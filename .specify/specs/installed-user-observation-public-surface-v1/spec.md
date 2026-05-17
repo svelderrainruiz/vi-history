@@ -4,7 +4,7 @@
 
 **Created**: 2026-05-17
 
-**Status**: Locked for public import; implementation not admitted
+**Status**: Locked for public import; observation-model IAU admitted
 
 **Input**: Imported requirements slice `installed-user-observation-public-surface-v1`
 
@@ -165,8 +165,10 @@ Docker Desktop proof from this slice.
   fact buckets, routing decisions, and blocked claims without admitting code.
 - **SC-003**: Public validation rejects private paths, private tooling names,
   credentials, private evidence, and copied implementation-source instructions.
-- **SC-004**: The admission record states that implementation is not admitted
-  and that any future code requires a named IAU preflight with `status: pass`.
+- **SC-004**: The admission record states that
+  `IAU-installed-user-observation-model-v1` is admitted for `T009` through
+  `T013`, and that future code outside that scope requires a separate named
+  IAU preflight with `status: pass`.
 - **SC-005**: Public artifacts keep Marketplace publication disabled.
 
 ## Assumptions
@@ -175,6 +177,6 @@ Docker Desktop proof from this slice.
 - The MIT authority may add local requirements for divergent behavior, but it
   must not redefine imported IDs.
 - This feature is a public observation and reporting model first. Runnable
-  implementation waits for a later IAU.
+  implementation is admitted only for the observation-model IAU.
 - Marketplace publication remains disabled; future enablement requires a later
   decision.

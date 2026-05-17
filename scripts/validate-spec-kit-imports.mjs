@@ -10,6 +10,8 @@ const observationSliceId = "installed-user-observation-public-surface-v1";
 const observationFeatureDir = `.specify/specs/${observationSliceId}`;
 const observationImportDir = `docs/requirements/imports/${observationSliceId}`;
 const observationAdmissionPath = `docs/requirements/admissions/${observationSliceId}.json`;
+const observationModelIauPath = `docs/requirements/admissions/${observationSliceId}/IAU-installed-user-observation-model-v1.json`;
+const observationModelPreflightPath = `docs/requirements/admissions/${observationSliceId}/IAU-installed-user-observation-model-v1-preflight-v1.json`;
 const marketplaceAdrPath = "docs/decisions/ADR-001-marketplace-publication-disabled.md";
 const explicitCompareIauPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1.json`;
 const explicitComparePreflightPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1-preflight-v1.json`;
@@ -303,14 +305,14 @@ requireTextIncludes(`${featureDir}/plan.md`, [
   "no implementation source"
 ]);
 requireTextIncludes("README.md", [
-  "No implementation unit is currently admitted",
+  "IAU-installed-user-observation-model-v1",
   "docs/decisions/ADR-001-marketplace-publication-disabled.md",
   "docs/governance/marketplace-posture.md"
 ]);
 requireTextIncludes("AGENTS.md", [
   "Marketplace publication is disabled",
   "docs/decisions/ADR-001-marketplace-publication-disabled.md",
-  "No Implementation Admission Unit is currently admitted"
+  "IAU-installed-user-observation-model-v1"
 ]);
 requireTextIncludes(marketplaceAdrPath, [
   "ADR-001: Marketplace Publication Disabled",
@@ -374,18 +376,53 @@ requireTextIncludes(`${importDir}/rtm.csv`, expectedIds);
 const observationAdmission = readJson(observationAdmissionPath);
 requireEqual(observationAdmission.schema, "vi-history/requirements-admission@v1", "observation admission schema");
 requireEqual(observationAdmission.sliceId, observationSliceId, "observation admission sliceId");
-requireEqual(observationAdmission.state, "spec-locked", "observation admission state");
+requireEqual(observationAdmission.state, "implementation-admitted", "observation admission state");
 requireEqual(observationAdmission.targetProduct, "vi-history", "observation admission targetProduct");
 requireEqual(observationAdmission.targetFeature, observationSliceId, "observation admission targetFeature");
 requireEqual(observationAdmission.sourceBaselineTag, "v1.3.16", "observation admission sourceBaselineTag");
 requireEqual(observationAdmission.sourceCommit, "48232bcc620d4dbe89ff846fda2bfe048b7768fb", "observation admission sourceCommit");
 requireEqual(observationAdmission.implementationSharing, "none", "observation admission implementationSharing");
 requireMarketplacePosture(observationAdmission, "observation admission");
-requireEqual(observationAdmission.currentImplementationAdmissionUnit, null, "observation currentImplementationAdmissionUnit");
+requireEqual(observationAdmission.currentImplementationAdmissionUnit, "IAU-installed-user-observation-model-v1", "observation currentImplementationAdmissionUnit");
 requireArrayEqual(observationAdmission.completedImplementationScope, [], "observation completedImplementationScope");
-requireArrayEqual(observationAdmission.admittedImplementationScope, [], "observation admittedImplementationScope");
-requireEqual(observationAdmission.preImplementationPreflight, null, "observation preImplementationPreflight");
+requireArrayEqual(observationAdmission.admittedImplementationScope, ["T009", "T010", "T011", "T012", "T013"], "observation admittedImplementationScope");
+requireEqual(observationAdmission.preImplementationPreflight?.iauId, "IAU-installed-user-observation-model-v1", "observation preImplementationPreflight iauId");
+requireEqual(observationAdmission.preImplementationPreflight?.status, "pass", "observation preImplementationPreflight status");
+requireEqual(observationAdmission.preImplementationPreflight?.implementationStartAllowed, true, "observation preImplementationPreflight implementationStartAllowed");
+requireEqual(observationAdmission.preImplementationPreflight?.record, observationModelPreflightPath, "observation preImplementationPreflight record");
 requireFile(`docs/requirements/admissions/${observationSliceId}.md`);
+
+const observationModelIau = readJson(observationModelIauPath);
+requireEqual(observationModelIau.schema, "vi-history/implementation-admission-unit@v1", "observation model IAU schema");
+requireEqual(observationModelIau.iauId, "IAU-installed-user-observation-model-v1", "observation model IAU id");
+requireEqual(observationModelIau.state, "implementation-admitted", "observation model IAU state");
+requireEqual(observationModelIau.parentSliceId, observationSliceId, "observation model IAU parentSliceId");
+requireArrayEqual(observationModelIau.admittedTasks, ["T009", "T010", "T011", "T012", "T013"], "observation model IAU admittedTasks");
+requireArrayEqual(observationModelIau.blockedTasks, ["T014", "T015", "T016"], "observation model IAU blockedTasks");
+requireEqual(observationModelIau.implementationSharing, "none", "observation model IAU implementationSharing");
+requireMarketplacePosture(observationModelIau, "observation model IAU");
+requireEqual(observationModelIau.preImplementationPreflight?.status, "pass", "observation model IAU preImplementationPreflight status");
+requireEqual(observationModelIau.preImplementationPreflight?.record, "IAU-installed-user-observation-model-v1-preflight-v1.json", "observation model IAU preImplementationPreflight record");
+requireEqual(observationModelIau.preImplementationPreflight?.implementationStartAllowed, true, "observation model IAU preImplementationPreflight implementationStartAllowed");
+requireFile(`docs/requirements/admissions/${observationSliceId}/IAU-installed-user-observation-model-v1.md`);
+
+const observationModelPreflight = readJson(observationModelPreflightPath);
+requireEqual(observationModelPreflight.schema, "vi-history/implementation-admission-unit-preflight@v1", "observation model preflight schema");
+requireEqual(observationModelPreflight.iauId, "IAU-installed-user-observation-model-v1", "observation model preflight iauId");
+requireEqual(observationModelPreflight.status, "pass", "observation model preflight status");
+requireEqual(observationModelPreflight.implementationStartAllowed, true, "observation model preflight implementationStartAllowed");
+requireEqual(observationModelPreflight.parentSliceId, observationSliceId, "observation model preflight parentSliceId");
+requireEqual(observationModelPreflight.implementationSharing, "none", "observation model preflight implementationSharing");
+requireMarketplacePosture(observationModelPreflight, "observation model preflight");
+requireArrayEqual(observationModelPreflight.implementationStartScope, ["T009", "T010", "T011", "T012", "T013"], "observation model preflight implementationStartScope");
+if (!Array.isArray(observationModelPreflight.checkResults) || observationModelPreflight.checkResults.length !== observationModelPreflight.requiredChecks.length) {
+  failures.push("observation model preflight checkResults: must match requiredChecks length");
+} else {
+  for (const result of observationModelPreflight.checkResults) {
+    requireEqual(result.status, "pass", `observation model preflight check result ${result.check}`);
+  }
+}
+requireFile(`docs/requirements/admissions/${observationSliceId}/IAU-installed-user-observation-model-v1-preflight-v1.md`);
 
 const observationManifest = readJson(`${observationImportDir}/manifest.json`);
 requireEqual(observationManifest.schema, "vi-history/requirements-import@v1", "observation manifest schema");
@@ -414,30 +451,32 @@ requireTextIncludes(`${observationFeatureDir}/spec.md`, [
   "observed",
   "deferred",
   "blocked",
-  "implementation is not admitted"
+  "IAU-installed-user-observation-model-v1"
 ]);
 requireTextIncludes(`${observationFeatureDir}/plan.md`, [
   "import/spec baseline",
-  "No implementation IAU is admitted",
+  "IAU-installed-user-observation-model-v1",
   "Marketplace publication remains disabled"
 ]);
 requireTextIncludes(`${observationFeatureDir}/tasks.md`, [
   "Issue #25",
   "- [x] T001",
   "- [x] T008",
+  "IAU-installed-user-observation-model-v1",
+  "T009",
+  "T013",
   "[BLOCKED]",
-  "No current IAU is admitted",
-  "Copilot implementation work must not start"
+  "Issue #27"
 ]);
 requireTextIncludes(`${observationImportDir}/rtm.csv`, observationExpectedIds);
 requireTextIncludes("README.md", [
   "installed-user-observation-public-surface-v1",
   "docs/requirements/admissions/installed-user-observation-public-surface-v1.json",
-  "No implementation unit is currently admitted"
+  "IAU-installed-user-observation-model-v1"
 ]);
 requireTextIncludes("AGENTS.md", [
   "installed-user-observation-public-surface-v1",
-  "No Implementation Admission Unit is currently admitted",
+  "IAU-installed-user-observation-model-v1",
   "002-installed-user-observation-public-surface-v1"
 ]);
 

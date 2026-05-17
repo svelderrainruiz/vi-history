@@ -22,6 +22,17 @@ Read these before changing code:
 - `docs/requirements/admissions/runtime-contract-host-provider-v1.json`
 - `docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-proof-intake-v1.json`
 - `docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-proof-intake-v1-preflight-v1.json`
+- `docs/requirements/imports/installed-user-observation-public-surface-v1/manifest.json`
+- `docs/requirements/imports/installed-user-observation-public-surface-v1/syrs.md`
+- `docs/requirements/imports/installed-user-observation-public-surface-v1/srs.md`
+- `docs/requirements/imports/installed-user-observation-public-surface-v1/rtm.csv`
+- `docs/requirements/imports/installed-user-observation-public-surface-v1/test-plan.md`
+- `.specify/specs/installed-user-observation-public-surface-v1/spec.md`
+- `.specify/specs/installed-user-observation-public-surface-v1/plan.md`
+- `.specify/specs/installed-user-observation-public-surface-v1/tasks.md`
+- `docs/requirements/admissions/installed-user-observation-public-surface-v1.json`
+- `docs/requirements/admissions/installed-user-observation-public-surface-v1/IAU-installed-user-observation-model-v1.json`
+- `docs/requirements/admissions/installed-user-observation-public-surface-v1/IAU-installed-user-observation-model-v1-preflight-v1.json`
 
 ## Current Status
 
@@ -41,6 +52,10 @@ Completed units:
 - `IAU-runtime-contract-provider-policy-v1`
 - `IAU-runtime-contract-proof-intake-v1`
 
+Current admitted unit:
+
+- `IAU-installed-user-observation-model-v1`
+
 Completed runtime-contract tasks:
 
 - `T007` through `T011`: foundational runtime contracts.
@@ -53,12 +68,21 @@ Completed runtime-contract tasks:
 - `T029`: implement proof packet writer and issue-body generation.
 - `T030`: implement Windows Docker Desktop proof intake validation.
 
+Current installed-user observation tasks:
+
+- `T009`: define an observation-cycle data contract.
+- `T010`: define an observation-fact classification contract.
+- `T011`: define routing-decision and SemVer recommendation contracts.
+- `T012`: add tests for `observed`, `deferred`, and `blocked` fact buckets.
+- `T013`: add tests that public feedback is input, not release proof.
+
 ## Future Work Packet
 
-Future Copilot work must start with a new public bridge admission record before
-any code changes. A valid future work packet must name a new IAU, admitted
-tasks, blocked tasks, preflight status, source files, expected write area, and
-validation commands.
+Current Copilot work may start from Issue #27 after planning first. Future
+Copilot work outside `IAU-installed-user-observation-model-v1` must start with
+a new public bridge admission record before any code changes. A valid work
+packet must name a new IAU, admitted tasks, blocked tasks, preflight status,
+source files, expected write area, and validation commands.
 
 ## Blocked Work
 
@@ -66,6 +90,7 @@ Do not implement these without a separate bridge admission:
 
 - LabVIEWCLI command execution
 - Docker command execution or container orchestration
+- observation report rendering for T014-T016
 - Marketplace publication or packaging
 - source copying from another VI History product line
 
@@ -96,9 +121,9 @@ git diff --check
 
 ## Web Copilot Flow
 
-Do not use Issue #4 as a new implementation packet. Use a future public issue
-only after the bridge admits a new IAU. The PR must target `develop` and state
-the exact admitted IAU it implements.
+Do not use Issue #4 as a new implementation packet. Use Issue #27 for
+`IAU-installed-user-observation-model-v1` only. The PR must target `develop`
+and state the exact admitted IAU it implements.
 
 The PR summary should include:
 
