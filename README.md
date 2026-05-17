@@ -7,8 +7,8 @@ This repository starts from requirements and Spec Kit artifacts, not from copied
 extension source. The initial baseline imported the
 `runtime-contract-host-provider-v1` requirements slice and completed admitted
 runtime-contract IAUs through proof intake. The current public Spec Kit import
-adds `installed-user-observation-public-surface-v1` for requirements/spec
-planning only.
+adds `installed-user-observation-public-surface-v1`, with
+`IAU-installed-user-observation-model-v1` admitted for T009-T013 only.
 
 ## Authority
 
@@ -34,18 +34,21 @@ planning only.
 - #3 locked the Spec Kit feature spec, plan, and tasks.
 - #4 completed admitted runtime-contract IAUs through proof intake.
 - #5 keeps Marketplace publication disabled until a later ADR admits it.
-- #25 imports `installed-user-observation-public-surface-v1` as a public
-  requirements/spec baseline without admitting implementation.
+- #25 imported `installed-user-observation-public-surface-v1` as a public
+  requirements/spec baseline.
+- #27 is the public handoff for
+  `IAU-installed-user-observation-model-v1`.
 
 The current admission ledgers are:
 
 - `docs/requirements/admissions/runtime-contract-host-provider-v1.json`
 - `docs/requirements/admissions/installed-user-observation-public-surface-v1.json`
 
-No implementation unit is currently admitted.
+The current admitted implementation unit is
+`IAU-installed-user-observation-model-v1`, scoped only to T009-T013.
 
-Future code work must start from a new public bridge admission record before
-Copilot or local implementation begins.
+Future code work outside T009-T013 must start from a new public bridge
+admission record before Copilot or local implementation begins.
 
 The Marketplace posture is recorded in
 `docs/decisions/ADR-001-marketplace-publication-disabled.md` and summarized in

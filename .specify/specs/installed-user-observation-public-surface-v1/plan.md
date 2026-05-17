@@ -11,18 +11,23 @@ slice for the MIT clean-room Spec Kit authority. The feature defines public
 observation triggers, fact buckets, routing decisions, SemVer recommendation
 rules, and blocked proof/release scope.
 
-This plan admits requirements, Spec Kit artifacts, admission records, and
-validation script coverage only. It does not admit runnable implementation.
+This plan first admitted requirements, Spec Kit artifacts, admission records,
+and validation script coverage only. It now admits
+`IAU-installed-user-observation-model-v1` for `T009` through `T013` after the
+public preflight passed.
 
 ## Technical Context
 
 **Language/Version**: Node.js 22 for current repository gates. Future
 implementation may use JavaScript or TypeScript after a separate IAU preflight.
 
-**Primary Dependencies**: None for this import/spec baseline.
+**Primary Dependencies**: None for the import/spec baseline. Future
+implementation for the admitted observation model should stay file-based and
+deterministic.
 
-**Storage**: Public requirements files and Spec Kit artifacts only. Future
-implementation may define public observation records after admission.
+**Storage**: Public requirements files and Spec Kit artifacts. The admitted
+observation-model IAU may define public observation data contracts after this
+admission packet merges.
 
 **Testing**: `npm test` validates import packet shape, Spec Kit artifact
 presence, package identity, admission state, redaction, traceability, and the
@@ -42,8 +47,8 @@ later IAU admits integration behavior.
 Marketplace publication remains disabled. Observation input must not become
 release proof by itself.
 
-**Scale/Scope**: One imported requirement ID, four user stories, and no
-admitted implementation tasks.
+**Scale/Scope**: One imported requirement ID, four user stories, and one
+admitted observation-model IAU scoped to `T009` through `T013`.
 
 ## Constitution Check
 
@@ -126,9 +131,10 @@ No constitution violations are admitted.
 
 ## Implementation Admission
 
-No implementation IAU is admitted by this plan.
+`IAU-installed-user-observation-model-v1` is admitted by this plan.
 
-Future code work requires:
+Implementation may start for `T009` through `T013` only. Future code work
+outside this IAU requires:
 
 1. a named IAU,
 2. public admission records,

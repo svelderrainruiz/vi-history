@@ -30,17 +30,19 @@ installed-user observation.
 
 ## Phase 2: Blocked Future IAU Candidate - Observation Model
 
-**Purpose**: Reserved for a later IAU only if the public Spec Kit artifacts
-justify runnable code.
+**Purpose**: Current admitted implementation unit for the observation model.
 
-**Implementation is blocked until**: A named IAU and preflight record have
-`status: "pass"`.
+**Current IAU**: `IAU-installed-user-observation-model-v1`
 
-- [ ] T009 [BLOCKED] Define an observation-cycle data contract.
-- [ ] T010 [BLOCKED] Define an observation-fact classification contract.
-- [ ] T011 [BLOCKED] Define routing-decision and SemVer recommendation contracts.
-- [ ] T012 [BLOCKED] Add tests for `observed`, `deferred`, and `blocked` fact buckets.
-- [ ] T013 [BLOCKED] Add tests that public feedback is input, not release proof.
+**Implementation is admitted after**:
+`docs/requirements/admissions/installed-user-observation-public-surface-v1/IAU-installed-user-observation-model-v1-preflight-v1.json`
+records `status: "pass"`.
+
+- [ ] T009 Define an observation-cycle data contract.
+- [ ] T010 Define an observation-fact classification contract.
+- [ ] T011 Define routing-decision and SemVer recommendation contracts.
+- [ ] T012 Add tests for `observed`, `deferred`, and `blocked` fact buckets.
+- [ ] T013 Add tests that public feedback is input, not release proof.
 
 ---
 
@@ -48,8 +50,8 @@ justify runnable code.
 
 **Purpose**: Reserved for a later IAU only if the observation model is admitted.
 
-**Implementation is blocked until**: The observation model IAU, or a successor
-IAU, is admitted.
+**Implementation is blocked until**: The observation model IAU is implemented
+and a successor IAU is admitted.
 
 - [ ] T014 [BLOCKED] Define public-safe observation report rendering.
 - [ ] T015 [BLOCKED] Add tests for blocked proof/release claim rendering.
@@ -70,9 +72,11 @@ IAU, is admitted.
 ## Dependencies & Execution Order
 
 - Phase 1 must merge before any future IAU can be considered.
-- Phase 2 and Phase 3 remain blocked until a separate public preflight passes.
-- No current IAU is admitted.
-- Copilot implementation work must not start from this issue or PR.
+- Phase 2 is admitted by `IAU-installed-user-observation-model-v1`.
+- Phase 3 remains blocked until a separate public preflight passes.
+- The current IAU is `IAU-installed-user-observation-model-v1`.
+- Copilot implementation work starts only from Issue #27 after this admission
+  PR merges.
 
 ## Implementation Strategy
 
