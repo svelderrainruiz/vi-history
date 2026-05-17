@@ -16,19 +16,18 @@ other VI History product line.
 The integration branch is `develop`; feature work targets `develop` before
 promotion to `main`.
 
-Marketplace publication is disabled until a later governing decision admits a
-release channel.
+Marketplace publication is disabled. Future enablement requires a later ADR and
+must not add release tokens, publishing automation, or Marketplace workflows
+before that decision lands.
 
-Implementation for `runtime-contract-host-provider-v1` begins only after a
-named Implementation Admission Unit has a preflight record with `status: pass`.
-The current unit is `IAU-runtime-contract-runtime-facts-v1`, covering tasks
-`T016` through `T021`, and its preflight is `pass`. Tasks `T022` through
-`T030` remain blocked until that IAU merges.
+Implementation for `runtime-contract-host-provider-v1` is complete through
+proof intake. No Implementation Admission Unit is currently admitted. Future
+implementation begins only after a new named IAU has a public preflight record
+with `status: pass`.
 
 For Copilot local or web implementation work, read
-`docs/development/copilot-workflow.md` before changing code. It names the
-current public source files, admitted task scope, blocked scope, and validation
-commands.
+`docs/development/copilot-workflow.md` before changing code. It explains that
+future work must start from a new public bridge admission record.
 
 When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:

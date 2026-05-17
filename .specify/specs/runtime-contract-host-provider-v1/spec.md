@@ -181,4 +181,5 @@ evidence.
 - The first implementation will target a VS Code extension-style product, but
   runnable implementation is deferred to Issue #4 after this spec, plan, and
   tasks set is accepted.
-- Marketplace publication remains disabled until a later governing decision.
+- Marketplace publication remains disabled; future enablement requires a later
+  ADR.

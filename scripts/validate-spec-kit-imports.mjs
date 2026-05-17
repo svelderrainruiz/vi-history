@@ -85,6 +85,7 @@ requireEqual(packageJson.publisher, "svelderrainruiz", "publisher");
 requireEqual(packageJson.version, "0.1.0", "version");
 requireEqual(packageJson.license, "MIT", "license");
 requireEqual(packageJson.private, false, "private");
+requireFile("docs/governance/marketplace-posture.md");
 
 const integration = readJson(".specify/integration.json");
 requireEqual(integration.integration, "codex", "Spec Kit integration");
@@ -278,6 +279,19 @@ requireTextIncludes(`${featureDir}/plan.md`, [
   "MIT",
   "no implementation source"
 ]);
+requireTextIncludes("README.md", [
+  "No implementation unit is currently admitted",
+  "docs/governance/marketplace-posture.md"
+]);
+requireTextIncludes("AGENTS.md", [
+  "Marketplace publication is disabled",
+  "No Implementation Admission Unit is currently admitted"
+]);
+requireTextIncludes("docs/governance/marketplace-posture.md", [
+  "remains Marketplace-disabled",
+  "future ADR",
+  "No publication workflow is admitted"
+]);
 requireTextIncludes(`${featureDir}/tasks.md`, [
   "Issue #4",
   "blocked until",
@@ -288,6 +302,7 @@ requireTextIncludes(`${featureDir}/tasks.md`, [
   "IAU-runtime-contract-provider-policy-v1",
   "IAU-runtime-contract-proof-intake-v1",
   "runtime-contract closeout PR",
+  "Issue #5 records that Marketplace publication remains disabled",
   "- [x] T012",
   "- [x] T013",
   "- [x] T014",

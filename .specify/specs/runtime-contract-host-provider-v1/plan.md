@@ -48,8 +48,8 @@ artifacts only. Issue #4 will add runnable implementation after this plan and
   referenced without redefining their semantics.
 - Public evidence without private leakage: PASS. Redaction and clean-room scans
   are repository gates.
-- Marketplace disabled until governed: PASS. Package metadata records identity
-  but no publication workflow is admitted.
+- Marketplace disabled until ADR: PASS. Package metadata records identity but no
+  publication workflow is admitted.
 
 ## Project Structure
 
