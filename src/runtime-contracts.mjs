@@ -42,6 +42,7 @@ const PROVIDERS = new Set(["host-native", "docker"]);
 const ENGINES = new Set(["LabVIEWCLI", "Docker"]);
 const BITNESS = new Set(["x64", "x86"]);
 const READINESS = new Set(["ready", "blocked", "unavailable"]);
+const PROOF_PACKET_SCHEMA = "vi-history/proof-packet@v1";
 
 function requireValue(value, label) {
   if (value === undefined || value === null || value === "") {
@@ -101,6 +102,93 @@ function selectedRuntimePaths(input = {}) {
     ...(input.labviewCliPath ? { labviewCli: String(input.labviewCliPath) } : {}),
     ...(input.labviewPath ? { labview: String(input.labviewPath) } : {})
   };
+}
+
+function toRuntimeFacts(runtimeSelection) {
+  return {
+    provider: runtimeSelection.provider,
+    engine: runtimeSelection.engine,
+    version: runtimeSelection.version,
+    bitness: runtimeSelection.bitness,
+    readiness: runtimeSelection.readiness,
+    blockedReason: runtimeSelection.blockedReason,
+    selectedPaths: { ...(runtimeSelection.selectedPaths ?? {}) },
+    notes: normalizeNotes(runtimeSelection.notes)
+  };
+}
+
+function toExecutionFacts(input = {}) {
+  const state = input.state ?? (input.exitCode === 0 ? "completed" : input.exitCode === null || input.exitCode === undefined ? "planned" : "failed");
+  return {
+    state: String(state),
+    stdout: String(input.stdout ?? ""),
+    stderr: String(input.stderr ?? ""),
+    exitCode: input.exitCode ?? null,
+    durationMs: input.durationMs ?? null
+  };
+}
+
+function toGeneratedReportFacts(input = {}) {
+  return {
+    path: input.path ? String(input.path) : "",
+    exists: input.exists === true,
+    ...Object.fromEntries(
+      Object.entries(input)
+        .filter(([key]) => key !== "path" && key !== "exists")
+        .map(([key, value]) => [key, value])
+    )
+  };
+}
+
+function toHostFacts(input = {}) {
+  return {
+    platform: input.platform ? String(input.platform) : "unknown",
+    osFamily: input.osFamily ? String(input.osFamily) : "unknown",
+    isWsl: input.isWsl === true
+  };
+}
+
+function toDockerDesktopFacts(input = {}) {
+  return {
+    ostype: input.ostype ? String(input.ostype) : "unknown"
+  };
+}
+
+function toFixtureFacts(input = {}) {
+  return {
+    command: input.command ? String(input.command) : "",
+    canonical: input.canonical === true
+  };
+}
+
+export function createProofIssueBody(input = {}) {
+  const environmentClass = String(input.environmentClass ?? "unknown");
+  const runtimeFacts = input.runtimeFacts ?? {};
+  const execution = input.execution ?? {};
+  const generatedReportFacts = input.generatedReportFacts ?? {};
+  const fixture = input.fixture ?? {};
+  const hostFacts = input.hostFacts ?? {};
+  const dockerDesktopFacts = input.dockerDesktopFacts ?? {};
+
+  return [
+    "### Runtime contract proof",
+    `- Environment class: ${environmentClass}`,
+    `- Runtime provider: ${runtimeFacts.provider ?? "unknown"}`,
+    `- Runtime engine: ${runtimeFacts.engine ?? "unknown"}`,
+    `- Runtime version: ${runtimeFacts.version ?? "unknown"}`,
+    `- Runtime bitness: ${runtimeFacts.bitness ?? "unknown"}`,
+    `- Runtime readiness: ${runtimeFacts.readiness ?? "unknown"}`,
+    `- Execution state: ${execution.state ?? "unknown"}`,
+    `- Execution exit code: ${execution.exitCode ?? "null"}`,
+    `- Generated report path: ${generatedReportFacts.path ?? ""}`,
+    `- Generated report exists: ${generatedReportFacts.exists === true}`,
+    `- Host platform: ${hostFacts.platform ?? "unknown"}`,
+    `- Host osFamily: ${hostFacts.osFamily ?? "unknown"}`,
+    `- Host isWsl: ${hostFacts.isWsl === true}`,
+    `- Docker Desktop OSType: ${dockerDesktopFacts.ostype ?? "unknown"}`,
+    `- Fixture command: ${fixture.command ?? ""}`,
+    `- Fixture canonical: ${fixture.canonical === true}`
+  ].join("\n");
 }
 
 export function createRuntimeSelection(input) {
@@ -359,19 +447,119 @@ export function createProofPacket(input) {
     throw new Error("runtimeSelection must come from createRuntimeSelection");
   }
 
+  const runtimeFacts = toRuntimeFacts(runtimeSelection);
+  const execution = toExecutionFacts({
+    ...(input?.execution ?? {}),
+    stdout: input?.stdout ?? input?.execution?.stdout,
+    stderr: input?.stderr ?? input?.execution?.stderr,
+    exitCode: input?.exitCode ?? input?.execution?.exitCode,
+    durationMs: input?.durationMs ?? input?.execution?.durationMs,
+    state: input?.state ?? input?.execution?.state
+  });
+  const generatedReportFacts = toGeneratedReportFacts(input?.generatedReportFacts ?? {});
+  const hostFacts = toHostFacts(input?.hostFacts ?? {});
+  const dockerDesktopFacts = toDockerDesktopFacts(input?.dockerDesktopFacts ?? {});
+  const fixture = toFixtureFacts(input?.fixture ?? {});
+  const issueBody =
+    input?.issueBody ??
+    createProofIssueBody({
+      environmentClass: input?.environmentClass,
+      runtimeFacts,
+      execution,
+      generatedReportFacts,
+      hostFacts,
+      dockerDesktopFacts,
+      fixture
+    });
+
   return freezeRecord({
     kind: "proof-packet",
+    schema: PROOF_PACKET_SCHEMA,
     environmentClass: String(requireValue(input?.environmentClass, "environmentClass")),
-    runtimeFacts: runtimeSelection,
+    runtimeFacts,
     commandPlan: input?.commandPlan ?? null,
-    generatedReportFacts: { ...(input?.generatedReportFacts ?? {}) },
-    execution: {
-      stdout: String(input?.stdout ?? ""),
-      stderr: String(input?.stderr ?? ""),
-      exitCode: input?.exitCode ?? null,
-      durationMs: input?.durationMs ?? null
-    },
-    issueBody: String(input?.issueBody ?? ""),
+    generatedReportFacts,
+    hostFacts,
+    dockerDesktopFacts,
+    fixture,
+    execution,
+    issueBody: String(issueBody),
+    requirementIds: [...RUNTIME_CONTRACT_REQUIREMENTS.proofPacket]
+  });
+}
+
+export function createValidateFixtureProofArtifacts(input) {
+  const proofJson = createProofPacket({
+    ...input,
+    fixture: {
+      command: "vihs validate-fixture",
+      canonical: true,
+      ...(input?.fixture ?? {})
+    }
+  });
+  return freezeRecord({
+    kind: "validate-fixture-proof-artifacts",
+    proofJson,
+    issueBody: proofJson.issueBody,
+    requirementIds: [...RUNTIME_CONTRACT_REQUIREMENTS.proofPacket]
+  });
+}
+
+export function validateWindowsDockerDesktopProofIntake(input) {
+  if (!input || typeof input !== "object" || input.kind !== "proof-packet") {
+    return freezeRecord({
+      kind: "proof-intake-validation",
+      classification: "not-windows-docker-desktop-proof",
+      accepted: false,
+      reason: "report-without-proof-packet",
+      requirementIds: [...RUNTIME_CONTRACT_REQUIREMENTS.proofPacket]
+    });
+  }
+
+  const hostFacts = input.hostFacts ?? {};
+  const dockerDesktopFacts = input.dockerDesktopFacts ?? {};
+  const runtimeFacts = input.runtimeFacts ?? {};
+  const execution = input.execution ?? {};
+  const fixture = input.fixture ?? {};
+  const generatedReportFacts = input.generatedReportFacts ?? {};
+
+  const windowsDockerDesktopAccepted =
+    input.environmentClass === "windows-docker-desktop-windows-container" &&
+    hostFacts.platform === "win32" &&
+    hostFacts.osFamily === "windows" &&
+    hostFacts.isWsl === false &&
+    dockerDesktopFacts.ostype === "windows" &&
+    runtimeFacts.provider === "docker" &&
+    runtimeFacts.engine === "Docker" &&
+    execution.state === "completed" &&
+    execution.exitCode === 0 &&
+    fixture.command === "vihs validate-fixture" &&
+    fixture.canonical === true &&
+    generatedReportFacts.exists === true;
+
+  if (windowsDockerDesktopAccepted) {
+    return freezeRecord({
+      kind: "proof-intake-validation",
+      classification: "windows-docker-desktop-windows-container-proof",
+      accepted: true,
+      reason: null,
+      requirementIds: [...RUNTIME_CONTRACT_REQUIREMENTS.proofPacket]
+    });
+  }
+
+  const reason = hostFacts.isWsl === true
+    ? "wsl-evidence-substitute"
+    : runtimeFacts.provider === "host-native"
+      ? "host-provider-evidence-substitute"
+      : dockerDesktopFacts.ostype === "linux" || hostFacts.osFamily === "linux"
+        ? "linux-docker-evidence-substitute"
+        : "not-windows-docker-desktop-proof";
+
+  return freezeRecord({
+    kind: "proof-intake-validation",
+    classification: "not-windows-docker-desktop-proof",
+    accepted: false,
+    reason,
     requirementIds: [...RUNTIME_CONTRACT_REQUIREMENTS.proofPacket]
   });
 }
