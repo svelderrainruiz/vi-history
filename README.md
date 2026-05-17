@@ -35,8 +35,9 @@ plan, and tasks, then records a public admission before implementation begins.
 
 The current admission ledger is
 `docs/requirements/admissions/runtime-contract-host-provider-v1.json`. The
-current admitted implementation unit is
-`IAU-runtime-contract-explicit-compare-v1`.
+current implementation unit is `IAU-runtime-contract-explicit-compare-v1`, but
+its preflight is `pending`; code work for `T012` through `T015` starts only
+after the preflight records `status: pass`.
 
 ## Validation
 

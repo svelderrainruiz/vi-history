@@ -30,19 +30,18 @@ function readJson(fullPath) {
   }
 }
 
-function hasAdmittedImplementationScope() {
+function hasImplementedFoundationScope() {
   const admission = readJson(admissionPath);
-  const completedScope = admission?.completedImplementationScope ?? admission?.admittedImplementationScope;
+  const completedScope = admission?.completedImplementationScope;
   const iaus = admission?.implementationAdmissionUnits;
   const foundationImplemented = Array.isArray(iaus)
     && iaus.some((iau) => iau?.iauId === "IAU-runtime-contract-foundation-v1" && iau?.state === "implemented");
-  return admission?.state === "implementation-admitted"
-    && admission?.sliceId === admittedSliceId
+  return admission?.sliceId === admittedSliceId
     && admission?.implementationSharing === "none"
     && Array.isArray(completedScope)
     && completedScope.includes("T007")
     && completedScope.includes("T011")
-    && (foundationImplemented || !Array.isArray(iaus));
+    && foundationImplemented;
 }
 
 function walk(directory) {
@@ -78,8 +77,8 @@ function scanFile(fullPath) {
 
 walk(repoRoot);
 
-if (fs.existsSync(path.join(repoRoot, "src")) && !hasAdmittedImplementationScope()) {
-  failures.push("src/: implementation source requires an implementation-admitted requirements slice");
+if (fs.existsSync(path.join(repoRoot, "src")) && !hasImplementedFoundationScope()) {
+  failures.push("src/: implementation source requires an implemented foundation requirements scope");
 }
 
 if (failures.length > 0) {
