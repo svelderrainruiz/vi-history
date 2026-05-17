@@ -118,7 +118,13 @@ function toRuntimeFacts(runtimeSelection) {
 }
 
 function toExecutionFacts(input = {}) {
-  const state = input.state ?? (input.exitCode === 0 ? "completed" : input.exitCode === null || input.exitCode === undefined ? "planned" : "failed");
+  let derivedState = "planned";
+  if (input.exitCode === 0) {
+    derivedState = "completed";
+  } else if (input.exitCode !== null && input.exitCode !== undefined) {
+    derivedState = "failed";
+  }
+  const state = input.state ?? derivedState;
   return {
     state: String(state),
     stdout: String(input.stdout ?? ""),
@@ -135,7 +141,6 @@ function toGeneratedReportFacts(input = {}) {
     ...Object.fromEntries(
       Object.entries(input)
         .filter(([key]) => key !== "path" && key !== "exists")
-        .map(([key, value]) => [key, value])
     )
   };
 }
