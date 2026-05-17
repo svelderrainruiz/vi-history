@@ -10,12 +10,15 @@ import {
   createComparisonCommandPlan,
   createComparisonCommandPlanFromCompareAction,
   createLabViewCliCommandPlan,
+  createProofIssueBody,
   createProofPacket,
   createRuntimeFactsReport,
+  createValidateFixtureProofArtifacts,
   discoverHostNativeLabViewRuntime,
   requestExplicitCompareAction,
   createRuntimeSelection,
-  selectProviderPolicy
+  selectProviderPolicy,
+  validateWindowsDockerDesktopProofIntake
 } from "../src/runtime-contracts.mjs";
 
 const sliceId = "runtime-contract-host-provider-v1";
@@ -122,7 +125,7 @@ test("T009 defines proof packets with runtime, report, execution, and issue fact
   assert.equal(packet.environmentClass, "linux-host-labview-2026");
   assert.equal(packet.runtimeFacts.provider, "host-native");
   assert.equal(packet.generatedReportFacts.exists, true);
-  assert.deepEqual(packet.execution, { stdout: "ok", stderr: "", exitCode: 0, durationMs: 42 });
+  assert.deepEqual(packet.execution, { state: "completed", stdout: "ok", stderr: "", exitCode: 0, durationMs: 42 });
   assert.equal(packet.issueBody, "proof summary");
 });
 
@@ -419,4 +422,194 @@ test("T025 provides stable failure guidance for blocked and unavailable provider
   assert.ok(unavailable.failureGuidance.length > 0);
   assert.equal(unavailable.fallbackProvider, null);
   assert.equal(unavailable.silentFallbackAllowed, false);
+});
+
+test("T026 classifies Linux host LabVIEW proof as distinct non-Windows evidence", () => {
+  const runtimeSelection = createRuntimeSelection({
+    provider: "host-native",
+    engine: "LabVIEWCLI",
+    version: "2026",
+    bitness: "x64",
+    readiness: "ready"
+  });
+  const packet = createProofPacket({
+    environmentClass: "linux-host-labview-2026",
+    runtimeSelection,
+    execution: { state: "completed", exitCode: 0 },
+    generatedReportFacts: { path: "report.html", exists: true },
+    hostFacts: { platform: "linux", osFamily: "linux", isWsl: false },
+    dockerDesktopFacts: { ostype: "linux" },
+    fixture: { command: "vihs validate-fixture", canonical: true }
+  });
+
+  const intake = validateWindowsDockerDesktopProofIntake(packet);
+  assert.equal(packet.environmentClass, "linux-host-labview-2026");
+  assert.equal(packet.runtimeFacts.provider, "host-native");
+  assert.equal(intake.classification, "not-windows-docker-desktop-proof");
+  assert.equal(intake.accepted, false);
+});
+
+test("T027 rejects Linux Docker, WSL, host-provider proof, and reports without proof packets as Windows Docker Desktop proof", () => {
+  const dockerRuntime = createRuntimeSelection({
+    provider: "docker",
+    engine: "Docker",
+    version: "2026",
+    bitness: "x64",
+    readiness: "ready"
+  });
+  const linuxDockerPacket = createProofPacket({
+    environmentClass: "windows-docker-desktop-windows-container",
+    runtimeSelection: dockerRuntime,
+    execution: { state: "completed", exitCode: 0 },
+    generatedReportFacts: { path: "report.html", exists: true },
+    hostFacts: { platform: "linux", osFamily: "linux", isWsl: false },
+    dockerDesktopFacts: { ostype: "linux" },
+    fixture: { command: "vihs validate-fixture", canonical: true }
+  });
+  assert.equal(validateWindowsDockerDesktopProofIntake(linuxDockerPacket).reason, "linux-docker-evidence-substitute");
+
+  const wslPacket = createProofPacket({
+    environmentClass: "windows-docker-desktop-windows-container",
+    runtimeSelection: dockerRuntime,
+    execution: { state: "completed", exitCode: 0 },
+    generatedReportFacts: { path: "report.html", exists: true },
+    hostFacts: { platform: "win32", osFamily: "windows", isWsl: true },
+    dockerDesktopFacts: { ostype: "windows" },
+    fixture: { command: "vihs validate-fixture", canonical: true }
+  });
+  assert.equal(validateWindowsDockerDesktopProofIntake(wslPacket).reason, "wsl-evidence-substitute");
+
+  const hostRuntime = createRuntimeSelection({
+    provider: "host-native",
+    engine: "LabVIEWCLI",
+    version: "2026",
+    bitness: "x64",
+    readiness: "ready"
+  });
+  const hostProviderPacket = createProofPacket({
+    environmentClass: "windows-docker-desktop-windows-container",
+    runtimeSelection: hostRuntime,
+    execution: { state: "completed", exitCode: 0 },
+    generatedReportFacts: { path: "report.html", exists: true },
+    hostFacts: { platform: "win32", osFamily: "windows", isWsl: false },
+    dockerDesktopFacts: { ostype: "windows" },
+    fixture: { command: "vihs validate-fixture", canonical: true }
+  });
+  assert.equal(validateWindowsDockerDesktopProofIntake(hostProviderPacket).reason, "host-provider-evidence-substitute");
+
+  const reportWithoutProof = { reportPath: "report.html", exists: true };
+  const withoutPacketIntake = validateWindowsDockerDesktopProofIntake(reportWithoutProof);
+  assert.equal(withoutPacketIntake.classification, "not-windows-docker-desktop-proof");
+  assert.equal(withoutPacketIntake.reason, "report-without-proof-packet");
+});
+
+test("T028 validates deterministic vihs validate-fixture proof JSON and issue-body generation", () => {
+  const runtimeSelection = createRuntimeSelection({
+    provider: "docker",
+    engine: "Docker",
+    version: "2026",
+    bitness: "x64",
+    readiness: "ready"
+  });
+  const artifacts = createValidateFixtureProofArtifacts({
+    environmentClass: "windows-docker-desktop-windows-container",
+    runtimeSelection,
+    commandPlan: { operation: "CreateComparisonReport" },
+    execution: { state: "completed", exitCode: 0, stdout: "ok", stderr: "", durationMs: 77 },
+    generatedReportFacts: { path: "report.html", exists: true },
+    hostFacts: { platform: "win32", osFamily: "windows", isWsl: false },
+    dockerDesktopFacts: { ostype: "windows" },
+    fixture: { command: "custom command", canonical: false }
+  });
+
+  assert.equal(artifacts.proofJson.schema, "vi-history/proof-packet@v1");
+  assert.equal(artifacts.proofJson.fixture.command, "vihs validate-fixture");
+  assert.equal(artifacts.proofJson.fixture.canonical, true);
+  assert.equal(artifacts.proofJson.generatedReportFacts.path, "report.html");
+  assert.equal(artifacts.proofJson.generatedReportFacts.exists, true);
+  assert.equal(artifacts.issueBody, artifacts.proofJson.issueBody);
+  assert.equal(artifacts.issueBody, createProofIssueBody(artifacts.proofJson));
+  assert.ok(artifacts.issueBody.includes("Fixture command: vihs validate-fixture"));
+  assert.ok(artifacts.issueBody.includes("Fixture canonical: true"));
+});
+
+test("T029 writes proof packet and generated issue body from retained proof facts", () => {
+  const runtimeSelection = createRuntimeSelection({
+    provider: "docker",
+    engine: "Docker",
+    version: "2026",
+    bitness: "x64",
+    readiness: "ready"
+  });
+  const packet = createProofPacket({
+    environmentClass: "windows-docker-desktop-windows-container",
+    runtimeSelection,
+    commandPlan: { operation: "CreateComparisonReport" },
+    execution: { state: "completed", exitCode: 0, stdout: "ok", stderr: "", durationMs: 41 },
+    generatedReportFacts: { path: "report.html", exists: true },
+    hostFacts: { platform: "win32", osFamily: "windows", isWsl: false },
+    dockerDesktopFacts: { ostype: "windows" },
+    fixture: { command: "vihs validate-fixture", canonical: true }
+  });
+
+  assert.equal(packet.schema, "vi-history/proof-packet@v1");
+  assert.equal(packet.runtimeFacts.provider, "docker");
+  assert.equal(packet.runtimeFacts.engine, "Docker");
+  assert.equal(packet.execution.state, "completed");
+  assert.equal(packet.execution.exitCode, 0);
+  assert.equal(packet.generatedReportFacts.exists, true);
+  assert.equal(packet.hostFacts.platform, "win32");
+  assert.equal(packet.dockerDesktopFacts.ostype, "windows");
+  assert.equal(packet.fixture.command, "vihs validate-fixture");
+  assert.ok(packet.issueBody.includes("Runtime provider: docker"));
+});
+
+test("T030 accepts only real Windows Docker Desktop Windows-container proof intake", () => {
+  const runtimeSelection = createRuntimeSelection({
+    provider: "docker",
+    engine: "Docker",
+    version: "2026",
+    bitness: "x64",
+    readiness: "ready"
+  });
+  const acceptedPacket = createProofPacket({
+    environmentClass: "windows-docker-desktop-windows-container",
+    runtimeSelection,
+    execution: { state: "completed", exitCode: 0 },
+    generatedReportFacts: { path: "report.html", exists: true },
+    hostFacts: { platform: "win32", osFamily: "windows", isWsl: false },
+    dockerDesktopFacts: { ostype: "windows" },
+    fixture: { command: "vihs validate-fixture", canonical: true }
+  });
+
+  const accepted = validateWindowsDockerDesktopProofIntake(acceptedPacket);
+  assert.equal(accepted.classification, "windows-docker-desktop-windows-container-proof");
+  assert.equal(accepted.accepted, true);
+  assert.equal(accepted.reason, null);
+
+  const missingGeneratedReport = createProofPacket({
+    environmentClass: "windows-docker-desktop-windows-container",
+    runtimeSelection,
+    execution: { state: "completed", exitCode: 0 },
+    generatedReportFacts: { path: "report.html", exists: false },
+    hostFacts: { platform: "win32", osFamily: "windows", isWsl: false },
+    dockerDesktopFacts: { ostype: "windows" },
+    fixture: { command: "vihs validate-fixture", canonical: true }
+  });
+  const rejected = validateWindowsDockerDesktopProofIntake(missingGeneratedReport);
+  assert.equal(rejected.classification, "not-windows-docker-desktop-proof");
+  assert.equal(rejected.accepted, false);
+
+  const missingGeneratedReportPath = createProofPacket({
+    environmentClass: "windows-docker-desktop-windows-container",
+    runtimeSelection,
+    execution: { state: "completed", exitCode: 0 },
+    generatedReportFacts: { exists: true },
+    hostFacts: { platform: "win32", osFamily: "windows", isWsl: false },
+    dockerDesktopFacts: { ostype: "windows" },
+    fixture: { command: "vihs validate-fixture", canonical: true }
+  });
+  const rejectedWithoutPath = validateWindowsDockerDesktopProofIntake(missingGeneratedReportPath);
+  assert.equal(rejectedWithoutPath.classification, "not-windows-docker-desktop-proof");
+  assert.equal(rejectedWithoutPath.accepted, false);
 });
