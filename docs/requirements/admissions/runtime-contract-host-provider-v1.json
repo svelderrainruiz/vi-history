@@ -19,7 +19,8 @@
     "specKitArtifactsPresent": "pass",
     "redactionScan": "pass",
     "artifactConsistency": "pass",
-    "analyzeCriticalFindings": "none-recorded"
+    "analyzeCriticalFindings": "none-recorded",
+    "explicitCompareIauPreflight": "pass"
   },
   "implementationAdmissionUnits": [
     {
@@ -35,7 +36,7 @@
     },
     {
       "iauId": "IAU-runtime-contract-explicit-compare-v1",
-      "state": "preflight-required",
+      "state": "implementation-admitted",
       "record": "docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-explicit-compare-v1.json",
       "preflightRecord": "docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-explicit-compare-v1-preflight-v1.json",
       "admittedTasks": [
@@ -62,9 +63,9 @@
   ],
   "preImplementationPreflight": {
     "iauId": "IAU-runtime-contract-explicit-compare-v1",
-    "status": "pending",
+    "status": "pass",
     "record": "docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-explicit-compare-v1-preflight-v1.json",
-    "implementationStartAllowed": false
+    "implementationStartAllowed": true
   },
   "blockedUntilExplicitCompareMerge": [
     "T016",

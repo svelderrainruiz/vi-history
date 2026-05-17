@@ -3,8 +3,8 @@
 ## State
 
 `runtime-contract-host-provider-v1` has an implemented foundation IAU. The
-current explicit-compare IAU is `preflight-required`, so implementation remains
-blocked until its preflight records `status: pass`.
+current explicit-compare IAU has preflight `status: pass`, so implementation is
+admitted for `T012` through `T015`.
 
 ## Admission Basis
 
@@ -27,10 +27,8 @@ blocked until its preflight records `status: pass`.
 
 ## Current IAU
 
-`IAU-runtime-contract-explicit-compare-v1` is scoped for tasks `T012` through
-`T015`, but code work is blocked until
-`IAU-runtime-contract-explicit-compare-v1-preflight-v1` records
-`status: pass`:
+`IAU-runtime-contract-explicit-compare-v1` is admitted for tasks `T012` through
+`T015`:
 
 - commit-pair selection retains selected/base commit facts
 - compare does not start before explicit user action
