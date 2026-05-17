@@ -12,9 +12,9 @@ observation triggers, fact buckets, routing decisions, SemVer recommendation
 rules, and blocked proof/release scope.
 
 This plan first admitted requirements, Spec Kit artifacts, admission records,
-and validation script coverage only. It now admits
-`IAU-installed-user-observation-model-v1` for `T009` through `T013` after the
-public preflight passed.
+and validation script coverage only. It now records
+`IAU-installed-user-observation-model-v1` as implemented for `T009` through
+`T013` after the public preflight passed.
 
 ## Technical Context
 
@@ -25,9 +25,9 @@ implementation may use JavaScript or TypeScript after a separate IAU preflight.
 implementation for the admitted observation model should stay file-based and
 deterministic.
 
-**Storage**: Public requirements files and Spec Kit artifacts. The admitted
-observation-model IAU may define public observation data contracts after this
-admission packet merges.
+**Storage**: Public requirements files, Spec Kit artifacts, and public
+observation data contracts. Future reporting storage remains blocked until a
+separate IAU admits it.
 
 **Testing**: `npm test` validates import packet shape, Spec Kit artifact
 presence, package identity, admission state, redaction, traceability, and the
@@ -48,7 +48,7 @@ Marketplace publication remains disabled. Observation input must not become
 release proof by itself.
 
 **Scale/Scope**: One imported requirement ID, four user stories, and one
-admitted observation-model IAU scoped to `T009` through `T013`.
+implemented observation-model IAU scoped to `T009` through `T013`.
 
 ## Constitution Check
 
@@ -131,10 +131,10 @@ No constitution violations are admitted.
 
 ## Implementation Admission
 
-`IAU-installed-user-observation-model-v1` is admitted by this plan.
+`IAU-installed-user-observation-model-v1` is implemented by this plan.
 
-Implementation may start for `T009` through `T013` only. Future code work
-outside this IAU requires:
+Implementation completed `T009` through `T013` only. Future code work outside
+this IAU requires:
 
 1. a named IAU,
 2. public admission records,

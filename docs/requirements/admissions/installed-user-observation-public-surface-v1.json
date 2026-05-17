@@ -2,7 +2,7 @@
   "schema": "vi-history/requirements-admission@v1",
   "sliceId": "installed-user-observation-public-surface-v1",
   "createdDate": "2026-05-17",
-  "state": "implementation-admitted",
+  "state": "implemented",
   "targetProduct": "vi-history",
   "targetFeature": "installed-user-observation-public-surface-v1",
   "sourceBaselineTag": "v1.3.16",
@@ -22,12 +22,13 @@
     "artifactConsistency": "pass",
     "analyzeCriticalFindings": "none-recorded-for-import-spec-baseline",
     "observationModelIauPreflight": "pass",
-    "implementationPreflight": "pass"
+    "implementationPreflight": "pass",
+    "implementationCloseout": "pass"
   },
   "implementationAdmissionUnits": [
     {
       "iauId": "IAU-installed-user-observation-model-v1",
-      "state": "implementation-admitted",
+      "state": "implemented",
       "record": "docs/requirements/admissions/installed-user-observation-public-surface-v1/IAU-installed-user-observation-model-v1.json",
       "preflightRecord": "docs/requirements/admissions/installed-user-observation-public-surface-v1/IAU-installed-user-observation-model-v1-preflight-v1.json",
       "admittedTasks": [
@@ -39,7 +40,7 @@
       ]
     }
   ],
-  "currentImplementationAdmissionUnit": "IAU-installed-user-observation-model-v1",
+  "currentImplementationAdmissionUnit": null,
   "completedSpecScope": [
     "T001",
     "T002",
@@ -50,14 +51,14 @@
     "T007",
     "T008"
   ],
-  "completedImplementationScope": [],
-  "admittedImplementationScope": [
+  "completedImplementationScope": [
     "T009",
     "T010",
     "T011",
     "T012",
     "T013"
   ],
+  "admittedImplementationScope": [],
   "blockedImplementationScope": [
     "T014",
     "T015",

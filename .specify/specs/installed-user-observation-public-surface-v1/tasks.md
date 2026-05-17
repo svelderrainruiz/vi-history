@@ -28,21 +28,21 @@ installed-user observation.
 
 ---
 
-## Phase 2: Blocked Future IAU Candidate - Observation Model
+## Phase 2: Implemented IAU - Observation Model
 
-**Purpose**: Current admitted implementation unit for the observation model.
+**Purpose**: Completed implementation unit for the observation model.
 
-**Current IAU**: `IAU-installed-user-observation-model-v1`
+**Completed IAU**: `IAU-installed-user-observation-model-v1`
 
-**Implementation is admitted after**:
+**Implementation was admitted after**:
 `docs/requirements/admissions/installed-user-observation-public-surface-v1/IAU-installed-user-observation-model-v1-preflight-v1.json`
-records `status: "pass"`.
+recorded `status: "pass"`.
 
-- [ ] T009 Define an observation-cycle data contract.
-- [ ] T010 Define an observation-fact classification contract.
-- [ ] T011 Define routing-decision and SemVer recommendation contracts.
-- [ ] T012 Add tests for `observed`, `deferred`, and `blocked` fact buckets.
-- [ ] T013 Add tests that public feedback is input, not release proof.
+- [x] T009 Define an observation-cycle data contract.
+- [x] T010 Define an observation-fact classification contract.
+- [x] T011 Define routing-decision and SemVer recommendation contracts.
+- [x] T012 Add tests for `observed`, `deferred`, and `blocked` fact buckets.
+- [x] T013 Add tests that public feedback is input, not release proof.
 
 ---
 
@@ -72,16 +72,17 @@ and a successor IAU is admitted.
 ## Dependencies & Execution Order
 
 - Phase 1 must merge before any future IAU can be considered.
-- Phase 2 is admitted by `IAU-installed-user-observation-model-v1`.
+- Phase 2 is implemented by `IAU-installed-user-observation-model-v1`.
 - Phase 3 remains blocked until a separate public preflight passes.
-- The current IAU is `IAU-installed-user-observation-model-v1`.
-- Copilot implementation work starts only from Issue #27 after this admission
-  PR merges.
+- No current IAU is admitted after `IAU-installed-user-observation-model-v1`
+  closes.
+- Future Copilot implementation work starts only after a new public bridge
+  admission record passes preflight.
 
 ## Implementation Strategy
 
 1. Merge import/spec artifacts to `develop`.
 2. Close Issue #25 after validation passes.
-3. Decide separately whether an observation model IAU is useful.
+3. Complete `IAU-installed-user-observation-model-v1` through Issue #27.
 4. Keep LabVIEWCLI execution, Docker orchestration, Windows Docker Desktop proof
    claims, Marketplace publication, and source copying blocked.

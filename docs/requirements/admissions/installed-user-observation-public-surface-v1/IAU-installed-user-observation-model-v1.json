@@ -2,7 +2,8 @@
   "schema": "vi-history/implementation-admission-unit@v1",
   "iauId": "IAU-installed-user-observation-model-v1",
   "createdDate": "2026-05-17",
-  "state": "implementation-admitted",
+  "completedDate": "2026-05-17",
+  "state": "implemented",
   "parentSliceId": "installed-user-observation-public-surface-v1",
   "specFeature": ".specify/specs/installed-user-observation-public-surface-v1",
   "issue": {
@@ -34,6 +35,21 @@
     "status": "pass",
     "record": "IAU-installed-user-observation-model-v1-preflight-v1.json",
     "implementationStartAllowed": true
+  },
+  "implementationCloseout": {
+    "status": "pass",
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011",
+      "T012",
+      "T013"
+    ],
+    "blockedTasksRemainBlocked": [
+      "T014",
+      "T015",
+      "T016"
+    ]
   },
   "exitGate": [
     "T009-T013 complete",

@@ -24,13 +24,12 @@ workflows before that decision lands.
 
 Implementation for `runtime-contract-host-provider-v1` is complete through
 proof intake. `installed-user-observation-public-surface-v1` is a
-requirements/spec baseline with one admitted IAU:
-`IAU-installed-user-observation-model-v1`. It admits only T009-T013.
+requirements/spec baseline with one implemented IAU:
+`IAU-installed-user-observation-model-v1`. It completed only T009-T013.
 Future implementation outside that scope begins only after a new named IAU has
 a public preflight record with `status: pass`.
 
-Current Implementation Admission Unit:
-`IAU-installed-user-observation-model-v1`.
+Current Implementation Admission Unit: none.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that
