@@ -20,22 +20,20 @@ Read these before changing code:
 - `.specify/specs/runtime-contract-host-provider-v1/plan.md`
 - `.specify/specs/runtime-contract-host-provider-v1/tasks.md`
 - `docs/requirements/admissions/runtime-contract-host-provider-v1.json`
-- `docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-runtime-facts-v1.json`
-- `docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-runtime-facts-v1-preflight-v1.json`
+- `docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-provider-policy-v1.json`
+- `docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-provider-policy-v1-preflight-v1.json`
 
 ## Current Work Packet
 
 GitHub Issue #4 is the public implementation issue. The current admitted unit is
-`IAU-runtime-contract-runtime-facts-v1`.
+`IAU-runtime-contract-provider-policy-v1`.
 
 Allowed tasks:
 
-- `T016`: add tests for supported host-native LabVIEWCLI runtime selection.
-- `T017`: add tests for unsupported LabVIEW 2024-or-older rejection.
-- `T018`: add tests for missing explicit proof override paths failing closed.
-- `T019`: implement runtime discovery and readiness classification.
-- `T020`: implement LabVIEWCLI command-plan creation.
-- `T021`: implement report/proof rendering of retained runtime facts.
+- `T022`: add tests for host-native default provider selection.
+- `T023`: add tests for explicit Docker expert-provider selection.
+- `T024`: add tests that Docker is never selected implicitly.
+- `T025`: implement provider policy selection and failure guidance.
 
 Expected write area:
 
@@ -47,9 +45,9 @@ Expected write area:
 
 Do not implement these in the current PR:
 
-- `T022` through `T030`
+- `T026` through `T030`
 - LabVIEWCLI command execution
-- Docker provider behavior
+- Docker command execution or container orchestration
 - proof intake validation
 - Marketplace publication or packaging
 - source copying from another VI History product line
@@ -62,9 +60,9 @@ instead of expanding the implementation scope.
 1. Start from `develop`.
 2. Create a feature branch for the current IAU.
 3. Ask Copilot to plan first, without changing code. The plan must name files
-   expected to change, tests to add or update, how `T022` through `T030` remain
+   expected to change, tests to add or update, how `T026` through `T030` remain
    blocked, and validation commands.
-4. After the plan, ask Copilot to implement only `T016` through `T021` from the
+4. After the plan, ask Copilot to implement only `T022` through `T025` from the
    files listed in this workflow.
 5. Keep implementation behavior clean-room and traceable to imported
    requirement IDs.
@@ -81,14 +79,14 @@ git diff --check
 ## Web Copilot Flow
 
 Use Issue #4 as the web-mode work packet. The PR must target `develop` and
-state that it implements only `IAU-runtime-contract-runtime-facts-v1`.
+state that it implements only `IAU-runtime-contract-provider-policy-v1`.
 
 The PR summary should include:
 
 - the implementation plan used before code changes
-- completed tasks from `T016` through `T021`
+- completed tasks from `T022` through `T025`
 - tests added or updated
-- confirmation that `T022` through `T030` remain blocked
+- confirmation that `T026` through `T030` remain blocked
 - validation command results
 
 ## Clarification Rule

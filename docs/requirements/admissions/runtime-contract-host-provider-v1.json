@@ -22,7 +22,9 @@
     "analyzeCriticalFindings": "none-recorded",
     "explicitCompareIauPreflight": "pass",
     "explicitCompareIauCloseout": "implemented",
-    "runtimeFactsIauPreflight": "pass"
+    "runtimeFactsIauPreflight": "pass",
+    "runtimeFactsIauCloseout": "implemented",
+    "providerPolicyIauPreflight": "pass"
   },
   "implementationAdmissionUnits": [
     {
@@ -50,7 +52,7 @@
     },
     {
       "iauId": "IAU-runtime-contract-runtime-facts-v1",
-      "state": "implementation-admitted",
+      "state": "implemented",
       "record": "docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-runtime-facts-v1.json",
       "preflightRecord": "docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-runtime-facts-v1-preflight-v1.json",
       "admittedTasks": [
@@ -61,9 +63,21 @@
         "T020",
         "T021"
       ]
+    },
+    {
+      "iauId": "IAU-runtime-contract-provider-policy-v1",
+      "state": "implementation-admitted",
+      "record": "docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-provider-policy-v1.json",
+      "preflightRecord": "docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-provider-policy-v1-preflight-v1.json",
+      "admittedTasks": [
+        "T022",
+        "T023",
+        "T024",
+        "T025"
+      ]
     }
   ],
-  "currentImplementationAdmissionUnit": "IAU-runtime-contract-runtime-facts-v1",
+  "currentImplementationAdmissionUnit": "IAU-runtime-contract-provider-policy-v1",
   "completedImplementationScope": [
     "T007",
     "T008",
@@ -73,9 +87,7 @@
     "T012",
     "T013",
     "T014",
-    "T015"
-  ],
-  "admittedImplementationScope": [
+    "T015",
     "T016",
     "T017",
     "T018",
@@ -83,17 +95,19 @@
     "T020",
     "T021"
   ],
-  "preImplementationPreflight": {
-    "iauId": "IAU-runtime-contract-runtime-facts-v1",
-    "status": "pass",
-    "record": "docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-runtime-facts-v1-preflight-v1.json",
-    "implementationStartAllowed": true
-  },
-  "blockedUntilRuntimeFactsMerge": [
+  "admittedImplementationScope": [
     "T022",
     "T023",
     "T024",
-    "T025",
+    "T025"
+  ],
+  "preImplementationPreflight": {
+    "iauId": "IAU-runtime-contract-provider-policy-v1",
+    "status": "pass",
+    "record": "docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-provider-policy-v1-preflight-v1.json",
+    "implementationStartAllowed": true
+  },
+  "blockedUntilProviderPolicyMerge": [
     "T026",
     "T027",
     "T028",
