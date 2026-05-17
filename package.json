@@ -1,0 +1,22 @@
+{
+  "name": "vi-history",
+  "displayName": "VI History",
+  "publisher": "svelderrainruiz",
+  "version": "0.1.0",
+  "license": "MIT",
+  "description": "MIT clean-room Spec Kit implementation authority for VI History.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/svelderrainruiz/vi-history.git"
+  },
+  "bugs": {
+    "url": "https://github.com/svelderrainruiz/vi-history/issues"
+  },
+  "homepage": "https://github.com/svelderrainruiz/vi-history",
+  "private": false,
+  "scripts": {
+    "check": "npm run validate",
+    "test": "npm run validate",
+    "validate": "node scripts/validate-spec-kit-imports.mjs && node scripts/check-clean-room-boundary.mjs"
+  }
+}
