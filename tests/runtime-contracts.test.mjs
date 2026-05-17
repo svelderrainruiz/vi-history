@@ -9,7 +9,10 @@ import {
   createComparePreExecutionFacts,
   createComparisonCommandPlan,
   createComparisonCommandPlanFromCompareAction,
+  createLabViewCliCommandPlan,
   createProofPacket,
+  createRuntimeFactsReport,
+  discoverHostNativeLabViewRuntime,
   requestExplicitCompareAction,
   createRuntimeSelection,
   selectProviderPolicy
@@ -249,4 +252,118 @@ test("T015 renders selected/base commit and runtime facts before execution", () 
   assert.equal(facts.provider, "host-native");
   assert.equal(facts.version, "2026");
   assert.equal(facts.bitness, "x64");
+});
+
+test("T016 selects a supported host-native LabVIEWCLI runtime", () => {
+  const runtimeSelection = discoverHostNativeLabViewRuntime({
+    version: "2026",
+    bitness: "x64",
+    labviewCliPath: "/opt/ni/labview-2026/LabVIEWCLI",
+    labviewPath: "/opt/ni/labview-2026/LabVIEW",
+    notes: ["detected from host"]
+  });
+
+  assert.equal(runtimeSelection.provider, "host-native");
+  assert.equal(runtimeSelection.engine, "LabVIEWCLI");
+  assert.equal(runtimeSelection.version, "2026");
+  assert.equal(runtimeSelection.bitness, "x64");
+  assert.equal(runtimeSelection.readiness, "ready");
+  assert.equal(runtimeSelection.blockedReason, null);
+  assert.equal(runtimeSelection.selectedPaths.labviewCli, "/opt/ni/labview-2026/LabVIEWCLI");
+  assert.equal(runtimeSelection.selectedPaths.labview, "/opt/ni/labview-2026/LabVIEW");
+});
+
+test("T017 rejects unsupported LabVIEW 2024-or-older runtimes", () => {
+  const runtimeSelection = discoverHostNativeLabViewRuntime({
+    version: "2024",
+    bitness: "x64",
+    labviewCliPath: "/opt/ni/labview-2024/LabVIEWCLI",
+    labviewPath: "/opt/ni/labview-2024/LabVIEW"
+  });
+
+  assert.equal(runtimeSelection.readiness, "blocked");
+  assert.equal(runtimeSelection.blockedReason, "labview-version-unsupported");
+  assert.deepEqual(runtimeSelection.notes, ["LabVIEW 2025 or newer is required"]);
+});
+
+test("T018 fails closed when explicit proof override paths are missing", () => {
+  const runtimeSelection = discoverHostNativeLabViewRuntime({
+    version: "2026",
+    bitness: "x64",
+    proofOverrideRequired: true,
+    labviewCliPath: "/opt/ni/labview-2026/LabVIEWCLI"
+  });
+
+  assert.equal(runtimeSelection.readiness, "blocked");
+  assert.equal(runtimeSelection.blockedReason, "explicit-proof-override-paths-missing");
+  assert.equal(runtimeSelection.selectedPaths.labviewCli, "/opt/ni/labview-2026/LabVIEWCLI");
+  assert.equal(runtimeSelection.selectedPaths.labview, undefined);
+});
+
+test("T019 classifies unavailable host-native runtimes with retained facts", () => {
+  const runtimeSelection = discoverHostNativeLabViewRuntime({
+    version: "2026",
+    bitness: "x64",
+    labviewCliPath: "/opt/ni/labview-2026/LabVIEWCLI",
+    labviewPath: "/opt/ni/labview-2026/LabVIEW",
+    runtimeAvailable: false,
+    notes: ["binary missing during discovery"]
+  });
+
+  assert.equal(runtimeSelection.readiness, "unavailable");
+  assert.equal(runtimeSelection.blockedReason, "runtime-bundle-unavailable");
+  assert.equal(runtimeSelection.provider, "host-native");
+  assert.equal(runtimeSelection.engine, "LabVIEWCLI");
+  assert.deepEqual(runtimeSelection.notes, ["binary missing during discovery"]);
+});
+
+test("T020 creates a LabVIEWCLI command plan without command execution", () => {
+  const runtimeSelection = discoverHostNativeLabViewRuntime({
+    version: "2026",
+    bitness: "x64",
+    labviewCliPath: "/opt/ni/labview-2026/LabVIEWCLI",
+    labviewPath: "/opt/ni/labview-2026/LabVIEW"
+  });
+
+  const plan = createLabViewCliCommandPlan({
+    runtimeSelection,
+    selectedViPath: "selected.vi",
+    baseViPath: "base.vi",
+    outputPath: "report.html"
+  });
+
+  assert.equal(plan.kind, "labviewcli-command-plan");
+  assert.equal(plan.operation, "CreateComparisonReport");
+  assert.equal(plan.executable, "/opt/ni/labview-2026/LabVIEWCLI");
+  assert.equal(plan.executionStarted, false);
+  assert.equal(plan.executionPolicy, "plan-only");
+});
+
+test("T021 renders retained runtime facts for report and proof surfaces", () => {
+  const runtimeSelection = discoverHostNativeLabViewRuntime({
+    version: "2026",
+    bitness: "x64",
+    labviewCliPath: "/opt/ni/labview-2026/LabVIEWCLI",
+    labviewPath: "/opt/ni/labview-2026/LabVIEW",
+    notes: ["ready for planning"]
+  });
+  const commandPlan = createLabViewCliCommandPlan({
+    runtimeSelection,
+    selectedViPath: "selected.vi",
+    baseViPath: "base.vi",
+    outputPath: "report.html"
+  });
+
+  const report = createRuntimeFactsReport({ runtimeSelection, commandPlan });
+
+  assert.equal(report.kind, "runtime-facts-report");
+  assert.equal(report.runtime.provider, "host-native");
+  assert.equal(report.runtime.engine, "LabVIEWCLI");
+  assert.equal(report.runtime.version, "2026");
+  assert.equal(report.runtime.bitness, "x64");
+  assert.equal(report.runtime.readiness, "ready");
+  assert.deepEqual(report.runtime.notes, ["ready for planning"]);
+  assert.equal(report.commandPlan.operation, "CreateComparisonReport");
+  assert.equal(report.commandPlan.selectedLabView.provider, "host-native");
+  assert.equal(report.commandPlan.executionStarted, false);
 });
