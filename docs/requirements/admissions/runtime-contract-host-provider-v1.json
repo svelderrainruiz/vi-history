@@ -21,18 +21,45 @@
     "artifactConsistency": "pass",
     "analyzeCriticalFindings": "none-recorded"
   },
-  "admittedImplementationScope": [
+  "implementationAdmissionUnits": [
+    {
+      "iauId": "IAU-runtime-contract-foundation-v1",
+      "state": "implemented",
+      "admittedTasks": [
+        "T007",
+        "T008",
+        "T009",
+        "T010",
+        "T011"
+      ]
+    },
+    {
+      "iauId": "IAU-runtime-contract-explicit-compare-v1",
+      "state": "implementation-admitted",
+      "record": "docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-explicit-compare-v1.json",
+      "admittedTasks": [
+        "T012",
+        "T013",
+        "T014",
+        "T015"
+      ]
+    }
+  ],
+  "currentImplementationAdmissionUnit": "IAU-runtime-contract-explicit-compare-v1",
+  "completedImplementationScope": [
     "T007",
     "T008",
     "T009",
     "T010",
     "T011"
   ],
-  "blockedUntilFoundationMerge": [
+  "admittedImplementationScope": [
     "T012",
     "T013",
     "T014",
-    "T015",
+    "T015"
+  ],
+  "blockedUntilExplicitCompareMerge": [
     "T016",
     "T017",
     "T018",

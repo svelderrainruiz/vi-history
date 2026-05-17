@@ -32,12 +32,17 @@ function readJson(fullPath) {
 
 function hasAdmittedImplementationScope() {
   const admission = readJson(admissionPath);
+  const completedScope = admission?.completedImplementationScope ?? admission?.admittedImplementationScope;
+  const iaus = admission?.implementationAdmissionUnits;
+  const foundationImplemented = Array.isArray(iaus)
+    && iaus.some((iau) => iau?.iauId === "IAU-runtime-contract-foundation-v1" && iau?.state === "implemented");
   return admission?.state === "implementation-admitted"
     && admission?.sliceId === admittedSliceId
     && admission?.implementationSharing === "none"
-    && Array.isArray(admission?.admittedImplementationScope)
-    && admission.admittedImplementationScope.includes("T007")
-    && admission.admittedImplementationScope.includes("T011");
+    && Array.isArray(completedScope)
+    && completedScope.includes("T007")
+    && completedScope.includes("T011")
+    && (foundationImplemented || !Array.isArray(iaus));
 }
 
 function walk(directory) {

@@ -33,8 +33,10 @@ plan, and tasks, then records a public admission before implementation begins.
 - #4 implements the admitted foundation scope `T007` through `T011`.
 - #5 decides any future Marketplace publication posture.
 
-The current admission record is
-`docs/requirements/admissions/runtime-contract-host-provider-v1.json`.
+The current admission ledger is
+`docs/requirements/admissions/runtime-contract-host-provider-v1.json`. The
+current admitted implementation unit is
+`IAU-runtime-contract-explicit-compare-v1`.
 
 ## Validation
 
