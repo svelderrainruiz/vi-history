@@ -26,6 +26,15 @@ export const RUNTIME_CONTRACT_REQUIREMENTS = Object.freeze({
   explicitCompareAction: Object.freeze([
     "VHS-SYS-REQ-006",
     "VHS-SYS-REQ-008"
+  ]),
+  runtimeProviderFacts: Object.freeze([
+    "VHS-SYS-REQ-006",
+    "VHS-SYS-REQ-007",
+    "VHS-REQ-094",
+    "VHS-REQ-095",
+    "VHS-REQ-141",
+    "VHS-REQ-144",
+    "VHS-REQ-194"
   ])
 });
 
@@ -75,6 +84,23 @@ function cloneRecord(value, label) {
     throw new Error(`${label} must be a string or object`);
   }
   return freezeRecord({ ...required });
+}
+
+function normalizeVersionNumber(version) {
+  const versionText = String(requireValue(version, "version"));
+  const match = versionText.match(/\d{4}/);
+  if (!match) {
+    throw new Error("version must include a four-digit LabVIEW year");
+  }
+  return Number(match[0]);
+}
+
+function selectedRuntimePaths(input = {}) {
+  return {
+    ...(input.selectedPaths ?? {}),
+    ...(input.labviewCliPath ? { labviewCli: String(input.labviewCliPath) } : {}),
+    ...(input.labviewPath ? { labview: String(input.labviewPath) } : {})
+  };
 }
 
 export function createRuntimeSelection(input) {
@@ -224,6 +250,106 @@ export function createComparisonCommandPlanFromCompareAction(input) {
     baseViPath: input?.baseViPath,
     outputPath: input?.outputPath,
     labviewCliPath: input?.labviewCliPath
+  });
+}
+
+export function discoverHostNativeLabViewRuntime(input = {}) {
+  const version = String(requireValue(input.version, "version"));
+  const bitness = requireOneOf(input.bitness, BITNESS, "bitness");
+  const paths = selectedRuntimePaths(input);
+  const versionYear = normalizeVersionNumber(version);
+  const proofOverrideRequired = input.proofOverrideRequired === true;
+
+  if (proofOverrideRequired && (!paths.labviewCli || !paths.labview)) {
+    return createRuntimeSelection({
+      provider: "host-native",
+      engine: "LabVIEWCLI",
+      version,
+      bitness,
+      selectedPaths: paths,
+      readiness: "blocked",
+      blockedReason: "explicit-proof-override-paths-missing",
+      notes: ["explicit LabVIEWCLI and LabVIEW paths are required for proof override mode"]
+    });
+  }
+
+  if (versionYear <= 2024) {
+    return createRuntimeSelection({
+      provider: "host-native",
+      engine: "LabVIEWCLI",
+      version,
+      bitness,
+      selectedPaths: paths,
+      readiness: "blocked",
+      blockedReason: "labview-version-unsupported",
+      notes: ["LabVIEW 2025 or newer is required"]
+    });
+  }
+
+  if (input.runtimeAvailable === false) {
+    return createRuntimeSelection({
+      provider: "host-native",
+      engine: "LabVIEWCLI",
+      version,
+      bitness,
+      selectedPaths: paths,
+      readiness: "unavailable",
+      blockedReason: "runtime-bundle-unavailable",
+      notes: normalizeNotes(input.notes)
+    });
+  }
+
+  return createRuntimeSelection({
+    provider: "host-native",
+    engine: "LabVIEWCLI",
+    version,
+    bitness,
+    selectedPaths: paths,
+    readiness: "ready",
+    notes: normalizeNotes(input.notes)
+  });
+}
+
+export function createLabViewCliCommandPlan(input) {
+  const plan = createComparisonCommandPlan(input);
+  return freezeRecord({
+    ...plan,
+    kind: "labviewcli-command-plan",
+    executionStarted: false,
+    executionPolicy: "plan-only"
+  });
+}
+
+export function createRuntimeFactsReport(input) {
+  const runtimeSelection = requireValue(input?.runtimeSelection, "runtimeSelection");
+  if (runtimeSelection.kind !== "runtime-selection") {
+    throw new Error("runtimeSelection must come from createRuntimeSelection");
+  }
+
+  const commandPlan = input?.commandPlan ?? null;
+  return freezeRecord({
+    kind: "runtime-facts-report",
+    runtime: {
+      provider: runtimeSelection.provider,
+      engine: runtimeSelection.engine,
+      version: runtimeSelection.version,
+      bitness: runtimeSelection.bitness,
+      selectedPaths: runtimeSelection.selectedPaths,
+      readiness: runtimeSelection.readiness,
+      blockedReason: runtimeSelection.blockedReason,
+      notes: runtimeSelection.notes
+    },
+    commandPlan: commandPlan
+      ? {
+          operation: commandPlan.operation,
+          executable: commandPlan.executable,
+          stagedViPaths: commandPlan.stagedViPaths,
+          outputPath: commandPlan.outputPath,
+          selectedLabView: commandPlan.selectedLabView,
+          executionStarted: commandPlan.executionStarted === true
+        }
+      : null,
+    requirementIds: [...RUNTIME_CONTRACT_REQUIREMENTS.runtimeProviderFacts]
   });
 }
 
