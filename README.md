@@ -5,8 +5,8 @@ authority for VI History.
 
 This repository starts from requirements and Spec Kit artifacts, not from copied
 extension source. The initial baseline imports the
-`runtime-contract-host-provider-v1` requirements slice and keeps implementation
-blocked until the feature spec, plan, and tasks are locked.
+`runtime-contract-host-provider-v1` requirements slice, locks the feature spec,
+plan, and tasks, then records a public admission before implementation begins.
 
 ## Authority
 
@@ -30,8 +30,11 @@ blocked until the feature spec, plan, and tasks are locked.
 - #1 bootstraps the MIT Spec Kit authority.
 - #2 imports `runtime-contract-host-provider-v1`.
 - #3 locks the Spec Kit feature spec, plan, and tasks.
-- #4 implements the runtime contract only after #3 is locked.
+- #4 implements the admitted foundation scope `T007` through `T011`.
 - #5 decides any future Marketplace publication posture.
+
+The current admission record is
+`docs/requirements/admissions/runtime-contract-host-provider-v1.json`.
 
 ## Validation
 
@@ -42,4 +45,5 @@ npm test
 ```
 
 The current gates validate import packet shape, Spec Kit artifact presence,
-package identity, redaction, and the clean-room boundary.
+package identity, admission state, redaction, traceability, and the clean-room
+boundary.

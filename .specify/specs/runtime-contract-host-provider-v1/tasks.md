@@ -34,11 +34,11 @@ validation passes.
 **Implementation is blocked until**: Issue #4 starts after this bootstrap and
 Issue #3 are closed.
 
-- [ ] T007 [P] Define runtime selection data contract with provider, engine, version, bitness, selected paths, readiness, blocked reason, and notes.
-- [ ] T008 [P] Define comparison command-plan contract for LabVIEWCLI `CreateComparisonReport`.
-- [ ] T009 [P] Define proof packet contract for runtime facts, generated-report facts, stdout, stderr, exit code, duration, and issue body.
-- [ ] T010 Define provider policy contract for host-native default, bounded Docker expert selection, unsupported bundles, and no silent fallback.
-- [ ] T011 Add tests that imported IDs are traceable from implementation contracts to `docs/requirements/imports/runtime-contract-host-provider-v1/rtm.csv`.
+- [x] T007 [P] Define runtime selection data contract with provider, engine, version, bitness, selected paths, readiness, blocked reason, and notes.
+- [x] T008 [P] Define comparison command-plan contract for LabVIEWCLI `CreateComparisonReport`.
+- [x] T009 [P] Define proof packet contract for runtime facts, generated-report facts, stdout, stderr, exit code, duration, and issue body.
+- [x] T010 Define provider policy contract for host-native default, bounded Docker expert selection, unsupported bundles, and no silent fallback.
+- [x] T011 Add tests that imported IDs are traceable from implementation contracts to `docs/requirements/imports/runtime-contract-host-provider-v1/rtm.csv`.
 
 **Checkpoint**: User story implementation can begin after these contracts and
 tests exist.

@@ -17,6 +17,7 @@
   "scripts": {
     "check": "npm run validate",
     "test": "npm run validate",
-    "validate": "node scripts/validate-spec-kit-imports.mjs && node scripts/check-clean-room-boundary.mjs"
+    "unit": "node --test tests/*.test.mjs",
+    "validate": "npm run unit && node scripts/validate-spec-kit-imports.mjs && node scripts/check-clean-room-boundary.mjs"
   }
 }

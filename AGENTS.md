@@ -19,8 +19,10 @@ promotion to `main`.
 Marketplace publication is disabled until a later governing decision admits a
 release channel.
 
-Implementation for `runtime-contract-host-provider-v1` remains blocked until
-the imported requirements, `spec.md`, `plan.md`, and `tasks.md` are locked.
+Implementation for `runtime-contract-host-provider-v1` begins only after the
+public admission record reaches `implementation-admitted`. The current admitted
+scope is limited to foundation tasks `T007` through `T011`; user-story tasks
+remain blocked until the foundation contract pull request merges.
 
 When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:
