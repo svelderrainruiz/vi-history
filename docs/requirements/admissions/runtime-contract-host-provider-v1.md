@@ -2,9 +2,9 @@
 
 ## State
 
-`runtime-contract-host-provider-v1` has an implemented foundation IAU. The
-current explicit-compare IAU has preflight `status: pass`, so implementation is
-admitted for `T012` through `T015`.
+`runtime-contract-host-provider-v1` has implemented foundation and
+explicit-compare IAUs. The current runtime-facts IAU has preflight `status:
+pass`, so implementation is admitted for `T016` through `T021`.
 
 ## Admission Basis
 
@@ -25,15 +25,24 @@ admitted for `T012` through `T015`.
 - provider policy contract
 - imported requirement traceability tests
 
-## Current IAU
-
-`IAU-runtime-contract-explicit-compare-v1` is admitted for tasks `T012` through
+`IAU-runtime-contract-explicit-compare-v1` completed tasks `T012` through
 `T015`:
 
-- commit-pair selection retains selected/base commit facts
-- compare does not start before explicit user action
+- commit-pair selection retention tests
+- explicit user-action gating tests
 - clean-room compare-action state flow
-- selected commit, base commit, provider, version, and bitness facts render
-  before execution
+- selected/base commit and runtime fact rendering before execution
 
-Tasks `T016` through `T030` remain blocked until this IAU merges.
+## Current IAU
+
+`IAU-runtime-contract-runtime-facts-v1` is admitted for tasks `T016` through
+`T021`:
+
+- supported host-native LabVIEWCLI runtime selection tests
+- unsupported LabVIEW 2024-or-older rejection tests
+- missing explicit proof override path fail-closed tests
+- runtime discovery and readiness classification
+- LabVIEWCLI command-plan creation without command execution
+- retained runtime facts in report/proof surfaces
+
+Tasks `T022` through `T030` remain blocked until this IAU merges.

@@ -21,8 +21,8 @@ release channel.
 
 Implementation for `runtime-contract-host-provider-v1` begins only after a
 named Implementation Admission Unit has a preflight record with `status: pass`.
-The current unit is `IAU-runtime-contract-explicit-compare-v1`, covering tasks
-`T012` through `T015`, and its preflight is `pass`. Tasks `T016` through
+The current unit is `IAU-runtime-contract-runtime-facts-v1`, covering tasks
+`T016` through `T021`, and its preflight is `pass`. Tasks `T022` through
 `T030` remain blocked until that IAU merges.
 
 For Copilot local or web implementation work, read

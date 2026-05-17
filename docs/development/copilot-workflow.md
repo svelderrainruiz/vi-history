@@ -20,22 +20,22 @@ Read these before changing code:
 - `.specify/specs/runtime-contract-host-provider-v1/plan.md`
 - `.specify/specs/runtime-contract-host-provider-v1/tasks.md`
 - `docs/requirements/admissions/runtime-contract-host-provider-v1.json`
-- `docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-explicit-compare-v1.json`
-- `docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-explicit-compare-v1-preflight-v1.json`
+- `docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-runtime-facts-v1.json`
+- `docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-runtime-facts-v1-preflight-v1.json`
 
 ## Current Work Packet
 
 GitHub Issue #4 is the public implementation issue. The current admitted unit is
-`IAU-runtime-contract-explicit-compare-v1`.
+`IAU-runtime-contract-runtime-facts-v1`.
 
 Allowed tasks:
 
-- `T012`: add tests for commit-pair selection retaining selected/base commit
-  facts.
-- `T013`: add tests proving compare does not start before explicit user action.
-- `T014`: implement clean-room compare-action state flow.
-- `T015`: render selected commit, base commit, provider, version, and bitness
-  facts before execution.
+- `T016`: add tests for supported host-native LabVIEWCLI runtime selection.
+- `T017`: add tests for unsupported LabVIEW 2024-or-older rejection.
+- `T018`: add tests for missing explicit proof override paths failing closed.
+- `T019`: implement runtime discovery and readiness classification.
+- `T020`: implement LabVIEWCLI command-plan creation.
+- `T021`: implement report/proof rendering of retained runtime facts.
 
 Expected write area:
 
@@ -47,11 +47,9 @@ Expected write area:
 
 Do not implement these in the current PR:
 
-- `T016` through `T030`
-- runtime discovery
+- `T022` through `T030`
 - LabVIEWCLI command execution
 - Docker provider behavior
-- proof packet writing beyond existing contract support
 - proof intake validation
 - Marketplace publication or packaging
 - source copying from another VI History product line
@@ -63,11 +61,14 @@ instead of expanding the implementation scope.
 
 1. Start from `develop`.
 2. Create a feature branch for the current IAU.
-3. Ask Copilot to implement only `T012` through `T015` from the files listed in
-   this workflow.
-4. Keep implementation behavior clean-room and traceable to imported
+3. Ask Copilot to plan first, without changing code. The plan must name files
+   expected to change, tests to add or update, how `T022` through `T030` remain
+   blocked, and validation commands.
+4. After the plan, ask Copilot to implement only `T016` through `T021` from the
+   files listed in this workflow.
+5. Keep implementation behavior clean-room and traceable to imported
    requirement IDs.
-5. Run validation before opening a PR.
+6. Run validation before opening a PR.
 
 Use these checks:
 
@@ -80,13 +81,14 @@ git diff --check
 ## Web Copilot Flow
 
 Use Issue #4 as the web-mode work packet. The PR must target `develop` and
-state that it implements only `IAU-runtime-contract-explicit-compare-v1`.
+state that it implements only `IAU-runtime-contract-runtime-facts-v1`.
 
 The PR summary should include:
 
-- completed tasks from `T012` through `T015`
+- the implementation plan used before code changes
+- completed tasks from `T016` through `T021`
 - tests added or updated
-- confirmation that `T016` through `T030` remain blocked
+- confirmation that `T022` through `T030` remain blocked
 - validation command results
 
 ## Clarification Rule
