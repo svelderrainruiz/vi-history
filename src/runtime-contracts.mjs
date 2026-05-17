@@ -5,6 +5,10 @@ export const RUNTIME_CONTRACT_REQUIREMENTS = Object.freeze({
     "VHS-REQ-095",
     "VHS-REQ-141"
   ]),
+  compareActionState: Object.freeze([
+    "VHS-SYS-REQ-006",
+    "VHS-SYS-REQ-008"
+  ]),
   comparisonCommandPlan: Object.freeze([
     "VHS-SYS-REQ-004",
     "VHS-SYS-REQ-008",
@@ -53,6 +57,24 @@ function normalizeNotes(notes) {
   return Object.freeze(values.map(String).filter((note) => note.length > 0));
 }
 
+function normalizeCommitFact(value, label) {
+  if (value === undefined || value === null) {
+    return null;
+  }
+
+  if (typeof value === "string") {
+    const id = value.trim();
+    if (!id) {
+      throw new Error(`${label} id is required`);
+    }
+    return Object.freeze({ id, label: null });
+  }
+
+  const id = String(requireValue(value.id ?? value.sha, `${label} id`)).trim();
+  const commitLabel = value.label === undefined || value.label === null ? null : String(value.label);
+  return Object.freeze({ id, label: commitLabel });
+}
+
 function freezeRecord(record) {
   for (const [key, value] of Object.entries(record)) {
     if (value && typeof value === "object" && !Object.isFrozen(value)) {
@@ -60,6 +82,74 @@ function freezeRecord(record) {
     }
   }
   return Object.freeze(record);
+}
+
+export function createCompareActionState(input = {}) {
+  const runtimeSelection = requireValue(input.runtimeSelection, "runtimeSelection");
+  if (runtimeSelection.kind !== "runtime-selection") {
+    throw new Error("runtimeSelection must come from createRuntimeSelection");
+  }
+
+  const selectedCommit = normalizeCommitFact(input.selectedCommit, "selectedCommit");
+  const baseCommit = normalizeCommitFact(input.baseCommit, "baseCommit");
+  const compareRequested = input.compareRequested === true;
+  const compareStarted = compareRequested && selectedCommit !== null && baseCommit !== null;
+
+  return freezeRecord({
+    kind: "compare-action-state",
+    selectedCommit,
+    baseCommit,
+    compareRequested,
+    compareStarted,
+    runtimeSelection,
+    requirementIds: [...RUNTIME_CONTRACT_REQUIREMENTS.compareActionState]
+  });
+}
+
+export function selectCompareCommitPair(compareActionState, input = {}) {
+  const current = requireValue(compareActionState, "compareActionState");
+  if (current.kind !== "compare-action-state") {
+    throw new Error("compareActionState must come from createCompareActionState");
+  }
+
+  return createCompareActionState({
+    runtimeSelection: current.runtimeSelection,
+    selectedCommit: requireValue(input.selectedCommit, "selectedCommit"),
+    baseCommit: requireValue(input.baseCommit, "baseCommit"),
+    compareRequested: false
+  });
+}
+
+export function requestCompareAction(compareActionState) {
+  const current = requireValue(compareActionState, "compareActionState");
+  if (current.kind !== "compare-action-state") {
+    throw new Error("compareActionState must come from createCompareActionState");
+  }
+
+  return createCompareActionState({
+    runtimeSelection: current.runtimeSelection,
+    selectedCommit: current.selectedCommit,
+    baseCommit: current.baseCommit,
+    compareRequested: true
+  });
+}
+
+export function renderCompareActionFacts(compareActionState) {
+  const current = requireValue(compareActionState, "compareActionState");
+  if (current.kind !== "compare-action-state") {
+    throw new Error("compareActionState must come from createCompareActionState");
+  }
+
+  return freezeRecord({
+    selectedCommit: current.selectedCommit,
+    baseCommit: current.baseCommit,
+    provider: current.runtimeSelection.provider,
+    version: current.runtimeSelection.version,
+    bitness: current.runtimeSelection.bitness,
+    compareRequested: current.compareRequested,
+    compareStarted: current.compareStarted,
+    requirementIds: [...RUNTIME_CONTRACT_REQUIREMENTS.compareActionState]
+  });
 }
 
 export function createRuntimeSelection(input) {

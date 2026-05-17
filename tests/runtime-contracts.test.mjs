@@ -4,9 +4,13 @@ import test from "node:test";
 
 import {
   allRuntimeContractRequirementIds,
+  createCompareActionState,
   createComparisonCommandPlan,
   createProofPacket,
   createRuntimeSelection,
+  renderCompareActionFacts,
+  requestCompareAction,
+  selectCompareCommitPair,
   selectProviderPolicy
 } from "../src/runtime-contracts.mjs";
 
@@ -157,4 +161,95 @@ test("T011 traces implementation contract IDs to the imported manifest and RTM",
   for (const id of implementationIds) {
     assert.ok(rtmIds.has(id), `${id} must appear in imported RTM`);
   }
+});
+
+test("T012 retains selected/base commit facts after commit-pair selection", () => {
+  const runtimeSelection = createRuntimeSelection({
+    provider: "host-native",
+    engine: "LabVIEWCLI",
+    version: "2026",
+    bitness: "x64",
+    readiness: "ready"
+  });
+
+  const initial = createCompareActionState({ runtimeSelection });
+  const withPair = selectCompareCommitPair(initial, {
+    selectedCommit: { id: "def456", label: "selected commit" },
+    baseCommit: { id: "abc123", label: "base commit" }
+  });
+
+  assert.deepEqual(withPair.selectedCommit, { id: "def456", label: "selected commit" });
+  assert.deepEqual(withPair.baseCommit, { id: "abc123", label: "base commit" });
+  assert.equal(withPair.compareRequested, false);
+});
+
+test("T013 compare does not start before explicit user action", () => {
+  const runtimeSelection = createRuntimeSelection({
+    provider: "host-native",
+    engine: "LabVIEWCLI",
+    version: "2026",
+    bitness: "x64",
+    readiness: "ready"
+  });
+
+  const stateWithoutAction = selectCompareCommitPair(createCompareActionState({ runtimeSelection }), {
+    selectedCommit: "def456",
+    baseCommit: "abc123"
+  });
+
+  assert.equal(stateWithoutAction.compareStarted, false);
+
+  const stateWithAction = requestCompareAction(stateWithoutAction);
+  assert.equal(stateWithAction.compareStarted, true);
+});
+
+test("T014 compare-action state flow stays explicit and clean-room", () => {
+  const runtimeSelection = createRuntimeSelection({
+    provider: "host-native",
+    engine: "LabVIEWCLI",
+    version: "2026",
+    bitness: "x64",
+    readiness: "ready"
+  });
+
+  const initial = createCompareActionState({ runtimeSelection });
+  assert.equal(initial.compareRequested, false);
+  assert.equal(initial.compareStarted, false);
+  assert.equal(initial.selectedCommit, null);
+  assert.equal(initial.baseCommit, null);
+
+  const selectedPair = selectCompareCommitPair(initial, {
+    selectedCommit: "def456",
+    baseCommit: "abc123"
+  });
+  assert.equal(selectedPair.compareRequested, false);
+  assert.equal(selectedPair.compareStarted, false);
+
+  const requested = requestCompareAction(selectedPair);
+  assert.equal(requested.compareRequested, true);
+  assert.equal(requested.compareStarted, true);
+});
+
+test("T015 renders selected/base commit and runtime facts before compare execution", () => {
+  const runtimeSelection = createRuntimeSelection({
+    provider: "host-native",
+    engine: "LabVIEWCLI",
+    version: "2026",
+    bitness: "x64",
+    readiness: "ready"
+  });
+
+  const compareState = selectCompareCommitPair(createCompareActionState({ runtimeSelection }), {
+    selectedCommit: { id: "def456", label: "selected commit" },
+    baseCommit: { id: "abc123", label: "base commit" }
+  });
+
+  const facts = renderCompareActionFacts(compareState);
+
+  assert.deepEqual(facts.selectedCommit, { id: "def456", label: "selected commit" });
+  assert.deepEqual(facts.baseCommit, { id: "abc123", label: "base commit" });
+  assert.equal(facts.provider, "host-native");
+  assert.equal(facts.version, "2026");
+  assert.equal(facts.bitness, "x64");
+  assert.equal(facts.compareStarted, false);
 });
