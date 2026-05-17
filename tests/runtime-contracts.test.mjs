@@ -4,8 +4,13 @@ import test from "node:test";
 
 import {
   allRuntimeContractRequirementIds,
+  createCommitPairSelection,
+  createCompareActionState,
+  createComparePreExecutionFacts,
   createComparisonCommandPlan,
+  createComparisonCommandPlanFromCompareAction,
   createProofPacket,
+  requestExplicitCompareAction,
   createRuntimeSelection,
   selectProviderPolicy
 } from "../src/runtime-contracts.mjs";
@@ -157,4 +162,91 @@ test("T011 traces implementation contract IDs to the imported manifest and RTM",
   for (const id of implementationIds) {
     assert.ok(rtmIds.has(id), `${id} must appear in imported RTM`);
   }
+});
+
+test("T012 retains selected and base commit facts after commit-pair selection", () => {
+  const commitPair = createCommitPairSelection({
+    selectedCommit: { sha: "abc123", label: "selected" },
+    baseCommit: { sha: "def456", label: "base" }
+  });
+
+  assert.equal(commitPair.kind, "commit-pair-selection");
+  assert.deepEqual(commitPair.selectedCommit, { sha: "abc123", label: "selected" });
+  assert.deepEqual(commitPair.baseCommit, { sha: "def456", label: "base" });
+});
+
+test("T013 proves compare does not start before explicit user action", () => {
+  const commitPair = createCommitPairSelection({
+    selectedCommit: { sha: "abc123" },
+    baseCommit: { sha: "def456" }
+  });
+  const runtimeSelection = createRuntimeSelection({
+    provider: "host-native",
+    engine: "LabVIEWCLI",
+    version: "2026",
+    bitness: "x64",
+    readiness: "ready"
+  });
+  const reviewState = createCompareActionState({ commitPair, runtimeSelection });
+
+  assert.throws(
+    () => createComparisonCommandPlanFromCompareAction({
+      compareActionState: reviewState,
+      selectedViPath: "selected.vi",
+      baseViPath: "base.vi",
+      outputPath: "report.html"
+    }),
+    /does not start before explicit user action/
+  );
+});
+
+test("T014 implements compare-action state flow from selection to explicit execution trigger", () => {
+  const commitPair = createCommitPairSelection({
+    selectedCommit: { sha: "abc123" },
+    baseCommit: { sha: "def456" }
+  });
+  const runtimeSelection = createRuntimeSelection({
+    provider: "host-native",
+    engine: "LabVIEWCLI",
+    version: "2026",
+    bitness: "x64",
+    readiness: "ready"
+  });
+  const reviewState = createCompareActionState({ commitPair, runtimeSelection });
+  assert.equal(reviewState.phase, "review");
+  assert.equal(reviewState.compareRequested, false);
+
+  const requestedState = requestExplicitCompareAction(reviewState);
+  assert.equal(requestedState.phase, "execution-requested");
+  assert.equal(requestedState.compareRequested, true);
+
+  const plan = createComparisonCommandPlanFromCompareAction({
+    compareActionState: requestedState,
+    selectedViPath: "selected.vi",
+    baseViPath: "base.vi",
+    outputPath: "report.html"
+  });
+  assert.equal(plan.operation, "CreateComparisonReport");
+});
+
+test("T015 renders selected/base commit and runtime facts before execution", () => {
+  const commitPair = createCommitPairSelection({
+    selectedCommit: { sha: "abc123", label: "selected" },
+    baseCommit: { sha: "def456", label: "base" }
+  });
+  const runtimeSelection = createRuntimeSelection({
+    provider: "host-native",
+    engine: "LabVIEWCLI",
+    version: "2026",
+    bitness: "x64",
+    readiness: "ready"
+  });
+  const reviewState = createCompareActionState({ commitPair, runtimeSelection });
+  const facts = createComparePreExecutionFacts(reviewState);
+
+  assert.deepEqual(facts.selectedCommit, { sha: "abc123", label: "selected" });
+  assert.deepEqual(facts.baseCommit, { sha: "def456", label: "base" });
+  assert.equal(facts.provider, "host-native");
+  assert.equal(facts.version, "2026");
+  assert.equal(facts.bitness, "x64");
 });
