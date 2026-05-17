@@ -5,6 +5,7 @@ const repoRoot = process.cwd();
 const sliceId = "runtime-contract-host-provider-v1";
 const featureDir = ".specify/specs/runtime-contract-host-provider-v1";
 const importDir = `docs/requirements/imports/${sliceId}`;
+const admissionPath = `docs/requirements/admissions/${sliceId}.json`;
 const expectedIds = [
   "VHS-SYS-REQ-004",
   "VHS-SYS-REQ-005",
@@ -83,6 +84,18 @@ requireEqual(integration.integration, "codex", "Spec Kit integration");
 const featureJson = readJson(".specify/feature.json");
 requireEqual(featureJson.feature_directory, featureDir, "pinned Spec Kit feature directory");
 
+const admission = readJson(admissionPath);
+requireEqual(admission.schema, "vi-history/requirements-admission@v1", "admission schema");
+requireEqual(admission.sliceId, sliceId, "admission sliceId");
+requireEqual(admission.state, "implementation-admitted", "admission state");
+requireEqual(admission.targetProduct, "vi-history", "admission targetProduct");
+requireEqual(admission.targetFeature, sliceId, "admission targetFeature");
+requireEqual(admission.sourceBaselineTag, "v1.3.16", "admission sourceBaselineTag");
+requireEqual(admission.sourceCommit, "31add781bd04cc832d9fb55aa821a69305a91a37", "admission sourceCommit");
+requireEqual(admission.implementationSharing, "none", "admission implementationSharing");
+requireArrayEqual(admission.admittedImplementationScope, ["T007", "T008", "T009", "T010", "T011"], "admittedImplementationScope");
+requireFile(`docs/requirements/admissions/${sliceId}.md`);
+
 const manifest = readJson(`${importDir}/manifest.json`);
 requireEqual(manifest.schema, "vi-history/requirements-import@v1", "manifest schema");
 requireEqual(manifest.sliceId, sliceId, "sliceId");
@@ -117,7 +130,9 @@ requireTextIncludes(`${featureDir}/plan.md`, [
 ]);
 requireTextIncludes(`${featureDir}/tasks.md`, [
   "Issue #4",
-  "blocked until"
+  "blocked until",
+  "T007",
+  "T011"
 ]);
 requireTextIncludes(`${importDir}/rtm.csv`, expectedIds);
 

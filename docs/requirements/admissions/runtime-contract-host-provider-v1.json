@@ -1,0 +1,55 @@
+{
+  "schema": "vi-history/requirements-admission@v1",
+  "sliceId": "runtime-contract-host-provider-v1",
+  "createdDate": "2026-05-17",
+  "state": "implementation-admitted",
+  "targetProduct": "vi-history",
+  "targetFeature": "runtime-contract-host-provider-v1",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "31add781bd04cc832d9fb55aa821a69305a91a37",
+  "publicImportPath": "docs/requirements/imports/runtime-contract-host-provider-v1/",
+  "specKitPath": ".specify/specs/runtime-contract-host-provider-v1/",
+  "issue": {
+    "number": 4,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/4"
+  },
+  "bridgeChecks": {
+    "specKitCliVersion": "0.8.12.dev0",
+    "publicImportPacketPresent": "pass",
+    "specKitArtifactsPresent": "pass",
+    "redactionScan": "pass",
+    "artifactConsistency": "pass",
+    "analyzeCriticalFindings": "none-recorded"
+  },
+  "admittedImplementationScope": [
+    "T007",
+    "T008",
+    "T009",
+    "T010",
+    "T011"
+  ],
+  "blockedUntilFoundationMerge": [
+    "T012",
+    "T013",
+    "T014",
+    "T015",
+    "T016",
+    "T017",
+    "T018",
+    "T019",
+    "T020",
+    "T021",
+    "T022",
+    "T023",
+    "T024",
+    "T025",
+    "T026",
+    "T027",
+    "T028",
+    "T029",
+    "T030"
+  ],
+  "requirementMaturityBasis": "governed released extension supports requirement maturity, not source reuse",
+  "implementationSharing": "none",
+  "marketplacePublication": "disabled-until-later-adr"
+}
