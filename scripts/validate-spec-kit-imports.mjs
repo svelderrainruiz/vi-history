@@ -6,6 +6,10 @@ const sliceId = "runtime-contract-host-provider-v1";
 const featureDir = ".specify/specs/runtime-contract-host-provider-v1";
 const importDir = `docs/requirements/imports/${sliceId}`;
 const admissionPath = `docs/requirements/admissions/${sliceId}.json`;
+const observationSliceId = "installed-user-observation-public-surface-v1";
+const observationFeatureDir = `.specify/specs/${observationSliceId}`;
+const observationImportDir = `docs/requirements/imports/${observationSliceId}`;
+const observationAdmissionPath = `docs/requirements/admissions/${observationSliceId}.json`;
 const marketplaceAdrPath = "docs/decisions/ADR-001-marketplace-publication-disabled.md";
 const explicitCompareIauPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1.json`;
 const explicitComparePreflightPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1-preflight-v1.json`;
@@ -32,6 +36,9 @@ const expectedIds = [
   "VHS-REQ-588",
   "VHS-REQ-589",
   "VHS-REQ-590"
+];
+const observationExpectedIds = [
+  "VHS-REQ-595"
 ];
 
 const failures = [];
@@ -98,7 +105,7 @@ const integration = readJson(".specify/integration.json");
 requireEqual(integration.integration, "codex", "Spec Kit integration");
 
 const featureJson = readJson(".specify/feature.json");
-requireEqual(featureJson.feature_directory, featureDir, "pinned Spec Kit feature directory");
+requireEqual(featureJson.feature_directory, observationFeatureDir, "pinned Spec Kit feature directory");
 
 const admission = readJson(admissionPath);
 requireEqual(admission.schema, "vi-history/requirements-admission@v1", "admission schema");
@@ -363,6 +370,76 @@ requireTextIncludes("docs/development/copilot-workflow.md", [
   "git diff --check"
 ]);
 requireTextIncludes(`${importDir}/rtm.csv`, expectedIds);
+
+const observationAdmission = readJson(observationAdmissionPath);
+requireEqual(observationAdmission.schema, "vi-history/requirements-admission@v1", "observation admission schema");
+requireEqual(observationAdmission.sliceId, observationSliceId, "observation admission sliceId");
+requireEqual(observationAdmission.state, "spec-locked", "observation admission state");
+requireEqual(observationAdmission.targetProduct, "vi-history", "observation admission targetProduct");
+requireEqual(observationAdmission.targetFeature, observationSliceId, "observation admission targetFeature");
+requireEqual(observationAdmission.sourceBaselineTag, "v1.3.16", "observation admission sourceBaselineTag");
+requireEqual(observationAdmission.sourceCommit, "48232bcc620d4dbe89ff846fda2bfe048b7768fb", "observation admission sourceCommit");
+requireEqual(observationAdmission.implementationSharing, "none", "observation admission implementationSharing");
+requireMarketplacePosture(observationAdmission, "observation admission");
+requireEqual(observationAdmission.currentImplementationAdmissionUnit, null, "observation currentImplementationAdmissionUnit");
+requireArrayEqual(observationAdmission.completedImplementationScope, [], "observation completedImplementationScope");
+requireArrayEqual(observationAdmission.admittedImplementationScope, [], "observation admittedImplementationScope");
+requireEqual(observationAdmission.preImplementationPreflight, null, "observation preImplementationPreflight");
+requireFile(`docs/requirements/admissions/${observationSliceId}.md`);
+
+const observationManifest = readJson(`${observationImportDir}/manifest.json`);
+requireEqual(observationManifest.schema, "vi-history/requirements-import@v1", "observation manifest schema");
+requireEqual(observationManifest.sliceId, observationSliceId, "observation sliceId");
+requireEqual(observationManifest.sourceBaselineTag, "v1.3.16", "observation sourceBaselineTag");
+requireEqual(observationManifest.sourceCommit, "48232bcc620d4dbe89ff846fda2bfe048b7768fb", "observation sourceCommit");
+requireEqual(observationManifest.targetProduct, "vi-history", "observation targetProduct");
+requireEqual(observationManifest.targetFeature, observationSliceId, "observation targetFeature");
+requireEqual(observationManifest.redactionStatus, "pass", "observation redactionStatus");
+requireEqual(observationManifest.implementationSharing, "none", "observation implementationSharing");
+requireEqual(observationManifest.marketplacePublication, "disabled-until-later-adr", "observation marketplacePublication");
+requireArrayEqual(observationManifest.importedRequirementIds, observationExpectedIds, "observation importedRequirementIds");
+requireArrayEqual(observationManifest.files, ["syrs.md", "srs.md", "rtm.csv", "test-plan.md"], "observation manifest files");
+
+for (const file of observationManifest.files ?? []) {
+  requireFile(`${observationImportDir}/${file}`);
+}
+
+for (const file of ["spec.md", "plan.md", "tasks.md"]) {
+  requireFile(`${observationFeatureDir}/${file}`);
+}
+
+requireTextIncludes(`${observationFeatureDir}/spec.md`, [
+  "Installed-User Observation Public Surface",
+  "VHS-REQ-595",
+  "observed",
+  "deferred",
+  "blocked",
+  "implementation is not admitted"
+]);
+requireTextIncludes(`${observationFeatureDir}/plan.md`, [
+  "import/spec baseline",
+  "No implementation IAU is admitted",
+  "Marketplace publication remains disabled"
+]);
+requireTextIncludes(`${observationFeatureDir}/tasks.md`, [
+  "Issue #25",
+  "- [x] T001",
+  "- [x] T008",
+  "[BLOCKED]",
+  "No current IAU is admitted",
+  "Copilot implementation work must not start"
+]);
+requireTextIncludes(`${observationImportDir}/rtm.csv`, observationExpectedIds);
+requireTextIncludes("README.md", [
+  "installed-user-observation-public-surface-v1",
+  "docs/requirements/admissions/installed-user-observation-public-surface-v1.json",
+  "No implementation unit is currently admitted"
+]);
+requireTextIncludes("AGENTS.md", [
+  "installed-user-observation-public-surface-v1",
+  "No Implementation Admission Unit is currently admitted",
+  "002-installed-user-observation-public-surface-v1"
+]);
 
 if (failures.length > 0) {
   console.error(failures.join("\n"));

@@ -51,10 +51,17 @@ This repository is the MIT implementation authority for package `vi-history`,
 display name `VI History`, publisher `svelderrainruiz`, extension ID
 `svelderrainruiz.vi-history`, and version `0.1.0`.
 
-The current imported slice is `runtime-contract-host-provider-v1`. Its import
-packet lives under `docs/requirements/imports/runtime-contract-host-provider-v1/`
-and its Spec Kit feature is pinned under
-`.specify/specs/runtime-contract-host-provider-v1/`.
+The imported slices are:
+
+- `runtime-contract-host-provider-v1`, with its import packet under
+  `docs/requirements/imports/runtime-contract-host-provider-v1/` and Spec Kit
+  feature under `.specify/specs/runtime-contract-host-provider-v1/`.
+- `installed-user-observation-public-surface-v1`, with its import packet under
+  `docs/requirements/imports/installed-user-observation-public-surface-v1/`
+  and Spec Kit feature under
+  `.specify/specs/installed-user-observation-public-surface-v1/`.
+
+The active pinned Spec Kit feature is recorded in `.specify/feature.json`.
 
 ## Development Workflow
 
