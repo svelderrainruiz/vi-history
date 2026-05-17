@@ -1,0 +1,17 @@
+Requirement ID,Requirement Summary,Source Baseline,Priority,Verification IDs,Verification Artifacts,Status
+VHS-SYS-REQ-004,Windows installed-user compare defaults to host-native LabVIEWCLI,v1.3.16,High,TEST-DOC-148; TEST-UNIT-354,README.md; FIRST-RUN.md; tests/unit/localRuntimeSettingsCli.test.ts,Imported
+VHS-SYS-REQ-005,Docker remains a bounded expert provider selected explicitly,v1.3.16,High,TEST-DOC-148; TEST-UNIT-347,README.md; TROUBLESHOOTING.md; tests/unit/comparisonRuntimeLocator.test.ts,Imported
+VHS-SYS-REQ-006,Runtime requests retain provider version and bitness facts,v1.3.16,High,TEST-UNIT-354; TEST-UNIT-392,tests/unit/localRuntimeSettingsCli.test.ts; tests/unit/publicFixtureValidation.test.ts,Imported
+VHS-SYS-REQ-007,Unsupported or unavailable bundles fail closed with retained facts,v1.3.16,High,TEST-UNIT-347; TEST-UNIT-354,tests/unit/comparisonRuntimeLocator.test.ts; tests/unit/localRuntimeSettingsCli.test.ts,Imported
+VHS-SYS-REQ-008,Compare starts from an explicit user action after commit selection,v1.3.16,High,TEST-UNIT-346; TEST-DOC-148,src/ui/historyPanel.ts; README.md,Imported
+VHS-REQ-094,Proof override inputs are honored while public settings stay simple,v1.3.16,High,TEST-UNIT-063; TEST-UNIT-066,tests/unit/comparisonRuntimeLocator.test.ts; tests/unit/packageManifest.test.ts,Imported
+VHS-REQ-095,Windows runtime discovery locates supported LabVIEW and comparison tooling,v1.3.16,High,TEST-UNIT-064; TEST-UNIT-066,tests/unit/comparisonRuntimeLocator.test.ts,Imported
+VHS-REQ-138,Runtime-provider boundary preserves host-native and bounded expert paths,v1.3.16,High,TEST-DOC-005,docs/architecture/overview.md,Imported
+VHS-REQ-141,Comparison report HTML renders runtime selection facts,v1.3.16,High,TEST-UNIT-068,tests/unit/comparisonReportPacket.test.ts,Imported
+VHS-REQ-144,Ready LabVIEWCLI runtime maps to CreateComparisonReport command plan,v1.3.16,High,TEST-UNIT-070,tests/unit/comparisonReportExecutionPlan.test.ts,Imported
+VHS-REQ-146,Bounded Windows container provider remains an expert isolation path,v1.3.16,High,TEST-DOC-006; TEST-SMOKE-002,docs/architecture/overview.md; tests/harness/live-proof,Imported
+VHS-REQ-148,Host-native execution retains command stdout stderr exit code and duration,v1.3.16,High,TEST-UNIT-071,tests/unit/comparisonReportRuntimeExecution.test.ts,Imported
+VHS-REQ-194,Public report engine remains LabVIEWCLI CreateComparisonReport,v1.3.16,Medium,TEST-UNIT-097,tests/unit/runGovernedProofCli.test.ts; tests/unit/comparisonRuntimeLocator.test.ts,Imported
+VHS-REQ-588,Linux host LabVIEW proof remains distinct from Windows proof,v1.3.16,High,TEST-DOC-148; TEST-UNIT-396,README.md; tests/unit/publicFixtureValidation.test.ts,Imported
+VHS-REQ-589,validate-fixture writes structured public proof artifacts,v1.3.16,High,TEST-UNIT-396; TEST-DOC-148,tests/unit/publicFixtureValidation.test.ts; README.md,Imported
+VHS-REQ-590,Windows Docker Desktop proof intake requires real Windows-container evidence,v1.3.16,High,TEST-UNIT-397; TEST-DOC-149,tests/unit/windowsDockerDesktopProofIntake.test.ts; .github/ISSUE_TEMPLATE/windows-docker-desktop-validation.yml,Imported
