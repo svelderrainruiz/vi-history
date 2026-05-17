@@ -73,16 +73,16 @@ provider, engine, version, bitness, paths, and failure facts.
 **Independent Test**: A ready runtime produces a command plan with retained
 selection fields; an unavailable runtime fails closed with corrective guidance.
 
-**Current IAU**: `IAU-runtime-contract-runtime-facts-v1` has preflight
-`status: pass`, so `T016` through `T021` may start. Command execution, Docker,
-proof-intake, and Marketplace tasks remain blocked.
+**Status**: `IAU-runtime-contract-runtime-facts-v1` is implemented. Command
+execution, provider-policy, proof-intake, and Marketplace tasks remain blocked
+until separately admitted.
 
-- [ ] T016 [P] [US2] Add tests for supported host-native LabVIEWCLI runtime selection.
-- [ ] T017 [P] [US2] Add tests for unsupported LabVIEW 2024-or-older rejection.
-- [ ] T018 [P] [US2] Add tests for missing explicit proof override paths failing closed.
-- [ ] T019 [US2] Implement runtime discovery and readiness classification.
-- [ ] T020 [US2] Implement LabVIEWCLI command-plan creation.
-- [ ] T021 [US2] Implement report/proof rendering of retained runtime facts.
+- [x] T016 [P] [US2] Add tests for supported host-native LabVIEWCLI runtime selection.
+- [x] T017 [P] [US2] Add tests for unsupported LabVIEW 2024-or-older rejection.
+- [x] T018 [P] [US2] Add tests for missing explicit proof override paths failing closed.
+- [x] T019 [US2] Implement runtime discovery and readiness classification.
+- [x] T020 [US2] Implement LabVIEWCLI command-plan creation.
+- [x] T021 [US2] Implement report/proof rendering of retained runtime facts.
 
 **Checkpoint**: US2 is independently testable without Docker proof intake.
 
@@ -95,6 +95,10 @@ installed-user host-native default.
 
 **Independent Test**: Default settings choose host-native LabVIEWCLI; explicit
 Docker selection records Docker facts and fails closed if unsupported.
+
+**Current IAU**: `IAU-runtime-contract-provider-policy-v1` has preflight
+`status: pass`, so `T022` through `T025` may start. Command execution,
+proof-intake, and Marketplace tasks remain blocked.
 
 - [ ] T022 [P] [US3] Add tests for host-native default provider selection.
 - [ ] T023 [P] [US3] Add tests for explicit Docker expert-provider selection.
@@ -149,7 +153,7 @@ real Windows-container facts and does not treat Linux proof as Windows proof.
 3. Close Issues #1, #2, and #3.
 4. Use Issue #4 for implementation tasks through named IAUs, not as one broad
    implementation batch.
-5. Treat `IAU-runtime-contract-runtime-facts-v1` as the current admitted work
-   packet for `T016` through `T021` only.
+5. Treat `IAU-runtime-contract-provider-policy-v1` as the current admitted work
+   packet for `T022` through `T025` only.
 6. Keep Issue #5 open until a later governing decision admits or rejects
    Marketplace publication.
