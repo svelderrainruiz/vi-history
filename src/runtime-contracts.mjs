@@ -118,15 +118,24 @@ function toRuntimeFacts(runtimeSelection) {
 }
 
 function toExecutionFacts(input = {}) {
+  if (input.state !== undefined && input.state !== null && input.state !== "") {
+    return {
+      state: String(input.state),
+      stdout: String(input.stdout ?? ""),
+      stderr: String(input.stderr ?? ""),
+      exitCode: input.exitCode ?? null,
+      durationMs: input.durationMs ?? null
+    };
+  }
+
   let derivedState = "planned";
   if (input.exitCode === 0) {
     derivedState = "completed";
   } else if (input.exitCode !== null && input.exitCode !== undefined) {
     derivedState = "failed";
   }
-  const state = input.state ?? derivedState;
   return {
-    state: String(state),
+    state: String(derivedState),
     stdout: String(input.stdout ?? ""),
     stderr: String(input.stderr ?? ""),
     exitCode: input.exitCode ?? null,
@@ -552,13 +561,14 @@ export function validateWindowsDockerDesktopProofIntake(input) {
     });
   }
 
-  const reason = hostFacts.isWsl === true
-    ? "wsl-evidence-substitute"
-    : runtimeFacts.provider === "host-native"
-      ? "host-provider-evidence-substitute"
-      : dockerDesktopFacts.ostype === "linux" || hostFacts.osFamily === "linux"
-        ? "linux-docker-evidence-substitute"
-        : "not-windows-docker-desktop-proof";
+  let reason = "not-windows-docker-desktop-proof";
+  if (hostFacts.isWsl === true) {
+    reason = "wsl-evidence-substitute";
+  } else if (runtimeFacts.provider === "host-native") {
+    reason = "host-provider-evidence-substitute";
+  } else if (dockerDesktopFacts.ostype === "linux" || hostFacts.osFamily === "linux") {
+    reason = "linux-docker-evidence-substitute";
+  }
 
   return freezeRecord({
     kind: "proof-intake-validation",
