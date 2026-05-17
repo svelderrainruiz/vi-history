@@ -12,6 +12,8 @@ const runtimeFactsIauPath = `docs/requirements/admissions/${sliceId}/IAU-runtime
 const runtimeFactsPreflightPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-runtime-facts-v1-preflight-v1.json`;
 const providerPolicyIauPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-provider-policy-v1.json`;
 const providerPolicyPreflightPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-provider-policy-v1-preflight-v1.json`;
+const proofIntakeIauPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-proof-intake-v1.json`;
+const proofIntakePreflightPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-proof-intake-v1-preflight-v1.json`;
 const expectedIds = [
   "VHS-SYS-REQ-004",
   "VHS-SYS-REQ-005",
@@ -99,13 +101,13 @@ requireEqual(admission.targetFeature, sliceId, "admission targetFeature");
 requireEqual(admission.sourceBaselineTag, "v1.3.16", "admission sourceBaselineTag");
 requireEqual(admission.sourceCommit, "31add781bd04cc832d9fb55aa821a69305a91a37", "admission sourceCommit");
 requireEqual(admission.implementationSharing, "none", "admission implementationSharing");
-requireEqual(admission.currentImplementationAdmissionUnit, "IAU-runtime-contract-provider-policy-v1", "currentImplementationAdmissionUnit");
-requireArrayEqual(admission.completedImplementationScope, ["T007", "T008", "T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016", "T017", "T018", "T019", "T020", "T021"], "completedImplementationScope");
-requireArrayEqual(admission.admittedImplementationScope, ["T022", "T023", "T024", "T025"], "admittedImplementationScope");
-requireEqual(admission.preImplementationPreflight?.iauId, "IAU-runtime-contract-provider-policy-v1", "admission preImplementationPreflight iauId");
+requireEqual(admission.currentImplementationAdmissionUnit, "IAU-runtime-contract-proof-intake-v1", "currentImplementationAdmissionUnit");
+requireArrayEqual(admission.completedImplementationScope, ["T007", "T008", "T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016", "T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025"], "completedImplementationScope");
+requireArrayEqual(admission.admittedImplementationScope, ["T026", "T027", "T028", "T029", "T030"], "admittedImplementationScope");
+requireEqual(admission.preImplementationPreflight?.iauId, "IAU-runtime-contract-proof-intake-v1", "admission preImplementationPreflight iauId");
 requireEqual(admission.preImplementationPreflight?.status, "pass", "admission preImplementationPreflight status");
 requireEqual(admission.preImplementationPreflight?.implementationStartAllowed, true, "admission preImplementationPreflight implementationStartAllowed");
-requireEqual(admission.preImplementationPreflight?.record, providerPolicyPreflightPath, "admission preImplementationPreflight record");
+requireEqual(admission.preImplementationPreflight?.record, proofIntakePreflightPath, "admission preImplementationPreflight record");
 requireFile(`docs/requirements/admissions/${sliceId}.md`);
 
 const explicitCompareAdmissionUnit = (admission.implementationAdmissionUnits ?? [])
@@ -120,8 +122,13 @@ requireEqual(runtimeFactsAdmissionUnit?.preflightRecord, runtimeFactsPreflightPa
 
 const providerPolicyAdmissionUnit = (admission.implementationAdmissionUnits ?? [])
   .find((unit) => unit?.iauId === "IAU-runtime-contract-provider-policy-v1");
-requireEqual(providerPolicyAdmissionUnit?.state, "implementation-admitted", "provider policy admission unit state");
+requireEqual(providerPolicyAdmissionUnit?.state, "implemented", "provider policy admission unit state");
 requireEqual(providerPolicyAdmissionUnit?.preflightRecord, providerPolicyPreflightPath, "provider policy admission unit preflightRecord");
+
+const proofIntakeAdmissionUnit = (admission.implementationAdmissionUnits ?? [])
+  .find((unit) => unit?.iauId === "IAU-runtime-contract-proof-intake-v1");
+requireEqual(proofIntakeAdmissionUnit?.state, "implementation-admitted", "proof intake admission unit state");
+requireEqual(proofIntakeAdmissionUnit?.preflightRecord, proofIntakePreflightPath, "proof intake admission unit preflightRecord");
 
 const explicitCompareIau = readJson(explicitCompareIauPath);
 requireEqual(explicitCompareIau.schema, "vi-history/implementation-admission-unit@v1", "explicit compare IAU schema");
@@ -184,7 +191,7 @@ requireFile(`docs/requirements/admissions/${sliceId}/IAU-runtime-contract-runtim
 const providerPolicyIau = readJson(providerPolicyIauPath);
 requireEqual(providerPolicyIau.schema, "vi-history/implementation-admission-unit@v1", "provider policy IAU schema");
 requireEqual(providerPolicyIau.iauId, "IAU-runtime-contract-provider-policy-v1", "provider policy IAU id");
-requireEqual(providerPolicyIau.state, "implementation-admitted", "provider policy IAU state");
+requireEqual(providerPolicyIau.state, "implemented", "provider policy IAU state");
 requireEqual(providerPolicyIau.parentSliceId, sliceId, "provider policy IAU parentSliceId");
 requireArrayEqual(providerPolicyIau.admittedTasks, ["T022", "T023", "T024", "T025"], "provider policy IAU admittedTasks");
 requireEqual(providerPolicyIau.implementationSharing, "none", "provider policy IAU implementationSharing");
@@ -209,6 +216,35 @@ if (!Array.isArray(providerPolicyPreflight.checkResults) || providerPolicyPrefli
   }
 }
 requireFile(`docs/requirements/admissions/${sliceId}/IAU-runtime-contract-provider-policy-v1-preflight-v1.md`);
+
+const proofIntakeIau = readJson(proofIntakeIauPath);
+requireEqual(proofIntakeIau.schema, "vi-history/implementation-admission-unit@v1", "proof intake IAU schema");
+requireEqual(proofIntakeIau.iauId, "IAU-runtime-contract-proof-intake-v1", "proof intake IAU id");
+requireEqual(proofIntakeIau.state, "implementation-admitted", "proof intake IAU state");
+requireEqual(proofIntakeIau.parentSliceId, sliceId, "proof intake IAU parentSliceId");
+requireArrayEqual(proofIntakeIau.admittedTasks, ["T026", "T027", "T028", "T029", "T030"], "proof intake IAU admittedTasks");
+requireEqual(proofIntakeIau.implementationSharing, "none", "proof intake IAU implementationSharing");
+requireEqual(proofIntakeIau.preImplementationPreflight?.status, "pass", "proof intake IAU preImplementationPreflight status");
+requireEqual(proofIntakeIau.preImplementationPreflight?.record, "IAU-runtime-contract-proof-intake-v1-preflight-v1.json", "proof intake IAU preImplementationPreflight record");
+requireEqual(proofIntakeIau.preImplementationPreflight?.implementationStartAllowed, true, "proof intake IAU preImplementationPreflight implementationStartAllowed");
+requireFile(`docs/requirements/admissions/${sliceId}/IAU-runtime-contract-proof-intake-v1.md`);
+
+const proofIntakePreflight = readJson(proofIntakePreflightPath);
+requireEqual(proofIntakePreflight.schema, "vi-history/implementation-admission-unit-preflight@v1", "proof intake preflight schema");
+requireEqual(proofIntakePreflight.iauId, "IAU-runtime-contract-proof-intake-v1", "proof intake preflight iauId");
+requireEqual(proofIntakePreflight.status, "pass", "proof intake preflight status");
+requireEqual(proofIntakePreflight.implementationStartAllowed, true, "proof intake preflight implementationStartAllowed");
+requireEqual(proofIntakePreflight.parentSliceId, sliceId, "proof intake preflight parentSliceId");
+requireEqual(proofIntakePreflight.implementationSharing, "none", "proof intake preflight implementationSharing");
+requireArrayEqual(proofIntakePreflight.implementationStartScope, ["T026", "T027", "T028", "T029", "T030"], "proof intake preflight implementationStartScope");
+if (!Array.isArray(proofIntakePreflight.checkResults) || proofIntakePreflight.checkResults.length !== proofIntakePreflight.requiredChecks.length) {
+  failures.push("proof intake preflight checkResults: must match requiredChecks length");
+} else {
+  for (const result of proofIntakePreflight.checkResults) {
+    requireEqual(result.status, "pass", `proof intake preflight check result ${result.check}`);
+  }
+}
+requireFile(`docs/requirements/admissions/${sliceId}/IAU-runtime-contract-proof-intake-v1-preflight-v1.md`);
 
 const manifest = readJson(`${importDir}/manifest.json`);
 requireEqual(manifest.schema, "vi-history/requirements-import@v1", "manifest schema");
@@ -250,6 +286,7 @@ requireTextIncludes(`${featureDir}/tasks.md`, [
   "IAU-runtime-contract-explicit-compare-v1",
   "IAU-runtime-contract-runtime-facts-v1",
   "IAU-runtime-contract-provider-policy-v1",
+  "IAU-runtime-contract-proof-intake-v1",
   "preflight",
   "- [x] T012",
   "- [x] T013",
@@ -261,18 +298,23 @@ requireTextIncludes(`${featureDir}/tasks.md`, [
   "- [x] T019",
   "- [x] T020",
   "- [x] T021",
-  "- [ ] T022",
-  "- [ ] T023",
-  "- [ ] T024",
-  "- [ ] T025",
-  "T022",
-  "T025"
+  "- [x] T022",
+  "- [x] T023",
+  "- [x] T024",
+  "- [x] T025",
+  "- [ ] T026",
+  "- [ ] T027",
+  "- [ ] T028",
+  "- [ ] T029",
+  "- [ ] T030",
+  "T026",
+  "T030"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
-  "IAU-runtime-contract-provider-policy-v1",
-  "`T022`",
-  "`T025`",
-  "`T026` through `T030`",
+  "IAU-runtime-contract-proof-intake-v1",
+  "`T026`",
+  "`T030`",
+  "Docker command execution or container orchestration",
   "plan first",
   "GitHub Issue #4",
   "npm test",

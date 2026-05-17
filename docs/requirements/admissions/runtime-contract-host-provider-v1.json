@@ -24,7 +24,9 @@
     "explicitCompareIauCloseout": "implemented",
     "runtimeFactsIauPreflight": "pass",
     "runtimeFactsIauCloseout": "implemented",
-    "providerPolicyIauPreflight": "pass"
+    "providerPolicyIauPreflight": "pass",
+    "providerPolicyIauCloseout": "implemented",
+    "proofIntakeIauPreflight": "pass"
   },
   "implementationAdmissionUnits": [
     {
@@ -66,7 +68,7 @@
     },
     {
       "iauId": "IAU-runtime-contract-provider-policy-v1",
-      "state": "implementation-admitted",
+      "state": "implemented",
       "record": "docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-provider-policy-v1.json",
       "preflightRecord": "docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-provider-policy-v1-preflight-v1.json",
       "admittedTasks": [
@@ -75,9 +77,22 @@
         "T024",
         "T025"
       ]
+    },
+    {
+      "iauId": "IAU-runtime-contract-proof-intake-v1",
+      "state": "implementation-admitted",
+      "record": "docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-proof-intake-v1.json",
+      "preflightRecord": "docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-proof-intake-v1-preflight-v1.json",
+      "admittedTasks": [
+        "T026",
+        "T027",
+        "T028",
+        "T029",
+        "T030"
+      ]
     }
   ],
-  "currentImplementationAdmissionUnit": "IAU-runtime-contract-provider-policy-v1",
+  "currentImplementationAdmissionUnit": "IAU-runtime-contract-proof-intake-v1",
   "completedImplementationScope": [
     "T007",
     "T008",
@@ -93,27 +108,26 @@
     "T018",
     "T019",
     "T020",
-    "T021"
-  ],
-  "admittedImplementationScope": [
+    "T021",
     "T022",
     "T023",
     "T024",
     "T025"
   ],
-  "preImplementationPreflight": {
-    "iauId": "IAU-runtime-contract-provider-policy-v1",
-    "status": "pass",
-    "record": "docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-provider-policy-v1-preflight-v1.json",
-    "implementationStartAllowed": true
-  },
-  "blockedUntilProviderPolicyMerge": [
+  "admittedImplementationScope": [
     "T026",
     "T027",
     "T028",
     "T029",
     "T030"
   ],
+  "preImplementationPreflight": {
+    "iauId": "IAU-runtime-contract-proof-intake-v1",
+    "status": "pass",
+    "record": "docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-proof-intake-v1-preflight-v1.json",
+    "implementationStartAllowed": true
+  },
+  "blockedUntilProofIntakeMerge": [],
   "requirementMaturityBasis": "governed released extension supports requirement maturity, not source reuse",
   "implementationSharing": "none",
   "marketplacePublication": "disabled-until-later-adr"
