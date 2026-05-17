@@ -1,0 +1,62 @@
+{
+  "schema": "vi-history/requirements-admission@v1",
+  "sliceId": "installed-user-observation-public-surface-v1",
+  "createdDate": "2026-05-17",
+  "state": "spec-locked",
+  "targetProduct": "vi-history",
+  "targetFeature": "installed-user-observation-public-surface-v1",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "48232bcc620d4dbe89ff846fda2bfe048b7768fb",
+  "publicImportPath": "docs/requirements/imports/installed-user-observation-public-surface-v1/",
+  "specKitPath": ".specify/specs/installed-user-observation-public-surface-v1/",
+  "issue": {
+    "number": 25,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/25"
+  },
+  "bridgeChecks": {
+    "specKitCliVersion": "0.8.12.dev0",
+    "publicImportPacketPresent": "pass",
+    "specKitArtifactsPresent": "pass",
+    "redactionScan": "pass",
+    "artifactConsistency": "pass",
+    "analyzeCriticalFindings": "none-recorded-for-import-spec-baseline",
+    "implementationPreflight": "not-created"
+  },
+  "implementationAdmissionUnits": [],
+  "currentImplementationAdmissionUnit": null,
+  "completedSpecScope": [
+    "T001",
+    "T002",
+    "T003",
+    "T004",
+    "T005",
+    "T006",
+    "T007",
+    "T008"
+  ],
+  "completedImplementationScope": [],
+  "admittedImplementationScope": [],
+  "blockedImplementationScope": [
+    "T009",
+    "T010",
+    "T011",
+    "T012",
+    "T013",
+    "T014",
+    "T015",
+    "T016"
+  ],
+  "preImplementationPreflight": null,
+  "requirementMaturityBasis": "governed bridge-readiness packet supports public import and Spec Kit planning, not source reuse",
+  "implementationSharing": "none",
+  "marketplacePublication": "disabled",
+  "marketplacePublicationAdr": "docs/decisions/ADR-001-marketplace-publication-disabled.md",
+  "blockedScope": [
+    "MIT implementation",
+    "Copilot implementation handoff",
+    "LabVIEWCLI execution",
+    "Docker execution or orchestration",
+    "Windows Docker Desktop proof claims",
+    "Marketplace publication"
+  ]
+}

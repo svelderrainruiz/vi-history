@@ -1,0 +1,31 @@
+{
+  "schema": "vi-history/requirements-import@v1",
+  "sliceId": "installed-user-observation-public-surface-v1",
+  "createdDate": "2026-05-17",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "48232bcc620d4dbe89ff846fda2bfe048b7768fb",
+  "targetProduct": "vi-history",
+  "targetFeature": "installed-user-observation-public-surface-v1",
+  "importedRequirementIds": [
+    "VHS-REQ-595"
+  ],
+  "redactionStatus": "pass",
+  "implementationSharing": "none",
+  "licenseBoundary": "MIT target receives requirements and Spec Kit artifacts only",
+  "marketplacePublication": "disabled-until-later-adr",
+  "files": [
+    "syrs.md",
+    "srs.md",
+    "rtm.csv",
+    "test-plan.md"
+  ],
+  "publicFeedbackSignal": {
+    "url": "https://github.com/svelderrainruiz/vi-history-suite/issues/98",
+    "classification": "feedback-input-not-release-proof"
+  },
+  "bugOracle": {
+    "sameWrongBehaviorAcrossIndependentImplementations": "requirement-defect-candidate",
+    "oneAuthorityWrongBehavior": "implementation-defect-candidate",
+    "ambiguousBehavior": "requirement-clarification-candidate"
+  }
+}

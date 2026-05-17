@@ -4,9 +4,11 @@
 authority for VI History.
 
 This repository starts from requirements and Spec Kit artifacts, not from copied
-extension source. The initial baseline imports the
-`runtime-contract-host-provider-v1` requirements slice, locks the feature spec,
-plan, and tasks, then records a public admission before implementation begins.
+extension source. The initial baseline imported the
+`runtime-contract-host-provider-v1` requirements slice and completed admitted
+runtime-contract IAUs through proof intake. The current public Spec Kit import
+adds `installed-user-observation-public-surface-v1` for requirements/spec
+planning only.
 
 ## Authority
 
@@ -32,9 +34,13 @@ plan, and tasks, then records a public admission before implementation begins.
 - #3 locked the Spec Kit feature spec, plan, and tasks.
 - #4 completed admitted runtime-contract IAUs through proof intake.
 - #5 keeps Marketplace publication disabled until a later ADR admits it.
+- #25 imports `installed-user-observation-public-surface-v1` as a public
+  requirements/spec baseline without admitting implementation.
 
-The current admission ledger is
-`docs/requirements/admissions/runtime-contract-host-provider-v1.json`.
+The current admission ledgers are:
+
+- `docs/requirements/admissions/runtime-contract-host-provider-v1.json`
+- `docs/requirements/admissions/installed-user-observation-public-surface-v1.json`
 
 No implementation unit is currently admitted.
 

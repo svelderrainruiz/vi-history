@@ -23,9 +23,12 @@ ADR and must not add release tokens, publishing automation, or Marketplace
 workflows before that decision lands.
 
 Implementation for `runtime-contract-host-provider-v1` is complete through
-proof intake. No Implementation Admission Unit is currently admitted. Future
-implementation begins only after a new named IAU has a public preflight record
-with `status: pass`.
+proof intake. `installed-user-observation-public-surface-v1` is a
+requirements/spec baseline only. No Implementation Admission Unit is currently
+admitted. Future implementation begins only after a new named IAU has a public
+preflight record with `status: pass`.
+
+No Implementation Admission Unit is currently admitted.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that
@@ -35,7 +38,7 @@ When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:
 
 ```bash
-SPECIFY_FEATURE=001-runtime-contract-host-provider-v1 \
-SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-contract-host-provider-v1 \
+SPECIFY_FEATURE=002-installed-user-observation-public-surface-v1 \
+SPECIFY_FEATURE_DIRECTORY=.specify/specs/installed-user-observation-public-surface-v1 \
 .specify/scripts/bash/check-prerequisites.sh --json --paths-only
 ```
