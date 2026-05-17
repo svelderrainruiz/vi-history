@@ -22,6 +22,10 @@ export const RUNTIME_CONTRACT_REQUIREMENTS = Object.freeze({
     "VHS-SYS-REQ-005",
     "VHS-REQ-138",
     "VHS-REQ-146"
+  ]),
+  explicitCompareAction: Object.freeze([
+    "VHS-SYS-REQ-006",
+    "VHS-SYS-REQ-008"
   ])
 });
 
@@ -62,6 +66,17 @@ function freezeRecord(record) {
   return Object.freeze(record);
 }
 
+function cloneRecord(value, label) {
+  const required = requireValue(value, label);
+  if (typeof required === "string") {
+    return Object.freeze({ id: required });
+  }
+  if (typeof required !== "object") {
+    throw new Error(`${label} must be a string or object`);
+  }
+  return freezeRecord({ ...required });
+}
+
 export function createRuntimeSelection(input) {
   const provider = requireOneOf(input?.provider, PROVIDERS, "provider");
   const engine = requireOneOf(input?.engine ?? "LabVIEWCLI", ENGINES, "engine");
@@ -84,6 +99,68 @@ export function createRuntimeSelection(input) {
     blockedReason,
     notes: normalizeNotes(input?.notes),
     requirementIds: [...RUNTIME_CONTRACT_REQUIREMENTS.runtimeSelection]
+  });
+}
+
+export function createCommitPairSelection(input) {
+  const selectedCommit = cloneRecord(input?.selectedCommit, "selectedCommit");
+  const baseCommit = cloneRecord(input?.baseCommit, "baseCommit");
+
+  return freezeRecord({
+    kind: "commit-pair-selection",
+    selectedCommit,
+    baseCommit,
+    requirementIds: [...RUNTIME_CONTRACT_REQUIREMENTS.explicitCompareAction]
+  });
+}
+
+export function createCompareActionState(input) {
+  const commitPair = requireValue(input?.commitPair, "commitPair");
+  const runtimeSelection = requireValue(input?.runtimeSelection, "runtimeSelection");
+  if (commitPair.kind !== "commit-pair-selection") {
+    throw new Error("commitPair must come from createCommitPairSelection");
+  }
+  if (runtimeSelection.kind !== "runtime-selection") {
+    throw new Error("runtimeSelection must come from createRuntimeSelection");
+  }
+
+  return freezeRecord({
+    kind: "compare-action-state",
+    phase: "review",
+    compareRequested: false,
+    commitPair,
+    runtimeSelection,
+    requirementIds: [...RUNTIME_CONTRACT_REQUIREMENTS.explicitCompareAction]
+  });
+}
+
+export function requestExplicitCompareAction(compareActionState) {
+  const state = requireValue(compareActionState, "compareActionState");
+  if (state.kind !== "compare-action-state") {
+    throw new Error("compareActionState must come from createCompareActionState");
+  }
+
+  return freezeRecord({
+    ...state,
+    phase: "execution-requested",
+    compareRequested: true
+  });
+}
+
+export function createComparePreExecutionFacts(compareActionState) {
+  const state = requireValue(compareActionState, "compareActionState");
+  if (state.kind !== "compare-action-state") {
+    throw new Error("compareActionState must come from createCompareActionState");
+  }
+
+  return freezeRecord({
+    kind: "compare-pre-execution-facts",
+    selectedCommit: state.commitPair.selectedCommit,
+    baseCommit: state.commitPair.baseCommit,
+    provider: state.runtimeSelection.provider,
+    version: state.runtimeSelection.version,
+    bitness: state.runtimeSelection.bitness,
+    requirementIds: [...RUNTIME_CONTRACT_REQUIREMENTS.explicitCompareAction]
   });
 }
 
@@ -129,6 +206,24 @@ export function createComparisonCommandPlan(input) {
     },
     runtimeSelection,
     requirementIds: [...RUNTIME_CONTRACT_REQUIREMENTS.comparisonCommandPlan]
+  });
+}
+
+export function createComparisonCommandPlanFromCompareAction(input) {
+  const compareActionState = requireValue(input?.compareActionState, "compareActionState");
+  if (compareActionState.kind !== "compare-action-state") {
+    throw new Error("compareActionState must come from createCompareActionState");
+  }
+  if (compareActionState.compareRequested !== true || compareActionState.phase !== "execution-requested") {
+    throw new Error("compare does not start before explicit user action");
+  }
+
+  return createComparisonCommandPlan({
+    runtimeSelection: compareActionState.runtimeSelection,
+    selectedViPath: input?.selectedViPath,
+    baseViPath: input?.baseViPath,
+    outputPath: input?.outputPath,
+    labviewCliPath: input?.labviewCliPath
   });
 }
 
