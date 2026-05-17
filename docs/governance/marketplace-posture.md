@@ -4,6 +4,8 @@
 
 `svelderrainruiz/vi-history` remains Marketplace-disabled.
 
+Formal ADR: `docs/decisions/ADR-001-marketplace-publication-disabled.md`.
+
 This MIT authority may keep extension identity metadata for compatibility, but
 it must not add Marketplace publication, packaging automation, release tokens,
 or VSIX publishing workflows until a later ADR explicitly admits that channel.

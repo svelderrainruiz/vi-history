@@ -16,9 +16,11 @@ other VI History product line.
 The integration branch is `develop`; feature work targets `develop` before
 promotion to `main`.
 
-Marketplace publication is disabled. Future enablement requires a later ADR and
-must not add release tokens, publishing automation, or Marketplace workflows
-before that decision lands.
+Marketplace publication is disabled. The decision is recorded in
+`docs/decisions/ADR-001-marketplace-publication-disabled.md` and summarized in
+`docs/governance/marketplace-posture.md`. Future enablement requires a later
+ADR and must not add release tokens, publishing automation, or Marketplace
+workflows before that decision lands.
 
 Implementation for `runtime-contract-host-provider-v1` is complete through
 proof intake. No Implementation Admission Unit is currently admitted. Future

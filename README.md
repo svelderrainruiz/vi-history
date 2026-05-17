@@ -41,7 +41,8 @@ No implementation unit is currently admitted.
 Future code work must start from a new public bridge admission record before
 Copilot or local implementation begins.
 
-The Marketplace posture is documented in
+The Marketplace posture is recorded in
+`docs/decisions/ADR-001-marketplace-publication-disabled.md` and summarized in
 `docs/governance/marketplace-posture.md`.
 
 ## Validation
