@@ -383,15 +383,29 @@ export function selectProviderPolicy(input = {}) {
 
   let readiness = "ready";
   let blockedReason = null;
+  let failureGuidance = [];
+
   if (selectedProvider === "docker" && input.expertMode !== true) {
     readiness = "blocked";
     blockedReason = "docker-provider-requires-explicit-expert-selection";
+    failureGuidance = [
+      "Docker is bounded to explicit expert selection.",
+      "Keep host-native LabVIEWCLI as the installed-user default or set expert mode explicitly."
+    ];
   } else if (input.bundleSupported === false) {
     readiness = "blocked";
     blockedReason = "runtime-bundle-unsupported";
+    failureGuidance = [
+      "The selected provider bundle is unsupported.",
+      "Choose a supported runtime bundle before comparison."
+    ];
   } else if (input.runtimeAvailable === false) {
     readiness = "unavailable";
     blockedReason = "runtime-bundle-unavailable";
+    failureGuidance = [
+      "The selected provider bundle is unavailable.",
+      "Install or configure the runtime bundle, then retry."
+    ];
   }
 
   return freezeRecord({
@@ -403,6 +417,7 @@ export function selectProviderPolicy(input = {}) {
     expertMode: input.expertMode === true,
     readiness,
     blockedReason,
+    failureGuidance,
     fallbackProvider: null,
     silentFallbackAllowed: false,
     requirementIds: [...RUNTIME_CONTRACT_REQUIREMENTS.providerPolicy]

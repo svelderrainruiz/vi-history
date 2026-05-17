@@ -136,6 +136,7 @@ test("T010 defines host-native default, bounded Docker, unsupported bundles, and
     expertMode: false,
     readiness: "ready",
     blockedReason: null,
+    failureGuidance: [],
     fallbackProvider: null,
     silentFallbackAllowed: false,
     requirementIds: ["VHS-SYS-REQ-005", "VHS-REQ-138", "VHS-REQ-146"]
@@ -366,4 +367,56 @@ test("T021 renders retained runtime facts for report and proof surfaces", () => 
   assert.equal(report.commandPlan.operation, "CreateComparisonReport");
   assert.equal(report.commandPlan.selectedLabView.provider, "host-native");
   assert.equal(report.commandPlan.executionStarted, false);
+});
+
+
+test("T022 selects host-native as the default provider", () => {
+  const policy = selectProviderPolicy({ platform: "win32" });
+
+  assert.equal(policy.defaultProvider, "host-native");
+  assert.equal(policy.requestedProvider, null);
+  assert.equal(policy.selectedProvider, "host-native");
+  assert.equal(policy.readiness, "ready");
+  assert.equal(policy.blockedReason, null);
+  assert.deepEqual(policy.failureGuidance, []);
+});
+
+test("T023 selects Docker only when explicitly requested in expert mode", () => {
+  const policy = selectProviderPolicy({ requestedProvider: "docker", expertMode: true });
+
+  assert.equal(policy.selectedProvider, "docker");
+  assert.equal(policy.expertMode, true);
+  assert.equal(policy.readiness, "ready");
+  assert.equal(policy.blockedReason, null);
+  assert.deepEqual(policy.failureGuidance, []);
+});
+
+test("T024 never selects Docker implicitly", () => {
+  const implicit = selectProviderPolicy({ expertMode: true });
+  assert.equal(implicit.selectedProvider, "host-native");
+  assert.equal(implicit.readiness, "ready");
+
+  const unbounded = selectProviderPolicy({ requestedProvider: "docker", expertMode: false });
+  assert.equal(unbounded.selectedProvider, "docker");
+  assert.equal(unbounded.readiness, "blocked");
+  assert.equal(unbounded.blockedReason, "docker-provider-requires-explicit-expert-selection");
+  assert.equal(unbounded.fallbackProvider, null);
+  assert.equal(unbounded.silentFallbackAllowed, false);
+  assert.equal(unbounded.failureGuidance.length > 0, true);
+});
+
+test("T025 provides stable failure guidance for blocked and unavailable provider selections", () => {
+  const blocked = selectProviderPolicy({ requestedProvider: "host-native", bundleSupported: false });
+  assert.equal(blocked.readiness, "blocked");
+  assert.equal(blocked.blockedReason, "runtime-bundle-unsupported");
+  assert.equal(blocked.failureGuidance.length > 0, true);
+  assert.equal(blocked.fallbackProvider, null);
+  assert.equal(blocked.silentFallbackAllowed, false);
+
+  const unavailable = selectProviderPolicy({ requestedProvider: "host-native", runtimeAvailable: false });
+  assert.equal(unavailable.readiness, "unavailable");
+  assert.equal(unavailable.blockedReason, "runtime-bundle-unavailable");
+  assert.equal(unavailable.failureGuidance.length > 0, true);
+  assert.equal(unavailable.fallbackProvider, null);
+  assert.equal(unavailable.silentFallbackAllowed, false);
 });
