@@ -2,11 +2,12 @@
 
 ## State
 
-`installed-user-observation-public-surface-v1` is `implementation-admitted`
-for one named IAU.
+`installed-user-observation-public-surface-v1` is `implemented` for the first
+named observation-model IAU.
 
 Issue #25 imported `VHS-REQ-595` and locked the public Spec Kit feature. Issue
-#27 is the public handoff for `IAU-installed-user-observation-model-v1`.
+#27 is the public handoff for `IAU-installed-user-observation-model-v1` and
+closes after the implementation PR merges.
 
 ## Admission Basis
 
@@ -17,10 +18,9 @@ Issue #25 imported `VHS-REQ-595` and locked the public Spec Kit feature. Issue
 - Implementation sharing remains `none`.
 - Marketplace publication remains disabled.
 
-## Current IAU
+## Completed IAU
 
-`IAU-installed-user-observation-model-v1` is admitted for `T009` through
-`T013` only:
+`IAU-installed-user-observation-model-v1` completed `T009` through `T013`:
 
 - `T009`: define an observation-cycle data contract.
 - `T010`: define an observation-fact classification contract.
@@ -28,12 +28,18 @@ Issue #25 imported `VHS-REQ-595` and locked the public Spec Kit feature. Issue
 - `T012`: add tests for `observed`, `deferred`, and `blocked` fact buckets.
 - `T013`: add tests that public feedback is input, not release proof.
 
-The preflight record has `status: pass`.
+The preflight record has `status: pass`, and the implementation closeout keeps
+reporting, execution, proof, and Marketplace scope blocked.
 
 ## Completed Spec Scope
 
 - `T001` through `T008`: public import, Spec Kit artifacts, admission records,
   active feature pin, and validation coverage.
+
+## Completed Implementation Scope
+
+- `T009` through `T013`: observation-cycle, observation-fact, routing-decision,
+  SemVer recommendation, fact bucket, and public-feedback-as-input contracts.
 
 ## Blocked Work
 
@@ -44,5 +50,5 @@ admitted.
 
 ## Future Gate
 
-Implementation work may start only for `IAU-installed-user-observation-model-v1`
-after this public admission packet merges to `develop`.
+Future implementation work may start only after a new named IAU has a public
+preflight record with `status: pass`.

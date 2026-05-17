@@ -8,7 +8,7 @@ extension source. The initial baseline imported the
 `runtime-contract-host-provider-v1` requirements slice and completed admitted
 runtime-contract IAUs through proof intake. The current public Spec Kit import
 adds `installed-user-observation-public-surface-v1`, with
-`IAU-installed-user-observation-model-v1` admitted for T009-T013 only.
+`IAU-installed-user-observation-model-v1` implemented for T009-T013 only.
 
 ## Authority
 
@@ -36,7 +36,7 @@ adds `installed-user-observation-public-surface-v1`, with
 - #5 keeps Marketplace publication disabled until a later ADR admits it.
 - #25 imported `installed-user-observation-public-surface-v1` as a public
   requirements/spec baseline.
-- #27 is the public handoff for
+- #27 implements and closes
   `IAU-installed-user-observation-model-v1`.
 
 The current admission ledgers are:
@@ -44,8 +44,9 @@ The current admission ledgers are:
 - `docs/requirements/admissions/runtime-contract-host-provider-v1.json`
 - `docs/requirements/admissions/installed-user-observation-public-surface-v1.json`
 
-The current admitted implementation unit is
-`IAU-installed-user-observation-model-v1`, scoped only to T009-T013.
+There is no current admitted implementation unit after
+`IAU-installed-user-observation-model-v1` closes. The completed observation
+model scope is T009-T013.
 
 Future code work outside T009-T013 must start from a new public bridge
 admission record before Copilot or local implementation begins.

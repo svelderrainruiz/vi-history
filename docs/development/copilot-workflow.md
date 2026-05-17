@@ -52,7 +52,7 @@ Completed units:
 - `IAU-runtime-contract-provider-policy-v1`
 - `IAU-runtime-contract-proof-intake-v1`
 
-Current admitted unit:
+Completed installed-user observation unit:
 
 - `IAU-installed-user-observation-model-v1`
 
@@ -68,7 +68,7 @@ Completed runtime-contract tasks:
 - `T029`: implement proof packet writer and issue-body generation.
 - `T030`: implement Windows Docker Desktop proof intake validation.
 
-Current installed-user observation tasks:
+Completed installed-user observation tasks:
 
 - `T009`: define an observation-cycle data contract.
 - `T010`: define an observation-fact classification contract.
@@ -78,11 +78,13 @@ Current installed-user observation tasks:
 
 ## Future Work Packet
 
-Current Copilot work may start from Issue #27 after planning first. Future
-Copilot work outside `IAU-installed-user-observation-model-v1` must start with
-a new public bridge admission record before any code changes. A valid work
-packet must name a new IAU, admitted tasks, blocked tasks, preflight status,
-source files, expected write area, and validation commands.
+Issue #27 completes `IAU-installed-user-observation-model-v1`. No new Copilot
+implementation should start from Issue #27 after that PR merges.
+
+Future Copilot work outside `IAU-installed-user-observation-model-v1` must
+start with a new public bridge admission record before any code changes. A
+valid work packet must name a new IAU, admitted tasks, blocked tasks, preflight
+status, source files, expected write area, and validation commands.
 
 ## Blocked Work
 
@@ -121,9 +123,10 @@ git diff --check
 
 ## Web Copilot Flow
 
-Do not use Issue #4 as a new implementation packet. Use Issue #27 for
-`IAU-installed-user-observation-model-v1` only. The PR must target `develop`
-and state the exact admitted IAU it implements.
+Do not use Issue #4 or Issue #27 as a new implementation packet after their
+PRs merge. Future work must use the issue named by the next public bridge
+admission record. The PR must target `develop` and state the exact admitted IAU
+it implements.
 
 The PR summary should include:
 

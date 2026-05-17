@@ -1,7 +1,7 @@
 # IAU-installed-user-observation-model-v1
 
 `IAU-installed-user-observation-model-v1` is admitted for the MIT authority.
-Its scope is limited to `T009` through `T013`.
+Its implementation completed `T009` through `T013`.
 
 ## Issue
 
@@ -15,6 +15,11 @@ GitHub Issue #27 is the public implementation handoff.
 - `T012`: add tests for `observed`, `deferred`, and `blocked` fact buckets.
 - `T013`: add tests that public feedback is input, not release proof.
 
+## Closeout
+
+The implementation closeout records `status: pass`. The admitted work added
+public clean-room observation contracts and contract tests only.
+
 ## Blocked Tasks
 
 - `T014` through `T016` remain blocked as a later reporting-surface IAU.
@@ -27,4 +32,4 @@ GitHub Issue #27 is the public implementation handoff.
 ## Preflight
 
 `IAU-installed-user-observation-model-v1-preflight-v1` records `status: pass`.
-Implementation may start only for this IAU.
+No further implementation may start from this IAU.
