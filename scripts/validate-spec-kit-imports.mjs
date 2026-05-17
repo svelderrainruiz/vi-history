@@ -6,6 +6,7 @@ const sliceId = "runtime-contract-host-provider-v1";
 const featureDir = ".specify/specs/runtime-contract-host-provider-v1";
 const importDir = `docs/requirements/imports/${sliceId}`;
 const admissionPath = `docs/requirements/admissions/${sliceId}.json`;
+const marketplaceAdrPath = "docs/decisions/ADR-001-marketplace-publication-disabled.md";
 const explicitCompareIauPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1.json`;
 const explicitComparePreflightPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1-preflight-v1.json`;
 const runtimeFactsIauPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-runtime-facts-v1.json`;
@@ -78,6 +79,11 @@ function requireTextIncludes(relativePath, snippets) {
   }
 }
 
+function requireMarketplacePosture(record, label) {
+  requireEqual(record.marketplacePublication, "disabled", `${label} marketplacePublication`);
+  requireEqual(record.marketplacePublicationAdr, marketplaceAdrPath, `${label} marketplacePublicationAdr`);
+}
+
 const packageJson = readJson("package.json");
 requireEqual(packageJson.name, "vi-history", "package name");
 requireEqual(packageJson.displayName, "VI History", "displayName");
@@ -85,6 +91,8 @@ requireEqual(packageJson.publisher, "svelderrainruiz", "publisher");
 requireEqual(packageJson.version, "0.1.0", "version");
 requireEqual(packageJson.license, "MIT", "license");
 requireEqual(packageJson.private, false, "private");
+requireFile("docs/governance/marketplace-posture.md");
+requireFile(marketplaceAdrPath);
 
 const integration = readJson(".specify/integration.json");
 requireEqual(integration.integration, "codex", "Spec Kit integration");
@@ -101,6 +109,7 @@ requireEqual(admission.targetFeature, sliceId, "admission targetFeature");
 requireEqual(admission.sourceBaselineTag, "v1.3.16", "admission sourceBaselineTag");
 requireEqual(admission.sourceCommit, "31add781bd04cc832d9fb55aa821a69305a91a37", "admission sourceCommit");
 requireEqual(admission.implementationSharing, "none", "admission implementationSharing");
+requireMarketplacePosture(admission, "admission");
 requireEqual(admission.currentImplementationAdmissionUnit, null, "currentImplementationAdmissionUnit");
 requireArrayEqual(admission.completedImplementationScope, ["T007", "T008", "T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016", "T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025", "T026", "T027", "T028", "T029", "T030"], "completedImplementationScope");
 requireArrayEqual(admission.admittedImplementationScope, [], "admittedImplementationScope");
@@ -137,6 +146,7 @@ requireEqual(explicitCompareIau.state, "implemented", "explicit compare IAU stat
 requireEqual(explicitCompareIau.parentSliceId, sliceId, "explicit compare IAU parentSliceId");
 requireArrayEqual(explicitCompareIau.admittedTasks, ["T012", "T013", "T014", "T015"], "explicit compare IAU admittedTasks");
 requireEqual(explicitCompareIau.implementationSharing, "none", "explicit compare IAU implementationSharing");
+requireMarketplacePosture(explicitCompareIau, "explicit compare IAU");
 requireEqual(explicitCompareIau.preImplementationPreflight?.status, "pass", "explicit compare IAU preImplementationPreflight status");
 requireEqual(explicitCompareIau.preImplementationPreflight?.record, "IAU-runtime-contract-explicit-compare-v1-preflight-v1.json", "explicit compare IAU preImplementationPreflight record");
 requireEqual(explicitCompareIau.preImplementationPreflight?.implementationStartAllowed, true, "explicit compare IAU preImplementationPreflight implementationStartAllowed");
@@ -149,6 +159,7 @@ requireEqual(explicitComparePreflight.status, "pass", "explicit compare prefligh
 requireEqual(explicitComparePreflight.implementationStartAllowed, true, "explicit compare preflight implementationStartAllowed");
 requireEqual(explicitComparePreflight.parentSliceId, sliceId, "explicit compare preflight parentSliceId");
 requireEqual(explicitComparePreflight.implementationSharing, "none", "explicit compare preflight implementationSharing");
+requireMarketplacePosture(explicitComparePreflight, "explicit compare preflight");
 requireArrayEqual(explicitComparePreflight.implementationStartScope, ["T012", "T013", "T014", "T015"], "explicit compare preflight implementationStartScope");
 if (!Array.isArray(explicitComparePreflight.checkResults) || explicitComparePreflight.checkResults.length !== explicitComparePreflight.requiredChecks.length) {
   failures.push("explicit compare preflight checkResults: must match requiredChecks length");
@@ -166,6 +177,7 @@ requireEqual(runtimeFactsIau.state, "implemented", "runtime facts IAU state");
 requireEqual(runtimeFactsIau.parentSliceId, sliceId, "runtime facts IAU parentSliceId");
 requireArrayEqual(runtimeFactsIau.admittedTasks, ["T016", "T017", "T018", "T019", "T020", "T021"], "runtime facts IAU admittedTasks");
 requireEqual(runtimeFactsIau.implementationSharing, "none", "runtime facts IAU implementationSharing");
+requireMarketplacePosture(runtimeFactsIau, "runtime facts IAU");
 requireEqual(runtimeFactsIau.preImplementationPreflight?.status, "pass", "runtime facts IAU preImplementationPreflight status");
 requireEqual(runtimeFactsIau.preImplementationPreflight?.record, "IAU-runtime-contract-runtime-facts-v1-preflight-v1.json", "runtime facts IAU preImplementationPreflight record");
 requireEqual(runtimeFactsIau.preImplementationPreflight?.implementationStartAllowed, true, "runtime facts IAU preImplementationPreflight implementationStartAllowed");
@@ -178,6 +190,7 @@ requireEqual(runtimeFactsPreflight.status, "pass", "runtime facts preflight stat
 requireEqual(runtimeFactsPreflight.implementationStartAllowed, true, "runtime facts preflight implementationStartAllowed");
 requireEqual(runtimeFactsPreflight.parentSliceId, sliceId, "runtime facts preflight parentSliceId");
 requireEqual(runtimeFactsPreflight.implementationSharing, "none", "runtime facts preflight implementationSharing");
+requireMarketplacePosture(runtimeFactsPreflight, "runtime facts preflight");
 requireArrayEqual(runtimeFactsPreflight.implementationStartScope, ["T016", "T017", "T018", "T019", "T020", "T021"], "runtime facts preflight implementationStartScope");
 if (!Array.isArray(runtimeFactsPreflight.checkResults) || runtimeFactsPreflight.checkResults.length !== runtimeFactsPreflight.requiredChecks.length) {
   failures.push("runtime facts preflight checkResults: must match requiredChecks length");
@@ -195,6 +208,7 @@ requireEqual(providerPolicyIau.state, "implemented", "provider policy IAU state"
 requireEqual(providerPolicyIau.parentSliceId, sliceId, "provider policy IAU parentSliceId");
 requireArrayEqual(providerPolicyIau.admittedTasks, ["T022", "T023", "T024", "T025"], "provider policy IAU admittedTasks");
 requireEqual(providerPolicyIau.implementationSharing, "none", "provider policy IAU implementationSharing");
+requireMarketplacePosture(providerPolicyIau, "provider policy IAU");
 requireEqual(providerPolicyIau.preImplementationPreflight?.status, "pass", "provider policy IAU preImplementationPreflight status");
 requireEqual(providerPolicyIau.preImplementationPreflight?.record, "IAU-runtime-contract-provider-policy-v1-preflight-v1.json", "provider policy IAU preImplementationPreflight record");
 requireEqual(providerPolicyIau.preImplementationPreflight?.implementationStartAllowed, true, "provider policy IAU preImplementationPreflight implementationStartAllowed");
@@ -207,6 +221,7 @@ requireEqual(providerPolicyPreflight.status, "pass", "provider policy preflight 
 requireEqual(providerPolicyPreflight.implementationStartAllowed, true, "provider policy preflight implementationStartAllowed");
 requireEqual(providerPolicyPreflight.parentSliceId, sliceId, "provider policy preflight parentSliceId");
 requireEqual(providerPolicyPreflight.implementationSharing, "none", "provider policy preflight implementationSharing");
+requireMarketplacePosture(providerPolicyPreflight, "provider policy preflight");
 requireArrayEqual(providerPolicyPreflight.implementationStartScope, ["T022", "T023", "T024", "T025"], "provider policy preflight implementationStartScope");
 if (!Array.isArray(providerPolicyPreflight.checkResults) || providerPolicyPreflight.checkResults.length !== providerPolicyPreflight.requiredChecks.length) {
   failures.push("provider policy preflight checkResults: must match requiredChecks length");
@@ -224,6 +239,7 @@ requireEqual(proofIntakeIau.state, "implemented", "proof intake IAU state");
 requireEqual(proofIntakeIau.parentSliceId, sliceId, "proof intake IAU parentSliceId");
 requireArrayEqual(proofIntakeIau.admittedTasks, ["T026", "T027", "T028", "T029", "T030"], "proof intake IAU admittedTasks");
 requireEqual(proofIntakeIau.implementationSharing, "none", "proof intake IAU implementationSharing");
+requireMarketplacePosture(proofIntakeIau, "proof intake IAU");
 requireEqual(proofIntakeIau.preImplementationPreflight?.status, "pass", "proof intake IAU preImplementationPreflight status");
 requireEqual(proofIntakeIau.preImplementationPreflight?.record, "IAU-runtime-contract-proof-intake-v1-preflight-v1.json", "proof intake IAU preImplementationPreflight record");
 requireEqual(proofIntakeIau.preImplementationPreflight?.implementationStartAllowed, true, "proof intake IAU preImplementationPreflight implementationStartAllowed");
@@ -236,6 +252,7 @@ requireEqual(proofIntakePreflight.status, "pass", "proof intake preflight status
 requireEqual(proofIntakePreflight.implementationStartAllowed, true, "proof intake preflight implementationStartAllowed");
 requireEqual(proofIntakePreflight.parentSliceId, sliceId, "proof intake preflight parentSliceId");
 requireEqual(proofIntakePreflight.implementationSharing, "none", "proof intake preflight implementationSharing");
+requireMarketplacePosture(proofIntakePreflight, "proof intake preflight");
 requireArrayEqual(proofIntakePreflight.implementationStartScope, ["T026", "T027", "T028", "T029", "T030"], "proof intake preflight implementationStartScope");
 if (!Array.isArray(proofIntakePreflight.checkResults) || proofIntakePreflight.checkResults.length !== proofIntakePreflight.requiredChecks.length) {
   failures.push("proof intake preflight checkResults: must match requiredChecks length");
@@ -278,6 +295,27 @@ requireTextIncludes(`${featureDir}/plan.md`, [
   "MIT",
   "no implementation source"
 ]);
+requireTextIncludes("README.md", [
+  "No implementation unit is currently admitted",
+  "docs/decisions/ADR-001-marketplace-publication-disabled.md",
+  "docs/governance/marketplace-posture.md"
+]);
+requireTextIncludes("AGENTS.md", [
+  "Marketplace publication is disabled",
+  "docs/decisions/ADR-001-marketplace-publication-disabled.md",
+  "No Implementation Admission Unit is currently admitted"
+]);
+requireTextIncludes(marketplaceAdrPath, [
+  "ADR-001: Marketplace Publication Disabled",
+  "Marketplace publication remains disabled",
+  "Future Marketplace work must"
+]);
+requireTextIncludes("docs/governance/marketplace-posture.md", [
+  "remains Marketplace-disabled",
+  "docs/decisions/ADR-001-marketplace-publication-disabled.md",
+  "future ADR",
+  "No publication workflow is admitted"
+]);
 requireTextIncludes(`${featureDir}/tasks.md`, [
   "Issue #4",
   "blocked until",
@@ -288,6 +326,7 @@ requireTextIncludes(`${featureDir}/tasks.md`, [
   "IAU-runtime-contract-provider-policy-v1",
   "IAU-runtime-contract-proof-intake-v1",
   "runtime-contract closeout PR",
+  "Issue #5 records that Marketplace publication remains disabled",
   "- [x] T012",
   "- [x] T013",
   "- [x] T014",
@@ -311,6 +350,8 @@ requireTextIncludes(`${featureDir}/tasks.md`, [
   "T030"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
+  "Issue #5 closed the Marketplace publication governance decision",
+  "docs/decisions/ADR-001-marketplace-publication-disabled.md",
   "IAU-runtime-contract-proof-intake-v1",
   "`T026`",
   "`T030`",

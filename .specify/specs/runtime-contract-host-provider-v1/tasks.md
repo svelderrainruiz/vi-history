@@ -159,5 +159,5 @@ publication, and source copying remain blocked until separately admitted.
 4. Issue #4 is complete after the runtime-contract closeout PR merges and the
    issue body is reconciled with the implementation proof summary.
 5. Start any future implementation only through a new bridge-admitted IAU.
-6. Keep Issue #5 open until a later governing decision admits or rejects
-   Marketplace publication.
+6. Issue #5 records that Marketplace publication remains disabled until a later
+   ADR admits that channel.

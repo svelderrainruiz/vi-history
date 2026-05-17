@@ -16,7 +16,7 @@ plan, and tasks, then records a public admission before implementation begins.
 - Extension ID: `svelderrainruiz.vi-history`
 - License: MIT
 - Version: `0.1.0`
-- Marketplace publication: disabled until a later governing decision
+- Marketplace publication: disabled; future enablement requires a later ADR
 
 ## Branch Flow
 
@@ -25,22 +25,25 @@ plan, and tasks, then records a public admission before implementation begins.
 - Feature branches target `develop` first, then `develop` promotes to `main`
   after validation is green.
 
-## Current Work
+## Current Status
 
-- #1 bootstraps the MIT Spec Kit authority.
-- #2 imports `runtime-contract-host-provider-v1`.
-- #3 locks the Spec Kit feature spec, plan, and tasks.
-- #4 implements admitted runtime-contract IAUs. Foundational contracts `T007`
-  through `T011` and explicit-compare tasks `T012` through `T015` are complete;
-  the current admitted scope is `T016` through `T021`.
-- #5 decides any future Marketplace publication posture.
+- #1 bootstrapped the MIT Spec Kit authority.
+- #2 imported `runtime-contract-host-provider-v1`.
+- #3 locked the Spec Kit feature spec, plan, and tasks.
+- #4 completed admitted runtime-contract IAUs through proof intake.
+- #5 keeps Marketplace publication disabled until a later ADR admits it.
 
 The current admission ledger is
-`docs/requirements/admissions/runtime-contract-host-provider-v1.json`. The
-current implementation unit is `IAU-runtime-contract-runtime-facts-v1`; its
-preflight is `pass`, so code work for `T016` through `T021` may start.
-Use `docs/development/copilot-workflow.md` as the public handoff when working
-with Copilot locally or in web mode.
+`docs/requirements/admissions/runtime-contract-host-provider-v1.json`.
+
+No implementation unit is currently admitted.
+
+Future code work must start from a new public bridge admission record before
+Copilot or local implementation begins.
+
+The Marketplace posture is recorded in
+`docs/decisions/ADR-001-marketplace-publication-disabled.md` and summarized in
+`docs/governance/marketplace-posture.md`.
 
 ## Validation
 

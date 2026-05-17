@@ -41,8 +41,9 @@ instructions.
 ### V. Marketplace Disabled Until Governed
 
 The extension identity MAY be modeled for future compatibility, but package
-publishing and Marketplace release work MUST remain disabled until a later
-governing decision admits that channel.
+publishing and Marketplace release work MUST remain disabled. Issue #5 records
+the current posture: this repository stays MIT, public, and
+Marketplace-disabled. A later ADR is required before enabling that channel.
 
 ## Authority Boundaries
 
