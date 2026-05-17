@@ -1,0 +1,44 @@
+{
+  "schema": "vi-history/implementation-admission-unit@v1",
+  "iauId": "IAU-runtime-contract-proof-intake-v1",
+  "createdDate": "2026-05-17",
+  "state": "implemented",
+  "parentSliceId": "runtime-contract-host-provider-v1",
+  "specFeature": ".specify/specs/runtime-contract-host-provider-v1",
+  "issue": {
+    "number": 4,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/4"
+  },
+  "admittedTasks": [
+    "T026",
+    "T027",
+    "T028",
+    "T029",
+    "T030"
+  ],
+  "blockedTasks": [],
+  "entryGate": [
+    "IAU-runtime-contract-provider-policy-v1 merged",
+    "public import packet present",
+    "Spec Kit artifacts locked",
+    "bridge artifact validation passed",
+    "public redaction scan passed",
+    "IAU preflight status pass"
+  ],
+  "preImplementationPreflight": {
+    "status": "pass",
+    "record": "IAU-runtime-contract-proof-intake-v1-preflight-v1.json",
+    "implementationStartAllowed": true
+  },
+  "exitGate": [
+    "T026-T030 complete",
+    "public redaction scan passes",
+    "bridge artifact validation passes",
+    "npm test passes",
+    "npm run check passes",
+    "Issue 4 names completed IAU and final runtime-contract closeout state"
+  ],
+  "implementationSharing": "none",
+  "requirementMaturityBasis": "governed released extension supports requirement maturity, not source reuse",
+  "marketplacePublication": "disabled-until-later-adr"
+}

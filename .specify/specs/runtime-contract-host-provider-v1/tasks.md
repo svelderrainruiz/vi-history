@@ -34,11 +34,11 @@ validation passes.
 **Implementation is blocked until**: Issue #4 starts after this bootstrap and
 Issue #3 are closed.
 
-- [ ] T007 [P] Define runtime selection data contract with provider, engine, version, bitness, selected paths, readiness, blocked reason, and notes.
-- [ ] T008 [P] Define comparison command-plan contract for LabVIEWCLI `CreateComparisonReport`.
-- [ ] T009 [P] Define proof packet contract for runtime facts, generated-report facts, stdout, stderr, exit code, duration, and issue body.
-- [ ] T010 Define provider policy contract for host-native default, bounded Docker expert selection, unsupported bundles, and no silent fallback.
-- [ ] T011 Add tests that imported IDs are traceable from implementation contracts to `docs/requirements/imports/runtime-contract-host-provider-v1/rtm.csv`.
+- [x] T007 [P] Define runtime selection data contract with provider, engine, version, bitness, selected paths, readiness, blocked reason, and notes.
+- [x] T008 [P] Define comparison command-plan contract for LabVIEWCLI `CreateComparisonReport`.
+- [x] T009 [P] Define proof packet contract for runtime facts, generated-report facts, stdout, stderr, exit code, duration, and issue body.
+- [x] T010 Define provider policy contract for host-native default, bounded Docker expert selection, unsupported bundles, and no silent fallback.
+- [x] T011 Add tests that imported IDs are traceable from implementation contracts to `docs/requirements/imports/runtime-contract-host-provider-v1/rtm.csv`.
 
 **Checkpoint**: User story implementation can begin after these contracts and
 tests exist.
@@ -53,10 +53,13 @@ action.
 **Independent Test**: Selecting commits exposes runtime facts and does not run
 report generation until the compare action is invoked.
 
-- [ ] T012 [P] [US1] Add tests for commit-pair selection retaining selected/base commit facts.
-- [ ] T013 [P] [US1] Add tests proving compare does not start before explicit user action.
-- [ ] T014 [US1] Implement clean-room compare-action state flow.
-- [ ] T015 [US1] Render selected commit, base commit, provider, version, and bitness facts before execution.
+**Status**: `IAU-runtime-contract-explicit-compare-v1` is implemented. Later
+Docker and proof-intake tasks remain blocked.
+
+- [x] T012 [P] [US1] Add tests for commit-pair selection retaining selected/base commit facts.
+- [x] T013 [P] [US1] Add tests proving compare does not start before explicit user action.
+- [x] T014 [US1] Implement clean-room compare-action state flow.
+- [x] T015 [US1] Render selected commit, base commit, provider, version, and bitness facts before execution.
 
 **Checkpoint**: US1 is independently demonstrable without Docker or proof intake.
 
@@ -70,12 +73,16 @@ provider, engine, version, bitness, paths, and failure facts.
 **Independent Test**: A ready runtime produces a command plan with retained
 selection fields; an unavailable runtime fails closed with corrective guidance.
 
-- [ ] T016 [P] [US2] Add tests for supported host-native LabVIEWCLI runtime selection.
-- [ ] T017 [P] [US2] Add tests for unsupported LabVIEW 2024-or-older rejection.
-- [ ] T018 [P] [US2] Add tests for missing explicit proof override paths failing closed.
-- [ ] T019 [US2] Implement runtime discovery and readiness classification.
-- [ ] T020 [US2] Implement LabVIEWCLI command-plan creation.
-- [ ] T021 [US2] Implement report/proof rendering of retained runtime facts.
+**Status**: `IAU-runtime-contract-runtime-facts-v1` is implemented. Command
+execution, provider-policy, proof-intake, and Marketplace tasks remain blocked
+until separately admitted.
+
+- [x] T016 [P] [US2] Add tests for supported host-native LabVIEWCLI runtime selection.
+- [x] T017 [P] [US2] Add tests for unsupported LabVIEW 2024-or-older rejection.
+- [x] T018 [P] [US2] Add tests for missing explicit proof override paths failing closed.
+- [x] T019 [US2] Implement runtime discovery and readiness classification.
+- [x] T020 [US2] Implement LabVIEWCLI command-plan creation.
+- [x] T021 [US2] Implement report/proof rendering of retained runtime facts.
 
 **Checkpoint**: US2 is independently testable without Docker proof intake.
 
@@ -89,10 +96,14 @@ installed-user host-native default.
 **Independent Test**: Default settings choose host-native LabVIEWCLI; explicit
 Docker selection records Docker facts and fails closed if unsupported.
 
-- [ ] T022 [P] [US3] Add tests for host-native default provider selection.
-- [ ] T023 [P] [US3] Add tests for explicit Docker expert-provider selection.
-- [ ] T024 [P] [US3] Add tests that Docker is never selected implicitly.
-- [ ] T025 [US3] Implement provider policy selection and failure guidance.
+**Status**: `IAU-runtime-contract-provider-policy-v1` is implemented. Command
+execution, proof-intake, and Marketplace tasks remain blocked until separately
+admitted.
+
+- [x] T022 [P] [US3] Add tests for host-native default provider selection.
+- [x] T023 [P] [US3] Add tests for explicit Docker expert-provider selection.
+- [x] T024 [P] [US3] Add tests that Docker is never selected implicitly.
+- [x] T025 [US3] Implement provider policy selection and failure guidance.
 
 **Checkpoint**: US3 is independently testable through provider policy fixtures.
 
@@ -106,11 +117,16 @@ Desktop Windows-container proof remain distinct.
 **Independent Test**: Proof intake rejects Windows Docker Desktop claims without
 real Windows-container facts and does not treat Linux proof as Windows proof.
 
-- [ ] T026 [P] [US4] Add tests for Linux host LabVIEW proof classification.
-- [ ] T027 [P] [US4] Add tests rejecting Linux Docker, WSL, host-provider proof, or reports without proof packets as Windows Docker Desktop proof.
-- [ ] T028 [P] [US4] Add tests for `vihs validate-fixture` proof JSON and issue-body generation.
-- [ ] T029 [US4] Implement proof packet writer and issue-body generation.
-- [ ] T030 [US4] Implement Windows Docker Desktop proof intake validation.
+**Status**: `IAU-runtime-contract-proof-intake-v1` is implemented. Runtime
+contract implementation is complete through proof intake. LabVIEWCLI command
+execution, Docker command execution or container orchestration, Marketplace
+publication, and source copying remain blocked until separately admitted.
+
+- [x] T026 [P] [US4] Add tests for Linux host LabVIEW proof classification.
+- [x] T027 [P] [US4] Add tests rejecting Linux Docker, WSL, host-provider proof, or reports without proof packets as Windows Docker Desktop proof.
+- [x] T028 [P] [US4] Add tests for `vihs validate-fixture` proof JSON and issue-body generation.
+- [x] T029 [US4] Implement proof packet writer and issue-body generation.
+- [x] T030 [US4] Implement Windows Docker Desktop proof intake validation.
 
 **Checkpoint**: US4 is independently testable through proof packet fixtures.
 
@@ -120,11 +136,11 @@ real Windows-container facts and does not treat Linux proof as Windows proof.
 
 **Purpose**: Validate traceability, clean-room boundaries, and public safety.
 
-- [ ] T031 Run `npm test`.
-- [ ] T032 Run `npm run check`.
-- [ ] T033 Run `git diff --check`.
-- [ ] T034 Confirm no copied implementation source, private paths, private tooling names, credentials, or private evidence entered the repo.
-- [ ] T035 Update public issues with the final Issue #4 implementation proof summary.
+- [x] T031 Run `npm test`.
+- [x] T032 Run `npm run check`.
+- [x] T033 Run `git diff --check`.
+- [x] T034 Confirm no copied implementation source, private paths, private tooling names, credentials, or private evidence entered the repo.
+- [x] T035 Update public issues with the final Issue #4 implementation proof summary.
 
 ## Dependencies & Execution Order
 
@@ -140,6 +156,8 @@ real Windows-container facts and does not treat Linux proof as Windows proof.
 1. Merge bootstrap to `develop`.
 2. Promote `develop` to `main` after green validation.
 3. Close Issues #1, #2, and #3.
-4. Use Issue #4 for implementation tasks T007-T035.
-5. Keep Issue #5 open until a later governing decision admits or rejects
+4. Issue #4 is complete after the runtime-contract closeout PR merges and the
+   issue body is reconciled with the implementation proof summary.
+5. Start any future implementation only through a new bridge-admitted IAU.
+6. Keep Issue #5 open until a later governing decision admits or rejects
    Marketplace publication.
