@@ -506,9 +506,9 @@ export function createValidateFixtureProofArtifacts(input) {
   const proofJson = createProofPacket({
     ...input,
     fixture: {
+      ...(input?.fixture ?? {}),
       command: "vihs validate-fixture",
-      canonical: true,
-      ...(input?.fixture ?? {})
+      canonical: true
     }
   });
   return freezeRecord({
@@ -549,6 +549,7 @@ export function validateWindowsDockerDesktopProofIntake(input) {
     execution.exitCode === 0 &&
     fixture.command === "vihs validate-fixture" &&
     fixture.canonical === true &&
+    String(generatedReportFacts.path ?? "").length > 0 &&
     generatedReportFacts.exists === true;
 
   if (windowsDockerDesktopAccepted) {

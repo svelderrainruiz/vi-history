@@ -518,7 +518,8 @@ test("T028 validates deterministic vihs validate-fixture proof JSON and issue-bo
     execution: { state: "completed", exitCode: 0, stdout: "ok", stderr: "", durationMs: 77 },
     generatedReportFacts: { path: "report.html", exists: true },
     hostFacts: { platform: "win32", osFamily: "windows", isWsl: false },
-    dockerDesktopFacts: { ostype: "windows" }
+    dockerDesktopFacts: { ostype: "windows" },
+    fixture: { command: "custom command", canonical: false }
   });
 
   assert.equal(artifacts.proofJson.schema, "vi-history/proof-packet@v1");
@@ -527,11 +528,9 @@ test("T028 validates deterministic vihs validate-fixture proof JSON and issue-bo
   assert.equal(artifacts.proofJson.generatedReportFacts.path, "report.html");
   assert.equal(artifacts.proofJson.generatedReportFacts.exists, true);
   assert.equal(artifacts.issueBody, artifacts.proofJson.issueBody);
-  assert.equal(
-    createProofIssueBody(artifacts.proofJson),
-    createProofIssueBody(artifacts.proofJson),
-    "issue body generation must be deterministic"
-  );
+  assert.equal(artifacts.issueBody, createProofIssueBody(artifacts.proofJson));
+  assert.ok(artifacts.issueBody.includes("Fixture command: vihs validate-fixture"));
+  assert.ok(artifacts.issueBody.includes("Fixture canonical: true"));
 });
 
 test("T029 writes proof packet and generated issue body from retained proof facts", () => {
@@ -600,4 +599,17 @@ test("T030 accepts only real Windows Docker Desktop Windows-container proof inta
   const rejected = validateWindowsDockerDesktopProofIntake(missingGeneratedReport);
   assert.equal(rejected.classification, "not-windows-docker-desktop-proof");
   assert.equal(rejected.accepted, false);
+
+  const missingGeneratedReportPath = createProofPacket({
+    environmentClass: "windows-docker-desktop-windows-container",
+    runtimeSelection,
+    execution: { state: "completed", exitCode: 0 },
+    generatedReportFacts: { exists: true },
+    hostFacts: { platform: "win32", osFamily: "windows", isWsl: false },
+    dockerDesktopFacts: { ostype: "windows" },
+    fixture: { command: "vihs validate-fixture", canonical: true }
+  });
+  const rejectedWithoutPath = validateWindowsDockerDesktopProofIntake(missingGeneratedReportPath);
+  assert.equal(rejectedWithoutPath.classification, "not-windows-docker-desktop-proof");
+  assert.equal(rejectedWithoutPath.accepted, false);
 });
