@@ -6,6 +6,7 @@ const sliceId = "runtime-contract-host-provider-v1";
 const featureDir = ".specify/specs/runtime-contract-host-provider-v1";
 const importDir = `docs/requirements/imports/${sliceId}`;
 const admissionPath = `docs/requirements/admissions/${sliceId}.json`;
+const explicitCompareIauPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1.json`;
 const expectedIds = [
   "VHS-SYS-REQ-004",
   "VHS-SYS-REQ-005",
@@ -93,8 +94,19 @@ requireEqual(admission.targetFeature, sliceId, "admission targetFeature");
 requireEqual(admission.sourceBaselineTag, "v1.3.16", "admission sourceBaselineTag");
 requireEqual(admission.sourceCommit, "31add781bd04cc832d9fb55aa821a69305a91a37", "admission sourceCommit");
 requireEqual(admission.implementationSharing, "none", "admission implementationSharing");
-requireArrayEqual(admission.admittedImplementationScope, ["T007", "T008", "T009", "T010", "T011"], "admittedImplementationScope");
+requireEqual(admission.currentImplementationAdmissionUnit, "IAU-runtime-contract-explicit-compare-v1", "currentImplementationAdmissionUnit");
+requireArrayEqual(admission.completedImplementationScope, ["T007", "T008", "T009", "T010", "T011"], "completedImplementationScope");
+requireArrayEqual(admission.admittedImplementationScope, ["T012", "T013", "T014", "T015"], "admittedImplementationScope");
 requireFile(`docs/requirements/admissions/${sliceId}.md`);
+
+const explicitCompareIau = readJson(explicitCompareIauPath);
+requireEqual(explicitCompareIau.schema, "vi-history/implementation-admission-unit@v1", "explicit compare IAU schema");
+requireEqual(explicitCompareIau.iauId, "IAU-runtime-contract-explicit-compare-v1", "explicit compare IAU id");
+requireEqual(explicitCompareIau.state, "implementation-admitted", "explicit compare IAU state");
+requireEqual(explicitCompareIau.parentSliceId, sliceId, "explicit compare IAU parentSliceId");
+requireArrayEqual(explicitCompareIau.admittedTasks, ["T012", "T013", "T014", "T015"], "explicit compare IAU admittedTasks");
+requireEqual(explicitCompareIau.implementationSharing, "none", "explicit compare IAU implementationSharing");
+requireFile(`docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1.md`);
 
 const manifest = readJson(`${importDir}/manifest.json`);
 requireEqual(manifest.schema, "vi-history/requirements-import@v1", "manifest schema");
@@ -132,7 +144,10 @@ requireTextIncludes(`${featureDir}/tasks.md`, [
   "Issue #4",
   "blocked until",
   "T007",
-  "T011"
+  "T011",
+  "IAU-runtime-contract-explicit-compare-v1",
+  "T012",
+  "T015"
 ]);
 requireTextIncludes(`${importDir}/rtm.csv`, expectedIds);
 
