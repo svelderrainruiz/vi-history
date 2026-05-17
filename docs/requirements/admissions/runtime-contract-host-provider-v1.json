@@ -35,8 +35,9 @@
     },
     {
       "iauId": "IAU-runtime-contract-explicit-compare-v1",
-      "state": "implementation-admitted",
+      "state": "preflight-required",
       "record": "docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-explicit-compare-v1.json",
+      "preflightRecord": "docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-explicit-compare-v1-preflight-v1.json",
       "admittedTasks": [
         "T012",
         "T013",
@@ -59,6 +60,12 @@
     "T014",
     "T015"
   ],
+  "preImplementationPreflight": {
+    "iauId": "IAU-runtime-contract-explicit-compare-v1",
+    "status": "pending",
+    "record": "docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-explicit-compare-v1-preflight-v1.json",
+    "implementationStartAllowed": false
+  },
   "blockedUntilExplicitCompareMerge": [
     "T016",
     "T017",

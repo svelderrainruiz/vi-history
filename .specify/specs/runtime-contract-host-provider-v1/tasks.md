@@ -53,8 +53,9 @@ action.
 **Independent Test**: Selecting commits exposes runtime facts and does not run
 report generation until the compare action is invoked.
 
-**Current IAU**: `IAU-runtime-contract-explicit-compare-v1` admits `T012`
-through `T015`. Later runtime, Docker, and proof-intake tasks remain blocked.
+**Current IAU**: `IAU-runtime-contract-explicit-compare-v1` scopes `T012`
+through `T015`, but implementation remains blocked until its preflight records
+`status: pass`. Later runtime, Docker, and proof-intake tasks remain blocked.
 
 - [ ] T012 [P] [US1] Add tests for commit-pair selection retaining selected/base commit facts.
 - [ ] T013 [P] [US1] Add tests proving compare does not start before explicit user action.

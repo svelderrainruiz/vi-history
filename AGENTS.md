@@ -19,11 +19,11 @@ promotion to `main`.
 Marketplace publication is disabled until a later governing decision admits a
 release channel.
 
-Implementation for `runtime-contract-host-provider-v1` begins only after the
-public admission record reaches `implementation-admitted`. The current admitted
-scope is the named Implementation Admission Unit
-`IAU-runtime-contract-explicit-compare-v1`, covering tasks `T012` through
-`T015`. Tasks `T016` through `T030` remain blocked until that IAU merges.
+Implementation for `runtime-contract-host-provider-v1` begins only after a
+named Implementation Admission Unit has a preflight record with `status: pass`.
+The current unit is `IAU-runtime-contract-explicit-compare-v1`, covering tasks
+`T012` through `T015`, and its preflight is currently `pending`. Tasks `T016`
+through `T030` remain blocked until that IAU merges.
 
 When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:
