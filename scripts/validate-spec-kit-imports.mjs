@@ -184,6 +184,16 @@ requireTextIncludes(`${featureDir}/tasks.md`, [
   "T012",
   "T015"
 ]);
+requireTextIncludes("docs/development/copilot-workflow.md", [
+  "IAU-runtime-contract-explicit-compare-v1",
+  "`T012`",
+  "`T015`",
+  "`T016` through `T030`",
+  "GitHub Issue #4",
+  "npm test",
+  "npm run check",
+  "git diff --check"
+]);
 requireTextIncludes(`${importDir}/rtm.csv`, expectedIds);
 
 if (failures.length > 0) {

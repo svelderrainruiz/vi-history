@@ -144,6 +144,9 @@ real Windows-container facts and does not treat Linux proof as Windows proof.
 1. Merge bootstrap to `develop`.
 2. Promote `develop` to `main` after green validation.
 3. Close Issues #1, #2, and #3.
-4. Use Issue #4 for implementation tasks T007-T035.
-5. Keep Issue #5 open until a later governing decision admits or rejects
+4. Use Issue #4 for implementation tasks through named IAUs, not as one broad
+   implementation batch.
+5. Treat `IAU-runtime-contract-explicit-compare-v1` as the current admitted
+   work packet for `T012` through `T015` only.
+6. Keep Issue #5 open until a later governing decision admits or rejects
    Marketplace publication.
