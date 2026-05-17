@@ -1,0 +1,42 @@
+{
+  "schema": "vi-history/requirements-import@v1",
+  "sliceId": "runtime-contract-host-provider-v1",
+  "createdDate": "2026-05-17",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "31add781bd04cc832d9fb55aa821a69305a91a37",
+  "targetProduct": "vi-history",
+  "targetFeature": "runtime-contract-host-provider-v1",
+  "importedRequirementIds": [
+    "VHS-SYS-REQ-004",
+    "VHS-SYS-REQ-005",
+    "VHS-SYS-REQ-006",
+    "VHS-SYS-REQ-007",
+    "VHS-SYS-REQ-008",
+    "VHS-REQ-094",
+    "VHS-REQ-095",
+    "VHS-REQ-138",
+    "VHS-REQ-141",
+    "VHS-REQ-144",
+    "VHS-REQ-146",
+    "VHS-REQ-148",
+    "VHS-REQ-194",
+    "VHS-REQ-588",
+    "VHS-REQ-589",
+    "VHS-REQ-590"
+  ],
+  "redactionStatus": "pass",
+  "implementationSharing": "none",
+  "licenseBoundary": "MIT target receives requirements and Spec Kit artifacts only",
+  "marketplacePublication": "disabled-until-later-adr",
+  "files": [
+    "syrs.md",
+    "srs.md",
+    "rtm.csv",
+    "test-plan.md"
+  ],
+  "bugOracle": {
+    "sameWrongBehaviorAcrossIndependentImplementations": "requirement-defect-candidate",
+    "oneAuthorityWrongBehavior": "implementation-defect-candidate",
+    "ambiguousBehavior": "requirement-clarification-candidate"
+  }
+}
