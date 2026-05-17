@@ -25,6 +25,11 @@ The current unit is `IAU-runtime-contract-explicit-compare-v1`, covering tasks
 `T012` through `T015`, and its preflight is `pass`. Tasks `T016` through
 `T030` remain blocked until that IAU merges.
 
+For Copilot local or web implementation work, read
+`docs/development/copilot-workflow.md` before changing code. It names the
+current public source files, admitted task scope, blocked scope, and validation
+commands.
+
 When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:
 
