@@ -2,8 +2,8 @@
 
 ## State
 
-`IAU-runtime-contract-explicit-compare-v1` is scoped for the MIT authority, but
-implementation remains blocked until its preflight records `status: pass`.
+`IAU-runtime-contract-explicit-compare-v1` is admitted for the MIT authority.
+Its preflight records `status: pass`.
 
 ## Scope
 
@@ -22,8 +22,7 @@ source copying from another product line.
 
 ## Preflight
 
-Implementation remains blocked until
-`IAU-runtime-contract-explicit-compare-v1-preflight-v1` records `status: pass`.
-The current status is `pending`.
+`IAU-runtime-contract-explicit-compare-v1-preflight-v1` records `status:
+pass`. Implementation may start for `T012` through `T015` only.
 
 Tasks `T016` through `T030` remain blocked until this IAU merges.

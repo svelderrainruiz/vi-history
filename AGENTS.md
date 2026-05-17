@@ -22,8 +22,8 @@ release channel.
 Implementation for `runtime-contract-host-provider-v1` begins only after a
 named Implementation Admission Unit has a preflight record with `status: pass`.
 The current unit is `IAU-runtime-contract-explicit-compare-v1`, covering tasks
-`T012` through `T015`, and its preflight is currently `pending`. Tasks `T016`
-through `T030` remain blocked until that IAU merges.
+`T012` through `T015`, and its preflight is `pass`. Tasks `T016` through
+`T030` remain blocked until that IAU merges.
 
 When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:
