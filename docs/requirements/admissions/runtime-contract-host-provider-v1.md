@@ -3,9 +3,9 @@
 ## State
 
 `runtime-contract-host-provider-v1` has implemented foundation,
-explicit-compare, runtime-facts, and provider-policy IAUs. The current
-proof-intake IAU has preflight `status: pass`, so implementation is admitted
-for `T026` through `T030`.
+explicit-compare, runtime-facts, provider-policy, and proof-intake IAUs. Issue
+#4 is complete after the closeout PR reconciles this public admission surface
+with the final implementation proof summary.
 
 ## Admission Basis
 
@@ -51,10 +51,7 @@ for `T026` through `T030`.
 - tests proving Docker is never selected implicitly
 - provider policy selection and failure guidance
 
-## Current IAU
-
-`IAU-runtime-contract-proof-intake-v1` is admitted for tasks `T026` through
-`T030`:
+`IAU-runtime-contract-proof-intake-v1` completed tasks `T026` through `T030`:
 
 - Linux host LabVIEW proof classification tests
 - rejection tests for Linux Docker, WSL, host-provider proof, or reports
@@ -63,5 +60,8 @@ for `T026` through `T030`.
 - proof packet writer and issue-body generation
 - Windows Docker Desktop proof intake validation
 
-This IAU does not admit LabVIEWCLI command execution, Docker command execution
-or container orchestration, Marketplace publication, or source copying.
+## Blocked Work
+
+No current IAU is admitted for new implementation. LabVIEWCLI command execution,
+Docker command execution or container orchestration, Marketplace publication,
+and source copying remain blocked until separately admitted.

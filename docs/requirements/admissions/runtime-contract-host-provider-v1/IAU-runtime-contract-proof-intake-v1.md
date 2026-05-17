@@ -1,7 +1,7 @@
 # IAU-runtime-contract-proof-intake-v1
 
-`IAU-runtime-contract-proof-intake-v1` is admitted for the MIT authority. Its
-implementation scope is limited to tasks `T026` through `T030`:
+`IAU-runtime-contract-proof-intake-v1` is implemented for the MIT authority. It
+completed tasks `T026` through `T030`:
 
 - `T026`: add tests for Linux host LabVIEW proof classification.
 - `T027`: add tests rejecting Linux Docker, WSL, host-provider proof, or reports
@@ -18,7 +18,9 @@ not admit LabVIEWCLI command execution, Docker command execution or container
 orchestration, Marketplace publication, or source copying from any other
 VI History authority.
 
-## Preflight
+## Closeout
 
-`IAU-runtime-contract-proof-intake-v1-preflight-v1` records `status: pass`.
-Implementation may start for `T026` through `T030` only.
+`IAU-runtime-contract-proof-intake-v1-preflight-v1` recorded `status: pass`
+before implementation started. The implementation merged through canonical PR
+#19 and the final Issue #4 implementation proof summary records validation
+evidence.
