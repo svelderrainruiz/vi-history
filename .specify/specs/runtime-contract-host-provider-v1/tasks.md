@@ -96,14 +96,14 @@ installed-user host-native default.
 **Independent Test**: Default settings choose host-native LabVIEWCLI; explicit
 Docker selection records Docker facts and fails closed if unsupported.
 
-**Current IAU**: `IAU-runtime-contract-provider-policy-v1` has preflight
-`status: pass`, so `T022` through `T025` may start. Command execution,
-proof-intake, and Marketplace tasks remain blocked.
+**Status**: `IAU-runtime-contract-provider-policy-v1` is implemented. Command
+execution, proof-intake, and Marketplace tasks remain blocked until separately
+admitted.
 
-- [ ] T022 [P] [US3] Add tests for host-native default provider selection.
-- [ ] T023 [P] [US3] Add tests for explicit Docker expert-provider selection.
-- [ ] T024 [P] [US3] Add tests that Docker is never selected implicitly.
-- [ ] T025 [US3] Implement provider policy selection and failure guidance.
+- [x] T022 [P] [US3] Add tests for host-native default provider selection.
+- [x] T023 [P] [US3] Add tests for explicit Docker expert-provider selection.
+- [x] T024 [P] [US3] Add tests that Docker is never selected implicitly.
+- [x] T025 [US3] Implement provider policy selection and failure guidance.
 
 **Checkpoint**: US3 is independently testable through provider policy fixtures.
 
@@ -116,6 +116,11 @@ Desktop Windows-container proof remain distinct.
 
 **Independent Test**: Proof intake rejects Windows Docker Desktop claims without
 real Windows-container facts and does not treat Linux proof as Windows proof.
+
+**Current IAU**: `IAU-runtime-contract-proof-intake-v1` has preflight
+`status: pass`, so `T026` through `T030` may start. LabVIEWCLI command
+execution, Docker command execution or container orchestration, Marketplace
+publication, and source copying remain blocked.
 
 - [ ] T026 [P] [US4] Add tests for Linux host LabVIEW proof classification.
 - [ ] T027 [P] [US4] Add tests rejecting Linux Docker, WSL, host-provider proof, or reports without proof packets as Windows Docker Desktop proof.
@@ -153,7 +158,7 @@ real Windows-container facts and does not treat Linux proof as Windows proof.
 3. Close Issues #1, #2, and #3.
 4. Use Issue #4 for implementation tasks through named IAUs, not as one broad
    implementation batch.
-5. Treat `IAU-runtime-contract-provider-policy-v1` as the current admitted work
-   packet for `T022` through `T025` only.
+5. Treat `IAU-runtime-contract-proof-intake-v1` as the current admitted work
+   packet for `T026` through `T030` only.
 6. Keep Issue #5 open until a later governing decision admits or rejects
    Marketplace publication.
