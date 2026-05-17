@@ -5,6 +5,9 @@ const repoRoot = process.cwd();
 const sliceId = "runtime-contract-host-provider-v1";
 const featureDir = ".specify/specs/runtime-contract-host-provider-v1";
 const importDir = `docs/requirements/imports/${sliceId}`;
+const admissionPath = `docs/requirements/admissions/${sliceId}.json`;
+const explicitCompareIauPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1.json`;
+const explicitComparePreflightPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1-preflight-v1.json`;
 const expectedIds = [
   "VHS-SYS-REQ-004",
   "VHS-SYS-REQ-005",
@@ -83,6 +86,58 @@ requireEqual(integration.integration, "codex", "Spec Kit integration");
 const featureJson = readJson(".specify/feature.json");
 requireEqual(featureJson.feature_directory, featureDir, "pinned Spec Kit feature directory");
 
+const admission = readJson(admissionPath);
+requireEqual(admission.schema, "vi-history/requirements-admission@v1", "admission schema");
+requireEqual(admission.sliceId, sliceId, "admission sliceId");
+requireEqual(admission.state, "implementation-admitted", "admission state");
+requireEqual(admission.targetProduct, "vi-history", "admission targetProduct");
+requireEqual(admission.targetFeature, sliceId, "admission targetFeature");
+requireEqual(admission.sourceBaselineTag, "v1.3.16", "admission sourceBaselineTag");
+requireEqual(admission.sourceCommit, "31add781bd04cc832d9fb55aa821a69305a91a37", "admission sourceCommit");
+requireEqual(admission.implementationSharing, "none", "admission implementationSharing");
+requireEqual(admission.currentImplementationAdmissionUnit, "IAU-runtime-contract-explicit-compare-v1", "currentImplementationAdmissionUnit");
+requireArrayEqual(admission.completedImplementationScope, ["T007", "T008", "T009", "T010", "T011"], "completedImplementationScope");
+requireArrayEqual(admission.admittedImplementationScope, ["T012", "T013", "T014", "T015"], "admittedImplementationScope");
+requireEqual(admission.preImplementationPreflight?.iauId, "IAU-runtime-contract-explicit-compare-v1", "admission preImplementationPreflight iauId");
+requireEqual(admission.preImplementationPreflight?.status, "pass", "admission preImplementationPreflight status");
+requireEqual(admission.preImplementationPreflight?.implementationStartAllowed, true, "admission preImplementationPreflight implementationStartAllowed");
+requireEqual(admission.preImplementationPreflight?.record, explicitComparePreflightPath, "admission preImplementationPreflight record");
+requireFile(`docs/requirements/admissions/${sliceId}.md`);
+
+const explicitCompareAdmissionUnit = (admission.implementationAdmissionUnits ?? [])
+  .find((unit) => unit?.iauId === "IAU-runtime-contract-explicit-compare-v1");
+requireEqual(explicitCompareAdmissionUnit?.state, "implementation-admitted", "explicit compare admission unit state");
+requireEqual(explicitCompareAdmissionUnit?.preflightRecord, explicitComparePreflightPath, "explicit compare admission unit preflightRecord");
+
+const explicitCompareIau = readJson(explicitCompareIauPath);
+requireEqual(explicitCompareIau.schema, "vi-history/implementation-admission-unit@v1", "explicit compare IAU schema");
+requireEqual(explicitCompareIau.iauId, "IAU-runtime-contract-explicit-compare-v1", "explicit compare IAU id");
+requireEqual(explicitCompareIau.state, "implementation-admitted", "explicit compare IAU state");
+requireEqual(explicitCompareIau.parentSliceId, sliceId, "explicit compare IAU parentSliceId");
+requireArrayEqual(explicitCompareIau.admittedTasks, ["T012", "T013", "T014", "T015"], "explicit compare IAU admittedTasks");
+requireEqual(explicitCompareIau.implementationSharing, "none", "explicit compare IAU implementationSharing");
+requireEqual(explicitCompareIau.preImplementationPreflight?.status, "pass", "explicit compare IAU preImplementationPreflight status");
+requireEqual(explicitCompareIau.preImplementationPreflight?.record, "IAU-runtime-contract-explicit-compare-v1-preflight-v1.json", "explicit compare IAU preImplementationPreflight record");
+requireEqual(explicitCompareIau.preImplementationPreflight?.implementationStartAllowed, true, "explicit compare IAU preImplementationPreflight implementationStartAllowed");
+requireFile(`docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1.md`);
+
+const explicitComparePreflight = readJson(explicitComparePreflightPath);
+requireEqual(explicitComparePreflight.schema, "vi-history/implementation-admission-unit-preflight@v1", "explicit compare preflight schema");
+requireEqual(explicitComparePreflight.iauId, "IAU-runtime-contract-explicit-compare-v1", "explicit compare preflight iauId");
+requireEqual(explicitComparePreflight.status, "pass", "explicit compare preflight status");
+requireEqual(explicitComparePreflight.implementationStartAllowed, true, "explicit compare preflight implementationStartAllowed");
+requireEqual(explicitComparePreflight.parentSliceId, sliceId, "explicit compare preflight parentSliceId");
+requireEqual(explicitComparePreflight.implementationSharing, "none", "explicit compare preflight implementationSharing");
+requireArrayEqual(explicitComparePreflight.implementationStartScope, ["T012", "T013", "T014", "T015"], "explicit compare preflight implementationStartScope");
+if (!Array.isArray(explicitComparePreflight.checkResults) || explicitComparePreflight.checkResults.length !== explicitComparePreflight.requiredChecks.length) {
+  failures.push("explicit compare preflight checkResults: must match requiredChecks length");
+} else {
+  for (const result of explicitComparePreflight.checkResults) {
+    requireEqual(result.status, "pass", `explicit compare preflight check result ${result.check}`);
+  }
+}
+requireFile(`docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1-preflight-v1.md`);
+
 const manifest = readJson(`${importDir}/manifest.json`);
 requireEqual(manifest.schema, "vi-history/requirements-import@v1", "manifest schema");
 requireEqual(manifest.sliceId, sliceId, "sliceId");
@@ -117,7 +172,27 @@ requireTextIncludes(`${featureDir}/plan.md`, [
 ]);
 requireTextIncludes(`${featureDir}/tasks.md`, [
   "Issue #4",
-  "blocked until"
+  "blocked until",
+  "T007",
+  "T011",
+  "IAU-runtime-contract-explicit-compare-v1",
+  "preflight",
+  "- [ ] T012",
+  "- [ ] T013",
+  "- [ ] T014",
+  "- [ ] T015",
+  "T012",
+  "T015"
+]);
+requireTextIncludes("docs/development/copilot-workflow.md", [
+  "IAU-runtime-contract-explicit-compare-v1",
+  "`T012`",
+  "`T015`",
+  "`T016` through `T030`",
+  "GitHub Issue #4",
+  "npm test",
+  "npm run check",
+  "git diff --check"
 ]);
 requireTextIncludes(`${importDir}/rtm.csv`, expectedIds);
 

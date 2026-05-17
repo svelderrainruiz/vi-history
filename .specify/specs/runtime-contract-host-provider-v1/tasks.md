@@ -34,11 +34,11 @@ validation passes.
 **Implementation is blocked until**: Issue #4 starts after this bootstrap and
 Issue #3 are closed.
 
-- [ ] T007 [P] Define runtime selection data contract with provider, engine, version, bitness, selected paths, readiness, blocked reason, and notes.
-- [ ] T008 [P] Define comparison command-plan contract for LabVIEWCLI `CreateComparisonReport`.
-- [ ] T009 [P] Define proof packet contract for runtime facts, generated-report facts, stdout, stderr, exit code, duration, and issue body.
-- [ ] T010 Define provider policy contract for host-native default, bounded Docker expert selection, unsupported bundles, and no silent fallback.
-- [ ] T011 Add tests that imported IDs are traceable from implementation contracts to `docs/requirements/imports/runtime-contract-host-provider-v1/rtm.csv`.
+- [x] T007 [P] Define runtime selection data contract with provider, engine, version, bitness, selected paths, readiness, blocked reason, and notes.
+- [x] T008 [P] Define comparison command-plan contract for LabVIEWCLI `CreateComparisonReport`.
+- [x] T009 [P] Define proof packet contract for runtime facts, generated-report facts, stdout, stderr, exit code, duration, and issue body.
+- [x] T010 Define provider policy contract for host-native default, bounded Docker expert selection, unsupported bundles, and no silent fallback.
+- [x] T011 Add tests that imported IDs are traceable from implementation contracts to `docs/requirements/imports/runtime-contract-host-provider-v1/rtm.csv`.
 
 **Checkpoint**: User story implementation can begin after these contracts and
 tests exist.
@@ -52,6 +52,10 @@ action.
 
 **Independent Test**: Selecting commits exposes runtime facts and does not run
 report generation until the compare action is invoked.
+
+**Current IAU**: `IAU-runtime-contract-explicit-compare-v1` has preflight
+`status: pass`, so `T012` through `T015` may start. Later runtime, Docker, and
+proof-intake tasks remain blocked.
 
 - [ ] T012 [P] [US1] Add tests for commit-pair selection retaining selected/base commit facts.
 - [ ] T013 [P] [US1] Add tests proving compare does not start before explicit user action.
@@ -140,6 +144,9 @@ real Windows-container facts and does not treat Linux proof as Windows proof.
 1. Merge bootstrap to `develop`.
 2. Promote `develop` to `main` after green validation.
 3. Close Issues #1, #2, and #3.
-4. Use Issue #4 for implementation tasks T007-T035.
-5. Keep Issue #5 open until a later governing decision admits or rejects
+4. Use Issue #4 for implementation tasks through named IAUs, not as one broad
+   implementation batch.
+5. Treat `IAU-runtime-contract-explicit-compare-v1` as the current admitted
+   work packet for `T012` through `T015` only.
+6. Keep Issue #5 open until a later governing decision admits or rejects
    Marketplace publication.

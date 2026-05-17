@@ -5,8 +5,8 @@ authority for VI History.
 
 This repository starts from requirements and Spec Kit artifacts, not from copied
 extension source. The initial baseline imports the
-`runtime-contract-host-provider-v1` requirements slice and keeps implementation
-blocked until the feature spec, plan, and tasks are locked.
+`runtime-contract-host-provider-v1` requirements slice, locks the feature spec,
+plan, and tasks, then records a public admission before implementation begins.
 
 ## Authority
 
@@ -30,8 +30,17 @@ blocked until the feature spec, plan, and tasks are locked.
 - #1 bootstraps the MIT Spec Kit authority.
 - #2 imports `runtime-contract-host-provider-v1`.
 - #3 locks the Spec Kit feature spec, plan, and tasks.
-- #4 implements the runtime contract only after #3 is locked.
+- #4 implements admitted runtime-contract IAUs. Foundational contracts `T007`
+  through `T011` are complete; the current admitted scope is `T012` through
+  `T015`.
 - #5 decides any future Marketplace publication posture.
+
+The current admission ledger is
+`docs/requirements/admissions/runtime-contract-host-provider-v1.json`. The
+current implementation unit is `IAU-runtime-contract-explicit-compare-v1`; its
+preflight is `pass`, so code work for `T012` through `T015` may start.
+Use `docs/development/copilot-workflow.md` as the public handoff when working
+with Copilot locally or in web mode.
 
 ## Validation
 
@@ -42,4 +51,5 @@ npm test
 ```
 
 The current gates validate import packet shape, Spec Kit artifact presence,
-package identity, redaction, and the clean-room boundary.
+package identity, admission state, redaction, traceability, and the clean-room
+boundary.

@@ -2,8 +2,10 @@ import fs from "node:fs";
 import path from "node:path";
 
 const repoRoot = process.cwd();
+const admittedSliceId = "runtime-contract-host-provider-v1";
+const admissionPath = path.join(repoRoot, "docs", "requirements", "admissions", `${admittedSliceId}.json`);
 const forbidden = [
-  "/home/" + "sergio",
+  "/" + "home/" + "sergio",
   ".co" + "dex",
   "repo-" + "standards-review",
   "VIHS_ASSURANCE_" + "SKILL_ROOT",
@@ -19,6 +21,28 @@ const forbidden = [
 ];
 const ignoredDirectories = new Set([".git", "node_modules", "coverage", ".cache", "out", "dist"]);
 const failures = [];
+
+function readJson(fullPath) {
+  try {
+    return JSON.parse(fs.readFileSync(fullPath, "utf8"));
+  } catch {
+    return undefined;
+  }
+}
+
+function hasImplementedFoundationScope() {
+  const admission = readJson(admissionPath);
+  const completedScope = admission?.completedImplementationScope;
+  const iaus = admission?.implementationAdmissionUnits;
+  const foundationImplemented = Array.isArray(iaus)
+    && iaus.some((iau) => iau?.iauId === "IAU-runtime-contract-foundation-v1" && iau?.state === "implemented");
+  return admission?.sliceId === admittedSliceId
+    && admission?.implementationSharing === "none"
+    && Array.isArray(completedScope)
+    && completedScope.includes("T007")
+    && completedScope.includes("T011")
+    && foundationImplemented;
+}
 
 function walk(directory) {
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
@@ -53,8 +77,8 @@ function scanFile(fullPath) {
 
 walk(repoRoot);
 
-if (fs.existsSync(path.join(repoRoot, "src"))) {
-  failures.push("src/: implementation source is not admitted during bootstrap");
+if (fs.existsSync(path.join(repoRoot, "src")) && !hasImplementedFoundationScope()) {
+  failures.push("src/: implementation source requires an implemented foundation requirements scope");
 }
 
 if (failures.length > 0) {
