@@ -31,14 +31,14 @@ plan, and tasks, then records a public admission before implementation begins.
 - #2 imports `runtime-contract-host-provider-v1`.
 - #3 locks the Spec Kit feature spec, plan, and tasks.
 - #4 implements admitted runtime-contract IAUs. Foundational contracts `T007`
-  through `T011` are complete; the current admitted scope is `T012` through
-  `T015`.
+  through `T011` and explicit-compare tasks `T012` through `T015` are complete;
+  the current admitted scope is `T016` through `T021`.
 - #5 decides any future Marketplace publication posture.
 
 The current admission ledger is
 `docs/requirements/admissions/runtime-contract-host-provider-v1.json`. The
-current implementation unit is `IAU-runtime-contract-explicit-compare-v1`; its
-preflight is `pass`, so code work for `T012` through `T015` may start.
+current implementation unit is `IAU-runtime-contract-runtime-facts-v1`; its
+preflight is `pass`, so code work for `T016` through `T021` may start.
 Use `docs/development/copilot-workflow.md` as the public handoff when working
 with Copilot locally or in web mode.
 

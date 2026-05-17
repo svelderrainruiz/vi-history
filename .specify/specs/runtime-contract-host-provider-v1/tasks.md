@@ -53,14 +53,13 @@ action.
 **Independent Test**: Selecting commits exposes runtime facts and does not run
 report generation until the compare action is invoked.
 
-**Current IAU**: `IAU-runtime-contract-explicit-compare-v1` has preflight
-`status: pass`, so `T012` through `T015` may start. Later runtime, Docker, and
-proof-intake tasks remain blocked.
+**Status**: `IAU-runtime-contract-explicit-compare-v1` is implemented. Later
+Docker and proof-intake tasks remain blocked.
 
-- [ ] T012 [P] [US1] Add tests for commit-pair selection retaining selected/base commit facts.
-- [ ] T013 [P] [US1] Add tests proving compare does not start before explicit user action.
-- [ ] T014 [US1] Implement clean-room compare-action state flow.
-- [ ] T015 [US1] Render selected commit, base commit, provider, version, and bitness facts before execution.
+- [x] T012 [P] [US1] Add tests for commit-pair selection retaining selected/base commit facts.
+- [x] T013 [P] [US1] Add tests proving compare does not start before explicit user action.
+- [x] T014 [US1] Implement clean-room compare-action state flow.
+- [x] T015 [US1] Render selected commit, base commit, provider, version, and bitness facts before execution.
 
 **Checkpoint**: US1 is independently demonstrable without Docker or proof intake.
 
@@ -73,6 +72,10 @@ provider, engine, version, bitness, paths, and failure facts.
 
 **Independent Test**: A ready runtime produces a command plan with retained
 selection fields; an unavailable runtime fails closed with corrective guidance.
+
+**Current IAU**: `IAU-runtime-contract-runtime-facts-v1` has preflight
+`status: pass`, so `T016` through `T021` may start. Command execution, Docker,
+proof-intake, and Marketplace tasks remain blocked.
 
 - [ ] T016 [P] [US2] Add tests for supported host-native LabVIEWCLI runtime selection.
 - [ ] T017 [P] [US2] Add tests for unsupported LabVIEW 2024-or-older rejection.
@@ -146,7 +149,7 @@ real Windows-container facts and does not treat Linux proof as Windows proof.
 3. Close Issues #1, #2, and #3.
 4. Use Issue #4 for implementation tasks through named IAUs, not as one broad
    implementation batch.
-5. Treat `IAU-runtime-contract-explicit-compare-v1` as the current admitted
-   work packet for `T012` through `T015` only.
+5. Treat `IAU-runtime-contract-runtime-facts-v1` as the current admitted work
+   packet for `T016` through `T021` only.
 6. Keep Issue #5 open until a later governing decision admits or rejects
    Marketplace publication.
