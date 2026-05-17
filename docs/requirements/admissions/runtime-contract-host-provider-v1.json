@@ -2,7 +2,7 @@
   "schema": "vi-history/requirements-admission@v1",
   "sliceId": "runtime-contract-host-provider-v1",
   "createdDate": "2026-05-17",
-  "state": "implementation-admitted",
+  "state": "implemented",
   "targetProduct": "vi-history",
   "targetFeature": "runtime-contract-host-provider-v1",
   "sourceBaselineTag": "v1.3.16",
@@ -26,7 +26,8 @@
     "runtimeFactsIauCloseout": "implemented",
     "providerPolicyIauPreflight": "pass",
     "providerPolicyIauCloseout": "implemented",
-    "proofIntakeIauPreflight": "pass"
+    "proofIntakeIauPreflight": "pass",
+    "proofIntakeIauCloseout": "implemented"
   },
   "implementationAdmissionUnits": [
     {
@@ -80,7 +81,7 @@
     },
     {
       "iauId": "IAU-runtime-contract-proof-intake-v1",
-      "state": "implementation-admitted",
+      "state": "implemented",
       "record": "docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-proof-intake-v1.json",
       "preflightRecord": "docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-proof-intake-v1-preflight-v1.json",
       "admittedTasks": [
@@ -92,7 +93,7 @@
       ]
     }
   ],
-  "currentImplementationAdmissionUnit": "IAU-runtime-contract-proof-intake-v1",
+  "currentImplementationAdmissionUnit": null,
   "completedImplementationScope": [
     "T007",
     "T008",
@@ -112,15 +113,14 @@
     "T022",
     "T023",
     "T024",
-    "T025"
-  ],
-  "admittedImplementationScope": [
+    "T025",
     "T026",
     "T027",
     "T028",
     "T029",
     "T030"
   ],
+  "admittedImplementationScope": [],
   "preImplementationPreflight": {
     "iauId": "IAU-runtime-contract-proof-intake-v1",
     "status": "pass",

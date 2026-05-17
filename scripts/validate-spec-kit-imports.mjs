@@ -95,15 +95,15 @@ requireEqual(featureJson.feature_directory, featureDir, "pinned Spec Kit feature
 const admission = readJson(admissionPath);
 requireEqual(admission.schema, "vi-history/requirements-admission@v1", "admission schema");
 requireEqual(admission.sliceId, sliceId, "admission sliceId");
-requireEqual(admission.state, "implementation-admitted", "admission state");
+requireEqual(admission.state, "implemented", "admission state");
 requireEqual(admission.targetProduct, "vi-history", "admission targetProduct");
 requireEqual(admission.targetFeature, sliceId, "admission targetFeature");
 requireEqual(admission.sourceBaselineTag, "v1.3.16", "admission sourceBaselineTag");
 requireEqual(admission.sourceCommit, "31add781bd04cc832d9fb55aa821a69305a91a37", "admission sourceCommit");
 requireEqual(admission.implementationSharing, "none", "admission implementationSharing");
-requireEqual(admission.currentImplementationAdmissionUnit, "IAU-runtime-contract-proof-intake-v1", "currentImplementationAdmissionUnit");
-requireArrayEqual(admission.completedImplementationScope, ["T007", "T008", "T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016", "T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025"], "completedImplementationScope");
-requireArrayEqual(admission.admittedImplementationScope, ["T026", "T027", "T028", "T029", "T030"], "admittedImplementationScope");
+requireEqual(admission.currentImplementationAdmissionUnit, null, "currentImplementationAdmissionUnit");
+requireArrayEqual(admission.completedImplementationScope, ["T007", "T008", "T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016", "T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025", "T026", "T027", "T028", "T029", "T030"], "completedImplementationScope");
+requireArrayEqual(admission.admittedImplementationScope, [], "admittedImplementationScope");
 requireEqual(admission.preImplementationPreflight?.iauId, "IAU-runtime-contract-proof-intake-v1", "admission preImplementationPreflight iauId");
 requireEqual(admission.preImplementationPreflight?.status, "pass", "admission preImplementationPreflight status");
 requireEqual(admission.preImplementationPreflight?.implementationStartAllowed, true, "admission preImplementationPreflight implementationStartAllowed");
@@ -127,7 +127,7 @@ requireEqual(providerPolicyAdmissionUnit?.preflightRecord, providerPolicyPreflig
 
 const proofIntakeAdmissionUnit = (admission.implementationAdmissionUnits ?? [])
   .find((unit) => unit?.iauId === "IAU-runtime-contract-proof-intake-v1");
-requireEqual(proofIntakeAdmissionUnit?.state, "implementation-admitted", "proof intake admission unit state");
+requireEqual(proofIntakeAdmissionUnit?.state, "implemented", "proof intake admission unit state");
 requireEqual(proofIntakeAdmissionUnit?.preflightRecord, proofIntakePreflightPath, "proof intake admission unit preflightRecord");
 
 const explicitCompareIau = readJson(explicitCompareIauPath);
@@ -220,7 +220,7 @@ requireFile(`docs/requirements/admissions/${sliceId}/IAU-runtime-contract-provid
 const proofIntakeIau = readJson(proofIntakeIauPath);
 requireEqual(proofIntakeIau.schema, "vi-history/implementation-admission-unit@v1", "proof intake IAU schema");
 requireEqual(proofIntakeIau.iauId, "IAU-runtime-contract-proof-intake-v1", "proof intake IAU id");
-requireEqual(proofIntakeIau.state, "implementation-admitted", "proof intake IAU state");
+requireEqual(proofIntakeIau.state, "implemented", "proof intake IAU state");
 requireEqual(proofIntakeIau.parentSliceId, sliceId, "proof intake IAU parentSliceId");
 requireArrayEqual(proofIntakeIau.admittedTasks, ["T026", "T027", "T028", "T029", "T030"], "proof intake IAU admittedTasks");
 requireEqual(proofIntakeIau.implementationSharing, "none", "proof intake IAU implementationSharing");
@@ -287,7 +287,7 @@ requireTextIncludes(`${featureDir}/tasks.md`, [
   "IAU-runtime-contract-runtime-facts-v1",
   "IAU-runtime-contract-provider-policy-v1",
   "IAU-runtime-contract-proof-intake-v1",
-  "preflight",
+  "runtime-contract closeout PR",
   "- [x] T012",
   "- [x] T013",
   "- [x] T014",
@@ -302,11 +302,11 @@ requireTextIncludes(`${featureDir}/tasks.md`, [
   "- [x] T023",
   "- [x] T024",
   "- [x] T025",
-  "- [ ] T026",
-  "- [ ] T027",
-  "- [ ] T028",
-  "- [ ] T029",
-  "- [ ] T030",
+  "- [x] T026",
+  "- [x] T027",
+  "- [x] T028",
+  "- [x] T029",
+  "- [x] T030",
   "T026",
   "T030"
 ]);

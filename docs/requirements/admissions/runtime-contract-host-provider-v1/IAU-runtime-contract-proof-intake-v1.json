@@ -2,7 +2,7 @@
   "schema": "vi-history/implementation-admission-unit@v1",
   "iauId": "IAU-runtime-contract-proof-intake-v1",
   "createdDate": "2026-05-17",
-  "state": "implementation-admitted",
+  "state": "implemented",
   "parentSliceId": "runtime-contract-host-provider-v1",
   "specFeature": ".specify/specs/runtime-contract-host-provider-v1",
   "issue": {

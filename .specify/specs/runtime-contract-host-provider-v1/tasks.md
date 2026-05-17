@@ -117,16 +117,16 @@ Desktop Windows-container proof remain distinct.
 **Independent Test**: Proof intake rejects Windows Docker Desktop claims without
 real Windows-container facts and does not treat Linux proof as Windows proof.
 
-**Current IAU**: `IAU-runtime-contract-proof-intake-v1` has preflight
-`status: pass`, so `T026` through `T030` may start. LabVIEWCLI command
+**Status**: `IAU-runtime-contract-proof-intake-v1` is implemented. Runtime
+contract implementation is complete through proof intake. LabVIEWCLI command
 execution, Docker command execution or container orchestration, Marketplace
-publication, and source copying remain blocked.
+publication, and source copying remain blocked until separately admitted.
 
-- [ ] T026 [P] [US4] Add tests for Linux host LabVIEW proof classification.
-- [ ] T027 [P] [US4] Add tests rejecting Linux Docker, WSL, host-provider proof, or reports without proof packets as Windows Docker Desktop proof.
-- [ ] T028 [P] [US4] Add tests for `vihs validate-fixture` proof JSON and issue-body generation.
-- [ ] T029 [US4] Implement proof packet writer and issue-body generation.
-- [ ] T030 [US4] Implement Windows Docker Desktop proof intake validation.
+- [x] T026 [P] [US4] Add tests for Linux host LabVIEW proof classification.
+- [x] T027 [P] [US4] Add tests rejecting Linux Docker, WSL, host-provider proof, or reports without proof packets as Windows Docker Desktop proof.
+- [x] T028 [P] [US4] Add tests for `vihs validate-fixture` proof JSON and issue-body generation.
+- [x] T029 [US4] Implement proof packet writer and issue-body generation.
+- [x] T030 [US4] Implement Windows Docker Desktop proof intake validation.
 
 **Checkpoint**: US4 is independently testable through proof packet fixtures.
 
@@ -136,11 +136,11 @@ publication, and source copying remain blocked.
 
 **Purpose**: Validate traceability, clean-room boundaries, and public safety.
 
-- [ ] T031 Run `npm test`.
-- [ ] T032 Run `npm run check`.
-- [ ] T033 Run `git diff --check`.
-- [ ] T034 Confirm no copied implementation source, private paths, private tooling names, credentials, or private evidence entered the repo.
-- [ ] T035 Update public issues with the final Issue #4 implementation proof summary.
+- [x] T031 Run `npm test`.
+- [x] T032 Run `npm run check`.
+- [x] T033 Run `git diff --check`.
+- [x] T034 Confirm no copied implementation source, private paths, private tooling names, credentials, or private evidence entered the repo.
+- [x] T035 Update public issues with the final Issue #4 implementation proof summary.
 
 ## Dependencies & Execution Order
 
@@ -156,9 +156,8 @@ publication, and source copying remain blocked.
 1. Merge bootstrap to `develop`.
 2. Promote `develop` to `main` after green validation.
 3. Close Issues #1, #2, and #3.
-4. Use Issue #4 for implementation tasks through named IAUs, not as one broad
-   implementation batch.
-5. Treat `IAU-runtime-contract-proof-intake-v1` as the current admitted work
-   packet for `T026` through `T030` only.
+4. Issue #4 is complete after the runtime-contract closeout PR merges and the
+   issue body is reconciled with the implementation proof summary.
+5. Start any future implementation only through a new bridge-admitted IAU.
 6. Keep Issue #5 open until a later governing decision admits or rejects
    Marketplace publication.
