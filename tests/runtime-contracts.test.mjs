@@ -396,27 +396,27 @@ test("T024 never selects Docker implicitly", () => {
   assert.equal(implicit.selectedProvider, "host-native");
   assert.equal(implicit.readiness, "ready");
 
-  const unbounded = selectProviderPolicy({ requestedProvider: "docker", expertMode: false });
-  assert.equal(unbounded.selectedProvider, "docker");
-  assert.equal(unbounded.readiness, "blocked");
-  assert.equal(unbounded.blockedReason, "docker-provider-requires-explicit-expert-selection");
-  assert.equal(unbounded.fallbackProvider, null);
-  assert.equal(unbounded.silentFallbackAllowed, false);
-  assert.equal(unbounded.failureGuidance.length > 0, true);
+  const expertModeRequired = selectProviderPolicy({ requestedProvider: "docker", expertMode: false });
+  assert.equal(expertModeRequired.selectedProvider, "docker");
+  assert.equal(expertModeRequired.readiness, "blocked");
+  assert.equal(expertModeRequired.blockedReason, "docker-provider-requires-explicit-expert-selection");
+  assert.equal(expertModeRequired.fallbackProvider, null);
+  assert.equal(expertModeRequired.silentFallbackAllowed, false);
+  assert.ok(expertModeRequired.failureGuidance.length > 0);
 });
 
 test("T025 provides stable failure guidance for blocked and unavailable provider selections", () => {
   const blocked = selectProviderPolicy({ requestedProvider: "host-native", bundleSupported: false });
   assert.equal(blocked.readiness, "blocked");
   assert.equal(blocked.blockedReason, "runtime-bundle-unsupported");
-  assert.equal(blocked.failureGuidance.length > 0, true);
+  assert.ok(blocked.failureGuidance.length > 0);
   assert.equal(blocked.fallbackProvider, null);
   assert.equal(blocked.silentFallbackAllowed, false);
 
   const unavailable = selectProviderPolicy({ requestedProvider: "host-native", runtimeAvailable: false });
   assert.equal(unavailable.readiness, "unavailable");
   assert.equal(unavailable.blockedReason, "runtime-bundle-unavailable");
-  assert.equal(unavailable.failureGuidance.length > 0, true);
+  assert.ok(unavailable.failureGuidance.length > 0);
   assert.equal(unavailable.fallbackProvider, null);
   assert.equal(unavailable.silentFallbackAllowed, false);
 });

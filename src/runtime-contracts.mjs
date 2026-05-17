@@ -389,7 +389,7 @@ export function selectProviderPolicy(input = {}) {
     readiness = "blocked";
     blockedReason = "docker-provider-requires-explicit-expert-selection";
     failureGuidance = [
-      "Docker is bounded to explicit expert selection.",
+      "Docker is bound to explicit expert selection.",
       "Keep host-native LabVIEWCLI as the installed-user default or set expert mode explicitly."
     ];
   } else if (input.bundleSupported === false) {
