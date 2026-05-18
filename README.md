@@ -27,6 +27,10 @@ implements and closes it for T009-T012. Issue #55 imports
 `runtime-settings-cli-validation-proof-v1` and admits
 `IAU-runtime-settings-cli-validation-proof-artifact-v1`; Issue #57 implements
 and closes it for T009-T012 only.
+Issue #60 imports `runtime-settings-cli-interactive-selection-v1` and admits
+`IAU-runtime-settings-cli-interactive-selection-contract-v1` for T009-T013
+only. Implementation must wait for a separate handoff issue after the
+admission PR merges.
 
 ## Authority
 
@@ -88,6 +92,10 @@ and closes it for T009-T012 only.
   Issue #55 is an admission issue and must not be reused for implementation.
 - Issue #57 implements and closes
   `IAU-runtime-settings-cli-validation-proof-artifact-v1` for T009-T012 only.
+- Issue #60 imports `runtime-settings-cli-interactive-selection-v1` and admits
+  `IAU-runtime-settings-cli-interactive-selection-contract-v1` for T009-T013
+  only. Issue #60 is an admission issue and must not be reused for
+  implementation.
 
 The current admission ledgers are:
 
@@ -100,8 +108,12 @@ The current admission ledgers are:
 - `docs/requirements/admissions/runtime-settings-cli-settings-write-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-readback-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-proof-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-interactive-selection-v1.json`
 
-Current Implementation Admission Unit: none.
+Current Implementation Admission Unit:
+`IAU-runtime-settings-cli-interactive-selection-contract-v1`.
+Implementation must wait until Issue #60's admission PR merges and a separate
+implementation handoff issue is created.
 
 The completed observation model scope is T009-T013. The command activation
 manifest contract implements only T009-T012. The command handler entrypoint shell
@@ -134,6 +146,13 @@ structured proof JSON, secret-like environment redaction, deterministic MIT
 issue-body content, and the minimum validation proof artifact contract.
 No-argument interactive selection, compare execution, execution engines,
 live-session proof, packaging, and Marketplace work remain blocked.
+The runtime settings CLI interactive selection IAU admits only T009-T013 in
+`.specify/specs/runtime-settings-cli-interactive-selection-v1/tasks.md`: tests
+for default settings seeding, confirmation validation handoff, guided host
+selection, bounded Docker 2026 x64 selection, and the minimum pure selection
+state contract. Terminal prompt loops, compare execution, LabVIEWCLI
+execution, Docker execution, proof-out expansion, live-session proof,
+packaging, and Marketplace work remain blocked.
 
 The Marketplace posture is recorded in
 `docs/decisions/ADR-001-marketplace-publication-disabled.md` and summarized in

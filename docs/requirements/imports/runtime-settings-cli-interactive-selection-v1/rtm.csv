@@ -1,0 +1,3 @@
+Requirement ID,Public Verification,Status
+VHS-REQ-545,TEST-UNIT-RSSELECT-001 verifies default settings seeding and current bundle reporting; TEST-UNIT-RSSELECT-002 verifies guided host selection accepts supported local host choices and fails closed for unsupported or missing bitness paths; TEST-UNIT-RSSELECT-003 verifies Docker selection remains bounded to 2026 x64,Imported
+VHS-REQ-546,TEST-UNIT-RSSELECT-004 verifies Enter-through confirmation preserves the current governed selection and requests validation through the existing validation readback contract without execution or proof-out behavior,Imported

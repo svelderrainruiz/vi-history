@@ -54,6 +54,12 @@ const runtimeSettingsProofImportDir = `docs/requirements/imports/${runtimeSettin
 const runtimeSettingsProofAdmissionPath = `docs/requirements/admissions/${runtimeSettingsProofSliceId}.json`;
 const runtimeSettingsProofIauPath = `docs/requirements/admissions/${runtimeSettingsProofSliceId}/IAU-runtime-settings-cli-validation-proof-artifact-v1.json`;
 const runtimeSettingsProofPreflightPath = `docs/requirements/admissions/${runtimeSettingsProofSliceId}/IAU-runtime-settings-cli-validation-proof-artifact-v1-preflight-v1.json`;
+const runtimeSettingsInteractiveSliceId = "runtime-settings-cli-interactive-selection-v1";
+const runtimeSettingsInteractiveFeatureDir = `.specify/specs/${runtimeSettingsInteractiveSliceId}`;
+const runtimeSettingsInteractiveImportDir = `docs/requirements/imports/${runtimeSettingsInteractiveSliceId}`;
+const runtimeSettingsInteractiveAdmissionPath = `docs/requirements/admissions/${runtimeSettingsInteractiveSliceId}.json`;
+const runtimeSettingsInteractiveIauPath = `docs/requirements/admissions/${runtimeSettingsInteractiveSliceId}/IAU-runtime-settings-cli-interactive-selection-contract-v1.json`;
+const runtimeSettingsInteractivePreflightPath = `docs/requirements/admissions/${runtimeSettingsInteractiveSliceId}/IAU-runtime-settings-cli-interactive-selection-contract-v1-preflight-v1.json`;
 const marketplaceAdrPath = "docs/decisions/ADR-001-marketplace-publication-disabled.md";
 const explicitCompareIauPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1.json`;
 const explicitComparePreflightPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1-preflight-v1.json`;
@@ -112,6 +118,10 @@ const runtimeSettingsValidateExpectedIds = [
   "VHS-REQ-546"
 ];
 const runtimeSettingsProofExpectedIds = [
+  "VHS-REQ-546"
+];
+const runtimeSettingsInteractiveExpectedIds = [
+  "VHS-REQ-545",
   "VHS-REQ-546"
 ];
 
@@ -188,11 +198,12 @@ requireTextIncludes(".specify/memory/constitution.md", [
   "runtime-settings-cli-settings-write-v1",
   "runtime-settings-cli-validation-readback-v1",
   "runtime-settings-cli-validation-proof-v1",
-  "**Version**: 0.1.7"
+  "runtime-settings-cli-interactive-selection-v1",
+  "**Version**: 0.1.8"
 ]);
 
 const featureJson = readJson(".specify/feature.json");
-requireEqual(featureJson.feature_directory, runtimeSettingsProofFeatureDir, "pinned Spec Kit feature directory");
+requireEqual(featureJson.feature_directory, runtimeSettingsInteractiveFeatureDir, "pinned Spec Kit feature directory");
 
 const admission = readJson(admissionPath);
 requireEqual(admission.schema, "vi-history/requirements-admission@v1", "admission schema");
@@ -569,7 +580,7 @@ requireTextIncludes("README.md", [
 requireTextIncludes("AGENTS.md", [
   "installed-user-observation-public-surface-v1",
   "IAU-installed-user-observation-model-v1",
-  "009-runtime-settings-cli-validation-proof-v1"
+  "010-runtime-settings-cli-interactive-selection-v1"
 ]);
 
 const commandAdmission = readJson(commandAdmissionPath);
@@ -1056,7 +1067,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-bootstrap-v1",
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-prepare-command-shell-v1",
-  "009-runtime-settings-cli-validation-proof-v1"
+  "010-runtime-settings-cli-interactive-selection-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-bootstrap-v1",
@@ -1192,7 +1203,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-settings-write-v1",
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-settings-write-contract-v1",
-  "009-runtime-settings-cli-validation-proof-v1"
+  "010-runtime-settings-cli-interactive-selection-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-settings-write-v1",
@@ -1327,7 +1338,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-validation-readback-v1",
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-validation-readback-contract-v1",
-  "009-runtime-settings-cli-validation-proof-v1"
+  "010-runtime-settings-cli-interactive-selection-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-readback-v1",
@@ -1469,9 +1480,9 @@ requireTextIncludes("AGENTS.md", [
   "Issue #55",
   "Issue #57",
   "Current Implementation Admission Unit",
-  "none",
   "IAU-runtime-settings-cli-validation-proof-artifact-v1",
-  "009-runtime-settings-cli-validation-proof-v1"
+  "IAU-runtime-settings-cli-interactive-selection-contract-v1",
+  "010-runtime-settings-cli-interactive-selection-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-proof-v1",
@@ -1479,6 +1490,143 @@ requireTextIncludes("docs/development/copilot-workflow.md", [
   "Issue #57",
   "IAU-runtime-settings-cli-validation-proof-artifact-v1",
   "validation proof artifact behavior beyond the admitted pure proof JSON"
+]);
+
+const runtimeSettingsInteractiveAdmission = readJson(runtimeSettingsInteractiveAdmissionPath);
+requireEqual(runtimeSettingsInteractiveAdmission.schema, "vi-history/requirements-admission@v1", "runtime settings interactive admission schema");
+requireEqual(runtimeSettingsInteractiveAdmission.sliceId, runtimeSettingsInteractiveSliceId, "runtime settings interactive admission sliceId");
+requireEqual(runtimeSettingsInteractiveAdmission.state, "implementation-admitted", "runtime settings interactive admission state");
+requireEqual(runtimeSettingsInteractiveAdmission.targetProduct, "vi-history", "runtime settings interactive admission targetProduct");
+requireEqual(runtimeSettingsInteractiveAdmission.targetFeature, runtimeSettingsInteractiveSliceId, "runtime settings interactive admission targetFeature");
+requireEqual(runtimeSettingsInteractiveAdmission.sourceBaselineTag, "v1.3.16", "runtime settings interactive admission sourceBaselineTag");
+requireEqual(runtimeSettingsInteractiveAdmission.sourceCommit, "edb8bfaa53237a8f3b63052573d6bfe728376424", "runtime settings interactive admission sourceCommit");
+requireEqual(runtimeSettingsInteractiveAdmission.governedAdmissionCommit, "3716d35a7ba57031464a81902f37862128f53681", "runtime settings interactive admission governedAdmissionCommit");
+requireEqual(runtimeSettingsInteractiveAdmission.implementationSharing, "none", "runtime settings interactive admission implementationSharing");
+requireMarketplacePosture(runtimeSettingsInteractiveAdmission, "runtime settings interactive admission");
+requireEqual(runtimeSettingsInteractiveAdmission.currentImplementationAdmissionUnit, "IAU-runtime-settings-cli-interactive-selection-contract-v1", "runtime settings interactive currentImplementationAdmissionUnit");
+requireArrayEqual(runtimeSettingsInteractiveAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "runtime settings interactive completedSpecScope");
+requireArrayEqual(runtimeSettingsInteractiveAdmission.completedImplementationScope, [], "runtime settings interactive completedImplementationScope");
+requireArrayEqual(runtimeSettingsInteractiveAdmission.admittedImplementationScope, ["T009", "T010", "T011", "T012", "T013"], "runtime settings interactive admittedImplementationScope");
+requireArrayEqual(runtimeSettingsInteractiveAdmission.blockedImplementationScope, ["T014", "T015", "T016", "T017", "T018", "T019"], "runtime settings interactive blockedImplementationScope");
+requireEqual(runtimeSettingsInteractiveAdmission.preImplementationPreflight?.iauId, "IAU-runtime-settings-cli-interactive-selection-contract-v1", "runtime settings interactive preImplementationPreflight iauId");
+requireEqual(runtimeSettingsInteractiveAdmission.preImplementationPreflight?.status, "pass", "runtime settings interactive preImplementationPreflight status");
+requireEqual(runtimeSettingsInteractiveAdmission.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings interactive preImplementationPreflight implementationStartAllowed");
+requireEqual(runtimeSettingsInteractiveAdmission.preImplementationPreflight?.record, runtimeSettingsInteractivePreflightPath, "runtime settings interactive preImplementationPreflight record");
+requireEqual(runtimeSettingsInteractiveAdmission.implementationHandoffIssue, null, "runtime settings interactive implementationHandoffIssue");
+requireFile(`docs/requirements/admissions/${runtimeSettingsInteractiveSliceId}.md`);
+
+const runtimeSettingsInteractiveAdmissionUnit = (runtimeSettingsInteractiveAdmission.implementationAdmissionUnits ?? [])
+  .find((unit) => unit?.iauId === "IAU-runtime-settings-cli-interactive-selection-contract-v1");
+requireEqual(runtimeSettingsInteractiveAdmissionUnit?.state, "implementation-admitted", "runtime settings interactive admission unit state");
+requireEqual(runtimeSettingsInteractiveAdmissionUnit?.preflightRecord, runtimeSettingsInteractivePreflightPath, "runtime settings interactive admission unit preflightRecord");
+
+const runtimeSettingsInteractiveIau = readJson(runtimeSettingsInteractiveIauPath);
+requireEqual(runtimeSettingsInteractiveIau.schema, "vi-history/implementation-admission-unit@v1", "runtime settings interactive IAU schema");
+requireEqual(runtimeSettingsInteractiveIau.iauId, "IAU-runtime-settings-cli-interactive-selection-contract-v1", "runtime settings interactive IAU id");
+requireEqual(runtimeSettingsInteractiveIau.state, "implementation-admitted", "runtime settings interactive IAU state");
+requireEqual(runtimeSettingsInteractiveIau.parentSliceId, runtimeSettingsInteractiveSliceId, "runtime settings interactive IAU parentSliceId");
+requireArrayEqual(runtimeSettingsInteractiveIau.admittedTasks, ["T009", "T010", "T011", "T012", "T013"], "runtime settings interactive IAU admittedTasks");
+requireArrayEqual(runtimeSettingsInteractiveIau.blockedTasks, ["T014", "T015", "T016", "T017", "T018", "T019"], "runtime settings interactive IAU blockedTasks");
+requireEqual(runtimeSettingsInteractiveIau.implementationSharing, "none", "runtime settings interactive IAU implementationSharing");
+requireMarketplacePosture(runtimeSettingsInteractiveIau, "runtime settings interactive IAU");
+requireEqual(runtimeSettingsInteractiveIau.preImplementationPreflight?.status, "pass", "runtime settings interactive IAU preImplementationPreflight status");
+requireEqual(runtimeSettingsInteractiveIau.preImplementationPreflight?.record, "IAU-runtime-settings-cli-interactive-selection-contract-v1-preflight-v1.json", "runtime settings interactive IAU preImplementationPreflight record");
+requireEqual(runtimeSettingsInteractiveIau.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings interactive IAU preImplementationPreflight implementationStartAllowed");
+requireEqual(runtimeSettingsInteractiveIau.implementationHandoffIssue, null, "runtime settings interactive IAU implementationHandoffIssue");
+requireFile(`docs/requirements/admissions/${runtimeSettingsInteractiveSliceId}/IAU-runtime-settings-cli-interactive-selection-contract-v1.md`);
+
+const runtimeSettingsInteractivePreflight = readJson(runtimeSettingsInteractivePreflightPath);
+requireEqual(runtimeSettingsInteractivePreflight.schema, "vi-history/implementation-admission-unit-preflight@v1", "runtime settings interactive preflight schema");
+requireEqual(runtimeSettingsInteractivePreflight.iauId, "IAU-runtime-settings-cli-interactive-selection-contract-v1", "runtime settings interactive preflight iauId");
+requireEqual(runtimeSettingsInteractivePreflight.status, "pass", "runtime settings interactive preflight status");
+requireEqual(runtimeSettingsInteractivePreflight.implementationStartAllowed, true, "runtime settings interactive preflight implementationStartAllowed");
+requireEqual(runtimeSettingsInteractivePreflight.parentSliceId, runtimeSettingsInteractiveSliceId, "runtime settings interactive preflight parentSliceId");
+requireEqual(runtimeSettingsInteractivePreflight.implementationSharing, "none", "runtime settings interactive preflight implementationSharing");
+requireMarketplacePosture(runtimeSettingsInteractivePreflight, "runtime settings interactive preflight");
+requireArrayEqual(runtimeSettingsInteractivePreflight.implementationStartScope, ["T009", "T010", "T011", "T012", "T013"], "runtime settings interactive preflight implementationStartScope");
+if (!Array.isArray(runtimeSettingsInteractivePreflight.checkResults) || runtimeSettingsInteractivePreflight.checkResults.length !== runtimeSettingsInteractivePreflight.requiredChecks.length) {
+  failures.push("runtime settings interactive preflight checkResults: must match requiredChecks length");
+} else {
+  for (const result of runtimeSettingsInteractivePreflight.checkResults) {
+    requireEqual(result.status, "pass", `runtime settings interactive preflight check result ${result.check}`);
+  }
+}
+requireFile(`docs/requirements/admissions/${runtimeSettingsInteractiveSliceId}/IAU-runtime-settings-cli-interactive-selection-contract-v1-preflight-v1.md`);
+
+const runtimeSettingsInteractiveManifest = readJson(`${runtimeSettingsInteractiveImportDir}/manifest.json`);
+requireEqual(runtimeSettingsInteractiveManifest.schema, "vi-history/requirements-import@v1", "runtime settings interactive manifest schema");
+requireEqual(runtimeSettingsInteractiveManifest.sliceId, runtimeSettingsInteractiveSliceId, "runtime settings interactive sliceId");
+requireEqual(runtimeSettingsInteractiveManifest.sourceBaselineTag, "v1.3.16", "runtime settings interactive sourceBaselineTag");
+requireEqual(runtimeSettingsInteractiveManifest.sourceCommit, "edb8bfaa53237a8f3b63052573d6bfe728376424", "runtime settings interactive sourceCommit");
+requireEqual(runtimeSettingsInteractiveManifest.governedAdmissionCommit, "3716d35a7ba57031464a81902f37862128f53681", "runtime settings interactive governedAdmissionCommit");
+requireEqual(runtimeSettingsInteractiveManifest.targetProduct, "vi-history", "runtime settings interactive targetProduct");
+requireEqual(runtimeSettingsInteractiveManifest.targetFeature, runtimeSettingsInteractiveSliceId, "runtime settings interactive targetFeature");
+requireEqual(runtimeSettingsInteractiveManifest.redactionStatus, "pass", "runtime settings interactive redactionStatus");
+requireEqual(runtimeSettingsInteractiveManifest.implementationSharing, "none", "runtime settings interactive implementationSharing");
+requireEqual(runtimeSettingsInteractiveManifest.marketplacePublication, "disabled-until-later-adr", "runtime settings interactive marketplacePublication");
+requireArrayEqual(runtimeSettingsInteractiveManifest.importedRequirementIds, runtimeSettingsInteractiveExpectedIds, "runtime settings interactive importedRequirementIds");
+requireArrayEqual(runtimeSettingsInteractiveManifest.supportingTestIds, ["TEST-UNIT-353", "TEST-UNIT-354"], "runtime settings interactive supportingTestIds");
+requireArrayEqual(runtimeSettingsInteractiveManifest.files, ["syrs.md", "srs.md", "rtm.csv", "test-plan.md"], "runtime settings interactive manifest files");
+
+for (const file of runtimeSettingsInteractiveManifest.files ?? []) {
+  requireFile(`${runtimeSettingsInteractiveImportDir}/${file}`);
+}
+
+for (const file of ["spec.md", "plan.md", "tasks.md"]) {
+  requireFile(`${runtimeSettingsInteractiveFeatureDir}/${file}`);
+}
+
+requireTextIncludes(`${runtimeSettingsInteractiveFeatureDir}/spec.md`, [
+  "Runtime Settings CLI Interactive Selection",
+  "VHS-REQ-545",
+  "VHS-REQ-546",
+  "TEST-UNIT-353",
+  "TEST-UNIT-354",
+  "IAU-runtime-settings-cli-interactive-selection-contract-v1",
+  "clean-room"
+]);
+requireTextIncludes(`${runtimeSettingsInteractiveFeatureDir}/plan.md`, [
+  "IAU-runtime-settings-cli-interactive-selection-contract-v1",
+  "Issue #60",
+  "Marketplace publication remains disabled"
+]);
+requireTextIncludes(`${runtimeSettingsInteractiveFeatureDir}/tasks.md`, [
+  "Issue #60",
+  "- [x] T001",
+  "- [x] T008",
+  "- [ ] T009",
+  "- [ ] T013",
+  "IAU-runtime-settings-cli-interactive-selection-contract-v1",
+  "[BLOCKED]",
+  "T019"
+]);
+requireTextIncludes(`${runtimeSettingsInteractiveImportDir}/rtm.csv`, runtimeSettingsInteractiveExpectedIds);
+requireTextIncludes(`${runtimeSettingsInteractiveImportDir}/srs.md`, [
+  "VHS-REQ-545",
+  "VHS-REQ-546",
+  "TEST-UNIT-353",
+  "TEST-UNIT-354",
+  "host/windows/2026/x86",
+  "validation readback contract"
+]);
+requireTextIncludes("README.md", [
+  "runtime-settings-cli-interactive-selection-v1",
+  "docs/requirements/admissions/runtime-settings-cli-interactive-selection-v1.json",
+  "Issue #60",
+  "IAU-runtime-settings-cli-interactive-selection-contract-v1"
+]);
+requireTextIncludes("AGENTS.md", [
+  "runtime-settings-cli-interactive-selection-v1",
+  "Issue #60",
+  "Current Implementation Admission Unit",
+  "IAU-runtime-settings-cli-interactive-selection-contract-v1",
+  "010-runtime-settings-cli-interactive-selection-v1"
+]);
+requireTextIncludes("docs/development/copilot-workflow.md", [
+  "runtime-settings-cli-interactive-selection-v1",
+  "Issue #60",
+  "IAU-runtime-settings-cli-interactive-selection-contract-v1",
+  "no-argument interactive selection beyond the admitted pure selection-state"
 ]);
 
 if (failures.length > 0) {
