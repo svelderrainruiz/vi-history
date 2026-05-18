@@ -17,7 +17,10 @@ of `command-handler-entrypoint-shell-v1`. Issue #41 implements and closes
 `installed-user-documentation-command-v1`. Issue #43 imports
 `runtime-settings-cli-bootstrap-v1` and admits
 `IAU-runtime-settings-cli-prepare-command-shell-v1`. Issue #45 implements and
-closes it for T009-T011. No current IAU is active.
+closes it for T009-T011. Issue #47 imports
+`runtime-settings-cli-settings-write-v1` and admits
+`IAU-runtime-settings-cli-settings-write-contract-v1` for T009-T012 after the
+admission PR merges and a separate implementation handoff issue exists.
 
 ## Authority
 
@@ -62,6 +65,9 @@ closes it for T009-T011. No current IAU is active.
   `IAU-runtime-settings-cli-prepare-command-shell-v1` for T009-T011 only.
 - Issue #45 implements and closes
   `IAU-runtime-settings-cli-prepare-command-shell-v1` for T009-T011 only.
+- Issue #47 imports `runtime-settings-cli-settings-write-v1` and admits
+  `IAU-runtime-settings-cli-settings-write-contract-v1` for T009-T012 only.
+  Issue #47 is an admission issue and must not be reused for implementation.
 
 The current admission ledgers are:
 
@@ -71,8 +77,10 @@ The current admission ledgers are:
 - `docs/requirements/admissions/command-handler-entrypoint-shell-v1.json`
 - `docs/requirements/admissions/installed-user-documentation-command-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-bootstrap-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-settings-write-v1.json`
 
-Current Implementation Admission Unit: none.
+Current Implementation Admission Unit:
+`IAU-runtime-settings-cli-settings-write-contract-v1`.
 
 The completed observation model scope is T009-T013. The command activation
 manifest contract implements only T009-T012. The command handler entrypoint shell
@@ -83,9 +91,14 @@ user documentation command implements only T009-T011 in
 settings CLI bootstrap implements only T009-T011 in
 `.specify/specs/runtime-settings-cli-bootstrap-v1/tasks.md`: prepare-command
 handler tests, launcher materialization/recovery fact tests, and the minimum
-prepare-command shell. Provider/version/bitness settings mutation, JSONC
-settings rewrite, `vihs --validate`, runtime validation, compare execution,
-execution engines, packaging, and Marketplace work remain blocked.
+prepare-command shell. The runtime settings CLI settings-write IAU admits only
+T009-T012 in
+`.specify/specs/runtime-settings-cli-settings-write-v1/tasks.md`: tests for
+provider/version/bitness settings mutation, preservation of unrelated settings,
+fail-closed unsupported target handling, and the minimum settings-write
+contract. `vihs --validate`, runtime validation, no-argument interactive
+selection, compare execution, execution engines, live-session proof, packaging,
+and Marketplace work remain blocked.
 
 The Marketplace posture is recorded in
 `docs/decisions/ADR-001-marketplace-publication-disabled.md` and summarized in

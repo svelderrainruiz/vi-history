@@ -50,11 +50,19 @@ only. Issue #45 implements and closes it: prepare-command handler tests,
 launcher materialization/recovery fact tests, and the minimum prepare-command
 shell. Issue #43 and Issue #45 must not be reused for new implementation.
 
-Provider/version/bitness settings mutation, JSONC settings rewrite,
-`vihs --validate`, runtime validation, compare execution, LabVIEWCLI execution,
-Docker execution, packaging, and Marketplace publication remain blocked.
+`runtime-settings-cli-settings-write-v1` admits
+`IAU-runtime-settings-cli-settings-write-contract-v1` for Issue #47 and
+T009-T012 only. Issue #47 is an admission issue; implementation must use a
+separate handoff issue after the admission PR merges. The admitted behavior is
+limited to the public settings-write contract for provider, LabVIEW version,
+and LabVIEW bitness settings.
 
-Current Implementation Admission Unit: none.
+`vihs --validate`, runtime validation, no-argument interactive selection,
+compare execution, LabVIEWCLI execution, Docker execution, live-session proof,
+packaging, and Marketplace publication remain blocked.
+
+Current Implementation Admission Unit:
+`IAU-runtime-settings-cli-settings-write-contract-v1`.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that
@@ -64,7 +72,7 @@ When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:
 
 ```bash
-SPECIFY_FEATURE=006-runtime-settings-cli-bootstrap-v1 \
-SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-bootstrap-v1 \
+SPECIFY_FEATURE=007-runtime-settings-cli-settings-write-v1 \
+SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-settings-write-v1 \
 .specify/scripts/bash/check-prerequisites.sh --json --paths-only
 ```

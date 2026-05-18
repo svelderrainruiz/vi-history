@@ -66,6 +66,17 @@ Read these before changing code:
 - `docs/requirements/admissions/runtime-settings-cli-bootstrap-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-bootstrap-v1/IAU-runtime-settings-cli-prepare-command-shell-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-bootstrap-v1/IAU-runtime-settings-cli-prepare-command-shell-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-settings-write-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-settings-write-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-settings-write-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-settings-write-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-settings-write-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-settings-write-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-settings-write-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-settings-write-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-settings-write-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-settings-write-v1/IAU-runtime-settings-cli-settings-write-contract-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-settings-write-v1/IAU-runtime-settings-cli-settings-write-contract-v1-preflight-v1.json`
 
 ## Current Status
 
@@ -145,6 +156,11 @@ T009-T011 only: prepare-command handler tests, launcher materialization and
 recovery fact tests, and the minimum prepare-command shell. No new Copilot
 implementation should start from Issue #45.
 
+Issue #47 admits `IAU-runtime-settings-cli-settings-write-contract-v1` for
+`runtime-settings-cli-settings-write-v1` and T009-T012 only. Issue #47 is an
+admission issue. Copilot implementation must wait for the separate handoff issue
+created after the admission PR merges.
+
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.
 
@@ -156,9 +172,12 @@ Do not implement these without a separate bridge admission:
 - Docker command execution or container orchestration
 - documentation navigation or rendering beyond the admitted minimum command shell
 - runtime settings CLI materialization beyond the admitted prepare-command shell
-- provider/version/bitness settings mutation or JSONC settings rewrite
+- runtime settings mutation beyond the admitted provider/version/bitness
+  settings-write contract
 - `vihs --validate` or runtime validation output
 - compare execution
+- no-argument interactive selection
+- live already-running VS Code session uptake proof
 - observation report rendering for T014-T016
 - Marketplace publication or packaging
 - source copying from another VI History product line
