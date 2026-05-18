@@ -1,0 +1,81 @@
+{
+  "schema": "vi-history/requirements-admission@v1",
+  "sliceId": "command-handler-entrypoint-shell-v1",
+  "createdDate": "2026-05-18",
+  "state": "implementation-admitted",
+  "targetProduct": "vi-history",
+  "targetFeature": "command-handler-entrypoint-shell-v1",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "01ff907ad878ca335e402b37cdf0929d09c17caf",
+  "governedAdmissionCommit": "47f5b67ae35d5bb8b18c2bd2db12e0e7f835313d",
+  "publicImportPath": "docs/requirements/imports/command-handler-entrypoint-shell-v1/",
+  "specKitPath": ".specify/specs/command-handler-entrypoint-shell-v1/",
+  "issue": {
+    "number": 36,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/36"
+  },
+  "bridgeChecks": {
+    "specKitCliVersion": "0.8.12.dev0",
+    "publicImportPacketPresent": "pass",
+    "specKitArtifactsPresent": "pass",
+    "redactionScan": "pass",
+    "artifactConsistency": "pass",
+    "analyzeCriticalFindings": "none-recorded-for-import-spec-baseline",
+    "implementationPreflight": "pass"
+  },
+  "implementationAdmissionUnits": [
+    {
+      "iauId": "IAU-command-handler-entrypoint-shell-v1",
+      "state": "implementation-admitted",
+      "record": "docs/requirements/admissions/command-handler-entrypoint-shell-v1/IAU-command-handler-entrypoint-shell-v1.json",
+      "preflightRecord": "docs/requirements/admissions/command-handler-entrypoint-shell-v1/IAU-command-handler-entrypoint-shell-v1-preflight-v1.json",
+      "admittedTasks": [
+        "T009",
+        "T010",
+        "T011"
+      ]
+    }
+  ],
+  "currentImplementationAdmissionUnit": "IAU-command-handler-entrypoint-shell-v1",
+  "completedSpecScope": [
+    "T001",
+    "T002",
+    "T003",
+    "T004",
+    "T005",
+    "T006",
+    "T007",
+    "T008"
+  ],
+  "completedImplementationScope": [],
+  "admittedImplementationScope": [
+    "T009",
+    "T010",
+    "T011"
+  ],
+  "blockedImplementationScope": [
+    "T012",
+    "T013",
+    "T014",
+    "T015"
+  ],
+  "preImplementationPreflight": {
+    "iauId": "IAU-command-handler-entrypoint-shell-v1",
+    "status": "pass",
+    "record": "docs/requirements/admissions/command-handler-entrypoint-shell-v1/IAU-command-handler-entrypoint-shell-v1-preflight-v1.json",
+    "implementationStartAllowed": true
+  },
+  "requirementMaturityBasis": "governed bridge-readiness packet supports public import, Spec Kit planning, and narrow entrypoint-shell admission, not source reuse",
+  "implementationSharing": "none",
+  "marketplacePublication": "disabled",
+  "marketplacePublicationAdr": "docs/decisions/ADR-001-marketplace-publication-disabled.md",
+  "blockedScope": [
+    "documentation panel rendering",
+    "runtime settings CLI materialization",
+    "compare execution",
+    "Docker execution or orchestration",
+    "VSIX packaging",
+    "Marketplace publication",
+    "source copying from another VI History product line"
+  ]
+}

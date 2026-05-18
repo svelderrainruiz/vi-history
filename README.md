@@ -11,6 +11,9 @@ imports `installed-user-observation-public-surface-v1`, with
 `IAU-installed-user-observation-model-v1` implemented for T009-T013 only, and
 `command-activation-surface-v1` with
 `IAU-command-activation-manifest-contract-v1` implemented for T009-T012 only.
+The next public bridge-admitted unit is
+`IAU-command-handler-entrypoint-shell-v1`, scoped to Issue #36 and T009-T011
+of `command-handler-entrypoint-shell-v1` only.
 
 ## Authority
 
@@ -44,19 +47,25 @@ imports `installed-user-observation-public-surface-v1`, with
   requirements/spec baseline.
 - Issue #32 implements `IAU-command-activation-manifest-contract-v1` for
   T009-T012.
+- Issue #36 admits `IAU-command-handler-entrypoint-shell-v1` for command
+  entrypoint shell implementation only.
 
 The current admission ledgers are:
 
 - `docs/requirements/admissions/runtime-contract-host-provider-v1.json`
 - `docs/requirements/admissions/installed-user-observation-public-surface-v1.json`
 - `docs/requirements/admissions/command-activation-surface-v1.json`
+- `docs/requirements/admissions/command-handler-entrypoint-shell-v1.json`
 
-Current Implementation Admission Unit: none.
+Current Implementation Admission Unit:
+`IAU-command-handler-entrypoint-shell-v1`.
 
 The completed observation model scope is T009-T013. The command activation
-manifest contract implements only T009-T012. Future code work outside those tasks
-must start from a new public bridge admission record before Copilot or local
-implementation begins.
+manifest contract implements only T009-T012. The current command handler
+entrypoint shell handoff admits only T009-T011 in
+`.specify/specs/command-handler-entrypoint-shell-v1/tasks.md`. Future code work
+outside those tasks must start from a new public bridge admission record before
+Copilot or local implementation begins.
 
 The Marketplace posture is recorded in
 `docs/decisions/ADR-001-marketplace-publication-disabled.md` and summarized in

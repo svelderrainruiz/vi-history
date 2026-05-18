@@ -1,7 +1,7 @@
 <!--
 Sync Impact Report
-Version change: template -> 0.1.0
-Modified principles: imported slice registry adds command activation surface
+Version change: 0.1.1 -> 0.1.2
+Modified principles: imported slice registry adds command handler entrypoint shell
 Added sections: Authority Boundaries, Development Workflow, Governance
 Removed sections: unresolved template placeholders
 Templates requiring updates: pending after first implementation planning pass
@@ -63,6 +63,9 @@ The imported slices are:
 - `command-activation-surface-v1`, with its import packet under
   `docs/requirements/imports/command-activation-surface-v1/` and Spec Kit
   feature under `.specify/specs/command-activation-surface-v1/`.
+- `command-handler-entrypoint-shell-v1`, with its import packet under
+  `docs/requirements/imports/command-handler-entrypoint-shell-v1/` and Spec Kit
+  feature under `.specify/specs/command-handler-entrypoint-shell-v1/`.
 
 The active pinned Spec Kit feature is recorded in `.specify/feature.json`.
 
@@ -79,4 +82,4 @@ This constitution governs repository-local work. Amendments require a versioned
 change, a short rationale, and validation that affected Spec Kit templates and
 repository guidance remain consistent.
 
-**Version**: 0.1.1 | **Ratified**: 2026-05-17 | **Last Amended**: 2026-05-18
+**Version**: 0.1.2 | **Ratified**: 2026-05-17 | **Last Amended**: 2026-05-18

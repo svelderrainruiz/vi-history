@@ -32,11 +32,15 @@ activation-event contract tests, contributed command ID/title contract tests,
 package identity and Marketplace-disabled contract tests, and minimal manifest
 metadata.
 
-Command handlers, documentation panel rendering, runtime settings CLI
-materialization, compare execution, packaging, and Marketplace publication
-remain blocked.
+`command-handler-entrypoint-shell-v1` currently admits
+`IAU-command-handler-entrypoint-shell-v1` for Issue #36 and T009-T011 only:
+entrypoint shell tests and the minimum public MIT entrypoint shell.
 
-Current Implementation Admission Unit: none.
+Documentation panel rendering, runtime settings CLI materialization, compare
+execution, packaging, and Marketplace publication remain blocked.
+
+Current Implementation Admission Unit:
+`IAU-command-handler-entrypoint-shell-v1`.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that
@@ -46,7 +50,7 @@ When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:
 
 ```bash
-SPECIFY_FEATURE=003-command-activation-surface-v1 \
-SPECIFY_FEATURE_DIRECTORY=.specify/specs/command-activation-surface-v1 \
+SPECIFY_FEATURE=004-command-handler-entrypoint-shell-v1 \
+SPECIFY_FEATURE_DIRECTORY=.specify/specs/command-handler-entrypoint-shell-v1 \
 .specify/scripts/bash/check-prerequisites.sh --json --paths-only
 ```

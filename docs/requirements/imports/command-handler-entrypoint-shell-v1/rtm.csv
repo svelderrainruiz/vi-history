@@ -1,0 +1,4 @@
+id,requirement,source,priority,verification,verification_paths,status
+VHS-REQ-082,"Register the primary command under the authoritative command identifier labviewViHistory.open","authoritative research",High,TEST-UNIT-024,"future entrypoint shell tests; package.json; src/extension entrypoint shell",Imported
+VHS-REQ-083,"Avoid startup activation and manifest-level Git activation","author direction",High,TEST-UNIT-025; TEST-UNIT-451,"future entrypoint shell tests; package.json",Imported
+VHS-REQ-594,"Retain explicit command activation for VI History, Open Documentation, and Prepare Local Runtime Settings CLI","author direction",High,TEST-UNIT-025,"tests/command-activation-manifest-contract.test.mjs; package.json",Imported

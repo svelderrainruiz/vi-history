@@ -18,6 +18,12 @@ const commandImportDir = `docs/requirements/imports/${commandSliceId}`;
 const commandAdmissionPath = `docs/requirements/admissions/${commandSliceId}.json`;
 const commandManifestIauPath = `docs/requirements/admissions/${commandSliceId}/IAU-command-activation-manifest-contract-v1.json`;
 const commandManifestPreflightPath = `docs/requirements/admissions/${commandSliceId}/IAU-command-activation-manifest-contract-v1-preflight-v1.json`;
+const handlerSliceId = "command-handler-entrypoint-shell-v1";
+const handlerFeatureDir = `.specify/specs/${handlerSliceId}`;
+const handlerImportDir = `docs/requirements/imports/${handlerSliceId}`;
+const handlerAdmissionPath = `docs/requirements/admissions/${handlerSliceId}.json`;
+const handlerIauPath = `docs/requirements/admissions/${handlerSliceId}/IAU-command-handler-entrypoint-shell-v1.json`;
+const handlerPreflightPath = `docs/requirements/admissions/${handlerSliceId}/IAU-command-handler-entrypoint-shell-v1-preflight-v1.json`;
 const marketplaceAdrPath = "docs/decisions/ADR-001-marketplace-publication-disabled.md";
 const explicitCompareIauPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1.json`;
 const explicitComparePreflightPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1-preflight-v1.json`;
@@ -49,6 +55,11 @@ const observationExpectedIds = [
   "VHS-REQ-595"
 ];
 const commandExpectedIds = [
+  "VHS-REQ-594"
+];
+const handlerExpectedIds = [
+  "VHS-REQ-082",
+  "VHS-REQ-083",
   "VHS-REQ-594"
 ];
 
@@ -119,11 +130,12 @@ requireTextIncludes(".specify/memory/constitution.md", [
   "runtime-contract-host-provider-v1",
   "installed-user-observation-public-surface-v1",
   "command-activation-surface-v1",
-  "**Version**: 0.1.1"
+  "command-handler-entrypoint-shell-v1",
+  "**Version**: 0.1.2"
 ]);
 
 const featureJson = readJson(".specify/feature.json");
-requireEqual(featureJson.feature_directory, commandFeatureDir, "pinned Spec Kit feature directory");
+requireEqual(featureJson.feature_directory, handlerFeatureDir, "pinned Spec Kit feature directory");
 
 const admission = readJson(admissionPath);
 requireEqual(admission.schema, "vi-history/requirements-admission@v1", "admission schema");
@@ -500,7 +512,7 @@ requireTextIncludes("README.md", [
 requireTextIncludes("AGENTS.md", [
   "installed-user-observation-public-surface-v1",
   "IAU-installed-user-observation-model-v1",
-  "003-command-activation-surface-v1"
+  "004-command-handler-entrypoint-shell-v1"
 ]);
 
 const commandAdmission = readJson(commandAdmissionPath);
@@ -619,8 +631,121 @@ requireTextIncludes("README.md", [
 ]);
 requireTextIncludes("AGENTS.md", [
   "command-activation-surface-v1",
-  "003-command-activation-surface-v1",
-  "Current Implementation Admission Unit: none"
+  "command-handler-entrypoint-shell-v1",
+  "Current Implementation Admission Unit",
+  "IAU-command-handler-entrypoint-shell-v1"
+]);
+
+const handlerAdmission = readJson(handlerAdmissionPath);
+requireEqual(handlerAdmission.schema, "vi-history/requirements-admission@v1", "handler admission schema");
+requireEqual(handlerAdmission.sliceId, handlerSliceId, "handler admission sliceId");
+requireEqual(handlerAdmission.state, "implementation-admitted", "handler admission state");
+requireEqual(handlerAdmission.targetProduct, "vi-history", "handler admission targetProduct");
+requireEqual(handlerAdmission.targetFeature, handlerSliceId, "handler admission targetFeature");
+requireEqual(handlerAdmission.sourceBaselineTag, "v1.3.16", "handler admission sourceBaselineTag");
+requireEqual(handlerAdmission.sourceCommit, "01ff907ad878ca335e402b37cdf0929d09c17caf", "handler admission sourceCommit");
+requireEqual(handlerAdmission.governedAdmissionCommit, "47f5b67ae35d5bb8b18c2bd2db12e0e7f835313d", "handler admission governedAdmissionCommit");
+requireEqual(handlerAdmission.implementationSharing, "none", "handler admission implementationSharing");
+requireMarketplacePosture(handlerAdmission, "handler admission");
+requireEqual(handlerAdmission.currentImplementationAdmissionUnit, "IAU-command-handler-entrypoint-shell-v1", "handler currentImplementationAdmissionUnit");
+requireArrayEqual(handlerAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "handler completedSpecScope");
+requireArrayEqual(handlerAdmission.completedImplementationScope, [], "handler completedImplementationScope");
+requireArrayEqual(handlerAdmission.admittedImplementationScope, ["T009", "T010", "T011"], "handler admittedImplementationScope");
+requireArrayEqual(handlerAdmission.blockedImplementationScope, ["T012", "T013", "T014", "T015"], "handler blockedImplementationScope");
+requireEqual(handlerAdmission.preImplementationPreflight?.iauId, "IAU-command-handler-entrypoint-shell-v1", "handler preImplementationPreflight iauId");
+requireEqual(handlerAdmission.preImplementationPreflight?.status, "pass", "handler preImplementationPreflight status");
+requireEqual(handlerAdmission.preImplementationPreflight?.implementationStartAllowed, true, "handler preImplementationPreflight implementationStartAllowed");
+requireEqual(handlerAdmission.preImplementationPreflight?.record, handlerPreflightPath, "handler preImplementationPreflight record");
+requireFile(`docs/requirements/admissions/${handlerSliceId}.md`);
+
+const handlerIau = readJson(handlerIauPath);
+requireEqual(handlerIau.schema, "vi-history/implementation-admission-unit@v1", "handler IAU schema");
+requireEqual(handlerIau.iauId, "IAU-command-handler-entrypoint-shell-v1", "handler IAU id");
+requireEqual(handlerIau.state, "implementation-admitted", "handler IAU state");
+requireEqual(handlerIau.parentSliceId, handlerSliceId, "handler IAU parentSliceId");
+requireArrayEqual(handlerIau.admittedTasks, ["T009", "T010", "T011"], "handler IAU admittedTasks");
+requireArrayEqual(handlerIau.blockedTasks, ["T012", "T013", "T014", "T015"], "handler IAU blockedTasks");
+requireEqual(handlerIau.implementationSharing, "none", "handler IAU implementationSharing");
+requireMarketplacePosture(handlerIau, "handler IAU");
+requireEqual(handlerIau.preImplementationPreflight?.status, "pass", "handler IAU preImplementationPreflight status");
+requireEqual(handlerIau.preImplementationPreflight?.record, "IAU-command-handler-entrypoint-shell-v1-preflight-v1.json", "handler IAU preImplementationPreflight record");
+requireEqual(handlerIau.preImplementationPreflight?.implementationStartAllowed, true, "handler IAU preImplementationPreflight implementationStartAllowed");
+requireFile(`docs/requirements/admissions/${handlerSliceId}/IAU-command-handler-entrypoint-shell-v1.md`);
+
+const handlerPreflight = readJson(handlerPreflightPath);
+requireEqual(handlerPreflight.schema, "vi-history/implementation-admission-unit-preflight@v1", "handler preflight schema");
+requireEqual(handlerPreflight.iauId, "IAU-command-handler-entrypoint-shell-v1", "handler preflight iauId");
+requireEqual(handlerPreflight.status, "pass", "handler preflight status");
+requireEqual(handlerPreflight.implementationStartAllowed, true, "handler preflight implementationStartAllowed");
+requireEqual(handlerPreflight.parentSliceId, handlerSliceId, "handler preflight parentSliceId");
+requireEqual(handlerPreflight.implementationSharing, "none", "handler preflight implementationSharing");
+requireMarketplacePosture(handlerPreflight, "handler preflight");
+requireArrayEqual(handlerPreflight.implementationStartScope, ["T009", "T010", "T011"], "handler preflight implementationStartScope");
+if (!Array.isArray(handlerPreflight.checkResults) || handlerPreflight.checkResults.length !== handlerPreflight.requiredChecks.length) {
+  failures.push("handler preflight checkResults: must match requiredChecks length");
+} else {
+  for (const result of handlerPreflight.checkResults) {
+    requireEqual(result.status, "pass", `handler preflight check result ${result.check}`);
+  }
+}
+requireFile(`docs/requirements/admissions/${handlerSliceId}/IAU-command-handler-entrypoint-shell-v1-preflight-v1.md`);
+
+const handlerManifest = readJson(`${handlerImportDir}/manifest.json`);
+requireEqual(handlerManifest.schema, "vi-history/requirements-import@v1", "handler manifest schema");
+requireEqual(handlerManifest.sliceId, handlerSliceId, "handler sliceId");
+requireEqual(handlerManifest.sourceBaselineTag, "v1.3.16", "handler sourceBaselineTag");
+requireEqual(handlerManifest.sourceCommit, "01ff907ad878ca335e402b37cdf0929d09c17caf", "handler sourceCommit");
+requireEqual(handlerManifest.governedAdmissionCommit, "47f5b67ae35d5bb8b18c2bd2db12e0e7f835313d", "handler governedAdmissionCommit");
+requireEqual(handlerManifest.targetProduct, "vi-history", "handler targetProduct");
+requireEqual(handlerManifest.targetFeature, handlerSliceId, "handler targetFeature");
+requireEqual(handlerManifest.redactionStatus, "pass", "handler redactionStatus");
+requireEqual(handlerManifest.implementationSharing, "none", "handler implementationSharing");
+requireEqual(handlerManifest.marketplacePublication, "disabled-until-later-adr", "handler marketplacePublication");
+requireArrayEqual(handlerManifest.importedRequirementIds, handlerExpectedIds, "handler importedRequirementIds");
+requireArrayEqual(handlerManifest.files, ["syrs.md", "srs.md", "rtm.csv", "test-plan.md"], "handler manifest files");
+
+for (const file of handlerManifest.files ?? []) {
+  requireFile(`${handlerImportDir}/${file}`);
+}
+
+for (const file of ["spec.md", "plan.md", "tasks.md"]) {
+  requireFile(`${handlerFeatureDir}/${file}`);
+}
+
+requireTextIncludes(`${handlerFeatureDir}/spec.md`, [
+  "Command Handler Entrypoint Shell",
+  "VHS-REQ-082",
+  "VHS-REQ-083",
+  "VHS-REQ-594",
+  "IAU-command-handler-entrypoint-shell-v1"
+]);
+requireTextIncludes(`${handlerFeatureDir}/plan.md`, [
+  "IAU-command-handler-entrypoint-shell-v1",
+  "Issue #36",
+  "Marketplace publication remains disabled"
+]);
+requireTextIncludes(`${handlerFeatureDir}/tasks.md`, [
+  "Issue #36",
+  "- [x] T001",
+  "- [x] T008",
+  "- [ ] T009",
+  "- [ ] T011",
+  "IAU-command-handler-entrypoint-shell-v1",
+  "[BLOCKED]",
+  "T015"
+]);
+requireTextIncludes(`${handlerImportDir}/rtm.csv`, handlerExpectedIds);
+requireTextIncludes(`${handlerImportDir}/srs.md`, [
+  "VHS-REQ-082",
+  "VHS-REQ-083",
+  "VHS-REQ-594",
+  "labviewViHistory.open"
+]);
+requireTextIncludes("README.md", [
+  "command-handler-entrypoint-shell-v1",
+  "docs/requirements/admissions/command-handler-entrypoint-shell-v1.json",
+  "Issue #36",
+  "IAU-command-handler-entrypoint-shell-v1"
 ]);
 
 if (failures.length > 0) {

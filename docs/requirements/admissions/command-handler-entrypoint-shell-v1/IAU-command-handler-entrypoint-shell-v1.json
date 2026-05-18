@@ -1,0 +1,56 @@
+{
+  "schema": "vi-history/implementation-admission-unit@v1",
+  "iauId": "IAU-command-handler-entrypoint-shell-v1",
+  "createdDate": "2026-05-18",
+  "state": "implementation-admitted",
+  "parentSliceId": "command-handler-entrypoint-shell-v1",
+  "specFeature": ".specify/specs/command-handler-entrypoint-shell-v1/",
+  "issue": {
+    "number": 36,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/36"
+  },
+  "admittedTasks": [
+    "T009",
+    "T010",
+    "T011"
+  ],
+  "blockedTasks": [
+    "T012",
+    "T013",
+    "T014",
+    "T015"
+  ],
+  "entryGate": [
+    "public import packet present",
+    "Spec Kit spec, plan, and tasks locked",
+    "public redaction scan passes",
+    "bridge artifact validation passes",
+    "clean-room boundary retained",
+    "preflight status is pass"
+  ],
+  "exitGate": [
+    "admitted tasks complete",
+    "npm test passes",
+    "npm run check passes",
+    "git diff --check passes",
+    "public redaction scan passes",
+    "bridge artifact validation passes"
+  ],
+  "implementationSharing": "none",
+  "marketplacePublication": "disabled",
+  "marketplacePublicationAdr": "docs/decisions/ADR-001-marketplace-publication-disabled.md",
+  "preImplementationPreflight": {
+    "status": "pass",
+    "record": "IAU-command-handler-entrypoint-shell-v1-preflight-v1.json",
+    "implementationStartAllowed": true
+  },
+  "blockedScope": [
+    "documentation panel rendering",
+    "runtime settings CLI materialization",
+    "compare execution",
+    "Docker execution or orchestration",
+    "VSIX packaging",
+    "Marketplace publication",
+    "source copying from another VI History product line"
+  ]
+}
