@@ -67,7 +67,7 @@ Completed installed-user observation unit:
 
 - `IAU-installed-user-observation-model-v1`
 
-Admitted command activation unit:
+Completed command activation unit:
 
 - `IAU-command-activation-manifest-contract-v1`
 
@@ -101,8 +101,9 @@ start with a new public bridge admission record before any code changes. A
 valid work packet must name a new IAU, admitted tasks, blocked tasks, preflight
 status, source files, expected write area, and validation commands.
 
-Issue #32 is the public handoff for
-`IAU-command-activation-manifest-contract-v1`. It admits only T009-T012:
+Issue #32 completes
+`IAU-command-activation-manifest-contract-v1`. No new Copilot implementation
+should start from Issue #32 after that PR merges. It implements only T009-T012:
 manifest activation-event contract tests, contributed command ID/title contract
 tests, package identity and Marketplace-disabled contract tests, and minimal
 manifest metadata.

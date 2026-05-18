@@ -2,11 +2,10 @@
 
 ## State
 
-`IAU-command-activation-manifest-contract-v1` is
-`implementation-admitted`.
+`IAU-command-activation-manifest-contract-v1` is `implemented`.
 
-Issue #32 is the implementation handoff. It may start only after this
-admission record and its preflight are merged to `develop`.
+Issue #32 is the implementation handoff and closes after the implementation PR
+merges.
 
 ## Admitted Scope
 
@@ -20,6 +19,13 @@ admission record and its preflight are merged to `develop`.
 The preflight record has `status: pass` and
 `implementationStartAllowed: true`.
 
+## Completed Scope
+
+- `T009`: manifest activation-event contract tests.
+- `T010`: contributed command ID and title contract tests.
+- `T011`: package identity and Marketplace-disabled contract tests.
+- `T012`: minimal manifest metadata.
+
 ## Blocked Work
 
 Command handlers, documentation panel rendering, runtime settings CLI
@@ -29,5 +35,5 @@ until separately admitted.
 
 ## Exit Gate
 
-The implementation PR must complete only `T009` through `T012`, keep blocked
-scope blocked, and pass repository validation before Issue #32 closes.
+The implementation PR completes only `T009` through `T012`, keeps blocked scope
+blocked, and passes repository validation before Issue #32 closes.
