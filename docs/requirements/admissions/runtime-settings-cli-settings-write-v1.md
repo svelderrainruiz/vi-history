@@ -1,10 +1,11 @@
 # Runtime Settings CLI Settings-Write Admission
 
-State: `implementation-admitted`
+State: `implemented`
 
 Issue #47 imports `runtime-settings-cli-settings-write-v1`, locks the public
 Spec Kit feature, and admits
 `IAU-runtime-settings-cli-settings-write-contract-v1` for T009-T012 only.
+Issue #49 implements and closes the admitted IAU.
 
 Machine-readable ledger:
 [runtime-settings-cli-settings-write-v1.json](./runtime-settings-cli-settings-write-v1.json)
@@ -17,9 +18,9 @@ Machine-readable ledger:
   content is preserved, and only governed provider/version/bitness facts are
   updated.
 
-## Admitted IAU
+## Implemented IAU
 
-`IAU-runtime-settings-cli-settings-write-contract-v1` is admitted for:
+`IAU-runtime-settings-cli-settings-write-contract-v1` is implemented for:
 
 - `T009`: add tests proving only `viHistorySuite.runtimeProvider`,
   `viHistorySuite.labviewVersion`, and `viHistorySuite.labviewBitness` are
@@ -30,8 +31,7 @@ Machine-readable ledger:
   by the public spec and unsupported target shapes fail closed.
 - `T012`: implement the minimum public MIT settings-write contract.
 
-Implementation starts only after this admission PR merges and a separate
-implementation handoff issue is created.
+No current implementation admission unit remains active after Issue #49.
 
 ## Blocked Scope
 

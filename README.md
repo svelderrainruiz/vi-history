@@ -19,8 +19,8 @@ of `command-handler-entrypoint-shell-v1`. Issue #41 implements and closes
 `IAU-runtime-settings-cli-prepare-command-shell-v1`. Issue #45 implements and
 closes it for T009-T011. Issue #47 imports
 `runtime-settings-cli-settings-write-v1` and admits
-`IAU-runtime-settings-cli-settings-write-contract-v1` for T009-T012 after the
-admission PR merges and a separate implementation handoff issue exists.
+`IAU-runtime-settings-cli-settings-write-contract-v1`; Issue #49 implements and
+closes it for T009-T012.
 
 ## Authority
 
@@ -68,6 +68,8 @@ admission PR merges and a separate implementation handoff issue exists.
 - Issue #47 imports `runtime-settings-cli-settings-write-v1` and admits
   `IAU-runtime-settings-cli-settings-write-contract-v1` for T009-T012 only.
   Issue #47 is an admission issue and must not be reused for implementation.
+- Issue #49 implements and closes
+  `IAU-runtime-settings-cli-settings-write-contract-v1` for T009-T012 only.
 
 The current admission ledgers are:
 
@@ -79,8 +81,7 @@ The current admission ledgers are:
 - `docs/requirements/admissions/runtime-settings-cli-bootstrap-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-settings-write-v1.json`
 
-Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-settings-write-contract-v1`.
+Current Implementation Admission Unit: none.
 
 The completed observation model scope is T009-T013. The command activation
 manifest contract implements only T009-T012. The command handler entrypoint shell
@@ -91,7 +92,7 @@ user documentation command implements only T009-T011 in
 settings CLI bootstrap implements only T009-T011 in
 `.specify/specs/runtime-settings-cli-bootstrap-v1/tasks.md`: prepare-command
 handler tests, launcher materialization/recovery fact tests, and the minimum
-prepare-command shell. The runtime settings CLI settings-write IAU admits only
+prepare-command shell. The runtime settings CLI settings-write IAU implements only
 T009-T012 in
 `.specify/specs/runtime-settings-cli-settings-write-v1/tasks.md`: tests for
 provider/version/bitness settings mutation, preservation of unrelated settings,

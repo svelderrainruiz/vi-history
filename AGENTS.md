@@ -53,16 +53,16 @@ shell. Issue #43 and Issue #45 must not be reused for new implementation.
 `runtime-settings-cli-settings-write-v1` admits
 `IAU-runtime-settings-cli-settings-write-contract-v1` for Issue #47 and
 T009-T012 only. Issue #47 is an admission issue; implementation must use a
-separate handoff issue after the admission PR merges. The admitted behavior is
-limited to the public settings-write contract for provider, LabVIEW version,
-and LabVIEW bitness settings.
+separate handoff issue after the admission PR merges. Issue #49 implements and
+closes it for T009-T012 only: tests for governed provider/version/bitness
+settings writes, unrelated settings preservation, fail-closed unsupported target
+handling, and the minimum public settings-write contract.
 
 `vihs --validate`, runtime validation, no-argument interactive selection,
 compare execution, LabVIEWCLI execution, Docker execution, live-session proof,
 packaging, and Marketplace publication remain blocked.
 
-Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-settings-write-contract-v1`.
+Current Implementation Admission Unit: none.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that

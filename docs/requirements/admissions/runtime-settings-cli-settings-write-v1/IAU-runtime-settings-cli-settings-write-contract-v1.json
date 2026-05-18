@@ -2,14 +2,17 @@
   "schema": "vi-history/implementation-admission-unit@v1",
   "iauId": "IAU-runtime-settings-cli-settings-write-contract-v1",
   "createdDate": "2026-05-18",
-  "state": "implementation-admitted",
+  "state": "implemented",
   "parentSliceId": "runtime-settings-cli-settings-write-v1",
   "specFeature": ".specify/specs/runtime-settings-cli-settings-write-v1",
   "issue": {
     "number": 47,
     "url": "https://github.com/svelderrainruiz/vi-history/issues/47"
   },
-  "implementationHandoffIssue": null,
+  "implementationHandoffIssue": {
+    "number": 49,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/49"
+  },
   "admittedTasks": [
     "T009",
     "T010",
@@ -45,6 +48,16 @@
     "npm run check passes",
     "implementation handoff issue names completed IAU and next blocked scope"
   ],
+  "implementationCloseout": {
+    "status": "pass",
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011",
+      "T012"
+    ],
+    "issue": "https://github.com/svelderrainruiz/vi-history/issues/49"
+  },
   "implementationSharing": "none",
   "requirementMaturityBasis": "governed released extension supports requirement maturity, not source reuse",
   "marketplacePublication": "disabled",
