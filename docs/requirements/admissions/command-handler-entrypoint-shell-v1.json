@@ -2,7 +2,7 @@
   "schema": "vi-history/requirements-admission@v1",
   "sliceId": "command-handler-entrypoint-shell-v1",
   "createdDate": "2026-05-18",
-  "state": "implementation-admitted",
+  "state": "implemented",
   "targetProduct": "vi-history",
   "targetFeature": "command-handler-entrypoint-shell-v1",
   "sourceBaselineTag": "v1.3.16",
@@ -26,7 +26,7 @@
   "implementationAdmissionUnits": [
     {
       "iauId": "IAU-command-handler-entrypoint-shell-v1",
-      "state": "implementation-admitted",
+      "state": "implemented",
       "record": "docs/requirements/admissions/command-handler-entrypoint-shell-v1/IAU-command-handler-entrypoint-shell-v1.json",
       "preflightRecord": "docs/requirements/admissions/command-handler-entrypoint-shell-v1/IAU-command-handler-entrypoint-shell-v1-preflight-v1.json",
       "admittedTasks": [
@@ -36,7 +36,7 @@
       ]
     }
   ],
-  "currentImplementationAdmissionUnit": "IAU-command-handler-entrypoint-shell-v1",
+  "currentImplementationAdmissionUnit": null,
   "completedSpecScope": [
     "T001",
     "T002",
@@ -47,12 +47,12 @@
     "T007",
     "T008"
   ],
-  "completedImplementationScope": [],
-  "admittedImplementationScope": [
+  "completedImplementationScope": [
     "T009",
     "T010",
     "T011"
   ],
+  "admittedImplementationScope": [],
   "blockedImplementationScope": [
     "T012",
     "T013",

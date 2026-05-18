@@ -32,15 +32,17 @@ activation-event contract tests, contributed command ID/title contract tests,
 package identity and Marketplace-disabled contract tests, and minimal manifest
 metadata.
 
-`command-handler-entrypoint-shell-v1` currently admits
+`command-handler-entrypoint-shell-v1` implemented
 `IAU-command-handler-entrypoint-shell-v1` for Issue #36 and T009-T011 only:
 entrypoint shell tests and the minimum public MIT entrypoint shell.
+`IAU-command-handler-entrypoint-shell-v1` is closed. Issue #36 must not be
+reused for new implementation. No current IAU is active.
 
 Documentation panel rendering, runtime settings CLI materialization, compare
 execution, packaging, and Marketplace publication remain blocked.
 
-Current Implementation Admission Unit:
-`IAU-command-handler-entrypoint-shell-v1`.
+Current Implementation Admission Unit: none. Future work must start from a new
+public bridge admission record.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that

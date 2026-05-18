@@ -11,9 +11,9 @@ imports `installed-user-observation-public-surface-v1`, with
 `IAU-installed-user-observation-model-v1` implemented for T009-T013 only, and
 `command-activation-surface-v1` with
 `IAU-command-activation-manifest-contract-v1` implemented for T009-T012 only.
-The next public bridge-admitted unit is
-`IAU-command-handler-entrypoint-shell-v1`, scoped to Issue #36 and T009-T011
-of `command-handler-entrypoint-shell-v1` only.
+`IAU-command-handler-entrypoint-shell-v1` is implemented and closed for T009-T011
+of `command-handler-entrypoint-shell-v1`. No current IAU is active. Future code
+work must start from a new public bridge admission record.
 
 ## Authority
 
@@ -47,8 +47,9 @@ of `command-handler-entrypoint-shell-v1` only.
   requirements/spec baseline.
 - Issue #32 implements `IAU-command-activation-manifest-contract-v1` for
   T009-T012.
-- Issue #36 admits `IAU-command-handler-entrypoint-shell-v1` for command
-  entrypoint shell implementation only.
+- Issue #36 implements and closes `IAU-command-handler-entrypoint-shell-v1` for
+  T009-T011 of `command-handler-entrypoint-shell-v1`. Issue #36 must not be
+  reused for new implementation.
 
 The current admission ledgers are:
 
@@ -57,14 +58,14 @@ The current admission ledgers are:
 - `docs/requirements/admissions/command-activation-surface-v1.json`
 - `docs/requirements/admissions/command-handler-entrypoint-shell-v1.json`
 
-Current Implementation Admission Unit:
-`IAU-command-handler-entrypoint-shell-v1`.
+Current Implementation Admission Unit: none. `IAU-command-handler-entrypoint-shell-v1`
+is implemented and closed.
 
 The completed observation model scope is T009-T013. The command activation
-manifest contract implements only T009-T012. The current command handler
-entrypoint shell handoff admits only T009-T011 in
+manifest contract implements only T009-T012. The command handler entrypoint shell
+implements T009-T011 in
 `.specify/specs/command-handler-entrypoint-shell-v1/tasks.md`. Future code work
-outside those tasks must start from a new public bridge admission record before
+must start from a new public bridge admission record before
 Copilot or local implementation begins.
 
 The Marketplace posture is recorded in
