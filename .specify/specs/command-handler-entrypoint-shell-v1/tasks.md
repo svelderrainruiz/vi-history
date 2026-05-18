@@ -5,10 +5,10 @@
 **Prerequisites**: `plan.md`, `spec.md`, imported requirements packet
 
 **Tests**: This feature validates requirements, Spec Kit artifacts, admission
-records, and the next admitted entrypoint-shell implementation unit.
+records, and the completed entrypoint-shell implementation unit.
 
 **Organization**: Tasks are grouped into public import/spec/admission closeout,
-the admitted entrypoint-shell IAU, and blocked future runtime/release work.
+the completed entrypoint-shell IAU, and blocked future runtime/release work.
 
 ## Phase 1: Public Import And Spec Lock
 
@@ -33,14 +33,16 @@ the command handler entrypoint shell.
 
 ---
 
-## Phase 2: Admitted IAU - Entrypoint Shell
+## Phase 2: Completed IAU - Entrypoint Shell
 
-**Purpose**: Admit the smallest command-handler implementation step: tests and
+**Purpose**: Close the smallest command-handler implementation step: tests and
 minimal entrypoint shell only.
 
-**Status**: `IAU-command-handler-entrypoint-shell-v1` is implemented and closed.
-T009-T011 are complete. No current IAU is active. Issue #36 is closed and must
-not be reused for new implementation.
+**Completed IAU**: `IAU-command-handler-entrypoint-shell-v1`
+
+**Current IAU**: none. Issue #36 is closed and must not be reused for new
+implementation. Future implementation requires a new bridge admission and
+preflight pass first.
 
 - [x] T009 Add tests proving extension activation registers the admitted
   command entrypoint shell.
@@ -74,20 +76,19 @@ not be reused for new implementation.
 
 ## Dependencies & Execution Order
 
-- Phase 1 must merge before `IAU-command-handler-entrypoint-shell-v1`
-  implementation starts.
-- Phase 2 is complete. `IAU-command-handler-entrypoint-shell-v1` is closed.
-  No current IAU is active. Future implementation must not start from Issue #36;
-  it requires a new named IAU with a public preflight record.
+- Phase 1 established the public import, Spec Kit feature, and admission
+  baseline before `IAU-command-handler-entrypoint-shell-v1` implementation
+  started.
+- Phase 2 is implemented and closed. No current IAU is active.
 - Phase 3 remains blocked until separate public requirements and preflight
   records admit the runtime or release behavior.
+- Future Copilot implementation work must start from a new bridge admission,
+  not Issue #36.
 
 ## Implementation Strategy
 
-1. Import/spec/admission artifacts merged to `develop`. ✓
-2. Issue #36 completed as the bounded implementation handoff. ✓ Issue #36 is
-   closed and must not be reused.
+1. Keep `IAU-command-handler-entrypoint-shell-v1` closed.
+2. Start future work only from a new bridge-admitted IAU.
 3. Keep documentation rendering, runtime settings CLI materialization, compare
    execution, Docker orchestration, Marketplace publication, packaging, and
    source copying blocked.
-
