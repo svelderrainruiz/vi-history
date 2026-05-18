@@ -1,0 +1,25 @@
+{
+  "schema": "vi-history/requirements-import@v1",
+  "sliceId": "runtime-settings-cli-validation-proof-v1",
+  "createdDate": "2026-05-18",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "f9b2cb74d74c2bc31a8af54ce44c1eec62add04e",
+  "governedAdmissionCommit": "edb8bfaa53237a8f3b63052573d6bfe728376424",
+  "targetProduct": "vi-history",
+  "targetFeature": "runtime-settings-cli-validation-proof-v1",
+  "importedRequirementIds": [
+    "VHS-REQ-546"
+  ],
+  "supportingTestIds": [
+    "TEST-UNIT-392"
+  ],
+  "redactionStatus": "pass",
+  "implementationSharing": "none",
+  "marketplacePublication": "disabled-until-later-adr",
+  "files": [
+    "syrs.md",
+    "srs.md",
+    "rtm.csv",
+    "test-plan.md"
+  ]
+}
