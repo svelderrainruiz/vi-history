@@ -222,6 +222,10 @@ Issue #60 admits
 is an admission issue. Copilot implementation must wait for the separate
 handoff issue created after the admission PR merges.
 
+Issue #62 implements and closes
+`IAU-runtime-settings-cli-interactive-selection-contract-v1` for T009-T013
+only. No new Copilot implementation should start from Issue #62.
+
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.
 

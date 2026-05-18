@@ -1,7 +1,7 @@
 # IAU: Runtime Settings CLI Interactive Selection Contract
 
-`IAU-runtime-settings-cli-interactive-selection-contract-v1` is
-`implementation-admitted` for the MIT authority.
+`IAU-runtime-settings-cli-interactive-selection-contract-v1` is `implemented`
+for the MIT authority.
 
 Parent slice: `runtime-settings-cli-interactive-selection-v1`
 
@@ -16,11 +16,10 @@ Preflight record:
 - T012: tests for Docker 2026 x64 selection bounds
 - T013: minimum pure interactive-selection contract
 
-## Required Handoff
+## Closeout
 
-Implementation must wait until this admission PR merges and a separate
-implementation handoff issue is created. Issue #60 is an admission issue and
-must not be reused for implementation.
+Issue #62 implements T009-T013 only. Issue #60 is an admission issue and must
+not be reused for implementation.
 
 ## Blocked Tasks
 
