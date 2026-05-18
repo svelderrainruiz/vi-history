@@ -1195,7 +1195,7 @@ requireTextIncludes("docs/development/copilot-workflow.md", [
 const runtimeSettingsValidateAdmission = readJson(runtimeSettingsValidateAdmissionPath);
 requireEqual(runtimeSettingsValidateAdmission.schema, "vi-history/requirements-admission@v1", "runtime settings validate admission schema");
 requireEqual(runtimeSettingsValidateAdmission.sliceId, runtimeSettingsValidateSliceId, "runtime settings validate admission sliceId");
-requireEqual(runtimeSettingsValidateAdmission.state, "implementation-admitted", "runtime settings validate admission state");
+requireEqual(runtimeSettingsValidateAdmission.state, "implemented", "runtime settings validate admission state");
 requireEqual(runtimeSettingsValidateAdmission.targetProduct, "vi-history", "runtime settings validate admission targetProduct");
 requireEqual(runtimeSettingsValidateAdmission.targetFeature, runtimeSettingsValidateSliceId, "runtime settings validate admission targetFeature");
 requireEqual(runtimeSettingsValidateAdmission.sourceBaselineTag, "v1.3.16", "runtime settings validate admission sourceBaselineTag");
@@ -1203,26 +1203,28 @@ requireEqual(runtimeSettingsValidateAdmission.sourceCommit, "72c9a700da501eba23e
 requireEqual(runtimeSettingsValidateAdmission.governedAdmissionCommit, "f9b2cb76f6de98e97354d1fb8e5c81e3adc8f6e2", "runtime settings validate admission governedAdmissionCommit");
 requireEqual(runtimeSettingsValidateAdmission.implementationSharing, "none", "runtime settings validate admission implementationSharing");
 requireMarketplacePosture(runtimeSettingsValidateAdmission, "runtime settings validate admission");
-requireEqual(runtimeSettingsValidateAdmission.currentImplementationAdmissionUnit, "IAU-runtime-settings-cli-validation-readback-contract-v1", "runtime settings validate currentImplementationAdmissionUnit");
+requireEqual(runtimeSettingsValidateAdmission.currentImplementationAdmissionUnit, null, "runtime settings validate currentImplementationAdmissionUnit");
 requireArrayEqual(runtimeSettingsValidateAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "runtime settings validate completedSpecScope");
-requireArrayEqual(runtimeSettingsValidateAdmission.completedImplementationScope, [], "runtime settings validate completedImplementationScope");
-requireArrayEqual(runtimeSettingsValidateAdmission.admittedImplementationScope, ["T009", "T010", "T011", "T012"], "runtime settings validate admittedImplementationScope");
+requireArrayEqual(runtimeSettingsValidateAdmission.completedImplementationScope, ["T009", "T010", "T011", "T012"], "runtime settings validate completedImplementationScope");
+requireArrayEqual(runtimeSettingsValidateAdmission.admittedImplementationScope, [], "runtime settings validate admittedImplementationScope");
 requireArrayEqual(runtimeSettingsValidateAdmission.blockedImplementationScope, ["T013", "T014", "T015", "T016", "T017", "T018"], "runtime settings validate blockedImplementationScope");
 requireEqual(runtimeSettingsValidateAdmission.preImplementationPreflight?.iauId, "IAU-runtime-settings-cli-validation-readback-contract-v1", "runtime settings validate preImplementationPreflight iauId");
 requireEqual(runtimeSettingsValidateAdmission.preImplementationPreflight?.status, "pass", "runtime settings validate preImplementationPreflight status");
 requireEqual(runtimeSettingsValidateAdmission.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings validate preImplementationPreflight implementationStartAllowed");
 requireEqual(runtimeSettingsValidateAdmission.preImplementationPreflight?.record, runtimeSettingsValidatePreflightPath, "runtime settings validate preImplementationPreflight record");
+requireEqual(runtimeSettingsValidateAdmission.implementationCloseout?.status, "pass", "runtime settings validate implementationCloseout status");
+requireArrayEqual(runtimeSettingsValidateAdmission.implementationCloseout?.completedTasks, ["T009", "T010", "T011", "T012"], "runtime settings validate implementationCloseout completedTasks");
 requireFile(`docs/requirements/admissions/${runtimeSettingsValidateSliceId}.md`);
 
 const runtimeSettingsValidateAdmissionUnit = (runtimeSettingsValidateAdmission.implementationAdmissionUnits ?? [])
   .find((unit) => unit?.iauId === "IAU-runtime-settings-cli-validation-readback-contract-v1");
-requireEqual(runtimeSettingsValidateAdmissionUnit?.state, "implementation-admitted", "runtime settings validate admission unit state");
+requireEqual(runtimeSettingsValidateAdmissionUnit?.state, "implemented", "runtime settings validate admission unit state");
 requireEqual(runtimeSettingsValidateAdmissionUnit?.preflightRecord, runtimeSettingsValidatePreflightPath, "runtime settings validate admission unit preflightRecord");
 
 const runtimeSettingsValidateIau = readJson(runtimeSettingsValidateIauPath);
 requireEqual(runtimeSettingsValidateIau.schema, "vi-history/implementation-admission-unit@v1", "runtime settings validate IAU schema");
 requireEqual(runtimeSettingsValidateIau.iauId, "IAU-runtime-settings-cli-validation-readback-contract-v1", "runtime settings validate IAU id");
-requireEqual(runtimeSettingsValidateIau.state, "implementation-admitted", "runtime settings validate IAU state");
+requireEqual(runtimeSettingsValidateIau.state, "implemented", "runtime settings validate IAU state");
 requireEqual(runtimeSettingsValidateIau.parentSliceId, runtimeSettingsValidateSliceId, "runtime settings validate IAU parentSliceId");
 requireArrayEqual(runtimeSettingsValidateIau.admittedTasks, ["T009", "T010", "T011", "T012"], "runtime settings validate IAU admittedTasks");
 requireArrayEqual(runtimeSettingsValidateIau.blockedTasks, ["T013", "T014", "T015", "T016", "T017", "T018"], "runtime settings validate IAU blockedTasks");
@@ -1231,6 +1233,8 @@ requireMarketplacePosture(runtimeSettingsValidateIau, "runtime settings validate
 requireEqual(runtimeSettingsValidateIau.preImplementationPreflight?.status, "pass", "runtime settings validate IAU preImplementationPreflight status");
 requireEqual(runtimeSettingsValidateIau.preImplementationPreflight?.record, "IAU-runtime-settings-cli-validation-readback-contract-v1-preflight-v1.json", "runtime settings validate IAU preImplementationPreflight record");
 requireEqual(runtimeSettingsValidateIau.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings validate IAU preImplementationPreflight implementationStartAllowed");
+requireEqual(runtimeSettingsValidateIau.implementationCloseout?.status, "pass", "runtime settings validate IAU implementationCloseout status");
+requireArrayEqual(runtimeSettingsValidateIau.implementationCloseout?.completedTasks, ["T009", "T010", "T011", "T012"], "runtime settings validate IAU implementationCloseout completedTasks");
 requireFile(`docs/requirements/admissions/${runtimeSettingsValidateSliceId}/IAU-runtime-settings-cli-validation-readback-contract-v1.md`);
 
 const runtimeSettingsValidatePreflight = readJson(runtimeSettingsValidatePreflightPath);
@@ -1289,9 +1293,10 @@ requireTextIncludes(`${runtimeSettingsValidateFeatureDir}/tasks.md`, [
   "Issue #51",
   "- [x] T001",
   "- [x] T008",
-  "- [ ] T009",
-  "- [ ] T012",
+  "- [x] T009",
+  "- [x] T012",
   "IAU-runtime-settings-cli-validation-readback-contract-v1",
+  "Issue #53",
   "[BLOCKED]",
   "T018"
 ]);
@@ -1311,12 +1316,14 @@ requireTextIncludes("README.md", [
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-validation-readback-v1",
   "Current Implementation Admission Unit",
+  "none",
   "IAU-runtime-settings-cli-validation-readback-contract-v1",
   "008-runtime-settings-cli-validation-readback-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-readback-v1",
   "Issue #51",
+  "Issue #53",
   "IAU-runtime-settings-cli-validation-readback-contract-v1",
   "validation behavior beyond the admitted pure `vihs --validate` readback"
 ]);

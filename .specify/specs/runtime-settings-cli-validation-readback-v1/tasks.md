@@ -48,16 +48,16 @@ outcome facts without execution or proof-out file writing.
 
 **Public admission issue**: Issue #51
 
-**Implementation handoff issue**: to be created after this admission PR merges.
+**Implementation handoff issue**: Issue #53
 
-- [ ] T009 Add tests proving validation readback reports persisted provider,
+- [x] T009 Add tests proving validation readback reports persisted provider,
   LabVIEW version, LabVIEW bitness, and effective settings target facts without
   mutating settings content.
-- [ ] T010 Add tests proving validation readback reports runtime outcome facts
+- [x] T010 Add tests proving validation readback reports runtime outcome facts
   without LabVIEWCLI, Docker, compare, proof-out, or picker behavior.
-- [ ] T011 Add tests proving missing or unsupported persisted settings fail
+- [x] T011 Add tests proving missing or unsupported persisted settings fail
   closed with stable result fields.
-- [ ] T012 Implement the minimum public MIT validation readback contract.
+- [x] T012 Implement the minimum public MIT validation readback contract.
 
 ---
 
@@ -93,8 +93,7 @@ publication behavior visibly outside this IAU.
 - Phase 1 must merge before
   `IAU-runtime-settings-cli-validation-readback-contract-v1` implementation
   starts.
-- Phase 2 may start only from the implementation handoff issue created after
-  this admission PR merges.
+- Phase 2 completed through Issue #53.
 - Phase 3 remains blocked until separate public requirements and preflight
   records admit interactive selection, proof-out file generation, runtime
   execution, live-session proof, or release behavior.
@@ -105,7 +104,7 @@ publication behavior visibly outside this IAU.
 ## Implementation Strategy
 
 1. Merge import/spec/admission artifacts to `develop`.
-2. Create a separate implementation handoff issue for
+2. Complete Issue #53 for
    `IAU-runtime-settings-cli-validation-readback-contract-v1`.
 3. Keep interactive selection, proof-out file generation, compare execution,
    LabVIEWCLI, Docker, live-session proof, Marketplace publication, packaging,
