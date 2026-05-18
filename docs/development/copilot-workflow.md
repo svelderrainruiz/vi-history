@@ -110,6 +110,17 @@ Read these before changing code:
 - `docs/requirements/admissions/runtime-settings-cli-interactive-selection-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-interactive-selection-v1/IAU-runtime-settings-cli-interactive-selection-contract-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-interactive-selection-v1/IAU-runtime-settings-cli-interactive-selection-contract-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-terminal-entrypoint-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-terminal-entrypoint-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-terminal-entrypoint-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-terminal-entrypoint-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-terminal-entrypoint-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-terminal-entrypoint-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-terminal-entrypoint-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-terminal-entrypoint-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-terminal-entrypoint-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-terminal-entrypoint-v1/IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-terminal-entrypoint-v1/IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1-preflight-v1.json`
 
 ## Current Status
 
@@ -226,6 +237,12 @@ Issue #62 implements and closes
 `IAU-runtime-settings-cli-interactive-selection-contract-v1` for T009-T013
 only. No new Copilot implementation should start from Issue #62.
 
+Issue #65 admits
+`IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1` for
+`runtime-settings-cli-terminal-entrypoint-v1` and T009-T013 only. Issue #65 is
+an admission issue. Copilot implementation must wait for the separate handoff
+issue created after the admission PR merges.
+
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.
 
@@ -236,7 +253,8 @@ Do not implement these without a separate bridge admission:
 - LabVIEWCLI command execution
 - Docker command execution or container orchestration
 - documentation navigation or rendering beyond the admitted minimum command shell
-- runtime settings CLI materialization beyond the admitted prepare-command shell
+- runtime settings CLI terminal entrypoint implementation beyond
+  `IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1`
 - runtime settings mutation beyond the admitted provider/version/bitness
   settings-write contract
 - validation behavior beyond the admitted pure `vihs --validate` readback
