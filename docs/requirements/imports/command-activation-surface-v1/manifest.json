@@ -1,0 +1,27 @@
+{
+  "schema": "vi-history/requirements-import@v1",
+  "sliceId": "command-activation-surface-v1",
+  "createdDate": "2026-05-18",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "54a9e713bcd788bd91d6893f3c6550716691b7d4",
+  "targetProduct": "vi-history",
+  "targetFeature": "command-activation-surface-v1",
+  "importedRequirementIds": [
+    "VHS-REQ-594"
+  ],
+  "redactionStatus": "pass",
+  "implementationSharing": "none",
+  "licenseBoundary": "MIT target receives requirements and Spec Kit artifacts only",
+  "marketplacePublication": "disabled-until-later-adr",
+  "files": [
+    "syrs.md",
+    "srs.md",
+    "rtm.csv",
+    "test-plan.md"
+  ],
+  "bugOracle": {
+    "sameWrongBehaviorAcrossIndependentImplementations": "requirement-defect-candidate",
+    "oneAuthorityWrongBehavior": "implementation-defect-candidate",
+    "ambiguousBehavior": "requirement-clarification-candidate"
+  }
+}

@@ -12,6 +12,10 @@ const observationImportDir = `docs/requirements/imports/${observationSliceId}`;
 const observationAdmissionPath = `docs/requirements/admissions/${observationSliceId}.json`;
 const observationModelIauPath = `docs/requirements/admissions/${observationSliceId}/IAU-installed-user-observation-model-v1.json`;
 const observationModelPreflightPath = `docs/requirements/admissions/${observationSliceId}/IAU-installed-user-observation-model-v1-preflight-v1.json`;
+const commandSliceId = "command-activation-surface-v1";
+const commandFeatureDir = `.specify/specs/${commandSliceId}`;
+const commandImportDir = `docs/requirements/imports/${commandSliceId}`;
+const commandAdmissionPath = `docs/requirements/admissions/${commandSliceId}.json`;
 const marketplaceAdrPath = "docs/decisions/ADR-001-marketplace-publication-disabled.md";
 const explicitCompareIauPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1.json`;
 const explicitComparePreflightPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1-preflight-v1.json`;
@@ -41,6 +45,9 @@ const expectedIds = [
 ];
 const observationExpectedIds = [
   "VHS-REQ-595"
+];
+const commandExpectedIds = [
+  "VHS-REQ-594"
 ];
 
 const failures = [];
@@ -107,7 +114,7 @@ const integration = readJson(".specify/integration.json");
 requireEqual(integration.integration, "codex", "Spec Kit integration");
 
 const featureJson = readJson(".specify/feature.json");
-requireEqual(featureJson.feature_directory, observationFeatureDir, "pinned Spec Kit feature directory");
+requireEqual(featureJson.feature_directory, commandFeatureDir, "pinned Spec Kit feature directory");
 
 const admission = readJson(admissionPath);
 requireEqual(admission.schema, "vi-history/requirements-admission@v1", "admission schema");
@@ -306,13 +313,15 @@ requireTextIncludes(`${featureDir}/plan.md`, [
 ]);
 requireTextIncludes("README.md", [
   "IAU-installed-user-observation-model-v1",
+  "command-activation-surface-v1",
   "docs/decisions/ADR-001-marketplace-publication-disabled.md",
   "docs/governance/marketplace-posture.md"
 ]);
 requireTextIncludes("AGENTS.md", [
   "Marketplace publication is disabled",
   "docs/decisions/ADR-001-marketplace-publication-disabled.md",
-  "IAU-installed-user-observation-model-v1"
+  "IAU-installed-user-observation-model-v1",
+  "command-activation-surface-v1"
 ]);
 requireTextIncludes(marketplaceAdrPath, [
   "ADR-001: Marketplace Publication Disabled",
@@ -362,6 +371,7 @@ requireTextIncludes("docs/development/copilot-workflow.md", [
   "Issue #5 closed the Marketplace publication governance decision",
   "docs/decisions/ADR-001-marketplace-publication-disabled.md",
   "IAU-runtime-contract-proof-intake-v1",
+  "command-activation-surface-v1",
   "`T026`",
   "`T030`",
   "Docker command execution or container orchestration",
@@ -481,7 +491,87 @@ requireTextIncludes("README.md", [
 requireTextIncludes("AGENTS.md", [
   "installed-user-observation-public-surface-v1",
   "IAU-installed-user-observation-model-v1",
-  "002-installed-user-observation-public-surface-v1"
+  "003-command-activation-surface-v1"
+]);
+
+const commandAdmission = readJson(commandAdmissionPath);
+requireEqual(commandAdmission.schema, "vi-history/requirements-admission@v1", "command admission schema");
+requireEqual(commandAdmission.sliceId, commandSliceId, "command admission sliceId");
+requireEqual(commandAdmission.state, "spec-locked", "command admission state");
+requireEqual(commandAdmission.targetProduct, "vi-history", "command admission targetProduct");
+requireEqual(commandAdmission.targetFeature, commandSliceId, "command admission targetFeature");
+requireEqual(commandAdmission.sourceBaselineTag, "v1.3.16", "command admission sourceBaselineTag");
+requireEqual(commandAdmission.sourceCommit, "54a9e713bcd788bd91d6893f3c6550716691b7d4", "command admission sourceCommit");
+requireEqual(commandAdmission.governedAdmissionCommit, "01ff907ad878ca335e402b37cdf0929d09c17caf", "command admission governedAdmissionCommit");
+requireEqual(commandAdmission.implementationSharing, "none", "command admission implementationSharing");
+requireMarketplacePosture(commandAdmission, "command admission");
+requireEqual(commandAdmission.currentImplementationAdmissionUnit, null, "command currentImplementationAdmissionUnit");
+requireArrayEqual(commandAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "command completedSpecScope");
+requireArrayEqual(commandAdmission.completedImplementationScope, [], "command completedImplementationScope");
+requireArrayEqual(commandAdmission.admittedImplementationScope, [], "command admittedImplementationScope");
+requireEqual(commandAdmission.preImplementationPreflight, null, "command preImplementationPreflight");
+requireFile(`docs/requirements/admissions/${commandSliceId}.md`);
+
+const commandManifest = readJson(`${commandImportDir}/manifest.json`);
+requireEqual(commandManifest.schema, "vi-history/requirements-import@v1", "command manifest schema");
+requireEqual(commandManifest.sliceId, commandSliceId, "command sliceId");
+requireEqual(commandManifest.sourceBaselineTag, "v1.3.16", "command sourceBaselineTag");
+requireEqual(commandManifest.sourceCommit, "54a9e713bcd788bd91d6893f3c6550716691b7d4", "command sourceCommit");
+requireEqual(commandManifest.targetProduct, "vi-history", "command targetProduct");
+requireEqual(commandManifest.targetFeature, commandSliceId, "command targetFeature");
+requireEqual(commandManifest.redactionStatus, "pass", "command redactionStatus");
+requireEqual(commandManifest.implementationSharing, "none", "command implementationSharing");
+requireEqual(commandManifest.marketplacePublication, "disabled-until-later-adr", "command marketplacePublication");
+requireArrayEqual(commandManifest.importedRequirementIds, commandExpectedIds, "command importedRequirementIds");
+requireArrayEqual(commandManifest.files, ["syrs.md", "srs.md", "rtm.csv", "test-plan.md"], "command manifest files");
+
+for (const file of commandManifest.files ?? []) {
+  requireFile(`${commandImportDir}/${file}`);
+}
+
+for (const file of ["spec.md", "plan.md", "tasks.md"]) {
+  requireFile(`${commandFeatureDir}/${file}`);
+}
+
+requireTextIncludes(`${commandFeatureDir}/spec.md`, [
+  "Command Activation Surface",
+  "VHS-REQ-594",
+  "labviewViHistory.open",
+  "labviewViHistory.openDocumentation",
+  "labviewViHistory.prepareLocalRuntimeSettingsCli",
+  "no implementation IAU admitted"
+]);
+requireTextIncludes(`${commandFeatureDir}/plan.md`, [
+  "import/spec baseline",
+  "No implementation IAU is admitted",
+  "Marketplace publication remains disabled"
+]);
+requireTextIncludes(`${commandFeatureDir}/tasks.md`, [
+  "Issue #30",
+  "- [x] T001",
+  "- [x] T008",
+  "IAU-command-activation-manifest-contract-v1",
+  "[BLOCKED]",
+  "T009",
+  "T017",
+  "No current IAU is admitted"
+]);
+requireTextIncludes(`${commandImportDir}/rtm.csv`, commandExpectedIds);
+requireTextIncludes(`${commandImportDir}/srs.md`, [
+  "VHS-REQ-594",
+  "onCommand:labviewViHistory.open",
+  "onCommand:labviewViHistory.openDocumentation",
+  "onCommand:labviewViHistory.prepareLocalRuntimeSettingsCli"
+]);
+requireTextIncludes("README.md", [
+  "command-activation-surface-v1",
+  "docs/requirements/admissions/command-activation-surface-v1.json",
+  "Issue #30"
+]);
+requireTextIncludes("AGENTS.md", [
+  "command-activation-surface-v1",
+  "003-command-activation-surface-v1",
+  "Current Implementation Admission Unit: none"
 ]);
 
 if (failures.length > 0) {

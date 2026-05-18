@@ -33,6 +33,15 @@ Read these before changing code:
 - `docs/requirements/admissions/installed-user-observation-public-surface-v1.json`
 - `docs/requirements/admissions/installed-user-observation-public-surface-v1/IAU-installed-user-observation-model-v1.json`
 - `docs/requirements/admissions/installed-user-observation-public-surface-v1/IAU-installed-user-observation-model-v1-preflight-v1.json`
+- `docs/requirements/imports/command-activation-surface-v1/manifest.json`
+- `docs/requirements/imports/command-activation-surface-v1/syrs.md`
+- `docs/requirements/imports/command-activation-surface-v1/srs.md`
+- `docs/requirements/imports/command-activation-surface-v1/rtm.csv`
+- `docs/requirements/imports/command-activation-surface-v1/test-plan.md`
+- `.specify/specs/command-activation-surface-v1/spec.md`
+- `.specify/specs/command-activation-surface-v1/plan.md`
+- `.specify/specs/command-activation-surface-v1/tasks.md`
+- `docs/requirements/admissions/command-activation-surface-v1.json`
 
 ## Current Status
 
@@ -55,6 +64,10 @@ Completed units:
 Completed installed-user observation unit:
 
 - `IAU-installed-user-observation-model-v1`
+
+Spec-locked import without implementation admission:
+
+- `command-activation-surface-v1`
 
 Completed runtime-contract tasks:
 
@@ -86,12 +99,21 @@ start with a new public bridge admission record before any code changes. A
 valid work packet must name a new IAU, admitted tasks, blocked tasks, preflight
 status, source files, expected write area, and validation commands.
 
+Issue #30 imports `command-activation-surface-v1` and locks the Spec Kit
+feature. It does not admit manifest implementation, command handlers,
+documentation rendering, runtime settings CLI materialization, compare
+execution, packaging, or Marketplace publication.
+
 ## Blocked Work
 
 Do not implement these without a separate bridge admission:
 
 - LabVIEWCLI command execution
 - Docker command execution or container orchestration
+- command activation manifest implementation without a named IAU preflight
+- command handler implementation
+- documentation panel implementation
+- runtime settings CLI materialization
 - observation report rendering for T014-T016
 - Marketplace publication or packaging
 - source copying from another VI History product line
