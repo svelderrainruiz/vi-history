@@ -87,7 +87,20 @@ No-argument interactive selection, compare execution, LabVIEWCLI execution,
 Docker execution, live-session proof, packaging, and Marketplace publication
 remain blocked.
 
-Current Implementation Admission Unit: none.
+`runtime-settings-cli-interactive-selection-v1` admits
+`IAU-runtime-settings-cli-interactive-selection-contract-v1` for Issue #60 and
+T009-T013 only. Issue #60 is an admission issue; implementation must wait for a
+separate handoff issue after the admission PR merges. The admitted work is a
+pure selection-state contract: default seeding, current bundle reporting,
+Enter-through confirmation, guided host selection, Docker 2026 x64 bounds, and
+validation readback handoff facts.
+
+Terminal process prompt loops, compare execution, LabVIEWCLI execution, Docker
+execution or orchestration, proof-out expansion, live-session proof, packaging,
+and Marketplace publication remain blocked.
+
+Current Implementation Admission Unit:
+`IAU-runtime-settings-cli-interactive-selection-contract-v1`.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that
@@ -97,7 +110,7 @@ When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:
 
 ```bash
-SPECIFY_FEATURE=009-runtime-settings-cli-validation-proof-v1 \
-SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-validation-proof-v1 \
+SPECIFY_FEATURE=010-runtime-settings-cli-interactive-selection-v1 \
+SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-interactive-selection-v1 \
 .specify/scripts/bash/check-prerequisites.sh --json --paths-only
 ```

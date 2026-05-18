@@ -99,6 +99,17 @@ Read these before changing code:
 - `docs/requirements/admissions/runtime-settings-cli-validation-proof-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-proof-v1/IAU-runtime-settings-cli-validation-proof-artifact-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-proof-v1/IAU-runtime-settings-cli-validation-proof-artifact-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-interactive-selection-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-interactive-selection-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-interactive-selection-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-interactive-selection-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-interactive-selection-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-interactive-selection-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-interactive-selection-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-interactive-selection-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-interactive-selection-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-interactive-selection-v1/IAU-runtime-settings-cli-interactive-selection-contract-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-interactive-selection-v1/IAU-runtime-settings-cli-interactive-selection-contract-v1-preflight-v1.json`
 
 ## Current Status
 
@@ -205,6 +216,12 @@ Issue #57 implements and closes
 `IAU-runtime-settings-cli-validation-proof-artifact-v1` for T009-T012 only. No
 new Copilot implementation should start from Issue #57.
 
+Issue #60 admits
+`IAU-runtime-settings-cli-interactive-selection-contract-v1` for
+`runtime-settings-cli-interactive-selection-v1` and T009-T013 only. Issue #60
+is an admission issue. Copilot implementation must wait for the separate
+handoff issue created after the admission PR merges.
+
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.
 
@@ -223,7 +240,9 @@ Do not implement these without a separate bridge admission:
 - validation proof artifact behavior beyond the admitted pure proof JSON and
   issue-body contract
 - compare execution
-- no-argument interactive selection
+- no-argument interactive selection beyond the admitted pure selection-state
+  contract
+- terminal process prompt loops or raw stdin handling
 - proof-out file generation
 - live already-running VS Code session uptake proof
 - observation report rendering for T014-T016
