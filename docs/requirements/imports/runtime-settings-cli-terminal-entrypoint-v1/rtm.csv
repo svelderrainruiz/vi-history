@@ -1,0 +1,7 @@
+Requirement ID,Public Verification ID,Verification Summary,Public Artifact
+VHS-REQ-537,TEST-UNIT-RSTERMINAL-001,Prove a materialized bare vihs terminal entrypoint is represented without hidden path reconstruction profile editing admin elevation machine-wide install doctrine or prebuilt external CLI payload,tests/runtime-settings-cli-terminal-entrypoint-materialization.test.mjs
+VHS-REQ-537,TEST-UNIT-RSTERMINAL-002,Prove supported terminal-session admission records stay user-scoped and expose the intended entrypoint state,tests/runtime-settings-cli-terminal-entrypoint-materialization.test.mjs
+VHS-REQ-544,TEST-UNIT-RSTERMINAL-003,Prove runtime lookup and recovery facts prefer the standard VS Code runtime on Windows before global Node fallback or explicit override,tests/runtime-settings-cli-terminal-entrypoint-materialization.test.mjs
+VHS-REQ-544,TEST-UNIT-RSTERMINAL-004,Prove stale or missing launchers fail closed with one stable actionable recovery instruction,tests/runtime-settings-cli-terminal-entrypoint-materialization.test.mjs
+VHS-REQ-545,TEST-UNIT-RSTERMINAL-005,Prove no-argument discoverability facts can report the current runtime bundle and exact copyable next commands without raw prompt-loop behavior,tests/runtime-settings-cli-terminal-entrypoint-materialization.test.mjs
+VHS-REQ-546,TEST-UNIT-RSTERMINAL-006,Prove validation handoff remains a public contract reference and does not add validation execution or proof-out expansion in the first IAU,tests/runtime-settings-cli-terminal-entrypoint-materialization.test.mjs

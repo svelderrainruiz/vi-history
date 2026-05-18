@@ -60,6 +60,12 @@ const runtimeSettingsInteractiveImportDir = `docs/requirements/imports/${runtime
 const runtimeSettingsInteractiveAdmissionPath = `docs/requirements/admissions/${runtimeSettingsInteractiveSliceId}.json`;
 const runtimeSettingsInteractiveIauPath = `docs/requirements/admissions/${runtimeSettingsInteractiveSliceId}/IAU-runtime-settings-cli-interactive-selection-contract-v1.json`;
 const runtimeSettingsInteractivePreflightPath = `docs/requirements/admissions/${runtimeSettingsInteractiveSliceId}/IAU-runtime-settings-cli-interactive-selection-contract-v1-preflight-v1.json`;
+const runtimeSettingsTerminalSliceId = "runtime-settings-cli-terminal-entrypoint-v1";
+const runtimeSettingsTerminalFeatureDir = `.specify/specs/${runtimeSettingsTerminalSliceId}`;
+const runtimeSettingsTerminalImportDir = `docs/requirements/imports/${runtimeSettingsTerminalSliceId}`;
+const runtimeSettingsTerminalAdmissionPath = `docs/requirements/admissions/${runtimeSettingsTerminalSliceId}.json`;
+const runtimeSettingsTerminalIauPath = `docs/requirements/admissions/${runtimeSettingsTerminalSliceId}/IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1.json`;
+const runtimeSettingsTerminalPreflightPath = `docs/requirements/admissions/${runtimeSettingsTerminalSliceId}/IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1-preflight-v1.json`;
 const marketplaceAdrPath = "docs/decisions/ADR-001-marketplace-publication-disabled.md";
 const explicitCompareIauPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1.json`;
 const explicitComparePreflightPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1-preflight-v1.json`;
@@ -121,6 +127,12 @@ const runtimeSettingsProofExpectedIds = [
   "VHS-REQ-546"
 ];
 const runtimeSettingsInteractiveExpectedIds = [
+  "VHS-REQ-545",
+  "VHS-REQ-546"
+];
+const runtimeSettingsTerminalExpectedIds = [
+  "VHS-REQ-537",
+  "VHS-REQ-544",
   "VHS-REQ-545",
   "VHS-REQ-546"
 ];
@@ -199,11 +211,12 @@ requireTextIncludes(".specify/memory/constitution.md", [
   "runtime-settings-cli-validation-readback-v1",
   "runtime-settings-cli-validation-proof-v1",
   "runtime-settings-cli-interactive-selection-v1",
-  "**Version**: 0.1.8"
+  "runtime-settings-cli-terminal-entrypoint-v1",
+  "**Version**: 0.1.9"
 ]);
 
 const featureJson = readJson(".specify/feature.json");
-requireEqual(featureJson.feature_directory, runtimeSettingsInteractiveFeatureDir, "pinned Spec Kit feature directory");
+requireEqual(featureJson.feature_directory, runtimeSettingsTerminalFeatureDir, "pinned Spec Kit feature directory");
 
 const admission = readJson(admissionPath);
 requireEqual(admission.schema, "vi-history/requirements-admission@v1", "admission schema");
@@ -580,7 +593,7 @@ requireTextIncludes("README.md", [
 requireTextIncludes("AGENTS.md", [
   "installed-user-observation-public-surface-v1",
   "IAU-installed-user-observation-model-v1",
-  "010-runtime-settings-cli-interactive-selection-v1"
+  "011-runtime-settings-cli-terminal-entrypoint-v1"
 ]);
 
 const commandAdmission = readJson(commandAdmissionPath);
@@ -1067,7 +1080,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-bootstrap-v1",
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-prepare-command-shell-v1",
-  "010-runtime-settings-cli-interactive-selection-v1"
+  "011-runtime-settings-cli-terminal-entrypoint-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-bootstrap-v1",
@@ -1203,7 +1216,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-settings-write-v1",
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-settings-write-contract-v1",
-  "010-runtime-settings-cli-interactive-selection-v1"
+  "011-runtime-settings-cli-terminal-entrypoint-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-settings-write-v1",
@@ -1338,7 +1351,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-validation-readback-v1",
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-validation-readback-contract-v1",
-  "010-runtime-settings-cli-interactive-selection-v1"
+  "011-runtime-settings-cli-terminal-entrypoint-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-readback-v1",
@@ -1482,7 +1495,7 @@ requireTextIncludes("AGENTS.md", [
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-validation-proof-artifact-v1",
   "IAU-runtime-settings-cli-interactive-selection-contract-v1",
-  "010-runtime-settings-cli-interactive-selection-v1"
+  "011-runtime-settings-cli-terminal-entrypoint-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-proof-v1",
@@ -1625,9 +1638,9 @@ requireTextIncludes("AGENTS.md", [
   "Issue #60",
   "Issue #62",
   "Current Implementation Admission Unit",
-  "none",
+  "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
   "IAU-runtime-settings-cli-interactive-selection-contract-v1",
-  "010-runtime-settings-cli-interactive-selection-v1"
+  "011-runtime-settings-cli-terminal-entrypoint-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-interactive-selection-v1",
@@ -1635,6 +1648,151 @@ requireTextIncludes("docs/development/copilot-workflow.md", [
   "Issue #62",
   "IAU-runtime-settings-cli-interactive-selection-contract-v1",
   "no-argument interactive selection beyond the admitted pure selection-state"
+]);
+
+const runtimeSettingsTerminalAdmission = readJson(runtimeSettingsTerminalAdmissionPath);
+requireEqual(runtimeSettingsTerminalAdmission.schema, "vi-history/requirements-admission@v1", "runtime settings terminal admission schema");
+requireEqual(runtimeSettingsTerminalAdmission.sliceId, runtimeSettingsTerminalSliceId, "runtime settings terminal admission sliceId");
+requireEqual(runtimeSettingsTerminalAdmission.state, "implementation-admitted", "runtime settings terminal admission state");
+requireEqual(runtimeSettingsTerminalAdmission.targetProduct, "vi-history", "runtime settings terminal admission targetProduct");
+requireEqual(runtimeSettingsTerminalAdmission.targetFeature, runtimeSettingsTerminalSliceId, "runtime settings terminal admission targetFeature");
+requireEqual(runtimeSettingsTerminalAdmission.sourceBaselineTag, "v1.3.16", "runtime settings terminal admission sourceBaselineTag");
+requireEqual(runtimeSettingsTerminalAdmission.sourceCommit, "3716d35a7ba57031464a81902f37862128f53681", "runtime settings terminal admission sourceCommit");
+requireEqual(runtimeSettingsTerminalAdmission.governedAdmissionCommit, "913f840a9dd23319d91d5fcf5862be9615d5b8d0", "runtime settings terminal admission governedAdmissionCommit");
+requireEqual(runtimeSettingsTerminalAdmission.implementationSharing, "none", "runtime settings terminal admission implementationSharing");
+requireMarketplacePosture(runtimeSettingsTerminalAdmission, "runtime settings terminal admission");
+requireEqual(runtimeSettingsTerminalAdmission.currentImplementationAdmissionUnit, "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1", "runtime settings terminal currentImplementationAdmissionUnit");
+requireArrayEqual(runtimeSettingsTerminalAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "runtime settings terminal completedSpecScope");
+requireArrayEqual(runtimeSettingsTerminalAdmission.completedImplementationScope, [], "runtime settings terminal completedImplementationScope");
+requireArrayEqual(runtimeSettingsTerminalAdmission.admittedImplementationScope, ["T009", "T010", "T011", "T012", "T013"], "runtime settings terminal admittedImplementationScope");
+requireArrayEqual(runtimeSettingsTerminalAdmission.blockedImplementationScope, ["T014", "T015", "T016", "T017", "T018", "T019"], "runtime settings terminal blockedImplementationScope");
+requireEqual(runtimeSettingsTerminalAdmission.preImplementationPreflight?.iauId, "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1", "runtime settings terminal preImplementationPreflight iauId");
+requireEqual(runtimeSettingsTerminalAdmission.preImplementationPreflight?.status, "pass", "runtime settings terminal preImplementationPreflight status");
+requireEqual(runtimeSettingsTerminalAdmission.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings terminal preImplementationPreflight implementationStartAllowed");
+requireEqual(runtimeSettingsTerminalAdmission.preImplementationPreflight?.record, runtimeSettingsTerminalPreflightPath, "runtime settings terminal preImplementationPreflight record");
+requireEqual(runtimeSettingsTerminalAdmission.issue?.number, 65, "runtime settings terminal issue number");
+requireEqual(runtimeSettingsTerminalAdmission.implementationHandoffIssue, null, "runtime settings terminal implementationHandoffIssue");
+requireEqual(runtimeSettingsTerminalAdmission.implementationCloseout, null, "runtime settings terminal implementationCloseout");
+requireFile(`docs/requirements/admissions/${runtimeSettingsTerminalSliceId}.md`);
+
+const runtimeSettingsTerminalAdmissionUnit = (runtimeSettingsTerminalAdmission.implementationAdmissionUnits ?? [])
+  .find((unit) => unit?.iauId === "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1");
+requireEqual(runtimeSettingsTerminalAdmissionUnit?.state, "implementation-admitted", "runtime settings terminal admission unit state");
+requireEqual(runtimeSettingsTerminalAdmissionUnit?.preflightRecord, runtimeSettingsTerminalPreflightPath, "runtime settings terminal admission unit preflightRecord");
+
+const runtimeSettingsTerminalIau = readJson(runtimeSettingsTerminalIauPath);
+requireEqual(runtimeSettingsTerminalIau.schema, "vi-history/implementation-admission-unit@v1", "runtime settings terminal IAU schema");
+requireEqual(runtimeSettingsTerminalIau.iauId, "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1", "runtime settings terminal IAU id");
+requireEqual(runtimeSettingsTerminalIau.state, "implementation-admitted", "runtime settings terminal IAU state");
+requireEqual(runtimeSettingsTerminalIau.parentSliceId, runtimeSettingsTerminalSliceId, "runtime settings terminal IAU parentSliceId");
+requireArrayEqual(runtimeSettingsTerminalIau.admittedTasks, ["T009", "T010", "T011", "T012", "T013"], "runtime settings terminal IAU admittedTasks");
+requireArrayEqual(runtimeSettingsTerminalIau.blockedTasks, ["T014", "T015", "T016", "T017", "T018", "T019"], "runtime settings terminal IAU blockedTasks");
+requireEqual(runtimeSettingsTerminalIau.implementationSharing, "none", "runtime settings terminal IAU implementationSharing");
+requireMarketplacePosture(runtimeSettingsTerminalIau, "runtime settings terminal IAU");
+requireEqual(runtimeSettingsTerminalIau.preImplementationPreflight?.status, "pass", "runtime settings terminal IAU preImplementationPreflight status");
+requireEqual(runtimeSettingsTerminalIau.preImplementationPreflight?.record, "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1-preflight-v1.json", "runtime settings terminal IAU preImplementationPreflight record");
+requireEqual(runtimeSettingsTerminalIau.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings terminal IAU preImplementationPreflight implementationStartAllowed");
+requireEqual(runtimeSettingsTerminalIau.implementationHandoffIssue, null, "runtime settings terminal IAU implementationHandoffIssue");
+requireEqual(runtimeSettingsTerminalIau.implementationCloseout, null, "runtime settings terminal IAU implementationCloseout");
+requireFile(`docs/requirements/admissions/${runtimeSettingsTerminalSliceId}/IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1.md`);
+
+const runtimeSettingsTerminalPreflight = readJson(runtimeSettingsTerminalPreflightPath);
+requireEqual(runtimeSettingsTerminalPreflight.schema, "vi-history/implementation-admission-unit-preflight@v1", "runtime settings terminal preflight schema");
+requireEqual(runtimeSettingsTerminalPreflight.iauId, "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1", "runtime settings terminal preflight iauId");
+requireEqual(runtimeSettingsTerminalPreflight.status, "pass", "runtime settings terminal preflight status");
+requireEqual(runtimeSettingsTerminalPreflight.implementationStartAllowed, true, "runtime settings terminal preflight implementationStartAllowed");
+requireEqual(runtimeSettingsTerminalPreflight.parentSliceId, runtimeSettingsTerminalSliceId, "runtime settings terminal preflight parentSliceId");
+requireEqual(runtimeSettingsTerminalPreflight.implementationSharing, "none", "runtime settings terminal preflight implementationSharing");
+requireMarketplacePosture(runtimeSettingsTerminalPreflight, "runtime settings terminal preflight");
+requireArrayEqual(runtimeSettingsTerminalPreflight.implementationStartScope, ["T009", "T010", "T011", "T012", "T013"], "runtime settings terminal preflight implementationStartScope");
+if (!Array.isArray(runtimeSettingsTerminalPreflight.checkResults) || runtimeSettingsTerminalPreflight.checkResults.length !== runtimeSettingsTerminalPreflight.requiredChecks.length) {
+  failures.push("runtime settings terminal preflight checkResults: must match requiredChecks length");
+} else {
+  for (const result of runtimeSettingsTerminalPreflight.checkResults) {
+    requireEqual(result.status, "pass", `runtime settings terminal preflight check result ${result.check}`);
+  }
+}
+requireFile(`docs/requirements/admissions/${runtimeSettingsTerminalSliceId}/IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1-preflight-v1.md`);
+
+const runtimeSettingsTerminalManifest = readJson(`${runtimeSettingsTerminalImportDir}/manifest.json`);
+requireEqual(runtimeSettingsTerminalManifest.schema, "vi-history/requirements-import@v1", "runtime settings terminal manifest schema");
+requireEqual(runtimeSettingsTerminalManifest.sliceId, runtimeSettingsTerminalSliceId, "runtime settings terminal sliceId");
+requireEqual(runtimeSettingsTerminalManifest.sourceBaselineTag, "v1.3.16", "runtime settings terminal sourceBaselineTag");
+requireEqual(runtimeSettingsTerminalManifest.sourceCommit, "3716d35a7ba57031464a81902f37862128f53681", "runtime settings terminal sourceCommit");
+requireEqual(runtimeSettingsTerminalManifest.governedAdmissionCommit, "913f840a9dd23319d91d5fcf5862be9615d5b8d0", "runtime settings terminal governedAdmissionCommit");
+requireEqual(runtimeSettingsTerminalManifest.targetProduct, "vi-history", "runtime settings terminal targetProduct");
+requireEqual(runtimeSettingsTerminalManifest.targetFeature, runtimeSettingsTerminalSliceId, "runtime settings terminal targetFeature");
+requireEqual(runtimeSettingsTerminalManifest.redactionStatus, "pass", "runtime settings terminal redactionStatus");
+requireEqual(runtimeSettingsTerminalManifest.implementationSharing, "none", "runtime settings terminal implementationSharing");
+requireEqual(runtimeSettingsTerminalManifest.marketplacePublication, "disabled-until-later-adr", "runtime settings terminal marketplacePublication");
+requireArrayEqual(runtimeSettingsTerminalManifest.importedRequirementIds, runtimeSettingsTerminalExpectedIds, "runtime settings terminal importedRequirementIds");
+requireArrayEqual(runtimeSettingsTerminalManifest.supportingTestIds, ["TEST-UNIT-345", "TEST-UNIT-352", "TEST-UNIT-353", "TEST-UNIT-354", "TEST-INTEG-009", "TEST-INTEG-010", "TEST-INTEG-011"], "runtime settings terminal supportingTestIds");
+requireArrayEqual(runtimeSettingsTerminalManifest.files, ["syrs.md", "srs.md", "rtm.csv", "test-plan.md"], "runtime settings terminal manifest files");
+
+for (const file of runtimeSettingsTerminalManifest.files ?? []) {
+  requireFile(`${runtimeSettingsTerminalImportDir}/${file}`);
+}
+
+for (const file of ["spec.md", "plan.md", "tasks.md"]) {
+  requireFile(`${runtimeSettingsTerminalFeatureDir}/${file}`);
+}
+
+requireTextIncludes(`${runtimeSettingsTerminalFeatureDir}/spec.md`, [
+  "Runtime Settings CLI Terminal Entrypoint",
+  "VHS-REQ-537",
+  "VHS-REQ-544",
+  "VHS-REQ-545",
+  "VHS-REQ-546",
+  "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
+  "clean-room"
+]);
+requireTextIncludes(`${runtimeSettingsTerminalFeatureDir}/plan.md`, [
+  "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
+  "Issue #65",
+  "Marketplace publication remains disabled"
+]);
+requireTextIncludes(`${runtimeSettingsTerminalFeatureDir}/tasks.md`, [
+  "Issue #65",
+  "- [x] T001",
+  "- [x] T008",
+  "- [ ] T009",
+  "- [ ] T013",
+  "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
+  "[BLOCKED]",
+  "T019"
+]);
+requireTextIncludes(`${runtimeSettingsTerminalImportDir}/rtm.csv`, runtimeSettingsTerminalExpectedIds);
+requireTextIncludes(`${runtimeSettingsTerminalImportDir}/srs.md`, [
+  "VHS-REQ-537",
+  "VHS-REQ-544",
+  "VHS-REQ-545",
+  "VHS-REQ-546",
+  "TEST-UNIT-345",
+  "TEST-UNIT-352",
+  "TEST-UNIT-353",
+  "TEST-UNIT-354",
+  "user-scope admission",
+  "validation handoff"
+]);
+requireTextIncludes("README.md", [
+  "runtime-settings-cli-terminal-entrypoint-v1",
+  "docs/requirements/admissions/runtime-settings-cli-terminal-entrypoint-v1.json",
+  "Issue #65",
+  "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
+  "Current Implementation Admission Unit"
+]);
+requireTextIncludes("AGENTS.md", [
+  "runtime-settings-cli-terminal-entrypoint-v1",
+  "Issue #65",
+  "Current Implementation Admission Unit",
+  "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
+  "011-runtime-settings-cli-terminal-entrypoint-v1"
+]);
+requireTextIncludes("docs/development/copilot-workflow.md", [
+  "runtime-settings-cli-terminal-entrypoint-v1",
+  "Issue #65",
+  "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
+  "terminal entrypoint implementation beyond"
 ]);
 
 if (failures.length > 0) {

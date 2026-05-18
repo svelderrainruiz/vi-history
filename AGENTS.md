@@ -36,7 +36,7 @@ metadata.
 `IAU-command-handler-entrypoint-shell-v1` for Issue #36 and T009-T011 only:
 entrypoint shell tests and the minimum public MIT entrypoint shell.
 `IAU-command-handler-entrypoint-shell-v1` is closed. Issue #36 must not be
-reused for new implementation. No current IAU is active.
+reused for new implementation.
 
 `installed-user-documentation-command-v1` implemented
 `IAU-documentation-command-panel-shell-v1` for Issue #41 and T009-T011 only:
@@ -95,11 +95,18 @@ contract: default seeding, current bundle reporting, Enter-through
 confirmation, guided host selection, Docker 2026 x64 bounds, and validation
 readback handoff facts.
 
+`runtime-settings-cli-terminal-entrypoint-v1` admits
+`IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1` for Issue #65
+and T009-T013 only. Issue #65 is an admission issue and must not be reused for
+implementation. A separate handoff issue is required before Copilot or any
+agent implements the materialized-entrypoint contract.
+
 Terminal process prompt loops, compare execution, LabVIEWCLI execution, Docker
 execution or orchestration, proof-out expansion, live-session proof, packaging,
 and Marketplace publication remain blocked.
 
-Current Implementation Admission Unit: none.
+Current Implementation Admission Unit:
+`IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1`.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that
@@ -109,7 +116,7 @@ When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:
 
 ```bash
-SPECIFY_FEATURE=010-runtime-settings-cli-interactive-selection-v1 \
-SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-interactive-selection-v1 \
+SPECIFY_FEATURE=011-runtime-settings-cli-terminal-entrypoint-v1 \
+SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-terminal-entrypoint-v1 \
 .specify/scripts/bash/check-prerequisites.sh --json --paths-only
 ```

@@ -1,7 +1,7 @@
 <!--
 Sync Impact Report
-Version change: 0.1.7 -> 0.1.8
-Modified principles: imported slice registry adds runtime settings CLI interactive selection contract
+Version change: 0.1.8 -> 0.1.9
+Modified principles: imported slice registry adds runtime settings CLI terminal entrypoint contract
 Added sections: Authority Boundaries, Development Workflow, Governance
 Removed sections: unresolved template placeholders
 Templates requiring updates: pending after first implementation planning pass
@@ -89,6 +89,10 @@ The imported slices are:
   `docs/requirements/imports/runtime-settings-cli-interactive-selection-v1/`
   and Spec Kit feature under
   `.specify/specs/runtime-settings-cli-interactive-selection-v1/`.
+- `runtime-settings-cli-terminal-entrypoint-v1`, with its import packet under
+  `docs/requirements/imports/runtime-settings-cli-terminal-entrypoint-v1/`
+  and Spec Kit feature under
+  `.specify/specs/runtime-settings-cli-terminal-entrypoint-v1/`.
 
 The active pinned Spec Kit feature is recorded in `.specify/feature.json`.
 
@@ -105,4 +109,4 @@ This constitution governs repository-local work. Amendments require a versioned
 change, a short rationale, and validation that affected Spec Kit templates and
 repository guidance remain consistent.
 
-**Version**: 0.1.8 | **Ratified**: 2026-05-17 | **Last Amended**: 2026-05-18
+**Version**: 0.1.9 | **Ratified**: 2026-05-17 | **Last Amended**: 2026-05-18

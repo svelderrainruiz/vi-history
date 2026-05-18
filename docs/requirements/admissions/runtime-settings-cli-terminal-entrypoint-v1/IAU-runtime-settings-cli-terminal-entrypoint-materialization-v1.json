@@ -1,0 +1,56 @@
+{
+  "schema": "vi-history/implementation-admission-unit@v1",
+  "iauId": "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
+  "createdDate": "2026-05-18",
+  "state": "implementation-admitted",
+  "parentSliceId": "runtime-settings-cli-terminal-entrypoint-v1",
+  "specFeature": ".specify/specs/runtime-settings-cli-terminal-entrypoint-v1",
+  "admittedTasks": [
+    "T009",
+    "T010",
+    "T011",
+    "T012",
+    "T013"
+  ],
+  "blockedTasks": [
+    "T014",
+    "T015",
+    "T016",
+    "T017",
+    "T018",
+    "T019"
+  ],
+  "entryGate": {
+    "publicImport": "docs/requirements/imports/runtime-settings-cli-terminal-entrypoint-v1/manifest.json",
+    "spec": ".specify/specs/runtime-settings-cli-terminal-entrypoint-v1/spec.md",
+    "plan": ".specify/specs/runtime-settings-cli-terminal-entrypoint-v1/plan.md",
+    "tasks": ".specify/specs/runtime-settings-cli-terminal-entrypoint-v1/tasks.md",
+    "preflight": "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1-preflight-v1.json"
+  },
+  "exitGate": {
+    "requiredCommands": [
+      "npm test",
+      "npm run check",
+      "git diff --check"
+    ],
+    "reviewChecks": [
+      "T009-T013 only",
+      "no raw prompt-loop stdin handling",
+      "no runtime execution",
+      "no compare execution",
+      "no proof-out expansion",
+      "no Marketplace behavior",
+      "no source copying"
+    ]
+  },
+  "implementationSharing": "none",
+  "marketplacePublication": "disabled",
+  "marketplacePublicationAdr": "docs/decisions/ADR-001-marketplace-publication-disabled.md",
+  "preImplementationPreflight": {
+    "status": "pass",
+    "record": "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1-preflight-v1.json",
+    "implementationStartAllowed": true
+  },
+  "implementationHandoffIssue": null,
+  "implementationCloseout": null
+}
