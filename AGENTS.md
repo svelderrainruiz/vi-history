@@ -44,10 +44,18 @@ Open Documentation handler tests, public-safe bundled documentation contract
 tests, and the minimum documentation command panel shell. Issue #41 must not be
 reused for new implementation.
 
-Runtime settings CLI materialization, compare execution, LabVIEWCLI execution,
+`runtime-settings-cli-bootstrap-v1` admits
+`IAU-runtime-settings-cli-prepare-command-shell-v1` for Issue #43 and T009-T011
+only after its admission PR merges: prepare-command handler tests, launcher
+materialization/recovery fact tests, and the minimum prepare-command shell.
+Issue #43 is an admission issue and must not be reused for implementation.
+
+Provider/version/bitness settings mutation, JSONC settings rewrite,
+`vihs --validate`, runtime validation, compare execution, LabVIEWCLI execution,
 Docker execution, packaging, and Marketplace publication remain blocked.
 
-Current Implementation Admission Unit: none.
+Current Implementation Admission Unit:
+`IAU-runtime-settings-cli-prepare-command-shell-v1`.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that
@@ -57,7 +65,7 @@ When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:
 
 ```bash
-SPECIFY_FEATURE=005-installed-user-documentation-command-v1 \
-SPECIFY_FEATURE_DIRECTORY=.specify/specs/installed-user-documentation-command-v1 \
+SPECIFY_FEATURE=006-runtime-settings-cli-bootstrap-v1 \
+SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-bootstrap-v1 \
 .specify/scripts/bash/check-prerequisites.sh --json --paths-only
 ```

@@ -55,6 +55,17 @@ Read these before changing code:
 - `docs/requirements/admissions/command-handler-entrypoint-shell-v1.json`
 - `docs/requirements/admissions/command-handler-entrypoint-shell-v1/IAU-command-handler-entrypoint-shell-v1.json`
 - `docs/requirements/admissions/command-handler-entrypoint-shell-v1/IAU-command-handler-entrypoint-shell-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-bootstrap-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-bootstrap-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-bootstrap-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-bootstrap-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-bootstrap-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-bootstrap-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-bootstrap-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-bootstrap-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-bootstrap-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-bootstrap-v1/IAU-runtime-settings-cli-prepare-command-shell-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-bootstrap-v1/IAU-runtime-settings-cli-prepare-command-shell-v1-preflight-v1.json`
 
 ## Current Status
 
@@ -128,6 +139,13 @@ T009-T011 only: documentation command handler tests, public-safe bundled
 documentation contract tests, and the minimum documentation command panel shell.
 No new Copilot implementation should start from Issue #41.
 
+Issue #43 admits `IAU-runtime-settings-cli-prepare-command-shell-v1` for
+`runtime-settings-cli-bootstrap-v1` after its admission PR merges. It admits
+only T009-T011: prepare-command handler tests, launcher materialization and
+recovery fact tests, and the minimum prepare-command shell. A separate
+implementation handoff issue must be created before Copilot implementation
+starts.
+
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.
 
@@ -138,7 +156,9 @@ Do not implement these without a separate bridge admission:
 - LabVIEWCLI command execution
 - Docker command execution or container orchestration
 - documentation navigation or rendering beyond the admitted minimum command shell
-- runtime settings CLI materialization
+- runtime settings CLI materialization beyond the admitted prepare-command shell
+- provider/version/bitness settings mutation or JSONC settings rewrite
+- `vihs --validate` or runtime validation output
 - compare execution
 - observation report rendering for T014-T016
 - Marketplace publication or packaging
