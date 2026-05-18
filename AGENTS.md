@@ -38,17 +38,16 @@ entrypoint shell tests and the minimum public MIT entrypoint shell.
 `IAU-command-handler-entrypoint-shell-v1` is closed. Issue #36 must not be
 reused for new implementation. No current IAU is active.
 
-`installed-user-documentation-command-v1` admits
-`IAU-documentation-command-panel-shell-v1` after the admission PR merges to
-`develop`. It admits only T009-T011: Open Documentation handler tests,
-public-safe bundled documentation contract tests, and the minimum documentation
-command panel shell.
+`installed-user-documentation-command-v1` implemented
+`IAU-documentation-command-panel-shell-v1` for Issue #41 and T009-T011 only:
+Open Documentation handler tests, public-safe bundled documentation contract
+tests, and the minimum documentation command panel shell. Issue #41 must not be
+reused for new implementation.
 
 Runtime settings CLI materialization, compare execution, LabVIEWCLI execution,
 Docker execution, packaging, and Marketplace publication remain blocked.
 
-Current Implementation Admission Unit:
-`IAU-documentation-command-panel-shell-v1` after the admission PR merges.
+Current Implementation Admission Unit: none.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that

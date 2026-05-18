@@ -37,23 +37,20 @@ the installed-user documentation command.
 
 ## Phase 2: Admitted IAU - Documentation Command Panel Shell
 
-**Purpose**: Admit the smallest documentation command implementation step:
-tests, public-safe bundled docs contract, and minimal command panel shell only.
+**Purpose**: Implement the smallest documentation command step: tests,
+public-safe bundled docs contract, and minimal command panel shell only.
 
-**Current IAU**: `IAU-documentation-command-panel-shell-v1`
+**Implemented IAU**: `IAU-documentation-command-panel-shell-v1`
 
 **Public admission issue**: Issue #39
 
-**Implementation may start after**:
-`docs/requirements/admissions/installed-user-documentation-command-v1/IAU-documentation-command-panel-shell-v1-preflight-v1.json`
-records `status: "pass"` on `develop`.
+**Implementation handoff issue**: Issue #41
 
-- [ ] T009 Add tests proving `labviewViHistory.openDocumentation` registers as
+- [x] T009 Add tests proving `labviewViHistory.openDocumentation` registers as
   a separate handler from `labviewViHistory.open`.
-- [ ] T010 Add tests proving a public-safe bundled documentation manifest/page
+- [x] T010 Add tests proving a public-safe bundled documentation manifest/page
   contract exists.
-- [ ] T011 Implement the minimum public MIT documentation command panel shell
-  after preflight.
+- [x] T011 Implement the minimum public MIT documentation command panel shell.
 
 ---
 
@@ -83,17 +80,16 @@ records `status: "pass"` on `develop`.
 
 - Phase 1 must merge before `IAU-documentation-command-panel-shell-v1`
   implementation starts.
-- Phase 2 may be implemented only by the current admitted IAU after the
-  preflight record passes on `develop`.
+- Phase 2 is implemented and closed for
+  `IAU-documentation-command-panel-shell-v1`.
 - Phase 3 remains blocked until separate public requirements and preflight
   records admit runtime or release behavior.
-- Future Copilot implementation work must start from a new implementation
-  handoff issue after this admission PR merges.
+- Future Copilot implementation work must start from a new bridge admission and
+  implementation handoff issue. Issue #41 must not be reused.
 
 ## Implementation Strategy
 
 1. Merge import/spec/admission artifacts to `develop`.
-2. Create a separate implementation handoff issue for
-   `IAU-documentation-command-panel-shell-v1`.
+2. Complete Issue #41 for `IAU-documentation-command-panel-shell-v1`.
 3. Keep runtime settings CLI materialization, compare execution, LabVIEWCLI,
    Docker, Marketplace publication, packaging, and source copying blocked.

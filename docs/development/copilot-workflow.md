@@ -122,12 +122,11 @@ Issue #36 completed `IAU-command-handler-entrypoint-shell-v1`. No new Copilot
 implementation should start from Issue #36. It implemented only T009-T011:
 entrypoint shell tests and the minimum public MIT entrypoint shell.
 
-Issue #39 admits `IAU-documentation-command-panel-shell-v1` for
-`installed-user-documentation-command-v1`. Copilot implementation should not
-start until the admission PR is merged and a separate implementation handoff
-issue is opened. The admitted scope is only T009-T011:
-documentation command handler tests, public-safe bundled documentation contract
-tests, and the minimum documentation command panel shell.
+Issue #39 admitted `IAU-documentation-command-panel-shell-v1` for
+`installed-user-documentation-command-v1`. Issue #41 completed that IAU for
+T009-T011 only: documentation command handler tests, public-safe bundled
+documentation contract tests, and the minimum documentation command panel shell.
+No new Copilot implementation should start from Issue #41.
 
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.

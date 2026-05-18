@@ -1,0 +1,11 @@
+{
+  "schema": "vi-history/bundled-documentation-manifest@v1",
+  "manifestVersion": 1,
+  "pages": [
+    {
+      "id": "getting-started",
+      "title": "Getting Started",
+      "path": "docs/installed-user/getting-started.md"
+    }
+  ]
+}
