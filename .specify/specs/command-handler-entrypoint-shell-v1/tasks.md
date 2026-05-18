@@ -38,11 +38,9 @@ the command handler entrypoint shell.
 **Purpose**: Admit the smallest command-handler implementation step: tests and
 minimal entrypoint shell only.
 
-**Current IAU**: `IAU-command-handler-entrypoint-shell-v1`
-
-**Implementation may start after**:
-`docs/requirements/admissions/command-handler-entrypoint-shell-v1/IAU-command-handler-entrypoint-shell-v1-preflight-v1.json`
-records `status: "pass"` on `develop`.
+**Status**: `IAU-command-handler-entrypoint-shell-v1` is implemented and closed.
+T009-T011 are complete. No current IAU is active. Issue #36 is closed and must
+not be reused for new implementation.
 
 - [x] T009 Add tests proving extension activation registers the admitted
   command entrypoint shell.
@@ -78,17 +76,17 @@ records `status: "pass"` on `develop`.
 
 - Phase 1 must merge before `IAU-command-handler-entrypoint-shell-v1`
   implementation starts.
-- Phase 2 may be implemented only by the current admitted IAU after the
-  preflight record passes on `develop`.
+- Phase 2 is complete. `IAU-command-handler-entrypoint-shell-v1` is closed.
+  No current IAU is active. Future implementation must not start from Issue #36;
+  it requires a new named IAU with a public preflight record.
 - Phase 3 remains blocked until separate public requirements and preflight
   records admit the runtime or release behavior.
-- Future Copilot implementation work must start from Issue #36 and must stay
-  within T009-T011.
 
 ## Implementation Strategy
 
-1. Merge import/spec/admission artifacts to `develop`.
-2. Use Issue #36 as the bounded implementation handoff.
+1. Import/spec/admission artifacts merged to `develop`. ✓
+2. Issue #36 completed as the bounded implementation handoff. ✓ Issue #36 is
+   closed and must not be reused.
 3. Keep documentation rendering, runtime settings CLI materialization, compare
    execution, Docker orchestration, Marketplace publication, packaging, and
    source copying blocked.
