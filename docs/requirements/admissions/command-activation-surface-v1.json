@@ -2,7 +2,7 @@
   "schema": "vi-history/requirements-admission@v1",
   "sliceId": "command-activation-surface-v1",
   "createdDate": "2026-05-18",
-  "state": "implementation-admitted",
+  "state": "implemented",
   "targetProduct": "vi-history",
   "targetFeature": "command-activation-surface-v1",
   "sourceBaselineTag": "v1.3.16",
@@ -26,7 +26,7 @@
   "implementationAdmissionUnits": [
     {
       "iauId": "IAU-command-activation-manifest-contract-v1",
-      "state": "implementation-admitted",
+      "state": "implemented",
       "record": "docs/requirements/admissions/command-activation-surface-v1/IAU-command-activation-manifest-contract-v1.json",
       "preflightRecord": "docs/requirements/admissions/command-activation-surface-v1/IAU-command-activation-manifest-contract-v1-preflight-v1.json",
       "admittedTasks": [
@@ -37,7 +37,7 @@
       ]
     }
   ],
-  "currentImplementationAdmissionUnit": "IAU-command-activation-manifest-contract-v1",
+  "currentImplementationAdmissionUnit": null,
   "completedSpecScope": [
     "T001",
     "T002",
@@ -48,13 +48,13 @@
     "T007",
     "T008"
   ],
-  "completedImplementationScope": [],
-  "admittedImplementationScope": [
+  "completedImplementationScope": [
     "T009",
     "T010",
     "T011",
     "T012"
   ],
+  "admittedImplementationScope": [],
   "blockedImplementationScope": [
     "T013",
     "T014",

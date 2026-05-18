@@ -11,10 +11,10 @@ clean-room Spec Kit authority. The feature defines explicit command activation
 events, public command IDs and titles, and blocked runtime/release scope.
 
 This plan admits requirements, Spec Kit artifacts, admission records,
-validation script coverage, and
-`IAU-command-activation-manifest-contract-v1` for T009-T012 only. It does not
-admit command handlers, runtime settings CLI materialization, compare
-execution, packaging, or Marketplace publication.
+validation script coverage, and records
+`IAU-command-activation-manifest-contract-v1` as implemented for T009-T012
+only. It does not admit command handlers, runtime settings CLI materialization,
+compare execution, packaging, or Marketplace publication.
 
 ## Technical Context
 
@@ -126,10 +126,10 @@ No constitution violations are admitted.
 
 ## Implementation Admission
 
-`IAU-command-activation-manifest-contract-v1` is admitted by this plan.
+`IAU-command-activation-manifest-contract-v1` is implemented by this plan.
 
-Implementation may complete only T009-T012. Future implementation work outside
-that scope requires:
+Implementation completed only T009-T012. Future implementation work outside
+this IAU requires:
 
 1. a named IAU,
 2. public admission records,

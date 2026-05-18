@@ -14,6 +14,27 @@
   },
   "homepage": "https://github.com/svelderrainruiz/vi-history",
   "private": false,
+  "activationEvents": [
+    "onCommand:labviewViHistory.open",
+    "onCommand:labviewViHistory.openDocumentation",
+    "onCommand:labviewViHistory.prepareLocalRuntimeSettingsCli"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "labviewViHistory.open",
+        "title": "VI History"
+      },
+      {
+        "command": "labviewViHistory.openDocumentation",
+        "title": "Open Documentation"
+      },
+      {
+        "command": "labviewViHistory.prepareLocalRuntimeSettingsCli",
+        "title": "Prepare Local Runtime Settings CLI"
+      }
+    ]
+  },
   "scripts": {
     "check": "npm run validate",
     "test": "npm run validate",

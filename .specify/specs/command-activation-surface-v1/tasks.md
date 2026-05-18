@@ -34,21 +34,21 @@ command activation.
 
 ---
 
-## Phase 2: Admitted IAU - Manifest Contract
+## Phase 2: Implemented IAU - Manifest Contract
 
-**Purpose**: Admit the smallest command activation implementation step:
+**Purpose**: Complete the smallest command activation implementation step:
 manifest contract tests and minimal manifest metadata only.
 
-**Admitted IAU**: `IAU-command-activation-manifest-contract-v1`
+**Completed IAU**: `IAU-command-activation-manifest-contract-v1`
 
 **Implementation may start after**:
 `docs/requirements/admissions/command-activation-surface-v1/IAU-command-activation-manifest-contract-v1-preflight-v1.json`
 records `status: "pass"` on `develop`.
 
-- [ ] T009 Add manifest activation-event contract tests.
-- [ ] T010 Add contributed command ID and title contract tests.
-- [ ] T011 Add package identity and Marketplace-disabled contract tests.
-- [ ] T012 Minimally update manifest metadata only after preflight.
+- [x] T009 Add manifest activation-event contract tests.
+- [x] T010 Add contributed command ID and title contract tests.
+- [x] T011 Add package identity and Marketplace-disabled contract tests.
+- [x] T012 Minimally update manifest metadata only after preflight.
 
 ---
 
@@ -78,18 +78,19 @@ records `status: "pass"` on `develop`.
 
 - Phase 1 must merge before any future command activation implementation IAU
   can be considered.
-- Phase 2 is admitted by `IAU-command-activation-manifest-contract-v1`.
+- Phase 2 is implemented by `IAU-command-activation-manifest-contract-v1`.
 - Phase 3 remains blocked until separate public requirements and preflight
   records admit the runtime or release behavior.
-- Current IAU: `IAU-command-activation-manifest-contract-v1`.
-- Future Copilot implementation work may start only from Issue #32 after the
-  admission/preflight records are merged to `develop`.
+- No current IAU is admitted after
+  `IAU-command-activation-manifest-contract-v1` closes.
+- Future Copilot implementation work must start from a new public bridge
+  admission record.
 
 ## Implementation Strategy
 
 1. Merge import/spec artifacts to `develop`.
 2. Close Issue #30 after validation passes.
-3. Admit `IAU-command-activation-manifest-contract-v1` through Issue #32.
+3. Complete `IAU-command-activation-manifest-contract-v1` through Issue #32.
 4. Keep command handlers, documentation rendering, runtime settings CLI
    materialization, compare execution, Docker orchestration, Marketplace
    publication, packaging, and source copying blocked.

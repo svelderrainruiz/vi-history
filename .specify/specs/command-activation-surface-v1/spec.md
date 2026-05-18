@@ -4,7 +4,7 @@
 
 **Created**: 2026-05-18
 
-**Status**: Locked for public import; manifest-contract IAU admitted
+**Status**: Locked for public import; manifest-contract IAU implemented
 
 **Input**: Imported requirements slice `command-activation-surface-v1`
 
@@ -142,7 +142,7 @@ implementation admission and that future code requires a named IAU preflight.
   credentials, private evidence, and copied implementation-source
   instructions.
 - **SC-004**: The admission record states that
-  `IAU-command-activation-manifest-contract-v1` admits T009-T012 only.
+  `IAU-command-activation-manifest-contract-v1` implemented T009-T012 only.
 - **SC-005**: Public artifacts keep Marketplace publication disabled.
 
 ## Assumptions

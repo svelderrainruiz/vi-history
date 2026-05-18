@@ -10,7 +10,7 @@ runtime-contract IAUs through proof intake. The public Spec Kit baseline also
 imports `installed-user-observation-public-surface-v1`, with
 `IAU-installed-user-observation-model-v1` implemented for T009-T013 only, and
 `command-activation-surface-v1` with
-`IAU-command-activation-manifest-contract-v1` admitted for T009-T012 only.
+`IAU-command-activation-manifest-contract-v1` implemented for T009-T012 only.
 
 ## Authority
 
@@ -42,7 +42,8 @@ imports `installed-user-observation-public-surface-v1`, with
   `IAU-installed-user-observation-model-v1`.
 - Issue #30 imports `command-activation-surface-v1` as a public
   requirements/spec baseline.
-- Issue #32 admits `IAU-command-activation-manifest-contract-v1` for T009-T012.
+- Issue #32 implements `IAU-command-activation-manifest-contract-v1` for
+  T009-T012.
 
 The current admission ledgers are:
 
@@ -50,11 +51,10 @@ The current admission ledgers are:
 - `docs/requirements/admissions/installed-user-observation-public-surface-v1.json`
 - `docs/requirements/admissions/command-activation-surface-v1.json`
 
-Current Implementation Admission Unit:
-`IAU-command-activation-manifest-contract-v1`.
+Current Implementation Admission Unit: none.
 
 The completed observation model scope is T009-T013. The command activation
-manifest contract admits only T009-T012. Future code work outside those tasks
+manifest contract implements only T009-T012. Future code work outside those tasks
 must start from a new public bridge admission record before Copilot or local
 implementation begins.
 

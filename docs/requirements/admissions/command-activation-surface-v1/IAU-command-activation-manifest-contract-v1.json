@@ -2,7 +2,8 @@
   "schema": "vi-history/implementation-admission-unit@v1",
   "iauId": "IAU-command-activation-manifest-contract-v1",
   "createdDate": "2026-05-18",
-  "state": "implementation-admitted",
+  "completedDate": "2026-05-18",
+  "state": "implemented",
   "parentSliceId": "command-activation-surface-v1",
   "specFeature": ".specify/specs/command-activation-surface-v1",
   "issue": {
@@ -35,6 +36,22 @@
     "status": "pass",
     "record": "IAU-command-activation-manifest-contract-v1-preflight-v1.json",
     "implementationStartAllowed": true
+  },
+  "implementationCloseout": {
+    "status": "pass",
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011",
+      "T012"
+    ],
+    "blockedTasksRemainBlocked": [
+      "T013",
+      "T014",
+      "T015",
+      "T016",
+      "T017"
+    ]
   },
   "exitGate": [
     "T009-T012 complete",
