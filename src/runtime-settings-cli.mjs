@@ -5,6 +5,13 @@ export const RUNTIME_SETTINGS_CLI_SETTINGS_WRITE_REQUIREMENTS = Object.freeze({
   failClosed: Object.freeze(["VHS-REQ-543"])
 });
 
+export const RUNTIME_SETTINGS_CLI_VALIDATION_READBACK_REQUIREMENTS = Object.freeze({
+  effectiveTarget: Object.freeze(["VHS-REQ-543"]),
+  persistedFacts: Object.freeze(["VHS-REQ-546"]),
+  runtimeOutcome: Object.freeze(["VHS-REQ-546"]),
+  failClosed: Object.freeze(["VHS-REQ-546"])
+});
+
 export const RUNTIME_SETTINGS_KEYS = Object.freeze({
   runtimeProvider: "viHistorySuite.runtimeProvider",
   labviewVersion: "viHistorySuite.labviewVersion",
@@ -21,9 +28,32 @@ export const RUNTIME_SETTINGS_BLOCKED_SIDE_EFFECTS = Object.freeze({
   marketplace: false
 });
 
+export const RUNTIME_SETTINGS_VALIDATION_BLOCKED_SIDE_EFFECTS = Object.freeze({
+  settingsMutation: false,
+  interactiveSelection: false,
+  proofOut: false,
+  picker: false,
+  runtimeValidation: false,
+  compareExecution: false,
+  labviewCli: false,
+  docker: false,
+  liveSessionProof: false,
+  packaging: false,
+  marketplace: false
+});
+
 export function allRuntimeSettingsCliSettingsWriteRequirementIds() {
   return Object.freeze(
     Object.values(RUNTIME_SETTINGS_CLI_SETTINGS_WRITE_REQUIREMENTS)
+      .flat()
+      .filter((value, index, values) => values.indexOf(value) === index)
+      .sort()
+  );
+}
+
+export function allRuntimeSettingsCliValidationReadbackRequirementIds() {
+  return Object.freeze(
+    Object.values(RUNTIME_SETTINGS_CLI_VALIDATION_READBACK_REQUIREMENTS)
       .flat()
       .filter((value, index, values) => values.indexOf(value) === index)
       .sort()
@@ -76,6 +106,57 @@ export function writeRuntimeSettingsFacts(input = {}) {
   });
 }
 
+export function readRuntimeSettingsValidation(input = {}) {
+  const effectiveSettingsTarget = normalizeEffectiveSettingsTarget(
+    input.effectiveSettingsTarget ?? input.target ?? "user"
+  );
+  if (!effectiveSettingsTarget) {
+    return validationBlockedResult({
+      blockedReason: "unsupported-effective-settings-target",
+      runtimeErrorCode: "VIHS_E_UNSUPPORTED_EFFECTIVE_SETTINGS_TARGET",
+      effectiveSettingsTarget: null
+    });
+  }
+
+  const settings = parseSettingsContent(input.settingsContent ?? input.settings ?? {});
+  if (!settings.ok) {
+    return validationBlockedResult({
+      blockedReason: settings.blockedReason,
+      runtimeErrorCode: runtimeErrorCodeForSettingsFailure(settings.blockedReason),
+      effectiveSettingsTarget
+    });
+  }
+
+  const persistedFacts = readPersistedRuntimeSettingsFacts(settings.value);
+  if (!persistedFacts.ok) {
+    return validationBlockedResult({
+      blockedReason: persistedFacts.blockedReason,
+      runtimeErrorCode: "VIHS_E_MISSING_PERSISTED_RUNTIME_SETTINGS",
+      effectiveSettingsTarget
+    });
+  }
+
+  const runtimeOutcome = normalizeRuntimeOutcome(input.runtimeOutcome ?? input.runtime);
+  if (!runtimeOutcome.ok) {
+    return validationBlockedResult({
+      blockedReason: runtimeOutcome.blockedReason,
+      runtimeErrorCode: "VIHS_E_MISSING_RUNTIME_OUTCOME_FACTS",
+      effectiveSettingsTarget,
+      persistedSettings: persistedFacts.value
+    });
+  }
+
+  return Object.freeze({
+    status: runtimeOutcome.value.runtimeValidationOutcome,
+    type: "runtime-settings-cli-validation-readback-contract",
+    effectiveSettingsTarget,
+    persistedSettings: persistedFacts.value,
+    runtime: runtimeOutcome.value,
+    blockedSideEffects: RUNTIME_SETTINGS_VALIDATION_BLOCKED_SIDE_EFFECTS,
+    requirementIds: allRuntimeSettingsCliValidationReadbackRequirementIds()
+  });
+}
+
 function blockedResult({ blockedReason, effectiveSettingsTarget }) {
   return Object.freeze({
     status: "blocked",
@@ -86,6 +167,93 @@ function blockedResult({ blockedReason, effectiveSettingsTarget }) {
     blockedSideEffects: RUNTIME_SETTINGS_BLOCKED_SIDE_EFFECTS,
     requirementIds: allRuntimeSettingsCliSettingsWriteRequirementIds()
   });
+}
+
+function validationBlockedResult({
+  blockedReason,
+  runtimeErrorCode,
+  effectiveSettingsTarget,
+  persistedSettings = null
+}) {
+  return Object.freeze({
+    status: "blocked",
+    type: "runtime-settings-cli-validation-readback-contract",
+    blockedReason,
+    partialWrite: false,
+    effectiveSettingsTarget,
+    persistedSettings,
+    runtime: Object.freeze({
+      runtimeValidationOutcome: "blocked",
+      runtimeProvider: "unavailable",
+      runtimeEngine: null,
+      runtimeBlockedReason: blockedReason,
+      runtimeErrorCode,
+      runtimeProofStatus: "blocked-with-actionable-error",
+      runtimeImplementationStatus: "not-started"
+    }),
+    blockedSideEffects: RUNTIME_SETTINGS_VALIDATION_BLOCKED_SIDE_EFFECTS,
+    requirementIds: allRuntimeSettingsCliValidationReadbackRequirementIds()
+  });
+}
+
+function readPersistedRuntimeSettingsFacts(settings) {
+  const runtimeProvider = normalizeFact(settings[RUNTIME_SETTINGS_KEYS.runtimeProvider]);
+  const labviewVersion = normalizeFact(settings[RUNTIME_SETTINGS_KEYS.labviewVersion]);
+  const labviewBitness = normalizeFact(settings[RUNTIME_SETTINGS_KEYS.labviewBitness]);
+
+  if (!runtimeProvider || !labviewVersion || !labviewBitness) {
+    return {
+      ok: false,
+      blockedReason: "missing-persisted-runtime-settings"
+    };
+  }
+
+  return {
+    ok: true,
+    value: Object.freeze({
+      runtimeProvider,
+      labviewVersion,
+      labviewBitness
+    })
+  };
+}
+
+function normalizeRuntimeOutcome(outcome = {}) {
+  const runtimeValidationOutcome = normalizeFact(outcome.runtimeValidationOutcome);
+  const runtimeProvider = normalizeFact(outcome.runtimeProvider);
+  const runtimeErrorCode = normalizeFact(outcome.runtimeErrorCode);
+  const runtimeProofStatus = normalizeFact(outcome.runtimeProofStatus);
+  const runtimeImplementationStatus = normalizeFact(outcome.runtimeImplementationStatus);
+
+  if (!runtimeValidationOutcome || !runtimeProvider || !runtimeErrorCode || !runtimeProofStatus || !runtimeImplementationStatus) {
+    return {
+      ok: false,
+      blockedReason: "missing-runtime-outcome-facts"
+    };
+  }
+
+  return {
+    ok: true,
+    value: Object.freeze({
+      runtimeValidationOutcome,
+      runtimeProvider,
+      runtimeEngine: normalizeFact(outcome.runtimeEngine),
+      runtimeBlockedReason: normalizeFact(outcome.runtimeBlockedReason),
+      runtimeErrorCode,
+      runtimeProofStatus,
+      runtimeImplementationStatus
+    })
+  };
+}
+
+function runtimeErrorCodeForSettingsFailure(blockedReason) {
+  if (blockedReason === "unsupported-settings-target-shape") {
+    return "VIHS_E_UNSUPPORTED_SETTINGS_TARGET_SHAPE";
+  }
+  if (blockedReason === "invalid-settings-content") {
+    return "VIHS_E_INVALID_SETTINGS_CONTENT";
+  }
+  return "VIHS_E_RUNTIME_SETTINGS_READBACK_FAILED";
 }
 
 function normalizeRuntimeSettingsFacts(facts) {

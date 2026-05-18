@@ -1,10 +1,11 @@
 # Runtime Settings CLI Validation Readback Admission
 
-State: `implementation-admitted`
+State: `implemented`
 
 Issue #51 imports `runtime-settings-cli-validation-readback-v1`, locks the
 public Spec Kit feature, and admits
 `IAU-runtime-settings-cli-validation-readback-contract-v1` for T009-T012 only.
+Issue #53 implements and closes the admitted IAU.
 
 Machine-readable ledger:
 [runtime-settings-cli-validation-readback-v1.json](./runtime-settings-cli-validation-readback-v1.json)
@@ -17,9 +18,9 @@ Machine-readable ledger:
   reports persisted provider/version/bitness truth plus runtime outcome facts
   without reopening picker surfaces.
 
-## Admitted IAU
+## Implemented IAU
 
-`IAU-runtime-settings-cli-validation-readback-contract-v1` is admitted for:
+`IAU-runtime-settings-cli-validation-readback-contract-v1` is implemented for:
 
 - `T009`: add tests proving validation readback reports persisted provider,
   LabVIEW version, LabVIEW bitness, and effective settings target facts without
@@ -30,8 +31,7 @@ Machine-readable ledger:
   closed with stable result fields.
 - `T012`: implement the minimum public MIT validation readback contract.
 
-Implementation starts only after this admission PR merges and a separate
-implementation handoff issue is created.
+No current implementation admission unit remains active after Issue #53.
 
 ## Blocked Scope
 
