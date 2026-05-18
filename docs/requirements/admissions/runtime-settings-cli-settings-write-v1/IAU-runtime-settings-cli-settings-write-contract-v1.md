@@ -1,9 +1,9 @@
 # IAU: Runtime Settings CLI Settings-Write Contract
 
-State: `implementation-admitted`
+State: `implemented`
 
-This IAU admits the first runtime settings CLI settings-write step for
-`runtime-settings-cli-settings-write-v1`.
+This IAU implements the first runtime settings CLI settings-write step for
+`runtime-settings-cli-settings-write-v1` through Issue #49.
 
 ## Admitted Tasks
 
@@ -30,6 +30,13 @@ This IAU admits the first runtime settings CLI settings-write step for
 Preflight passed for T009-T012 only. Implementation may start only after this
 admission PR merges to `develop` and a separate implementation handoff issue is
 created.
+
+## Implementation Result
+
+Issue #49 completed T009-T012 only. No validation, interactive selection,
+compare execution, LabVIEWCLI execution, Docker orchestration, live-session
+proof, packaging, Marketplace publication, or source-copying behavior was
+implemented.
 
 Validation, interactive selection, compare execution, LabVIEWCLI execution,
 Docker orchestration, live-session proof, packaging, Marketplace publication,

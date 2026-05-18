@@ -45,16 +45,16 @@ LabVIEW bitness facts.
 
 **Public admission issue**: Issue #47
 
-**Implementation handoff issue**: to be created after this admission PR merges.
+**Implementation handoff issue**: Issue #49
 
-- [ ] T009 Add tests proving only `viHistorySuite.runtimeProvider`,
+- [x] T009 Add tests proving only `viHistorySuite.runtimeProvider`,
   `viHistorySuite.labviewVersion`, and `viHistorySuite.labviewBitness` are
   updated.
-- [ ] T010 Add tests proving unrelated settings content is preserved and the
+- [x] T010 Add tests proving unrelated settings content is preserved and the
   effective settings target is explicit.
-- [ ] T011 Add tests proving comments/trailing commas are handled when admitted
+- [x] T011 Add tests proving comments/trailing commas are handled when admitted
   by the public spec and unsupported target shapes fail closed.
-- [ ] T012 Implement the minimum public MIT settings-write contract.
+- [x] T012 Implement the minimum public MIT settings-write contract.
 
 ---
 
@@ -87,8 +87,7 @@ outside this IAU.
 
 - Phase 1 must merge before
   `IAU-runtime-settings-cli-settings-write-contract-v1` implementation starts.
-- Phase 2 may start only from the implementation handoff issue created after
-  this admission PR merges.
+- Phase 2 completed through Issue #49.
 - Phase 3 remains blocked until separate public requirements and preflight
   records admit validation, interactive selection, runtime execution,
   live-session proof, or release behavior.
@@ -99,7 +98,7 @@ outside this IAU.
 ## Implementation Strategy
 
 1. Merge import/spec/admission artifacts to `develop`.
-2. Create a separate implementation handoff issue for
+2. Complete Issue #49 for
    `IAU-runtime-settings-cli-settings-write-contract-v1`.
 3. Keep validation, interactive selection, compare execution, LabVIEWCLI,
    Docker, live-session proof, Marketplace publication, packaging, and source
