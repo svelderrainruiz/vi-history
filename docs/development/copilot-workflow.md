@@ -22,6 +22,83 @@ Read these before changing code:
 - `docs/requirements/admissions/runtime-contract-host-provider-v1.json`
 - `docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-proof-intake-v1.json`
 - `docs/requirements/admissions/runtime-contract-host-provider-v1/IAU-runtime-contract-proof-intake-v1-preflight-v1.json`
+- `docs/requirements/imports/installed-user-observation-public-surface-v1/manifest.json`
+- `docs/requirements/imports/installed-user-observation-public-surface-v1/syrs.md`
+- `docs/requirements/imports/installed-user-observation-public-surface-v1/srs.md`
+- `docs/requirements/imports/installed-user-observation-public-surface-v1/rtm.csv`
+- `docs/requirements/imports/installed-user-observation-public-surface-v1/test-plan.md`
+- `.specify/specs/installed-user-observation-public-surface-v1/spec.md`
+- `.specify/specs/installed-user-observation-public-surface-v1/plan.md`
+- `.specify/specs/installed-user-observation-public-surface-v1/tasks.md`
+- `docs/requirements/admissions/installed-user-observation-public-surface-v1.json`
+- `docs/requirements/admissions/installed-user-observation-public-surface-v1/IAU-installed-user-observation-model-v1.json`
+- `docs/requirements/admissions/installed-user-observation-public-surface-v1/IAU-installed-user-observation-model-v1-preflight-v1.json`
+- `docs/requirements/imports/command-activation-surface-v1/manifest.json`
+- `docs/requirements/imports/command-activation-surface-v1/syrs.md`
+- `docs/requirements/imports/command-activation-surface-v1/srs.md`
+- `docs/requirements/imports/command-activation-surface-v1/rtm.csv`
+- `docs/requirements/imports/command-activation-surface-v1/test-plan.md`
+- `.specify/specs/command-activation-surface-v1/spec.md`
+- `.specify/specs/command-activation-surface-v1/plan.md`
+- `.specify/specs/command-activation-surface-v1/tasks.md`
+- `docs/requirements/admissions/command-activation-surface-v1.json`
+- `docs/requirements/admissions/command-activation-surface-v1/IAU-command-activation-manifest-contract-v1.json`
+- `docs/requirements/admissions/command-activation-surface-v1/IAU-command-activation-manifest-contract-v1-preflight-v1.json`
+- `docs/requirements/imports/command-handler-entrypoint-shell-v1/manifest.json`
+- `docs/requirements/imports/command-handler-entrypoint-shell-v1/syrs.md`
+- `docs/requirements/imports/command-handler-entrypoint-shell-v1/srs.md`
+- `docs/requirements/imports/command-handler-entrypoint-shell-v1/rtm.csv`
+- `docs/requirements/imports/command-handler-entrypoint-shell-v1/test-plan.md`
+- `.specify/specs/command-handler-entrypoint-shell-v1/spec.md`
+- `.specify/specs/command-handler-entrypoint-shell-v1/plan.md`
+- `.specify/specs/command-handler-entrypoint-shell-v1/tasks.md`
+- `docs/requirements/admissions/command-handler-entrypoint-shell-v1.json`
+- `docs/requirements/admissions/command-handler-entrypoint-shell-v1/IAU-command-handler-entrypoint-shell-v1.json`
+- `docs/requirements/admissions/command-handler-entrypoint-shell-v1/IAU-command-handler-entrypoint-shell-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-bootstrap-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-bootstrap-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-bootstrap-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-bootstrap-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-bootstrap-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-bootstrap-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-bootstrap-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-bootstrap-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-bootstrap-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-bootstrap-v1/IAU-runtime-settings-cli-prepare-command-shell-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-bootstrap-v1/IAU-runtime-settings-cli-prepare-command-shell-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-settings-write-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-settings-write-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-settings-write-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-settings-write-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-settings-write-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-settings-write-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-settings-write-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-settings-write-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-settings-write-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-settings-write-v1/IAU-runtime-settings-cli-settings-write-contract-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-settings-write-v1/IAU-runtime-settings-cli-settings-write-contract-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-readback-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-readback-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-readback-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-readback-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-validation-readback-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-validation-readback-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-validation-readback-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-validation-readback-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-validation-readback-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-readback-v1/IAU-runtime-settings-cli-validation-readback-contract-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-readback-v1/IAU-runtime-settings-cli-validation-readback-contract-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-proof-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-proof-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-proof-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-proof-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-validation-proof-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-validation-proof-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-validation-proof-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-validation-proof-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-validation-proof-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-proof-v1/IAU-runtime-settings-cli-validation-proof-artifact-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-proof-v1/IAU-runtime-settings-cli-validation-proof-artifact-v1-preflight-v1.json`
 
 ## Current Status
 
@@ -41,6 +118,18 @@ Completed units:
 - `IAU-runtime-contract-provider-policy-v1`
 - `IAU-runtime-contract-proof-intake-v1`
 
+Completed installed-user observation unit:
+
+- `IAU-installed-user-observation-model-v1`
+
+Completed command activation unit:
+
+- `IAU-command-activation-manifest-contract-v1`
+
+Completed command handler unit:
+
+- `IAU-command-handler-entrypoint-shell-v1`
+
 Completed runtime-contract tasks:
 
 - `T007` through `T011`: foundational runtime contracts.
@@ -53,12 +142,71 @@ Completed runtime-contract tasks:
 - `T029`: implement proof packet writer and issue-body generation.
 - `T030`: implement Windows Docker Desktop proof intake validation.
 
+Completed installed-user observation tasks:
+
+- `T009`: define an observation-cycle data contract.
+- `T010`: define an observation-fact classification contract.
+- `T011`: define routing-decision and SemVer recommendation contracts.
+- `T012`: add tests for `observed`, `deferred`, and `blocked` fact buckets.
+- `T013`: add tests that public feedback is input, not release proof.
+
 ## Future Work Packet
 
-Future Copilot work must start with a new public bridge admission record before
-any code changes. A valid future work packet must name a new IAU, admitted
-tasks, blocked tasks, preflight status, source files, expected write area, and
-validation commands.
+Issue #27 completed `IAU-installed-user-observation-model-v1`. No new Copilot
+implementation should start from Issue #27.
+
+Issue #32 completes
+`IAU-command-activation-manifest-contract-v1`. No new Copilot implementation
+should start from Issue #32 after that PR merges. It implements only T009-T012:
+manifest activation-event contract tests, contributed command ID/title contract
+tests, package identity and Marketplace-disabled contract tests, and minimal
+manifest metadata.
+
+Issue #36 completed `IAU-command-handler-entrypoint-shell-v1`. No new Copilot
+implementation should start from Issue #36. It implemented only T009-T011:
+entrypoint shell tests and the minimum public MIT entrypoint shell.
+
+Issue #39 admitted `IAU-documentation-command-panel-shell-v1` for
+`installed-user-documentation-command-v1`. Issue #41 completed that IAU for
+T009-T011 only: documentation command handler tests, public-safe bundled
+documentation contract tests, and the minimum documentation command panel shell.
+No new Copilot implementation should start from Issue #41.
+
+Issue #43 admits `IAU-runtime-settings-cli-prepare-command-shell-v1` for
+`runtime-settings-cli-bootstrap-v1`. Issue #45 implements and closes it for
+T009-T011 only: prepare-command handler tests, launcher materialization and
+recovery fact tests, and the minimum prepare-command shell. No new Copilot
+implementation should start from Issue #45.
+
+Issue #47 admits `IAU-runtime-settings-cli-settings-write-contract-v1` for
+`runtime-settings-cli-settings-write-v1` and T009-T012 only. Issue #47 is an
+admission issue. Copilot implementation must wait for the separate handoff issue
+created after the admission PR merges.
+
+Issue #49 implements and closes
+`IAU-runtime-settings-cli-settings-write-contract-v1` for T009-T012 only. No
+new Copilot implementation should start from Issue #49.
+
+Issue #51 admits `IAU-runtime-settings-cli-validation-readback-contract-v1` for
+`runtime-settings-cli-validation-readback-v1` and T009-T012 only. Issue #51 is
+an admission issue. Copilot implementation must wait for the separate handoff
+issue created after the admission PR merges.
+
+Issue #53 implements and closes
+`IAU-runtime-settings-cli-validation-readback-contract-v1` for T009-T012 only.
+No new Copilot implementation should start from Issue #53.
+
+Issue #55 admits `IAU-runtime-settings-cli-validation-proof-artifact-v1` for
+`runtime-settings-cli-validation-proof-v1` and T009-T012 only. Issue #55 is an
+admission issue. Copilot implementation must wait for the separate handoff issue
+created after the admission PR merges.
+
+Issue #57 implements and closes
+`IAU-runtime-settings-cli-validation-proof-artifact-v1` for T009-T012 only. No
+new Copilot implementation should start from Issue #57.
+
+The Copilot plan must target `develop`, read this workflow first, and name how
+blocked work remains blocked.
 
 ## Blocked Work
 
@@ -66,6 +214,19 @@ Do not implement these without a separate bridge admission:
 
 - LabVIEWCLI command execution
 - Docker command execution or container orchestration
+- documentation navigation or rendering beyond the admitted minimum command shell
+- runtime settings CLI materialization beyond the admitted prepare-command shell
+- runtime settings mutation beyond the admitted provider/version/bitness
+  settings-write contract
+- validation behavior beyond the admitted pure `vihs --validate` readback
+  contract
+- validation proof artifact behavior beyond the admitted pure proof JSON and
+  issue-body contract
+- compare execution
+- no-argument interactive selection
+- proof-out file generation
+- live already-running VS Code session uptake proof
+- observation report rendering for T014-T016
 - Marketplace publication or packaging
 - source copying from another VI History product line
 
@@ -96,9 +257,10 @@ git diff --check
 
 ## Web Copilot Flow
 
-Do not use Issue #4 as a new implementation packet. Use a future public issue
-only after the bridge admits a new IAU. The PR must target `develop` and state
-the exact admitted IAU it implements.
+Do not use Issue #4 or Issue #27 as a new implementation packet after their
+PRs merge. Future work must use the issue named by the next public bridge
+admission record. The PR must target `develop` and state the exact admitted IAU
+it implements.
 
 The PR summary should include:
 

@@ -1,0 +1,64 @@
+{
+  "schema": "vi-history/implementation-admission-unit@v1",
+  "iauId": "IAU-documentation-command-panel-shell-v1",
+  "createdDate": "2026-05-18",
+  "completedDate": "2026-05-18",
+  "state": "implemented",
+  "parentSliceId": "installed-user-documentation-command-v1",
+  "specFeature": ".specify/specs/installed-user-documentation-command-v1",
+  "issue": {
+    "number": 41,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/41"
+  },
+  "admittedTasks": [
+    "T009",
+    "T010",
+    "T011"
+  ],
+  "blockedTasks": [
+    "T012",
+    "T013",
+    "T014",
+    "T015"
+  ],
+  "entryGate": [
+    "installed-user documentation command public surface spec-locked",
+    "public import packet present",
+    "Spec Kit artifacts locked",
+    "Spec Kit prerequisites resolved",
+    "bridge artifact validation passed",
+    "public redaction scan passed",
+    "IAU preflight status pass"
+  ],
+  "preImplementationPreflight": {
+    "status": "pass",
+    "record": "IAU-documentation-command-panel-shell-v1-preflight-v1.json",
+    "implementationStartAllowed": true
+  },
+  "implementationCloseout": {
+    "status": "pass",
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011"
+    ],
+    "blockedTasksRemainBlocked": [
+      "T012",
+      "T013",
+      "T014",
+      "T015"
+    ]
+  },
+  "exitGate": [
+    "T009-T011 complete",
+    "public redaction scan passes",
+    "bridge artifact validation passes",
+    "npm test passes",
+    "npm run check passes",
+    "implementation handoff issue names completed IAU and next blocked scope"
+  ],
+  "implementationSharing": "none",
+  "requirementMaturityBasis": "governed released extension supports requirement maturity, not source reuse",
+  "marketplacePublication": "disabled",
+  "marketplacePublicationAdr": "docs/decisions/ADR-001-marketplace-publication-disabled.md"
+}

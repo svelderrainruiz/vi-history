@@ -1,0 +1,5 @@
+Requirement ID,Requirement Summary,Source,Risk,Verification,Public Evidence,Import Status
+VHS-REQ-368,"Retain bundled documentation manifest and curated extension-user page set","governed requirements",Medium,TEST-UNIT-DOC-001,"future bundled documentation contract tests",Imported
+VHS-REQ-369,"Expose Open Documentation as a first-class command without repository access","governed requirements",Medium,TEST-UNIT-DOC-002,"future documentation command tests; package.json",Imported
+VHS-REQ-489,"Keep bundled installed-user documentation public-safe and free of private authority content","governed requirements",High,TEST-UNIT-DOC-003,"future bundled documentation redaction tests; public redaction scan",Imported
+VHS-REQ-594,"Retain explicit Open Documentation command activation metadata","governed requirements",High,TEST-UNIT-025,"tests/command-activation-manifest-contract.test.mjs; package.json",Imported

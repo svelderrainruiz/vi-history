@@ -1,0 +1,35 @@
+# IAU-installed-user-observation-model-v1
+
+`IAU-installed-user-observation-model-v1` is admitted for the MIT authority.
+Its implementation completed `T009` through `T013`.
+
+## Issue
+
+GitHub Issue #27 is the public implementation handoff.
+
+## Admitted Tasks
+
+- `T009`: define an observation-cycle data contract.
+- `T010`: define an observation-fact classification contract.
+- `T011`: define routing-decision and SemVer recommendation contracts.
+- `T012`: add tests for `observed`, `deferred`, and `blocked` fact buckets.
+- `T013`: add tests that public feedback is input, not release proof.
+
+## Closeout
+
+The implementation closeout records `status: pass`. The admitted work added
+public clean-room observation contracts and contract tests only.
+
+## Blocked Tasks
+
+- `T014` through `T016` remain blocked as a later reporting-surface IAU.
+- LabVIEWCLI execution remains blocked.
+- Docker execution and orchestration remain blocked.
+- Windows Docker Desktop Windows-container proof claims remain blocked.
+- Marketplace publication remains blocked.
+- Source copying remains blocked.
+
+## Preflight
+
+`IAU-installed-user-observation-model-v1-preflight-v1` records `status: pass`.
+No further implementation may start from this IAU.

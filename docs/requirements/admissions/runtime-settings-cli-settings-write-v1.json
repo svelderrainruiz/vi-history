@@ -1,0 +1,100 @@
+{
+  "schema": "vi-history/requirements-admission@v1",
+  "sliceId": "runtime-settings-cli-settings-write-v1",
+  "createdDate": "2026-05-18",
+  "state": "implemented",
+  "targetProduct": "vi-history",
+  "targetFeature": "runtime-settings-cli-settings-write-v1",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "110bf8e0a98478d141244ae0c53240e4cf93a790",
+  "governedAdmissionCommit": "72c9a700da501eba23e16e3d35b385ec8d8d6808",
+  "publicImportPath": "docs/requirements/imports/runtime-settings-cli-settings-write-v1/",
+  "specKitPath": ".specify/specs/runtime-settings-cli-settings-write-v1/",
+  "issue": {
+    "number": 47,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/47"
+  },
+  "implementationHandoffIssue": {
+    "number": 49,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/49"
+  },
+  "bridgeChecks": {
+    "specKitCliVersion": "0.8.12.dev0",
+    "publicImportPacketPresent": "pass",
+    "specKitArtifactsPresent": "pass",
+    "redactionScan": "pass",
+    "artifactConsistency": "pass",
+    "analyzeCriticalFindings": "none-recorded-for-import-spec-baseline",
+    "implementationPreflight": "pass"
+  },
+  "implementationAdmissionUnits": [
+    {
+      "iauId": "IAU-runtime-settings-cli-settings-write-contract-v1",
+      "state": "implemented",
+      "record": "docs/requirements/admissions/runtime-settings-cli-settings-write-v1/IAU-runtime-settings-cli-settings-write-contract-v1.json",
+      "preflightRecord": "docs/requirements/admissions/runtime-settings-cli-settings-write-v1/IAU-runtime-settings-cli-settings-write-contract-v1-preflight-v1.json",
+      "admittedTasks": [
+        "T009",
+        "T010",
+        "T011",
+        "T012"
+      ]
+    }
+  ],
+  "currentImplementationAdmissionUnit": null,
+  "completedSpecScope": [
+    "T001",
+    "T002",
+    "T003",
+    "T004",
+    "T005",
+    "T006",
+    "T007",
+    "T008"
+  ],
+  "completedImplementationScope": [
+    "T009",
+    "T010",
+    "T011",
+    "T012"
+  ],
+  "admittedImplementationScope": [],
+  "blockedImplementationScope": [
+    "T013",
+    "T014",
+    "T015",
+    "T016",
+    "T017"
+  ],
+  "preImplementationPreflight": {
+    "iauId": "IAU-runtime-settings-cli-settings-write-contract-v1",
+    "status": "pass",
+    "record": "docs/requirements/admissions/runtime-settings-cli-settings-write-v1/IAU-runtime-settings-cli-settings-write-contract-v1-preflight-v1.json",
+    "implementationStartAllowed": true
+  },
+  "implementationCloseout": {
+    "status": "pass",
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011",
+      "T012"
+    ],
+    "issue": "https://github.com/svelderrainruiz/vi-history/issues/49"
+  },
+  "requirementMaturityBasis": "governed bridge-readiness packet supports public import, Spec Kit planning, and narrow settings-write admission, not source reuse",
+  "implementationSharing": "none",
+  "marketplacePublication": "disabled",
+  "marketplacePublicationAdr": "docs/decisions/ADR-001-marketplace-publication-disabled.md",
+  "blockedScope": [
+    "vihs --validate or runtime validation output",
+    "no-argument interactive selection",
+    "compare execution",
+    "LabVIEWCLI execution",
+    "Docker execution or orchestration",
+    "live already-running VS Code session uptake proof",
+    "VSIX packaging",
+    "Marketplace publication",
+    "source copying from another VI History product line"
+  ]
+}

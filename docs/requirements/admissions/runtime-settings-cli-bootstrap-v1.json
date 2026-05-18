@@ -1,0 +1,87 @@
+{
+  "schema": "vi-history/requirements-admission@v1",
+  "sliceId": "runtime-settings-cli-bootstrap-v1",
+  "createdDate": "2026-05-18",
+  "state": "implemented",
+  "targetProduct": "vi-history",
+  "targetFeature": "runtime-settings-cli-bootstrap-v1",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "ff950d6b7401fe31c5a12aea28bcad9099b254f1",
+  "governedAdmissionCommit": "110bf8e0a98478d141244ae0c53240e4cf93a790",
+  "publicImportPath": "docs/requirements/imports/runtime-settings-cli-bootstrap-v1/",
+  "specKitPath": ".specify/specs/runtime-settings-cli-bootstrap-v1/",
+  "issue": {
+    "number": 43,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/43"
+  },
+  "implementationIssue": {
+    "number": 45,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/45"
+  },
+  "bridgeChecks": {
+    "specKitCliVersion": "0.8.12.dev0",
+    "publicImportPacketPresent": "pass",
+    "specKitArtifactsPresent": "pass",
+    "redactionScan": "pass",
+    "artifactConsistency": "pass",
+    "analyzeCriticalFindings": "none-recorded-for-import-spec-baseline",
+    "implementationPreflight": "pass"
+  },
+  "implementationAdmissionUnits": [
+    {
+      "iauId": "IAU-runtime-settings-cli-prepare-command-shell-v1",
+      "state": "implemented",
+      "record": "docs/requirements/admissions/runtime-settings-cli-bootstrap-v1/IAU-runtime-settings-cli-prepare-command-shell-v1.json",
+      "preflightRecord": "docs/requirements/admissions/runtime-settings-cli-bootstrap-v1/IAU-runtime-settings-cli-prepare-command-shell-v1-preflight-v1.json",
+      "admittedTasks": [
+        "T009",
+        "T010",
+        "T011"
+      ]
+    }
+  ],
+  "currentImplementationAdmissionUnit": null,
+  "completedSpecScope": [
+    "T001",
+    "T002",
+    "T003",
+    "T004",
+    "T005",
+    "T006",
+    "T007",
+    "T008"
+  ],
+  "completedImplementationScope": [
+    "T009",
+    "T010",
+    "T011"
+  ],
+  "admittedImplementationScope": [],
+  "blockedImplementationScope": [
+    "T012",
+    "T013",
+    "T014",
+    "T015"
+  ],
+  "preImplementationPreflight": {
+    "iauId": "IAU-runtime-settings-cli-prepare-command-shell-v1",
+    "status": "pass",
+    "record": "docs/requirements/admissions/runtime-settings-cli-bootstrap-v1/IAU-runtime-settings-cli-prepare-command-shell-v1-preflight-v1.json",
+    "implementationStartAllowed": true
+  },
+  "requirementMaturityBasis": "governed bridge-readiness packet supports public import, Spec Kit planning, and narrow prepare-command admission, not source reuse",
+  "implementationSharing": "none",
+  "marketplacePublication": "disabled",
+  "marketplacePublicationAdr": "docs/decisions/ADR-001-marketplace-publication-disabled.md",
+  "blockedScope": [
+    "provider/version/bitness settings mutation",
+    "JSONC settings rewrite",
+    "vihs --validate or runtime validation output",
+    "compare execution",
+    "LabVIEWCLI execution",
+    "Docker execution or orchestration",
+    "VSIX packaging",
+    "Marketplace publication",
+    "source copying from another VI History product line"
+  ]
+}

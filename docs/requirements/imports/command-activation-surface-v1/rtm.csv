@@ -1,0 +1,2 @@
+id,requirement,source,priority,verification,verification_paths,status
+VHS-REQ-594,"Retain explicit command activation for VI History, Open Documentation, and Prepare Local Runtime Settings CLI","author direction",High,TEST-UNIT-025,"future manifest contract tests; package.json",Imported

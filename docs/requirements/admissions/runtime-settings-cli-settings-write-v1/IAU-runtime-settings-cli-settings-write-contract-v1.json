@@ -1,0 +1,65 @@
+{
+  "schema": "vi-history/implementation-admission-unit@v1",
+  "iauId": "IAU-runtime-settings-cli-settings-write-contract-v1",
+  "createdDate": "2026-05-18",
+  "state": "implemented",
+  "parentSliceId": "runtime-settings-cli-settings-write-v1",
+  "specFeature": ".specify/specs/runtime-settings-cli-settings-write-v1",
+  "issue": {
+    "number": 47,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/47"
+  },
+  "implementationHandoffIssue": {
+    "number": 49,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/49"
+  },
+  "admittedTasks": [
+    "T009",
+    "T010",
+    "T011",
+    "T012"
+  ],
+  "blockedTasks": [
+    "T013",
+    "T014",
+    "T015",
+    "T016",
+    "T017"
+  ],
+  "entryGate": [
+    "runtime settings CLI settings-write public surface spec-locked",
+    "public import packet present",
+    "Spec Kit artifacts locked",
+    "Spec Kit prerequisites resolved",
+    "bridge artifact validation passed",
+    "public redaction scan passed",
+    "IAU preflight status pass"
+  ],
+  "preImplementationPreflight": {
+    "status": "pass",
+    "record": "IAU-runtime-settings-cli-settings-write-contract-v1-preflight-v1.json",
+    "implementationStartAllowed": true
+  },
+  "exitGate": [
+    "T009-T012 complete",
+    "public redaction scan passes",
+    "bridge artifact validation passes",
+    "npm test passes",
+    "npm run check passes",
+    "implementation handoff issue names completed IAU and next blocked scope"
+  ],
+  "implementationCloseout": {
+    "status": "pass",
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011",
+      "T012"
+    ],
+    "issue": "https://github.com/svelderrainruiz/vi-history/issues/49"
+  },
+  "implementationSharing": "none",
+  "requirementMaturityBasis": "governed released extension supports requirement maturity, not source reuse",
+  "marketplacePublication": "disabled",
+  "marketplacePublicationAdr": "docs/decisions/ADR-001-marketplace-publication-disabled.md"
+}

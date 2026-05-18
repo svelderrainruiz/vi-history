@@ -1,0 +1,23 @@
+{
+  "schema": "vi-history/requirements-import@v1",
+  "sliceId": "runtime-settings-cli-validation-readback-v1",
+  "createdDate": "2026-05-18",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "72c9a700da501eba23e16e3d35b385ec8d8d6808",
+  "governedAdmissionCommit": "f9b2cb76f6de98e97354d1fb8e5c81e3adc8f6e2",
+  "targetProduct": "vi-history",
+  "targetFeature": "runtime-settings-cli-validation-readback-v1",
+  "importedRequirementIds": [
+    "VHS-REQ-543",
+    "VHS-REQ-546"
+  ],
+  "redactionStatus": "pass",
+  "implementationSharing": "none",
+  "marketplacePublication": "disabled-until-later-adr",
+  "files": [
+    "syrs.md",
+    "srs.md",
+    "rtm.csv",
+    "test-plan.md"
+  ]
+}

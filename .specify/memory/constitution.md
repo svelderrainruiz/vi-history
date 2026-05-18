@@ -1,7 +1,7 @@
 <!--
 Sync Impact Report
-Version change: template -> 0.1.0
-Modified principles: template placeholders -> clean-room Spec Kit governance
+Version change: 0.1.6 -> 0.1.7
+Modified principles: imported slice registry adds runtime settings CLI validation proof artifact contract
 Added sections: Authority Boundaries, Development Workflow, Governance
 Removed sections: unresolved template placeholders
 Templates requiring updates: pending after first implementation planning pass
@@ -51,10 +51,41 @@ This repository is the MIT implementation authority for package `vi-history`,
 display name `VI History`, publisher `svelderrainruiz`, extension ID
 `svelderrainruiz.vi-history`, and version `0.1.0`.
 
-The current imported slice is `runtime-contract-host-provider-v1`. Its import
-packet lives under `docs/requirements/imports/runtime-contract-host-provider-v1/`
-and its Spec Kit feature is pinned under
-`.specify/specs/runtime-contract-host-provider-v1/`.
+The imported slices are:
+
+- `runtime-contract-host-provider-v1`, with its import packet under
+  `docs/requirements/imports/runtime-contract-host-provider-v1/` and Spec Kit
+  feature under `.specify/specs/runtime-contract-host-provider-v1/`.
+- `installed-user-observation-public-surface-v1`, with its import packet under
+  `docs/requirements/imports/installed-user-observation-public-surface-v1/`
+  and Spec Kit feature under
+  `.specify/specs/installed-user-observation-public-surface-v1/`.
+- `command-activation-surface-v1`, with its import packet under
+  `docs/requirements/imports/command-activation-surface-v1/` and Spec Kit
+  feature under `.specify/specs/command-activation-surface-v1/`.
+- `command-handler-entrypoint-shell-v1`, with its import packet under
+  `docs/requirements/imports/command-handler-entrypoint-shell-v1/` and Spec Kit
+  feature under `.specify/specs/command-handler-entrypoint-shell-v1/`.
+- `installed-user-documentation-command-v1`, with its import packet under
+  `docs/requirements/imports/installed-user-documentation-command-v1/` and
+  Spec Kit feature under
+  `.specify/specs/installed-user-documentation-command-v1/`.
+- `runtime-settings-cli-bootstrap-v1`, with its import packet under
+  `docs/requirements/imports/runtime-settings-cli-bootstrap-v1/` and Spec Kit
+  feature under `.specify/specs/runtime-settings-cli-bootstrap-v1/`.
+- `runtime-settings-cli-settings-write-v1`, with its import packet under
+  `docs/requirements/imports/runtime-settings-cli-settings-write-v1/` and Spec
+  Kit feature under `.specify/specs/runtime-settings-cli-settings-write-v1/`.
+- `runtime-settings-cli-validation-readback-v1`, with its import packet under
+  `docs/requirements/imports/runtime-settings-cli-validation-readback-v1/` and
+  Spec Kit feature under
+  `.specify/specs/runtime-settings-cli-validation-readback-v1/`.
+- `runtime-settings-cli-validation-proof-v1`, with its import packet under
+  `docs/requirements/imports/runtime-settings-cli-validation-proof-v1/` and
+  Spec Kit feature under
+  `.specify/specs/runtime-settings-cli-validation-proof-v1/`.
+
+The active pinned Spec Kit feature is recorded in `.specify/feature.json`.
 
 ## Development Workflow
 
@@ -69,4 +100,4 @@ This constitution governs repository-local work. Amendments require a versioned
 change, a short rationale, and validation that affected Spec Kit templates and
 repository guidance remain consistent.
 
-**Version**: 0.1.0 | **Ratified**: 2026-05-17 | **Last Amended**: 2026-05-17
+**Version**: 0.1.7 | **Ratified**: 2026-05-17 | **Last Amended**: 2026-05-18
