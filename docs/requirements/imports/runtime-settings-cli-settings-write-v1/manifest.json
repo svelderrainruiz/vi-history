@@ -1,0 +1,23 @@
+{
+  "schema": "vi-history/requirements-import@v1",
+  "sliceId": "runtime-settings-cli-settings-write-v1",
+  "createdDate": "2026-05-18",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "110bf8e0a98478d141244ae0c53240e4cf93a790",
+  "governedAdmissionCommit": "72c9a700da501eba23e16e3d35b385ec8d8d6808",
+  "targetProduct": "vi-history",
+  "targetFeature": "runtime-settings-cli-settings-write-v1",
+  "importedRequirementIds": [
+    "VHS-REQ-537",
+    "VHS-REQ-543"
+  ],
+  "redactionStatus": "pass",
+  "implementationSharing": "none",
+  "marketplacePublication": "disabled-until-later-adr",
+  "files": [
+    "syrs.md",
+    "srs.md",
+    "rtm.csv",
+    "test-plan.md"
+  ]
+}
