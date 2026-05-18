@@ -41,19 +41,19 @@ the runtime settings CLI bootstrap.
 minimum prepare-command shell that reports launcher materialization and
 recovery facts only.
 
-**Admitted IAU**: `IAU-runtime-settings-cli-prepare-command-shell-v1`
+**Implemented IAU**: `IAU-runtime-settings-cli-prepare-command-shell-v1`
 
 **Public admission issue**: Issue #43
 
-**Implementation handoff issue**: to be created after this admission PR merges.
+**Implementation handoff issue**: Issue #45
 
-- [ ] T009 Add tests proving
+- [x] T009 Add tests proving
   `labviewViHistory.prepareLocalRuntimeSettingsCli` registers as a separate
   handler from `labviewViHistory.open` and
   `labviewViHistory.openDocumentation`.
-- [ ] T010 Add tests proving the prepare-command shell reports launcher
+- [x] T010 Add tests proving the prepare-command shell reports launcher
   materialization and recovery facts without mutating settings.
-- [ ] T011 Implement the minimum public MIT prepare-command shell.
+- [x] T011 Implement the minimum public MIT prepare-command shell.
 
 ---
 
@@ -83,21 +83,20 @@ visibly outside this IAU.
 
 ## Dependencies & Execution Order
 
-- Phase 1 must merge before
-  `IAU-runtime-settings-cli-prepare-command-shell-v1` implementation starts.
-- Phase 2 may start only from the implementation handoff issue created after
-  this admission PR merges.
+- Phase 1 merged before
+  `IAU-runtime-settings-cli-prepare-command-shell-v1` implementation started.
+- Phase 2 is implemented and closed for
+  `IAU-runtime-settings-cli-prepare-command-shell-v1`.
 - Phase 3 remains blocked until separate public requirements and preflight
   records admit settings mutation, validation, runtime execution, or release
   behavior.
 - Future Copilot implementation work must start from a new bridge admission and
-  implementation handoff issue. Issue #43 is an admission issue and must not be
-  reused for implementation.
+  implementation handoff issue. Issue #43 and Issue #45 must not be reused.
 
 ## Implementation Strategy
 
 1. Merge import/spec/admission artifacts to `develop`.
-2. Create a separate implementation handoff issue for
+2. Complete Issue #45 for
    `IAU-runtime-settings-cli-prepare-command-shell-v1`.
 3. Keep settings mutation, runtime validation, compare execution, LabVIEWCLI,
    Docker, Marketplace publication, packaging, and source copying blocked.

@@ -140,11 +140,10 @@ documentation contract tests, and the minimum documentation command panel shell.
 No new Copilot implementation should start from Issue #41.
 
 Issue #43 admits `IAU-runtime-settings-cli-prepare-command-shell-v1` for
-`runtime-settings-cli-bootstrap-v1` after its admission PR merges. It admits
-only T009-T011: prepare-command handler tests, launcher materialization and
-recovery fact tests, and the minimum prepare-command shell. A separate
-implementation handoff issue must be created before Copilot implementation
-starts.
+`runtime-settings-cli-bootstrap-v1`. Issue #45 implements and closes it for
+T009-T011 only: prepare-command handler tests, launcher materialization and
+recovery fact tests, and the minimum prepare-command shell. No new Copilot
+implementation should start from Issue #45.
 
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.

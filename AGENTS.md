@@ -46,16 +46,15 @@ reused for new implementation.
 
 `runtime-settings-cli-bootstrap-v1` admits
 `IAU-runtime-settings-cli-prepare-command-shell-v1` for Issue #43 and T009-T011
-only after its admission PR merges: prepare-command handler tests, launcher
-materialization/recovery fact tests, and the minimum prepare-command shell.
-Issue #43 is an admission issue and must not be reused for implementation.
+only. Issue #45 implements and closes it: prepare-command handler tests,
+launcher materialization/recovery fact tests, and the minimum prepare-command
+shell. Issue #43 and Issue #45 must not be reused for new implementation.
 
 Provider/version/bitness settings mutation, JSONC settings rewrite,
 `vihs --validate`, runtime validation, compare execution, LabVIEWCLI execution,
 Docker execution, packaging, and Marketplace publication remain blocked.
 
-Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-prepare-command-shell-v1`.
+Current Implementation Admission Unit: none.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that

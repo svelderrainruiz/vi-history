@@ -1,11 +1,11 @@
 # IAU: Runtime Settings CLI Prepare Command Shell
 
-State: `implementation-admitted`
+State: `implemented`
 
-This IAU admits the first runtime settings CLI bootstrap step for
+This IAU implements the first runtime settings CLI bootstrap step for
 `runtime-settings-cli-bootstrap-v1`.
 
-## Admitted Tasks
+## Completed Tasks
 
 - `T009`: add tests proving
   `labviewViHistory.prepareLocalRuntimeSettingsCli` registers as a separate
@@ -25,9 +25,8 @@ This IAU admits the first runtime settings CLI bootstrap step for
 
 ## Admission Result
 
-Preflight passed for T009-T011 only. Implementation may start only after this
-admission PR merges to `develop` and a separate implementation handoff issue is
-created.
+Preflight passed for T009-T011 only. Issue #45 completed the implementation
+without expanding into blocked scope.
 
 Settings mutation, runtime validation, compare execution, LabVIEWCLI execution,
 Docker orchestration, packaging, Marketplace publication, and source copying

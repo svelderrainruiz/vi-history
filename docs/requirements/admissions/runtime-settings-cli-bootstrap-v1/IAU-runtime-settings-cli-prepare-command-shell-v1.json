@@ -2,14 +2,18 @@
   "schema": "vi-history/implementation-admission-unit@v1",
   "iauId": "IAU-runtime-settings-cli-prepare-command-shell-v1",
   "createdDate": "2026-05-18",
-  "state": "implementation-admitted",
+  "completedDate": "2026-05-18",
+  "state": "implemented",
   "parentSliceId": "runtime-settings-cli-bootstrap-v1",
   "specFeature": ".specify/specs/runtime-settings-cli-bootstrap-v1",
   "issue": {
     "number": 43,
     "url": "https://github.com/svelderrainruiz/vi-history/issues/43"
   },
-  "implementationHandoffIssue": null,
+  "implementationHandoffIssue": {
+    "number": 45,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/45"
+  },
   "admittedTasks": [
     "T009",
     "T010",
@@ -34,6 +38,20 @@
     "status": "pass",
     "record": "IAU-runtime-settings-cli-prepare-command-shell-v1-preflight-v1.json",
     "implementationStartAllowed": true
+  },
+  "implementationCloseout": {
+    "status": "pass",
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011"
+    ],
+    "blockedTasksRemainBlocked": [
+      "T012",
+      "T013",
+      "T014",
+      "T015"
+    ]
   },
   "exitGate": [
     "T009-T011 complete",
