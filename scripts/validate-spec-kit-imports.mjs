@@ -24,6 +24,12 @@ const handlerImportDir = `docs/requirements/imports/${handlerSliceId}`;
 const handlerAdmissionPath = `docs/requirements/admissions/${handlerSliceId}.json`;
 const handlerIauPath = `docs/requirements/admissions/${handlerSliceId}/IAU-command-handler-entrypoint-shell-v1.json`;
 const handlerPreflightPath = `docs/requirements/admissions/${handlerSliceId}/IAU-command-handler-entrypoint-shell-v1-preflight-v1.json`;
+const documentationSliceId = "installed-user-documentation-command-v1";
+const documentationFeatureDir = `.specify/specs/${documentationSliceId}`;
+const documentationImportDir = `docs/requirements/imports/${documentationSliceId}`;
+const documentationAdmissionPath = `docs/requirements/admissions/${documentationSliceId}.json`;
+const documentationIauPath = `docs/requirements/admissions/${documentationSliceId}/IAU-documentation-command-panel-shell-v1.json`;
+const documentationPreflightPath = `docs/requirements/admissions/${documentationSliceId}/IAU-documentation-command-panel-shell-v1-preflight-v1.json`;
 const marketplaceAdrPath = "docs/decisions/ADR-001-marketplace-publication-disabled.md";
 const explicitCompareIauPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1.json`;
 const explicitComparePreflightPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1-preflight-v1.json`;
@@ -60,6 +66,12 @@ const commandExpectedIds = [
 const handlerExpectedIds = [
   "VHS-REQ-082",
   "VHS-REQ-083",
+  "VHS-REQ-594"
+];
+const documentationExpectedIds = [
+  "VHS-REQ-368",
+  "VHS-REQ-369",
+  "VHS-REQ-489",
   "VHS-REQ-594"
 ];
 
@@ -131,11 +143,12 @@ requireTextIncludes(".specify/memory/constitution.md", [
   "installed-user-observation-public-surface-v1",
   "command-activation-surface-v1",
   "command-handler-entrypoint-shell-v1",
-  "**Version**: 0.1.2"
+  "installed-user-documentation-command-v1",
+  "**Version**: 0.1.3"
 ]);
 
 const featureJson = readJson(".specify/feature.json");
-requireEqual(featureJson.feature_directory, handlerFeatureDir, "pinned Spec Kit feature directory");
+requireEqual(featureJson.feature_directory, documentationFeatureDir, "pinned Spec Kit feature directory");
 
 const admission = readJson(admissionPath);
 requireEqual(admission.schema, "vi-history/requirements-admission@v1", "admission schema");
@@ -512,7 +525,7 @@ requireTextIncludes("README.md", [
 requireTextIncludes("AGENTS.md", [
   "installed-user-observation-public-surface-v1",
   "IAU-installed-user-observation-model-v1",
-  "004-command-handler-entrypoint-shell-v1"
+  "005-installed-user-documentation-command-v1"
 ]);
 
 const commandAdmission = readJson(commandAdmissionPath);
@@ -749,6 +762,126 @@ requireTextIncludes("README.md", [
   "docs/requirements/admissions/command-handler-entrypoint-shell-v1.json",
   "Issue #36",
   "IAU-command-handler-entrypoint-shell-v1"
+]);
+
+const documentationAdmission = readJson(documentationAdmissionPath);
+requireEqual(documentationAdmission.schema, "vi-history/requirements-admission@v1", "documentation admission schema");
+requireEqual(documentationAdmission.sliceId, documentationSliceId, "documentation admission sliceId");
+requireEqual(documentationAdmission.state, "implementation-admitted", "documentation admission state");
+requireEqual(documentationAdmission.targetProduct, "vi-history", "documentation admission targetProduct");
+requireEqual(documentationAdmission.targetFeature, documentationSliceId, "documentation admission targetFeature");
+requireEqual(documentationAdmission.sourceBaselineTag, "v1.3.16", "documentation admission sourceBaselineTag");
+requireEqual(documentationAdmission.sourceCommit, "47f5b67ae35d5bb8b18c2bd2db12e0e7f835313d", "documentation admission sourceCommit");
+requireEqual(documentationAdmission.governedAdmissionCommit, "ff950d6b7401fe31c5a12aea28bcad9099b254f1", "documentation admission governedAdmissionCommit");
+requireEqual(documentationAdmission.implementationSharing, "none", "documentation admission implementationSharing");
+requireMarketplacePosture(documentationAdmission, "documentation admission");
+requireEqual(documentationAdmission.currentImplementationAdmissionUnit, "IAU-documentation-command-panel-shell-v1", "documentation currentImplementationAdmissionUnit");
+requireArrayEqual(documentationAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "documentation completedSpecScope");
+requireArrayEqual(documentationAdmission.completedImplementationScope, [], "documentation completedImplementationScope");
+requireArrayEqual(documentationAdmission.admittedImplementationScope, ["T009", "T010", "T011"], "documentation admittedImplementationScope");
+requireArrayEqual(documentationAdmission.blockedImplementationScope, ["T012", "T013", "T014", "T015"], "documentation blockedImplementationScope");
+requireEqual(documentationAdmission.preImplementationPreflight?.iauId, "IAU-documentation-command-panel-shell-v1", "documentation preImplementationPreflight iauId");
+requireEqual(documentationAdmission.preImplementationPreflight?.status, "pass", "documentation preImplementationPreflight status");
+requireEqual(documentationAdmission.preImplementationPreflight?.implementationStartAllowed, true, "documentation preImplementationPreflight implementationStartAllowed");
+requireEqual(documentationAdmission.preImplementationPreflight?.record, documentationPreflightPath, "documentation preImplementationPreflight record");
+requireFile(`docs/requirements/admissions/${documentationSliceId}.md`);
+
+const documentationIau = readJson(documentationIauPath);
+requireEqual(documentationIau.schema, "vi-history/implementation-admission-unit@v1", "documentation IAU schema");
+requireEqual(documentationIau.iauId, "IAU-documentation-command-panel-shell-v1", "documentation IAU id");
+requireEqual(documentationIau.state, "implementation-admitted", "documentation IAU state");
+requireEqual(documentationIau.parentSliceId, documentationSliceId, "documentation IAU parentSliceId");
+requireArrayEqual(documentationIau.admittedTasks, ["T009", "T010", "T011"], "documentation IAU admittedTasks");
+requireArrayEqual(documentationIau.blockedTasks, ["T012", "T013", "T014", "T015"], "documentation IAU blockedTasks");
+requireEqual(documentationIau.implementationSharing, "none", "documentation IAU implementationSharing");
+requireMarketplacePosture(documentationIau, "documentation IAU");
+requireEqual(documentationIau.preImplementationPreflight?.status, "pass", "documentation IAU preImplementationPreflight status");
+requireEqual(documentationIau.preImplementationPreflight?.record, "IAU-documentation-command-panel-shell-v1-preflight-v1.json", "documentation IAU preImplementationPreflight record");
+requireEqual(documentationIau.preImplementationPreflight?.implementationStartAllowed, true, "documentation IAU preImplementationPreflight implementationStartAllowed");
+requireFile(`docs/requirements/admissions/${documentationSliceId}/IAU-documentation-command-panel-shell-v1.md`);
+
+const documentationPreflight = readJson(documentationPreflightPath);
+requireEqual(documentationPreflight.schema, "vi-history/implementation-admission-unit-preflight@v1", "documentation preflight schema");
+requireEqual(documentationPreflight.iauId, "IAU-documentation-command-panel-shell-v1", "documentation preflight iauId");
+requireEqual(documentationPreflight.status, "pass", "documentation preflight status");
+requireEqual(documentationPreflight.implementationStartAllowed, true, "documentation preflight implementationStartAllowed");
+requireEqual(documentationPreflight.parentSliceId, documentationSliceId, "documentation preflight parentSliceId");
+requireEqual(documentationPreflight.implementationSharing, "none", "documentation preflight implementationSharing");
+requireMarketplacePosture(documentationPreflight, "documentation preflight");
+requireArrayEqual(documentationPreflight.implementationStartScope, ["T009", "T010", "T011"], "documentation preflight implementationStartScope");
+if (!Array.isArray(documentationPreflight.checkResults) || documentationPreflight.checkResults.length !== documentationPreflight.requiredChecks.length) {
+  failures.push("documentation preflight checkResults: must match requiredChecks length");
+} else {
+  for (const result of documentationPreflight.checkResults) {
+    requireEqual(result.status, "pass", `documentation preflight check result ${result.check}`);
+  }
+}
+requireFile(`docs/requirements/admissions/${documentationSliceId}/IAU-documentation-command-panel-shell-v1-preflight-v1.md`);
+
+const documentationManifest = readJson(`${documentationImportDir}/manifest.json`);
+requireEqual(documentationManifest.schema, "vi-history/requirements-import@v1", "documentation manifest schema");
+requireEqual(documentationManifest.sliceId, documentationSliceId, "documentation sliceId");
+requireEqual(documentationManifest.sourceBaselineTag, "v1.3.16", "documentation sourceBaselineTag");
+requireEqual(documentationManifest.sourceCommit, "47f5b67ae35d5bb8b18c2bd2db12e0e7f835313d", "documentation sourceCommit");
+requireEqual(documentationManifest.governedAdmissionCommit, "ff950d6b7401fe31c5a12aea28bcad9099b254f1", "documentation governedAdmissionCommit");
+requireEqual(documentationManifest.targetProduct, "vi-history", "documentation targetProduct");
+requireEqual(documentationManifest.targetFeature, documentationSliceId, "documentation targetFeature");
+requireEqual(documentationManifest.redactionStatus, "pass", "documentation redactionStatus");
+requireEqual(documentationManifest.implementationSharing, "none", "documentation implementationSharing");
+requireEqual(documentationManifest.marketplacePublication, "disabled-until-later-adr", "documentation marketplacePublication");
+requireArrayEqual(documentationManifest.importedRequirementIds, documentationExpectedIds, "documentation importedRequirementIds");
+requireArrayEqual(documentationManifest.files, ["syrs.md", "srs.md", "rtm.csv", "test-plan.md"], "documentation manifest files");
+
+for (const file of documentationManifest.files ?? []) {
+  requireFile(`${documentationImportDir}/${file}`);
+}
+
+for (const file of ["spec.md", "plan.md", "tasks.md"]) {
+  requireFile(`${documentationFeatureDir}/${file}`);
+}
+
+requireTextIncludes(`${documentationFeatureDir}/spec.md`, [
+  "Installed-User Documentation Command",
+  "VHS-REQ-368",
+  "VHS-REQ-369",
+  "VHS-REQ-489",
+  "VHS-REQ-594",
+  "IAU-documentation-command-panel-shell-v1"
+]);
+requireTextIncludes(`${documentationFeatureDir}/plan.md`, [
+  "IAU-documentation-command-panel-shell-v1",
+  "Issue #39",
+  "Marketplace publication remains disabled"
+]);
+requireTextIncludes(`${documentationFeatureDir}/tasks.md`, [
+  "Issue #39",
+  "- [x] T001",
+  "- [x] T008",
+  "- [ ] T009",
+  "- [ ] T010",
+  "- [ ] T011",
+  "IAU-documentation-command-panel-shell-v1",
+  "[BLOCKED]",
+  "T015"
+]);
+requireTextIncludes(`${documentationImportDir}/rtm.csv`, documentationExpectedIds);
+requireTextIncludes(`${documentationImportDir}/srs.md`, [
+  "VHS-REQ-368",
+  "VHS-REQ-369",
+  "VHS-REQ-489",
+  "VHS-REQ-594",
+  "labviewViHistory.openDocumentation"
+]);
+requireTextIncludes("README.md", [
+  "installed-user-documentation-command-v1",
+  "docs/requirements/admissions/installed-user-documentation-command-v1.json",
+  "Issue #39",
+  "IAU-documentation-command-panel-shell-v1"
+]);
+requireTextIncludes("AGENTS.md", [
+  "installed-user-documentation-command-v1",
+  "Current Implementation Admission Unit",
+  "IAU-documentation-command-panel-shell-v1"
 ]);
 
 if (failures.length > 0) {
