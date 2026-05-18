@@ -1495,7 +1495,7 @@ requireTextIncludes("docs/development/copilot-workflow.md", [
 const runtimeSettingsInteractiveAdmission = readJson(runtimeSettingsInteractiveAdmissionPath);
 requireEqual(runtimeSettingsInteractiveAdmission.schema, "vi-history/requirements-admission@v1", "runtime settings interactive admission schema");
 requireEqual(runtimeSettingsInteractiveAdmission.sliceId, runtimeSettingsInteractiveSliceId, "runtime settings interactive admission sliceId");
-requireEqual(runtimeSettingsInteractiveAdmission.state, "implementation-admitted", "runtime settings interactive admission state");
+requireEqual(runtimeSettingsInteractiveAdmission.state, "implemented", "runtime settings interactive admission state");
 requireEqual(runtimeSettingsInteractiveAdmission.targetProduct, "vi-history", "runtime settings interactive admission targetProduct");
 requireEqual(runtimeSettingsInteractiveAdmission.targetFeature, runtimeSettingsInteractiveSliceId, "runtime settings interactive admission targetFeature");
 requireEqual(runtimeSettingsInteractiveAdmission.sourceBaselineTag, "v1.3.16", "runtime settings interactive admission sourceBaselineTag");
@@ -1503,27 +1503,29 @@ requireEqual(runtimeSettingsInteractiveAdmission.sourceCommit, "edb8bfaa53237a8f
 requireEqual(runtimeSettingsInteractiveAdmission.governedAdmissionCommit, "3716d35a7ba57031464a81902f37862128f53681", "runtime settings interactive admission governedAdmissionCommit");
 requireEqual(runtimeSettingsInteractiveAdmission.implementationSharing, "none", "runtime settings interactive admission implementationSharing");
 requireMarketplacePosture(runtimeSettingsInteractiveAdmission, "runtime settings interactive admission");
-requireEqual(runtimeSettingsInteractiveAdmission.currentImplementationAdmissionUnit, "IAU-runtime-settings-cli-interactive-selection-contract-v1", "runtime settings interactive currentImplementationAdmissionUnit");
+requireEqual(runtimeSettingsInteractiveAdmission.currentImplementationAdmissionUnit, null, "runtime settings interactive currentImplementationAdmissionUnit");
 requireArrayEqual(runtimeSettingsInteractiveAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "runtime settings interactive completedSpecScope");
-requireArrayEqual(runtimeSettingsInteractiveAdmission.completedImplementationScope, [], "runtime settings interactive completedImplementationScope");
-requireArrayEqual(runtimeSettingsInteractiveAdmission.admittedImplementationScope, ["T009", "T010", "T011", "T012", "T013"], "runtime settings interactive admittedImplementationScope");
+requireArrayEqual(runtimeSettingsInteractiveAdmission.completedImplementationScope, ["T009", "T010", "T011", "T012", "T013"], "runtime settings interactive completedImplementationScope");
+requireArrayEqual(runtimeSettingsInteractiveAdmission.admittedImplementationScope, [], "runtime settings interactive admittedImplementationScope");
 requireArrayEqual(runtimeSettingsInteractiveAdmission.blockedImplementationScope, ["T014", "T015", "T016", "T017", "T018", "T019"], "runtime settings interactive blockedImplementationScope");
 requireEqual(runtimeSettingsInteractiveAdmission.preImplementationPreflight?.iauId, "IAU-runtime-settings-cli-interactive-selection-contract-v1", "runtime settings interactive preImplementationPreflight iauId");
 requireEqual(runtimeSettingsInteractiveAdmission.preImplementationPreflight?.status, "pass", "runtime settings interactive preImplementationPreflight status");
 requireEqual(runtimeSettingsInteractiveAdmission.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings interactive preImplementationPreflight implementationStartAllowed");
 requireEqual(runtimeSettingsInteractiveAdmission.preImplementationPreflight?.record, runtimeSettingsInteractivePreflightPath, "runtime settings interactive preImplementationPreflight record");
-requireEqual(runtimeSettingsInteractiveAdmission.implementationHandoffIssue, null, "runtime settings interactive implementationHandoffIssue");
+requireEqual(runtimeSettingsInteractiveAdmission.implementationHandoffIssue?.number, 62, "runtime settings interactive implementationHandoffIssue number");
+requireEqual(runtimeSettingsInteractiveAdmission.implementationCloseout?.status, "pass", "runtime settings interactive implementationCloseout status");
+requireArrayEqual(runtimeSettingsInteractiveAdmission.implementationCloseout?.completedTasks, ["T009", "T010", "T011", "T012", "T013"], "runtime settings interactive implementationCloseout completedTasks");
 requireFile(`docs/requirements/admissions/${runtimeSettingsInteractiveSliceId}.md`);
 
 const runtimeSettingsInteractiveAdmissionUnit = (runtimeSettingsInteractiveAdmission.implementationAdmissionUnits ?? [])
   .find((unit) => unit?.iauId === "IAU-runtime-settings-cli-interactive-selection-contract-v1");
-requireEqual(runtimeSettingsInteractiveAdmissionUnit?.state, "implementation-admitted", "runtime settings interactive admission unit state");
+requireEqual(runtimeSettingsInteractiveAdmissionUnit?.state, "implemented", "runtime settings interactive admission unit state");
 requireEqual(runtimeSettingsInteractiveAdmissionUnit?.preflightRecord, runtimeSettingsInteractivePreflightPath, "runtime settings interactive admission unit preflightRecord");
 
 const runtimeSettingsInteractiveIau = readJson(runtimeSettingsInteractiveIauPath);
 requireEqual(runtimeSettingsInteractiveIau.schema, "vi-history/implementation-admission-unit@v1", "runtime settings interactive IAU schema");
 requireEqual(runtimeSettingsInteractiveIau.iauId, "IAU-runtime-settings-cli-interactive-selection-contract-v1", "runtime settings interactive IAU id");
-requireEqual(runtimeSettingsInteractiveIau.state, "implementation-admitted", "runtime settings interactive IAU state");
+requireEqual(runtimeSettingsInteractiveIau.state, "implemented", "runtime settings interactive IAU state");
 requireEqual(runtimeSettingsInteractiveIau.parentSliceId, runtimeSettingsInteractiveSliceId, "runtime settings interactive IAU parentSliceId");
 requireArrayEqual(runtimeSettingsInteractiveIau.admittedTasks, ["T009", "T010", "T011", "T012", "T013"], "runtime settings interactive IAU admittedTasks");
 requireArrayEqual(runtimeSettingsInteractiveIau.blockedTasks, ["T014", "T015", "T016", "T017", "T018", "T019"], "runtime settings interactive IAU blockedTasks");
@@ -1532,7 +1534,9 @@ requireMarketplacePosture(runtimeSettingsInteractiveIau, "runtime settings inter
 requireEqual(runtimeSettingsInteractiveIau.preImplementationPreflight?.status, "pass", "runtime settings interactive IAU preImplementationPreflight status");
 requireEqual(runtimeSettingsInteractiveIau.preImplementationPreflight?.record, "IAU-runtime-settings-cli-interactive-selection-contract-v1-preflight-v1.json", "runtime settings interactive IAU preImplementationPreflight record");
 requireEqual(runtimeSettingsInteractiveIau.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings interactive IAU preImplementationPreflight implementationStartAllowed");
-requireEqual(runtimeSettingsInteractiveIau.implementationHandoffIssue, null, "runtime settings interactive IAU implementationHandoffIssue");
+requireEqual(runtimeSettingsInteractiveIau.implementationHandoffIssue?.number, 62, "runtime settings interactive IAU implementationHandoffIssue number");
+requireEqual(runtimeSettingsInteractiveIau.implementationCloseout?.status, "pass", "runtime settings interactive IAU implementationCloseout status");
+requireArrayEqual(runtimeSettingsInteractiveIau.implementationCloseout?.completedTasks, ["T009", "T010", "T011", "T012", "T013"], "runtime settings interactive IAU implementationCloseout completedTasks");
 requireFile(`docs/requirements/admissions/${runtimeSettingsInteractiveSliceId}/IAU-runtime-settings-cli-interactive-selection-contract-v1.md`);
 
 const runtimeSettingsInteractivePreflight = readJson(runtimeSettingsInteractivePreflightPath);
@@ -1594,8 +1598,8 @@ requireTextIncludes(`${runtimeSettingsInteractiveFeatureDir}/tasks.md`, [
   "Issue #60",
   "- [x] T001",
   "- [x] T008",
-  "- [ ] T009",
-  "- [ ] T013",
+  "- [x] T009",
+  "- [x] T013",
   "IAU-runtime-settings-cli-interactive-selection-contract-v1",
   "[BLOCKED]",
   "T019"
@@ -1613,18 +1617,22 @@ requireTextIncludes("README.md", [
   "runtime-settings-cli-interactive-selection-v1",
   "docs/requirements/admissions/runtime-settings-cli-interactive-selection-v1.json",
   "Issue #60",
+  "Issue #62",
   "IAU-runtime-settings-cli-interactive-selection-contract-v1"
 ]);
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-interactive-selection-v1",
   "Issue #60",
+  "Issue #62",
   "Current Implementation Admission Unit",
+  "none",
   "IAU-runtime-settings-cli-interactive-selection-contract-v1",
   "010-runtime-settings-cli-interactive-selection-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-interactive-selection-v1",
   "Issue #60",
+  "Issue #62",
   "IAU-runtime-settings-cli-interactive-selection-contract-v1",
   "no-argument interactive selection beyond the admitted pure selection-state"
 ]);

@@ -2,14 +2,17 @@
   "schema": "vi-history/implementation-admission-unit@v1",
   "iauId": "IAU-runtime-settings-cli-interactive-selection-contract-v1",
   "createdDate": "2026-05-18",
-  "state": "implementation-admitted",
+  "state": "implemented",
   "parentSliceId": "runtime-settings-cli-interactive-selection-v1",
   "specFeature": ".specify/specs/runtime-settings-cli-interactive-selection-v1",
   "issue": {
     "number": 60,
     "url": "https://github.com/svelderrainruiz/vi-history/issues/60"
   },
-  "implementationHandoffIssue": null,
+  "implementationHandoffIssue": {
+    "number": 62,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/62"
+  },
   "admittedTasks": [
     "T009",
     "T010",
@@ -44,6 +47,25 @@
     "status": "pass",
     "record": "IAU-runtime-settings-cli-interactive-selection-contract-v1-preflight-v1.json",
     "implementationStartAllowed": true
+  },
+  "implementationCloseout": {
+    "status": "pass",
+    "issue": 62,
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011",
+      "T012",
+      "T013"
+    ],
+    "blockedScopeRetained": [
+      "T014",
+      "T015",
+      "T016",
+      "T017",
+      "T018",
+      "T019"
+    ]
   },
   "implementationSharing": "none",
   "requirementMaturityBasis": "governed released extension supports requirement maturity, not source reuse",

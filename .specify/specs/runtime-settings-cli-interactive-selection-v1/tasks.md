@@ -49,21 +49,20 @@ terminal process loops or runtime execution.
 
 **Public admission issue**: Issue #60
 
-**Implementation handoff issue**: To be created after this admission PR
-merges.
+**Implementation handoff issue**: Issue #62.
 
-- [ ] T009 Add tests proving bare `vihs` seeds missing settings to
+- [x] T009 Add tests proving bare `vihs` seeds missing settings to
   `host/windows/2026/x86` and reports the current provider/platform/version/
   bitness bundle.
-- [ ] T010 Add tests proving Enter-through confirmation preserves the current
+- [x] T010 Add tests proving Enter-through confirmation preserves the current
   governed selection and requests validation through the existing validation
   readback contract.
-- [ ] T011 Add tests proving guided host selection accepts supported LabVIEW
+- [x] T011 Add tests proving guided host selection accepts supported LabVIEW
   2025, LabVIEW 2026, and newer local host choices while failing closed for
   unsupported years or missing selected bitness.
-- [ ] T012 Add tests proving Docker selection remains bounded to LabVIEW 2026
+- [x] T012 Add tests proving Docker selection remains bounded to LabVIEW 2026
   x64 and fails closed for unsupported Docker years or bitness.
-- [ ] T013 Implement the minimum public MIT interactive-selection contract as
+- [x] T013 Implement the minimum public MIT interactive-selection contract as
   pure selection state and output facts.
 
 ---
@@ -102,8 +101,7 @@ visibly outside this IAU.
 - Phase 1 must merge before
   `IAU-runtime-settings-cli-interactive-selection-contract-v1` implementation
   starts.
-- Phase 2 may start only after this admission PR merges and a separate
-  implementation handoff issue is created.
+- Phase 2 is complete through Issue #62 for T009-T013 only.
 - Phase 3 remains blocked until separate public requirements and preflight
   records admit terminal prompt loops, compare execution, runtime execution,
   proof-out expansion, live-session proof, or release behavior.
@@ -114,7 +112,7 @@ visibly outside this IAU.
 ## Implementation Strategy
 
 1. Merge import/spec/admission artifacts to `develop`.
-2. Create a separate implementation handoff issue for
+2. Issue #62 implements
    `IAU-runtime-settings-cli-interactive-selection-contract-v1`.
 3. Keep terminal process prompt loops, compare execution, LabVIEWCLI, Docker,
    proof-out expansion, live-session proof, Marketplace publication,

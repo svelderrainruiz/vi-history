@@ -3,24 +3,23 @@
 Issue #60 imports `runtime-settings-cli-interactive-selection-v1`, locks the
 public Spec Kit feature, and admits
 `IAU-runtime-settings-cli-interactive-selection-contract-v1` for T009-T013
-only.
+only. Issue #62 implements and closes that IAU.
 
 Machine-readable record:
 [runtime-settings-cli-interactive-selection-v1.json](./runtime-settings-cli-interactive-selection-v1.json)
 
 ## State
 
-- Slice state: `implementation-admitted`
-- Current IAU:
-  `IAU-runtime-settings-cli-interactive-selection-contract-v1`
+- Slice state: `implemented`
+- Current IAU: none
 - Admission issue: #60
-- Implementation handoff issue: to be created after this admission PR merges
+- Implementation handoff issue: #62
 - Marketplace publication: disabled
 - Implementation sharing: none
 
-## Admitted Work
+## Implemented Work
 
-`IAU-runtime-settings-cli-interactive-selection-contract-v1` admits only:
+`IAU-runtime-settings-cli-interactive-selection-contract-v1` implements only:
 
 - tests for bare `vihs` default seeding and current bundle reporting
 - tests for Enter-through confirmation and validation readback handoff facts

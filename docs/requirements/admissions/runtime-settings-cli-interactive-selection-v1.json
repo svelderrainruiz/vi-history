@@ -2,7 +2,7 @@
   "schema": "vi-history/requirements-admission@v1",
   "sliceId": "runtime-settings-cli-interactive-selection-v1",
   "createdDate": "2026-05-18",
-  "state": "implementation-admitted",
+  "state": "implemented",
   "targetProduct": "vi-history",
   "targetFeature": "runtime-settings-cli-interactive-selection-v1",
   "sourceBaselineTag": "v1.3.16",
@@ -14,7 +14,10 @@
     "number": 60,
     "url": "https://github.com/svelderrainruiz/vi-history/issues/60"
   },
-  "implementationHandoffIssue": null,
+  "implementationHandoffIssue": {
+    "number": 62,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/62"
+  },
   "bridgeChecks": {
     "specKitCliVersion": "0.8.12.dev0",
     "publicImportPacketPresent": "pass",
@@ -27,7 +30,7 @@
   "implementationAdmissionUnits": [
     {
       "iauId": "IAU-runtime-settings-cli-interactive-selection-contract-v1",
-      "state": "implementation-admitted",
+      "state": "implemented",
       "record": "docs/requirements/admissions/runtime-settings-cli-interactive-selection-v1/IAU-runtime-settings-cli-interactive-selection-contract-v1.json",
       "preflightRecord": "docs/requirements/admissions/runtime-settings-cli-interactive-selection-v1/IAU-runtime-settings-cli-interactive-selection-contract-v1-preflight-v1.json",
       "admittedTasks": [
@@ -39,7 +42,7 @@
       ]
     }
   ],
-  "currentImplementationAdmissionUnit": "IAU-runtime-settings-cli-interactive-selection-contract-v1",
+  "currentImplementationAdmissionUnit": null,
   "completedSpecScope": [
     "T001",
     "T002",
@@ -50,14 +53,14 @@
     "T007",
     "T008"
   ],
-  "completedImplementationScope": [],
-  "admittedImplementationScope": [
+  "completedImplementationScope": [
     "T009",
     "T010",
     "T011",
     "T012",
     "T013"
   ],
+  "admittedImplementationScope": [],
   "blockedImplementationScope": [
     "T014",
     "T015",
@@ -71,6 +74,25 @@
     "status": "pass",
     "record": "docs/requirements/admissions/runtime-settings-cli-interactive-selection-v1/IAU-runtime-settings-cli-interactive-selection-contract-v1-preflight-v1.json",
     "implementationStartAllowed": true
+  },
+  "implementationCloseout": {
+    "status": "pass",
+    "issue": 62,
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011",
+      "T012",
+      "T013"
+    ],
+    "blockedScopeRetained": [
+      "T014",
+      "T015",
+      "T016",
+      "T017",
+      "T018",
+      "T019"
+    ]
   },
   "requirementMaturityBasis": "governed bridge-readiness packet supports public import, Spec Kit planning, and narrow interactive-selection contract admission, not source reuse",
   "implementationSharing": "none",
