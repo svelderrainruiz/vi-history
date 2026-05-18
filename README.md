@@ -16,8 +16,8 @@ of `command-handler-entrypoint-shell-v1`. Issue #41 implements and closes
 `IAU-documentation-command-panel-shell-v1` for T009-T011 of
 `installed-user-documentation-command-v1`. Issue #43 imports
 `runtime-settings-cli-bootstrap-v1` and admits
-`IAU-runtime-settings-cli-prepare-command-shell-v1` for T009-T011 after its
-admission PR merges.
+`IAU-runtime-settings-cli-prepare-command-shell-v1`. Issue #45 implements and
+closes it for T009-T011. No current IAU is active.
 
 ## Authority
 
@@ -60,6 +60,8 @@ admission PR merges.
   for T009-T011 only.
 - Issue #43 imports `runtime-settings-cli-bootstrap-v1` and admits
   `IAU-runtime-settings-cli-prepare-command-shell-v1` for T009-T011 only.
+- Issue #45 implements and closes
+  `IAU-runtime-settings-cli-prepare-command-shell-v1` for T009-T011 only.
 
 The current admission ledgers are:
 
@@ -70,8 +72,7 @@ The current admission ledgers are:
 - `docs/requirements/admissions/installed-user-documentation-command-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-bootstrap-v1.json`
 
-Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-prepare-command-shell-v1`.
+Current Implementation Admission Unit: none.
 
 The completed observation model scope is T009-T013. The command activation
 manifest contract implements only T009-T012. The command handler entrypoint shell
@@ -79,7 +80,7 @@ implements T009-T011 in
 `.specify/specs/command-handler-entrypoint-shell-v1/tasks.md`. The installed
 user documentation command implements only T009-T011 in
 `.specify/specs/installed-user-documentation-command-v1/tasks.md`. The runtime
-settings CLI bootstrap admits only T009-T011 in
+settings CLI bootstrap implements only T009-T011 in
 `.specify/specs/runtime-settings-cli-bootstrap-v1/tasks.md`: prepare-command
 handler tests, launcher materialization/recovery fact tests, and the minimum
 prepare-command shell. Provider/version/bitness settings mutation, JSONC

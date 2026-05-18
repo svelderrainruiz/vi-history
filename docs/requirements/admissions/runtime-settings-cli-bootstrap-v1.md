@@ -1,10 +1,11 @@
 # Runtime Settings CLI Bootstrap Admission
 
-State: `implementation-admitted`
+State: `implemented`
 
 Issue #43 imports `runtime-settings-cli-bootstrap-v1`, locks the public Spec
 Kit feature, and admits
-`IAU-runtime-settings-cli-prepare-command-shell-v1` for T009-T011 only.
+`IAU-runtime-settings-cli-prepare-command-shell-v1` for T009-T011 only. Issue
+#45 implements and closes the admitted IAU.
 
 Machine-readable ledger:
 [runtime-settings-cli-bootstrap-v1.json](./runtime-settings-cli-bootstrap-v1.json)
@@ -19,9 +20,9 @@ Machine-readable ledger:
 - `VHS-REQ-594`: explicit
   `labviewViHistory.prepareLocalRuntimeSettingsCli` activation metadata.
 
-## Admitted IAU
+## Implemented IAU
 
-`IAU-runtime-settings-cli-prepare-command-shell-v1` is admitted for:
+`IAU-runtime-settings-cli-prepare-command-shell-v1` is implemented for:
 
 - `T009`: add tests proving
   `labviewViHistory.prepareLocalRuntimeSettingsCli` registers as a separate
@@ -31,8 +32,7 @@ Machine-readable ledger:
   materialization and recovery facts without mutating settings.
 - `T011`: implement the minimum public MIT prepare-command shell.
 
-Implementation starts only after this admission PR merges and a separate
-implementation handoff issue is created.
+No current IAU is active for this slice.
 
 ## Blocked Scope
 
