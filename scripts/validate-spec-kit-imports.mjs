@@ -115,6 +115,13 @@ requireFile(marketplaceAdrPath);
 const integration = readJson(".specify/integration.json");
 requireEqual(integration.integration, "codex", "Spec Kit integration");
 
+requireTextIncludes(".specify/memory/constitution.md", [
+  "runtime-contract-host-provider-v1",
+  "installed-user-observation-public-surface-v1",
+  "command-activation-surface-v1",
+  "**Version**: 0.1.1"
+]);
+
 const featureJson = readJson(".specify/feature.json");
 requireEqual(featureJson.feature_directory, commandFeatureDir, "pinned Spec Kit feature directory");
 
