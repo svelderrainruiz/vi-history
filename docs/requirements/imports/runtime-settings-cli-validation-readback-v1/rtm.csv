@@ -1,0 +1,3 @@
+Requirement ID,Public Verification,Status
+VHS-REQ-543,TEST-UNIT-RSVALIDATE-001 verifies effective settings target readback without mutation,Imported
+VHS-REQ-546,TEST-UNIT-RSVALIDATE-002 verifies persisted provider/version/bitness plus bounded runtime outcome readback without picker or execution behavior,Imported

@@ -62,7 +62,19 @@ handling, and the minimum public settings-write contract.
 compare execution, LabVIEWCLI execution, Docker execution, live-session proof,
 packaging, and Marketplace publication remain blocked.
 
-Current Implementation Admission Unit: none.
+`runtime-settings-cli-validation-readback-v1` admits
+`IAU-runtime-settings-cli-validation-readback-contract-v1` for Issue #51 and
+T009-T012 only. Issue #51 is an admission issue; implementation must use a
+separate handoff issue after the admission PR merges. The admitted behavior is
+limited to a pure validation readback/result contract for persisted settings
+facts and runtime outcome facts.
+
+No-argument interactive selection, proof-out file generation, compare
+execution, LabVIEWCLI execution, Docker execution, live-session proof,
+packaging, and Marketplace publication remain blocked.
+
+Current Implementation Admission Unit:
+`IAU-runtime-settings-cli-validation-readback-contract-v1`.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that
@@ -72,7 +84,7 @@ When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:
 
 ```bash
-SPECIFY_FEATURE=007-runtime-settings-cli-settings-write-v1 \
-SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-settings-write-v1 \
+SPECIFY_FEATURE=008-runtime-settings-cli-validation-readback-v1 \
+SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-validation-readback-v1 \
 .specify/scripts/bash/check-prerequisites.sh --json --paths-only
 ```
