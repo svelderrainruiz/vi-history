@@ -78,16 +78,16 @@ packaging, and Marketplace publication remain blocked.
 `runtime-settings-cli-validation-proof-v1` admits
 `IAU-runtime-settings-cli-validation-proof-artifact-v1` for Issue #55 and
 T009-T012 only. Issue #55 is an admission issue; implementation must use a
-separate handoff issue after the admission PR merges. The admitted behavior is
-limited to pure validation proof JSON and deterministic issue-body artifact
-generation from supplied validation facts.
+separate handoff issue after the admission PR merges. Issue #57 implements and
+closes it for T009-T012 only: tests for pure validation proof JSON,
+secret-like environment redaction, deterministic MIT issue-body content, and
+the minimum validation proof artifact contract from supplied validation facts.
 
 No-argument interactive selection, compare execution, LabVIEWCLI execution,
 Docker execution, live-session proof, packaging, and Marketplace publication
 remain blocked.
 
-Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-proof-artifact-v1`.
+Current Implementation Admission Unit: none.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that

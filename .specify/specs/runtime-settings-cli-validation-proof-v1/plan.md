@@ -15,7 +15,8 @@ implementation admission unit after validation readback:
 
 This plan admits requirements, Spec Kit artifacts, admission records, preflight
 records, validation script coverage, and Issue #55 as the public admission
-surface. It does not implement proof artifact generation in this PR.
+surface. Issue #57 implements the admitted proof artifact contract for
+T009-T012 only.
 
 ## Technical Context
 
@@ -116,9 +117,8 @@ Contracts to preserve for the admitted IAU:
 
 ## Implementation Admission
 
-`IAU-runtime-settings-cli-validation-proof-artifact-v1` is admitted for
-T009-T012 only after this admission PR merges with its preflight record at
-`status: "pass"`.
+`IAU-runtime-settings-cli-validation-proof-artifact-v1` is implemented for
+T009-T012 only through Issue #57 after its preflight record passed.
 
 Implementation must not start T013-T018. Future implementation outside this IAU
 requires a separate named IAU, public admission records, and a preflight record

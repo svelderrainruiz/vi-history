@@ -2,14 +2,17 @@
   "schema": "vi-history/implementation-admission-unit@v1",
   "iauId": "IAU-runtime-settings-cli-validation-proof-artifact-v1",
   "createdDate": "2026-05-18",
-  "state": "implementation-admitted",
+  "state": "implemented",
   "parentSliceId": "runtime-settings-cli-validation-proof-v1",
   "specFeature": ".specify/specs/runtime-settings-cli-validation-proof-v1",
   "issue": {
     "number": 55,
     "url": "https://github.com/svelderrainruiz/vi-history/issues/55"
   },
-  "implementationHandoffIssue": null,
+  "implementationHandoffIssue": {
+    "number": 57,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/57"
+  },
   "admittedTasks": [
     "T009",
     "T010",
@@ -43,6 +46,24 @@
     "status": "pass",
     "record": "IAU-runtime-settings-cli-validation-proof-artifact-v1-preflight-v1.json",
     "implementationStartAllowed": true
+  },
+  "implementationCloseout": {
+    "status": "pass",
+    "issue": 57,
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011",
+      "T012"
+    ],
+    "blockedScopeRetained": [
+      "T013",
+      "T014",
+      "T015",
+      "T016",
+      "T017",
+      "T018"
+    ]
   },
   "implementationSharing": "none",
   "requirementMaturityBasis": "governed released extension supports requirement maturity, not source reuse",
