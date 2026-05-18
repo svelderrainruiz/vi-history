@@ -1,10 +1,10 @@
 # Installed-User Documentation Command Admission
 
-State: `implementation-admitted`
+State: `implemented`
 
 Issue #39 imports `installed-user-documentation-command-v1`, locks the public
 Spec Kit feature, and admits `IAU-documentation-command-panel-shell-v1` for
-T009-T011 only after this admission PR merges.
+T009-T011 only. Issue #41 implements and closes the admitted IAU.
 
 Machine-readable ledger:
 [installed-user-documentation-command-v1.json](./installed-user-documentation-command-v1.json)
@@ -18,18 +18,17 @@ Machine-readable ledger:
 - `VHS-REQ-489`: public-safe bundled installed-user documentation.
 - `VHS-REQ-594`: explicit Open Documentation activation metadata.
 
-## Current IAU
+## Implemented IAU
 
-`IAU-documentation-command-panel-shell-v1` is admitted for:
+`IAU-documentation-command-panel-shell-v1` is implemented for:
 
 - `T009`: add tests proving `labviewViHistory.openDocumentation` registers as a
   separate handler from `labviewViHistory.open`.
 - `T010`: add tests proving a public-safe bundled documentation manifest/page
   contract exists.
-- `T011`: implement the minimum public MIT documentation command panel shell
-  after preflight.
+- `T011`: implement the minimum public MIT documentation command panel shell.
 
-Implementation must wait until this admission PR is merged to `develop`.
+No current IAU is active for this slice.
 
 ## Blocked Scope
 

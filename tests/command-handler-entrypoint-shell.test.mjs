@@ -38,7 +38,7 @@ function makeContextDouble(commandDouble) {
 
 // T009: add tests proving extension activation registers the admitted command entrypoint shell
 
-test("T009 activate registers labviewViHistory.open command handler", () => {
+test("T009 activate registers labviewViHistory.open and openDocumentation command handlers", () => {
   const commands = makeCommandDouble();
   const context = makeContextDouble(commands);
 
@@ -49,7 +49,11 @@ test("T009 activate registers labviewViHistory.open command handler", () => {
     registeredIds.includes("labviewViHistory.open"),
     "labviewViHistory.open must be registered after activate"
   );
-  assert.equal(context.subscriptions.length, 1, "activate must push one subscription");
+  assert.ok(
+    registeredIds.includes("labviewViHistory.openDocumentation"),
+    "labviewViHistory.openDocumentation must be registered after activate"
+  );
+  assert.equal(context.subscriptions.length, 2, "activate must push two subscriptions");
 });
 
 test("T009 registered labviewViHistory.open handler is a function", () => {
@@ -66,18 +70,16 @@ test("T009 registered labviewViHistory.open handler is a function", () => {
 // T010: add tests proving handler registration does not initialize Git,
 // LabVIEWCLI, Docker, packaging, or Marketplace behavior
 
-test("T010 activate registers only labviewViHistory.open and no other commands", () => {
+test("T010 activate registers only labviewViHistory.open and openDocumentation commands", () => {
   const commands = makeCommandDouble();
   const context = makeContextDouble(commands);
 
   activate(context);
 
-  assert.equal(commands.registered.length, 1, "activate must register exactly one command");
-  assert.equal(
-    commands.registered[0].id,
-    "labviewViHistory.open",
-    "the only registered command must be labviewViHistory.open"
-  );
+  assert.equal(commands.registered.length, 2, "activate must register exactly two commands");
+  const ids = commands.registered.map((r) => r.id);
+  assert.ok(ids.includes("labviewViHistory.open"), "labviewViHistory.open must be registered");
+  assert.ok(ids.includes("labviewViHistory.openDocumentation"), "labviewViHistory.openDocumentation must be registered");
 });
 
 test("T010 activate does not throw and produces no unexpected side-effects", () => {
@@ -85,8 +87,10 @@ test("T010 activate does not throw and produces no unexpected side-effects", () 
   const context = makeContextDouble(commands);
 
   assert.doesNotThrow(() => activate(context), "activate must not throw");
-  assert.equal(commands.registered.length, 1, "only one command registered");
-  assert.equal(commands.registered[0].id, "labviewViHistory.open");
+  assert.equal(commands.registered.length, 2, "two commands registered");
+  const ids = commands.registered.map((r) => r.id);
+  assert.ok(ids.includes("labviewViHistory.open"), "labviewViHistory.open must be registered");
+  assert.ok(ids.includes("labviewViHistory.openDocumentation"), "labviewViHistory.openDocumentation must be registered");
 });
 
 test("T010 handler invocation does not throw and returns undefined", () => {

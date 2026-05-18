@@ -2,7 +2,7 @@
   "schema": "vi-history/requirements-admission@v1",
   "sliceId": "installed-user-documentation-command-v1",
   "createdDate": "2026-05-18",
-  "state": "implementation-admitted",
+  "state": "implemented",
   "targetProduct": "vi-history",
   "targetFeature": "installed-user-documentation-command-v1",
   "sourceBaselineTag": "v1.3.16",
@@ -13,6 +13,10 @@
   "issue": {
     "number": 39,
     "url": "https://github.com/svelderrainruiz/vi-history/issues/39"
+  },
+  "implementationIssue": {
+    "number": 41,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/41"
   },
   "bridgeChecks": {
     "specKitCliVersion": "0.8.12.dev0",
@@ -26,7 +30,7 @@
   "implementationAdmissionUnits": [
     {
       "iauId": "IAU-documentation-command-panel-shell-v1",
-      "state": "implementation-admitted",
+      "state": "implemented",
       "record": "docs/requirements/admissions/installed-user-documentation-command-v1/IAU-documentation-command-panel-shell-v1.json",
       "preflightRecord": "docs/requirements/admissions/installed-user-documentation-command-v1/IAU-documentation-command-panel-shell-v1-preflight-v1.json",
       "admittedTasks": [
@@ -36,7 +40,7 @@
       ]
     }
   ],
-  "currentImplementationAdmissionUnit": "IAU-documentation-command-panel-shell-v1",
+  "currentImplementationAdmissionUnit": null,
   "completedSpecScope": [
     "T001",
     "T002",
@@ -47,12 +51,12 @@
     "T007",
     "T008"
   ],
-  "completedImplementationScope": [],
-  "admittedImplementationScope": [
+  "completedImplementationScope": [
     "T009",
     "T010",
     "T011"
   ],
+  "admittedImplementationScope": [],
   "blockedImplementationScope": [
     "T012",
     "T013",

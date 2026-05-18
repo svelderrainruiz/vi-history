@@ -767,7 +767,7 @@ requireTextIncludes("README.md", [
 const documentationAdmission = readJson(documentationAdmissionPath);
 requireEqual(documentationAdmission.schema, "vi-history/requirements-admission@v1", "documentation admission schema");
 requireEqual(documentationAdmission.sliceId, documentationSliceId, "documentation admission sliceId");
-requireEqual(documentationAdmission.state, "implementation-admitted", "documentation admission state");
+requireEqual(documentationAdmission.state, "implemented", "documentation admission state");
 requireEqual(documentationAdmission.targetProduct, "vi-history", "documentation admission targetProduct");
 requireEqual(documentationAdmission.targetFeature, documentationSliceId, "documentation admission targetFeature");
 requireEqual(documentationAdmission.sourceBaselineTag, "v1.3.16", "documentation admission sourceBaselineTag");
@@ -775,10 +775,10 @@ requireEqual(documentationAdmission.sourceCommit, "47f5b67ae35d5bb8b18c2bd2db12e
 requireEqual(documentationAdmission.governedAdmissionCommit, "ff950d6b7401fe31c5a12aea28bcad9099b254f1", "documentation admission governedAdmissionCommit");
 requireEqual(documentationAdmission.implementationSharing, "none", "documentation admission implementationSharing");
 requireMarketplacePosture(documentationAdmission, "documentation admission");
-requireEqual(documentationAdmission.currentImplementationAdmissionUnit, "IAU-documentation-command-panel-shell-v1", "documentation currentImplementationAdmissionUnit");
+requireEqual(documentationAdmission.currentImplementationAdmissionUnit, null, "documentation currentImplementationAdmissionUnit");
 requireArrayEqual(documentationAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "documentation completedSpecScope");
-requireArrayEqual(documentationAdmission.completedImplementationScope, [], "documentation completedImplementationScope");
-requireArrayEqual(documentationAdmission.admittedImplementationScope, ["T009", "T010", "T011"], "documentation admittedImplementationScope");
+requireArrayEqual(documentationAdmission.completedImplementationScope, ["T009", "T010", "T011"], "documentation completedImplementationScope");
+requireArrayEqual(documentationAdmission.admittedImplementationScope, [], "documentation admittedImplementationScope");
 requireArrayEqual(documentationAdmission.blockedImplementationScope, ["T012", "T013", "T014", "T015"], "documentation blockedImplementationScope");
 requireEqual(documentationAdmission.preImplementationPreflight?.iauId, "IAU-documentation-command-panel-shell-v1", "documentation preImplementationPreflight iauId");
 requireEqual(documentationAdmission.preImplementationPreflight?.status, "pass", "documentation preImplementationPreflight status");
@@ -789,7 +789,7 @@ requireFile(`docs/requirements/admissions/${documentationSliceId}.md`);
 const documentationIau = readJson(documentationIauPath);
 requireEqual(documentationIau.schema, "vi-history/implementation-admission-unit@v1", "documentation IAU schema");
 requireEqual(documentationIau.iauId, "IAU-documentation-command-panel-shell-v1", "documentation IAU id");
-requireEqual(documentationIau.state, "implementation-admitted", "documentation IAU state");
+requireEqual(documentationIau.state, "implemented", "documentation IAU state");
 requireEqual(documentationIau.parentSliceId, documentationSliceId, "documentation IAU parentSliceId");
 requireArrayEqual(documentationIau.admittedTasks, ["T009", "T010", "T011"], "documentation IAU admittedTasks");
 requireArrayEqual(documentationIau.blockedTasks, ["T012", "T013", "T014", "T015"], "documentation IAU blockedTasks");
@@ -857,10 +857,11 @@ requireTextIncludes(`${documentationFeatureDir}/tasks.md`, [
   "Issue #39",
   "- [x] T001",
   "- [x] T008",
-  "- [ ] T009",
-  "- [ ] T010",
-  "- [ ] T011",
+  "- [x] T009",
+  "- [x] T010",
+  "- [x] T011",
   "IAU-documentation-command-panel-shell-v1",
+  "Issue #41",
   "[BLOCKED]",
   "T015"
 ]);
@@ -876,11 +877,13 @@ requireTextIncludes("README.md", [
   "installed-user-documentation-command-v1",
   "docs/requirements/admissions/installed-user-documentation-command-v1.json",
   "Issue #39",
+  "Issue #41",
   "IAU-documentation-command-panel-shell-v1"
 ]);
 requireTextIncludes("AGENTS.md", [
   "installed-user-documentation-command-v1",
   "Current Implementation Admission Unit",
+  "none",
   "IAU-documentation-command-panel-shell-v1"
 ]);
 
