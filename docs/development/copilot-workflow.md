@@ -44,6 +44,17 @@ Read these before changing code:
 - `docs/requirements/admissions/command-activation-surface-v1.json`
 - `docs/requirements/admissions/command-activation-surface-v1/IAU-command-activation-manifest-contract-v1.json`
 - `docs/requirements/admissions/command-activation-surface-v1/IAU-command-activation-manifest-contract-v1-preflight-v1.json`
+- `docs/requirements/imports/command-handler-entrypoint-shell-v1/manifest.json`
+- `docs/requirements/imports/command-handler-entrypoint-shell-v1/syrs.md`
+- `docs/requirements/imports/command-handler-entrypoint-shell-v1/srs.md`
+- `docs/requirements/imports/command-handler-entrypoint-shell-v1/rtm.csv`
+- `docs/requirements/imports/command-handler-entrypoint-shell-v1/test-plan.md`
+- `.specify/specs/command-handler-entrypoint-shell-v1/spec.md`
+- `.specify/specs/command-handler-entrypoint-shell-v1/plan.md`
+- `.specify/specs/command-handler-entrypoint-shell-v1/tasks.md`
+- `docs/requirements/admissions/command-handler-entrypoint-shell-v1.json`
+- `docs/requirements/admissions/command-handler-entrypoint-shell-v1/IAU-command-handler-entrypoint-shell-v1.json`
+- `docs/requirements/admissions/command-handler-entrypoint-shell-v1/IAU-command-handler-entrypoint-shell-v1-preflight-v1.json`
 
 ## Current Status
 
@@ -71,6 +82,10 @@ Completed command activation unit:
 
 - `IAU-command-activation-manifest-contract-v1`
 
+Current command handler unit:
+
+- `IAU-command-handler-entrypoint-shell-v1`
+
 Completed runtime-contract tasks:
 
 - `T007` through `T011`: foundational runtime contracts.
@@ -96,11 +111,6 @@ Completed installed-user observation tasks:
 Issue #27 completed `IAU-installed-user-observation-model-v1`. No new Copilot
 implementation should start from Issue #27.
 
-Future Copilot work outside `IAU-command-activation-manifest-contract-v1` must
-start with a new public bridge admission record before any code changes. A
-valid work packet must name a new IAU, admitted tasks, blocked tasks, preflight
-status, source files, expected write area, and validation commands.
-
 Issue #32 completes
 `IAU-command-activation-manifest-contract-v1`. No new Copilot implementation
 should start from Issue #32 after that PR merges. It implements only T009-T012:
@@ -108,13 +118,24 @@ manifest activation-event contract tests, contributed command ID/title contract
 tests, package identity and Marketplace-disabled contract tests, and minimal
 manifest metadata.
 
+Issue #36 admits `IAU-command-handler-entrypoint-shell-v1`. Copilot may start
+from Issue #36 after this admission PR merges, but only for:
+
+- `T009`: add tests proving extension activation registers the admitted command
+  entrypoint shell.
+- `T010`: add tests proving handler registration does not initialize Git,
+  LabVIEWCLI, Docker, packaging, or Marketplace behavior.
+- `T011`: implement the minimum public MIT entrypoint shell after preflight.
+
+The Copilot plan must target `develop`, read this workflow first, and name how
+T012-T015 remain blocked.
+
 ## Blocked Work
 
 Do not implement these without a separate bridge admission:
 
 - LabVIEWCLI command execution
 - Docker command execution or container orchestration
-- command handler implementation
 - documentation panel implementation
 - runtime settings CLI materialization
 - observation report rendering for T014-T016

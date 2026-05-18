@@ -1,0 +1,30 @@
+{
+  "schema": "vi-history/requirements-import@v1",
+  "sliceId": "command-handler-entrypoint-shell-v1",
+  "createdDate": "2026-05-18",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "01ff907ad878ca335e402b37cdf0929d09c17caf",
+  "governedAdmissionCommit": "47f5b67ae35d5bb8b18c2bd2db12e0e7f835313d",
+  "targetProduct": "vi-history",
+  "targetFeature": "command-handler-entrypoint-shell-v1",
+  "importedRequirementIds": [
+    "VHS-REQ-082",
+    "VHS-REQ-083",
+    "VHS-REQ-594"
+  ],
+  "redactionStatus": "pass",
+  "implementationSharing": "none",
+  "licenseBoundary": "MIT target receives requirements and Spec Kit artifacts only",
+  "marketplacePublication": "disabled-until-later-adr",
+  "files": [
+    "syrs.md",
+    "srs.md",
+    "rtm.csv",
+    "test-plan.md"
+  ],
+  "bugOracle": {
+    "sameWrongBehaviorAcrossIndependentImplementations": "requirement-defect-candidate",
+    "oneAuthorityWrongBehavior": "implementation-defect-candidate",
+    "ambiguousBehavior": "requirement-clarification-candidate"
+  }
+}
