@@ -26,8 +26,12 @@ Implementation for `runtime-contract-host-provider-v1` is complete through
 proof intake. `installed-user-observation-public-surface-v1` is a
 requirements/spec baseline with one implemented IAU:
 `IAU-installed-user-observation-model-v1`. It completed only T009-T013.
-Future implementation outside that scope begins only after a new named IAU has
-a public preflight record with `status: pass`.
+`command-activation-surface-v1` is spec-locked only. It admits no manifest
+implementation, command handlers, runtime settings CLI materialization, compare
+execution, packaging, or Marketplace publication.
+
+Future implementation outside the completed observation-model scope begins only
+after a new named IAU has a public preflight record with `status: pass`.
 
 Current Implementation Admission Unit: none.
 
@@ -39,7 +43,7 @@ When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:
 
 ```bash
-SPECIFY_FEATURE=002-installed-user-observation-public-surface-v1 \
-SPECIFY_FEATURE_DIRECTORY=.specify/specs/installed-user-observation-public-surface-v1 \
+SPECIFY_FEATURE=003-command-activation-surface-v1 \
+SPECIFY_FEATURE_DIRECTORY=.specify/specs/command-activation-surface-v1 \
 .specify/scripts/bash/check-prerequisites.sh --json --paths-only
 ```

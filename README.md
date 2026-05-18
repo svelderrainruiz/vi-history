@@ -6,9 +6,10 @@ authority for VI History.
 This repository starts from requirements and Spec Kit artifacts, not from copied
 extension source. The initial baseline imported the
 `runtime-contract-host-provider-v1` requirements slice and completed admitted
-runtime-contract IAUs through proof intake. The current public Spec Kit import
-adds `installed-user-observation-public-surface-v1`, with
-`IAU-installed-user-observation-model-v1` implemented for T009-T013 only.
+runtime-contract IAUs through proof intake. The public Spec Kit baseline also
+imports `installed-user-observation-public-surface-v1`, with
+`IAU-installed-user-observation-model-v1` implemented for T009-T013 only, and
+`command-activation-surface-v1` as a spec-locked command activation import.
 
 ## Authority
 
@@ -38,18 +39,22 @@ adds `installed-user-observation-public-surface-v1`, with
   requirements/spec baseline.
 - #27 implements and closes
   `IAU-installed-user-observation-model-v1`.
+- Issue #30 imports `command-activation-surface-v1` as a public
+  requirements/spec baseline. It does not admit implementation.
 
 The current admission ledgers are:
 
 - `docs/requirements/admissions/runtime-contract-host-provider-v1.json`
 - `docs/requirements/admissions/installed-user-observation-public-surface-v1.json`
+- `docs/requirements/admissions/command-activation-surface-v1.json`
 
-There is no current admitted implementation unit after
-`IAU-installed-user-observation-model-v1` closes. The completed observation
-model scope is T009-T013.
+There is no current admitted implementation unit after the command activation
+import. The completed observation model scope is T009-T013. The command
+activation import is spec-locked only.
 
-Future code work outside T009-T013 must start from a new public bridge
-admission record before Copilot or local implementation begins.
+Future code work outside T009-T013, including command activation manifest
+implementation, must start from a new public bridge admission record before
+Copilot or local implementation begins.
 
 The Marketplace posture is recorded in
 `docs/decisions/ADR-001-marketplace-publication-disabled.md` and summarized in
