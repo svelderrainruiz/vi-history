@@ -77,6 +77,17 @@ Read these before changing code:
 - `docs/requirements/admissions/runtime-settings-cli-settings-write-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-settings-write-v1/IAU-runtime-settings-cli-settings-write-contract-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-settings-write-v1/IAU-runtime-settings-cli-settings-write-contract-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-readback-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-readback-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-readback-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-readback-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-validation-readback-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-validation-readback-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-validation-readback-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-validation-readback-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-validation-readback-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-readback-v1/IAU-runtime-settings-cli-validation-readback-contract-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-readback-v1/IAU-runtime-settings-cli-validation-readback-contract-v1-preflight-v1.json`
 
 ## Current Status
 
@@ -165,6 +176,11 @@ Issue #49 implements and closes
 `IAU-runtime-settings-cli-settings-write-contract-v1` for T009-T012 only. No
 new Copilot implementation should start from Issue #49.
 
+Issue #51 admits `IAU-runtime-settings-cli-validation-readback-contract-v1` for
+`runtime-settings-cli-validation-readback-v1` and T009-T012 only. Issue #51 is
+an admission issue. Copilot implementation must wait for the separate handoff
+issue created after the admission PR merges.
+
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.
 
@@ -178,9 +194,11 @@ Do not implement these without a separate bridge admission:
 - runtime settings CLI materialization beyond the admitted prepare-command shell
 - runtime settings mutation beyond the admitted provider/version/bitness
   settings-write contract
-- `vihs --validate` or runtime validation output
+- validation behavior beyond the admitted pure `vihs --validate` readback
+  contract
 - compare execution
 - no-argument interactive selection
+- proof-out file generation
 - live already-running VS Code session uptake proof
 - observation report rendering for T014-T016
 - Marketplace publication or packaging
