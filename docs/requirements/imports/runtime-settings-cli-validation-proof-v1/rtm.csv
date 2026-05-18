@@ -1,0 +1,2 @@
+Requirement ID,Public Verification,Status
+VHS-REQ-546,TEST-UNIT-RSPROOF-001 verifies validation proof JSON preserves supplied validation facts without execution; TEST-UNIT-RSPROOF-002 verifies secret-like environment redaction; TEST-UNIT-RSPROOF-003 verifies deterministic MIT issue-body content,Imported
