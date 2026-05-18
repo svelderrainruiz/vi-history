@@ -12,8 +12,10 @@ imports `installed-user-observation-public-surface-v1`, with
 `command-activation-surface-v1` with
 `IAU-command-activation-manifest-contract-v1` implemented for T009-T012 only.
 `IAU-command-handler-entrypoint-shell-v1` is implemented and closed for T009-T011
-of `command-handler-entrypoint-shell-v1`. No current IAU is active. Future code
-work must start from a new public bridge admission record.
+of `command-handler-entrypoint-shell-v1`. Issue #39 admits
+`IAU-documentation-command-panel-shell-v1` for
+`installed-user-documentation-command-v1`; implementation waits until the
+admission PR merges to `develop`.
 
 ## Authority
 
@@ -50,6 +52,9 @@ work must start from a new public bridge admission record.
 - Issue #36 implements and closes `IAU-command-handler-entrypoint-shell-v1` for
   T009-T011 of `command-handler-entrypoint-shell-v1`. Issue #36 must not be
   reused for new implementation.
+- Issue #39 imports `installed-user-documentation-command-v1` and admits
+  `IAU-documentation-command-panel-shell-v1` for T009-T011 after the admission
+  PR merges.
 
 The current admission ledgers are:
 
@@ -57,16 +62,20 @@ The current admission ledgers are:
 - `docs/requirements/admissions/installed-user-observation-public-surface-v1.json`
 - `docs/requirements/admissions/command-activation-surface-v1.json`
 - `docs/requirements/admissions/command-handler-entrypoint-shell-v1.json`
+- `docs/requirements/admissions/installed-user-documentation-command-v1.json`
 
-Current Implementation Admission Unit: none. `IAU-command-handler-entrypoint-shell-v1`
-is implemented and closed.
+Current Implementation Admission Unit:
+`IAU-documentation-command-panel-shell-v1` after the admission PR merges to
+`develop`.
 
 The completed observation model scope is T009-T013. The command activation
 manifest contract implements only T009-T012. The command handler entrypoint shell
 implements T009-T011 in
-`.specify/specs/command-handler-entrypoint-shell-v1/tasks.md`. Future code work
-must start from a new public bridge admission record before
-Copilot or local implementation begins.
+`.specify/specs/command-handler-entrypoint-shell-v1/tasks.md`. The installed
+user documentation command admission admits only T009-T011 in
+`.specify/specs/installed-user-documentation-command-v1/tasks.md`; runtime
+settings CLI materialization, compare execution, execution engines, packaging,
+and Marketplace work remain blocked.
 
 The Marketplace posture is recorded in
 `docs/decisions/ADR-001-marketplace-publication-disabled.md` and summarized in

@@ -38,11 +38,17 @@ entrypoint shell tests and the minimum public MIT entrypoint shell.
 `IAU-command-handler-entrypoint-shell-v1` is closed. Issue #36 must not be
 reused for new implementation. No current IAU is active.
 
-Documentation panel rendering, runtime settings CLI materialization, compare
-execution, packaging, and Marketplace publication remain blocked.
+`installed-user-documentation-command-v1` admits
+`IAU-documentation-command-panel-shell-v1` after the admission PR merges to
+`develop`. It admits only T009-T011: Open Documentation handler tests,
+public-safe bundled documentation contract tests, and the minimum documentation
+command panel shell.
 
-Current Implementation Admission Unit: none. Future work must start from a new
-public bridge admission record.
+Runtime settings CLI materialization, compare execution, LabVIEWCLI execution,
+Docker execution, packaging, and Marketplace publication remain blocked.
+
+Current Implementation Admission Unit:
+`IAU-documentation-command-panel-shell-v1` after the admission PR merges.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that
@@ -52,7 +58,7 @@ When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:
 
 ```bash
-SPECIFY_FEATURE=004-command-handler-entrypoint-shell-v1 \
-SPECIFY_FEATURE_DIRECTORY=.specify/specs/command-handler-entrypoint-shell-v1 \
+SPECIFY_FEATURE=005-installed-user-documentation-command-v1 \
+SPECIFY_FEATURE_DIRECTORY=.specify/specs/installed-user-documentation-command-v1 \
 .specify/scripts/bash/check-prerequisites.sh --json --paths-only
 ```
