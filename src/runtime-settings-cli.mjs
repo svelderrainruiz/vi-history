@@ -12,6 +12,13 @@ export const RUNTIME_SETTINGS_CLI_VALIDATION_READBACK_REQUIREMENTS = Object.free
   failClosed: Object.freeze(["VHS-REQ-546"])
 });
 
+export const RUNTIME_SETTINGS_CLI_VALIDATION_PROOF_REQUIREMENTS = Object.freeze({
+  proofArtifact: Object.freeze(["VHS-REQ-546"]),
+  redaction: Object.freeze(["VHS-REQ-546"]),
+  issueBody: Object.freeze(["VHS-REQ-546"]),
+  failClosed: Object.freeze(["VHS-REQ-546"])
+});
+
 export const RUNTIME_SETTINGS_KEYS = Object.freeze({
   runtimeProvider: "viHistorySuite.runtimeProvider",
   labviewVersion: "viHistorySuite.labviewVersion",
@@ -42,6 +49,22 @@ export const RUNTIME_SETTINGS_VALIDATION_BLOCKED_SIDE_EFFECTS = Object.freeze({
   marketplace: false
 });
 
+export const RUNTIME_SETTINGS_VALIDATION_PROOF_BLOCKED_SIDE_EFFECTS = Object.freeze({
+  settingsMutation: false,
+  interactiveSelection: false,
+  runtimeValidation: false,
+  compareExecution: false,
+  labviewCli: false,
+  docker: false,
+  liveSessionProof: false,
+  packaging: false,
+  marketplace: false
+});
+
+const RUNTIME_SETTINGS_VALIDATION_PROOF_SCHEMA = "vi-history/runtime-settings-validation-proof@v1";
+const RUNTIME_SETTINGS_VALIDATION_PROOF_COMMAND = "vihs --validate --proof-out";
+const MIT_PUBLIC_AUTHORITY = "svelderrainruiz/vi-history";
+
 export function allRuntimeSettingsCliSettingsWriteRequirementIds() {
   return Object.freeze(
     Object.values(RUNTIME_SETTINGS_CLI_SETTINGS_WRITE_REQUIREMENTS)
@@ -54,6 +77,15 @@ export function allRuntimeSettingsCliSettingsWriteRequirementIds() {
 export function allRuntimeSettingsCliValidationReadbackRequirementIds() {
   return Object.freeze(
     Object.values(RUNTIME_SETTINGS_CLI_VALIDATION_READBACK_REQUIREMENTS)
+      .flat()
+      .filter((value, index, values) => values.indexOf(value) === index)
+      .sort()
+  );
+}
+
+export function allRuntimeSettingsCliValidationProofRequirementIds() {
+  return Object.freeze(
+    Object.values(RUNTIME_SETTINGS_CLI_VALIDATION_PROOF_REQUIREMENTS)
       .flat()
       .filter((value, index, values) => values.indexOf(value) === index)
       .sort()
@@ -157,6 +189,63 @@ export function readRuntimeSettingsValidation(input = {}) {
   });
 }
 
+export function createRuntimeSettingsValidationProofArtifact(input = {}) {
+  const validation = normalizeValidationProofFacts(input.validation ?? input.validationFacts ?? input);
+  if (!validation.ok) {
+    return validationProofBlockedResult(validation.blockedReason);
+  }
+
+  const environmentFacts = redactEnvironmentFacts(input.environment ?? input.environmentFacts ?? {});
+  const proofJson = freezeRecord({
+    schema: RUNTIME_SETTINGS_VALIDATION_PROOF_SCHEMA,
+    targetAuthority: MIT_PUBLIC_AUTHORITY,
+    command: RUNTIME_SETTINGS_VALIDATION_PROOF_COMMAND,
+    validation: validation.value,
+    environmentFacts,
+    blockedSideEffects: RUNTIME_SETTINGS_VALIDATION_PROOF_BLOCKED_SIDE_EFFECTS,
+    requirementIds: allRuntimeSettingsCliValidationProofRequirementIds()
+  });
+  const issueBody = createRuntimeSettingsValidationProofIssueBody(proofJson);
+
+  return freezeRecord({
+    status: validation.value.status,
+    type: "runtime-settings-cli-validation-proof-artifact-contract",
+    proofJson,
+    issueBody,
+    blockedSideEffects: RUNTIME_SETTINGS_VALIDATION_PROOF_BLOCKED_SIDE_EFFECTS,
+    requirementIds: allRuntimeSettingsCliValidationProofRequirementIds()
+  });
+}
+
+export function createRuntimeSettingsValidationProofIssueBody(proofJson = {}) {
+  const validation = proofJson.validation ?? {};
+  const runtime = validation.runtime ?? {};
+  const persistedSettings = validation.persistedSettings ?? {};
+  const effectiveTarget = validation.effectiveSettingsTarget ?? {};
+  const environmentLines = Object.entries(proofJson.environmentFacts ?? {})
+    .sort(([left], [right]) => left.localeCompare(right))
+    .map(([key, value]) => `- Environment ${key}: ${value}`);
+
+  return [
+    "### Runtime settings CLI validation proof",
+    `- Repository: ${proofJson.targetAuthority ?? MIT_PUBLIC_AUTHORITY}`,
+    `- Command: ${proofJson.command ?? RUNTIME_SETTINGS_VALIDATION_PROOF_COMMAND}`,
+    `- Validation outcome: ${validation.status ?? "blocked"}`,
+    `- Runtime provider: ${runtime.runtimeProvider ?? "unavailable"}`,
+    `- Runtime engine: ${runtime.runtimeEngine ?? "none"}`,
+    `- Runtime blocked reason: ${runtime.runtimeBlockedReason ?? "none"}`,
+    `- Runtime error code: ${runtime.runtimeErrorCode ?? "VIHS_E_MISSING_VALIDATION_PROOF_FACTS"}`,
+    `- Runtime proof status: ${runtime.runtimeProofStatus ?? "blocked-with-actionable-error"}`,
+    `- Runtime implementation status: ${runtime.runtimeImplementationStatus ?? "not-started"}`,
+    `- Effective settings scope: ${effectiveTarget.scope ?? "unknown"}`,
+    `- Effective settings identifier: ${effectiveTarget.identifier ?? "unknown"}`,
+    `- Persisted runtime provider: ${persistedSettings.runtimeProvider ?? "unknown"}`,
+    `- Persisted LabVIEW version: ${persistedSettings.labviewVersion ?? "unknown"}`,
+    `- Persisted LabVIEW bitness: ${persistedSettings.labviewBitness ?? "unknown"}`,
+    ...environmentLines
+  ].join("\n");
+}
+
 function blockedResult({ blockedReason, effectiveSettingsTarget }) {
   return Object.freeze({
     status: "blocked",
@@ -166,6 +255,43 @@ function blockedResult({ blockedReason, effectiveSettingsTarget }) {
     effectiveSettingsTarget,
     blockedSideEffects: RUNTIME_SETTINGS_BLOCKED_SIDE_EFFECTS,
     requirementIds: allRuntimeSettingsCliSettingsWriteRequirementIds()
+  });
+}
+
+function validationProofBlockedResult(blockedReason) {
+  const validation = freezeRecord({
+    status: "blocked",
+    blockedReason,
+    effectiveSettingsTarget: null,
+    persistedSettings: null,
+    runtime: {
+      runtimeValidationOutcome: "blocked",
+      runtimeProvider: "unavailable",
+      runtimeEngine: null,
+      runtimeBlockedReason: blockedReason,
+      runtimeErrorCode: "VIHS_E_MISSING_VALIDATION_PROOF_FACTS",
+      runtimeProofStatus: "blocked-with-actionable-error",
+      runtimeImplementationStatus: "not-started"
+    }
+  });
+  const proofJson = freezeRecord({
+    schema: RUNTIME_SETTINGS_VALIDATION_PROOF_SCHEMA,
+    targetAuthority: MIT_PUBLIC_AUTHORITY,
+    command: RUNTIME_SETTINGS_VALIDATION_PROOF_COMMAND,
+    validation,
+    environmentFacts: Object.freeze({}),
+    blockedSideEffects: RUNTIME_SETTINGS_VALIDATION_PROOF_BLOCKED_SIDE_EFFECTS,
+    requirementIds: allRuntimeSettingsCliValidationProofRequirementIds()
+  });
+
+  return freezeRecord({
+    status: "blocked",
+    type: "runtime-settings-cli-validation-proof-artifact-contract",
+    blockedReason,
+    proofJson,
+    issueBody: createRuntimeSettingsValidationProofIssueBody(proofJson),
+    blockedSideEffects: RUNTIME_SETTINGS_VALIDATION_PROOF_BLOCKED_SIDE_EFFECTS,
+    requirementIds: allRuntimeSettingsCliValidationProofRequirementIds()
   });
 }
 
@@ -194,6 +320,41 @@ function validationBlockedResult({
     blockedSideEffects: RUNTIME_SETTINGS_VALIDATION_BLOCKED_SIDE_EFFECTS,
     requirementIds: allRuntimeSettingsCliValidationReadbackRequirementIds()
   });
+}
+
+function normalizeValidationProofFacts(validation = {}) {
+  if (!isPlainObject(validation)) {
+    return {
+      ok: false,
+      blockedReason: "missing-validation-proof-facts"
+    };
+  }
+
+  const persistedSettings = normalizeRuntimeSettingsFacts(validation.persistedSettings ?? {});
+  if (!persistedSettings.ok) {
+    return {
+      ok: false,
+      blockedReason: "missing-validation-proof-facts"
+    };
+  }
+
+  const runtime = normalizeRuntimeOutcome(validation.runtime ?? {});
+  if (!runtime.ok) {
+    return {
+      ok: false,
+      blockedReason: "missing-validation-proof-facts"
+    };
+  }
+
+  return {
+    ok: true,
+    value: freezeRecord({
+      status: normalizeFact(validation.status) ?? runtime.value.runtimeValidationOutcome,
+      effectiveSettingsTarget: normalizeEffectiveSettingsTarget(validation.effectiveSettingsTarget ?? validation.target ?? "user"),
+      persistedSettings: persistedSettings.value,
+      runtime: runtime.value
+    })
+  };
 }
 
 function readPersistedRuntimeSettingsFacts(settings) {
@@ -359,6 +520,36 @@ function validateSettingsObject(value) {
 
 function isPlainObject(value) {
   return value !== null && typeof value === "object" && !Array.isArray(value);
+}
+
+function freezeRecord(record) {
+  for (const value of Object.values(record)) {
+    if (value && typeof value === "object" && !Object.isFrozen(value)) {
+      freezeRecord(value);
+    }
+  }
+  return Object.freeze(record);
+}
+
+function redactEnvironmentFacts(environment) {
+  if (!isPlainObject(environment)) {
+    return Object.freeze({});
+  }
+
+  const redacted = {};
+  for (const [key, value] of Object.entries(environment).sort(([left], [right]) => left.localeCompare(right))) {
+    const normalizedKey = String(key);
+    redacted[normalizedKey] = shouldRedactEnvironmentFact(normalizedKey, value)
+      ? "[REDACTED]"
+      : String(value);
+  }
+  return freezeRecord(redacted);
+}
+
+function shouldRedactEnvironmentFact(key, value) {
+  const haystack = `${key}=${String(value)}`;
+  return /secret|password|token|credential|authorization|bearer|private/i.test(haystack)
+    || /(?:gho_|ghp_|ghs_|ghr_|github_pat_|\/home\/|\\Users\\)/i.test(haystack);
 }
 
 function stripJsonComments(source) {

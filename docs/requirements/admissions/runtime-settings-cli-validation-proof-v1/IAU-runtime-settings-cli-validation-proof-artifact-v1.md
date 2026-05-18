@@ -1,9 +1,9 @@
 # IAU: Runtime Settings CLI Validation Proof Artifact
 
-State: `implementation-admitted`
+State: `implemented`
 
-This IAU admits the first runtime settings CLI validation proof artifact step
-for `runtime-settings-cli-validation-proof-v1`.
+This IAU implements the first runtime settings CLI validation proof artifact
+step for `runtime-settings-cli-validation-proof-v1`.
 
 ## Admitted Tasks
 
@@ -27,10 +27,13 @@ for `runtime-settings-cli-validation-proof-v1`.
 
 ## Preflight
 
-Preflight passed for T009-T012 only. Implementation may start only after this
-admission PR merges to `develop` and a separate implementation handoff issue is
-created.
+Preflight passed for T009-T012 only before implementation started from Issue
+#57.
 
 Interactive selection, compare execution, LabVIEWCLI execution, Docker
 orchestration, live-session proof, packaging, Marketplace publication, and
 source copying remain blocked.
+
+## Closeout
+
+Issue #57 completed T009-T012. No current IAU remains active for this slice.

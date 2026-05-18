@@ -1340,7 +1340,7 @@ requireTextIncludes("docs/development/copilot-workflow.md", [
 const runtimeSettingsProofAdmission = readJson(runtimeSettingsProofAdmissionPath);
 requireEqual(runtimeSettingsProofAdmission.schema, "vi-history/requirements-admission@v1", "runtime settings proof admission schema");
 requireEqual(runtimeSettingsProofAdmission.sliceId, runtimeSettingsProofSliceId, "runtime settings proof admission sliceId");
-requireEqual(runtimeSettingsProofAdmission.state, "implementation-admitted", "runtime settings proof admission state");
+requireEqual(runtimeSettingsProofAdmission.state, "implemented", "runtime settings proof admission state");
 requireEqual(runtimeSettingsProofAdmission.targetProduct, "vi-history", "runtime settings proof admission targetProduct");
 requireEqual(runtimeSettingsProofAdmission.targetFeature, runtimeSettingsProofSliceId, "runtime settings proof admission targetFeature");
 requireEqual(runtimeSettingsProofAdmission.sourceBaselineTag, "v1.3.16", "runtime settings proof admission sourceBaselineTag");
@@ -1348,26 +1348,29 @@ requireEqual(runtimeSettingsProofAdmission.sourceCommit, "f9b2cb74d74c2bc31a8af5
 requireEqual(runtimeSettingsProofAdmission.governedAdmissionCommit, "edb8bfaa53237a8f3b63052573d6bfe728376424", "runtime settings proof admission governedAdmissionCommit");
 requireEqual(runtimeSettingsProofAdmission.implementationSharing, "none", "runtime settings proof admission implementationSharing");
 requireMarketplacePosture(runtimeSettingsProofAdmission, "runtime settings proof admission");
-requireEqual(runtimeSettingsProofAdmission.currentImplementationAdmissionUnit, "IAU-runtime-settings-cli-validation-proof-artifact-v1", "runtime settings proof currentImplementationAdmissionUnit");
+requireEqual(runtimeSettingsProofAdmission.currentImplementationAdmissionUnit, null, "runtime settings proof currentImplementationAdmissionUnit");
 requireArrayEqual(runtimeSettingsProofAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "runtime settings proof completedSpecScope");
-requireArrayEqual(runtimeSettingsProofAdmission.completedImplementationScope, [], "runtime settings proof completedImplementationScope");
-requireArrayEqual(runtimeSettingsProofAdmission.admittedImplementationScope, ["T009", "T010", "T011", "T012"], "runtime settings proof admittedImplementationScope");
+requireArrayEqual(runtimeSettingsProofAdmission.completedImplementationScope, ["T009", "T010", "T011", "T012"], "runtime settings proof completedImplementationScope");
+requireArrayEqual(runtimeSettingsProofAdmission.admittedImplementationScope, [], "runtime settings proof admittedImplementationScope");
 requireArrayEqual(runtimeSettingsProofAdmission.blockedImplementationScope, ["T013", "T014", "T015", "T016", "T017", "T018"], "runtime settings proof blockedImplementationScope");
 requireEqual(runtimeSettingsProofAdmission.preImplementationPreflight?.iauId, "IAU-runtime-settings-cli-validation-proof-artifact-v1", "runtime settings proof preImplementationPreflight iauId");
 requireEqual(runtimeSettingsProofAdmission.preImplementationPreflight?.status, "pass", "runtime settings proof preImplementationPreflight status");
 requireEqual(runtimeSettingsProofAdmission.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings proof preImplementationPreflight implementationStartAllowed");
 requireEqual(runtimeSettingsProofAdmission.preImplementationPreflight?.record, runtimeSettingsProofPreflightPath, "runtime settings proof preImplementationPreflight record");
+requireEqual(runtimeSettingsProofAdmission.implementationHandoffIssue?.number, 57, "runtime settings proof implementationHandoffIssue number");
+requireEqual(runtimeSettingsProofAdmission.implementationCloseout?.status, "pass", "runtime settings proof implementationCloseout status");
+requireArrayEqual(runtimeSettingsProofAdmission.implementationCloseout?.completedTasks, ["T009", "T010", "T011", "T012"], "runtime settings proof implementationCloseout completedTasks");
 requireFile(`docs/requirements/admissions/${runtimeSettingsProofSliceId}.md`);
 
 const runtimeSettingsProofAdmissionUnit = (runtimeSettingsProofAdmission.implementationAdmissionUnits ?? [])
   .find((unit) => unit?.iauId === "IAU-runtime-settings-cli-validation-proof-artifact-v1");
-requireEqual(runtimeSettingsProofAdmissionUnit?.state, "implementation-admitted", "runtime settings proof admission unit state");
+requireEqual(runtimeSettingsProofAdmissionUnit?.state, "implemented", "runtime settings proof admission unit state");
 requireEqual(runtimeSettingsProofAdmissionUnit?.preflightRecord, runtimeSettingsProofPreflightPath, "runtime settings proof admission unit preflightRecord");
 
 const runtimeSettingsProofIau = readJson(runtimeSettingsProofIauPath);
 requireEqual(runtimeSettingsProofIau.schema, "vi-history/implementation-admission-unit@v1", "runtime settings proof IAU schema");
 requireEqual(runtimeSettingsProofIau.iauId, "IAU-runtime-settings-cli-validation-proof-artifact-v1", "runtime settings proof IAU id");
-requireEqual(runtimeSettingsProofIau.state, "implementation-admitted", "runtime settings proof IAU state");
+requireEqual(runtimeSettingsProofIau.state, "implemented", "runtime settings proof IAU state");
 requireEqual(runtimeSettingsProofIau.parentSliceId, runtimeSettingsProofSliceId, "runtime settings proof IAU parentSliceId");
 requireArrayEqual(runtimeSettingsProofIau.admittedTasks, ["T009", "T010", "T011", "T012"], "runtime settings proof IAU admittedTasks");
 requireArrayEqual(runtimeSettingsProofIau.blockedTasks, ["T013", "T014", "T015", "T016", "T017", "T018"], "runtime settings proof IAU blockedTasks");
@@ -1376,6 +1379,9 @@ requireMarketplacePosture(runtimeSettingsProofIau, "runtime settings proof IAU")
 requireEqual(runtimeSettingsProofIau.preImplementationPreflight?.status, "pass", "runtime settings proof IAU preImplementationPreflight status");
 requireEqual(runtimeSettingsProofIau.preImplementationPreflight?.record, "IAU-runtime-settings-cli-validation-proof-artifact-v1-preflight-v1.json", "runtime settings proof IAU preImplementationPreflight record");
 requireEqual(runtimeSettingsProofIau.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings proof IAU preImplementationPreflight implementationStartAllowed");
+requireEqual(runtimeSettingsProofIau.implementationHandoffIssue?.number, 57, "runtime settings proof IAU implementationHandoffIssue number");
+requireEqual(runtimeSettingsProofIau.implementationCloseout?.status, "pass", "runtime settings proof IAU implementationCloseout status");
+requireArrayEqual(runtimeSettingsProofIau.implementationCloseout?.completedTasks, ["T009", "T010", "T011", "T012"], "runtime settings proof IAU implementationCloseout completedTasks");
 requireFile(`docs/requirements/admissions/${runtimeSettingsProofSliceId}/IAU-runtime-settings-cli-validation-proof-artifact-v1.md`);
 
 const runtimeSettingsProofPreflight = readJson(runtimeSettingsProofPreflightPath);
@@ -1435,9 +1441,10 @@ requireTextIncludes(`${runtimeSettingsProofFeatureDir}/tasks.md`, [
   "Issue #55",
   "- [x] T001",
   "- [x] T008",
-  "- [ ] T009",
-  "- [ ] T012",
+  "- [x] T009",
+  "- [x] T012",
   "IAU-runtime-settings-cli-validation-proof-artifact-v1",
+  "Issue #57",
   "[BLOCKED]",
   "T018"
 ]);
@@ -1454,18 +1461,22 @@ requireTextIncludes("README.md", [
   "runtime-settings-cli-validation-proof-v1",
   "docs/requirements/admissions/runtime-settings-cli-validation-proof-v1.json",
   "Issue #55",
+  "Issue #57",
   "IAU-runtime-settings-cli-validation-proof-artifact-v1"
 ]);
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-validation-proof-v1",
   "Issue #55",
+  "Issue #57",
   "Current Implementation Admission Unit",
+  "none",
   "IAU-runtime-settings-cli-validation-proof-artifact-v1",
   "009-runtime-settings-cli-validation-proof-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-proof-v1",
   "Issue #55",
+  "Issue #57",
   "IAU-runtime-settings-cli-validation-proof-artifact-v1",
   "validation proof artifact behavior beyond the admitted pure proof JSON"
 ]);

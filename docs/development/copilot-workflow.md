@@ -201,6 +201,10 @@ Issue #55 admits `IAU-runtime-settings-cli-validation-proof-artifact-v1` for
 admission issue. Copilot implementation must wait for the separate handoff issue
 created after the admission PR merges.
 
+Issue #57 implements and closes
+`IAU-runtime-settings-cli-validation-proof-artifact-v1` for T009-T012 only. No
+new Copilot implementation should start from Issue #57.
+
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.
 

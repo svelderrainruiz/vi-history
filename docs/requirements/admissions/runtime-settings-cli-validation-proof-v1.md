@@ -1,10 +1,11 @@
 # Runtime Settings CLI Validation Proof Admission
 
-State: `implementation-admitted`
+State: `implemented`
 
 Issue #55 imports `runtime-settings-cli-validation-proof-v1`, locks the public
 Spec Kit feature, and admits
 `IAU-runtime-settings-cli-validation-proof-artifact-v1` for T009-T012 only.
+Issue #57 implements and closes the admitted IAU.
 
 Machine-readable ledger:
 [runtime-settings-cli-validation-proof-v1.json](./runtime-settings-cli-validation-proof-v1.json)
@@ -15,9 +16,9 @@ Machine-readable ledger:
   reports persisted provider/version/bitness truth plus runtime outcome facts.
   This slice admits the proof-artifact portion of that validation surface.
 
-## Admitted IAU
+## Implemented IAU
 
-`IAU-runtime-settings-cli-validation-proof-artifact-v1` is admitted for:
+`IAU-runtime-settings-cli-validation-proof-artifact-v1` is implemented for:
 
 - `T009`: add tests proving validation readback facts can be retained as
   structured proof JSON without LabVIEWCLI, Docker, compare execution, or
@@ -28,8 +29,8 @@ Machine-readable ledger:
   public authority.
 - `T012`: implement the minimum public MIT validation proof artifact contract.
 
-Implementation starts only after this admission PR merges and a separate
-implementation handoff issue is created.
+Implementation is complete through Issue #57 for T009-T012 only. No current
+IAU remains active.
 
 ## Blocked Scope
 

@@ -48,16 +48,16 @@ execution.
 
 **Public admission issue**: Issue #55
 
-**Implementation handoff issue**: to be created after this admission PR merges.
+**Implementation handoff issue**: Issue #57.
 
-- [ ] T009 Add tests proving validation readback facts can be retained as
+- [x] T009 Add tests proving validation readback facts can be retained as
   structured proof JSON without LabVIEWCLI, Docker, compare execution, or
   runtime orchestration.
-- [ ] T010 Add tests proving secret-like environment values are redacted from
+- [x] T010 Add tests proving secret-like environment values are redacted from
   public proof output.
-- [ ] T011 Add tests proving deterministic issue-body content points to the MIT
+- [x] T011 Add tests proving deterministic issue-body content points to the MIT
   public authority.
-- [ ] T012 Implement the minimum public MIT validation proof artifact contract.
+- [x] T012 Implement the minimum public MIT validation proof artifact contract.
 
 ---
 
@@ -93,8 +93,7 @@ visibly outside this IAU.
 - Phase 1 must merge before
   `IAU-runtime-settings-cli-validation-proof-artifact-v1` implementation
   starts.
-- Phase 2 may start only from the implementation handoff issue created after
-  this admission PR merges.
+- Phase 2 is complete through Issue #57 for T009-T012 only.
 - Phase 3 remains blocked until separate public requirements and preflight
   records admit interactive selection, compare execution, runtime execution,
   live-session proof, or release behavior.
@@ -105,7 +104,7 @@ visibly outside this IAU.
 ## Implementation Strategy
 
 1. Merge import/spec/admission artifacts to `develop`.
-2. Create a separate implementation handoff issue for
+2. Issue #57 implements
    `IAU-runtime-settings-cli-validation-proof-artifact-v1`.
 3. Keep interactive selection, compare execution, LabVIEWCLI, Docker,
    live-session proof, Marketplace publication, packaging, and source copying

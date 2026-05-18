@@ -4,8 +4,8 @@
 
 **Created**: 2026-05-18
 
-**Status**: Locked for public import and IAU admission; implementation not in
-this PR
+**Status**: Implemented for
+`IAU-runtime-settings-cli-validation-proof-artifact-v1`
 
 **Input**: Imported requirements slice
 `runtime-settings-cli-validation-proof-v1`
@@ -121,8 +121,8 @@ source-copying instructions.
   credentials, private evidence, and copied implementation-source
   instructions.
 - **SC-004**: The admission record states that
-  `IAU-runtime-settings-cli-validation-proof-artifact-v1` is the current
-  admitted IAU after this PR merges and admits only T009-T012.
+  `IAU-runtime-settings-cli-validation-proof-artifact-v1` is implemented for
+  T009-T012 only and no current IAU remains active.
 - **SC-005**: Marketplace publication remains disabled.
 
 ## Assumptions
