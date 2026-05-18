@@ -1,0 +1,71 @@
+{
+  "schema": "vi-history/implementation-admission-unit-preflight@v1",
+  "iauId": "IAU-runtime-settings-cli-prepare-command-shell-v1",
+  "parentSliceId": "runtime-settings-cli-bootstrap-v1",
+  "createdDate": "2026-05-18",
+  "status": "pass",
+  "implementationStartAllowed": true,
+  "implementationStartScope": [
+    "T009",
+    "T010",
+    "T011"
+  ],
+  "requiredChecks": [
+    "constitution-current",
+    "requirements-import-present",
+    "spec-present",
+    "plan-present",
+    "tasks-present",
+    "blocked-scope-explicit",
+    "bridge-artifact-validation",
+    "public-redaction",
+    "clean-room-boundary",
+    "marketplace-disabled"
+  ],
+  "checkResults": [
+    {
+      "check": "constitution-current",
+      "status": "pass"
+    },
+    {
+      "check": "requirements-import-present",
+      "status": "pass"
+    },
+    {
+      "check": "spec-present",
+      "status": "pass"
+    },
+    {
+      "check": "plan-present",
+      "status": "pass"
+    },
+    {
+      "check": "tasks-present",
+      "status": "pass"
+    },
+    {
+      "check": "blocked-scope-explicit",
+      "status": "pass"
+    },
+    {
+      "check": "bridge-artifact-validation",
+      "status": "pass"
+    },
+    {
+      "check": "public-redaction",
+      "status": "pass"
+    },
+    {
+      "check": "clean-room-boundary",
+      "status": "pass"
+    },
+    {
+      "check": "marketplace-disabled",
+      "status": "pass"
+    }
+  ],
+  "resultSummary": "Implementation may start for IAU-runtime-settings-cli-prepare-command-shell-v1 only after this admission PR merges and a separate implementation handoff issue is created. T012-T015 and all settings mutation, validation, compare execution, Docker, LabVIEWCLI, packaging, Marketplace, and source-copying behavior remain blocked.",
+  "implementationSharing": "none",
+  "marketplacePublication": "disabled",
+  "marketplacePublicationAdr": "docs/decisions/ADR-001-marketplace-publication-disabled.md"
+}
