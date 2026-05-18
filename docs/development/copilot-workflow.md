@@ -42,6 +42,8 @@ Read these before changing code:
 - `.specify/specs/command-activation-surface-v1/plan.md`
 - `.specify/specs/command-activation-surface-v1/tasks.md`
 - `docs/requirements/admissions/command-activation-surface-v1.json`
+- `docs/requirements/admissions/command-activation-surface-v1/IAU-command-activation-manifest-contract-v1.json`
+- `docs/requirements/admissions/command-activation-surface-v1/IAU-command-activation-manifest-contract-v1-preflight-v1.json`
 
 ## Current Status
 
@@ -65,9 +67,9 @@ Completed installed-user observation unit:
 
 - `IAU-installed-user-observation-model-v1`
 
-Spec-locked import without implementation admission:
+Admitted command activation unit:
 
-- `command-activation-surface-v1`
+- `IAU-command-activation-manifest-contract-v1`
 
 Completed runtime-contract tasks:
 
@@ -91,18 +93,19 @@ Completed installed-user observation tasks:
 
 ## Future Work Packet
 
-Issue #27 completes `IAU-installed-user-observation-model-v1`. No new Copilot
-implementation should start from Issue #27 after that PR merges.
+Issue #27 completed `IAU-installed-user-observation-model-v1`. No new Copilot
+implementation should start from Issue #27.
 
-Future Copilot work outside `IAU-installed-user-observation-model-v1` must
+Future Copilot work outside `IAU-command-activation-manifest-contract-v1` must
 start with a new public bridge admission record before any code changes. A
 valid work packet must name a new IAU, admitted tasks, blocked tasks, preflight
 status, source files, expected write area, and validation commands.
 
-Issue #30 imports `command-activation-surface-v1` and locks the Spec Kit
-feature. It does not admit manifest implementation, command handlers,
-documentation rendering, runtime settings CLI materialization, compare
-execution, packaging, or Marketplace publication.
+Issue #32 is the public handoff for
+`IAU-command-activation-manifest-contract-v1`. It admits only T009-T012:
+manifest activation-event contract tests, contributed command ID/title contract
+tests, package identity and Marketplace-disabled contract tests, and minimal
+manifest metadata.
 
 ## Blocked Work
 
@@ -110,7 +113,6 @@ Do not implement these without a separate bridge admission:
 
 - LabVIEWCLI command execution
 - Docker command execution or container orchestration
-- command activation manifest implementation without a named IAU preflight
 - command handler implementation
 - documentation panel implementation
 - runtime settings CLI materialization

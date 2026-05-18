@@ -9,7 +9,8 @@ extension source. The initial baseline imported the
 runtime-contract IAUs through proof intake. The public Spec Kit baseline also
 imports `installed-user-observation-public-surface-v1`, with
 `IAU-installed-user-observation-model-v1` implemented for T009-T013 only, and
-`command-activation-surface-v1` as a spec-locked command activation import.
+`command-activation-surface-v1` with
+`IAU-command-activation-manifest-contract-v1` admitted for T009-T012 only.
 
 ## Authority
 
@@ -40,7 +41,8 @@ imports `installed-user-observation-public-surface-v1`, with
 - #27 implements and closes
   `IAU-installed-user-observation-model-v1`.
 - Issue #30 imports `command-activation-surface-v1` as a public
-  requirements/spec baseline. It does not admit implementation.
+  requirements/spec baseline.
+- Issue #32 admits `IAU-command-activation-manifest-contract-v1` for T009-T012.
 
 The current admission ledgers are:
 
@@ -48,13 +50,13 @@ The current admission ledgers are:
 - `docs/requirements/admissions/installed-user-observation-public-surface-v1.json`
 - `docs/requirements/admissions/command-activation-surface-v1.json`
 
-There is no current admitted implementation unit after the command activation
-import. The completed observation model scope is T009-T013. The command
-activation import is spec-locked only.
+Current Implementation Admission Unit:
+`IAU-command-activation-manifest-contract-v1`.
 
-Future code work outside T009-T013, including command activation manifest
-implementation, must start from a new public bridge admission record before
-Copilot or local implementation begins.
+The completed observation model scope is T009-T013. The command activation
+manifest contract admits only T009-T012. Future code work outside those tasks
+must start from a new public bridge admission record before Copilot or local
+implementation begins.
 
 The Marketplace posture is recorded in
 `docs/decisions/ADR-001-marketplace-publication-disabled.md` and summarized in

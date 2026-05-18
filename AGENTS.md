@@ -26,14 +26,18 @@ Implementation for `runtime-contract-host-provider-v1` is complete through
 proof intake. `installed-user-observation-public-surface-v1` is a
 requirements/spec baseline with one implemented IAU:
 `IAU-installed-user-observation-model-v1`. It completed only T009-T013.
-`command-activation-surface-v1` is spec-locked only. It admits no manifest
-implementation, command handlers, runtime settings CLI materialization, compare
-execution, packaging, or Marketplace publication.
+`command-activation-surface-v1` admits
+`IAU-command-activation-manifest-contract-v1` for T009-T012 only: manifest
+activation-event contract tests, contributed command ID/title contract tests,
+package identity and Marketplace-disabled contract tests, and minimal manifest
+metadata.
 
-Future implementation outside the completed observation-model scope begins only
-after a new named IAU has a public preflight record with `status: pass`.
+Command handlers, documentation panel rendering, runtime settings CLI
+materialization, compare execution, packaging, and Marketplace publication
+remain blocked.
 
-Current Implementation Admission Unit: none.
+Current Implementation Admission Unit:
+`IAU-command-activation-manifest-contract-v1`.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that

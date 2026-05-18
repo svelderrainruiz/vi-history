@@ -1,0 +1,51 @@
+{
+  "schema": "vi-history/implementation-admission-unit@v1",
+  "iauId": "IAU-command-activation-manifest-contract-v1",
+  "createdDate": "2026-05-18",
+  "state": "implementation-admitted",
+  "parentSliceId": "command-activation-surface-v1",
+  "specFeature": ".specify/specs/command-activation-surface-v1",
+  "issue": {
+    "number": 32,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/32"
+  },
+  "admittedTasks": [
+    "T009",
+    "T010",
+    "T011",
+    "T012"
+  ],
+  "blockedTasks": [
+    "T013",
+    "T014",
+    "T015",
+    "T016",
+    "T017"
+  ],
+  "entryGate": [
+    "command activation public surface spec-locked",
+    "public import packet present",
+    "Spec Kit artifacts locked",
+    "Spec Kit prerequisites resolved",
+    "bridge artifact validation passed",
+    "public redaction scan passed",
+    "IAU preflight status pass"
+  ],
+  "preImplementationPreflight": {
+    "status": "pass",
+    "record": "IAU-command-activation-manifest-contract-v1-preflight-v1.json",
+    "implementationStartAllowed": true
+  },
+  "exitGate": [
+    "T009-T012 complete",
+    "public redaction scan passes",
+    "bridge artifact validation passes",
+    "npm test passes",
+    "npm run check passes",
+    "Issue 32 names completed IAU and next blocked scope"
+  ],
+  "implementationSharing": "none",
+  "requirementMaturityBasis": "governed released extension supports requirement maturity, not source reuse",
+  "marketplacePublication": "disabled",
+  "marketplacePublicationAdr": "docs/decisions/ADR-001-marketplace-publication-disabled.md"
+}

@@ -4,8 +4,9 @@
 
 **Prerequisites**: `plan.md`, `spec.md`, imported requirements packet
 
-**Tests**: This branch validates requirements and Spec Kit artifacts only.
-Future implementation tasks require a separate IAU preflight.
+**Tests**: This feature validates requirements, Spec Kit artifacts, and the
+first admitted manifest-contract IAU. Runtime implementation tasks require a
+separate IAU preflight.
 
 **Organization**: Tasks are grouped into public import/spec closeout and
 blocked future implementation candidates.
@@ -33,20 +34,21 @@ command activation.
 
 ---
 
-## Phase 2: Blocked Future IAU Candidate - Manifest Contract
+## Phase 2: Admitted IAU - Manifest Contract
 
-**Purpose**: Reserved for a later IAU only if command activation manifest
-implementation is admitted.
+**Purpose**: Admit the smallest command activation implementation step:
+manifest contract tests and minimal manifest metadata only.
 
-**Implementation is blocked until**: A named IAU, likely
-`IAU-command-activation-manifest-contract-v1`, has a public preflight record
-with `status: pass`.
+**Admitted IAU**: `IAU-command-activation-manifest-contract-v1`
 
-- [ ] T009 [BLOCKED] Add manifest activation-event contract tests.
-- [ ] T010 [BLOCKED] Add contributed command ID and title contract tests.
-- [ ] T011 [BLOCKED] Add package identity and Marketplace-disabled contract
-  tests.
-- [ ] T012 [BLOCKED] Minimally update manifest metadata only after preflight.
+**Implementation may start after**:
+`docs/requirements/admissions/command-activation-surface-v1/IAU-command-activation-manifest-contract-v1-preflight-v1.json`
+records `status: "pass"` on `develop`.
+
+- [ ] T009 Add manifest activation-event contract tests.
+- [ ] T010 Add contributed command ID and title contract tests.
+- [ ] T011 Add package identity and Marketplace-disabled contract tests.
+- [ ] T012 Minimally update manifest metadata only after preflight.
 
 ---
 
@@ -76,17 +78,18 @@ with `status: pass`.
 
 - Phase 1 must merge before any future command activation implementation IAU
   can be considered.
-- Phase 2 remains blocked until a separate public preflight passes.
+- Phase 2 is admitted by `IAU-command-activation-manifest-contract-v1`.
 - Phase 3 remains blocked until separate public requirements and preflight
   records admit the runtime or release behavior.
-- No current IAU is admitted by this import/spec-lock branch.
-- Future Copilot implementation work starts only after a new public bridge
-  admission record passes preflight.
+- Current IAU: `IAU-command-activation-manifest-contract-v1`.
+- Future Copilot implementation work may start only from Issue #32 after the
+  admission/preflight records are merged to `develop`.
 
 ## Implementation Strategy
 
 1. Merge import/spec artifacts to `develop`.
 2. Close Issue #30 after validation passes.
-3. Keep command handlers, documentation rendering, runtime settings CLI
+3. Admit `IAU-command-activation-manifest-contract-v1` through Issue #32.
+4. Keep command handlers, documentation rendering, runtime settings CLI
    materialization, compare execution, Docker orchestration, Marketplace
    publication, packaging, and source copying blocked.

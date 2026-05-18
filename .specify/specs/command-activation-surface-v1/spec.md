@@ -4,7 +4,7 @@
 
 **Created**: 2026-05-18
 
-**Status**: Locked for public import; no implementation IAU admitted
+**Status**: Locked for public import; manifest-contract IAU admitted
 
 **Input**: Imported requirements slice `command-activation-surface-v1`
 
@@ -141,8 +141,8 @@ implementation admission and that future code requires a named IAU preflight.
 - **SC-003**: Public validation rejects private paths, private tooling names,
   credentials, private evidence, and copied implementation-source
   instructions.
-- **SC-004**: The admission record states that the feature is `spec-locked`
-  and has no current implementation admission unit.
+- **SC-004**: The admission record states that
+  `IAU-command-activation-manifest-contract-v1` admits T009-T012 only.
 - **SC-005**: Public artifacts keep Marketplace publication disabled.
 
 ## Assumptions

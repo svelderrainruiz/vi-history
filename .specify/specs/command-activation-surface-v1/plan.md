@@ -10,10 +10,11 @@ Import and lock the command activation surface requirements slice for the MIT
 clean-room Spec Kit authority. The feature defines explicit command activation
 events, public command IDs and titles, and blocked runtime/release scope.
 
-This plan admits requirements, Spec Kit artifacts, admission records, and
-validation script coverage only. It does not admit manifest implementation,
-command handlers, runtime settings CLI materialization, compare execution,
-packaging, or Marketplace publication.
+This plan admits requirements, Spec Kit artifacts, admission records,
+validation script coverage, and
+`IAU-command-activation-manifest-contract-v1` for T009-T012 only. It does not
+admit command handlers, runtime settings CLI materialization, compare
+execution, packaging, or Marketplace publication.
 
 ## Technical Context
 
@@ -45,7 +46,8 @@ manifest checks should be static and fast.
 Marketplace publication remains disabled. Command activation must not imply
 command handler, execution, packaging, or publishing admission.
 
-**Scale/Scope**: One imported requirement ID and one import/spec-lock issue.
+**Scale/Scope**: One imported requirement ID, one import/spec-lock issue, and
+one manifest-contract IAU.
 
 ## Constitution Check
 
@@ -124,9 +126,10 @@ No constitution violations are admitted.
 
 ## Implementation Admission
 
-No implementation IAU is admitted by this plan.
+`IAU-command-activation-manifest-contract-v1` is admitted by this plan.
 
-Future implementation work requires:
+Implementation may complete only T009-T012. Future implementation work outside
+that scope requires:
 
 1. a named IAU,
 2. public admission records,

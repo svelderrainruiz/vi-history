@@ -16,6 +16,8 @@ const commandSliceId = "command-activation-surface-v1";
 const commandFeatureDir = `.specify/specs/${commandSliceId}`;
 const commandImportDir = `docs/requirements/imports/${commandSliceId}`;
 const commandAdmissionPath = `docs/requirements/admissions/${commandSliceId}.json`;
+const commandManifestIauPath = `docs/requirements/admissions/${commandSliceId}/IAU-command-activation-manifest-contract-v1.json`;
+const commandManifestPreflightPath = `docs/requirements/admissions/${commandSliceId}/IAU-command-activation-manifest-contract-v1-preflight-v1.json`;
 const marketplaceAdrPath = "docs/decisions/ADR-001-marketplace-publication-disabled.md";
 const explicitCompareIauPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1.json`;
 const explicitComparePreflightPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1-preflight-v1.json`;
@@ -497,7 +499,7 @@ requireTextIncludes("AGENTS.md", [
 const commandAdmission = readJson(commandAdmissionPath);
 requireEqual(commandAdmission.schema, "vi-history/requirements-admission@v1", "command admission schema");
 requireEqual(commandAdmission.sliceId, commandSliceId, "command admission sliceId");
-requireEqual(commandAdmission.state, "spec-locked", "command admission state");
+requireEqual(commandAdmission.state, "implementation-admitted", "command admission state");
 requireEqual(commandAdmission.targetProduct, "vi-history", "command admission targetProduct");
 requireEqual(commandAdmission.targetFeature, commandSliceId, "command admission targetFeature");
 requireEqual(commandAdmission.sourceBaselineTag, "v1.3.16", "command admission sourceBaselineTag");
@@ -505,12 +507,47 @@ requireEqual(commandAdmission.sourceCommit, "54a9e713bcd788bd91d6893f3c655071669
 requireEqual(commandAdmission.governedAdmissionCommit, "01ff907ad878ca335e402b37cdf0929d09c17caf", "command admission governedAdmissionCommit");
 requireEqual(commandAdmission.implementationSharing, "none", "command admission implementationSharing");
 requireMarketplacePosture(commandAdmission, "command admission");
-requireEqual(commandAdmission.currentImplementationAdmissionUnit, null, "command currentImplementationAdmissionUnit");
+requireEqual(commandAdmission.currentImplementationAdmissionUnit, "IAU-command-activation-manifest-contract-v1", "command currentImplementationAdmissionUnit");
 requireArrayEqual(commandAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "command completedSpecScope");
 requireArrayEqual(commandAdmission.completedImplementationScope, [], "command completedImplementationScope");
-requireArrayEqual(commandAdmission.admittedImplementationScope, [], "command admittedImplementationScope");
-requireEqual(commandAdmission.preImplementationPreflight, null, "command preImplementationPreflight");
+requireArrayEqual(commandAdmission.admittedImplementationScope, ["T009", "T010", "T011", "T012"], "command admittedImplementationScope");
+requireEqual(commandAdmission.preImplementationPreflight?.iauId, "IAU-command-activation-manifest-contract-v1", "command preImplementationPreflight iauId");
+requireEqual(commandAdmission.preImplementationPreflight?.status, "pass", "command preImplementationPreflight status");
+requireEqual(commandAdmission.preImplementationPreflight?.implementationStartAllowed, true, "command preImplementationPreflight implementationStartAllowed");
+requireEqual(commandAdmission.preImplementationPreflight?.record, commandManifestPreflightPath, "command preImplementationPreflight record");
 requireFile(`docs/requirements/admissions/${commandSliceId}.md`);
+
+const commandManifestIau = readJson(commandManifestIauPath);
+requireEqual(commandManifestIau.schema, "vi-history/implementation-admission-unit@v1", "command manifest IAU schema");
+requireEqual(commandManifestIau.iauId, "IAU-command-activation-manifest-contract-v1", "command manifest IAU id");
+requireEqual(commandManifestIau.state, "implementation-admitted", "command manifest IAU state");
+requireEqual(commandManifestIau.parentSliceId, commandSliceId, "command manifest IAU parentSliceId");
+requireArrayEqual(commandManifestIau.admittedTasks, ["T009", "T010", "T011", "T012"], "command manifest IAU admittedTasks");
+requireArrayEqual(commandManifestIau.blockedTasks, ["T013", "T014", "T015", "T016", "T017"], "command manifest IAU blockedTasks");
+requireEqual(commandManifestIau.implementationSharing, "none", "command manifest IAU implementationSharing");
+requireMarketplacePosture(commandManifestIau, "command manifest IAU");
+requireEqual(commandManifestIau.preImplementationPreflight?.status, "pass", "command manifest IAU preImplementationPreflight status");
+requireEqual(commandManifestIau.preImplementationPreflight?.record, "IAU-command-activation-manifest-contract-v1-preflight-v1.json", "command manifest IAU preImplementationPreflight record");
+requireEqual(commandManifestIau.preImplementationPreflight?.implementationStartAllowed, true, "command manifest IAU preImplementationPreflight implementationStartAllowed");
+requireFile(`docs/requirements/admissions/${commandSliceId}/IAU-command-activation-manifest-contract-v1.md`);
+
+const commandManifestPreflight = readJson(commandManifestPreflightPath);
+requireEqual(commandManifestPreflight.schema, "vi-history/implementation-admission-unit-preflight@v1", "command manifest preflight schema");
+requireEqual(commandManifestPreflight.iauId, "IAU-command-activation-manifest-contract-v1", "command manifest preflight iauId");
+requireEqual(commandManifestPreflight.status, "pass", "command manifest preflight status");
+requireEqual(commandManifestPreflight.implementationStartAllowed, true, "command manifest preflight implementationStartAllowed");
+requireEqual(commandManifestPreflight.parentSliceId, commandSliceId, "command manifest preflight parentSliceId");
+requireEqual(commandManifestPreflight.implementationSharing, "none", "command manifest preflight implementationSharing");
+requireMarketplacePosture(commandManifestPreflight, "command manifest preflight");
+requireArrayEqual(commandManifestPreflight.implementationStartScope, ["T009", "T010", "T011", "T012"], "command manifest preflight implementationStartScope");
+if (!Array.isArray(commandManifestPreflight.checkResults) || commandManifestPreflight.checkResults.length !== commandManifestPreflight.requiredChecks.length) {
+  failures.push("command manifest preflight checkResults: must match requiredChecks length");
+} else {
+  for (const result of commandManifestPreflight.checkResults) {
+    requireEqual(result.status, "pass", `command manifest preflight check result ${result.check}`);
+  }
+}
+requireFile(`docs/requirements/admissions/${commandSliceId}/IAU-command-activation-manifest-contract-v1-preflight-v1.md`);
 
 const commandManifest = readJson(`${commandImportDir}/manifest.json`);
 requireEqual(commandManifest.schema, "vi-history/requirements-import@v1", "command manifest schema");
@@ -539,22 +576,23 @@ requireTextIncludes(`${commandFeatureDir}/spec.md`, [
   "labviewViHistory.open",
   "labviewViHistory.openDocumentation",
   "labviewViHistory.prepareLocalRuntimeSettingsCli",
-  "no implementation IAU admitted"
+  "manifest-contract IAU admitted"
 ]);
 requireTextIncludes(`${commandFeatureDir}/plan.md`, [
-  "import/spec baseline",
-  "No implementation IAU is admitted",
+  "import/spec-lock issue",
+  "IAU-command-activation-manifest-contract-v1",
   "Marketplace publication remains disabled"
 ]);
 requireTextIncludes(`${commandFeatureDir}/tasks.md`, [
   "Issue #30",
+  "Issue #32",
   "- [x] T001",
   "- [x] T008",
   "IAU-command-activation-manifest-contract-v1",
   "[BLOCKED]",
   "T009",
   "T017",
-  "No current IAU is admitted"
+  "Current IAU"
 ]);
 requireTextIncludes(`${commandImportDir}/rtm.csv`, commandExpectedIds);
 requireTextIncludes(`${commandImportDir}/srs.md`, [
@@ -566,12 +604,15 @@ requireTextIncludes(`${commandImportDir}/srs.md`, [
 requireTextIncludes("README.md", [
   "command-activation-surface-v1",
   "docs/requirements/admissions/command-activation-surface-v1.json",
-  "Issue #30"
+  "Issue #30",
+  "Issue #32",
+  "IAU-command-activation-manifest-contract-v1"
 ]);
 requireTextIncludes("AGENTS.md", [
   "command-activation-surface-v1",
   "003-command-activation-surface-v1",
-  "Current Implementation Admission Unit: none"
+  "Current Implementation Admission Unit:",
+  "IAU-command-activation-manifest-contract-v1"
 ]);
 
 if (failures.length > 0) {
