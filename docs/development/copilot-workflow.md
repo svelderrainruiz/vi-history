@@ -82,7 +82,7 @@ Completed command activation unit:
 
 - `IAU-command-activation-manifest-contract-v1`
 
-Current command handler unit:
+Completed command handler unit:
 
 - `IAU-command-handler-entrypoint-shell-v1`
 
@@ -118,17 +118,13 @@ manifest activation-event contract tests, contributed command ID/title contract
 tests, package identity and Marketplace-disabled contract tests, and minimal
 manifest metadata.
 
-Issue #36 admits `IAU-command-handler-entrypoint-shell-v1`. Copilot may start
-from Issue #36 after this admission PR merges, but only for:
-
-- `T009`: add tests proving extension activation registers the admitted command
-  entrypoint shell.
-- `T010`: add tests proving handler registration does not initialize Git,
-  LabVIEWCLI, Docker, packaging, or Marketplace behavior.
-- `T011`: implement the minimum public MIT entrypoint shell after preflight.
+Issue #36 completed `IAU-command-handler-entrypoint-shell-v1`. No new Copilot
+implementation should start from Issue #36. It implemented only T009-T011:
+entrypoint shell tests and the minimum public MIT entrypoint shell. Future work
+must start from a new public bridge admission record.
 
 The Copilot plan must target `develop`, read this workflow first, and name how
-T012-T015 remain blocked.
+blocked work remains blocked.
 
 ## Blocked Work
 

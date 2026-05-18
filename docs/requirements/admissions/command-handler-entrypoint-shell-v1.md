@@ -2,11 +2,13 @@
 
 ## State
 
-`command-handler-entrypoint-shell-v1` is `implementation-admitted` for the
-named entrypoint-shell IAU.
+`command-handler-entrypoint-shell-v1` is `implemented`. The named entrypoint-shell
+IAU (`IAU-command-handler-entrypoint-shell-v1`) is closed. No current IAU is
+active for this slice.
 
-Issue #36 is the public handoff. It may implement only
-`IAU-command-handler-entrypoint-shell-v1` after this admission PR merges.
+Issue #36 implemented `IAU-command-handler-entrypoint-shell-v1` and is closed.
+It must not be reused for new implementation. Future work requires a new named
+IAU with a public preflight record.
 
 ## Admission Basis
 
@@ -24,17 +26,18 @@ Issue #36 is the public handoff. It may implement only
 - `T001` through `T008`: public import, Spec Kit artifacts, admission records,
   active feature pin, and validation coverage.
 
-## Current IAU
+## Completed IAU
 
-`IAU-command-handler-entrypoint-shell-v1` admits:
+`IAU-command-handler-entrypoint-shell-v1` implemented and closed:
 
 - `T009`: add tests proving extension activation registers the admitted
-  command entrypoint shell.
+  command entrypoint shell. ✓
 - `T010`: add tests proving handler registration does not initialize Git,
-  LabVIEWCLI, Docker, packaging, or Marketplace behavior.
-- `T011`: implement the minimum public MIT entrypoint shell after preflight.
+  LabVIEWCLI, Docker, packaging, or Marketplace behavior. ✓
+- `T011`: implement the minimum public MIT entrypoint shell after preflight. ✓
 
-The preflight record has `status: pass`.
+The preflight record had `status: pass`. The closeout is recorded in
+`IAU-command-handler-entrypoint-shell-v1.json`.
 
 ## Blocked Work
 
