@@ -639,7 +639,7 @@ requireTextIncludes("AGENTS.md", [
 const handlerAdmission = readJson(handlerAdmissionPath);
 requireEqual(handlerAdmission.schema, "vi-history/requirements-admission@v1", "handler admission schema");
 requireEqual(handlerAdmission.sliceId, handlerSliceId, "handler admission sliceId");
-requireEqual(handlerAdmission.state, "implementation-admitted", "handler admission state");
+requireEqual(handlerAdmission.state, "implemented", "handler admission state");
 requireEqual(handlerAdmission.targetProduct, "vi-history", "handler admission targetProduct");
 requireEqual(handlerAdmission.targetFeature, handlerSliceId, "handler admission targetFeature");
 requireEqual(handlerAdmission.sourceBaselineTag, "v1.3.16", "handler admission sourceBaselineTag");
@@ -647,10 +647,10 @@ requireEqual(handlerAdmission.sourceCommit, "01ff907ad878ca335e402b37cdf0929d09c
 requireEqual(handlerAdmission.governedAdmissionCommit, "47f5b67ae35d5bb8b18c2bd2db12e0e7f835313d", "handler admission governedAdmissionCommit");
 requireEqual(handlerAdmission.implementationSharing, "none", "handler admission implementationSharing");
 requireMarketplacePosture(handlerAdmission, "handler admission");
-requireEqual(handlerAdmission.currentImplementationAdmissionUnit, "IAU-command-handler-entrypoint-shell-v1", "handler currentImplementationAdmissionUnit");
+requireEqual(handlerAdmission.currentImplementationAdmissionUnit, null, "handler currentImplementationAdmissionUnit");
 requireArrayEqual(handlerAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "handler completedSpecScope");
-requireArrayEqual(handlerAdmission.completedImplementationScope, [], "handler completedImplementationScope");
-requireArrayEqual(handlerAdmission.admittedImplementationScope, ["T009", "T010", "T011"], "handler admittedImplementationScope");
+requireArrayEqual(handlerAdmission.completedImplementationScope, ["T009", "T010", "T011"], "handler completedImplementationScope");
+requireArrayEqual(handlerAdmission.admittedImplementationScope, [], "handler admittedImplementationScope");
 requireArrayEqual(handlerAdmission.blockedImplementationScope, ["T012", "T013", "T014", "T015"], "handler blockedImplementationScope");
 requireEqual(handlerAdmission.preImplementationPreflight?.iauId, "IAU-command-handler-entrypoint-shell-v1", "handler preImplementationPreflight iauId");
 requireEqual(handlerAdmission.preImplementationPreflight?.status, "pass", "handler preImplementationPreflight status");
@@ -661,7 +661,7 @@ requireFile(`docs/requirements/admissions/${handlerSliceId}.md`);
 const handlerIau = readJson(handlerIauPath);
 requireEqual(handlerIau.schema, "vi-history/implementation-admission-unit@v1", "handler IAU schema");
 requireEqual(handlerIau.iauId, "IAU-command-handler-entrypoint-shell-v1", "handler IAU id");
-requireEqual(handlerIau.state, "implementation-admitted", "handler IAU state");
+requireEqual(handlerIau.state, "implemented", "handler IAU state");
 requireEqual(handlerIau.parentSliceId, handlerSliceId, "handler IAU parentSliceId");
 requireArrayEqual(handlerIau.admittedTasks, ["T009", "T010", "T011"], "handler IAU admittedTasks");
 requireArrayEqual(handlerIau.blockedTasks, ["T012", "T013", "T014", "T015"], "handler IAU blockedTasks");
@@ -670,6 +670,8 @@ requireMarketplacePosture(handlerIau, "handler IAU");
 requireEqual(handlerIau.preImplementationPreflight?.status, "pass", "handler IAU preImplementationPreflight status");
 requireEqual(handlerIau.preImplementationPreflight?.record, "IAU-command-handler-entrypoint-shell-v1-preflight-v1.json", "handler IAU preImplementationPreflight record");
 requireEqual(handlerIau.preImplementationPreflight?.implementationStartAllowed, true, "handler IAU preImplementationPreflight implementationStartAllowed");
+requireEqual(handlerIau.implementationCloseout?.status, "pass", "handler IAU implementationCloseout status");
+requireArrayEqual(handlerIau.implementationCloseout?.completedTasks, ["T009", "T010", "T011"], "handler IAU implementationCloseout completedTasks");
 requireFile(`docs/requirements/admissions/${handlerSliceId}/IAU-command-handler-entrypoint-shell-v1.md`);
 
 const handlerPreflight = readJson(handlerPreflightPath);
@@ -728,8 +730,9 @@ requireTextIncludes(`${handlerFeatureDir}/tasks.md`, [
   "Issue #36",
   "- [x] T001",
   "- [x] T008",
-  "- [ ] T009",
-  "- [ ] T011",
+  "- [x] T009",
+  "- [x] T010",
+  "- [x] T011",
   "IAU-command-handler-entrypoint-shell-v1",
   "[BLOCKED]",
   "T015"

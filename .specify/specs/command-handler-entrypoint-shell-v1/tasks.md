@@ -44,11 +44,11 @@ minimal entrypoint shell only.
 `docs/requirements/admissions/command-handler-entrypoint-shell-v1/IAU-command-handler-entrypoint-shell-v1-preflight-v1.json`
 records `status: "pass"` on `develop`.
 
-- [ ] T009 Add tests proving extension activation registers the admitted
+- [x] T009 Add tests proving extension activation registers the admitted
   command entrypoint shell.
-- [ ] T010 Add tests proving handler registration does not initialize Git,
+- [x] T010 Add tests proving handler registration does not initialize Git,
   LabVIEWCLI, Docker, packaging, or Marketplace behavior.
-- [ ] T011 Implement the minimum public MIT entrypoint shell after preflight.
+- [x] T011 Implement the minimum public MIT entrypoint shell after preflight.
 
 ---
 
