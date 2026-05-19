@@ -1637,7 +1637,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-interactive-selection-v1",
   "Issue #60",
   "Issue #62",
-  "Current Implementation Admission Unit",
+  "Current Implementation Admission Unit:\n`none`.",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
   "IAU-runtime-settings-cli-interactive-selection-contract-v1",
   "011-runtime-settings-cli-terminal-entrypoint-v1"
@@ -1780,19 +1780,22 @@ requireTextIncludes("README.md", [
   "runtime-settings-cli-terminal-entrypoint-v1",
   "docs/requirements/admissions/runtime-settings-cli-terminal-entrypoint-v1.json",
   "Issue #65",
+  "Issue #67",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
-  "Current Implementation Admission Unit"
+  "Current Implementation Admission Unit:\n`none`."
 ]);
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-terminal-entrypoint-v1",
   "Issue #65",
-  "Current Implementation Admission Unit",
+  "Issue #67",
+  "Current Implementation Admission Unit:\n`none`.",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
   "011-runtime-settings-cli-terminal-entrypoint-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-terminal-entrypoint-v1",
   "Issue #65",
+  "Issue #67",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
   "terminal entrypoint implementation beyond"
 ]);
