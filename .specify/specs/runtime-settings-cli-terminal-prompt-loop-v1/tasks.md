@@ -50,19 +50,19 @@ terminal I/O drivers or runtime execution.
 
 **Public admission issue**: Issue #71
 
-**Implementation handoff issue**: not created yet.
+**Implementation handoff issue**: Issue #73
 
-- [ ] T009 Add tests proving no-argument `vihs` produces a deterministic
+- [x] T009 Add tests proving no-argument `vihs` produces a deterministic
   prompt transcript from the already materialized entrypoint facts.
-- [ ] T010 Add tests proving Enter-through confirmation preserves the current
+- [x] T010 Add tests proving Enter-through confirmation preserves the current
   governed provider/platform/version/bitness bundle and requests validation
   handoff.
-- [ ] T011 Add tests proving guided host selection accepts supported local host
+- [x] T011 Add tests proving guided host selection accepts supported local host
   choices and fails closed for unsupported years, host/platform mismatches, or
   missing selected bitness.
-- [ ] T012 Add tests proving Docker selection remains bounded to `2026` /
+- [x] T012 Add tests proving Docker selection remains bounded to `2026` /
   `x64` and fails closed for unsupported Docker years or bitness values.
-- [ ] T013 Implement the minimum public MIT terminal prompt-loop contract as
+- [x] T013 Implement the minimum public MIT terminal prompt-loop contract as
   pure prompt state and output facts.
 
 ---
@@ -104,8 +104,8 @@ publication behavior visibly outside this IAU.
   starts.
 - Phase 1 must merge before
   `IAU-runtime-settings-cli-terminal-prompt-loop-v1` implementation starts.
-- Phase 2 must use a separate implementation handoff issue after this
-  admission PR merges.
+- Phase 2 used separate implementation handoff Issue #73 after the admission
+  PR merged.
 - Phase 3 remains blocked until separate public requirements and preflight
   records admit OS-specific terminal I/O drivers, compare execution, runtime
   execution, proof-out expansion, live-session proof, Windows PowerShell
@@ -117,8 +117,8 @@ publication behavior visibly outside this IAU.
 ## Implementation Strategy
 
 1. Merge import/spec/admission artifacts to `develop`.
-2. Create a separate handoff issue for
-   `IAU-runtime-settings-cli-terminal-prompt-loop-v1`.
+2. Implement and close
+   `IAU-runtime-settings-cli-terminal-prompt-loop-v1` through Issue #73.
 3. Keep OS-specific raw stdin/TTY process drivers, compare execution,
    LabVIEWCLI, Docker, proof expansion, live-session proof, Marketplace
    publication, packaging, and source copying blocked.

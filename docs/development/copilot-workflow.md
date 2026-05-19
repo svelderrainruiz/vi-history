@@ -249,8 +249,11 @@ only. No new Copilot implementation should start from Issue #67.
 Issue #71 admits
 `IAU-runtime-settings-cli-terminal-prompt-loop-v1` for
 `runtime-settings-cli-terminal-prompt-loop-v1` and T009-T013 only. Issue #71
-is an admission issue. Copilot implementation must wait for the separate
-handoff issue created after the admission PR merges.
+is an admission issue and must not be reused for implementation.
+
+Issue #73 implements and closes
+`IAU-runtime-settings-cli-terminal-prompt-loop-v1` for T009-T013 only. No new
+Copilot implementation should start from Issue #73.
 
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.

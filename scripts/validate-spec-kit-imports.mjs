@@ -1648,7 +1648,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-interactive-selection-v1",
   "Issue #60",
   "Issue #62",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-terminal-prompt-loop-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
   "IAU-runtime-settings-cli-interactive-selection-contract-v1",
   "012-runtime-settings-cli-terminal-prompt-loop-v1"
@@ -1793,13 +1793,13 @@ requireTextIncludes("README.md", [
   "Issue #65",
   "Issue #67",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-terminal-prompt-loop-v1`."
+  "Current Implementation Admission Unit:\n`none`."
 ]);
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-terminal-entrypoint-v1",
   "Issue #65",
   "Issue #67",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-terminal-prompt-loop-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
   "012-runtime-settings-cli-terminal-prompt-loop-v1"
 ]);
@@ -1814,7 +1814,7 @@ requireTextIncludes("docs/development/copilot-workflow.md", [
 const runtimeSettingsPromptLoopAdmission = readJson(runtimeSettingsPromptLoopAdmissionPath);
 requireEqual(runtimeSettingsPromptLoopAdmission.schema, "vi-history/requirements-admission@v1", "runtime settings prompt-loop admission schema");
 requireEqual(runtimeSettingsPromptLoopAdmission.sliceId, runtimeSettingsPromptLoopSliceId, "runtime settings prompt-loop admission sliceId");
-requireEqual(runtimeSettingsPromptLoopAdmission.state, "admitted", "runtime settings prompt-loop admission state");
+requireEqual(runtimeSettingsPromptLoopAdmission.state, "implemented", "runtime settings prompt-loop admission state");
 requireEqual(runtimeSettingsPromptLoopAdmission.targetProduct, "vi-history", "runtime settings prompt-loop admission targetProduct");
 requireEqual(runtimeSettingsPromptLoopAdmission.targetFeature, runtimeSettingsPromptLoopSliceId, "runtime settings prompt-loop admission targetFeature");
 requireEqual(runtimeSettingsPromptLoopAdmission.sourceBaselineTag, "v1.3.16", "runtime settings prompt-loop admission sourceBaselineTag");
@@ -1822,27 +1822,30 @@ requireEqual(runtimeSettingsPromptLoopAdmission.sourceCommit, "913f840a9dd23319d
 requireEqual(runtimeSettingsPromptLoopAdmission.governedAdmissionCommit, "bb795ace470bcb17d9436fd34c59344077c37777", "runtime settings prompt-loop admission governedAdmissionCommit");
 requireEqual(runtimeSettingsPromptLoopAdmission.implementationSharing, "none", "runtime settings prompt-loop admission implementationSharing");
 requireMarketplacePosture(runtimeSettingsPromptLoopAdmission, "runtime settings prompt-loop admission");
-requireEqual(runtimeSettingsPromptLoopAdmission.currentImplementationAdmissionUnit, "IAU-runtime-settings-cli-terminal-prompt-loop-v1", "runtime settings prompt-loop currentImplementationAdmissionUnit");
+requireEqual(runtimeSettingsPromptLoopAdmission.currentImplementationAdmissionUnit, null, "runtime settings prompt-loop currentImplementationAdmissionUnit");
 requireArrayEqual(runtimeSettingsPromptLoopAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "runtime settings prompt-loop completedSpecScope");
-requireArrayEqual(runtimeSettingsPromptLoopAdmission.completedImplementationScope, [], "runtime settings prompt-loop completedImplementationScope");
-requireArrayEqual(runtimeSettingsPromptLoopAdmission.admittedImplementationScope, ["T009", "T010", "T011", "T012", "T013"], "runtime settings prompt-loop admittedImplementationScope");
+requireArrayEqual(runtimeSettingsPromptLoopAdmission.completedImplementationScope, ["T009", "T010", "T011", "T012", "T013"], "runtime settings prompt-loop completedImplementationScope");
+requireArrayEqual(runtimeSettingsPromptLoopAdmission.admittedImplementationScope, [], "runtime settings prompt-loop admittedImplementationScope");
 requireArrayEqual(runtimeSettingsPromptLoopAdmission.blockedImplementationScope, ["T014", "T015", "T016", "T017", "T018", "T019"], "runtime settings prompt-loop blockedImplementationScope");
 requireEqual(runtimeSettingsPromptLoopAdmission.preImplementationPreflight?.iauId, "IAU-runtime-settings-cli-terminal-prompt-loop-v1", "runtime settings prompt-loop preImplementationPreflight iauId");
 requireEqual(runtimeSettingsPromptLoopAdmission.preImplementationPreflight?.status, "pass", "runtime settings prompt-loop preImplementationPreflight status");
 requireEqual(runtimeSettingsPromptLoopAdmission.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings prompt-loop preImplementationPreflight implementationStartAllowed");
 requireEqual(runtimeSettingsPromptLoopAdmission.preImplementationPreflight?.record, runtimeSettingsPromptLoopPreflightPath, "runtime settings prompt-loop preImplementationPreflight record");
 requireEqual(runtimeSettingsPromptLoopAdmission.issue?.number, 71, "runtime settings prompt-loop issue number");
+requireEqual(runtimeSettingsPromptLoopAdmission.implementationHandoffIssue?.number, 73, "runtime settings prompt-loop implementationHandoffIssue number");
+requireEqual(runtimeSettingsPromptLoopAdmission.implementationCloseout?.status, "pass", "runtime settings prompt-loop implementationCloseout status");
+requireArrayEqual(runtimeSettingsPromptLoopAdmission.implementationCloseout?.completedTasks, ["T009", "T010", "T011", "T012", "T013"], "runtime settings prompt-loop implementationCloseout completedTasks");
 requireFile(`docs/requirements/admissions/${runtimeSettingsPromptLoopSliceId}.md`);
 
 const runtimeSettingsPromptLoopAdmissionUnit = (runtimeSettingsPromptLoopAdmission.implementationAdmissionUnits ?? [])
   .find((unit) => unit?.iauId === "IAU-runtime-settings-cli-terminal-prompt-loop-v1");
-requireEqual(runtimeSettingsPromptLoopAdmissionUnit?.state, "admitted", "runtime settings prompt-loop admission unit state");
+requireEqual(runtimeSettingsPromptLoopAdmissionUnit?.state, "implemented", "runtime settings prompt-loop admission unit state");
 requireEqual(runtimeSettingsPromptLoopAdmissionUnit?.preflightRecord, runtimeSettingsPromptLoopPreflightPath, "runtime settings prompt-loop admission unit preflightRecord");
 
 const runtimeSettingsPromptLoopIau = readJson(runtimeSettingsPromptLoopIauPath);
 requireEqual(runtimeSettingsPromptLoopIau.schema, "vi-history/implementation-admission-unit@v1", "runtime settings prompt-loop IAU schema");
 requireEqual(runtimeSettingsPromptLoopIau.iauId, "IAU-runtime-settings-cli-terminal-prompt-loop-v1", "runtime settings prompt-loop IAU id");
-requireEqual(runtimeSettingsPromptLoopIau.state, "admitted", "runtime settings prompt-loop IAU state");
+requireEqual(runtimeSettingsPromptLoopIau.state, "implemented", "runtime settings prompt-loop IAU state");
 requireEqual(runtimeSettingsPromptLoopIau.parentSliceId, runtimeSettingsPromptLoopSliceId, "runtime settings prompt-loop IAU parentSliceId");
 requireArrayEqual(runtimeSettingsPromptLoopIau.admittedTasks, ["T009", "T010", "T011", "T012", "T013"], "runtime settings prompt-loop IAU admittedTasks");
 requireArrayEqual(runtimeSettingsPromptLoopIau.blockedTasks, ["T014", "T015", "T016", "T017", "T018", "T019"], "runtime settings prompt-loop IAU blockedTasks");
@@ -1851,6 +1854,9 @@ requireMarketplacePosture(runtimeSettingsPromptLoopIau, "runtime settings prompt
 requireEqual(runtimeSettingsPromptLoopIau.preImplementationPreflight?.status, "pass", "runtime settings prompt-loop IAU preImplementationPreflight status");
 requireEqual(runtimeSettingsPromptLoopIau.preImplementationPreflight?.record, "IAU-runtime-settings-cli-terminal-prompt-loop-v1-preflight-v1.json", "runtime settings prompt-loop IAU preImplementationPreflight record");
 requireEqual(runtimeSettingsPromptLoopIau.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings prompt-loop IAU preImplementationPreflight implementationStartAllowed");
+requireEqual(runtimeSettingsPromptLoopIau.implementationHandoffIssue?.number, 73, "runtime settings prompt-loop IAU implementationHandoffIssue number");
+requireEqual(runtimeSettingsPromptLoopIau.implementationCloseout?.status, "pass", "runtime settings prompt-loop IAU implementationCloseout status");
+requireArrayEqual(runtimeSettingsPromptLoopIau.implementationCloseout?.completedTasks, ["T009", "T010", "T011", "T012", "T013"], "runtime settings prompt-loop IAU implementationCloseout completedTasks");
 requireFile(`docs/requirements/admissions/${runtimeSettingsPromptLoopSliceId}/IAU-runtime-settings-cli-terminal-prompt-loop-v1.md`);
 
 const runtimeSettingsPromptLoopPreflight = readJson(runtimeSettingsPromptLoopPreflightPath);
@@ -1909,10 +1915,11 @@ requireTextIncludes(`${runtimeSettingsPromptLoopFeatureDir}/plan.md`, [
 ]);
 requireTextIncludes(`${runtimeSettingsPromptLoopFeatureDir}/tasks.md`, [
   "Issue #71",
+  "Issue #73",
   "- [x] T001",
   "- [x] T008",
-  "- [ ] T009",
-  "- [ ] T013",
+  "- [x] T009",
+  "- [x] T013",
   "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
   "[BLOCKED]",
   "T019"
@@ -1931,19 +1938,22 @@ requireTextIncludes("README.md", [
   "runtime-settings-cli-terminal-prompt-loop-v1",
   "docs/requirements/admissions/runtime-settings-cli-terminal-prompt-loop-v1.json",
   "Issue #71",
+  "Issue #73",
   "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-terminal-prompt-loop-v1`."
+  "Current Implementation Admission Unit:\n`none`."
 ]);
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-terminal-prompt-loop-v1",
   "Issue #71",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-terminal-prompt-loop-v1`.",
+  "Issue #73",
+  "Current Implementation Admission Unit:\n`none`.",
   "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
   "012-runtime-settings-cli-terminal-prompt-loop-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-terminal-prompt-loop-v1",
   "Issue #71",
+  "Issue #73",
   "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
   "OS-specific raw stdin/TTY process drivers"
 ]);

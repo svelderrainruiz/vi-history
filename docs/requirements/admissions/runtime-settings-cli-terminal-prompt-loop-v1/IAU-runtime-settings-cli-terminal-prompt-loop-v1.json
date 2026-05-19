@@ -2,12 +2,16 @@
   "schema": "vi-history/implementation-admission-unit@v1",
   "iauId": "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
   "createdDate": "2026-05-19",
-  "state": "admitted",
+  "state": "implemented",
   "parentSliceId": "runtime-settings-cli-terminal-prompt-loop-v1",
   "specFeature": ".specify/specs/runtime-settings-cli-terminal-prompt-loop-v1",
   "issue": {
     "number": 71,
     "url": "https://github.com/svelderrainruiz/vi-history/issues/71"
+  },
+  "implementationHandoffIssue": {
+    "number": 73,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/73"
   },
   "admittedTasks": [
     "T009",
@@ -54,5 +58,24 @@
     "status": "pass",
     "record": "IAU-runtime-settings-cli-terminal-prompt-loop-v1-preflight-v1.json",
     "implementationStartAllowed": true
+  },
+  "implementationCloseout": {
+    "status": "pass",
+    "issue": 73,
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011",
+      "T012",
+      "T013"
+    ],
+    "blockedScopeRetained": [
+      "T014",
+      "T015",
+      "T016",
+      "T017",
+      "T018",
+      "T019"
+    ]
   }
 }

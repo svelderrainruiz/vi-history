@@ -3,6 +3,7 @@
 Issue #71 imports `runtime-settings-cli-terminal-prompt-loop-v1`, locks the
 public Spec Kit feature, and admits
 `IAU-runtime-settings-cli-terminal-prompt-loop-v1` for T009-T013 only.
+Issue #73 implements and closes it for T009-T013 only.
 
 Machine-readable ledger:
 [runtime-settings-cli-terminal-prompt-loop-v1.json](./runtime-settings-cli-terminal-prompt-loop-v1.json)
@@ -35,8 +36,8 @@ materialized-entrypoint prerequisites, but it does not re-admit that work.
 - `T013`: the minimum public MIT terminal prompt-loop contract as pure prompt
   state and output facts.
 
-Implementation must wait until this admission PR merges and a separate
-implementation handoff issue is created.
+Implementation uses separate handoff Issue #73 and is closed for T009-T013
+only.
 
 ## Blocked Scope
 

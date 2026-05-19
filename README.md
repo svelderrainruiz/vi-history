@@ -35,7 +35,7 @@ Issue #65 imports `runtime-settings-cli-terminal-entrypoint-v1` and admits
 T009-T013 only. Issue #67 implements and closes it for T009-T013 only.
 Issue #71 imports `runtime-settings-cli-terminal-prompt-loop-v1` and admits
 `IAU-runtime-settings-cli-terminal-prompt-loop-v1` for T009-T013 only.
-Implementation waits for a separate handoff issue.
+Issue #73 implements and closes it for T009-T013 only.
 
 ## Authority
 
@@ -114,6 +114,8 @@ Implementation waits for a separate handoff issue.
 - Issue #71 imports `runtime-settings-cli-terminal-prompt-loop-v1` and admits
   `IAU-runtime-settings-cli-terminal-prompt-loop-v1` for T009-T013 only.
   Issue #71 is an admission issue and must not be reused for implementation.
+- Issue #73 implements and closes
+  `IAU-runtime-settings-cli-terminal-prompt-loop-v1` for T009-T013 only.
 
 The current admission ledgers are:
 
@@ -131,7 +133,7 @@ The current admission ledgers are:
 - `docs/requirements/admissions/runtime-settings-cli-terminal-prompt-loop-v1.json`
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-terminal-prompt-loop-v1`.
+`none`.
 
 The completed observation model scope is T009-T013. The command activation
 manifest contract implements only T009-T012. The command handler entrypoint shell
@@ -179,15 +181,14 @@ minimum pure materialized-entrypoint contract. Raw prompt loops, compare
 execution, LabVIEWCLI execution, Docker execution, proof-out expansion,
 live-session proof, Windows PowerShell Marketplace bootstrap, packaging, and
 Marketplace work remain blocked.
-The runtime settings CLI terminal prompt-loop IAU is admitted for T009-T013 in
+The runtime settings CLI terminal prompt-loop IAU implements only T009-T013 in
 `.specify/specs/runtime-settings-cli-terminal-prompt-loop-v1/tasks.md`: tests
 for deterministic no-argument `vihs` prompt transcript/state behavior,
 Enter-through confirmation, guided host selection, bounded Docker 2026 x64
-selection, and the minimum pure prompt-loop contract. Implementation waits for
-a separate handoff issue. OS-specific raw terminal I/O drivers, compare
-execution, LabVIEWCLI execution, Docker execution, proof-out expansion,
-live-session proof, Windows PowerShell Marketplace bootstrap, packaging, and
-Marketplace work remain blocked.
+selection, and the minimum pure prompt-loop contract. OS-specific raw terminal
+I/O drivers, compare execution, LabVIEWCLI execution, Docker execution,
+proof-out expansion, live-session proof, Windows PowerShell Marketplace
+bootstrap, packaging, and Marketplace work remain blocked.
 
 The Marketplace posture is recorded in
 `docs/decisions/ADR-001-marketplace-publication-disabled.md` and summarized in
