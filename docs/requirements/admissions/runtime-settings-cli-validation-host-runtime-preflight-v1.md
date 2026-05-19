@@ -1,16 +1,18 @@
 # Requirements Admission: Runtime Settings CLI Validation Host Runtime Preflight
 
-`runtime-settings-cli-validation-host-runtime-preflight-v1` is admitted for
-public MIT implementation planning.
+`runtime-settings-cli-validation-host-runtime-preflight-v1` is implemented for
+public MIT implementation planning and clean-room implementation handoff Issue
+#108.
 
 - Admission issue: #106
+- Implementation handoff issue: #108
+- Implementation PR: #109
 - Candidate IAU:
   `IAU-runtime-settings-cli-validation-host-runtime-preflight-v1`
-- Current Implementation Admission Unit:
-  `IAU-runtime-settings-cli-validation-host-runtime-preflight-v1`
+- Current Implementation Admission Unit: `none`
 - Completed import/spec scope: T001-T008 in
   `.specify/specs/runtime-settings-cli-validation-host-runtime-preflight-v1/tasks.md`
-- Admitted implementation scope: T009-T016 in
+- Completed implementation scope: T009-T016 in
   `.specify/specs/runtime-settings-cli-validation-host-runtime-preflight-v1/tasks.md`
 - Blocked scope: T017-T026 in
   `.specify/specs/runtime-settings-cli-validation-host-runtime-preflight-v1/tasks.md`
@@ -18,9 +20,8 @@ public MIT implementation planning.
 The IAU admits only a pure supplied-facts host runtime preflight adapter:
 `createRuntimeSettingsValidationHostRuntimePreflight(input = {})`.
 
-Implementation may start only after this admission PR merges and a separate
-implementation handoff issue is created. Issue #106 is an admission issue and
-must not be reused for implementation.
+Issue #108 implements and closes T009-T016 through PR #109. Issue #106 is an
+admission issue and must not be reused for implementation.
 
 OS scanning, filesystem walking, registry probing, PATH probing, environment
 probing, private path discovery, runtime locator invocation, runtime validation

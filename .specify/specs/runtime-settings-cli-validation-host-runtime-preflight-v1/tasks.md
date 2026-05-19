@@ -51,28 +51,30 @@ deterministic runtime selection facts for the existing validation chain.
 
 **Public admission issue**: Issue #106
 
-**Implementation handoff issue**: to be created after admission merges
+**Implementation handoff issue**: Issue #108
 
-- [ ] T009 Add tests proving accepted host persisted selection facts and one
+**Implementation PR**: PR #109
+
+- [x] T009 Add tests proving accepted host persisted selection facts and one
   compatible supplied host candidate return ready runtime selection facts.
-- [ ] T010 Add tests proving Windows `host` / `2026` / `x64` accepts LabVIEW
+- [x] T010 Add tests proving Windows `host` / `2026` / `x64` accepts LabVIEW
   2026 x64 plus the canonical installed x86 LabVIEWCLI surface.
-- [ ] T011 Add tests proving missing selection, non-host provider, missing
+- [x] T011 Add tests proving missing selection, non-host provider, missing
   host candidate, and malformed inputs fail closed.
-- [ ] T012 Add tests proving ambiguous candidates, version mismatch, bitness
+- [x] T012 Add tests proving ambiguous candidates, version mismatch, bitness
   mismatch, missing LabVIEW executable, missing canonical LabVIEWCLI, and
   contaminated host surface fail closed.
-- [ ] T013 Add tests proving ready and blocked results are consumable by
+- [x] T013 Add tests proving ready and blocked results are consumable by
   `createRuntimeSettingsValidationRuntimeOutcome(input = {})`.
-- [ ] T014 Add tests proving composition into validation readback, proof
+- [x] T014 Add tests proving composition into validation readback, proof
   artifact, proof-out adapter, file-emission, validation command, and
   validate-plan-only results without redesigning those output shapes.
-- [ ] T015 Add tests proving deterministic blocked side-effect facts and no OS
+- [x] T015 Add tests proving deterministic blocked side-effect facts and no OS
   scanning, locators, private path discovery, runtime execution, compare,
   LabVIEWCLI, Docker, terminal process wiring, file writes, publication,
   Marketplace, release automation, launcher/profile mutation, or source
   copying.
-- [ ] T016 Implement the minimum public MIT host runtime preflight facts
+- [x] T016 Implement the minimum public MIT host runtime preflight facts
   adapter.
 
 ---
@@ -103,13 +105,13 @@ source sharing visibly outside this IAU.
 
 **Purpose**: Validate traceability, clean-room boundaries, and public safety.
 
-- [ ] T027 Run `npm test`.
-- [ ] T028 Run `npm run check`.
-- [ ] T029 Run `git diff --check`.
-- [ ] T030 Run public redaction scan over this feature's public artifacts.
-- [ ] T031 Run bridge artifact validation for
+- [x] T027 Run `npm test`.
+- [x] T028 Run `npm run check`.
+- [x] T029 Run `git diff --check`.
+- [x] T030 Run public redaction scan over this feature's public artifacts.
+- [x] T031 Run bridge artifact validation for
   `runtime-settings-cli-validation-host-runtime-preflight-v1`.
-- [ ] T032 Run Spec Kit CLI version/features check.
+- [x] T032 Run Spec Kit CLI version/features check.
 
 ## Dependencies & Execution Order
 
@@ -120,22 +122,25 @@ source sharing visibly outside this IAU.
 - Phase 1 must merge before
   `IAU-runtime-settings-cli-validation-host-runtime-preflight-v1`
   implementation starts.
-- Phase 2 must use a separate implementation handoff issue after the admission
-  PR merges.
+- Phase 2 used separate implementation handoff Issue #108 after the admission
+  PR merged.
 - Phase 3 remains blocked until separate public requirements and preflight
   records admit OS scanning, runtime locator invocation, runtime validation
   execution, compare execution, LabVIEWCLI execution, Docker execution,
   terminal process wiring, live proof, file writes from the host preflight
   adapter, package/bin publication, launcher/profile mutation, release
   automation, Marketplace publication, or source copying.
-- Issue #106 is an admission issue and must not be reused for implementation.
+- Issue #108 is the implementation handoff issue. PR #109 implements and
+  closes T009-T016. Issue #106 is an admission issue and must not be reused
+  for implementation.
 
 ## Implementation Strategy
 
 1. Merge import/spec/admission artifacts to `develop`.
-2. Create a separate implementation handoff issue for
+2. Create separate implementation handoff Issue #108 for
    `IAU-runtime-settings-cli-validation-host-runtime-preflight-v1`.
-3. Implement only T009-T016 through that handoff issue.
+3. Implement only T009-T016 through that handoff issue and close through PR
+   #109.
 4. Keep OS scanning, runtime locator invocation, private path discovery,
    runtime validation execution, compare execution, LabVIEWCLI execution,
    Docker execution, terminal process wiring, live proof, file writes from the
