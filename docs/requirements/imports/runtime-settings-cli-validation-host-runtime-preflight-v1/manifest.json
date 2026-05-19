@@ -1,0 +1,38 @@
+{
+  "schema": "vi-history/requirements-import@v1",
+  "sliceId": "runtime-settings-cli-validation-host-runtime-preflight-v1",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "331b6eab04068299b85405d36bf0ba033dbd9b26",
+  "governedAdmissionCommit": "b5ed9e5a77a096c342fc74c42e3e901d6bad041f",
+  "targetProduct": "vi-history",
+  "targetFeature": "runtime-settings-cli-validation-host-runtime-preflight-v1",
+  "specKitPath": ".specify/specs/runtime-settings-cli-validation-host-runtime-preflight-v1",
+  "redactionStatus": "pass",
+  "implementationSharing": "none",
+  "marketplacePublication": "disabled-until-later-adr",
+  "importedRequirementIds": [
+    "VHS-REQ-532",
+    "VHS-REQ-546",
+    "VHS-REQ-550"
+  ],
+  "prerequisiteRequirementIds": [
+    "VHS-REQ-537",
+    "VHS-REQ-543",
+    "VHS-REQ-544",
+    "VHS-REQ-545"
+  ],
+  "supportingTestIds": [
+    "TEST-UNIT-342",
+    "TEST-UNIT-354",
+    "TEST-UNIT-355",
+    "TEST-UNIT-392"
+  ],
+  "contractName": "createRuntimeSettingsValidationHostRuntimePreflight",
+  "preflightBoundary": "supplied-public-safe-host-candidate-facts-only",
+  "files": [
+    "syrs.md",
+    "srs.md",
+    "rtm.csv",
+    "test-plan.md"
+  ]
+}

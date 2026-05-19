@@ -198,6 +198,17 @@ Read these before changing code:
 - `docs/requirements/admissions/runtime-settings-cli-validation-plan-only-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-plan-only-v1/IAU-runtime-settings-cli-validation-plan-only-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-plan-only-v1/IAU-runtime-settings-cli-validation-plan-only-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-preflight-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-preflight-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-preflight-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-preflight-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-preflight-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-validation-host-runtime-preflight-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-validation-host-runtime-preflight-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-validation-host-runtime-preflight-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-preflight-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-preflight-v1/IAU-runtime-settings-cli-validation-host-runtime-preflight-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-preflight-v1/IAU-runtime-settings-cli-validation-host-runtime-preflight-v1-preflight-v1.json`
 
 ## Current Status
 
@@ -406,6 +417,27 @@ Docker, wire raw terminal processes, publish packages, mutate launcher/profile
 state, write files for plan-only, or copy source without a separate public
 admission.
 
+Issue #106 imports
+`runtime-settings-cli-validation-host-runtime-preflight-v1` and admits
+`IAU-runtime-settings-cli-validation-host-runtime-preflight-v1` for T009-T016
+only. Issue #106 is an admission issue and must not be reused for
+implementation. The implementation handoff issue must be created separately
+after admission merges. The admitted IAU adds only a pure
+`createRuntimeSettingsValidationHostRuntimePreflight(input = {})` adapter over
+supplied public-safe host candidate facts. Future work must not inspect the
+OS, invoke runtime locators, discover private paths, execute validation, call
+LabVIEWCLI, call Docker, wire raw terminal processes, write files from the host
+preflight adapter, publish packages, mutate launcher/profile state, or copy
+source without a separate public admission.
+
+Before Issue #106 admission, the previous plan-only closeout recorded:
+
+Current Implementation Admission Unit:
+`none`.
+
+Current Implementation Admission Unit:
+`IAU-runtime-settings-cli-validation-host-runtime-preflight-v1`.
+
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.
 
@@ -432,6 +464,11 @@ Do not implement these without a separate bridge admission:
   pure `vihs --validate` command contract
 - runtime settings CLI validation plan-only behavior beyond the admitted
   no-write proof-out planning facts branch
+- runtime settings CLI validation host runtime preflight behavior beyond the
+  admitted supplied-facts-only host preflight adapter
+- OS scanning, filesystem walking, registry probing, PATH probing, environment
+  probing, private path discovery, or runtime locator invocation
+- file writes from the host preflight adapter
 - runtime settings mutation beyond the admitted provider/version/bitness
   settings-write contract
 - validation behavior beyond the admitted pure `vihs --validate` readback

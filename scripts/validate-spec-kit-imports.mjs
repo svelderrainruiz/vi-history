@@ -108,6 +108,12 @@ const runtimeSettingsPlanOnlyImportDir = `docs/requirements/imports/${runtimeSet
 const runtimeSettingsPlanOnlyAdmissionPath = `docs/requirements/admissions/${runtimeSettingsPlanOnlySliceId}.json`;
 const runtimeSettingsPlanOnlyIauPath = `docs/requirements/admissions/${runtimeSettingsPlanOnlySliceId}/IAU-runtime-settings-cli-validation-plan-only-v1.json`;
 const runtimeSettingsPlanOnlyPreflightPath = `docs/requirements/admissions/${runtimeSettingsPlanOnlySliceId}/IAU-runtime-settings-cli-validation-plan-only-v1-preflight-v1.json`;
+const runtimeSettingsHostRuntimePreflightSliceId = "runtime-settings-cli-validation-host-runtime-preflight-v1";
+const runtimeSettingsHostRuntimePreflightFeatureDir = `.specify/specs/${runtimeSettingsHostRuntimePreflightSliceId}`;
+const runtimeSettingsHostRuntimePreflightImportDir = `docs/requirements/imports/${runtimeSettingsHostRuntimePreflightSliceId}`;
+const runtimeSettingsHostRuntimePreflightAdmissionPath = `docs/requirements/admissions/${runtimeSettingsHostRuntimePreflightSliceId}.json`;
+const runtimeSettingsHostRuntimePreflightIauPath = `docs/requirements/admissions/${runtimeSettingsHostRuntimePreflightSliceId}/IAU-runtime-settings-cli-validation-host-runtime-preflight-v1.json`;
+const runtimeSettingsHostRuntimePreflightPreflightPath = `docs/requirements/admissions/${runtimeSettingsHostRuntimePreflightSliceId}/IAU-runtime-settings-cli-validation-host-runtime-preflight-v1-preflight-v1.json`;
 const marketplaceAdrPath = "docs/decisions/ADR-001-marketplace-publication-disabled.md";
 const explicitCompareIauPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1.json`;
 const explicitComparePreflightPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1-preflight-v1.json`;
@@ -201,6 +207,11 @@ const runtimeSettingsCommandContractExpectedIds = [
 const runtimeSettingsPlanOnlyExpectedIds = [
   "VHS-REQ-546"
 ];
+const runtimeSettingsHostRuntimePreflightExpectedIds = [
+  "VHS-REQ-532",
+  "VHS-REQ-546",
+  "VHS-REQ-550"
+];
 
 const failures = [];
 
@@ -284,11 +295,12 @@ requireTextIncludes(".specify/memory/constitution.md", [
   "runtime-settings-cli-validation-runtime-outcome-v1",
   "runtime-settings-cli-validation-command-contract-v1",
   "runtime-settings-cli-validation-plan-only-v1",
+  "runtime-settings-cli-validation-host-runtime-preflight-v1",
   "**Version**: 0.1.16"
 ]);
 
 const featureJson = readJson(".specify/feature.json");
-requireEqual(featureJson.feature_directory, runtimeSettingsPlanOnlyFeatureDir, "pinned Spec Kit feature directory");
+requireEqual(featureJson.feature_directory, runtimeSettingsHostRuntimePreflightFeatureDir, "pinned Spec Kit feature directory");
 
 const admission = readJson(admissionPath);
 requireEqual(admission.schema, "vi-history/requirements-admission@v1", "admission schema");
@@ -3008,6 +3020,162 @@ requireTextIncludes("docs/development/copilot-workflow.md", [
   "validate-plan-only",
   "proof-out file-emission writer",
   "no-write proof-out planning facts branch"
+]);
+
+const runtimeSettingsHostRuntimePreflightAdmission = readJson(runtimeSettingsHostRuntimePreflightAdmissionPath);
+requireEqual(runtimeSettingsHostRuntimePreflightAdmission.schema, "vi-history/requirements-admission@v1", "runtime settings host runtime preflight admission schema");
+requireEqual(runtimeSettingsHostRuntimePreflightAdmission.sliceId, runtimeSettingsHostRuntimePreflightSliceId, "runtime settings host runtime preflight admission sliceId");
+requireEqual(runtimeSettingsHostRuntimePreflightAdmission.state, "admitted", "runtime settings host runtime preflight admission state");
+requireEqual(runtimeSettingsHostRuntimePreflightAdmission.targetProduct, "vi-history", "runtime settings host runtime preflight admission targetProduct");
+requireEqual(runtimeSettingsHostRuntimePreflightAdmission.targetFeature, runtimeSettingsHostRuntimePreflightSliceId, "runtime settings host runtime preflight admission targetFeature");
+requireEqual(runtimeSettingsHostRuntimePreflightAdmission.sourceBaselineTag, "v1.3.16", "runtime settings host runtime preflight admission sourceBaselineTag");
+requireEqual(runtimeSettingsHostRuntimePreflightAdmission.sourceCommit, "331b6eab04068299b85405d36bf0ba033dbd9b26", "runtime settings host runtime preflight admission sourceCommit");
+requireEqual(runtimeSettingsHostRuntimePreflightAdmission.governedAdmissionCommit, "b5ed9e5a77a096c342fc74c42e3e901d6bad041f", "runtime settings host runtime preflight admission governedAdmissionCommit");
+requireEqual(runtimeSettingsHostRuntimePreflightAdmission.implementationSharing, "none", "runtime settings host runtime preflight admission implementationSharing");
+requireMarketplacePosture(runtimeSettingsHostRuntimePreflightAdmission, "runtime settings host runtime preflight admission");
+requireEqual(runtimeSettingsHostRuntimePreflightAdmission.currentImplementationAdmissionUnit, "IAU-runtime-settings-cli-validation-host-runtime-preflight-v1", "runtime settings host runtime preflight currentImplementationAdmissionUnit");
+requireArrayEqual(runtimeSettingsHostRuntimePreflightAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "runtime settings host runtime preflight completedSpecScope");
+requireArrayEqual(runtimeSettingsHostRuntimePreflightAdmission.completedImplementationScope, [], "runtime settings host runtime preflight completedImplementationScope");
+requireArrayEqual(runtimeSettingsHostRuntimePreflightAdmission.admittedImplementationScope, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings host runtime preflight admittedImplementationScope");
+requireArrayEqual(runtimeSettingsHostRuntimePreflightAdmission.blockedImplementationScope, ["T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025", "T026"], "runtime settings host runtime preflight blockedImplementationScope");
+requireEqual(runtimeSettingsHostRuntimePreflightAdmission.preImplementationPreflight?.iauId, "IAU-runtime-settings-cli-validation-host-runtime-preflight-v1", "runtime settings host runtime preflight preImplementationPreflight iauId");
+requireEqual(runtimeSettingsHostRuntimePreflightAdmission.preImplementationPreflight?.status, "pass", "runtime settings host runtime preflight preImplementationPreflight status");
+requireEqual(runtimeSettingsHostRuntimePreflightAdmission.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings host runtime preflight preImplementationPreflight implementationStartAllowed");
+requireEqual(runtimeSettingsHostRuntimePreflightAdmission.preImplementationPreflight?.record, runtimeSettingsHostRuntimePreflightPreflightPath, "runtime settings host runtime preflight preImplementationPreflight record");
+requireEqual(runtimeSettingsHostRuntimePreflightAdmission.issue?.number, 106, "runtime settings host runtime preflight issue number");
+requireFile(`docs/requirements/admissions/${runtimeSettingsHostRuntimePreflightSliceId}.md`);
+
+const runtimeSettingsHostRuntimePreflightAdmissionUnit = (runtimeSettingsHostRuntimePreflightAdmission.implementationAdmissionUnits ?? [])
+  .find((unit) => unit?.iauId === "IAU-runtime-settings-cli-validation-host-runtime-preflight-v1");
+requireEqual(runtimeSettingsHostRuntimePreflightAdmissionUnit?.state, "admitted", "runtime settings host runtime preflight admission unit state");
+requireEqual(runtimeSettingsHostRuntimePreflightAdmissionUnit?.preflightRecord, runtimeSettingsHostRuntimePreflightPreflightPath, "runtime settings host runtime preflight admission unit preflightRecord");
+
+const runtimeSettingsHostRuntimePreflightIau = readJson(runtimeSettingsHostRuntimePreflightIauPath);
+requireEqual(runtimeSettingsHostRuntimePreflightIau.schema, "vi-history/implementation-admission-unit@v1", "runtime settings host runtime preflight IAU schema");
+requireEqual(runtimeSettingsHostRuntimePreflightIau.iauId, "IAU-runtime-settings-cli-validation-host-runtime-preflight-v1", "runtime settings host runtime preflight IAU id");
+requireEqual(runtimeSettingsHostRuntimePreflightIau.state, "admitted", "runtime settings host runtime preflight IAU state");
+requireEqual(runtimeSettingsHostRuntimePreflightIau.parentSliceId, runtimeSettingsHostRuntimePreflightSliceId, "runtime settings host runtime preflight IAU parentSliceId");
+requireArrayEqual(runtimeSettingsHostRuntimePreflightIau.admittedTasks, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings host runtime preflight IAU admittedTasks");
+requireArrayEqual(runtimeSettingsHostRuntimePreflightIau.blockedTasks, ["T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025", "T026"], "runtime settings host runtime preflight IAU blockedTasks");
+requireEqual(runtimeSettingsHostRuntimePreflightIau.implementationSharing, "none", "runtime settings host runtime preflight IAU implementationSharing");
+requireMarketplacePosture(runtimeSettingsHostRuntimePreflightIau, "runtime settings host runtime preflight IAU");
+requireEqual(runtimeSettingsHostRuntimePreflightIau.preImplementationPreflight?.status, "pass", "runtime settings host runtime preflight IAU preImplementationPreflight status");
+requireEqual(runtimeSettingsHostRuntimePreflightIau.preImplementationPreflight?.record, "IAU-runtime-settings-cli-validation-host-runtime-preflight-v1-preflight-v1.json", "runtime settings host runtime preflight IAU preImplementationPreflight record");
+requireEqual(runtimeSettingsHostRuntimePreflightIau.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings host runtime preflight IAU preImplementationPreflight implementationStartAllowed");
+requireFile(`docs/requirements/admissions/${runtimeSettingsHostRuntimePreflightSliceId}/IAU-runtime-settings-cli-validation-host-runtime-preflight-v1.md`);
+
+const runtimeSettingsHostRuntimePreflightPreflight = readJson(runtimeSettingsHostRuntimePreflightPreflightPath);
+requireEqual(runtimeSettingsHostRuntimePreflightPreflight.schema, "vi-history/implementation-admission-unit-preflight@v1", "runtime settings host runtime preflight preflight schema");
+requireEqual(runtimeSettingsHostRuntimePreflightPreflight.iauId, "IAU-runtime-settings-cli-validation-host-runtime-preflight-v1", "runtime settings host runtime preflight preflight iauId");
+requireEqual(runtimeSettingsHostRuntimePreflightPreflight.status, "pass", "runtime settings host runtime preflight preflight status");
+requireEqual(runtimeSettingsHostRuntimePreflightPreflight.implementationStartAllowed, true, "runtime settings host runtime preflight preflight implementationStartAllowed");
+requireEqual(runtimeSettingsHostRuntimePreflightPreflight.parentSliceId, runtimeSettingsHostRuntimePreflightSliceId, "runtime settings host runtime preflight preflight parentSliceId");
+requireEqual(runtimeSettingsHostRuntimePreflightPreflight.implementationSharing, "none", "runtime settings host runtime preflight preflight implementationSharing");
+requireMarketplacePosture(runtimeSettingsHostRuntimePreflightPreflight, "runtime settings host runtime preflight preflight");
+requireArrayEqual(runtimeSettingsHostRuntimePreflightPreflight.implementationStartScope, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings host runtime preflight preflight implementationStartScope");
+if (!Array.isArray(runtimeSettingsHostRuntimePreflightPreflight.checkResults) || runtimeSettingsHostRuntimePreflightPreflight.checkResults.length !== runtimeSettingsHostRuntimePreflightPreflight.requiredChecks.length) {
+  failures.push("runtime settings host runtime preflight preflight checkResults: must match requiredChecks length");
+} else {
+  for (const result of runtimeSettingsHostRuntimePreflightPreflight.checkResults) {
+    requireEqual(result.status, "pass", `runtime settings host runtime preflight preflight check result ${result.check}`);
+  }
+}
+requireFile(`docs/requirements/admissions/${runtimeSettingsHostRuntimePreflightSliceId}/IAU-runtime-settings-cli-validation-host-runtime-preflight-v1-preflight-v1.md`);
+
+const runtimeSettingsHostRuntimePreflightManifest = readJson(`${runtimeSettingsHostRuntimePreflightImportDir}/manifest.json`);
+requireEqual(runtimeSettingsHostRuntimePreflightManifest.schema, "vi-history/requirements-import@v1", "runtime settings host runtime preflight manifest schema");
+requireEqual(runtimeSettingsHostRuntimePreflightManifest.sliceId, runtimeSettingsHostRuntimePreflightSliceId, "runtime settings host runtime preflight sliceId");
+requireEqual(runtimeSettingsHostRuntimePreflightManifest.sourceBaselineTag, "v1.3.16", "runtime settings host runtime preflight sourceBaselineTag");
+requireEqual(runtimeSettingsHostRuntimePreflightManifest.sourceCommit, "331b6eab04068299b85405d36bf0ba033dbd9b26", "runtime settings host runtime preflight sourceCommit");
+requireEqual(runtimeSettingsHostRuntimePreflightManifest.governedAdmissionCommit, "b5ed9e5a77a096c342fc74c42e3e901d6bad041f", "runtime settings host runtime preflight governedAdmissionCommit");
+requireEqual(runtimeSettingsHostRuntimePreflightManifest.targetProduct, "vi-history", "runtime settings host runtime preflight targetProduct");
+requireEqual(runtimeSettingsHostRuntimePreflightManifest.targetFeature, runtimeSettingsHostRuntimePreflightSliceId, "runtime settings host runtime preflight targetFeature");
+requireEqual(runtimeSettingsHostRuntimePreflightManifest.redactionStatus, "pass", "runtime settings host runtime preflight redactionStatus");
+requireEqual(runtimeSettingsHostRuntimePreflightManifest.implementationSharing, "none", "runtime settings host runtime preflight implementationSharing");
+requireEqual(runtimeSettingsHostRuntimePreflightManifest.marketplacePublication, "disabled-until-later-adr", "runtime settings host runtime preflight marketplacePublication");
+requireArrayEqual(runtimeSettingsHostRuntimePreflightManifest.importedRequirementIds, runtimeSettingsHostRuntimePreflightExpectedIds, "runtime settings host runtime preflight importedRequirementIds");
+requireArrayEqual(runtimeSettingsHostRuntimePreflightManifest.prerequisiteRequirementIds, ["VHS-REQ-537", "VHS-REQ-543", "VHS-REQ-544", "VHS-REQ-545"], "runtime settings host runtime preflight prerequisiteRequirementIds");
+requireArrayEqual(runtimeSettingsHostRuntimePreflightManifest.supportingTestIds, ["TEST-UNIT-342", "TEST-UNIT-354", "TEST-UNIT-355", "TEST-UNIT-392"], "runtime settings host runtime preflight supportingTestIds");
+requireEqual(runtimeSettingsHostRuntimePreflightManifest.contractName, "createRuntimeSettingsValidationHostRuntimePreflight", "runtime settings host runtime preflight contractName");
+requireEqual(runtimeSettingsHostRuntimePreflightManifest.preflightBoundary, "supplied-public-safe-host-candidate-facts-only", "runtime settings host runtime preflight preflightBoundary");
+requireArrayEqual(runtimeSettingsHostRuntimePreflightManifest.files, ["syrs.md", "srs.md", "rtm.csv", "test-plan.md"], "runtime settings host runtime preflight manifest files");
+
+for (const file of runtimeSettingsHostRuntimePreflightManifest.files ?? []) {
+  requireFile(`${runtimeSettingsHostRuntimePreflightImportDir}/${file}`);
+}
+
+for (const file of ["spec.md", "plan.md", "tasks.md"]) {
+  requireFile(`${runtimeSettingsHostRuntimePreflightFeatureDir}/${file}`);
+}
+
+requireTextIncludes(`${runtimeSettingsHostRuntimePreflightFeatureDir}/spec.md`, [
+  "Runtime Settings CLI Validation Host Runtime Preflight",
+  "VHS-REQ-532",
+  "VHS-REQ-546",
+  "VHS-REQ-550",
+  "TEST-UNIT-355",
+  "IAU-runtime-settings-cli-validation-host-runtime-preflight-v1",
+  "createRuntimeSettingsValidationHostRuntimePreflight",
+  "Current Implementation Admission Unit is",
+  "clean-room"
+]);
+requireTextIncludes(`${runtimeSettingsHostRuntimePreflightFeatureDir}/plan.md`, [
+  "IAU-runtime-settings-cli-validation-host-runtime-preflight-v1",
+  "Issue #106",
+  "Marketplace publication: disabled",
+  "Implementation sharing: none",
+  "supplied public-safe host candidate facts only"
+]);
+requireTextIncludes(`${runtimeSettingsHostRuntimePreflightFeatureDir}/tasks.md`, [
+  "Issue #106",
+  "- [x] T001",
+  "- [x] T008",
+  "- [ ] T009",
+  "- [ ] T016",
+  "IAU-runtime-settings-cli-validation-host-runtime-preflight-v1",
+  "[BLOCKED]",
+  "T026"
+]);
+requireTextIncludes(`${runtimeSettingsHostRuntimePreflightImportDir}/rtm.csv`, runtimeSettingsHostRuntimePreflightExpectedIds);
+requireTextIncludes(`${runtimeSettingsHostRuntimePreflightImportDir}/srs.md`, [
+  "VHS-REQ-532",
+  "VHS-REQ-546",
+  "VHS-REQ-550",
+  "TEST-UNIT-355",
+  "createRuntimeSettingsValidationHostRuntimePreflight",
+  "canonical installed x86 LabVIEWCLI",
+  "MUST NOT inspect the OS"
+]);
+requireTextIncludes(`${runtimeSettingsHostRuntimePreflightImportDir}/test-plan.md`, [
+  "TEST-UNIT-RSHOSTPREFLIGHT-001",
+  "TEST-UNIT-RSHOSTPREFLIGHT-007",
+  "canonical installed x86 LabVIEWCLI",
+  "OS scan"
+]);
+requireTextIncludes("README.md", [
+  "runtime-settings-cli-validation-host-runtime-preflight-v1",
+  "docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-preflight-v1.json",
+  "Issue #106",
+  "IAU-runtime-settings-cli-validation-host-runtime-preflight-v1",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-host-runtime-preflight-v1`.",
+  "createRuntimeSettingsValidationHostRuntimePreflight(input = {})",
+  "supplied public-safe host candidate facts",
+  "runtime locator invocation"
+]);
+requireTextIncludes("AGENTS.md", [
+  "runtime-settings-cli-validation-host-runtime-preflight-v1",
+  "Issue #106",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-host-runtime-preflight-v1`.",
+  "IAU-runtime-settings-cli-validation-host-runtime-preflight-v1",
+  "019-runtime-settings-cli-validation-host-runtime-preflight-v1"
+]);
+requireTextIncludes("docs/development/copilot-workflow.md", [
+  "runtime-settings-cli-validation-host-runtime-preflight-v1",
+  "Issue #106",
+  "IAU-runtime-settings-cli-validation-host-runtime-preflight-v1",
+  "createRuntimeSettingsValidationHostRuntimePreflight(input = {})",
+  "supplied public-safe host candidate facts",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-host-runtime-preflight-v1`."
 ]);
 
 if (failures.length > 0) {
