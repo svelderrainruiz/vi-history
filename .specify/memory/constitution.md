@@ -135,6 +135,11 @@ The imported slices are:
   `docs/requirements/imports/runtime-settings-cli-validation-host-preflight-command-composition-v1/`
   and Spec Kit feature under
   `.specify/specs/runtime-settings-cli-validation-host-preflight-command-composition-v1/`.
+- `runtime-settings-cli-validation-host-runtime-discovery-v1`, with its import
+  packet under
+  `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-discovery-v1/`
+  and Spec Kit feature under
+  `.specify/specs/runtime-settings-cli-validation-host-runtime-discovery-v1/`.
 
 The active pinned Spec Kit feature is recorded in `.specify/feature.json`.
 
@@ -151,4 +156,4 @@ This constitution governs repository-local work. Amendments require a versioned
 change, a short rationale, and validation that affected Spec Kit templates and
 repository guidance remain consistent.
 
-**Version**: 0.1.16 | **Ratified**: 2026-05-17 | **Last Amended**: 2026-05-19
+**Version**: 0.1.17 | **Ratified**: 2026-05-17 | **Last Amended**: 2026-05-19

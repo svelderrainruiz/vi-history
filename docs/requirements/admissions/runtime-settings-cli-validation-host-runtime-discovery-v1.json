@@ -1,0 +1,109 @@
+{
+  "schema": "vi-history/requirements-admission@v1",
+  "sliceId": "runtime-settings-cli-validation-host-runtime-discovery-v1",
+  "createdDate": "2026-05-19",
+  "state": "admitted",
+  "targetProduct": "vi-history",
+  "targetFeature": "runtime-settings-cli-validation-host-runtime-discovery-v1",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "e411ef2bfa74cedf6f9b53d764810f9f4c93a8b0",
+  "governedAdmissionCommit": "4f4211edc824c92f3d9aa4c39cafa928d59c5ce3",
+  "publicImportPath": "docs/requirements/imports/runtime-settings-cli-validation-host-runtime-discovery-v1/",
+  "specKitPath": ".specify/specs/runtime-settings-cli-validation-host-runtime-discovery-v1/",
+  "issue": {
+    "number": 118,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/118"
+  },
+  "bridgeChecks": {
+    "specKitCliVersion": "0.8.12.dev0",
+    "publicImportPacketPresent": "pass",
+    "specKitArtifactsPresent": "pass",
+    "redactionScan": "pass",
+    "artifactConsistency": "pass",
+    "analyzeCriticalFindings": "none-recorded-for-import-spec-baseline",
+    "implementationPreflight": "pass"
+  },
+  "implementationAdmissionUnits": [
+    {
+      "iauId": "IAU-runtime-settings-cli-validation-host-runtime-discovery-v1",
+      "state": "admitted",
+      "record": "docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-discovery-v1/IAU-runtime-settings-cli-validation-host-runtime-discovery-v1.json",
+      "preflightRecord": "docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-discovery-v1/IAU-runtime-settings-cli-validation-host-runtime-discovery-v1-preflight-v1.json",
+      "admittedTasks": [
+        "T009",
+        "T010",
+        "T011",
+        "T012",
+        "T013",
+        "T014",
+        "T015",
+        "T016"
+      ]
+    }
+  ],
+  "currentImplementationAdmissionUnit": "IAU-runtime-settings-cli-validation-host-runtime-discovery-v1",
+  "completedSpecScope": [
+    "T001",
+    "T002",
+    "T003",
+    "T004",
+    "T005",
+    "T006",
+    "T007",
+    "T008"
+  ],
+  "completedImplementationScope": [],
+  "admittedImplementationScope": [
+    "T009",
+    "T010",
+    "T011",
+    "T012",
+    "T013",
+    "T014",
+    "T015",
+    "T016"
+  ],
+  "blockedImplementationScope": [
+    "T017",
+    "T018",
+    "T019",
+    "T020",
+    "T021",
+    "T022",
+    "T023",
+    "T024",
+    "T025",
+    "T026",
+    "T027",
+    "T028"
+  ],
+  "preImplementationPreflight": {
+    "iauId": "IAU-runtime-settings-cli-validation-host-runtime-discovery-v1",
+    "status": "pass",
+    "record": "docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-discovery-v1/IAU-runtime-settings-cli-validation-host-runtime-discovery-v1-preflight-v1.json",
+    "implementationStartAllowed": true
+  },
+  "implementationHandoffPolicy": "Create a separate implementation handoff issue after this admission PR merges; do not reuse Issue #118 for implementation.",
+  "requirementMaturityBasis": "governed bridge-readiness packet supports public import, Spec Kit planning, and narrow host runtime discovery admission, not source reuse",
+  "implementationSharing": "none",
+  "marketplacePublication": "disabled",
+  "marketplacePublicationAdr": "docs/decisions/ADR-001-marketplace-publication-disabled.md",
+  "blockedScope": [
+    "raw private path disclosure",
+    "arbitrary filesystem walking",
+    "PATH probing or environment probing",
+    "invocation of the existing compare runtime locator as an implementation shortcut",
+    "runtime validation execution",
+    "compare execution",
+    "LabVIEWCLI execution",
+    "Docker command execution or orchestration",
+    "raw terminal process wiring or live terminal proof",
+    "file writes",
+    "package/bin publication",
+    "VSIX packaging",
+    "Marketplace publication",
+    "release automation",
+    "launcher/profile mutation",
+    "source copying from another VI History product line"
+  ]
+}

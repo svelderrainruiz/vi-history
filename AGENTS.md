@@ -216,6 +216,31 @@ live-session proof, file writes from the host preflight adapter, package/bin
 publication, launcher/profile mutation, release automation, Marketplace
 publication, and source copying remain blocked.
 
+`runtime-settings-cli-validation-host-runtime-discovery-v1` admits
+`IAU-runtime-settings-cli-validation-host-runtime-discovery-v1` for Issue #118
+and T009-T016 only. Issue #118 is an admission issue and must not be reused for
+implementation. The admitted IAU is a bounded
+`createRuntimeSettingsValidationHostRuntimeDiscovery(input = {})` facts
+contract over public-safe selected host facts and bounded discovery
+observations. It may derive public-safe host candidate facts for
+`createRuntimeSettingsValidationHostRuntimePreflight(input = {})` and the
+existing validation command chain without changing output shapes. Raw private
+path disclosure, arbitrary filesystem walking, PATH probing, environment
+probing, existing compare runtime locator reuse, runtime validation execution,
+compare execution, LabVIEWCLI execution, Docker execution or orchestration,
+raw terminal process wiring, live-session proof, file writes, package/bin
+publication, launcher/profile mutation, release automation, Marketplace
+publication, and source copying remain blocked.
+
+Current Implementation Admission Unit:
+`IAU-runtime-settings-cli-validation-host-runtime-discovery-v1`.
+
+Issue #118 admission temporarily sets the current IAU to
+`IAU-runtime-settings-cli-validation-host-runtime-discovery-v1`. A separate
+implementation handoff issue must be created after this admission PR merges.
+Before Issue #118 admission, the host preflight command-composition closeout
+recorded:
+
 Current Implementation Admission Unit:
 `none`.
 
@@ -243,11 +268,13 @@ When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:
 
 ```bash
-SPECIFY_FEATURE=020-runtime-settings-cli-validation-host-preflight-command-composition-v1 \
-SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-validation-host-preflight-command-composition-v1 \
+SPECIFY_FEATURE=021-runtime-settings-cli-validation-host-runtime-discovery-v1 \
+SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-validation-host-runtime-discovery-v1 \
 .specify/scripts/bash/check-prerequisites.sh --json --paths-only
 ```
 
+The previous host preflight command-composition feature used
+`020-runtime-settings-cli-validation-host-preflight-command-composition-v1`.
 The previous host runtime preflight feature used
 `019-runtime-settings-cli-validation-host-runtime-preflight-v1`.
 The previous plan-only feature used
