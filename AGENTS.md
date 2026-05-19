@@ -233,11 +233,12 @@ raw terminal process wiring, live-session proof, file writes, package/bin
 publication, launcher/profile mutation, release automation, Marketplace
 publication, and source copying remain blocked.
 
-`runtime-settings-cli-validation-host-runtime-observation-adapter-v1` admits
+`runtime-settings-cli-validation-host-runtime-observation-adapter-v1`
+implements
 `IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1` for
 Issue #130 and T009-T016 only. Issue #130 is an admission issue and must not be
-reused for implementation. Implementation must use a separate handoff issue
-after the admission PR merges. The admitted IAU is a pure
+reused for implementation. Issue #132 implements and closes it through PR #133
+for T009-T016 only. The implemented IAU is a pure
 `createRuntimeSettingsValidationHostRuntimeObservation(input = {})` facts
 contract over public-safe selected host facts and supplied bounded observation
 dependencies. It may derive public-safe observation facts for
@@ -252,11 +253,12 @@ writes, package/bin publication, launcher/profile mutation, release
 automation, Marketplace publication, and source copying remain blocked.
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1`.
+`none`.
 
-Issue #130 admission temporarily sets the current IAU to
+Issue #130 admission temporarily set the current IAU to
 `IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1`.
-Before Issue #130 admission, the host runtime discovery closeout recorded:
+Issue #132 and PR #133 completed it. Before Issue #130 admission, the host
+runtime discovery closeout recorded:
 
 Current Implementation Admission Unit:
 `none`.

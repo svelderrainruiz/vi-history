@@ -3593,7 +3593,7 @@ requireTextIncludes("docs/development/copilot-workflow.md", [
 const runtimeSettingsHostRuntimeObservationAdmission = readJson(runtimeSettingsHostRuntimeObservationAdmissionPath);
 requireEqual(runtimeSettingsHostRuntimeObservationAdmission.schema, "vi-history/requirements-admission@v1", "runtime settings host runtime observation admission schema");
 requireEqual(runtimeSettingsHostRuntimeObservationAdmission.sliceId, runtimeSettingsHostRuntimeObservationSliceId, "runtime settings host runtime observation admission sliceId");
-requireEqual(runtimeSettingsHostRuntimeObservationAdmission.state, "admitted", "runtime settings host runtime observation admission state");
+requireEqual(runtimeSettingsHostRuntimeObservationAdmission.state, "implemented", "runtime settings host runtime observation admission state");
 requireEqual(runtimeSettingsHostRuntimeObservationAdmission.targetProduct, "vi-history", "runtime settings host runtime observation admission targetProduct");
 requireEqual(runtimeSettingsHostRuntimeObservationAdmission.targetFeature, runtimeSettingsHostRuntimeObservationSliceId, "runtime settings host runtime observation admission targetFeature");
 requireEqual(runtimeSettingsHostRuntimeObservationAdmission.sourceBaselineTag, "v1.3.16", "runtime settings host runtime observation admission sourceBaselineTag");
@@ -3601,27 +3601,31 @@ requireEqual(runtimeSettingsHostRuntimeObservationAdmission.sourceCommit, "4f421
 requireEqual(runtimeSettingsHostRuntimeObservationAdmission.governedAdmissionCommit, "bf014a64378db510119e1d6db2d0b21a8b360ba7", "runtime settings host runtime observation admission governedAdmissionCommit");
 requireEqual(runtimeSettingsHostRuntimeObservationAdmission.implementationSharing, "none", "runtime settings host runtime observation admission implementationSharing");
 requireMarketplacePosture(runtimeSettingsHostRuntimeObservationAdmission, "runtime settings host runtime observation admission");
-requireEqual(runtimeSettingsHostRuntimeObservationAdmission.currentImplementationAdmissionUnit, "IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1", "runtime settings host runtime observation currentImplementationAdmissionUnit");
+requireEqual(runtimeSettingsHostRuntimeObservationAdmission.currentImplementationAdmissionUnit, null, "runtime settings host runtime observation currentImplementationAdmissionUnit");
 requireArrayEqual(runtimeSettingsHostRuntimeObservationAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "runtime settings host runtime observation completedSpecScope");
-requireArrayEqual(runtimeSettingsHostRuntimeObservationAdmission.completedImplementationScope, [], "runtime settings host runtime observation completedImplementationScope");
-requireArrayEqual(runtimeSettingsHostRuntimeObservationAdmission.admittedImplementationScope, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings host runtime observation admittedImplementationScope");
+requireArrayEqual(runtimeSettingsHostRuntimeObservationAdmission.completedImplementationScope, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings host runtime observation completedImplementationScope");
+requireArrayEqual(runtimeSettingsHostRuntimeObservationAdmission.admittedImplementationScope, [], "runtime settings host runtime observation admittedImplementationScope");
 requireArrayEqual(runtimeSettingsHostRuntimeObservationAdmission.blockedImplementationScope, ["T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025", "T026", "T027", "T028"], "runtime settings host runtime observation blockedImplementationScope");
 requireEqual(runtimeSettingsHostRuntimeObservationAdmission.preImplementationPreflight?.iauId, "IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1", "runtime settings host runtime observation preImplementationPreflight iauId");
 requireEqual(runtimeSettingsHostRuntimeObservationAdmission.preImplementationPreflight?.status, "pass", "runtime settings host runtime observation preImplementationPreflight status");
 requireEqual(runtimeSettingsHostRuntimeObservationAdmission.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings host runtime observation preImplementationPreflight implementationStartAllowed");
 requireEqual(runtimeSettingsHostRuntimeObservationAdmission.preImplementationPreflight?.record, runtimeSettingsHostRuntimeObservationPreflightPath, "runtime settings host runtime observation preImplementationPreflight record");
 requireEqual(runtimeSettingsHostRuntimeObservationAdmission.issue?.number, 130, "runtime settings host runtime observation issue number");
+requireEqual(runtimeSettingsHostRuntimeObservationAdmission.implementationHandoffIssue?.number, 132, "runtime settings host runtime observation implementation handoff issue number");
+requireEqual(runtimeSettingsHostRuntimeObservationAdmission.implementationPullRequest?.number, 133, "runtime settings host runtime observation implementation pull request number");
+requireEqual(runtimeSettingsHostRuntimeObservationAdmission.implementationCloseout?.status, "pass", "runtime settings host runtime observation implementationCloseout status");
+requireArrayEqual(runtimeSettingsHostRuntimeObservationAdmission.implementationCloseout?.completedTasks, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings host runtime observation implementationCloseout completedTasks");
 requireFile(`docs/requirements/admissions/${runtimeSettingsHostRuntimeObservationSliceId}.md`);
 
 const runtimeSettingsHostRuntimeObservationAdmissionUnit = (runtimeSettingsHostRuntimeObservationAdmission.implementationAdmissionUnits ?? [])
   .find((unit) => unit?.iauId === "IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1");
-requireEqual(runtimeSettingsHostRuntimeObservationAdmissionUnit?.state, "admitted", "runtime settings host runtime observation admission unit state");
+requireEqual(runtimeSettingsHostRuntimeObservationAdmissionUnit?.state, "implemented", "runtime settings host runtime observation admission unit state");
 requireEqual(runtimeSettingsHostRuntimeObservationAdmissionUnit?.preflightRecord, runtimeSettingsHostRuntimeObservationPreflightPath, "runtime settings host runtime observation admission unit preflightRecord");
 
 const runtimeSettingsHostRuntimeObservationIau = readJson(runtimeSettingsHostRuntimeObservationIauPath);
 requireEqual(runtimeSettingsHostRuntimeObservationIau.schema, "vi-history/implementation-admission-unit@v1", "runtime settings host runtime observation IAU schema");
 requireEqual(runtimeSettingsHostRuntimeObservationIau.iauId, "IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1", "runtime settings host runtime observation IAU id");
-requireEqual(runtimeSettingsHostRuntimeObservationIau.state, "admitted", "runtime settings host runtime observation IAU state");
+requireEqual(runtimeSettingsHostRuntimeObservationIau.state, "implemented", "runtime settings host runtime observation IAU state");
 requireEqual(runtimeSettingsHostRuntimeObservationIau.parentSliceId, runtimeSettingsHostRuntimeObservationSliceId, "runtime settings host runtime observation IAU parentSliceId");
 requireArrayEqual(runtimeSettingsHostRuntimeObservationIau.admittedTasks, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings host runtime observation IAU admittedTasks");
 requireArrayEqual(runtimeSettingsHostRuntimeObservationIau.blockedTasks, ["T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025", "T026", "T027", "T028"], "runtime settings host runtime observation IAU blockedTasks");
@@ -3630,6 +3634,10 @@ requireMarketplacePosture(runtimeSettingsHostRuntimeObservationIau, "runtime set
 requireEqual(runtimeSettingsHostRuntimeObservationIau.preImplementationPreflight?.status, "pass", "runtime settings host runtime observation IAU preImplementationPreflight status");
 requireEqual(runtimeSettingsHostRuntimeObservationIau.preImplementationPreflight?.record, "IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1-preflight-v1.json", "runtime settings host runtime observation IAU preImplementationPreflight record");
 requireEqual(runtimeSettingsHostRuntimeObservationIau.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings host runtime observation IAU preImplementationPreflight implementationStartAllowed");
+requireEqual(runtimeSettingsHostRuntimeObservationIau.implementationHandoffIssue?.number, 132, "runtime settings host runtime observation IAU implementation handoff issue number");
+requireEqual(runtimeSettingsHostRuntimeObservationIau.implementationPullRequest?.number, 133, "runtime settings host runtime observation IAU implementation pull request number");
+requireEqual(runtimeSettingsHostRuntimeObservationIau.implementationCloseout?.status, "pass", "runtime settings host runtime observation IAU implementationCloseout status");
+requireArrayEqual(runtimeSettingsHostRuntimeObservationIau.implementationCloseout?.completedTasks, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings host runtime observation IAU implementationCloseout completedTasks");
 requireFile(`docs/requirements/admissions/${runtimeSettingsHostRuntimeObservationSliceId}/IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1.md`);
 
 const runtimeSettingsHostRuntimeObservationPreflight = readJson(runtimeSettingsHostRuntimeObservationPreflightPath);
@@ -3698,7 +3706,7 @@ requireTextIncludes(`${runtimeSettingsHostRuntimeObservationFeatureDir}/plan.md`
 ]);
 requireTextIncludes(`${runtimeSettingsHostRuntimeObservationFeatureDir}/tasks.md`, [
   "Issue #130",
-  "Implementation handoff issue**: To be created only after the admission PR",
+  "Implementation handoff issue**: Issue #132.",
   "- [x] T001",
   "- [x] T008",
   "- [x] T009",
@@ -3734,8 +3742,10 @@ requireTextIncludes("README.md", [
   "runtime-settings-cli-validation-host-runtime-observation-adapter-v1",
   "docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-adapter-v1.json",
   "Issue #130",
+  "Issue #132",
+  "PR #133",
   "IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "createRuntimeSettingsValidationHostRuntimeObservation(input = {})",
   "supplied bounded observation",
   "Raw private path disclosure"
@@ -3743,18 +3753,22 @@ requireTextIncludes("README.md", [
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-validation-host-runtime-observation-adapter-v1",
   "Issue #130",
+  "Issue #132",
+  "PR #133",
   "IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "createRuntimeSettingsValidationHostRuntimeObservation(input = {})",
   "022-runtime-settings-cli-validation-host-runtime-observation-adapter-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-host-runtime-observation-adapter-v1",
   "Issue #130",
+  "Issue #132",
+  "PR #133",
   "IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1",
   "createRuntimeSettingsValidationHostRuntimeObservation(input = {})",
   "bounded public-safe observation facts",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1`."
+  "Current Implementation Admission Unit:\n`none`."
 ]);
 
 if (failures.length > 0) {

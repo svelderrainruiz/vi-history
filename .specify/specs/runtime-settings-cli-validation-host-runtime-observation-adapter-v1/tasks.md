@@ -52,8 +52,7 @@ public-safe discovery observation facts without execution.
 
 **Public admission issue**: Issue #130
 
-**Implementation handoff issue**: To be created only after the admission PR
-merges.
+**Implementation handoff issue**: Issue #132.
 
 - [x] T009 Add tests proving selected host facts drive public-safe observation
   shaping without arbitrary filesystem walking.

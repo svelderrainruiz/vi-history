@@ -2,7 +2,7 @@
   "schema": "vi-history/requirements-admission@v1",
   "sliceId": "runtime-settings-cli-validation-host-runtime-observation-adapter-v1",
   "createdDate": "2026-05-19",
-  "state": "admitted",
+  "state": "implemented",
   "targetProduct": "vi-history",
   "targetFeature": "runtime-settings-cli-validation-host-runtime-observation-adapter-v1",
   "sourceBaselineTag": "v1.3.16",
@@ -13,6 +13,14 @@
   "issue": {
     "number": 130,
     "url": "https://github.com/svelderrainruiz/vi-history/issues/130"
+  },
+  "implementationHandoffIssue": {
+    "number": 132,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/132"
+  },
+  "implementationPullRequest": {
+    "number": 133,
+    "url": "https://github.com/svelderrainruiz/vi-history/pull/133"
   },
   "publicSequencingMarker": {
     "number": 126,
@@ -35,7 +43,7 @@
   "implementationAdmissionUnits": [
     {
       "iauId": "IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1",
-      "state": "admitted",
+      "state": "implemented",
       "record": "docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-adapter-v1/IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1.json",
       "preflightRecord": "docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-adapter-v1/IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1-preflight-v1.json",
       "admittedTasks": [
@@ -50,7 +58,7 @@
       ]
     }
   ],
-  "currentImplementationAdmissionUnit": "IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1",
+  "currentImplementationAdmissionUnit": null,
   "completedSpecScope": [
     "T001",
     "T002",
@@ -61,8 +69,7 @@
     "T007",
     "T008"
   ],
-  "completedImplementationScope": [],
-  "admittedImplementationScope": [
+  "completedImplementationScope": [
     "T009",
     "T010",
     "T011",
@@ -72,6 +79,7 @@
     "T015",
     "T016"
   ],
+  "admittedImplementationScope": [],
   "blockedImplementationScope": [
     "T017",
     "T018",
@@ -92,7 +100,36 @@
     "record": "docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-adapter-v1/IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1-preflight-v1.json",
     "implementationStartAllowed": true
   },
-  "implementationHandoffPolicy": "Issue #130 is the admission issue; implementation must use a separate handoff issue after the admission PR merges.",
+  "implementationHandoffPolicy": "Issue #132 is the separate implementation handoff issue; do not reuse Issue #130 for implementation.",
+  "implementationCloseout": {
+    "status": "pass",
+    "issue": 132,
+    "pullRequest": 133,
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011",
+      "T012",
+      "T013",
+      "T014",
+      "T015",
+      "T016"
+    ],
+    "blockedScopeRetained": [
+      "T017",
+      "T018",
+      "T019",
+      "T020",
+      "T021",
+      "T022",
+      "T023",
+      "T024",
+      "T025",
+      "T026",
+      "T027",
+      "T028"
+    ]
+  },
   "requirementMaturityBasis": "governed bridge-readiness packet supports public import, Spec Kit planning, and narrow host runtime observation admission, not source reuse",
   "implementationSharing": "none",
   "marketplacePublication": "disabled",

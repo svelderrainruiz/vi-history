@@ -508,7 +508,8 @@ Issue #130 imports
 admits
 `IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1` for
 T009-T016 only. Issue #130 is an admission issue and must not be reused for
-implementation. The admitted IAU is a pure
+implementation. Issue #132 and PR #133 completed it. The implemented IAU is a
+pure
 `createRuntimeSettingsValidationHostRuntimeObservation(input = {})` facts
 contract over public-safe selected host facts and supplied bounded observation
 dependencies. It may derive public-safe observation facts for
@@ -523,15 +524,15 @@ release, work on the Marketplace, or copy source without a separate public
 admission.
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1`.
+`none`.
 
-Issue #112 admission temporarily sets the current IAU to
+Issue #112 admission temporarily set the current IAU to
 `IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1`.
 Issue #114 and PR #115 completed it. Before Issue #112 admission, the host
 runtime preflight closeout recorded:
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1`.
+`none`.
 
 Issue #106 admission temporarily set the current IAU to
 `IAU-runtime-settings-cli-validation-host-runtime-preflight-v1`; Issue #108 and

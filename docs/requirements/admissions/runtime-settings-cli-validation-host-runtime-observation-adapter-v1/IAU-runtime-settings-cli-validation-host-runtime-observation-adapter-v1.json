@@ -2,12 +2,20 @@
   "schema": "vi-history/implementation-admission-unit@v1",
   "iauId": "IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1",
   "createdDate": "2026-05-19",
-  "state": "admitted",
+  "state": "implemented",
   "parentSliceId": "runtime-settings-cli-validation-host-runtime-observation-adapter-v1",
   "specFeature": ".specify/specs/runtime-settings-cli-validation-host-runtime-observation-adapter-v1",
   "issue": {
     "number": 130,
     "url": "https://github.com/svelderrainruiz/vi-history/issues/130"
+  },
+  "implementationHandoffIssue": {
+    "number": 132,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/132"
+  },
+  "implementationPullRequest": {
+    "number": 133,
+    "url": "https://github.com/svelderrainruiz/vi-history/pull/133"
   },
   "admittedTasks": [
     "T009",
@@ -54,7 +62,36 @@
     "record": "IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1-preflight-v1.json",
     "implementationStartAllowed": true
   },
-  "implementationHandoffPolicy": "Create a separate implementation handoff issue after the admission PR merges; do not reuse Issue #130 for implementation.",
+  "implementationCloseout": {
+    "status": "pass",
+    "issue": 132,
+    "pullRequest": 133,
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011",
+      "T012",
+      "T013",
+      "T014",
+      "T015",
+      "T016"
+    ],
+    "blockedScopeRetained": [
+      "T017",
+      "T018",
+      "T019",
+      "T020",
+      "T021",
+      "T022",
+      "T023",
+      "T024",
+      "T025",
+      "T026",
+      "T027",
+      "T028"
+    ]
+  },
+  "implementationHandoffPolicy": "Issue #132 is the separate implementation handoff issue; do not reuse Issue #130 for implementation.",
   "implementationSharing": "none",
   "requirementMaturityBasis": "governed bridge-readiness packet supports public import, Spec Kit planning, and narrow host runtime observation admission, not source reuse",
   "marketplacePublication": "disabled",
