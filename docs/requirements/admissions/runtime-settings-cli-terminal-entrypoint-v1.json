@@ -1,0 +1,113 @@
+{
+  "schema": "vi-history/requirements-admission@v1",
+  "sliceId": "runtime-settings-cli-terminal-entrypoint-v1",
+  "createdDate": "2026-05-18",
+  "state": "implemented",
+  "targetProduct": "vi-history",
+  "targetFeature": "runtime-settings-cli-terminal-entrypoint-v1",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "3716d35a7ba57031464a81902f37862128f53681",
+  "governedAdmissionCommit": "913f840a9dd23319d91d5fcf5862be9615d5b8d0",
+  "publicImportPath": "docs/requirements/imports/runtime-settings-cli-terminal-entrypoint-v1/",
+  "specKitPath": ".specify/specs/runtime-settings-cli-terminal-entrypoint-v1/",
+  "issue": {
+    "number": 65,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/65"
+  },
+  "implementationHandoffIssue": {
+    "number": 67,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/67"
+  },
+  "bridgeChecks": {
+    "specKitCliVersion": "0.8.12.dev0",
+    "publicImportPacketPresent": "pass",
+    "specKitArtifactsPresent": "pass",
+    "redactionScan": "pass",
+    "artifactConsistency": "pass",
+    "analyzeCriticalFindings": "none-recorded-for-import-spec-baseline",
+    "implementationPreflight": "pass"
+  },
+  "implementationAdmissionUnits": [
+    {
+      "iauId": "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
+      "state": "implemented",
+      "record": "docs/requirements/admissions/runtime-settings-cli-terminal-entrypoint-v1/IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1.json",
+      "preflightRecord": "docs/requirements/admissions/runtime-settings-cli-terminal-entrypoint-v1/IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1-preflight-v1.json",
+      "admittedTasks": [
+        "T009",
+        "T010",
+        "T011",
+        "T012",
+        "T013"
+      ]
+    }
+  ],
+  "currentImplementationAdmissionUnit": null,
+  "completedSpecScope": [
+    "T001",
+    "T002",
+    "T003",
+    "T004",
+    "T005",
+    "T006",
+    "T007",
+    "T008"
+  ],
+  "completedImplementationScope": [
+    "T009",
+    "T010",
+    "T011",
+    "T012",
+    "T013"
+  ],
+  "admittedImplementationScope": [],
+  "blockedImplementationScope": [
+    "T014",
+    "T015",
+    "T016",
+    "T017",
+    "T018",
+    "T019"
+  ],
+  "preImplementationPreflight": {
+    "iauId": "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
+    "status": "pass",
+    "record": "docs/requirements/admissions/runtime-settings-cli-terminal-entrypoint-v1/IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1-preflight-v1.json",
+    "implementationStartAllowed": true
+  },
+  "implementationCloseout": {
+    "status": "pass",
+    "issue": 67,
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011",
+      "T012",
+      "T013"
+    ],
+    "blockedScopeRetained": [
+      "T014",
+      "T015",
+      "T016",
+      "T017",
+      "T018",
+      "T019"
+    ]
+  },
+  "requirementMaturityBasis": "governed bridge-readiness packet supports public import, Spec Kit planning, and narrow terminal-entrypoint materialization admission, not source reuse",
+  "implementationSharing": "none",
+  "marketplacePublication": "disabled",
+  "marketplacePublicationAdr": "docs/decisions/ADR-001-marketplace-publication-disabled.md",
+  "blockedScope": [
+    "raw terminal prompt loops or stdin/TTY handling",
+    "compare execution",
+    "LabVIEWCLI execution",
+    "Docker execution or orchestration",
+    "proof-out expansion beyond already admitted proof artifact contracts",
+    "live already-running VS Code session uptake proof",
+    "Windows PowerShell Marketplace install/bootstrap behavior",
+    "VSIX packaging",
+    "Marketplace publication",
+    "source copying from another VI History product line"
+  ]
+}

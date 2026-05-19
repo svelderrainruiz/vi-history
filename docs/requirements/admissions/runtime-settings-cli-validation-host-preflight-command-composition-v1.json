@@ -1,0 +1,140 @@
+{
+  "schema": "vi-history/requirements-admission@v1",
+  "sliceId": "runtime-settings-cli-validation-host-preflight-command-composition-v1",
+  "createdDate": "2026-05-19",
+  "state": "implemented",
+  "targetProduct": "vi-history",
+  "targetFeature": "runtime-settings-cli-validation-host-preflight-command-composition-v1",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "b5ed9e5a77a096c342fc74c42e3e901d6bad041f",
+  "governedAdmissionCommit": "e411ef2bfa74cedf6f9b53d764810f9f4c93a8b0",
+  "publicImportPath": "docs/requirements/imports/runtime-settings-cli-validation-host-preflight-command-composition-v1/",
+  "specKitPath": ".specify/specs/runtime-settings-cli-validation-host-preflight-command-composition-v1/",
+  "issue": {
+    "number": 112,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/112"
+  },
+  "implementationHandoffIssue": {
+    "number": 114,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/114"
+  },
+  "implementationPullRequest": {
+    "number": 115,
+    "url": "https://github.com/svelderrainruiz/vi-history/pull/115"
+  },
+  "bridgeChecks": {
+    "specKitCliVersion": "0.8.12.dev0",
+    "publicImportPacketPresent": "pass",
+    "specKitArtifactsPresent": "pass",
+    "redactionScan": "pass",
+    "artifactConsistency": "pass",
+    "analyzeCriticalFindings": "none-recorded-for-import-spec-baseline",
+    "implementationPreflight": "pass"
+  },
+  "implementationAdmissionUnits": [
+    {
+      "iauId": "IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1",
+      "state": "implemented",
+      "record": "docs/requirements/admissions/runtime-settings-cli-validation-host-preflight-command-composition-v1/IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1.json",
+      "preflightRecord": "docs/requirements/admissions/runtime-settings-cli-validation-host-preflight-command-composition-v1/IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1-preflight-v1.json",
+      "admittedTasks": [
+        "T009",
+        "T010",
+        "T011",
+        "T012",
+        "T013",
+        "T014",
+        "T015",
+        "T016"
+      ]
+    }
+  ],
+  "currentImplementationAdmissionUnit": null,
+  "completedSpecScope": [
+    "T001",
+    "T002",
+    "T003",
+    "T004",
+    "T005",
+    "T006",
+    "T007",
+    "T008"
+  ],
+  "completedImplementationScope": [
+    "T009",
+    "T010",
+    "T011",
+    "T012",
+    "T013",
+    "T014",
+    "T015",
+    "T016"
+  ],
+  "admittedImplementationScope": [],
+  "blockedImplementationScope": [
+    "T017",
+    "T018",
+    "T019",
+    "T020",
+    "T021",
+    "T022",
+    "T023",
+    "T024",
+    "T025",
+    "T026"
+  ],
+  "preImplementationPreflight": {
+    "iauId": "IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1",
+    "status": "pass",
+    "record": "docs/requirements/admissions/runtime-settings-cli-validation-host-preflight-command-composition-v1/IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1-preflight-v1.json",
+    "implementationStartAllowed": true
+  },
+  "implementationHandoffPolicy": "Issue #114 is the separate implementation handoff issue; do not reuse Issue #112 for implementation.",
+  "implementationCloseout": {
+    "status": "pass",
+    "issue": 114,
+    "pullRequest": 115,
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011",
+      "T012",
+      "T013",
+      "T014",
+      "T015",
+      "T016"
+    ],
+    "blockedScopeRetained": [
+      "T017",
+      "T018",
+      "T019",
+      "T020",
+      "T021",
+      "T022",
+      "T023",
+      "T024",
+      "T025",
+      "T026"
+    ]
+  },
+  "requirementMaturityBasis": "governed bridge-readiness packet supports public import, Spec Kit planning, and narrow host preflight command-composition admission, not source reuse",
+  "implementationSharing": "none",
+  "marketplacePublication": "disabled",
+  "marketplacePublicationAdr": "docs/decisions/ADR-001-marketplace-publication-disabled.md",
+  "blockedScope": [
+    "OS scanning, filesystem walking, registry probing, PATH probing, environment probing, or private path discovery",
+    "runtime locator invocation",
+    "runtime validation execution",
+    "compare execution",
+    "LabVIEWCLI execution",
+    "Docker command execution or orchestration",
+    "raw terminal process wiring or live terminal proof",
+    "file writes from the host preflight adapter",
+    "package/bin publication",
+    "VSIX packaging",
+    "Marketplace publication",
+    "release automation",
+    "launcher/profile mutation",
+    "source copying from another VI History product line"
+  ]
+}

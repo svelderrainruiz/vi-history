@@ -1,0 +1,6 @@
+Requirement ID,Public Verification ID,Verification Summary,Public Artifact
+VHS-REQ-545,TEST-UNIT-RSTPROMPT-001,Prove no-argument vihs produces a deterministic prompt transcript from already materialized entrypoint facts,tests/runtime-settings-cli-terminal-prompt-loop.test.mjs
+VHS-REQ-545,TEST-UNIT-RSTPROMPT-002,Prove Enter-through confirmation preserves the current governed provider platform version and bitness bundle and requests validation handoff,tests/runtime-settings-cli-terminal-prompt-loop.test.mjs
+VHS-REQ-545,TEST-UNIT-RSTPROMPT-003,Prove guided host selection accepts supported local host choices and fails closed for unsupported years host platform mismatches or missing selected bitness,tests/runtime-settings-cli-terminal-prompt-loop.test.mjs
+VHS-REQ-545,TEST-UNIT-RSTPROMPT-004,Prove Docker selection uses the latest supported NI LabVIEW Docker image family without exposing a Docker bitness choice and fails closed for unsupported Docker image-family or bitness-choice requests,tests/runtime-settings-cli-terminal-prompt-loop.test.mjs
+VHS-REQ-546,TEST-UNIT-RSTPROMPT-005,Prove validation handoff remains a prompt-loop output fact through the public vihs --validate contract without runtime execution or proof-out expansion,tests/runtime-settings-cli-terminal-prompt-loop.test.mjs

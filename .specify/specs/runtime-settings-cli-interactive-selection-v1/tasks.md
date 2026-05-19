@@ -60,8 +60,9 @@ terminal process loops or runtime execution.
 - [x] T011 Add tests proving guided host selection accepts supported LabVIEW
   2025, LabVIEW 2026, and newer local host choices while failing closed for
   unsupported years or missing selected bitness.
-- [x] T012 Add tests proving Docker selection remains bounded to LabVIEW 2026
-  x64 and fails closed for unsupported Docker years or bitness.
+- [x] T012 Add tests proving Docker selection uses the latest supported NI
+  LabVIEW Docker image family, exposes no Docker bitness choice, and fails
+  closed for unsupported Docker image-family or bitness-choice requests.
 - [x] T013 Implement the minimum public MIT interactive-selection contract as
   pure selection state and output facts.
 

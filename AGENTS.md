@@ -36,7 +36,7 @@ metadata.
 `IAU-command-handler-entrypoint-shell-v1` for Issue #36 and T009-T011 only:
 entrypoint shell tests and the minimum public MIT entrypoint shell.
 `IAU-command-handler-entrypoint-shell-v1` is closed. Issue #36 must not be
-reused for new implementation. No current IAU is active.
+reused for new implementation.
 
 `installed-user-documentation-command-v1` implemented
 `IAU-documentation-command-panel-shell-v1` for Issue #41 and T009-T011 only:
@@ -92,14 +92,200 @@ remain blocked.
 T009-T013 only. Issue #60 is an admission issue and must not be reused for
 implementation. Issue #62 implements and closes the pure selection-state
 contract: default seeding, current bundle reporting, Enter-through
-confirmation, guided host selection, Docker 2026 x64 bounds, and validation
-readback handoff facts.
+confirmation, guided host selection, latest supported NI LabVIEW Docker image
+selection with no user-facing Docker bitness choice, and validation readback
+handoff facts. Docker remains 64-bit-only by image/platform; host LabVIEW
+bitness remains a host-provider concern.
 
-Terminal process prompt loops, compare execution, LabVIEWCLI execution, Docker
-execution or orchestration, proof-out expansion, live-session proof, packaging,
-and Marketplace publication remain blocked.
+`runtime-settings-cli-terminal-entrypoint-v1` admits
+`IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1` for Issue #65
+and T009-T013 only. Issue #65 is an admission issue and must not be reused for
+implementation. Issue #67 implements and closes the materialized-entrypoint
+contract for T009-T013 only.
 
-Current Implementation Admission Unit: none.
+`runtime-settings-cli-terminal-prompt-loop-v1` admits
+`IAU-runtime-settings-cli-terminal-prompt-loop-v1` for Issue #71 and T009-T013
+only. Issue #71 is an admission issue and must not be reused for
+implementation. Issue #73 implements and closes the pure prompt
+transcript/state contract for T009-T013 only. Issue #75 clarifies that Docker
+provider selection means the latest supported NI LabVIEW Docker image family,
+currently the LabVIEW 2026 Linux image family, with no separate Docker bitness
+choice exposed to users.
+
+`runtime-settings-cli-terminal-io-adapter-v1` admits
+`IAU-runtime-settings-cli-terminal-io-adapter-v1` for Issue #77 and T009-T014
+only. Issue #77 is an admission issue and must not be reused for
+implementation. Issue #79 implements and closes the pure terminal session/input
+adapter for T009-T014 only: Enter confirmation adaptation, guided host
+selection adaptation, Docker latest supported NI LabVIEW image-family selection
+with no Docker bitness prompt, non-TTY copyable guidance, unsupported
+input/EOF/cancel fail-closed behavior, and validation handoff facts.
+
+`runtime-settings-cli-validation-proof-out-v1` admits
+`IAU-runtime-settings-cli-validation-proof-out-v1` for Issue #81 and
+T009-T014 only. Issue #81 is an admission issue and must not be reused for
+implementation. Issue #83 implements and closes the pure proof-out request,
+target, artifact, non-interactive guidance, and blocked-side-effect facts over
+the already admitted validation readback and validation proof-artifact
+contracts for T009-T014 only.
+
+`runtime-settings-cli-validation-proof-out-file-emission-v1` admits
+`IAU-runtime-settings-cli-validation-proof-out-file-emission-v1` for Issue #85
+and T009-T016 only. Issue #85 is an admission issue and must not be reused for
+implementation. Issue #87 implements and closes the file-emission contract for
+T009-T016 only: writing exactly
+`vihs-validation-proof.json` and `vihs-validation-issue.md` from ready
+proof-out adapter facts, creating the supported target directory when safe, and
+returning deterministic write-result facts.
+
+Compare execution, LabVIEWCLI execution, Docker execution or orchestration,
+runtime validation execution, new validation fact generation, live-session
+proof, package/bin publication, launcher/profile mutation, packaging, and
+Marketplace publication remain blocked.
+
+`runtime-settings-cli-validation-runtime-outcome-v1` admits
+`IAU-runtime-settings-cli-validation-runtime-outcome-v1` for Issue #89 and
+T009-T016 only. Issue #89 is an admission issue and must not be reused for
+implementation. Issue #91 implements and closes pure runtime outcome fact
+shaping from supplied public-safe selection facts for T009-T016 only. Runtime
+validation execution, runtime locator invocation, compare execution, LabVIEWCLI
+execution, Docker execution or orchestration, live-session proof, package/bin
+publication, launcher/profile mutation, release automation, Marketplace
+publication, and source copying remain blocked.
+
+`runtime-settings-cli-validation-command-contract-v1` admits
+`IAU-runtime-settings-cli-validation-command-contract-v1` for Issue #93 and
+T009-T018 only. Issue #93 is an admission issue and must not be reused for
+implementation. Issue #95 implements and closes it through PR #96 for
+T009-T018 only. The implemented IAU is a pure
+`createRuntimeSettingsValidationCommandResult(input = {})` command-result
+contract for `vihs --validate` and optional `--proof-out <dir>` composition
+through the already admitted file-emission contract. OS inspection, runtime
+locator invocation, private path discovery, runtime validation execution,
+compare execution, LabVIEWCLI execution, Docker execution or orchestration,
+raw terminal process wiring, live-session proof, package/bin publication,
+launcher/profile mutation, release automation, Marketplace publication,
+and source copying remain blocked. `validate-plan-only` remained blocked for
+that IAU and is admitted separately below.
+
+`runtime-settings-cli-validation-plan-only-v1` admits
+`IAU-runtime-settings-cli-validation-plan-only-v1` for Issue #99 and
+T009-T016 only. Issue #99 is an admission issue and must not be reused for
+implementation. Issue #101 implements and closes it for T009-T016 only. Issue
+#102 and PR #103 repair and close the final plan-only command-contract
+behavior. The implemented IAU is a pure `validate-plan-only` branch over
+`createRuntimeSettingsValidationCommandResult(input = {})` that returns
+deterministic proof-out target and artifact planning facts without calling the
+proof-out file-emission writer or writing files. The proof-out file-emission
+writer and file writes for plan-only, runtime locator invocation, OS
+inspection, private path discovery, runtime validation execution, compare
+execution, LabVIEWCLI execution, Docker execution or orchestration, raw
+terminal process wiring, live-session proof, package/bin publication,
+launcher/profile mutation, release automation, Marketplace publication, and
+source copying remain blocked.
+
+`runtime-settings-cli-validation-host-runtime-preflight-v1` implements
+`IAU-runtime-settings-cli-validation-host-runtime-preflight-v1` for Issue #106
+and T009-T016 only. Issue #106 is an admission issue and must not be reused
+for implementation. Issue #108 implements and closes it through PR #109 for
+T009-T016 only. The implemented IAU is a pure
+`createRuntimeSettingsValidationHostRuntimePreflight(input = {})` adapter over
+supplied public-safe host candidate facts. It may compose with the existing
+runtime outcome, readback, proof artifact, proof-out adapter, file-emission,
+validation command, and `validate-plan-only` contracts without changing their
+output shapes. OS scanning, filesystem walking, registry probing, PATH
+probing, environment probing, private path discovery, runtime locator
+invocation, runtime validation execution, compare execution, LabVIEWCLI
+execution, Docker execution or orchestration, raw terminal process wiring,
+live-session proof, file writes from the host preflight adapter, package/bin
+publication, launcher/profile mutation, release automation, Marketplace
+publication, and source copying remain blocked.
+
+`runtime-settings-cli-validation-host-preflight-command-composition-v1` admits
+`IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1` for
+Issue #112 and T009-T016 only. Issue #112 is an admission issue and must not be
+reused for implementation. Issue #114 implements and closes it through PR #115
+for T009-T016 only. The implemented IAU is a pure
+`createRuntimeSettingsValidationCommandResult(input = {})` composition branch
+over ready host preflight facts or supplied public-safe host
+selection/candidate facts. OS scanning, filesystem walking, registry probing,
+PATH probing, environment probing, private path discovery, runtime locator
+invocation, runtime validation execution, compare execution, LabVIEWCLI
+execution, Docker execution or orchestration, raw terminal process wiring,
+live-session proof, file writes from the host preflight adapter, package/bin
+publication, launcher/profile mutation, release automation, Marketplace
+publication, and source copying remain blocked.
+
+`runtime-settings-cli-validation-host-runtime-discovery-v1` admits
+`IAU-runtime-settings-cli-validation-host-runtime-discovery-v1` for Issue #118
+and T009-T016 only. Issue #118 is an admission issue and must not be reused for
+implementation. Issue #120 implements and closes it through PR #121 for
+T009-T016 only. The implemented IAU is a bounded
+`createRuntimeSettingsValidationHostRuntimeDiscovery(input = {})` facts
+contract over public-safe selected host facts and bounded discovery
+observations. It may derive public-safe host candidate facts for
+`createRuntimeSettingsValidationHostRuntimePreflight(input = {})` and the
+existing validation command chain without changing output shapes. Raw private
+path disclosure, arbitrary filesystem walking, PATH probing, environment
+probing, existing compare runtime locator reuse, runtime validation execution,
+compare execution, LabVIEWCLI execution, Docker execution or orchestration,
+raw terminal process wiring, live-session proof, file writes, package/bin
+publication, launcher/profile mutation, release automation, Marketplace
+publication, and source copying remain blocked.
+
+`runtime-settings-cli-validation-host-runtime-observation-adapter-v1`
+implements
+`IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1` for
+Issue #130 and T009-T016 only. Issue #130 is an admission issue and must not be
+reused for implementation. Issue #132 implements and closes it through PR #133
+for T009-T016 only. The implemented IAU is a pure
+`createRuntimeSettingsValidationHostRuntimeObservation(input = {})` facts
+contract over public-safe selected host facts and supplied bounded observation
+dependencies. It may derive public-safe observation facts for
+`createRuntimeSettingsValidationHostRuntimeDiscovery(input = {})` and the
+existing validation command chain without changing output shapes. Raw private
+path disclosure, raw registry output retention, arbitrary filesystem walking
+beyond the admitted bounded observation policy, PATH probing, environment
+probing, existing compare runtime locator reuse, runtime validation execution,
+compare execution, LabVIEWCLI execution, Docker execution or orchestration,
+raw terminal process wiring, live-session proof, proof-out expansion, file
+writes, package/bin publication, launcher/profile mutation, release
+automation, Marketplace publication, and source copying remain blocked.
+
+Current Implementation Admission Unit:
+`none`.
+
+Issue #130 admission temporarily set the current IAU to
+`IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1`.
+Issue #132 and PR #133 completed it. Before Issue #130 admission, the host
+runtime discovery closeout recorded:
+
+Current Implementation Admission Unit:
+`none`.
+
+Issue #118 admission temporarily set the current IAU to
+`IAU-runtime-settings-cli-validation-host-runtime-discovery-v1`; Issue #120 and
+PR #121 completed it. Before Issue #118 admission, the host preflight
+command-composition closeout recorded:
+
+Current Implementation Admission Unit:
+`none`.
+
+Issue #112 admission temporarily sets the current IAU to
+`IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1`.
+Issue #114 and PR #115 completed it. Before Issue #112 admission, the host
+runtime preflight closeout recorded:
+
+Current Implementation Admission Unit:
+`none`.
+
+Issue #106 admission temporarily set the current IAU to
+`IAU-runtime-settings-cli-validation-host-runtime-preflight-v1`; Issue #108 and
+PR #109 completed it. Before Issue #106 admission, the plan-only closeout also
+recorded:
+
+Current Implementation Admission Unit:
+`none`.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that
@@ -109,7 +295,16 @@ When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:
 
 ```bash
-SPECIFY_FEATURE=010-runtime-settings-cli-interactive-selection-v1 \
-SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-interactive-selection-v1 \
+SPECIFY_FEATURE=021-runtime-settings-cli-validation-host-runtime-discovery-v1 \
+SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-validation-host-runtime-discovery-v1 \
 .specify/scripts/bash/check-prerequisites.sh --json --paths-only
 ```
+
+The current host runtime observation adapter feature uses
+`022-runtime-settings-cli-validation-host-runtime-observation-adapter-v1`.
+The previous host preflight command-composition feature used
+`020-runtime-settings-cli-validation-host-preflight-command-composition-v1`.
+The previous host runtime preflight feature used
+`019-runtime-settings-cli-validation-host-runtime-preflight-v1`.
+The previous plan-only feature used
+`018-runtime-settings-cli-validation-plan-only-v1`.

@@ -1,12 +1,12 @@
 {
-  "version": "0.8.12.dev0",
+  "version": "0.8.11",
   "integration_state_schema": 1,
   "installed_integrations": [
     "codex"
   ],
   "integration_settings": {
     "codex": {
-      "script": "sh",
+      "script": "ps",
       "raw_options": "--skills",
       "parsed_options": {
         "skills": true

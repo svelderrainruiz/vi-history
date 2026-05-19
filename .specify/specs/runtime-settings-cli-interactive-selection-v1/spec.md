@@ -51,8 +51,8 @@ terminal process behavior is wired. Supported choices and fail-closed reasons
 must be stable first.
 
 **Independent Test**: Contract tests can verify Enter-through confirmation,
-guided host choices, Docker 2026 x64 constraints, and unsupported selection
-failures without invoking a terminal prompt loop.
+guided host choices, latest supported NI LabVIEW Docker image selection, and
+unsupported selection failures without invoking a terminal prompt loop.
 
 **Acceptance Scenarios**:
 
@@ -62,16 +62,17 @@ failures without invoking a terminal prompt loop.
 2. **Given** supported local host choices for LabVIEW 2025, LabVIEW 2026, or
    newer supported host versions with the selected bitness present, **When**
    guided selection is modeled, **Then** the selected bundle is accepted.
-3. **Given** Docker is selected, **When** the requested LabVIEW year or bitness
-   is outside 2026 x64, **Then** the selection fails closed with stable
-   guidance.
+3. **Given** Docker is selected, **When** the request is outside the latest
+   supported NI LabVIEW Docker image family or tries to choose Docker bitness,
+   **Then** the selection fails closed with stable guidance.
 
 ### Edge Cases
 
 - Settings are missing, partial, or malformed.
 - Selected host installation is missing the requested bitness.
 - Requested host year is unsupported.
-- Docker is requested for a year other than 2026 or bitness other than x64.
+- Docker is requested outside the latest supported NI LabVIEW image family, or
+  Docker bitness is treated as user-selectable.
 - Confirmation attempts to run validation directly instead of producing a
   validation-handoff fact.
 - The implementation attempts to add terminal process prompt loops, runtime
@@ -91,15 +92,18 @@ failures without invoking a terminal prompt loop.
 - **FR-004**: The selection contract MUST accept supported host selections for
   LabVIEW 2025, LabVIEW 2026, and newer local supported host versions when the
   selected installation and bitness are present. Imported ID: `VHS-REQ-545`.
-- **FR-005**: The selection contract MUST constrain Docker selection to
-  LabVIEW 2026 x64. Imported ID: `VHS-REQ-545`.
+- **FR-005**: The selection contract MUST constrain Docker provider selection
+  to the latest supported NI LabVIEW Docker image family. The current governed
+  Linux default maps to the LabVIEW 2026 image family, and Docker exposes no
+  separate bitness choice because the image/platform is 64-bit-only. Imported
+  ID: `VHS-REQ-545`.
 - **FR-006**: The confirmation contract MUST preserve the current governed
   selection and request validation through the existing validation readback
   contract without adding execution behavior. Imported ID: `VHS-REQ-546`.
 - **FR-007**: Unsupported years, host/platform mismatches, missing selected
-  bitness, unsupported Docker bitness, unsupported Docker year, and
-  not-yet-implemented paths MUST fail closed with stable reasons. Imported
-  IDs: `VHS-REQ-545`, `VHS-REQ-546`.
+  host bitness, unsupported Docker image-family requests, attempted Docker
+  bitness choices, and not-yet-implemented paths MUST fail closed with stable
+  reasons. Imported IDs: `VHS-REQ-545`, `VHS-REQ-546`.
 - **FR-008**: The implementation MUST remain clean-room: no implementation
   source is copied from another product line.
 

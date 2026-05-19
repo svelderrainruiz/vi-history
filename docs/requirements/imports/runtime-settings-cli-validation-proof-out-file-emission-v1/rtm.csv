@@ -1,0 +1,8 @@
+Requirement ID,Test ID,Public MIT verification,Status
+VHS-REQ-546,TEST-UNIT-RSPROOFOUTEMIT-001,Prove a ready proof-out adapter emits exactly vihs-validation-proof.json and vihs-validation-issue.md,Admitted
+VHS-REQ-546,TEST-UNIT-RSPROOFOUTEMIT-002,Prove emitted file content is deterministic and matches ready proof-out adapter payload facts,Admitted
+VHS-REQ-546,TEST-UNIT-RSPROOFOUTEMIT-003,Prove supported output targets create the target directory when safe,Admitted
+VHS-REQ-546,TEST-UNIT-RSPROOFOUTEMIT-004,Prove missing or unready adapter facts fail closed before file writes,Admitted
+VHS-REQ-546,TEST-UNIT-RSPROOFOUTEMIT-005,Prove unsupported output targets fail closed before file writes,Admitted
+VHS-REQ-546,TEST-UNIT-RSPROOFOUTEMIT-006,Prove I/O failures return deterministic failure facts without hidden partial success,Admitted
+VHS-REQ-546,TEST-UNIT-RSPROOFOUTEMIT-007,Prove runtime validation execution new validation fact generation compare LabVIEWCLI Docker live proof publication mutation Marketplace and source-copying side effects remain blocked,Admitted

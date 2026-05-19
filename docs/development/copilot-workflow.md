@@ -110,6 +110,138 @@ Read these before changing code:
 - `docs/requirements/admissions/runtime-settings-cli-interactive-selection-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-interactive-selection-v1/IAU-runtime-settings-cli-interactive-selection-contract-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-interactive-selection-v1/IAU-runtime-settings-cli-interactive-selection-contract-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-terminal-entrypoint-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-terminal-entrypoint-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-terminal-entrypoint-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-terminal-entrypoint-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-terminal-entrypoint-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-terminal-entrypoint-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-terminal-entrypoint-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-terminal-entrypoint-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-terminal-entrypoint-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-terminal-entrypoint-v1/IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-terminal-entrypoint-v1/IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-terminal-prompt-loop-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-terminal-prompt-loop-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-terminal-prompt-loop-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-terminal-prompt-loop-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-terminal-prompt-loop-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-terminal-prompt-loop-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-terminal-prompt-loop-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-terminal-prompt-loop-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-terminal-prompt-loop-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-terminal-prompt-loop-v1/IAU-runtime-settings-cli-terminal-prompt-loop-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-terminal-prompt-loop-v1/IAU-runtime-settings-cli-terminal-prompt-loop-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-terminal-io-adapter-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-terminal-io-adapter-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-terminal-io-adapter-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-terminal-io-adapter-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-terminal-io-adapter-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-terminal-io-adapter-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-terminal-io-adapter-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-terminal-io-adapter-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-terminal-io-adapter-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-terminal-io-adapter-v1/IAU-runtime-settings-cli-terminal-io-adapter-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-terminal-io-adapter-v1/IAU-runtime-settings-cli-terminal-io-adapter-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-proof-out-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-proof-out-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-proof-out-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-proof-out-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-validation-proof-out-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-validation-proof-out-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-validation-proof-out-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-validation-proof-out-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-validation-proof-out-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-proof-out-v1/IAU-runtime-settings-cli-validation-proof-out-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-proof-out-v1/IAU-runtime-settings-cli-validation-proof-out-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-proof-out-file-emission-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-proof-out-file-emission-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-proof-out-file-emission-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-proof-out-file-emission-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-validation-proof-out-file-emission-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-validation-proof-out-file-emission-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-validation-proof-out-file-emission-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-validation-proof-out-file-emission-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-validation-proof-out-file-emission-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-proof-out-file-emission-v1/IAU-runtime-settings-cli-validation-proof-out-file-emission-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-proof-out-file-emission-v1/IAU-runtime-settings-cli-validation-proof-out-file-emission-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-runtime-outcome-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-runtime-outcome-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-runtime-outcome-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-runtime-outcome-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-validation-runtime-outcome-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-validation-runtime-outcome-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-validation-runtime-outcome-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-validation-runtime-outcome-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-validation-runtime-outcome-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-runtime-outcome-v1/IAU-runtime-settings-cli-validation-runtime-outcome-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-runtime-outcome-v1/IAU-runtime-settings-cli-validation-runtime-outcome-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-command-contract-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-command-contract-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-command-contract-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-command-contract-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-validation-command-contract-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-validation-command-contract-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-validation-command-contract-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-validation-command-contract-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-validation-command-contract-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-command-contract-v1/IAU-runtime-settings-cli-validation-command-contract-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-command-contract-v1/IAU-runtime-settings-cli-validation-command-contract-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-plan-only-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-plan-only-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-plan-only-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-plan-only-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-validation-plan-only-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-validation-plan-only-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-validation-plan-only-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-validation-plan-only-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-validation-plan-only-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-plan-only-v1/IAU-runtime-settings-cli-validation-plan-only-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-plan-only-v1/IAU-runtime-settings-cli-validation-plan-only-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-preflight-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-preflight-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-preflight-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-preflight-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-preflight-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-validation-host-runtime-preflight-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-validation-host-runtime-preflight-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-validation-host-runtime-preflight-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-preflight-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-preflight-v1/IAU-runtime-settings-cli-validation-host-runtime-preflight-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-preflight-v1/IAU-runtime-settings-cli-validation-host-runtime-preflight-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-preflight-command-composition-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-preflight-command-composition-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-preflight-command-composition-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-preflight-command-composition-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-preflight-command-composition-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-validation-host-preflight-command-composition-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-validation-host-preflight-command-composition-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-validation-host-preflight-command-composition-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-validation-host-preflight-command-composition-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-host-preflight-command-composition-v1/IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-host-preflight-command-composition-v1/IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-discovery-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-discovery-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-discovery-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-discovery-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-discovery-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-validation-host-runtime-discovery-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-validation-host-runtime-discovery-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-validation-host-runtime-discovery-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-discovery-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-discovery-v1/IAU-runtime-settings-cli-validation-host-runtime-discovery-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-discovery-v1/IAU-runtime-settings-cli-validation-host-runtime-discovery-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-observation-adapter-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-observation-adapter-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-observation-adapter-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-observation-adapter-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-observation-adapter-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-validation-host-runtime-observation-adapter-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-validation-host-runtime-observation-adapter-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-validation-host-runtime-observation-adapter-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-adapter-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-adapter-v1/IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-adapter-v1/IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1-preflight-v1.json`
 
 ## Current Status
 
@@ -226,6 +358,193 @@ Issue #62 implements and closes
 `IAU-runtime-settings-cli-interactive-selection-contract-v1` for T009-T013
 only. No new Copilot implementation should start from Issue #62.
 
+Issue #65 admits
+`IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1` for
+`runtime-settings-cli-terminal-entrypoint-v1` and T009-T013 only. Issue #65 is
+an admission issue and must not be reused for implementation.
+
+Issue #67 implements and closes
+`IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1` for T009-T013
+only. No new Copilot implementation should start from Issue #67.
+
+Issue #71 admits
+`IAU-runtime-settings-cli-terminal-prompt-loop-v1` for
+`runtime-settings-cli-terminal-prompt-loop-v1` and T009-T013 only. Issue #71
+is an admission issue and must not be reused for implementation.
+
+Issue #73 implements and closes
+`IAU-runtime-settings-cli-terminal-prompt-loop-v1` for T009-T013 only. No new
+Copilot implementation should start from Issue #73.
+
+Issue #75 clarifies the prompt/selection Docker wording: Docker provider
+selection is the latest supported NI LabVIEW Docker image family, currently the
+LabVIEW 2026 Linux image family for the governed Linux default, and must not be
+presented as a user-facing Docker bitness choice. Docker remains 64-bit-only by
+image/platform; host LabVIEW bitness remains host-provider scope.
+
+Issue #77 admits
+`IAU-runtime-settings-cli-terminal-io-adapter-v1` for
+`runtime-settings-cli-terminal-io-adapter-v1` and T009-T014 only. Issue #77 is
+an admission issue and must not be reused for implementation. Issue #79
+implements and closes the pure terminal session/input adapter for T009-T014
+only: Enter confirmation, guided host selection, Docker latest supported NI
+LabVIEW image-family selection without a Docker bitness prompt, non-TTY
+copyable guidance, unsupported input/EOF/cancel fail-closed behavior, and
+validation handoff facts. No new Copilot implementation should start from
+Issue #79.
+
+Issue #81 admits
+`IAU-runtime-settings-cli-validation-proof-out-v1` for
+`runtime-settings-cli-validation-proof-out-v1` and T009-T014 only. Issue #81
+is an admission issue and must not be reused for implementation. Issue #83
+implements and closes only the pure proof-out adapter: `--proof-out <dir>`
+request facts, deterministic proof JSON and issue Markdown from the admitted
+proof-artifact contract, missing validation/proof facts and unsupported target
+fail-closed behavior, non-interactive copyable guidance, and blocked
+side-effect facts. The proof-out adapter consumes supplied validation/proof
+facts; it does not run validation. Runtime settings CLI validation proof-out
+adapter behavior beyond pure proof-out facts remains blocked.
+
+Issue #85 admits
+`IAU-runtime-settings-cli-validation-proof-out-file-emission-v1` for
+`runtime-settings-cli-validation-proof-out-file-emission-v1` and T009-T016
+only. Issue #85 is an admission issue and must not be reused for
+implementation. Issue #87 implements and closes the file-emission contract for
+T009-T016 only: file emission from ready proof-out adapter facts, creating the
+supported target directory when safe, writing exactly
+`vihs-validation-proof.json` and
+`vihs-validation-issue.md`, reporting deterministic write-result facts, and fail
+closed without hidden partial success. It does not run validation or create new
+validation facts. No new Copilot implementation should start from Issue #87.
+Issue #89 imports `runtime-settings-cli-validation-runtime-outcome-v1` and
+admits `IAU-runtime-settings-cli-validation-runtime-outcome-v1` for T009-T016
+only. Issue #89 is an admission issue and must not be reused for
+implementation. Issue #91 implements and closes only pure runtime outcome fact
+shaping from supplied public-safe runtime selection facts; it must not invoke
+runtime locators or execute validation.
+
+Issue #93 imports `runtime-settings-cli-validation-command-contract-v1` and
+admits `IAU-runtime-settings-cli-validation-command-contract-v1` for T009-T018
+only. Issue #93 is an admission issue and must not be reused for
+implementation. Issue #95 implements and closes it through PR #96 for
+T009-T018 only. The implemented IAU adds only the pure
+`createRuntimeSettingsValidationCommandResult(input = {})` contract for
+`vihs --validate` and optional `--proof-out <dir>` composition through the
+already admitted proof-out file-emission contract. Future work must not execute
+validation, inspect the OS, invoke runtime locators, call LabVIEWCLI, call
+Docker, wire raw terminal processes, publish packages, mutate launcher/profile
+state, or copy source. `validate-plan-only` remained blocked for that IAU and
+is admitted separately by Issue #99.
+
+Issue #99 imports `runtime-settings-cli-validation-plan-only-v1` and admits
+`IAU-runtime-settings-cli-validation-plan-only-v1` for T009-T016 only. Issue
+#99 is an admission issue and must not be reused for implementation. The
+implementation handoff is Issue #101. Issue #102 and PR #103 repair and close
+the final plan-only command-contract behavior. The implemented IAU adds only a
+pure `validate-plan-only` branch over
+`createRuntimeSettingsValidationCommandResult(input = {})` that returns
+deterministic proof-out target and artifact planning facts without calling the
+proof-out file-emission writer or writing files. Future work must not execute
+validation, inspect the OS, invoke runtime locators, call LabVIEWCLI, call
+Docker, wire raw terminal processes, publish packages, mutate launcher/profile
+state, write files for plan-only, or copy source without a separate public
+admission.
+
+Issue #106 imports
+`runtime-settings-cli-validation-host-runtime-preflight-v1` and admits
+`IAU-runtime-settings-cli-validation-host-runtime-preflight-v1` for T009-T016
+only. Issue #106 is an admission issue and must not be reused for
+implementation. Issue #108 implements and closes it through PR #109 for
+T009-T016 only. The implemented IAU adds only a pure
+`createRuntimeSettingsValidationHostRuntimePreflight(input = {})` adapter over
+supplied public-safe host candidate facts. Future work must not inspect the
+OS, invoke runtime locators, discover private paths, execute validation, call
+LabVIEWCLI, call Docker, wire raw terminal processes, write files from the host
+preflight adapter, publish packages, mutate launcher/profile state, or copy
+source without a separate public admission.
+
+Issue #112 imports
+`runtime-settings-cli-validation-host-preflight-command-composition-v1` and
+admits
+`IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1` for
+T009-T016 only. Issue #112 is an admission issue and must not be reused for
+implementation. Issue #114 implements and closes it through PR #115 for
+T009-T016 only. The implemented IAU adds only a pure
+`createRuntimeSettingsValidationCommandResult(input = {})` composition branch
+over ready host preflight facts or supplied public-safe host
+selection/candidate facts. Future work must not inspect the OS, invoke runtime
+locators, discover private paths, execute validation, call LabVIEWCLI, call
+Docker, wire raw terminal processes, write files from the host preflight
+adapter, publish packages, mutate launcher/profile state, or copy source
+without a separate public admission.
+
+Issue #118 imports
+`runtime-settings-cli-validation-host-runtime-discovery-v1` and admits
+`IAU-runtime-settings-cli-validation-host-runtime-discovery-v1` for T009-T016
+only. Issue #118 is an admission issue and must not be reused for
+implementation. Issue #120 implements and closes it through PR #121 for
+T009-T016 only. The implemented IAU adds only a bounded
+`createRuntimeSettingsValidationHostRuntimeDiscovery(input = {})` facts
+contract over public-safe selected host facts and bounded discovery
+observations. It may derive public-safe host candidate facts for
+`createRuntimeSettingsValidationHostRuntimePreflight(input = {})` and the
+existing validation command chain without changing output shapes. Future work
+must not retain raw private paths, walk arbitrary filesystems, probe PATH or
+environment state, reuse the existing compare runtime locator, execute
+validation, call LabVIEWCLI, call Docker, wire raw terminal processes, write
+files, publish packages, mutate launcher/profile state, release, work on the
+Marketplace, or copy source without a separate public admission.
+
+Issue #118 admission temporarily set the current IAU to
+`IAU-runtime-settings-cli-validation-host-runtime-discovery-v1`; Issue #120 and
+PR #121 completed it. Before Issue #118 admission, the host preflight
+command-composition closeout recorded:
+
+Current Implementation Admission Unit:
+`none`.
+
+Issue #130 imports
+`runtime-settings-cli-validation-host-runtime-observation-adapter-v1` and
+admits
+`IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1` for
+T009-T016 only. Issue #130 is an admission issue and must not be reused for
+implementation. Issue #132 and PR #133 completed it. The implemented IAU is a
+pure
+`createRuntimeSettingsValidationHostRuntimeObservation(input = {})` facts
+contract over public-safe selected host facts and supplied bounded observation
+dependencies. It may derive public-safe observation facts for
+`createRuntimeSettingsValidationHostRuntimeDiscovery(input = {})` and the
+existing validation command chain without changing output shapes. Future work
+must not retain raw private paths or raw registry output, walk arbitrary
+filesystems beyond the admitted bounded observation policy, probe PATH or
+environment state, reuse the existing compare runtime locator, execute
+validation, call LabVIEWCLI, call Docker, wire raw terminal processes, expand
+proof-out, write files, publish packages, mutate launcher/profile state,
+release, work on the Marketplace, or copy source without a separate public
+admission.
+
+Current Implementation Admission Unit:
+`none`.
+
+Issue #112 admission temporarily set the current IAU to
+`IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1`.
+Issue #114 and PR #115 completed it. Before Issue #112 admission, the host
+runtime preflight closeout recorded:
+
+Current Implementation Admission Unit:
+`none`.
+
+Issue #106 admission temporarily set the current IAU to
+`IAU-runtime-settings-cli-validation-host-runtime-preflight-v1`; Issue #108 and
+PR #109 completed it. Before Issue #106 admission, the previous plan-only
+closeout recorded:
+
+Current Implementation Admission Unit:
+`none`.
+
+Current Implementation Admission Unit:
+`none`.
+
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.
 
@@ -236,18 +555,49 @@ Do not implement these without a separate bridge admission:
 - LabVIEWCLI command execution
 - Docker command execution or container orchestration
 - documentation navigation or rendering beyond the admitted minimum command shell
-- runtime settings CLI materialization beyond the admitted prepare-command shell
+- runtime settings CLI terminal entrypoint implementation beyond
+  `IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1`
+- runtime settings CLI terminal prompt-loop implementation beyond
+  `IAU-runtime-settings-cli-terminal-prompt-loop-v1`
+- runtime settings CLI terminal I/O adapter behavior beyond pure terminal
+  session/input facts
+- runtime settings CLI validation proof-out adapter behavior beyond pure
+  proof-out request, target, artifact, and guidance facts
+- runtime settings CLI validation proof-out file-emission behavior beyond
+  writing ready adapter payload facts as exactly two files
+- runtime settings CLI validation runtime-outcome behavior beyond pure mapping
+  from supplied public-safe runtime selection facts
+- runtime settings CLI validation command-result behavior beyond the admitted
+  pure `vihs --validate` command contract
+- runtime settings CLI validation plan-only behavior beyond the admitted
+  no-write proof-out planning facts branch
+- runtime settings CLI validation host runtime preflight behavior beyond the
+  admitted supplied-facts-only host preflight adapter
+- runtime settings CLI validation host runtime discovery behavior beyond
+  bounded public-safe discovery facts
+- runtime settings CLI validation host runtime observation behavior beyond
+  bounded public-safe observation facts
+- OS scanning, filesystem walking, registry probing, PATH probing, environment
+  probing, private path discovery, or runtime locator invocation
+- file writes from the host preflight adapter
 - runtime settings mutation beyond the admitted provider/version/bitness
   settings-write contract
 - validation behavior beyond the admitted pure `vihs --validate` readback
   contract
 - validation proof artifact behavior beyond the admitted pure proof JSON and
   issue-body contract
+- new validation fact generation in the proof-out file-emission lane
 - compare execution
 - no-argument interactive selection beyond the admitted pure selection-state
   contract
-- terminal process prompt loops or raw stdin handling
-- proof-out file generation
+- OS-specific raw stdin/TTY process drivers beyond the admitted pure terminal
+  session/input adapter contract
+- runtime locator invocation or OS inspection beyond the admitted pure runtime
+  outcome fact adapter
+- runtime execution or terminal process wiring beyond the admitted validation
+  command-result contract
+- proof-out file generation beyond the admitted validation proof-out adapter
+  and file-emission IAU
 - live already-running VS Code session uptake proof
 - observation report rendering for T014-T016
 - Marketplace publication or packaging

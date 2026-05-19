@@ -1,0 +1,94 @@
+{
+  "schema": "vi-history/implementation-admission-unit@v1",
+  "iauId": "IAU-runtime-settings-cli-validation-host-runtime-preflight-v1",
+  "createdDate": "2026-05-19",
+  "state": "implemented",
+  "parentSliceId": "runtime-settings-cli-validation-host-runtime-preflight-v1",
+  "specFeature": ".specify/specs/runtime-settings-cli-validation-host-runtime-preflight-v1",
+  "issue": {
+    "number": 106,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/106"
+  },
+  "implementationHandoffIssue": {
+    "number": 108,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/108"
+  },
+  "implementationPullRequest": {
+    "number": 109,
+    "url": "https://github.com/svelderrainruiz/vi-history/pull/109"
+  },
+  "admittedTasks": [
+    "T009",
+    "T010",
+    "T011",
+    "T012",
+    "T013",
+    "T014",
+    "T015",
+    "T016"
+  ],
+  "blockedTasks": [
+    "T017",
+    "T018",
+    "T019",
+    "T020",
+    "T021",
+    "T022",
+    "T023",
+    "T024",
+    "T025",
+    "T026"
+  ],
+  "entryGate": [
+    "public import packet committed",
+    "Spec Kit spec/plan/tasks committed",
+    "public redaction scan passes",
+    "bridge artifact validation passes",
+    "preflight status is pass",
+    "admission PR merged",
+    "separate implementation handoff issue created"
+  ],
+  "exitGate": [
+    "T009-T016 tests and implementation complete",
+    "npm test passes",
+    "npm run check passes",
+    "git diff --check passes",
+    "implementation handoff issue names completed IAU and next blocked scope"
+  ],
+  "preImplementationPreflight": {
+    "status": "pass",
+    "record": "IAU-runtime-settings-cli-validation-host-runtime-preflight-v1-preflight-v1.json",
+    "implementationStartAllowed": true
+  },
+  "implementationCloseout": {
+    "status": "pass",
+    "issue": 108,
+    "pullRequest": 109,
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011",
+      "T012",
+      "T013",
+      "T014",
+      "T015",
+      "T016"
+    ],
+    "blockedScopeRetained": [
+      "T017",
+      "T018",
+      "T019",
+      "T020",
+      "T021",
+      "T022",
+      "T023",
+      "T024",
+      "T025",
+      "T026"
+    ]
+  },
+  "implementationSharing": "none",
+  "requirementMaturityBasis": "governed bridge-readiness packet supports public import, Spec Kit planning, and narrow host runtime preflight fact admission, not source reuse",
+  "marketplacePublication": "disabled",
+  "marketplacePublicationAdr": "docs/decisions/ADR-001-marketplace-publication-disabled.md"
+}

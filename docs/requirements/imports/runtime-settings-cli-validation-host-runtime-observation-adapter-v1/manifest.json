@@ -1,0 +1,43 @@
+{
+  "schema": "vi-history/requirements-import@v1",
+  "sliceId": "runtime-settings-cli-validation-host-runtime-observation-adapter-v1",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "4f4211edc824c92f3d9aa4c39cafa928d59c5ce3",
+  "governedAdmissionCommit": "bf014a64378db510119e1d6db2d0b21a8b360ba7",
+  "targetProduct": "vi-history",
+  "targetFeature": "runtime-settings-cli-validation-host-runtime-observation-adapter-v1",
+  "specKitPath": ".specify/specs/runtime-settings-cli-validation-host-runtime-observation-adapter-v1",
+  "redactionStatus": "pass",
+  "implementationSharing": "none",
+  "marketplacePublication": "disabled-until-later-adr",
+  "importedRequirementIds": [
+    "VHS-REQ-095",
+    "VHS-REQ-096",
+    "VHS-REQ-532",
+    "VHS-REQ-546",
+    "VHS-REQ-550"
+  ],
+  "prerequisiteRequirementIds": [
+    "VHS-REQ-537",
+    "VHS-REQ-543",
+    "VHS-REQ-544",
+    "VHS-REQ-545"
+  ],
+  "supportingTestIds": [
+    "TEST-UNIT-063",
+    "TEST-UNIT-064",
+    "TEST-UNIT-342",
+    "TEST-UNIT-354",
+    "TEST-UNIT-355",
+    "TEST-UNIT-392"
+  ],
+  "contractName": "createRuntimeSettingsValidationHostRuntimeObservation",
+  "composedContractName": "createRuntimeSettingsValidationHostRuntimeDiscovery",
+  "observationBoundary": "bounded-public-safe-observation-facts-only",
+  "files": [
+    "syrs.md",
+    "srs.md",
+    "rtm.csv",
+    "test-plan.md"
+  ]
+}

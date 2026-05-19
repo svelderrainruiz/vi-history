@@ -1,0 +1,43 @@
+{
+  "schema": "vi-history/requirements-import@v1",
+  "sliceId": "runtime-settings-cli-terminal-io-adapter-v1",
+  "createdDate": "2026-05-19",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "bb795ace470bcb17d9436fd34c59344077c37777",
+  "governedAdmissionCommit": "087b08493c4f0f4fea55aca379a585a2110c5b63",
+  "targetProduct": "vi-history",
+  "targetFeature": "runtime-settings-cli-terminal-io-adapter-v1",
+  "importedRequirementIds": [
+    "VHS-REQ-545",
+    "VHS-REQ-546"
+  ],
+  "prerequisiteRequirementIds": [
+    "VHS-REQ-537",
+    "VHS-REQ-544"
+  ],
+  "supportingTestIds": [
+    "TEST-UNIT-353",
+    "TEST-UNIT-354"
+  ],
+  "dockerImageFacts": {
+    "source": "https://hub.docker.com/r/nationalinstruments/labview/tags",
+    "observedAt": "2026-05-19",
+    "repository": "nationalinstruments/labview",
+    "latestLinuxTag": "latest-linux",
+    "latestLinuxVersionedTag": "2026q1patch2-linux",
+    "latestLinuxPlatform": "linux/amd64",
+    "latestWindowsTag": "latest-windows",
+    "latestWindowsVersionedTag": "2026q1patch2-windows",
+    "latestWindowsPlatform": "windows/amd64",
+    "publicWording": "Docker provider selection uses the latest supported NI LabVIEW Docker image family; the current Linux default maps to LabVIEW 2026 and Docker exposes no user-facing bitness choice."
+  },
+  "redactionStatus": "pass",
+  "implementationSharing": "none",
+  "marketplacePublication": "disabled-until-later-adr",
+  "files": [
+    "syrs.md",
+    "srs.md",
+    "rtm.csv",
+    "test-plan.md"
+  ]
+}
