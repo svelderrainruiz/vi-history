@@ -31,6 +31,14 @@ export const RUNTIME_SETTINGS_CLI_VALIDATION_HOST_RUNTIME_PREFLIGHT_REQUIREMENTS
   failClosed: Object.freeze(["VHS-REQ-532", "VHS-REQ-546", "VHS-REQ-550"])
 });
 
+export const RUNTIME_SETTINGS_CLI_VALIDATION_HOST_RUNTIME_DISCOVERY_REQUIREMENTS = Object.freeze({
+  selectedHostFacts: Object.freeze(["VHS-REQ-095", "VHS-REQ-096", "VHS-REQ-532"]),
+  windowsRegistryViewObservations: Object.freeze(["VHS-REQ-095"]),
+  linuxDocumentedRootObservations: Object.freeze(["VHS-REQ-096"]),
+  hostPreflightComposition: Object.freeze(["VHS-REQ-532", "VHS-REQ-546", "VHS-REQ-550"]),
+  failClosed: Object.freeze(["VHS-REQ-095", "VHS-REQ-096", "VHS-REQ-532", "VHS-REQ-546", "VHS-REQ-550"])
+});
+
 export const RUNTIME_SETTINGS_CLI_VALIDATION_PROOF_REQUIREMENTS = Object.freeze({
   proofArtifact: Object.freeze(["VHS-REQ-546"]),
   redaction: Object.freeze(["VHS-REQ-546"]),
@@ -143,6 +151,36 @@ export const RUNTIME_SETTINGS_VALIDATION_HOST_RUNTIME_PREFLIGHT_BLOCKED_SIDE_EFF
   environmentProbe: false,
   privatePathDiscovery: false,
   runtimeLocator: false,
+  runtimeValidation: false,
+  runtimeExecution: false,
+  compareExecution: false,
+  labviewCli: false,
+  dockerExecution: false,
+  dockerOrchestration: false,
+  rawTerminalProcessWiring: false,
+  liveTerminalProof: false,
+  packageBinPublication: false,
+  launcherProfileMutation: false,
+  releaseAutomation: false,
+  marketplace: false,
+  sourceCopying: false
+});
+
+export const RUNTIME_SETTINGS_VALIDATION_HOST_RUNTIME_DISCOVERY_BLOCKED_SIDE_EFFECTS = Object.freeze({
+  settingsMutation: false,
+  interactiveSelection: false,
+  proofOut: false,
+  fileSystemReads: false,
+  fileSystemWrites: false,
+  rawPrivatePathDisclosure: false,
+  arbitraryFilesystemWalking: false,
+  filesystemWalking: false,
+  registryProbe: false,
+  pathProbe: false,
+  environmentProbe: false,
+  privatePathDiscovery: false,
+  runtimeLocator: false,
+  compareRuntimeLocator: false,
   runtimeValidation: false,
   runtimeExecution: false,
   compareExecution: false,
@@ -365,6 +403,15 @@ export function allRuntimeSettingsCliValidationRuntimeOutcomeRequirementIds() {
 export function allRuntimeSettingsCliValidationHostRuntimePreflightRequirementIds() {
   return Object.freeze(
     Object.values(RUNTIME_SETTINGS_CLI_VALIDATION_HOST_RUNTIME_PREFLIGHT_REQUIREMENTS)
+      .flat()
+      .filter((value, index, values) => values.indexOf(value) === index)
+      .sort()
+  );
+}
+
+export function allRuntimeSettingsCliValidationHostRuntimeDiscoveryRequirementIds() {
+  return Object.freeze(
+    Object.values(RUNTIME_SETTINGS_CLI_VALIDATION_HOST_RUNTIME_DISCOVERY_REQUIREMENTS)
       .flat()
       .filter((value, index, values) => values.indexOf(value) === index)
       .sort()
@@ -812,6 +859,84 @@ export function createRuntimeSettingsValidationHostRuntimePreflight(input = {}) 
   });
 }
 
+export function createRuntimeSettingsValidationHostRuntimeDiscovery(input = {}) {
+  const selection = normalizeHostRuntimePreflightSelection(input);
+  if (!selection.ok) {
+    return hostRuntimeDiscoveryBlockedResult({
+      blockedReason: selection.blockedReason,
+      selection: selection.value ?? null
+    });
+  }
+
+  if (selection.value.runtimeProvider !== "host-native") {
+    return hostRuntimeDiscoveryBlockedResult({
+      blockedReason: "unsupported-runtime-provider",
+      selection: selection.value
+    });
+  }
+
+  if (selection.value.platform === "macos") {
+    return hostRuntimeDiscoveryBlockedResult({
+      blockedReason: "macos-host-runtime-discovery-unavailable",
+      selection: selection.value
+    });
+  }
+
+  if (!["windows", "linux"].includes(selection.value.platform)) {
+    return hostRuntimeDiscoveryBlockedResult({
+      blockedReason: "unsupported-host-platform",
+      selection: selection.value
+    });
+  }
+
+  if (!isSupportedHostYear(selection.value.labviewVersion)) {
+    return hostRuntimeDiscoveryBlockedResult({
+      blockedReason: "unsupported-host-year",
+      selection: selection.value
+    });
+  }
+
+  const observations = normalizeHostRuntimeDiscoveryObservations(input, selection.value);
+  if (!observations.ok) {
+    return hostRuntimeDiscoveryBlockedResult({
+      blockedReason: observations.blockedReason,
+      selection: selection.value,
+      hostCandidates: observations.hostCandidates ?? []
+    });
+  }
+
+  const preflight = createRuntimeSettingsValidationHostRuntimePreflight({
+    selection: selection.value,
+    hostCandidates: observations.value
+  });
+
+  if (preflight.status !== "ready") {
+    return hostRuntimeDiscoveryBlockedResult({
+      blockedReason: preflight.blockedReason,
+      selection: selection.value,
+      hostCandidates: observations.value,
+      preflight
+    });
+  }
+
+  return freezeRecord({
+    status: "ready",
+    type: "runtime-settings-cli-validation-host-runtime-discovery-contract",
+    discoveryBoundary: "bounded-public-safe-discovery-facts-only",
+    selection: selection.value,
+    observationCount: observations.value.length,
+    hostCandidates: observations.value,
+    hostCandidateCount: observations.value.length,
+    compatibleHostCandidateCount: preflight.compatibleHostCandidateCount,
+    preflight,
+    runtimeSelection: preflight.runtimeSelection,
+    blockedReason: null,
+    partialWrite: false,
+    blockedSideEffects: RUNTIME_SETTINGS_VALIDATION_HOST_RUNTIME_DISCOVERY_BLOCKED_SIDE_EFFECTS,
+    requirementIds: allRuntimeSettingsCliValidationHostRuntimeDiscoveryRequirementIds()
+  });
+}
+
 export function createRuntimeSettingsValidationProofArtifact(input = {}) {
   const validation = normalizeValidationProofFacts(input.validation ?? input.validationFacts ?? input);
   if (!validation.ok) {
@@ -1097,10 +1222,48 @@ function resolveValidationCommandRuntimeSelection(input = {}) {
     return providedPreflight.runtimeSelection;
   }
 
+  const providedDiscovery = input.hostRuntimeDiscovery
+    ?? input.runtimeDiscovery
+    ?? input.discovery;
+  if (isPlainObject(providedDiscovery) && providedDiscovery.runtimeSelection) {
+    return providedDiscovery.runtimeSelection;
+  }
+  if (isPlainObject(providedDiscovery)) {
+    return createRuntimeSettingsValidationHostRuntimeDiscovery(providedDiscovery).runtimeSelection;
+  }
+
+  const hostDiscoveryRequest = input.hostRuntimeDiscoveryRequest
+    ?? input.runtimeDiscoveryRequest
+    ?? input.discoveryRequest;
+  if (isPlainObject(hostDiscoveryRequest)) {
+    return createRuntimeSettingsValidationHostRuntimeDiscovery(hostDiscoveryRequest).runtimeSelection;
+  }
+
   const hostPreflightRequest = input.hostRuntimePreflightRequest
     ?? input.hostPreflightRequest;
   if (isPlainObject(hostPreflightRequest)) {
     return createRuntimeSettingsValidationHostRuntimePreflight(hostPreflightRequest).runtimeSelection;
+  }
+
+  if (hasValidationCommandHostRuntimeDiscoveryFacts(input)) {
+    return createRuntimeSettingsValidationHostRuntimeDiscovery({
+      selection: input.hostSelection
+        ?? input.hostRuntimeSelection
+        ?? input.hostRuntimeFacts
+        ?? input.selection
+        ?? input.persistedSettings
+        ?? input.settings,
+      documentedRootObservations: input.documentedRootObservations
+        ?? input.documentedRoots
+        ?? input.rootObservations,
+      windowsRegistryViewObservations: input.windowsRegistryViewObservations
+        ?? input.registryViewObservations
+        ?? input.registryViews,
+      observations: input.discoveryObservations
+        ?? input.hostDiscoveryObservations
+        ?? input.observations,
+      discoveryDependencies: input.discoveryDependencies
+    }).runtimeSelection;
   }
 
   if (hasValidationCommandHostPreflightFacts(input)) {
@@ -1131,6 +1294,25 @@ function hasValidationCommandHostPreflightFacts(input = {}) {
     || input.availableHostInstallations !== undefined
     || input.hostInstallations !== undefined
     || input.candidates !== undefined;
+}
+
+function hasValidationCommandHostRuntimeDiscoveryFacts(input = {}) {
+  return input.hostRuntimeDiscovery !== undefined
+    || input.runtimeDiscovery !== undefined
+    || input.discovery !== undefined
+    || input.hostRuntimeDiscoveryRequest !== undefined
+    || input.runtimeDiscoveryRequest !== undefined
+    || input.discoveryRequest !== undefined
+    || input.documentedRootObservations !== undefined
+    || input.documentedRoots !== undefined
+    || input.rootObservations !== undefined
+    || input.windowsRegistryViewObservations !== undefined
+    || input.registryViewObservations !== undefined
+    || input.registryViews !== undefined
+    || input.discoveryObservations !== undefined
+    || input.hostDiscoveryObservations !== undefined
+    || input.observations !== undefined
+    || input.discoveryDependencies !== undefined;
 }
 
 export function createRuntimeSettingsInteractiveSelection(input = {}) {
@@ -1330,6 +1512,9 @@ function normalizePlatform(value) {
   }
   if (lower === "linux") {
     return "linux";
+  }
+  if (["macos", "darwin", "osx"].includes(lower)) {
+    return "macos";
   }
   if (["docker", "container", "windows-container"].includes(lower)) {
     return "docker";
@@ -2486,7 +2671,10 @@ function normalizeHostRuntimePreflightCandidates(input = {}) {
     ?? input.hostRuntimeCandidates
     ?? input.availableHostInstallations
     ?? input.hostInstallations
-    ?? input.candidates;
+    ?? input.candidates
+    ?? input.hostRuntimeDiscovery?.hostCandidates
+    ?? input.runtimeDiscovery?.hostCandidates
+    ?? input.discovery?.hostCandidates;
 
   if (candidates == null) {
     return {
@@ -2724,6 +2912,308 @@ function hostRuntimePreflightBlockedResult({
   });
 }
 
+function hostRuntimeDiscoveryBlockedResult({
+  blockedReason,
+  selection = null,
+  hostCandidates = [],
+  preflight = null
+}) {
+  const frozenCandidates = Array.isArray(hostCandidates) ? freezeRecord(hostCandidates) : freezeRecord([]);
+  return freezeRecord({
+    status: "blocked",
+    type: "runtime-settings-cli-validation-host-runtime-discovery-contract",
+    discoveryBoundary: "bounded-public-safe-discovery-facts-only",
+    selection,
+    observationCount: frozenCandidates.length,
+    hostCandidates: frozenCandidates,
+    hostCandidateCount: frozenCandidates.length,
+    compatibleHostCandidateCount: preflight?.compatibleHostCandidateCount ?? 0,
+    preflight,
+    runtimeSelection: preflight?.runtimeSelection ?? createHostRuntimePreflightRuntimeSelection(selection, blockedReason),
+    blockedReason,
+    partialWrite: false,
+    blockedSideEffects: RUNTIME_SETTINGS_VALIDATION_HOST_RUNTIME_DISCOVERY_BLOCKED_SIDE_EFFECTS,
+    requirementIds: allRuntimeSettingsCliValidationHostRuntimeDiscoveryRequirementIds()
+  });
+}
+
+function normalizeHostRuntimeDiscoveryObservations(input = {}, selection) {
+  const collected = collectHostRuntimeDiscoveryObservations(input);
+  if (!collected.ok) {
+    return collected;
+  }
+
+  if (collected.value.length === 0) {
+    return {
+      ok: false,
+      blockedReason: "missing-discovery-observation"
+    };
+  }
+
+  const hostCandidates = [];
+  for (const observation of collected.value) {
+    const normalized = normalizeHostRuntimeDiscoveryObservation(observation, selection);
+    if (!normalized.ok) {
+      return {
+        ok: false,
+        blockedReason: normalized.blockedReason,
+        hostCandidates
+      };
+    }
+    hostCandidates.push(normalized.value);
+  }
+
+  return {
+    ok: true,
+    value: freezeRecord(hostCandidates)
+  };
+}
+
+function collectHostRuntimeDiscoveryObservations(input = {}) {
+  const dependencies = isPlainObject(input.discoveryDependencies) ? input.discoveryDependencies : {};
+  const observationGroups = [
+    input.documentedRootObservations ?? input.documentedRoots ?? input.rootObservations,
+    input.windowsRegistryViewObservations ?? input.registryViewObservations ?? input.registryViews,
+    input.discoveryObservations ?? input.hostDiscoveryObservations ?? input.observations,
+    dependencies.documentedRootObservations ?? dependencies.documentedRoots ?? dependencies.rootObservations,
+    dependencies.windowsRegistryViewObservations ?? dependencies.registryViewObservations ?? dependencies.registryViews,
+    dependencies.discoveryObservations ?? dependencies.hostDiscoveryObservations ?? dependencies.observations
+  ];
+
+  const observations = [];
+  for (const group of observationGroups) {
+    if (group === undefined || group === null) {
+      continue;
+    }
+    if (!Array.isArray(group)) {
+      return {
+        ok: false,
+        blockedReason: "malformed-host-runtime-discovery-input"
+      };
+    }
+    observations.push(...group);
+  }
+
+  return {
+    ok: true,
+    value: observations
+  };
+}
+
+function normalizeHostRuntimeDiscoveryObservation(observation, selection) {
+  if (!isPlainObject(observation)) {
+    return {
+      ok: false,
+      blockedReason: "malformed-host-runtime-discovery-input"
+    };
+  }
+
+  const sourceClass = normalizeHostRuntimeDiscoverySourceClass(observation);
+  if (!sourceClass) {
+    return {
+      ok: false,
+      blockedReason: "malformed-host-runtime-discovery-input"
+    };
+  }
+
+  if (sourceClass === "windows-registry-view" && hasRawRegistryOutput(observation)) {
+    return {
+      ok: false,
+      blockedReason: "malformed-registry-observation"
+    };
+  }
+
+  if (hasPrivatePathDisclosure(observation)) {
+    return {
+      ok: false,
+      blockedReason: "private-path-disclosure-attempt"
+    };
+  }
+
+  const labviewExecutable = normalizeHostRuntimeDiscoveryLabviewExecutable(observation);
+  const labviewCli = normalizeHostRuntimeDiscoveryLabviewCli(observation);
+  const platform = normalizePlatform(observation.platform ?? observation.osFamily ?? selection?.platform);
+  const labviewVersion = normalizeFact(
+    observation.labviewVersion
+      ?? observation.version
+      ?? labviewExecutable.version
+      ?? selection?.labviewVersion
+  );
+  const labviewBitness = normalizeLabviewBitness(
+    observation.labviewBitness
+      ?? observation.bitness
+      ?? labviewExecutable.bitness
+      ?? selection?.labviewBitness
+  );
+
+  if (!platform || !labviewVersion || !labviewBitness) {
+    return {
+      ok: false,
+      blockedReason: sourceClass === "windows-registry-view"
+        ? "malformed-registry-observation"
+        : "malformed-host-runtime-discovery-input"
+    };
+  }
+
+  const sourceId = normalizePublicDiscoveryIdentifier(
+    observation.sourceId
+      ?? observation.identifier
+      ?? observation.id
+      ?? observation.documentedRoot
+      ?? observation.root
+      ?? observation.registryView
+      ?? `${sourceClass}-${platform}-${labviewVersion}-${labviewBitness}`
+  );
+  const documentedRoot = sourceClass === "documented-root"
+    ? normalizePublicDiscoveryIdentifier(observation.documentedRoot ?? observation.root ?? sourceId)
+    : null;
+  const registryView = sourceClass === "windows-registry-view"
+    ? normalizeRegistryView(observation.registryView ?? observation.view)
+    : null;
+
+  if ((sourceClass === "documented-root" && !documentedRoot) || (sourceClass === "windows-registry-view" && !registryView)) {
+    return {
+      ok: false,
+      blockedReason: sourceClass === "windows-registry-view"
+        ? "malformed-registry-observation"
+        : "malformed-host-runtime-discovery-input"
+    };
+  }
+
+  return {
+    ok: true,
+    value: freezeRecord({
+      kind: "host-runtime-candidate",
+      publicSafe: true,
+      sourceClass,
+      sourceId,
+      documentedRoot,
+      registryView,
+      available: observation.available !== false && observation.installed !== false && observation.present !== false,
+      contaminated: observation.contaminated === true || observation.surfaceContaminated === true,
+      platform,
+      labviewVersion,
+      labviewBitness,
+      labviewExecutable,
+      labviewCli
+    })
+  };
+}
+
+function normalizeHostRuntimeDiscoverySourceClass(observation) {
+  const sourceClass = normalizeFact(observation.sourceClass ?? observation.kind ?? observation.type ?? observation.source)?.toLowerCase();
+  if (["documented-root", "documented-root-observation", "documented-root-facts", "root"].includes(sourceClass)) {
+    return "documented-root";
+  }
+  if (["windows-registry-view", "registry-view", "registry-view-observation", "windows-registry"].includes(sourceClass)) {
+    return "windows-registry-view";
+  }
+  if (observation.documentedRoot || observation.root) {
+    return "documented-root";
+  }
+  if (observation.registryView || observation.view) {
+    return "windows-registry-view";
+  }
+  return null;
+}
+
+function normalizeHostRuntimeDiscoveryLabviewExecutable(observation) {
+  const executable = isPlainObject(observation.labviewExecutable)
+    ? observation.labviewExecutable
+    : isPlainObject(observation.labview)
+      ? observation.labview
+      : {};
+  const available = observation.labviewExecutable === false
+    ? false
+    : executable.available ?? executable.present ?? observation.labviewExecutableAvailable ?? observation.labviewExecutablePresent;
+
+  return freezeRecord({
+    role: "labview-executable",
+    available: available === true,
+    version: normalizeFact(executable.labviewVersion ?? executable.version ?? observation.labviewExecutableVersion ?? observation.labviewVersion ?? observation.version),
+    bitness: normalizeLabviewBitness(executable.labviewBitness ?? executable.bitness ?? observation.labviewExecutableBitness ?? observation.labviewBitness ?? observation.bitness)
+  });
+}
+
+function normalizeHostRuntimeDiscoveryLabviewCli(observation) {
+  const cli = isPlainObject(observation.labviewCli)
+    ? observation.labviewCli
+    : isPlainObject(observation.labviewCliExecutable)
+      ? observation.labviewCliExecutable
+      : {};
+  const available = observation.labviewCli === false || observation.labviewCliExecutable === false
+    ? false
+    : cli.available ?? cli.present ?? observation.labviewCliAvailable ?? observation.labviewCliPresent;
+  const role = normalizeFact(cli.role ?? observation.labviewCliRole ?? observation.cliRole);
+  const canonical = cli.canonical === true
+    || observation.canonicalLabviewCli === true
+    || observation.labviewCliCanonical === true
+    || role === "canonical-labview-cli";
+
+  return freezeRecord({
+    role: canonical ? "canonical-labview-cli" : (role ?? "labview-cli"),
+    available: available === true,
+    canonical,
+    bitness: normalizeLabviewBitness(cli.labviewBitness ?? cli.bitness ?? observation.labviewCliBitness ?? observation.cliBitness)
+  });
+}
+
+function hasRawRegistryOutput(observation) {
+  return observation.rawRegistryOutput !== undefined
+    || observation.rawRegistry !== undefined
+    || observation.registryKey !== undefined
+    || observation.registryValue !== undefined;
+}
+
+function hasPrivatePathDisclosure(value) {
+  if (Array.isArray(value)) {
+    return value.some((item) => hasPrivatePathDisclosure(item));
+  }
+  if (!isPlainObject(value)) {
+    return typeof value === "string" && isPrivatePathLike(value);
+  }
+  for (const [key, nested] of Object.entries(value)) {
+    if (["path", "installPath", "absolutePath", "privatePath", "rawPath"].includes(key)) {
+      return true;
+    }
+    if (hasPrivatePathDisclosure(nested)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function isPrivatePathLike(value) {
+  return /^[a-z]:[\\/]/iu.test(value)
+    || value.startsWith("/")
+    || value.startsWith("~")
+    || value.includes("\\Users\\")
+    || value.includes("/Users/")
+    || value.includes("/home/");
+}
+
+function normalizePublicDiscoveryIdentifier(value) {
+  const identifier = normalizeFact(value);
+  if (!identifier || isPrivatePathLike(identifier) || /secret|password|token|credential|authorization|bearer|private/iu.test(identifier)) {
+    return null;
+  }
+  return identifier.replaceAll("\\", "/").replace(/\/+$/u, "");
+}
+
+function normalizeRegistryView(value) {
+  const normalized = normalizeFact(value)?.toLowerCase();
+  if (!normalized) {
+    return null;
+  }
+  if (["64", "64-bit", "64bit", "x64", "wow64-64"].includes(normalized)) {
+    return "64-bit";
+  }
+  if (["32", "32-bit", "32bit", "x86", "wow6432node"].includes(normalized)) {
+    return "32-bit";
+  }
+  return null;
+}
+
 function normalizeRuntimeSelectionFacts(selection = {}) {
   if (!isPlainObject(selection)) {
     return {
@@ -2865,7 +3355,7 @@ function runtimeErrorCodeForRuntimeBlockedReason(blockedReason) {
   if (blockedReason === "labview-version-required") {
     return "VIHS_E_LABVIEW_VERSION_REQUIRED";
   }
-  if (blockedReason === "labview-version-unsupported-for-comparison-report") {
+  if (blockedReason === "labview-version-unsupported-for-comparison-report" || blockedReason === "unsupported-host-year") {
     return "VIHS_E_LABVIEW_VERSION_UNSUPPORTED";
   }
   if (blockedReason === "labview-bitness-required") {
@@ -2873,6 +3363,8 @@ function runtimeErrorCodeForRuntimeBlockedReason(blockedReason) {
   }
   if (
     blockedReason === "labview-2026q1-unsupported-on-macos"
+    || blockedReason === "macos-host-runtime-discovery-unavailable"
+    || blockedReason === "unsupported-host-platform"
     || blockedReason?.endsWith("provider-not-supported-on-platform")
   ) {
     return "VIHS_E_PLATFORM_UNSUPPORTED";
@@ -2890,7 +3382,7 @@ function runtimeErrorCodeForRuntimeBlockedReason(blockedReason) {
   ) {
     return "VIHS_E_DOCKER_UNAVAILABLE";
   }
-  if (blockedReason === "labview-exe-not-found" || blockedReason === "missing-host-runtime-candidate") {
+  if (blockedReason === "labview-exe-not-found" || blockedReason === "missing-host-runtime-candidate" || blockedReason === "missing-discovery-observation") {
     return "VIHS_E_LABVIEW_NOT_FOUND";
   }
   if (blockedReason === "labview-exe-ambiguous" || blockedReason === "ambiguous-host-runtime-candidate") {
@@ -2908,7 +3400,11 @@ function runtimeErrorCodeForRuntimeBlockedReason(blockedReason) {
   if (blockedReason === "canonical-labview-cli-not-found" || blockedReason === "comparison-tool-not-found") {
     return "VIHS_E_COMPARISON_TOOL_NOT_FOUND";
   }
-  if (blockedReason === "windows-host-runtime-surface-contaminated") {
+  if (
+    blockedReason === "windows-host-runtime-surface-contaminated"
+    || blockedReason === "malformed-registry-observation"
+    || blockedReason === "private-path-disclosure-attempt"
+  ) {
     return "VIHS_E_RUNTIME_SURFACE_CONTAMINATED";
   }
   return "VIHS_E_RUNTIME_VALIDATION_BLOCKED";
