@@ -59,6 +59,8 @@ Issue #95 implements and closes it through PR #96 for T009-T018 only.
 Issue #99 imports `runtime-settings-cli-validation-plan-only-v1` and admits
 `IAU-runtime-settings-cli-validation-plan-only-v1` for T009-T016 only.
 Issue #99 is an admission issue and must not be reused for implementation.
+Issue #101 implements and closes it for T009-T016 only; Issue #102 and PR #103
+repair and close the final plan-only command-contract behavior.
 
 ## Authority
 
@@ -173,6 +175,10 @@ Issue #99 is an admission issue and must not be reused for implementation.
 - Issue #99 imports `runtime-settings-cli-validation-plan-only-v1` and admits
   `IAU-runtime-settings-cli-validation-plan-only-v1` for T009-T016 only.
   Issue #99 is an admission issue and must not be reused for implementation.
+- Issue #101 implements and closes
+  `IAU-runtime-settings-cli-validation-plan-only-v1` for T009-T016 only.
+  Issue #102 and PR #103 repair and close the final plan-only
+  command-contract behavior.
 
 The current admission ledgers are:
 
@@ -196,7 +202,7 @@ The current admission ledgers are:
 - `docs/requirements/admissions/runtime-settings-cli-validation-plan-only-v1.json`
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-plan-only-v1`.
+`none`.
 
 The completed observation model scope is T009-T013. The command activation
 manifest contract implements only T009-T012. The command handler entrypoint shell
@@ -315,7 +321,9 @@ below.
 `runtime-settings-cli-validation-plan-only-v1` admits
 `IAU-runtime-settings-cli-validation-plan-only-v1` for Issue #99 and
 T009-T016 only. Issue #99 is an admission issue and must not be reused for
-implementation. The admitted IAU is a pure `validate-plan-only` branch over
+implementation. Issue #101 implements and closes it for T009-T016 only. Issue
+#102 and PR #103 repair and close the final plan-only command-contract
+behavior. The implemented IAU is a pure `validate-plan-only` branch over
 `createRuntimeSettingsValidationCommandResult(input = {})` that returns
 deterministic proof-out target and artifact planning facts without calling the
 proof-out file-emission writer or writing files. The proof-out file-emission

@@ -50,24 +50,26 @@ without file writes.
 
 **Public admission issue**: Issue #99
 
-**Implementation handoff issue**: to be created after this admission PR merges
+**Implementation handoff issue**: Issue #101
 
-- [ ] T009 Add tests proving `validate-plan-only` is accepted only as a bounded
+**Implementation repair PR**: PR #103
+
+- [x] T009 Add tests proving `validate-plan-only` is accepted only as a bounded
   request mode over `vihs --validate`.
-- [ ] T010 Add tests proving plan-only requires ready validation facts and a
+- [x] T010 Add tests proving plan-only requires ready validation facts and a
   supported proof-out target.
-- [ ] T011 Add tests proving plan-only composes through the existing proof
+- [x] T011 Add tests proving plan-only composes through the existing proof
   artifact and proof-out adapter contracts without calling the file-emission
   writer.
-- [ ] T012 Add tests proving plan-only returns exactly the planned
+- [x] T012 Add tests proving plan-only returns exactly the planned
   `vihs-validation-proof.json` and `vihs-validation-issue.md` artifact facts.
-- [ ] T013 Add tests proving no file writes occur and file-system adapters or
+- [x] T013 Add tests proving no file writes occur and file-system adapters or
   proof-out writers are not called.
-- [ ] T014 Add tests proving missing validation facts, unsupported proof-out
+- [x] T014 Add tests proving missing validation facts, unsupported proof-out
   targets, and malformed inputs fail closed without hidden success.
-- [ ] T015 Add tests proving deterministic non-interactive guidance and
+- [x] T015 Add tests proving deterministic non-interactive guidance and
   blocked side-effect facts.
-- [ ] T016 Implement the minimum public MIT plan-only command-result branch.
+- [x] T016 Implement the minimum public MIT plan-only command-result branch.
 
 ---
 
@@ -120,16 +122,17 @@ plan-only, and source sharing visibly outside this IAU.
   execution, Docker execution, terminal process wiring, live proof, package/bin
   publication, launcher/profile mutation, release automation, Marketplace
   publication, or source copying.
-- Future Copilot implementation work must start from the separate public
-  implementation handoff issue. Issue #99 is an admission issue and must not
-  be reused for implementation.
+- Issue #101 is the implementation handoff issue. Issue #102 and PR #103 repair
+  and close the final command-contract behavior for T009-T016. Issue #99 is an
+  admission issue and must not be reused for implementation.
 
 ## Implementation Strategy
 
 1. Merge import/spec/admission artifacts to `develop`.
-2. Create a separate implementation handoff issue for
+2. Create separate implementation handoff Issue #101 for
    `IAU-runtime-settings-cli-validation-plan-only-v1`.
-3. Implement only T009-T016 through that handoff issue.
+3. Implement only T009-T016 through that handoff issue and close the repaired
+   behavior through PR #103.
 4. Keep file emission for plan-only, runtime locator invocation, OS
    inspection, runtime validation execution, compare execution, LabVIEWCLI
    execution, Docker execution, terminal process wiring, live proof,

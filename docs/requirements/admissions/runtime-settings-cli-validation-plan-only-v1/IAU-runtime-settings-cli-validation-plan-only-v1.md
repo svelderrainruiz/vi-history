@@ -1,6 +1,6 @@
 # Implementation Admission Unit: Runtime Settings CLI Validation Plan-Only
 
-`IAU-runtime-settings-cli-validation-plan-only-v1` is admitted for
+`IAU-runtime-settings-cli-validation-plan-only-v1` is implemented for
 `runtime-settings-cli-validation-plan-only-v1`.
 
 Parent slice: `runtime-settings-cli-validation-plan-only-v1`
@@ -39,6 +39,6 @@ Preflight:
 - T025: source copying from another VI History product line.
 - T026: implementation beyond plan-only without a separate public IAU.
 
-Issue #99 is the admission issue and must not be reused for implementation.
-A separate implementation handoff issue must be created after the admission PR
-merges.
+Issue #101 implements and closes T009-T016. Issue #102 and PR #103 repair the
+implementation and close the final command-contract behavior. Issue #99 is the
+admission issue and must not be reused for implementation.

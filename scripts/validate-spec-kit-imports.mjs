@@ -1709,7 +1709,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-interactive-selection-v1",
   "Issue #60",
   "Issue #62",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-plan-only-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
   "IAU-runtime-settings-cli-interactive-selection-contract-v1",
   "018-runtime-settings-cli-validation-plan-only-v1"
@@ -1854,13 +1854,13 @@ requireTextIncludes("README.md", [
   "Issue #65",
   "Issue #67",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-plan-only-v1`."
+  "Current Implementation Admission Unit:\n`none`."
 ]);
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-terminal-entrypoint-v1",
   "Issue #65",
   "Issue #67",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-plan-only-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
   "018-runtime-settings-cli-validation-plan-only-v1"
 ]);
@@ -2003,14 +2003,14 @@ requireTextIncludes("README.md", [
   "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
   "latest supported NI LabVIEW Docker image selection",
   "no user-facing Docker bitness choice",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-plan-only-v1`."
+  "Current Implementation Admission Unit:\n`none`."
 ]);
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-terminal-prompt-loop-v1",
   "Issue #71",
   "Issue #73",
   "Issue #75",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-plan-only-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
   "no separate Docker bitness\nchoice",
   "018-runtime-settings-cli-validation-plan-only-v1"
@@ -2168,7 +2168,7 @@ requireTextIncludes("README.md", [
   "Issue #77",
   "Issue #79",
   "IAU-runtime-settings-cli-terminal-io-adapter-v1",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-plan-only-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "latest supported NI LabVIEW image-family selection with no Docker bitness\nprompt",
   "source copying remain blocked"
 ]);
@@ -2176,7 +2176,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-terminal-io-adapter-v1",
   "Issue #77",
   "Issue #79",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-plan-only-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "IAU-runtime-settings-cli-terminal-io-adapter-v1",
   "no Docker bitness prompt",
   "018-runtime-settings-cli-validation-plan-only-v1"
@@ -2330,7 +2330,7 @@ requireTextIncludes("README.md", [
   "Issue #81",
   "Issue #83",
   "IAU-runtime-settings-cli-validation-proof-out-v1",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-plan-only-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "Runtime validation execution",
   "source copying remain blocked"
 ]);
@@ -2338,7 +2338,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-validation-proof-out-v1",
   "Issue #81",
   "Issue #83",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-plan-only-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "IAU-runtime-settings-cli-validation-proof-out-v1",
   "018-runtime-settings-cli-validation-plan-only-v1"
 ]);
@@ -2653,7 +2653,7 @@ requireTextIncludes("README.md", [
   "Issue #89",
   "Issue #91",
   "IAU-runtime-settings-cli-validation-runtime-outcome-v1",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-plan-only-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "createRuntimeSettingsValidationRuntimeOutcome(input = {})",
   "validation fact generation beyond supplied\nruntime outcome fact shaping"
 ]);
@@ -2661,7 +2661,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-validation-runtime-outcome-v1",
   "Issue #89",
   "Issue #91",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-plan-only-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "IAU-runtime-settings-cli-validation-runtime-outcome-v1",
   "018-runtime-settings-cli-validation-plan-only-v1"
 ]);
@@ -2813,7 +2813,7 @@ requireTextIncludes("README.md", [
   "Issue #95",
   "PR #96",
   "IAU-runtime-settings-cli-validation-command-contract-v1",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-plan-only-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "createRuntimeSettingsValidationCommandResult(input = {})",
   "validate-plan-only"
 ]);
@@ -2822,7 +2822,7 @@ requireTextIncludes("AGENTS.md", [
   "Issue #93",
   "Issue #95",
   "PR #96",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-plan-only-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "IAU-runtime-settings-cli-validation-command-contract-v1",
   "018-runtime-settings-cli-validation-plan-only-v1"
 ]);
@@ -2839,7 +2839,7 @@ requireTextIncludes("docs/development/copilot-workflow.md", [
 const runtimeSettingsPlanOnlyAdmission = readJson(runtimeSettingsPlanOnlyAdmissionPath);
 requireEqual(runtimeSettingsPlanOnlyAdmission.schema, "vi-history/requirements-admission@v1", "runtime settings plan-only admission schema");
 requireEqual(runtimeSettingsPlanOnlyAdmission.sliceId, runtimeSettingsPlanOnlySliceId, "runtime settings plan-only admission sliceId");
-requireEqual(runtimeSettingsPlanOnlyAdmission.state, "admitted", "runtime settings plan-only admission state");
+requireEqual(runtimeSettingsPlanOnlyAdmission.state, "implemented", "runtime settings plan-only admission state");
 requireEqual(runtimeSettingsPlanOnlyAdmission.targetProduct, "vi-history", "runtime settings plan-only admission targetProduct");
 requireEqual(runtimeSettingsPlanOnlyAdmission.targetFeature, runtimeSettingsPlanOnlySliceId, "runtime settings plan-only admission targetFeature");
 requireEqual(runtimeSettingsPlanOnlyAdmission.sourceBaselineTag, "v1.3.16", "runtime settings plan-only admission sourceBaselineTag");
@@ -2847,30 +2847,42 @@ requireEqual(runtimeSettingsPlanOnlyAdmission.sourceCommit, "93177a013b5294c0e05
 requireEqual(runtimeSettingsPlanOnlyAdmission.governedAdmissionCommit, "331b6eab04068299b85405d36bf0ba033dbd9b26", "runtime settings plan-only admission governedAdmissionCommit");
 requireEqual(runtimeSettingsPlanOnlyAdmission.implementationSharing, "none", "runtime settings plan-only admission implementationSharing");
 requireMarketplacePosture(runtimeSettingsPlanOnlyAdmission, "runtime settings plan-only admission");
-requireEqual(runtimeSettingsPlanOnlyAdmission.currentImplementationAdmissionUnit, "IAU-runtime-settings-cli-validation-plan-only-v1", "runtime settings plan-only currentImplementationAdmissionUnit");
+requireEqual(runtimeSettingsPlanOnlyAdmission.currentImplementationAdmissionUnit, null, "runtime settings plan-only currentImplementationAdmissionUnit");
 requireArrayEqual(runtimeSettingsPlanOnlyAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "runtime settings plan-only completedSpecScope");
-requireArrayEqual(runtimeSettingsPlanOnlyAdmission.completedImplementationScope, [], "runtime settings plan-only completedImplementationScope");
-requireArrayEqual(runtimeSettingsPlanOnlyAdmission.admittedImplementationScope, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings plan-only admittedImplementationScope");
+requireArrayEqual(runtimeSettingsPlanOnlyAdmission.completedImplementationScope, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings plan-only completedImplementationScope");
+requireArrayEqual(runtimeSettingsPlanOnlyAdmission.admittedImplementationScope, [], "runtime settings plan-only admittedImplementationScope");
 requireArrayEqual(runtimeSettingsPlanOnlyAdmission.blockedImplementationScope, ["T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025", "T026"], "runtime settings plan-only blockedImplementationScope");
 requireEqual(runtimeSettingsPlanOnlyAdmission.preImplementationPreflight?.iauId, "IAU-runtime-settings-cli-validation-plan-only-v1", "runtime settings plan-only preImplementationPreflight iauId");
 requireEqual(runtimeSettingsPlanOnlyAdmission.preImplementationPreflight?.status, "pass", "runtime settings plan-only preImplementationPreflight status");
 requireEqual(runtimeSettingsPlanOnlyAdmission.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings plan-only preImplementationPreflight implementationStartAllowed");
 requireEqual(runtimeSettingsPlanOnlyAdmission.preImplementationPreflight?.record, runtimeSettingsPlanOnlyPreflightPath, "runtime settings plan-only preImplementationPreflight record");
 requireEqual(runtimeSettingsPlanOnlyAdmission.issue?.number, 99, "runtime settings plan-only issue number");
+requireEqual(runtimeSettingsPlanOnlyAdmission.implementationHandoffIssue?.number, 101, "runtime settings plan-only implementation handoff issue number");
+requireEqual(runtimeSettingsPlanOnlyAdmission.implementationRepairIssue?.number, 102, "runtime settings plan-only implementation repair issue number");
+requireEqual(runtimeSettingsPlanOnlyAdmission.implementationPullRequest?.number, 103, "runtime settings plan-only implementation pull request number");
+requireEqual(runtimeSettingsPlanOnlyAdmission.implementationCloseout?.status, "pass", "runtime settings plan-only implementation closeout status");
+requireArrayEqual(runtimeSettingsPlanOnlyAdmission.implementationCloseout?.completedTasks, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings plan-only implementation closeout completedTasks");
+requireArrayEqual(runtimeSettingsPlanOnlyAdmission.implementationCloseout?.blockedScopeRetained, ["T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025", "T026"], "runtime settings plan-only implementation closeout blockedScopeRetained");
 requireFile(`docs/requirements/admissions/${runtimeSettingsPlanOnlySliceId}.md`);
 
 const runtimeSettingsPlanOnlyAdmissionUnit = (runtimeSettingsPlanOnlyAdmission.implementationAdmissionUnits ?? [])
   .find((unit) => unit?.iauId === "IAU-runtime-settings-cli-validation-plan-only-v1");
-requireEqual(runtimeSettingsPlanOnlyAdmissionUnit?.state, "admitted", "runtime settings plan-only admission unit state");
+requireEqual(runtimeSettingsPlanOnlyAdmissionUnit?.state, "implemented", "runtime settings plan-only admission unit state");
 requireEqual(runtimeSettingsPlanOnlyAdmissionUnit?.preflightRecord, runtimeSettingsPlanOnlyPreflightPath, "runtime settings plan-only admission unit preflightRecord");
 
 const runtimeSettingsPlanOnlyIau = readJson(runtimeSettingsPlanOnlyIauPath);
 requireEqual(runtimeSettingsPlanOnlyIau.schema, "vi-history/implementation-admission-unit@v1", "runtime settings plan-only IAU schema");
 requireEqual(runtimeSettingsPlanOnlyIau.iauId, "IAU-runtime-settings-cli-validation-plan-only-v1", "runtime settings plan-only IAU id");
-requireEqual(runtimeSettingsPlanOnlyIau.state, "admitted", "runtime settings plan-only IAU state");
+requireEqual(runtimeSettingsPlanOnlyIau.state, "implemented", "runtime settings plan-only IAU state");
 requireEqual(runtimeSettingsPlanOnlyIau.parentSliceId, runtimeSettingsPlanOnlySliceId, "runtime settings plan-only IAU parentSliceId");
 requireArrayEqual(runtimeSettingsPlanOnlyIau.admittedTasks, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings plan-only IAU admittedTasks");
 requireArrayEqual(runtimeSettingsPlanOnlyIau.blockedTasks, ["T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025", "T026"], "runtime settings plan-only IAU blockedTasks");
+requireEqual(runtimeSettingsPlanOnlyIau.implementationHandoffIssue?.number, 101, "runtime settings plan-only IAU implementation handoff issue number");
+requireEqual(runtimeSettingsPlanOnlyIau.implementationRepairIssue?.number, 102, "runtime settings plan-only IAU implementation repair issue number");
+requireEqual(runtimeSettingsPlanOnlyIau.implementationPullRequest?.number, 103, "runtime settings plan-only IAU implementation pull request number");
+requireEqual(runtimeSettingsPlanOnlyIau.implementationCloseout?.status, "pass", "runtime settings plan-only IAU implementation closeout status");
+requireArrayEqual(runtimeSettingsPlanOnlyIau.implementationCloseout?.completedTasks, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings plan-only IAU implementationCloseout completedTasks");
+requireArrayEqual(runtimeSettingsPlanOnlyIau.implementationCloseout?.blockedScopeRetained, ["T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025", "T026"], "runtime settings plan-only IAU implementationCloseout blockedScopeRetained");
 requireEqual(runtimeSettingsPlanOnlyIau.implementationSharing, "none", "runtime settings plan-only IAU implementationSharing");
 requireMarketplacePosture(runtimeSettingsPlanOnlyIau, "runtime settings plan-only IAU");
 requireEqual(runtimeSettingsPlanOnlyIau.preImplementationPreflight?.status, "pass", "runtime settings plan-only IAU preImplementationPreflight status");
@@ -2929,21 +2941,25 @@ requireTextIncludes(`${runtimeSettingsPlanOnlyFeatureDir}/spec.md`, [
   "IAU-runtime-settings-cli-validation-plan-only-v1",
   "createRuntimeSettingsValidationCommandResult",
   "validate-plan-only",
-  "Current Implementation Admission Unit is\n  `IAU-runtime-settings-cli-validation-plan-only-v1`",
+  "Current Implementation Admission Unit is `none`",
   "clean-room"
 ]);
 requireTextIncludes(`${runtimeSettingsPlanOnlyFeatureDir}/plan.md`, [
   "IAU-runtime-settings-cli-validation-plan-only-v1",
   "Issue #99",
+  "Issue #101",
+  "PR #103",
   "Marketplace publication: disabled",
   "Implementation sharing: none"
 ]);
 requireTextIncludes(`${runtimeSettingsPlanOnlyFeatureDir}/tasks.md`, [
   "Issue #99",
+  "Issue #101",
+  "PR #103",
   "- [x] T001",
   "- [x] T008",
-  "- [ ] T009",
-  "- [ ] T016",
+  "- [x] T009",
+  "- [x] T016",
   "IAU-runtime-settings-cli-validation-plan-only-v1",
   "[BLOCKED]",
   "T026"
@@ -2967,21 +2983,27 @@ requireTextIncludes("README.md", [
   "runtime-settings-cli-validation-plan-only-v1",
   "docs/requirements/admissions/runtime-settings-cli-validation-plan-only-v1.json",
   "Issue #99",
+  "Issue #101",
+  "PR #103",
   "IAU-runtime-settings-cli-validation-plan-only-v1",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-plan-only-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "validate-plan-only",
   "proof-out file-emission writer"
 ]);
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-validation-plan-only-v1",
   "Issue #99",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-plan-only-v1`.",
+  "Issue #101",
+  "PR #103",
+  "Current Implementation Admission Unit:\n`none`.",
   "IAU-runtime-settings-cli-validation-plan-only-v1",
   "018-runtime-settings-cli-validation-plan-only-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-plan-only-v1",
   "Issue #99",
+  "Issue #101",
+  "PR #103",
   "IAU-runtime-settings-cli-validation-plan-only-v1",
   "validate-plan-only",
   "proof-out file-emission writer",

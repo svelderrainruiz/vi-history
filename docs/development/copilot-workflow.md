@@ -395,7 +395,9 @@ is admitted separately by Issue #99.
 Issue #99 imports `runtime-settings-cli-validation-plan-only-v1` and admits
 `IAU-runtime-settings-cli-validation-plan-only-v1` for T009-T016 only. Issue
 #99 is an admission issue and must not be reused for implementation. The
-admitted IAU adds only a pure `validate-plan-only` branch over
+implementation handoff is Issue #101. Issue #102 and PR #103 repair and close
+the final plan-only command-contract behavior. The implemented IAU adds only a
+pure `validate-plan-only` branch over
 `createRuntimeSettingsValidationCommandResult(input = {})` that returns
 deterministic proof-out target and artifact planning facts without calling the
 proof-out file-emission writer or writing files. Future work must not execute
