@@ -1,0 +1,83 @@
+{
+  "schema": "vi-history/implementation-admission-unit-preflight@v1",
+  "iauId": "IAU-runtime-settings-cli-validation-proof-out-v1",
+  "parentSliceId": "runtime-settings-cli-validation-proof-out-v1",
+  "status": "pass",
+  "implementationStartAllowed": true,
+  "implementationStartScope": [
+    "T009",
+    "T010",
+    "T011",
+    "T012",
+    "T013",
+    "T014"
+  ],
+  "requiredChecks": [
+    "constitution includes imported slice",
+    "requirements import packet exists",
+    "Spec Kit spec exists",
+    "Spec Kit plan exists",
+    "Spec Kit tasks exist",
+    "admission ledger exists",
+    "IAU record exists",
+    "redaction scan passes",
+    "bridge artifact validation passes",
+    "implementation sharing is none",
+    "Marketplace publication is disabled",
+    "blocked scope remains explicit"
+  ],
+  "checkResults": [
+    {
+      "check": "constitution includes imported slice",
+      "status": "pass"
+    },
+    {
+      "check": "requirements import packet exists",
+      "status": "pass"
+    },
+    {
+      "check": "Spec Kit spec exists",
+      "status": "pass"
+    },
+    {
+      "check": "Spec Kit plan exists",
+      "status": "pass"
+    },
+    {
+      "check": "Spec Kit tasks exist",
+      "status": "pass"
+    },
+    {
+      "check": "admission ledger exists",
+      "status": "pass"
+    },
+    {
+      "check": "IAU record exists",
+      "status": "pass"
+    },
+    {
+      "check": "redaction scan passes",
+      "status": "pass"
+    },
+    {
+      "check": "bridge artifact validation passes",
+      "status": "pass"
+    },
+    {
+      "check": "implementation sharing is none",
+      "status": "pass"
+    },
+    {
+      "check": "Marketplace publication is disabled",
+      "status": "pass"
+    },
+    {
+      "check": "blocked scope remains explicit",
+      "status": "pass"
+    }
+  ],
+  "resultSummary": "Implementation may start for IAU-runtime-settings-cli-validation-proof-out-v1 only after this admission PR merges and a separate implementation handoff issue is created. T015-T023 and all runtime validation execution, compare execution, LabVIEWCLI execution, Docker execution, live terminal proof, package/bin publication, launcher/profile mutation, Marketplace, and source-copying behavior remain blocked.",
+  "implementationSharing": "none",
+  "marketplacePublication": "disabled",
+  "marketplacePublicationAdr": "docs/decisions/ADR-001-marketplace-publication-disabled.md"
+}

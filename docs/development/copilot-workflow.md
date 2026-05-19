@@ -143,6 +143,17 @@ Read these before changing code:
 - `docs/requirements/admissions/runtime-settings-cli-terminal-io-adapter-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-terminal-io-adapter-v1/IAU-runtime-settings-cli-terminal-io-adapter-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-terminal-io-adapter-v1/IAU-runtime-settings-cli-terminal-io-adapter-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-proof-out-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-proof-out-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-proof-out-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-proof-out-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-validation-proof-out-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-validation-proof-out-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-validation-proof-out-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-validation-proof-out-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-validation-proof-out-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-proof-out-v1/IAU-runtime-settings-cli-validation-proof-out-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-proof-out-v1/IAU-runtime-settings-cli-validation-proof-out-v1-preflight-v1.json`
 
 ## Current Status
 
@@ -294,6 +305,18 @@ copyable guidance, unsupported input/EOF/cancel fail-closed behavior, and
 validation handoff facts. No new Copilot implementation should start from
 Issue #79.
 
+Issue #81 admits
+`IAU-runtime-settings-cli-validation-proof-out-v1` for
+`runtime-settings-cli-validation-proof-out-v1` and T009-T014 only. Issue #81
+is an admission issue and must not be reused for implementation. A separate
+implementation handoff issue must implement only the pure proof-out adapter:
+`--proof-out <dir>` request facts, deterministic proof JSON and issue Markdown
+from the admitted proof-artifact contract, missing validation/proof facts and
+unsupported target fail-closed behavior, non-interactive copyable guidance, and
+blocked side-effect facts. The proof-out adapter must consume supplied
+validation/proof facts; it must not run validation.
+The runtime settings CLI validation proof-out adapter behavior beyond pure proof-out facts remains blocked. The proof-out adapter must consume supplied validation/proof facts.
+
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.
 
@@ -310,6 +333,8 @@ Do not implement these without a separate bridge admission:
   `IAU-runtime-settings-cli-terminal-prompt-loop-v1`
 - runtime settings CLI terminal I/O adapter behavior beyond pure terminal
   session/input facts
+- runtime settings CLI validation proof-out adapter behavior beyond pure
+  proof-out request, target, artifact, and guidance facts
 - runtime settings mutation beyond the admitted provider/version/bitness
   settings-write contract
 - validation behavior beyond the admitted pure `vihs --validate` readback
@@ -321,7 +346,7 @@ Do not implement these without a separate bridge admission:
   contract
 - OS-specific raw stdin/TTY process drivers beyond the admitted pure terminal
   session/input adapter contract
-- proof-out file generation
+- proof-out file generation beyond the admitted validation proof-out adapter
 - live already-running VS Code session uptake proof
 - observation report rendering for T014-T016
 - Marketplace publication or packaging

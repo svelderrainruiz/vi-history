@@ -1,0 +1,56 @@
+{
+  "schema": "vi-history/implementation-admission-unit@v1",
+  "iauId": "IAU-runtime-settings-cli-validation-proof-out-v1",
+  "createdDate": "2026-05-19",
+  "state": "admitted",
+  "parentSliceId": "runtime-settings-cli-validation-proof-out-v1",
+  "specFeature": ".specify/specs/runtime-settings-cli-validation-proof-out-v1",
+  "issue": {
+    "number": 81,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/81"
+  },
+  "admittedTasks": [
+    "T009",
+    "T010",
+    "T011",
+    "T012",
+    "T013",
+    "T014"
+  ],
+  "blockedTasks": [
+    "T015",
+    "T016",
+    "T017",
+    "T018",
+    "T019",
+    "T020",
+    "T021",
+    "T022",
+    "T023"
+  ],
+  "entryGate": [
+    "public import packet committed",
+    "Spec Kit spec/plan/tasks committed",
+    "public redaction scan passes",
+    "bridge artifact validation passes",
+    "preflight status is pass",
+    "admission PR merged",
+    "separate implementation handoff issue created"
+  ],
+  "exitGate": [
+    "T009-T014 tests and implementation complete",
+    "npm test passes",
+    "npm run check passes",
+    "git diff --check passes",
+    "implementation handoff issue names completed IAU and next blocked scope"
+  ],
+  "preImplementationPreflight": {
+    "status": "pass",
+    "record": "IAU-runtime-settings-cli-validation-proof-out-v1-preflight-v1.json",
+    "implementationStartAllowed": true
+  },
+  "implementationSharing": "none",
+  "requirementMaturityBasis": "governed released extension supports requirement maturity, not source reuse",
+  "marketplacePublication": "disabled",
+  "marketplacePublicationAdr": "docs/decisions/ADR-001-marketplace-publication-disabled.md"
+}

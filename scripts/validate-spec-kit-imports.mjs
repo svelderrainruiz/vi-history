@@ -78,6 +78,12 @@ const runtimeSettingsTerminalIoImportDir = `docs/requirements/imports/${runtimeS
 const runtimeSettingsTerminalIoAdmissionPath = `docs/requirements/admissions/${runtimeSettingsTerminalIoSliceId}.json`;
 const runtimeSettingsTerminalIoIauPath = `docs/requirements/admissions/${runtimeSettingsTerminalIoSliceId}/IAU-runtime-settings-cli-terminal-io-adapter-v1.json`;
 const runtimeSettingsTerminalIoPreflightPath = `docs/requirements/admissions/${runtimeSettingsTerminalIoSliceId}/IAU-runtime-settings-cli-terminal-io-adapter-v1-preflight-v1.json`;
+const runtimeSettingsProofOutSliceId = "runtime-settings-cli-validation-proof-out-v1";
+const runtimeSettingsProofOutFeatureDir = `.specify/specs/${runtimeSettingsProofOutSliceId}`;
+const runtimeSettingsProofOutImportDir = `docs/requirements/imports/${runtimeSettingsProofOutSliceId}`;
+const runtimeSettingsProofOutAdmissionPath = `docs/requirements/admissions/${runtimeSettingsProofOutSliceId}.json`;
+const runtimeSettingsProofOutIauPath = `docs/requirements/admissions/${runtimeSettingsProofOutSliceId}/IAU-runtime-settings-cli-validation-proof-out-v1.json`;
+const runtimeSettingsProofOutPreflightPath = `docs/requirements/admissions/${runtimeSettingsProofOutSliceId}/IAU-runtime-settings-cli-validation-proof-out-v1-preflight-v1.json`;
 const marketplaceAdrPath = "docs/decisions/ADR-001-marketplace-publication-disabled.md";
 const explicitCompareIauPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1.json`;
 const explicitComparePreflightPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1-preflight-v1.json`;
@@ -154,6 +160,9 @@ const runtimeSettingsPromptLoopExpectedIds = [
 ];
 const runtimeSettingsTerminalIoExpectedIds = [
   "VHS-REQ-545",
+  "VHS-REQ-546"
+];
+const runtimeSettingsProofOutExpectedIds = [
   "VHS-REQ-546"
 ];
 
@@ -234,11 +243,12 @@ requireTextIncludes(".specify/memory/constitution.md", [
   "runtime-settings-cli-terminal-entrypoint-v1",
   "runtime-settings-cli-terminal-prompt-loop-v1",
   "runtime-settings-cli-terminal-io-adapter-v1",
-  "**Version**: 0.1.11"
+  "runtime-settings-cli-validation-proof-out-v1",
+  "**Version**: 0.1.12"
 ]);
 
 const featureJson = readJson(".specify/feature.json");
-requireEqual(featureJson.feature_directory, runtimeSettingsTerminalIoFeatureDir, "pinned Spec Kit feature directory");
+requireEqual(featureJson.feature_directory, runtimeSettingsProofOutFeatureDir, "pinned Spec Kit feature directory");
 
 const admission = readJson(admissionPath);
 requireEqual(admission.schema, "vi-history/requirements-admission@v1", "admission schema");
@@ -615,7 +625,7 @@ requireTextIncludes("README.md", [
 requireTextIncludes("AGENTS.md", [
   "installed-user-observation-public-surface-v1",
   "IAU-installed-user-observation-model-v1",
-  "013-runtime-settings-cli-terminal-io-adapter-v1"
+  "014-runtime-settings-cli-validation-proof-out-v1"
 ]);
 
 const commandAdmission = readJson(commandAdmissionPath);
@@ -1102,7 +1112,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-bootstrap-v1",
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-prepare-command-shell-v1",
-  "013-runtime-settings-cli-terminal-io-adapter-v1"
+  "014-runtime-settings-cli-validation-proof-out-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-bootstrap-v1",
@@ -1238,7 +1248,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-settings-write-v1",
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-settings-write-contract-v1",
-  "013-runtime-settings-cli-terminal-io-adapter-v1"
+  "014-runtime-settings-cli-validation-proof-out-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-settings-write-v1",
@@ -1373,7 +1383,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-validation-readback-v1",
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-validation-readback-contract-v1",
-  "013-runtime-settings-cli-terminal-io-adapter-v1"
+  "014-runtime-settings-cli-validation-proof-out-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-readback-v1",
@@ -1517,7 +1527,7 @@ requireTextIncludes("AGENTS.md", [
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-validation-proof-artifact-v1",
   "IAU-runtime-settings-cli-interactive-selection-contract-v1",
-  "013-runtime-settings-cli-terminal-io-adapter-v1"
+  "014-runtime-settings-cli-validation-proof-out-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-proof-v1",
@@ -1659,10 +1669,10 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-interactive-selection-v1",
   "Issue #60",
   "Issue #62",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-proof-out-v1`.",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
   "IAU-runtime-settings-cli-interactive-selection-contract-v1",
-  "013-runtime-settings-cli-terminal-io-adapter-v1"
+  "014-runtime-settings-cli-validation-proof-out-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-interactive-selection-v1",
@@ -1804,15 +1814,15 @@ requireTextIncludes("README.md", [
   "Issue #65",
   "Issue #67",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
-  "Current Implementation Admission Unit:\n`none`."
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-proof-out-v1`."
 ]);
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-terminal-entrypoint-v1",
   "Issue #65",
   "Issue #67",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-proof-out-v1`.",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
-  "013-runtime-settings-cli-terminal-io-adapter-v1"
+  "014-runtime-settings-cli-validation-proof-out-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-terminal-entrypoint-v1",
@@ -1953,17 +1963,17 @@ requireTextIncludes("README.md", [
   "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
   "latest supported NI LabVIEW Docker image selection",
   "no user-facing Docker bitness choice",
-  "Current Implementation Admission Unit:\n`none`."
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-proof-out-v1`."
 ]);
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-terminal-prompt-loop-v1",
   "Issue #71",
   "Issue #73",
   "Issue #75",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-proof-out-v1`.",
   "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
   "no separate Docker bitness\nchoice",
-  "013-runtime-settings-cli-terminal-io-adapter-v1"
+  "014-runtime-settings-cli-validation-proof-out-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-terminal-prompt-loop-v1",
@@ -2118,7 +2128,7 @@ requireTextIncludes("README.md", [
   "Issue #77",
   "Issue #79",
   "IAU-runtime-settings-cli-terminal-io-adapter-v1",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-proof-out-v1`.",
   "latest supported NI LabVIEW image-family selection with no Docker bitness\nprompt",
   "source copying remain blocked"
 ]);
@@ -2126,10 +2136,10 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-terminal-io-adapter-v1",
   "Issue #77",
   "Issue #79",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-proof-out-v1`.",
   "IAU-runtime-settings-cli-terminal-io-adapter-v1",
   "no Docker bitness prompt",
-  "013-runtime-settings-cli-terminal-io-adapter-v1"
+  "014-runtime-settings-cli-validation-proof-out-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-terminal-io-adapter-v1",
@@ -2138,6 +2148,153 @@ requireTextIncludes("docs/development/copilot-workflow.md", [
   "IAU-runtime-settings-cli-terminal-io-adapter-v1",
   "Docker latest supported NI\nLabVIEW image-family selection without a Docker bitness prompt",
   "runtime settings CLI terminal I/O adapter behavior beyond pure terminal"
+]);
+
+const runtimeSettingsProofOutAdmission = readJson(runtimeSettingsProofOutAdmissionPath);
+requireEqual(runtimeSettingsProofOutAdmission.schema, "vi-history/requirements-admission@v1", "runtime settings proof-out admission schema");
+requireEqual(runtimeSettingsProofOutAdmission.sliceId, runtimeSettingsProofOutSliceId, "runtime settings proof-out admission sliceId");
+requireEqual(runtimeSettingsProofOutAdmission.state, "admitted", "runtime settings proof-out admission state");
+requireEqual(runtimeSettingsProofOutAdmission.targetProduct, "vi-history", "runtime settings proof-out admission targetProduct");
+requireEqual(runtimeSettingsProofOutAdmission.targetFeature, runtimeSettingsProofOutSliceId, "runtime settings proof-out admission targetFeature");
+requireEqual(runtimeSettingsProofOutAdmission.sourceBaselineTag, "v1.3.16", "runtime settings proof-out admission sourceBaselineTag");
+requireEqual(runtimeSettingsProofOutAdmission.sourceCommit, "087b08493c4f0f4fea55aca379a585a2110c5b63", "runtime settings proof-out admission sourceCommit");
+requireEqual(runtimeSettingsProofOutAdmission.governedAdmissionCommit, "31810efff02ba5fe38c0642e6b2175f511ee12fa", "runtime settings proof-out admission governedAdmissionCommit");
+requireEqual(runtimeSettingsProofOutAdmission.implementationSharing, "none", "runtime settings proof-out admission implementationSharing");
+requireMarketplacePosture(runtimeSettingsProofOutAdmission, "runtime settings proof-out admission");
+requireEqual(runtimeSettingsProofOutAdmission.currentImplementationAdmissionUnit, "IAU-runtime-settings-cli-validation-proof-out-v1", "runtime settings proof-out currentImplementationAdmissionUnit");
+requireArrayEqual(runtimeSettingsProofOutAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "runtime settings proof-out completedSpecScope");
+requireArrayEqual(runtimeSettingsProofOutAdmission.completedImplementationScope, [], "runtime settings proof-out completedImplementationScope");
+requireArrayEqual(runtimeSettingsProofOutAdmission.admittedImplementationScope, ["T009", "T010", "T011", "T012", "T013", "T014"], "runtime settings proof-out admittedImplementationScope");
+requireArrayEqual(runtimeSettingsProofOutAdmission.blockedImplementationScope, ["T015", "T016", "T017", "T018", "T019", "T020", "T021", "T022", "T023"], "runtime settings proof-out blockedImplementationScope");
+requireEqual(runtimeSettingsProofOutAdmission.preImplementationPreflight?.iauId, "IAU-runtime-settings-cli-validation-proof-out-v1", "runtime settings proof-out preImplementationPreflight iauId");
+requireEqual(runtimeSettingsProofOutAdmission.preImplementationPreflight?.status, "pass", "runtime settings proof-out preImplementationPreflight status");
+requireEqual(runtimeSettingsProofOutAdmission.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings proof-out preImplementationPreflight implementationStartAllowed");
+requireEqual(runtimeSettingsProofOutAdmission.preImplementationPreflight?.record, runtimeSettingsProofOutPreflightPath, "runtime settings proof-out preImplementationPreflight record");
+requireEqual(runtimeSettingsProofOutAdmission.issue?.number, 81, "runtime settings proof-out issue number");
+requireFile(`docs/requirements/admissions/${runtimeSettingsProofOutSliceId}.md`);
+
+const runtimeSettingsProofOutAdmissionUnit = (runtimeSettingsProofOutAdmission.implementationAdmissionUnits ?? [])
+  .find((unit) => unit?.iauId === "IAU-runtime-settings-cli-validation-proof-out-v1");
+requireEqual(runtimeSettingsProofOutAdmissionUnit?.state, "admitted", "runtime settings proof-out admission unit state");
+requireEqual(runtimeSettingsProofOutAdmissionUnit?.preflightRecord, runtimeSettingsProofOutPreflightPath, "runtime settings proof-out admission unit preflightRecord");
+
+const runtimeSettingsProofOutIau = readJson(runtimeSettingsProofOutIauPath);
+requireEqual(runtimeSettingsProofOutIau.schema, "vi-history/implementation-admission-unit@v1", "runtime settings proof-out IAU schema");
+requireEqual(runtimeSettingsProofOutIau.iauId, "IAU-runtime-settings-cli-validation-proof-out-v1", "runtime settings proof-out IAU id");
+requireEqual(runtimeSettingsProofOutIau.state, "admitted", "runtime settings proof-out IAU state");
+requireEqual(runtimeSettingsProofOutIau.parentSliceId, runtimeSettingsProofOutSliceId, "runtime settings proof-out IAU parentSliceId");
+requireArrayEqual(runtimeSettingsProofOutIau.admittedTasks, ["T009", "T010", "T011", "T012", "T013", "T014"], "runtime settings proof-out IAU admittedTasks");
+requireArrayEqual(runtimeSettingsProofOutIau.blockedTasks, ["T015", "T016", "T017", "T018", "T019", "T020", "T021", "T022", "T023"], "runtime settings proof-out IAU blockedTasks");
+requireEqual(runtimeSettingsProofOutIau.implementationSharing, "none", "runtime settings proof-out IAU implementationSharing");
+requireMarketplacePosture(runtimeSettingsProofOutIau, "runtime settings proof-out IAU");
+requireEqual(runtimeSettingsProofOutIau.preImplementationPreflight?.status, "pass", "runtime settings proof-out IAU preImplementationPreflight status");
+requireEqual(runtimeSettingsProofOutIau.preImplementationPreflight?.record, "IAU-runtime-settings-cli-validation-proof-out-v1-preflight-v1.json", "runtime settings proof-out IAU preImplementationPreflight record");
+requireEqual(runtimeSettingsProofOutIau.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings proof-out IAU preImplementationPreflight implementationStartAllowed");
+requireFile(`docs/requirements/admissions/${runtimeSettingsProofOutSliceId}/IAU-runtime-settings-cli-validation-proof-out-v1.md`);
+
+const runtimeSettingsProofOutPreflight = readJson(runtimeSettingsProofOutPreflightPath);
+requireEqual(runtimeSettingsProofOutPreflight.schema, "vi-history/implementation-admission-unit-preflight@v1", "runtime settings proof-out preflight schema");
+requireEqual(runtimeSettingsProofOutPreflight.iauId, "IAU-runtime-settings-cli-validation-proof-out-v1", "runtime settings proof-out preflight iauId");
+requireEqual(runtimeSettingsProofOutPreflight.status, "pass", "runtime settings proof-out preflight status");
+requireEqual(runtimeSettingsProofOutPreflight.implementationStartAllowed, true, "runtime settings proof-out preflight implementationStartAllowed");
+requireEqual(runtimeSettingsProofOutPreflight.parentSliceId, runtimeSettingsProofOutSliceId, "runtime settings proof-out preflight parentSliceId");
+requireEqual(runtimeSettingsProofOutPreflight.implementationSharing, "none", "runtime settings proof-out preflight implementationSharing");
+requireMarketplacePosture(runtimeSettingsProofOutPreflight, "runtime settings proof-out preflight");
+requireArrayEqual(runtimeSettingsProofOutPreflight.implementationStartScope, ["T009", "T010", "T011", "T012", "T013", "T014"], "runtime settings proof-out preflight implementationStartScope");
+if (!Array.isArray(runtimeSettingsProofOutPreflight.checkResults) || runtimeSettingsProofOutPreflight.checkResults.length !== runtimeSettingsProofOutPreflight.requiredChecks.length) {
+  failures.push("runtime settings proof-out preflight checkResults: must match requiredChecks length");
+} else {
+  for (const result of runtimeSettingsProofOutPreflight.checkResults) {
+    requireEqual(result.status, "pass", `runtime settings proof-out preflight check result ${result.check}`);
+  }
+}
+requireFile(`docs/requirements/admissions/${runtimeSettingsProofOutSliceId}/IAU-runtime-settings-cli-validation-proof-out-v1-preflight-v1.md`);
+
+const runtimeSettingsProofOutManifest = readJson(`${runtimeSettingsProofOutImportDir}/manifest.json`);
+requireEqual(runtimeSettingsProofOutManifest.schema, "vi-history/requirements-import@v1", "runtime settings proof-out manifest schema");
+requireEqual(runtimeSettingsProofOutManifest.sliceId, runtimeSettingsProofOutSliceId, "runtime settings proof-out sliceId");
+requireEqual(runtimeSettingsProofOutManifest.sourceBaselineTag, "v1.3.16", "runtime settings proof-out sourceBaselineTag");
+requireEqual(runtimeSettingsProofOutManifest.sourceCommit, "087b08493c4f0f4fea55aca379a585a2110c5b63", "runtime settings proof-out sourceCommit");
+requireEqual(runtimeSettingsProofOutManifest.governedAdmissionCommit, "31810efff02ba5fe38c0642e6b2175f511ee12fa", "runtime settings proof-out governedAdmissionCommit");
+requireEqual(runtimeSettingsProofOutManifest.targetProduct, "vi-history", "runtime settings proof-out targetProduct");
+requireEqual(runtimeSettingsProofOutManifest.targetFeature, runtimeSettingsProofOutSliceId, "runtime settings proof-out targetFeature");
+requireEqual(runtimeSettingsProofOutManifest.redactionStatus, "pass", "runtime settings proof-out redactionStatus");
+requireEqual(runtimeSettingsProofOutManifest.implementationSharing, "none", "runtime settings proof-out implementationSharing");
+requireEqual(runtimeSettingsProofOutManifest.marketplacePublication, "disabled-until-later-adr", "runtime settings proof-out marketplacePublication");
+requireArrayEqual(runtimeSettingsProofOutManifest.importedRequirementIds, runtimeSettingsProofOutExpectedIds, "runtime settings proof-out importedRequirementIds");
+requireArrayEqual(runtimeSettingsProofOutManifest.prerequisiteRequirementIds, ["VHS-REQ-537", "VHS-REQ-544", "VHS-REQ-545"], "runtime settings proof-out prerequisiteRequirementIds");
+requireArrayEqual(runtimeSettingsProofOutManifest.supportingTestIds, ["TEST-UNIT-392"], "runtime settings proof-out supportingTestIds");
+requireArrayEqual(runtimeSettingsProofOutManifest.artifactNames, ["vihs-validation-proof.json", "vihs-validation-issue.md"], "runtime settings proof-out artifactNames");
+requireArrayEqual(runtimeSettingsProofOutManifest.files, ["syrs.md", "srs.md", "rtm.csv", "test-plan.md"], "runtime settings proof-out manifest files");
+
+for (const file of runtimeSettingsProofOutManifest.files ?? []) {
+  requireFile(`${runtimeSettingsProofOutImportDir}/${file}`);
+}
+
+for (const file of ["spec.md", "plan.md", "tasks.md"]) {
+  requireFile(`${runtimeSettingsProofOutFeatureDir}/${file}`);
+}
+
+requireTextIncludes(`${runtimeSettingsProofOutFeatureDir}/spec.md`, [
+  "Runtime Settings CLI Validation Proof-Out Adapter",
+  "VHS-REQ-546",
+  "TEST-UNIT-392",
+  "IAU-runtime-settings-cli-validation-proof-out-v1",
+  "vihs-validation-proof.json",
+  "vihs-validation-issue.md",
+  "clean-room"
+]);
+requireTextIncludes(`${runtimeSettingsProofOutFeatureDir}/plan.md`, [
+  "IAU-runtime-settings-cli-validation-proof-out-v1",
+  "Issue #81",
+  "Marketplace publication remains disabled"
+]);
+requireTextIncludes(`${runtimeSettingsProofOutFeatureDir}/tasks.md`, [
+  "Issue #81",
+  "- [x] T001",
+  "- [x] T008",
+  "- [ ] T009",
+  "- [ ] T014",
+  "IAU-runtime-settings-cli-validation-proof-out-v1",
+  "[BLOCKED]",
+  "T023"
+]);
+requireTextIncludes(`${runtimeSettingsProofOutImportDir}/rtm.csv`, runtimeSettingsProofOutExpectedIds);
+requireTextIncludes(`${runtimeSettingsProofOutImportDir}/srs.md`, [
+  "VHS-REQ-546",
+  "TEST-UNIT-392",
+  "vihs --validate --proof-out",
+  "vihs-validation-proof.json",
+  "vihs-validation-issue.md"
+]);
+requireTextIncludes(`${runtimeSettingsProofOutImportDir}/test-plan.md`, [
+  "TEST-UNIT-RSPROOFOUT-001",
+  "TEST-UNIT-RSPROOFOUT-005",
+  "non-interactive",
+  "side effects remain blocked"
+]);
+requireTextIncludes("README.md", [
+  "runtime-settings-cli-validation-proof-out-v1",
+  "docs/requirements/admissions/runtime-settings-cli-validation-proof-out-v1.json",
+  "Issue #81",
+  "IAU-runtime-settings-cli-validation-proof-out-v1",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-proof-out-v1`.",
+  "Runtime validation execution, compare execution, LabVIEWCLI execution, Docker execution",
+  "source copying remain blocked"
+]);
+requireTextIncludes("AGENTS.md", [
+  "runtime-settings-cli-validation-proof-out-v1",
+  "Issue #81",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-proof-out-v1`.",
+  "IAU-runtime-settings-cli-validation-proof-out-v1",
+  "014-runtime-settings-cli-validation-proof-out-v1"
+]);
+requireTextIncludes("docs/development/copilot-workflow.md", [
+  "runtime-settings-cli-validation-proof-out-v1",
+  "Issue #81",
+  "IAU-runtime-settings-cli-validation-proof-out-v1",
+  "runtime settings CLI validation proof-out adapter behavior beyond pure proof-out",
+  "proof-out adapter must consume supplied validation/proof facts"
 ]);
 
 if (failures.length > 0) {

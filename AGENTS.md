@@ -121,13 +121,22 @@ selection adaptation, Docker latest supported NI LabVIEW image-family selection
 with no Docker bitness prompt, non-TTY copyable guidance, unsupported
 input/EOF/cancel fail-closed behavior, and validation handoff facts.
 
+`runtime-settings-cli-validation-proof-out-v1` admits
+`IAU-runtime-settings-cli-validation-proof-out-v1` for Issue #81 and
+T009-T014 only. Issue #81 is an admission issue and must not be reused for
+implementation. Implementation must use a separate handoff issue after the
+admission PR merges. The admitted unit is limited to pure proof-out request,
+target, artifact, non-interactive guidance, and blocked-side-effect facts over
+the already admitted validation readback and validation proof-artifact
+contracts.
+
 Compare execution, LabVIEWCLI execution, Docker execution or orchestration,
-proof-out expansion, live-session proof, package/bin publication,
+runtime validation execution, live-session proof, package/bin publication,
 launcher/profile mutation, packaging, and Marketplace publication remain
 blocked.
 
 Current Implementation Admission Unit:
-`none`.
+`IAU-runtime-settings-cli-validation-proof-out-v1`.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that
@@ -137,7 +146,7 @@ When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:
 
 ```bash
-SPECIFY_FEATURE=013-runtime-settings-cli-terminal-io-adapter-v1 \
-SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-terminal-io-adapter-v1 \
+SPECIFY_FEATURE=014-runtime-settings-cli-validation-proof-out-v1 \
+SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-validation-proof-out-v1 \
 .specify/scripts/bash/check-prerequisites.sh --json --paths-only
 ```
