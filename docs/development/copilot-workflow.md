@@ -240,8 +240,11 @@ only. No new Copilot implementation should start from Issue #62.
 Issue #65 admits
 `IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1` for
 `runtime-settings-cli-terminal-entrypoint-v1` and T009-T013 only. Issue #65 is
-an admission issue. Copilot implementation must wait for the separate handoff
-issue created after the admission PR merges.
+an admission issue and must not be reused for implementation.
+
+Issue #67 implements and closes
+`IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1` for T009-T013
+only. No new Copilot implementation should start from Issue #67.
 
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.

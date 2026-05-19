@@ -98,15 +98,15 @@ readback handoff facts.
 `runtime-settings-cli-terminal-entrypoint-v1` admits
 `IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1` for Issue #65
 and T009-T013 only. Issue #65 is an admission issue and must not be reused for
-implementation. A separate handoff issue is required before Copilot or any
-agent implements the materialized-entrypoint contract.
+implementation. Issue #67 implements and closes the materialized-entrypoint
+contract for T009-T013 only.
 
 Terminal process prompt loops, compare execution, LabVIEWCLI execution, Docker
 execution or orchestration, proof-out expansion, live-session proof, packaging,
 and Marketplace publication remain blocked.
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1`.
+`none`.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that

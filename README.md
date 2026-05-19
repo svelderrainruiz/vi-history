@@ -32,7 +32,7 @@ Issue #60 imports `runtime-settings-cli-interactive-selection-v1` and admits
 only. Issue #62 implements and closes it for T009-T013 only.
 Issue #65 imports `runtime-settings-cli-terminal-entrypoint-v1` and admits
 `IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1` for
-T009-T013 only. Implementation waits for a separate handoff issue.
+T009-T013 only. Issue #67 implements and closes it for T009-T013 only.
 
 ## Authority
 
@@ -105,6 +105,9 @@ T009-T013 only. Implementation waits for a separate handoff issue.
   `IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1` for
   T009-T013 only. Issue #65 is an admission issue and must not be reused for
   implementation.
+- Issue #67 implements and closes
+  `IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1` for
+  T009-T013 only.
 
 The current admission ledgers are:
 
@@ -121,7 +124,7 @@ The current admission ledgers are:
 - `docs/requirements/admissions/runtime-settings-cli-terminal-entrypoint-v1.json`
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1`.
+`none`.
 
 The completed observation model scope is T009-T013. The command activation
 manifest contract implements only T009-T012. The command handler entrypoint shell
@@ -161,7 +164,7 @@ selection, bounded Docker 2026 x64 selection, and the minimum pure selection
 state contract. Terminal prompt loops, compare execution, LabVIEWCLI
 execution, Docker execution, proof-out expansion, live-session proof,
 packaging, and Marketplace work remain blocked.
-The runtime settings CLI terminal entrypoint IAU is admitted for T009-T013 in
+The runtime settings CLI terminal entrypoint IAU implements only T009-T013 in
 `.specify/specs/runtime-settings-cli-terminal-entrypoint-v1/tasks.md`: tests
 for materialized bare `vihs` entrypoint facts, user-scoped terminal admission,
 runtime lookup/recovery facts, stale or missing launcher guidance, and the

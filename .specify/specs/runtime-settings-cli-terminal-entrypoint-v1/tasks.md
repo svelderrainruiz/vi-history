@@ -51,7 +51,7 @@ runtime execution.
 
 **Public admission issue**: Issue #65
 
-**Implementation handoff issue**: not created yet.
+**Implementation handoff issue**: Issue #67
 
 - [x] T009 Add tests proving a materialized `vihs` terminal entrypoint is
   represented without hidden path reconstruction, profile editing, admin
@@ -103,8 +103,8 @@ behavior visibly outside this IAU.
 - Phase 1 must merge before
   `IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1`
   implementation starts.
-- Phase 2 must use a separate implementation handoff issue after this
-  admission PR merges.
+- Phase 2 used separate implementation handoff Issue #67 after the admission
+  PR merged.
 - Phase 3 remains blocked until separate public requirements and preflight
   records admit prompt loops, compare execution, runtime execution, proof-out
   expansion, live-session proof, Windows PowerShell Marketplace bootstrap, or
@@ -116,8 +116,9 @@ behavior visibly outside this IAU.
 ## Implementation Strategy
 
 1. Merge import/spec/admission artifacts to `develop`.
-2. Create a separate handoff issue for
-   `IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1`.
+2. Implement and close
+   `IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1` through
+   Issue #67.
 3. Keep raw prompt loops, compare execution, LabVIEWCLI, Docker, proof
    expansion, live-session proof, Marketplace publication, packaging, and
    source copying blocked.
