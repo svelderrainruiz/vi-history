@@ -125,6 +125,11 @@ The imported slices are:
   `docs/requirements/imports/runtime-settings-cli-validation-plan-only-v1/`
   and Spec Kit feature under
   `.specify/specs/runtime-settings-cli-validation-plan-only-v1/`.
+- `runtime-settings-cli-validation-host-runtime-preflight-v1`, with its import
+  packet under
+  `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-preflight-v1/`
+  and Spec Kit feature under
+  `.specify/specs/runtime-settings-cli-validation-host-runtime-preflight-v1/`.
 
 The active pinned Spec Kit feature is recorded in `.specify/feature.json`.
 

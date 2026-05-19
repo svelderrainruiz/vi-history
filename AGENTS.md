@@ -184,6 +184,27 @@ terminal process wiring, live-session proof, package/bin publication,
 launcher/profile mutation, release automation, Marketplace publication, and
 source copying remain blocked.
 
+`runtime-settings-cli-validation-host-runtime-preflight-v1` admits
+`IAU-runtime-settings-cli-validation-host-runtime-preflight-v1` for Issue #106
+and T009-T016 only. Issue #106 is an admission issue and must not be reused
+for implementation. The admitted IAU is a pure
+`createRuntimeSettingsValidationHostRuntimePreflight(input = {})` adapter over
+supplied public-safe host candidate facts. It may compose with the existing
+runtime outcome, readback, proof artifact, proof-out adapter, file-emission,
+validation command, and `validate-plan-only` contracts without changing their
+output shapes. OS scanning, filesystem walking, registry probing, PATH
+probing, environment probing, private path discovery, runtime locator
+invocation, runtime validation execution, compare execution, LabVIEWCLI
+execution, Docker execution or orchestration, raw terminal process wiring,
+live-session proof, file writes from the host preflight adapter, package/bin
+publication, launcher/profile mutation, release automation, Marketplace
+publication, and source copying remain blocked.
+
+Current Implementation Admission Unit:
+`IAU-runtime-settings-cli-validation-host-runtime-preflight-v1`.
+
+Before Issue #106 admission, the plan-only closeout recorded:
+
 Current Implementation Admission Unit:
 `none`.
 
@@ -195,7 +216,10 @@ When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:
 
 ```bash
-SPECIFY_FEATURE=018-runtime-settings-cli-validation-plan-only-v1 \
-SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-validation-plan-only-v1 \
+SPECIFY_FEATURE=019-runtime-settings-cli-validation-host-runtime-preflight-v1 \
+SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-validation-host-runtime-preflight-v1 \
 .specify/scripts/bash/check-prerequisites.sh --json --paths-only
 ```
+
+The previous plan-only feature used
+`018-runtime-settings-cli-validation-plan-only-v1`.

@@ -61,6 +61,11 @@ Issue #99 imports `runtime-settings-cli-validation-plan-only-v1` and admits
 Issue #99 is an admission issue and must not be reused for implementation.
 Issue #101 implements and closes it for T009-T016 only; Issue #102 and PR #103
 repair and close the final plan-only command-contract behavior.
+Issue #106 imports
+`runtime-settings-cli-validation-host-runtime-preflight-v1` and admits
+`IAU-runtime-settings-cli-validation-host-runtime-preflight-v1` for
+T009-T016 only. Issue #106 is an admission issue and must not be reused for
+implementation.
 
 ## Authority
 
@@ -179,6 +184,11 @@ repair and close the final plan-only command-contract behavior.
   `IAU-runtime-settings-cli-validation-plan-only-v1` for T009-T016 only.
   Issue #102 and PR #103 repair and close the final plan-only
   command-contract behavior.
+- Issue #106 imports
+  `runtime-settings-cli-validation-host-runtime-preflight-v1` and admits
+  `IAU-runtime-settings-cli-validation-host-runtime-preflight-v1` for
+  T009-T016 only. Issue #106 is an admission issue and must not be reused for
+  implementation.
 
 The current admission ledgers are:
 
@@ -200,6 +210,12 @@ The current admission ledgers are:
 - `docs/requirements/admissions/runtime-settings-cli-validation-runtime-outcome-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-command-contract-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-plan-only-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-preflight-v1.json`
+
+Current Implementation Admission Unit:
+`IAU-runtime-settings-cli-validation-host-runtime-preflight-v1`.
+
+Before Issue #106 admission, the plan-only closeout recorded:
 
 Current Implementation Admission Unit:
 `none`.
@@ -333,6 +349,22 @@ execution, LabVIEWCLI execution, Docker execution or orchestration, raw
 terminal process wiring, live terminal proof, package/bin publication,
 launcher/profile mutation, release automation, Marketplace work, and source
 copying remain blocked.
+
+`runtime-settings-cli-validation-host-runtime-preflight-v1` admits
+`IAU-runtime-settings-cli-validation-host-runtime-preflight-v1` for Issue #106
+and T009-T016 only. Issue #106 is an admission issue and must not be reused
+for implementation. The admitted IAU is a pure
+`createRuntimeSettingsValidationHostRuntimePreflight(input = {})` adapter over
+supplied public-safe host candidate facts. It may produce deterministic
+runtime selection facts for the existing validation runtime outcome, readback,
+proof artifact, proof-out adapter, file-emission, validation command, and
+`validate-plan-only` contracts. OS scanning, filesystem walking, registry
+probing, PATH probing, environment probing, private path discovery, runtime
+locator invocation, runtime validation execution, compare execution,
+LabVIEWCLI execution, Docker execution or orchestration, raw terminal process
+wiring, live terminal proof, file writes from the host preflight adapter,
+package/bin publication, launcher/profile mutation, release automation,
+Marketplace work, and source copying remain blocked.
 
 The Marketplace posture is recorded in
 `docs/decisions/ADR-001-marketplace-publication-disabled.md` and summarized in
