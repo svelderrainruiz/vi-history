@@ -153,8 +153,22 @@ execution, Docker execution or orchestration, live-session proof, package/bin
 publication, launcher/profile mutation, release automation, Marketplace
 publication, and source copying remain blocked.
 
+`runtime-settings-cli-validation-command-contract-v1` admits
+`IAU-runtime-settings-cli-validation-command-contract-v1` for Issue #93 and
+T009-T018 only. Issue #93 is an admission issue and must not be reused for
+implementation. Implementation must use a separate handoff issue after the
+admission PR merges. The admitted IAU is a pure
+`createRuntimeSettingsValidationCommandResult(input = {})` command-result
+contract for `vihs --validate` and optional `--proof-out <dir>` composition
+through the already admitted file-emission contract. OS inspection, runtime
+locator invocation, private path discovery, runtime validation execution,
+compare execution, LabVIEWCLI execution, Docker execution or orchestration,
+raw terminal process wiring, live-session proof, package/bin publication,
+launcher/profile mutation, release automation, Marketplace publication,
+`validate-plan-only`, and source copying remain blocked.
+
 Current Implementation Admission Unit:
-`none`.
+`IAU-runtime-settings-cli-validation-command-contract-v1`.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that
@@ -164,7 +178,7 @@ When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:
 
 ```bash
-SPECIFY_FEATURE=016-runtime-settings-cli-validation-runtime-outcome-v1 \
-SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-validation-runtime-outcome-v1 \
+SPECIFY_FEATURE=017-runtime-settings-cli-validation-command-contract-v1 \
+SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-validation-command-contract-v1 \
 .specify/scripts/bash/check-prerequisites.sh --json --paths-only
 ```

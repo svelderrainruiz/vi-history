@@ -96,6 +96,12 @@ const runtimeSettingsRuntimeOutcomeImportDir = `docs/requirements/imports/${runt
 const runtimeSettingsRuntimeOutcomeAdmissionPath = `docs/requirements/admissions/${runtimeSettingsRuntimeOutcomeSliceId}.json`;
 const runtimeSettingsRuntimeOutcomeIauPath = `docs/requirements/admissions/${runtimeSettingsRuntimeOutcomeSliceId}/IAU-runtime-settings-cli-validation-runtime-outcome-v1.json`;
 const runtimeSettingsRuntimeOutcomePreflightPath = `docs/requirements/admissions/${runtimeSettingsRuntimeOutcomeSliceId}/IAU-runtime-settings-cli-validation-runtime-outcome-v1-preflight-v1.json`;
+const runtimeSettingsCommandContractSliceId = "runtime-settings-cli-validation-command-contract-v1";
+const runtimeSettingsCommandContractFeatureDir = `.specify/specs/${runtimeSettingsCommandContractSliceId}`;
+const runtimeSettingsCommandContractImportDir = `docs/requirements/imports/${runtimeSettingsCommandContractSliceId}`;
+const runtimeSettingsCommandContractAdmissionPath = `docs/requirements/admissions/${runtimeSettingsCommandContractSliceId}.json`;
+const runtimeSettingsCommandContractIauPath = `docs/requirements/admissions/${runtimeSettingsCommandContractSliceId}/IAU-runtime-settings-cli-validation-command-contract-v1.json`;
+const runtimeSettingsCommandContractPreflightPath = `docs/requirements/admissions/${runtimeSettingsCommandContractSliceId}/IAU-runtime-settings-cli-validation-command-contract-v1-preflight-v1.json`;
 const marketplaceAdrPath = "docs/decisions/ADR-001-marketplace-publication-disabled.md";
 const explicitCompareIauPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1.json`;
 const explicitComparePreflightPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1-preflight-v1.json`;
@@ -183,6 +189,9 @@ const runtimeSettingsProofOutFileEmissionExpectedIds = [
 const runtimeSettingsRuntimeOutcomeExpectedIds = [
   "VHS-REQ-546"
 ];
+const runtimeSettingsCommandContractExpectedIds = [
+  "VHS-REQ-546"
+];
 
 const failures = [];
 
@@ -264,11 +273,12 @@ requireTextIncludes(".specify/memory/constitution.md", [
   "runtime-settings-cli-validation-proof-out-v1",
   "runtime-settings-cli-validation-proof-out-file-emission-v1",
   "runtime-settings-cli-validation-runtime-outcome-v1",
-  "**Version**: 0.1.14"
+  "runtime-settings-cli-validation-command-contract-v1",
+  "**Version**: 0.1.15"
 ]);
 
 const featureJson = readJson(".specify/feature.json");
-requireEqual(featureJson.feature_directory, runtimeSettingsRuntimeOutcomeFeatureDir, "pinned Spec Kit feature directory");
+requireEqual(featureJson.feature_directory, runtimeSettingsCommandContractFeatureDir, "pinned Spec Kit feature directory");
 
 const admission = readJson(admissionPath);
 requireEqual(admission.schema, "vi-history/requirements-admission@v1", "admission schema");
@@ -645,7 +655,7 @@ requireTextIncludes("README.md", [
 requireTextIncludes("AGENTS.md", [
   "installed-user-observation-public-surface-v1",
   "IAU-installed-user-observation-model-v1",
-  "016-runtime-settings-cli-validation-runtime-outcome-v1"
+  "017-runtime-settings-cli-validation-command-contract-v1"
 ]);
 
 const commandAdmission = readJson(commandAdmissionPath);
@@ -1132,7 +1142,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-bootstrap-v1",
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-prepare-command-shell-v1",
-  "016-runtime-settings-cli-validation-runtime-outcome-v1"
+  "017-runtime-settings-cli-validation-command-contract-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-bootstrap-v1",
@@ -1268,7 +1278,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-settings-write-v1",
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-settings-write-contract-v1",
-  "016-runtime-settings-cli-validation-runtime-outcome-v1"
+  "017-runtime-settings-cli-validation-command-contract-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-settings-write-v1",
@@ -1403,7 +1413,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-validation-readback-v1",
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-validation-readback-contract-v1",
-  "016-runtime-settings-cli-validation-runtime-outcome-v1"
+  "017-runtime-settings-cli-validation-command-contract-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-readback-v1",
@@ -1547,7 +1557,7 @@ requireTextIncludes("AGENTS.md", [
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-validation-proof-artifact-v1",
   "IAU-runtime-settings-cli-interactive-selection-contract-v1",
-  "016-runtime-settings-cli-validation-runtime-outcome-v1"
+  "017-runtime-settings-cli-validation-command-contract-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-proof-v1",
@@ -1689,10 +1699,10 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-interactive-selection-v1",
   "Issue #60",
   "Issue #62",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-command-contract-v1`.",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
   "IAU-runtime-settings-cli-interactive-selection-contract-v1",
-  "016-runtime-settings-cli-validation-runtime-outcome-v1"
+  "017-runtime-settings-cli-validation-command-contract-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-interactive-selection-v1",
@@ -1834,15 +1844,15 @@ requireTextIncludes("README.md", [
   "Issue #65",
   "Issue #67",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
-  "Current Implementation Admission Unit:\n`none`."
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-command-contract-v1`."
 ]);
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-terminal-entrypoint-v1",
   "Issue #65",
   "Issue #67",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-command-contract-v1`.",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
-  "016-runtime-settings-cli-validation-runtime-outcome-v1"
+  "017-runtime-settings-cli-validation-command-contract-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-terminal-entrypoint-v1",
@@ -1983,17 +1993,17 @@ requireTextIncludes("README.md", [
   "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
   "latest supported NI LabVIEW Docker image selection",
   "no user-facing Docker bitness choice",
-  "Current Implementation Admission Unit:\n`none`."
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-command-contract-v1`."
 ]);
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-terminal-prompt-loop-v1",
   "Issue #71",
   "Issue #73",
   "Issue #75",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-command-contract-v1`.",
   "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
   "no separate Docker bitness\nchoice",
-  "016-runtime-settings-cli-validation-runtime-outcome-v1"
+  "017-runtime-settings-cli-validation-command-contract-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-terminal-prompt-loop-v1",
@@ -2148,7 +2158,7 @@ requireTextIncludes("README.md", [
   "Issue #77",
   "Issue #79",
   "IAU-runtime-settings-cli-terminal-io-adapter-v1",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-command-contract-v1`.",
   "latest supported NI LabVIEW image-family selection with no Docker bitness\nprompt",
   "source copying remain blocked"
 ]);
@@ -2156,10 +2166,10 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-terminal-io-adapter-v1",
   "Issue #77",
   "Issue #79",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-command-contract-v1`.",
   "IAU-runtime-settings-cli-terminal-io-adapter-v1",
   "no Docker bitness prompt",
-  "016-runtime-settings-cli-validation-runtime-outcome-v1"
+  "017-runtime-settings-cli-validation-command-contract-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-terminal-io-adapter-v1",
@@ -2310,7 +2320,7 @@ requireTextIncludes("README.md", [
   "Issue #81",
   "Issue #83",
   "IAU-runtime-settings-cli-validation-proof-out-v1",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-command-contract-v1`.",
   "Runtime validation execution",
   "source copying remain blocked"
 ]);
@@ -2318,9 +2328,9 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-validation-proof-out-v1",
   "Issue #81",
   "Issue #83",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-command-contract-v1`.",
   "IAU-runtime-settings-cli-validation-proof-out-v1",
-  "016-runtime-settings-cli-validation-runtime-outcome-v1"
+  "017-runtime-settings-cli-validation-command-contract-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-proof-out-v1",
@@ -2633,7 +2643,7 @@ requireTextIncludes("README.md", [
   "Issue #89",
   "Issue #91",
   "IAU-runtime-settings-cli-validation-runtime-outcome-v1",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-command-contract-v1`.",
   "createRuntimeSettingsValidationRuntimeOutcome(input = {})",
   "validation fact generation beyond supplied\nruntime outcome fact shaping"
 ]);
@@ -2641,9 +2651,9 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-validation-runtime-outcome-v1",
   "Issue #89",
   "Issue #91",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-command-contract-v1`.",
   "IAU-runtime-settings-cli-validation-runtime-outcome-v1",
-  "016-runtime-settings-cli-validation-runtime-outcome-v1"
+  "017-runtime-settings-cli-validation-command-contract-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-runtime-outcome-v1",
@@ -2652,6 +2662,156 @@ requireTextIncludes("docs/development/copilot-workflow.md", [
   "IAU-runtime-settings-cli-validation-runtime-outcome-v1",
   "pure runtime outcome fact\nshaping",
   "runtime locator invocation or OS inspection"
+]);
+
+const runtimeSettingsCommandContractAdmission = readJson(runtimeSettingsCommandContractAdmissionPath);
+requireEqual(runtimeSettingsCommandContractAdmission.schema, "vi-history/requirements-admission@v1", "runtime settings command contract admission schema");
+requireEqual(runtimeSettingsCommandContractAdmission.sliceId, runtimeSettingsCommandContractSliceId, "runtime settings command contract admission sliceId");
+requireEqual(runtimeSettingsCommandContractAdmission.state, "admitted", "runtime settings command contract admission state");
+requireEqual(runtimeSettingsCommandContractAdmission.targetProduct, "vi-history", "runtime settings command contract admission targetProduct");
+requireEqual(runtimeSettingsCommandContractAdmission.targetFeature, runtimeSettingsCommandContractSliceId, "runtime settings command contract admission targetFeature");
+requireEqual(runtimeSettingsCommandContractAdmission.sourceBaselineTag, "v1.3.16", "runtime settings command contract admission sourceBaselineTag");
+requireEqual(runtimeSettingsCommandContractAdmission.sourceCommit, "7b3d15af11df545de21501106c9b62734fb177f5", "runtime settings command contract admission sourceCommit");
+requireEqual(runtimeSettingsCommandContractAdmission.governedAdmissionCommit, "93177a013b5294c0e05745f5af67b866e9b15568", "runtime settings command contract admission governedAdmissionCommit");
+requireEqual(runtimeSettingsCommandContractAdmission.implementationSharing, "none", "runtime settings command contract admission implementationSharing");
+requireMarketplacePosture(runtimeSettingsCommandContractAdmission, "runtime settings command contract admission");
+requireEqual(runtimeSettingsCommandContractAdmission.currentImplementationAdmissionUnit, "IAU-runtime-settings-cli-validation-command-contract-v1", "runtime settings command contract currentImplementationAdmissionUnit");
+requireArrayEqual(runtimeSettingsCommandContractAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "runtime settings command contract completedSpecScope");
+requireArrayEqual(runtimeSettingsCommandContractAdmission.completedImplementationScope, [], "runtime settings command contract completedImplementationScope");
+requireArrayEqual(runtimeSettingsCommandContractAdmission.admittedImplementationScope, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016", "T017", "T018"], "runtime settings command contract admittedImplementationScope");
+requireArrayEqual(runtimeSettingsCommandContractAdmission.blockedImplementationScope, ["T019", "T020", "T021", "T022", "T023", "T024", "T025", "T026", "T027"], "runtime settings command contract blockedImplementationScope");
+requireEqual(runtimeSettingsCommandContractAdmission.preImplementationPreflight?.iauId, "IAU-runtime-settings-cli-validation-command-contract-v1", "runtime settings command contract preImplementationPreflight iauId");
+requireEqual(runtimeSettingsCommandContractAdmission.preImplementationPreflight?.status, "pass", "runtime settings command contract preImplementationPreflight status");
+requireEqual(runtimeSettingsCommandContractAdmission.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings command contract preImplementationPreflight implementationStartAllowed");
+requireEqual(runtimeSettingsCommandContractAdmission.preImplementationPreflight?.record, runtimeSettingsCommandContractPreflightPath, "runtime settings command contract preImplementationPreflight record");
+requireEqual(runtimeSettingsCommandContractAdmission.issue?.number, 93, "runtime settings command contract issue number");
+requireFile(`docs/requirements/admissions/${runtimeSettingsCommandContractSliceId}.md`);
+
+const runtimeSettingsCommandContractAdmissionUnit = (runtimeSettingsCommandContractAdmission.implementationAdmissionUnits ?? [])
+  .find((unit) => unit?.iauId === "IAU-runtime-settings-cli-validation-command-contract-v1");
+requireEqual(runtimeSettingsCommandContractAdmissionUnit?.state, "admitted", "runtime settings command contract admission unit state");
+requireEqual(runtimeSettingsCommandContractAdmissionUnit?.preflightRecord, runtimeSettingsCommandContractPreflightPath, "runtime settings command contract admission unit preflightRecord");
+
+const runtimeSettingsCommandContractIau = readJson(runtimeSettingsCommandContractIauPath);
+requireEqual(runtimeSettingsCommandContractIau.schema, "vi-history/implementation-admission-unit@v1", "runtime settings command contract IAU schema");
+requireEqual(runtimeSettingsCommandContractIau.iauId, "IAU-runtime-settings-cli-validation-command-contract-v1", "runtime settings command contract IAU id");
+requireEqual(runtimeSettingsCommandContractIau.state, "admitted", "runtime settings command contract IAU state");
+requireEqual(runtimeSettingsCommandContractIau.parentSliceId, runtimeSettingsCommandContractSliceId, "runtime settings command contract IAU parentSliceId");
+requireArrayEqual(runtimeSettingsCommandContractIau.admittedTasks, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016", "T017", "T018"], "runtime settings command contract IAU admittedTasks");
+requireArrayEqual(runtimeSettingsCommandContractIau.blockedTasks, ["T019", "T020", "T021", "T022", "T023", "T024", "T025", "T026", "T027"], "runtime settings command contract IAU blockedTasks");
+requireEqual(runtimeSettingsCommandContractIau.implementationSharing, "none", "runtime settings command contract IAU implementationSharing");
+requireMarketplacePosture(runtimeSettingsCommandContractIau, "runtime settings command contract IAU");
+requireEqual(runtimeSettingsCommandContractIau.preImplementationPreflight?.status, "pass", "runtime settings command contract IAU preImplementationPreflight status");
+requireEqual(runtimeSettingsCommandContractIau.preImplementationPreflight?.record, "IAU-runtime-settings-cli-validation-command-contract-v1-preflight-v1.json", "runtime settings command contract IAU preImplementationPreflight record");
+requireEqual(runtimeSettingsCommandContractIau.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings command contract IAU preImplementationPreflight implementationStartAllowed");
+requireFile(`docs/requirements/admissions/${runtimeSettingsCommandContractSliceId}/IAU-runtime-settings-cli-validation-command-contract-v1.md`);
+
+const runtimeSettingsCommandContractPreflight = readJson(runtimeSettingsCommandContractPreflightPath);
+requireEqual(runtimeSettingsCommandContractPreflight.schema, "vi-history/implementation-admission-unit-preflight@v1", "runtime settings command contract preflight schema");
+requireEqual(runtimeSettingsCommandContractPreflight.iauId, "IAU-runtime-settings-cli-validation-command-contract-v1", "runtime settings command contract preflight iauId");
+requireEqual(runtimeSettingsCommandContractPreflight.status, "pass", "runtime settings command contract preflight status");
+requireEqual(runtimeSettingsCommandContractPreflight.implementationStartAllowed, true, "runtime settings command contract preflight implementationStartAllowed");
+requireEqual(runtimeSettingsCommandContractPreflight.parentSliceId, runtimeSettingsCommandContractSliceId, "runtime settings command contract preflight parentSliceId");
+requireEqual(runtimeSettingsCommandContractPreflight.implementationSharing, "none", "runtime settings command contract preflight implementationSharing");
+requireMarketplacePosture(runtimeSettingsCommandContractPreflight, "runtime settings command contract preflight");
+requireArrayEqual(runtimeSettingsCommandContractPreflight.implementationStartScope, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016", "T017", "T018"], "runtime settings command contract preflight implementationStartScope");
+if (!Array.isArray(runtimeSettingsCommandContractPreflight.checkResults) || runtimeSettingsCommandContractPreflight.checkResults.length !== runtimeSettingsCommandContractPreflight.requiredChecks.length) {
+  failures.push("runtime settings command contract preflight checkResults: must match requiredChecks length");
+} else {
+  for (const result of runtimeSettingsCommandContractPreflight.checkResults) {
+    requireEqual(result.status, "pass", `runtime settings command contract preflight check result ${result.check}`);
+  }
+}
+requireFile(`docs/requirements/admissions/${runtimeSettingsCommandContractSliceId}/IAU-runtime-settings-cli-validation-command-contract-v1-preflight-v1.md`);
+
+const runtimeSettingsCommandContractManifest = readJson(`${runtimeSettingsCommandContractImportDir}/manifest.json`);
+requireEqual(runtimeSettingsCommandContractManifest.schema, "vi-history/requirements-import@v1", "runtime settings command contract manifest schema");
+requireEqual(runtimeSettingsCommandContractManifest.sliceId, runtimeSettingsCommandContractSliceId, "runtime settings command contract sliceId");
+requireEqual(runtimeSettingsCommandContractManifest.sourceBaselineTag, "v1.3.16", "runtime settings command contract sourceBaselineTag");
+requireEqual(runtimeSettingsCommandContractManifest.sourceCommit, "7b3d15af11df545de21501106c9b62734fb177f5", "runtime settings command contract sourceCommit");
+requireEqual(runtimeSettingsCommandContractManifest.governedAdmissionCommit, "93177a013b5294c0e05745f5af67b866e9b15568", "runtime settings command contract governedAdmissionCommit");
+requireEqual(runtimeSettingsCommandContractManifest.targetProduct, "vi-history", "runtime settings command contract targetProduct");
+requireEqual(runtimeSettingsCommandContractManifest.targetFeature, runtimeSettingsCommandContractSliceId, "runtime settings command contract targetFeature");
+requireEqual(runtimeSettingsCommandContractManifest.redactionStatus, "pass", "runtime settings command contract redactionStatus");
+requireEqual(runtimeSettingsCommandContractManifest.implementationSharing, "none", "runtime settings command contract implementationSharing");
+requireEqual(runtimeSettingsCommandContractManifest.marketplacePublication, "disabled-until-later-adr", "runtime settings command contract marketplacePublication");
+requireArrayEqual(runtimeSettingsCommandContractManifest.importedRequirementIds, runtimeSettingsCommandContractExpectedIds, "runtime settings command contract importedRequirementIds");
+requireArrayEqual(runtimeSettingsCommandContractManifest.prerequisiteRequirementIds, ["VHS-REQ-537", "VHS-REQ-543", "VHS-REQ-544", "VHS-REQ-545"], "runtime settings command contract prerequisiteRequirementIds");
+requireArrayEqual(runtimeSettingsCommandContractManifest.supportingTestIds, ["TEST-UNIT-392"], "runtime settings command contract supportingTestIds");
+requireEqual(runtimeSettingsCommandContractManifest.contractName, "createRuntimeSettingsValidationCommandResult", "runtime settings command contract contractName");
+requireArrayEqual(runtimeSettingsCommandContractManifest.files, ["syrs.md", "srs.md", "rtm.csv", "test-plan.md"], "runtime settings command contract manifest files");
+
+for (const file of runtimeSettingsCommandContractManifest.files ?? []) {
+  requireFile(`${runtimeSettingsCommandContractImportDir}/${file}`);
+}
+
+for (const file of ["spec.md", "plan.md", "tasks.md"]) {
+  requireFile(`${runtimeSettingsCommandContractFeatureDir}/${file}`);
+}
+
+requireTextIncludes(`${runtimeSettingsCommandContractFeatureDir}/spec.md`, [
+  "Runtime Settings CLI Validation Command Contract",
+  "VHS-REQ-546",
+  "TEST-UNIT-392",
+  "IAU-runtime-settings-cli-validation-command-contract-v1",
+  "createRuntimeSettingsValidationCommandResult",
+  "vihs --validate",
+  "validate-plan-only",
+  "Current Implementation Admission Unit is\n  `IAU-runtime-settings-cli-validation-command-contract-v1`",
+  "clean-room"
+]);
+requireTextIncludes(`${runtimeSettingsCommandContractFeatureDir}/plan.md`, [
+  "IAU-runtime-settings-cli-validation-command-contract-v1",
+  "Issue #93",
+  "separate handoff issue",
+  "Marketplace publication remains disabled"
+]);
+requireTextIncludes(`${runtimeSettingsCommandContractFeatureDir}/tasks.md`, [
+  "Issue #93",
+  "- [x] T001",
+  "- [x] T008",
+  "- [ ] T009",
+  "- [ ] T018",
+  "IAU-runtime-settings-cli-validation-command-contract-v1",
+  "[BLOCKED]",
+  "T027"
+]);
+requireTextIncludes(`${runtimeSettingsCommandContractImportDir}/rtm.csv`, runtimeSettingsCommandContractExpectedIds);
+requireTextIncludes(`${runtimeSettingsCommandContractImportDir}/srs.md`, [
+  "VHS-REQ-546",
+  "TEST-UNIT-392",
+  "createRuntimeSettingsValidationCommandResult",
+  "vihs-validation-proof.json",
+  "validate-plan-only"
+]);
+requireTextIncludes(`${runtimeSettingsCommandContractImportDir}/test-plan.md`, [
+  "TEST-UNIT-RSCOMMAND-001",
+  "TEST-UNIT-RSCOMMAND-008",
+  "hidden partial success",
+  "source-copying side effects remain blocked"
+]);
+requireTextIncludes("README.md", [
+  "runtime-settings-cli-validation-command-contract-v1",
+  "docs/requirements/admissions/runtime-settings-cli-validation-command-contract-v1.json",
+  "Issue #93",
+  "IAU-runtime-settings-cli-validation-command-contract-v1",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-command-contract-v1`.",
+  "createRuntimeSettingsValidationCommandResult(input = {})",
+  "validate-plan-only"
+]);
+requireTextIncludes("AGENTS.md", [
+  "runtime-settings-cli-validation-command-contract-v1",
+  "Issue #93",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-command-contract-v1`.",
+  "IAU-runtime-settings-cli-validation-command-contract-v1",
+  "017-runtime-settings-cli-validation-command-contract-v1"
+]);
+requireTextIncludes("docs/development/copilot-workflow.md", [
+  "runtime-settings-cli-validation-command-contract-v1",
+  "Issue #93",
+  "IAU-runtime-settings-cli-validation-command-contract-v1",
+  "createRuntimeSettingsValidationCommandResult(input = {})",
+  "validate-plan-only"
 ]);
 
 if (failures.length > 0) {

@@ -51,6 +51,10 @@ Issue #89 imports `runtime-settings-cli-validation-runtime-outcome-v1` and
 admits `IAU-runtime-settings-cli-validation-runtime-outcome-v1` for
 T009-T016 only.
 Issue #91 implements and closes it for T009-T016 only.
+Issue #93 imports `runtime-settings-cli-validation-command-contract-v1` and
+admits `IAU-runtime-settings-cli-validation-command-contract-v1` for
+T009-T018 only. Issue #93 is an admission issue and must not be reused for
+implementation.
 
 ## Authority
 
@@ -155,6 +159,10 @@ Issue #91 implements and closes it for T009-T016 only.
   implementation.
 - Issue #91 implements and closes
   `IAU-runtime-settings-cli-validation-runtime-outcome-v1` for T009-T016 only.
+- Issue #93 imports `runtime-settings-cli-validation-command-contract-v1` and
+  admits `IAU-runtime-settings-cli-validation-command-contract-v1` for
+  T009-T018 only. Issue #93 is an admission issue and must not be reused for
+  implementation.
 
 The current admission ledgers are:
 
@@ -174,9 +182,10 @@ The current admission ledgers are:
 - `docs/requirements/admissions/runtime-settings-cli-validation-proof-out-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-proof-out-file-emission-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-runtime-outcome-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-command-contract-v1.json`
 
 Current Implementation Admission Unit:
-`none`.
+`IAU-runtime-settings-cli-validation-command-contract-v1`.
 
 The completed observation model scope is T009-T013. The command activation
 manifest contract implements only T009-T012. The command handler entrypoint shell
@@ -278,10 +287,18 @@ Runtime validation execution, runtime locator invocation, compare execution,
 LabVIEWCLI execution, Docker execution or orchestration, live terminal proof,
 package/bin publication, launcher/profile mutation, release automation,
 Marketplace work, and source copying remain blocked.
+`runtime-settings-cli-validation-command-contract-v1` admits
+`IAU-runtime-settings-cli-validation-command-contract-v1` for Issue #93 and
+T009-T018 only. Issue #93 is an admission issue and must not be reused for
+implementation. The admitted implementation must use a separate handoff issue
+after the admission PR merges. It may implement only the pure
+`createRuntimeSettingsValidationCommandResult(input = {})` contract for
+`vihs --validate` and optional `--proof-out <dir>` composition through the
+already admitted proof-out file-emission contract.
 Runtime validation execution, validation fact generation beyond supplied
 runtime outcome fact shaping, compare execution, LabVIEWCLI execution, Docker
-execution, and source copying remain blocked until separate public bridge
-admission.
+execution, raw terminal process wiring, `validate-plan-only`, and source
+copying remain blocked until separate public bridge admission.
 
 The Marketplace posture is recorded in
 `docs/decisions/ADR-001-marketplace-publication-disabled.md` and summarized in
