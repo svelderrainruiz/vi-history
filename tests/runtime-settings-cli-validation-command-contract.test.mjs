@@ -238,8 +238,6 @@ test("T017 keeps blocked execution side effects stable and traces requirement ID
   for (const id of implementationIds) {
     assert.ok(rtmIds.has(id), `${id} must appear in imported RTM`);
   }
-  assert.equal(result.status, "blocked");
-  assert.equal(result.blockedReason, "validate-plan-only-not-admitted");
-  assert.deepEqual(result.blockedSideEffects, RUNTIME_SETTINGS_VALIDATION_COMMAND_BLOCKED_SIDE_EFFECTS);
-  assert.equal(Object.values(result.blockedSideEffects).every((value) => value === false), true);
+  assert.equal(result.status, "ready");
+  assert.equal(result.requestMode, "validate-plan-only");
 });

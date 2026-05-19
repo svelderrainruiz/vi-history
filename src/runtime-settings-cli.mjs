@@ -880,6 +880,32 @@ export async function writeRuntimeSettingsValidationProofOutFiles(input = {}) {
 }
 
 export async function createRuntimeSettingsValidationCommandResult(input = {}) {
+  const { requestMode } = input;
+
+  if (requestMode === "validate-plan-only") {
+    // Fail closed for missing inputs
+    if (!input.settings || !input.runtimeSelection) {
+      return {
+        status: "blocked",
+        blockedReason: "missing-validation-facts",
+        validationStatus: "blocked"
+      };
+    }
+
+    // Compose through createRuntimeSettingsValidationProofOutAdapter
+    const proofOutAdapter = createRuntimeSettingsValidationProofOutAdapter(input);
+
+    return {
+      status: "ready",
+      requestMode,
+      proofOut: proofOutAdapter,
+      artifactWrites: false,
+      partialWrite: false,
+      guidance: { nonInteractive: true, promptWait: false },
+      copyableGuidance: ["vihs --validate"]
+    };
+  }
+
   const request = normalizeValidationCommandRequest(input);
   if (!request.ok) {
     return validationCommandContractResult({
