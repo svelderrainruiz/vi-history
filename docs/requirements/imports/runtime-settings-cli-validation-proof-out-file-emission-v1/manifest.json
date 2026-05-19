@@ -1,0 +1,34 @@
+{
+  "schema": "vi-history/requirements-import@v1",
+  "sliceId": "runtime-settings-cli-validation-proof-out-file-emission-v1",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "31810efff02ba5fe38c0642e6b2175f511ee12fa",
+  "governedAdmissionCommit": "567157f4a77536c4efa07ba72eea3314083ccde2",
+  "targetProduct": "vi-history",
+  "targetFeature": "runtime-settings-cli-validation-proof-out-file-emission-v1",
+  "specKitPath": ".specify/specs/runtime-settings-cli-validation-proof-out-file-emission-v1",
+  "redactionStatus": "pass",
+  "implementationSharing": "none",
+  "marketplacePublication": "disabled-until-later-adr",
+  "importedRequirementIds": [
+    "VHS-REQ-546"
+  ],
+  "prerequisiteRequirementIds": [
+    "VHS-REQ-537",
+    "VHS-REQ-544",
+    "VHS-REQ-545"
+  ],
+  "supportingTestIds": [
+    "TEST-UNIT-392"
+  ],
+  "artifactNames": [
+    "vihs-validation-proof.json",
+    "vihs-validation-issue.md"
+  ],
+  "files": [
+    "syrs.md",
+    "srs.md",
+    "rtm.csv",
+    "test-plan.md"
+  ]
+}

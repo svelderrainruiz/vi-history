@@ -154,6 +154,17 @@ Read these before changing code:
 - `docs/requirements/admissions/runtime-settings-cli-validation-proof-out-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-proof-out-v1/IAU-runtime-settings-cli-validation-proof-out-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-proof-out-v1/IAU-runtime-settings-cli-validation-proof-out-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-proof-out-file-emission-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-proof-out-file-emission-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-proof-out-file-emission-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-proof-out-file-emission-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-validation-proof-out-file-emission-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-validation-proof-out-file-emission-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-validation-proof-out-file-emission-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-validation-proof-out-file-emission-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-validation-proof-out-file-emission-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-proof-out-file-emission-v1/IAU-runtime-settings-cli-validation-proof-out-file-emission-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-proof-out-file-emission-v1/IAU-runtime-settings-cli-validation-proof-out-file-emission-v1-preflight-v1.json`
 
 ## Current Status
 
@@ -317,6 +328,18 @@ side-effect facts. The proof-out adapter consumes supplied validation/proof
 facts; it does not run validation. Runtime settings CLI validation proof-out
 adapter behavior beyond pure proof-out facts remains blocked.
 
+Issue #85 admits
+`IAU-runtime-settings-cli-validation-proof-out-file-emission-v1` for
+`runtime-settings-cli-validation-proof-out-file-emission-v1` and T009-T016
+only. Issue #85 is an admission issue and must not be reused for
+implementation. Implementation must use a separate handoff issue after the
+admission PR merges. The admitted unit is limited to file emission from ready
+proof-out adapter facts: create the supported target directory when safe,
+write exactly `vihs-validation-proof.json` and
+`vihs-validation-issue.md`, report deterministic write-result facts, and fail
+closed without hidden partial success. It does not run validation or create new
+validation facts.
+
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.
 
@@ -335,18 +358,22 @@ Do not implement these without a separate bridge admission:
   session/input facts
 - runtime settings CLI validation proof-out adapter behavior beyond pure
   proof-out request, target, artifact, and guidance facts
+- runtime settings CLI validation proof-out file-emission behavior beyond
+  writing ready adapter payload facts as exactly two files
 - runtime settings mutation beyond the admitted provider/version/bitness
   settings-write contract
 - validation behavior beyond the admitted pure `vihs --validate` readback
   contract
 - validation proof artifact behavior beyond the admitted pure proof JSON and
   issue-body contract
+- new validation fact generation in the proof-out file-emission lane
 - compare execution
 - no-argument interactive selection beyond the admitted pure selection-state
   contract
 - OS-specific raw stdin/TTY process drivers beyond the admitted pure terminal
   session/input adapter contract
 - proof-out file generation beyond the admitted validation proof-out adapter
+  and file-emission IAU
 - live already-running VS Code session uptake proof
 - observation report rendering for T014-T016
 - Marketplace publication or packaging

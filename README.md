@@ -42,6 +42,10 @@ Issue #79 implements and closes it for T009-T014 only.
 Issue #81 imports `runtime-settings-cli-validation-proof-out-v1` and admits
 `IAU-runtime-settings-cli-validation-proof-out-v1` for T009-T014 only.
 Issue #83 implements and closes it for T009-T014 only.
+Issue #85 imports
+`runtime-settings-cli-validation-proof-out-file-emission-v1` and admits
+`IAU-runtime-settings-cli-validation-proof-out-file-emission-v1` for
+T009-T016 only.
 
 ## Authority
 
@@ -132,6 +136,11 @@ Issue #83 implements and closes it for T009-T014 only.
   Issue #81 is an admission issue and must not be reused for implementation.
 - Issue #83 implements and closes
   `IAU-runtime-settings-cli-validation-proof-out-v1` for T009-T014 only.
+- Issue #85 imports
+  `runtime-settings-cli-validation-proof-out-file-emission-v1` and admits
+  `IAU-runtime-settings-cli-validation-proof-out-file-emission-v1` for
+  T009-T016 only. Issue #85 is an admission issue and must not be reused for
+  implementation.
 
 The current admission ledgers are:
 
@@ -149,9 +158,10 @@ The current admission ledgers are:
 - `docs/requirements/admissions/runtime-settings-cli-terminal-prompt-loop-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-terminal-io-adapter-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-proof-out-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-proof-out-file-emission-v1.json`
 
 Current Implementation Admission Unit:
-`none`.
+`IAU-runtime-settings-cli-validation-proof-out-file-emission-v1`.
 
 The completed observation model scope is T009-T013. The command activation
 manifest contract implements only T009-T012. The command handler entrypoint shell
@@ -231,7 +241,22 @@ adapter contract. Issue #83 implements and closes the handoff. Runtime
 validation execution, compare execution, LabVIEWCLI execution, Docker
 execution, live terminal proof, package/bin publication, launcher/profile
 mutation, Marketplace work, and source copying remain blocked.
-Runtime validation execution, compare execution, LabVIEWCLI execution, Docker execution, and source copying remain blocked until separate public bridge admission.
+The runtime settings CLI validation proof-out file-emission IAU is admitted
+only for T009-T016 in
+`.specify/specs/runtime-settings-cli-validation-proof-out-file-emission-v1/tasks.md`:
+tests for successful two-file emission, deterministic file content, created
+output directory, missing or unready adapter failure, unsupported target
+failure, I/O failure reporting, no hidden partial success, blocked side
+effects, and the minimum pure file-emission adapter around ready proof-out
+adapter facts. Issue #85 is the admission issue; implementation must use a
+separate handoff issue after this admission PR merges. Runtime validation
+execution, new validation fact generation, compare execution, LabVIEWCLI
+execution, Docker execution, live terminal proof, package/bin publication,
+launcher/profile mutation, Marketplace work, and source copying remain
+blocked.
+Runtime validation execution, new validation fact generation, compare
+execution, LabVIEWCLI execution, Docker execution, and source copying remain
+blocked until separate public bridge admission.
 
 The Marketplace posture is recorded in
 `docs/decisions/ADR-001-marketplace-publication-disabled.md` and summarized in

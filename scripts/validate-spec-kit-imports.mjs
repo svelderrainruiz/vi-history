@@ -84,6 +84,12 @@ const runtimeSettingsProofOutImportDir = `docs/requirements/imports/${runtimeSet
 const runtimeSettingsProofOutAdmissionPath = `docs/requirements/admissions/${runtimeSettingsProofOutSliceId}.json`;
 const runtimeSettingsProofOutIauPath = `docs/requirements/admissions/${runtimeSettingsProofOutSliceId}/IAU-runtime-settings-cli-validation-proof-out-v1.json`;
 const runtimeSettingsProofOutPreflightPath = `docs/requirements/admissions/${runtimeSettingsProofOutSliceId}/IAU-runtime-settings-cli-validation-proof-out-v1-preflight-v1.json`;
+const runtimeSettingsProofOutFileEmissionSliceId = "runtime-settings-cli-validation-proof-out-file-emission-v1";
+const runtimeSettingsProofOutFileEmissionFeatureDir = `.specify/specs/${runtimeSettingsProofOutFileEmissionSliceId}`;
+const runtimeSettingsProofOutFileEmissionImportDir = `docs/requirements/imports/${runtimeSettingsProofOutFileEmissionSliceId}`;
+const runtimeSettingsProofOutFileEmissionAdmissionPath = `docs/requirements/admissions/${runtimeSettingsProofOutFileEmissionSliceId}.json`;
+const runtimeSettingsProofOutFileEmissionIauPath = `docs/requirements/admissions/${runtimeSettingsProofOutFileEmissionSliceId}/IAU-runtime-settings-cli-validation-proof-out-file-emission-v1.json`;
+const runtimeSettingsProofOutFileEmissionPreflightPath = `docs/requirements/admissions/${runtimeSettingsProofOutFileEmissionSliceId}/IAU-runtime-settings-cli-validation-proof-out-file-emission-v1-preflight-v1.json`;
 const marketplaceAdrPath = "docs/decisions/ADR-001-marketplace-publication-disabled.md";
 const explicitCompareIauPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1.json`;
 const explicitComparePreflightPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1-preflight-v1.json`;
@@ -165,6 +171,9 @@ const runtimeSettingsTerminalIoExpectedIds = [
 const runtimeSettingsProofOutExpectedIds = [
   "VHS-REQ-546"
 ];
+const runtimeSettingsProofOutFileEmissionExpectedIds = [
+  "VHS-REQ-546"
+];
 
 const failures = [];
 
@@ -244,11 +253,12 @@ requireTextIncludes(".specify/memory/constitution.md", [
   "runtime-settings-cli-terminal-prompt-loop-v1",
   "runtime-settings-cli-terminal-io-adapter-v1",
   "runtime-settings-cli-validation-proof-out-v1",
-  "**Version**: 0.1.12"
+  "runtime-settings-cli-validation-proof-out-file-emission-v1",
+  "**Version**: 0.1.13"
 ]);
 
 const featureJson = readJson(".specify/feature.json");
-requireEqual(featureJson.feature_directory, runtimeSettingsProofOutFeatureDir, "pinned Spec Kit feature directory");
+requireEqual(featureJson.feature_directory, runtimeSettingsProofOutFileEmissionFeatureDir, "pinned Spec Kit feature directory");
 
 const admission = readJson(admissionPath);
 requireEqual(admission.schema, "vi-history/requirements-admission@v1", "admission schema");
@@ -625,7 +635,7 @@ requireTextIncludes("README.md", [
 requireTextIncludes("AGENTS.md", [
   "installed-user-observation-public-surface-v1",
   "IAU-installed-user-observation-model-v1",
-  "014-runtime-settings-cli-validation-proof-out-v1"
+  "015-runtime-settings-cli-validation-proof-out-file-emission-v1"
 ]);
 
 const commandAdmission = readJson(commandAdmissionPath);
@@ -1112,7 +1122,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-bootstrap-v1",
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-prepare-command-shell-v1",
-  "014-runtime-settings-cli-validation-proof-out-v1"
+  "015-runtime-settings-cli-validation-proof-out-file-emission-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-bootstrap-v1",
@@ -1248,7 +1258,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-settings-write-v1",
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-settings-write-contract-v1",
-  "014-runtime-settings-cli-validation-proof-out-v1"
+  "015-runtime-settings-cli-validation-proof-out-file-emission-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-settings-write-v1",
@@ -1383,7 +1393,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-validation-readback-v1",
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-validation-readback-contract-v1",
-  "014-runtime-settings-cli-validation-proof-out-v1"
+  "015-runtime-settings-cli-validation-proof-out-file-emission-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-readback-v1",
@@ -1527,7 +1537,7 @@ requireTextIncludes("AGENTS.md", [
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-validation-proof-artifact-v1",
   "IAU-runtime-settings-cli-interactive-selection-contract-v1",
-  "014-runtime-settings-cli-validation-proof-out-v1"
+  "015-runtime-settings-cli-validation-proof-out-file-emission-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-proof-v1",
@@ -1669,10 +1679,10 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-interactive-selection-v1",
   "Issue #60",
   "Issue #62",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-proof-out-file-emission-v1`.",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
   "IAU-runtime-settings-cli-interactive-selection-contract-v1",
-  "014-runtime-settings-cli-validation-proof-out-v1"
+  "015-runtime-settings-cli-validation-proof-out-file-emission-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-interactive-selection-v1",
@@ -1814,15 +1824,15 @@ requireTextIncludes("README.md", [
   "Issue #65",
   "Issue #67",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
-  "Current Implementation Admission Unit:\n`none`."
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-proof-out-file-emission-v1`."
 ]);
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-terminal-entrypoint-v1",
   "Issue #65",
   "Issue #67",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-proof-out-file-emission-v1`.",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
-  "014-runtime-settings-cli-validation-proof-out-v1"
+  "015-runtime-settings-cli-validation-proof-out-file-emission-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-terminal-entrypoint-v1",
@@ -1963,17 +1973,17 @@ requireTextIncludes("README.md", [
   "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
   "latest supported NI LabVIEW Docker image selection",
   "no user-facing Docker bitness choice",
-  "Current Implementation Admission Unit:\n`none`."
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-proof-out-file-emission-v1`."
 ]);
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-terminal-prompt-loop-v1",
   "Issue #71",
   "Issue #73",
   "Issue #75",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-proof-out-file-emission-v1`.",
   "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
   "no separate Docker bitness\nchoice",
-  "014-runtime-settings-cli-validation-proof-out-v1"
+  "015-runtime-settings-cli-validation-proof-out-file-emission-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-terminal-prompt-loop-v1",
@@ -2128,7 +2138,7 @@ requireTextIncludes("README.md", [
   "Issue #77",
   "Issue #79",
   "IAU-runtime-settings-cli-terminal-io-adapter-v1",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-proof-out-file-emission-v1`.",
   "latest supported NI LabVIEW image-family selection with no Docker bitness\nprompt",
   "source copying remain blocked"
 ]);
@@ -2136,10 +2146,10 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-terminal-io-adapter-v1",
   "Issue #77",
   "Issue #79",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-proof-out-file-emission-v1`.",
   "IAU-runtime-settings-cli-terminal-io-adapter-v1",
   "no Docker bitness prompt",
-  "014-runtime-settings-cli-validation-proof-out-v1"
+  "015-runtime-settings-cli-validation-proof-out-file-emission-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-terminal-io-adapter-v1",
@@ -2290,17 +2300,17 @@ requireTextIncludes("README.md", [
   "Issue #81",
   "Issue #83",
   "IAU-runtime-settings-cli-validation-proof-out-v1",
-  "Current Implementation Admission Unit:\n`none`.",
-  "Runtime validation execution, compare execution, LabVIEWCLI execution, Docker execution",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-proof-out-file-emission-v1`.",
+  "Runtime validation execution",
   "source copying remain blocked"
 ]);
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-validation-proof-out-v1",
   "Issue #81",
   "Issue #83",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-proof-out-file-emission-v1`.",
   "IAU-runtime-settings-cli-validation-proof-out-v1",
-  "014-runtime-settings-cli-validation-proof-out-v1"
+  "015-runtime-settings-cli-validation-proof-out-file-emission-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-proof-out-v1",
@@ -2309,6 +2319,155 @@ requireTextIncludes("docs/development/copilot-workflow.md", [
   "IAU-runtime-settings-cli-validation-proof-out-v1",
   "validation proof-out\nadapter behavior beyond pure proof-out",
   "proof-out adapter consumes supplied validation/proof"
+]);
+
+const runtimeSettingsProofOutFileEmissionAdmission = readJson(runtimeSettingsProofOutFileEmissionAdmissionPath);
+requireEqual(runtimeSettingsProofOutFileEmissionAdmission.schema, "vi-history/requirements-admission@v1", "runtime settings proof-out file-emission admission schema");
+requireEqual(runtimeSettingsProofOutFileEmissionAdmission.sliceId, runtimeSettingsProofOutFileEmissionSliceId, "runtime settings proof-out file-emission admission sliceId");
+requireEqual(runtimeSettingsProofOutFileEmissionAdmission.state, "admitted", "runtime settings proof-out file-emission admission state");
+requireEqual(runtimeSettingsProofOutFileEmissionAdmission.targetProduct, "vi-history", "runtime settings proof-out file-emission admission targetProduct");
+requireEqual(runtimeSettingsProofOutFileEmissionAdmission.targetFeature, runtimeSettingsProofOutFileEmissionSliceId, "runtime settings proof-out file-emission admission targetFeature");
+requireEqual(runtimeSettingsProofOutFileEmissionAdmission.sourceBaselineTag, "v1.3.16", "runtime settings proof-out file-emission admission sourceBaselineTag");
+requireEqual(runtimeSettingsProofOutFileEmissionAdmission.sourceCommit, "31810efff02ba5fe38c0642e6b2175f511ee12fa", "runtime settings proof-out file-emission admission sourceCommit");
+requireEqual(runtimeSettingsProofOutFileEmissionAdmission.governedAdmissionCommit, "567157f4a77536c4efa07ba72eea3314083ccde2", "runtime settings proof-out file-emission admission governedAdmissionCommit");
+requireEqual(runtimeSettingsProofOutFileEmissionAdmission.implementationSharing, "none", "runtime settings proof-out file-emission admission implementationSharing");
+requireMarketplacePosture(runtimeSettingsProofOutFileEmissionAdmission, "runtime settings proof-out file-emission admission");
+requireEqual(runtimeSettingsProofOutFileEmissionAdmission.currentImplementationAdmissionUnit, "IAU-runtime-settings-cli-validation-proof-out-file-emission-v1", "runtime settings proof-out file-emission currentImplementationAdmissionUnit");
+requireArrayEqual(runtimeSettingsProofOutFileEmissionAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "runtime settings proof-out file-emission completedSpecScope");
+requireArrayEqual(runtimeSettingsProofOutFileEmissionAdmission.completedImplementationScope, [], "runtime settings proof-out file-emission completedImplementationScope");
+requireArrayEqual(runtimeSettingsProofOutFileEmissionAdmission.admittedImplementationScope, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings proof-out file-emission admittedImplementationScope");
+requireArrayEqual(runtimeSettingsProofOutFileEmissionAdmission.blockedImplementationScope, ["T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025", "T026"], "runtime settings proof-out file-emission blockedImplementationScope");
+requireEqual(runtimeSettingsProofOutFileEmissionAdmission.preImplementationPreflight?.iauId, "IAU-runtime-settings-cli-validation-proof-out-file-emission-v1", "runtime settings proof-out file-emission preImplementationPreflight iauId");
+requireEqual(runtimeSettingsProofOutFileEmissionAdmission.preImplementationPreflight?.status, "pass", "runtime settings proof-out file-emission preImplementationPreflight status");
+requireEqual(runtimeSettingsProofOutFileEmissionAdmission.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings proof-out file-emission preImplementationPreflight implementationStartAllowed");
+requireEqual(runtimeSettingsProofOutFileEmissionAdmission.preImplementationPreflight?.record, runtimeSettingsProofOutFileEmissionPreflightPath, "runtime settings proof-out file-emission preImplementationPreflight record");
+requireEqual(runtimeSettingsProofOutFileEmissionAdmission.issue?.number, 85, "runtime settings proof-out file-emission issue number");
+requireFile(`docs/requirements/admissions/${runtimeSettingsProofOutFileEmissionSliceId}.md`);
+
+const runtimeSettingsProofOutFileEmissionAdmissionUnit = (runtimeSettingsProofOutFileEmissionAdmission.implementationAdmissionUnits ?? [])
+  .find((unit) => unit?.iauId === "IAU-runtime-settings-cli-validation-proof-out-file-emission-v1");
+requireEqual(runtimeSettingsProofOutFileEmissionAdmissionUnit?.state, "admitted", "runtime settings proof-out file-emission admission unit state");
+requireEqual(runtimeSettingsProofOutFileEmissionAdmissionUnit?.preflightRecord, runtimeSettingsProofOutFileEmissionPreflightPath, "runtime settings proof-out file-emission admission unit preflightRecord");
+
+const runtimeSettingsProofOutFileEmissionIau = readJson(runtimeSettingsProofOutFileEmissionIauPath);
+requireEqual(runtimeSettingsProofOutFileEmissionIau.schema, "vi-history/implementation-admission-unit@v1", "runtime settings proof-out file-emission IAU schema");
+requireEqual(runtimeSettingsProofOutFileEmissionIau.iauId, "IAU-runtime-settings-cli-validation-proof-out-file-emission-v1", "runtime settings proof-out file-emission IAU id");
+requireEqual(runtimeSettingsProofOutFileEmissionIau.state, "admitted", "runtime settings proof-out file-emission IAU state");
+requireEqual(runtimeSettingsProofOutFileEmissionIau.parentSliceId, runtimeSettingsProofOutFileEmissionSliceId, "runtime settings proof-out file-emission IAU parentSliceId");
+requireArrayEqual(runtimeSettingsProofOutFileEmissionIau.admittedTasks, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings proof-out file-emission IAU admittedTasks");
+requireArrayEqual(runtimeSettingsProofOutFileEmissionIau.blockedTasks, ["T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025", "T026"], "runtime settings proof-out file-emission IAU blockedTasks");
+requireEqual(runtimeSettingsProofOutFileEmissionIau.implementationSharing, "none", "runtime settings proof-out file-emission IAU implementationSharing");
+requireMarketplacePosture(runtimeSettingsProofOutFileEmissionIau, "runtime settings proof-out file-emission IAU");
+requireEqual(runtimeSettingsProofOutFileEmissionIau.preImplementationPreflight?.status, "pass", "runtime settings proof-out file-emission IAU preImplementationPreflight status");
+requireEqual(runtimeSettingsProofOutFileEmissionIau.preImplementationPreflight?.record, "IAU-runtime-settings-cli-validation-proof-out-file-emission-v1-preflight-v1.json", "runtime settings proof-out file-emission IAU preImplementationPreflight record");
+requireEqual(runtimeSettingsProofOutFileEmissionIau.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings proof-out file-emission IAU preImplementationPreflight implementationStartAllowed");
+requireFile(`docs/requirements/admissions/${runtimeSettingsProofOutFileEmissionSliceId}/IAU-runtime-settings-cli-validation-proof-out-file-emission-v1.md`);
+
+const runtimeSettingsProofOutFileEmissionPreflight = readJson(runtimeSettingsProofOutFileEmissionPreflightPath);
+requireEqual(runtimeSettingsProofOutFileEmissionPreflight.schema, "vi-history/implementation-admission-unit-preflight@v1", "runtime settings proof-out file-emission preflight schema");
+requireEqual(runtimeSettingsProofOutFileEmissionPreflight.iauId, "IAU-runtime-settings-cli-validation-proof-out-file-emission-v1", "runtime settings proof-out file-emission preflight iauId");
+requireEqual(runtimeSettingsProofOutFileEmissionPreflight.status, "pass", "runtime settings proof-out file-emission preflight status");
+requireEqual(runtimeSettingsProofOutFileEmissionPreflight.implementationStartAllowed, true, "runtime settings proof-out file-emission preflight implementationStartAllowed");
+requireEqual(runtimeSettingsProofOutFileEmissionPreflight.parentSliceId, runtimeSettingsProofOutFileEmissionSliceId, "runtime settings proof-out file-emission preflight parentSliceId");
+requireEqual(runtimeSettingsProofOutFileEmissionPreflight.implementationSharing, "none", "runtime settings proof-out file-emission preflight implementationSharing");
+requireMarketplacePosture(runtimeSettingsProofOutFileEmissionPreflight, "runtime settings proof-out file-emission preflight");
+requireArrayEqual(runtimeSettingsProofOutFileEmissionPreflight.implementationStartScope, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings proof-out file-emission preflight implementationStartScope");
+if (!Array.isArray(runtimeSettingsProofOutFileEmissionPreflight.checkResults) || runtimeSettingsProofOutFileEmissionPreflight.checkResults.length !== runtimeSettingsProofOutFileEmissionPreflight.requiredChecks.length) {
+  failures.push("runtime settings proof-out file-emission preflight checkResults: must match requiredChecks length");
+} else {
+  for (const result of runtimeSettingsProofOutFileEmissionPreflight.checkResults) {
+    requireEqual(result.status, "pass", `runtime settings proof-out file-emission preflight check result ${result.check}`);
+  }
+}
+requireFile(`docs/requirements/admissions/${runtimeSettingsProofOutFileEmissionSliceId}/IAU-runtime-settings-cli-validation-proof-out-file-emission-v1-preflight-v1.md`);
+
+const runtimeSettingsProofOutFileEmissionManifest = readJson(`${runtimeSettingsProofOutFileEmissionImportDir}/manifest.json`);
+requireEqual(runtimeSettingsProofOutFileEmissionManifest.schema, "vi-history/requirements-import@v1", "runtime settings proof-out file-emission manifest schema");
+requireEqual(runtimeSettingsProofOutFileEmissionManifest.sliceId, runtimeSettingsProofOutFileEmissionSliceId, "runtime settings proof-out file-emission sliceId");
+requireEqual(runtimeSettingsProofOutFileEmissionManifest.sourceBaselineTag, "v1.3.16", "runtime settings proof-out file-emission sourceBaselineTag");
+requireEqual(runtimeSettingsProofOutFileEmissionManifest.sourceCommit, "31810efff02ba5fe38c0642e6b2175f511ee12fa", "runtime settings proof-out file-emission sourceCommit");
+requireEqual(runtimeSettingsProofOutFileEmissionManifest.governedAdmissionCommit, "567157f4a77536c4efa07ba72eea3314083ccde2", "runtime settings proof-out file-emission governedAdmissionCommit");
+requireEqual(runtimeSettingsProofOutFileEmissionManifest.targetProduct, "vi-history", "runtime settings proof-out file-emission targetProduct");
+requireEqual(runtimeSettingsProofOutFileEmissionManifest.targetFeature, runtimeSettingsProofOutFileEmissionSliceId, "runtime settings proof-out file-emission targetFeature");
+requireEqual(runtimeSettingsProofOutFileEmissionManifest.redactionStatus, "pass", "runtime settings proof-out file-emission redactionStatus");
+requireEqual(runtimeSettingsProofOutFileEmissionManifest.implementationSharing, "none", "runtime settings proof-out file-emission implementationSharing");
+requireEqual(runtimeSettingsProofOutFileEmissionManifest.marketplacePublication, "disabled-until-later-adr", "runtime settings proof-out file-emission marketplacePublication");
+requireArrayEqual(runtimeSettingsProofOutFileEmissionManifest.importedRequirementIds, runtimeSettingsProofOutFileEmissionExpectedIds, "runtime settings proof-out file-emission importedRequirementIds");
+requireArrayEqual(runtimeSettingsProofOutFileEmissionManifest.prerequisiteRequirementIds, ["VHS-REQ-537", "VHS-REQ-544", "VHS-REQ-545"], "runtime settings proof-out file-emission prerequisiteRequirementIds");
+requireArrayEqual(runtimeSettingsProofOutFileEmissionManifest.supportingTestIds, ["TEST-UNIT-392"], "runtime settings proof-out file-emission supportingTestIds");
+requireArrayEqual(runtimeSettingsProofOutFileEmissionManifest.artifactNames, ["vihs-validation-proof.json", "vihs-validation-issue.md"], "runtime settings proof-out file-emission artifactNames");
+requireArrayEqual(runtimeSettingsProofOutFileEmissionManifest.files, ["syrs.md", "srs.md", "rtm.csv", "test-plan.md"], "runtime settings proof-out file-emission manifest files");
+
+for (const file of runtimeSettingsProofOutFileEmissionManifest.files ?? []) {
+  requireFile(`${runtimeSettingsProofOutFileEmissionImportDir}/${file}`);
+}
+
+for (const file of ["spec.md", "plan.md", "tasks.md"]) {
+  requireFile(`${runtimeSettingsProofOutFileEmissionFeatureDir}/${file}`);
+}
+
+requireTextIncludes(`${runtimeSettingsProofOutFileEmissionFeatureDir}/spec.md`, [
+  "Runtime Settings CLI Validation Proof-Out File Emission",
+  "VHS-REQ-546",
+  "TEST-UNIT-392",
+  "IAU-runtime-settings-cli-validation-proof-out-file-emission-v1",
+  "runtime-settings-cli-validation-proof-out-adapter-contract",
+  "vihs-validation-proof.json",
+  "vihs-validation-issue.md",
+  "clean-room"
+]);
+requireTextIncludes(`${runtimeSettingsProofOutFileEmissionFeatureDir}/plan.md`, [
+  "IAU-runtime-settings-cli-validation-proof-out-file-emission-v1",
+  "Issue #85",
+  "Marketplace publication remains disabled"
+]);
+requireTextIncludes(`${runtimeSettingsProofOutFileEmissionFeatureDir}/tasks.md`, [
+  "Issue #85",
+  "- [x] T001",
+  "- [x] T008",
+  "- [ ] T009",
+  "- [ ] T016",
+  "IAU-runtime-settings-cli-validation-proof-out-file-emission-v1",
+  "[BLOCKED]",
+  "T026"
+]);
+requireTextIncludes(`${runtimeSettingsProofOutFileEmissionImportDir}/rtm.csv`, runtimeSettingsProofOutFileEmissionExpectedIds);
+requireTextIncludes(`${runtimeSettingsProofOutFileEmissionImportDir}/srs.md`, [
+  "VHS-REQ-546",
+  "TEST-UNIT-392",
+  "vihs --validate --proof-out",
+  "runtime-settings-cli-validation-proof-out-adapter-contract",
+  "vihs-validation-proof.json",
+  "vihs-validation-issue.md"
+]);
+requireTextIncludes(`${runtimeSettingsProofOutFileEmissionImportDir}/test-plan.md`, [
+  "TEST-UNIT-RSPROOFOUTEMIT-001",
+  "TEST-UNIT-RSPROOFOUTEMIT-007",
+  "hidden partial success",
+  "source copying remain blocked"
+]);
+requireTextIncludes("README.md", [
+  "runtime-settings-cli-validation-proof-out-file-emission-v1",
+  "docs/requirements/admissions/runtime-settings-cli-validation-proof-out-file-emission-v1.json",
+  "Issue #85",
+  "IAU-runtime-settings-cli-validation-proof-out-file-emission-v1",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-proof-out-file-emission-v1`.",
+  "new validation fact generation",
+  "source copying remain\nblocked"
+]);
+requireTextIncludes("AGENTS.md", [
+  "runtime-settings-cli-validation-proof-out-file-emission-v1",
+  "Issue #85",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-proof-out-file-emission-v1`.",
+  "IAU-runtime-settings-cli-validation-proof-out-file-emission-v1",
+  "015-runtime-settings-cli-validation-proof-out-file-emission-v1"
+]);
+requireTextIncludes("docs/development/copilot-workflow.md", [
+  "runtime-settings-cli-validation-proof-out-file-emission-v1",
+  "Issue #85",
+  "IAU-runtime-settings-cli-validation-proof-out-file-emission-v1",
+  "file emission from ready\nproof-out adapter facts",
+  "new\nvalidation facts"
 ]);
 
 if (failures.length > 0) {
