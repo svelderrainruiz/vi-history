@@ -112,12 +112,24 @@ provider selection means the latest supported NI LabVIEW Docker image family,
 currently the LabVIEW 2026 Linux image family, with no separate Docker bitness
 choice exposed to users.
 
-OS-specific raw terminal I/O drivers, compare execution, LabVIEWCLI execution,
-Docker execution or orchestration, proof-out expansion, live-session proof,
-packaging, and Marketplace publication remain blocked.
+`runtime-settings-cli-terminal-io-adapter-v1` admits
+`IAU-runtime-settings-cli-terminal-io-adapter-v1` for Issue #77 and T009-T014
+only. Issue #77 is an admission issue and must not be reused for
+implementation. The future implementation must use a separate handoff issue
+after the admission PR merges. This IAU is limited to pure terminal
+session/input facts around the existing prompt-loop contract: Enter
+confirmation adaptation, guided host selection adaptation, Docker latest
+supported NI LabVIEW image-family selection with no Docker bitness prompt,
+non-TTY copyable guidance, unsupported input/EOF/cancel fail-closed behavior,
+and validation handoff facts.
+
+Compare execution, LabVIEWCLI execution, Docker execution or orchestration,
+proof-out expansion, live-session proof, package/bin publication,
+launcher/profile mutation, packaging, and Marketplace publication remain
+blocked.
 
 Current Implementation Admission Unit:
-`none`.
+`IAU-runtime-settings-cli-terminal-io-adapter-v1`.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that
@@ -127,7 +139,7 @@ When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:
 
 ```bash
-SPECIFY_FEATURE=012-runtime-settings-cli-terminal-prompt-loop-v1 \
-SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-terminal-prompt-loop-v1 \
+SPECIFY_FEATURE=013-runtime-settings-cli-terminal-io-adapter-v1 \
+SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-terminal-io-adapter-v1 \
 .specify/scripts/bash/check-prerequisites.sh --json --paths-only
 ```

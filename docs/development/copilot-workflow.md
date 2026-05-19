@@ -121,6 +121,28 @@ Read these before changing code:
 - `docs/requirements/admissions/runtime-settings-cli-terminal-entrypoint-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-terminal-entrypoint-v1/IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-terminal-entrypoint-v1/IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-terminal-prompt-loop-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-terminal-prompt-loop-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-terminal-prompt-loop-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-terminal-prompt-loop-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-terminal-prompt-loop-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-terminal-prompt-loop-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-terminal-prompt-loop-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-terminal-prompt-loop-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-terminal-prompt-loop-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-terminal-prompt-loop-v1/IAU-runtime-settings-cli-terminal-prompt-loop-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-terminal-prompt-loop-v1/IAU-runtime-settings-cli-terminal-prompt-loop-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-terminal-io-adapter-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-terminal-io-adapter-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-terminal-io-adapter-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-terminal-io-adapter-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-terminal-io-adapter-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-terminal-io-adapter-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-terminal-io-adapter-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-terminal-io-adapter-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-terminal-io-adapter-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-terminal-io-adapter-v1/IAU-runtime-settings-cli-terminal-io-adapter-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-terminal-io-adapter-v1/IAU-runtime-settings-cli-terminal-io-adapter-v1-preflight-v1.json`
 
 ## Current Status
 
@@ -261,6 +283,17 @@ LabVIEW 2026 Linux image family for the governed Linux default, and must not be
 presented as a user-facing Docker bitness choice. Docker remains 64-bit-only by
 image/platform; host LabVIEW bitness remains host-provider scope.
 
+Issue #77 admits
+`IAU-runtime-settings-cli-terminal-io-adapter-v1` for
+`runtime-settings-cli-terminal-io-adapter-v1` and T009-T014 only. Issue #77 is
+an admission issue and must not be reused for implementation. Copilot
+implementation must wait for the separate handoff issue created after the
+admission PR merges. The admitted IAU is limited to pure terminal session/input
+facts around the existing prompt-loop contract: Enter confirmation, guided host
+selection, Docker latest supported NI LabVIEW image-family selection without a
+Docker bitness prompt, non-TTY copyable guidance, unsupported input/EOF/cancel
+fail-closed behavior, and validation handoff facts.
+
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.
 
@@ -275,6 +308,10 @@ Do not implement these without a separate bridge admission:
   `IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1`
 - runtime settings CLI terminal prompt-loop implementation beyond
   `IAU-runtime-settings-cli-terminal-prompt-loop-v1`
+- runtime settings CLI terminal I/O adapter implementation before the separate
+  handoff issue for `IAU-runtime-settings-cli-terminal-io-adapter-v1`
+- runtime settings CLI terminal I/O adapter behavior beyond pure terminal
+  session/input facts
 - runtime settings mutation beyond the admitted provider/version/bitness
   settings-write contract
 - validation behavior beyond the admitted pure `vihs --validate` readback
@@ -285,7 +322,7 @@ Do not implement these without a separate bridge admission:
 - no-argument interactive selection beyond the admitted pure selection-state
   contract
 - OS-specific raw stdin/TTY process drivers beyond the admitted pure terminal
-  prompt transcript/state contract
+  session/input adapter contract
 - proof-out file generation
 - live already-running VS Code session uptake proof
 - observation report rendering for T014-T016
