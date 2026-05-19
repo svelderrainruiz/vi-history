@@ -55,6 +55,7 @@ Issue #93 imports `runtime-settings-cli-validation-command-contract-v1` and
 admits `IAU-runtime-settings-cli-validation-command-contract-v1` for
 T009-T018 only. Issue #93 is an admission issue and must not be reused for
 implementation.
+Issue #95 implements and closes it through PR #96 for T009-T018 only.
 
 ## Authority
 
@@ -163,6 +164,9 @@ implementation.
   admits `IAU-runtime-settings-cli-validation-command-contract-v1` for
   T009-T018 only. Issue #93 is an admission issue and must not be reused for
   implementation.
+- Issue #95 implements and closes
+  `IAU-runtime-settings-cli-validation-command-contract-v1` through PR #96 for
+  T009-T018 only.
 
 The current admission ledgers are:
 
@@ -185,7 +189,7 @@ The current admission ledgers are:
 - `docs/requirements/admissions/runtime-settings-cli-validation-command-contract-v1.json`
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-command-contract-v1`.
+`none`.
 
 The completed observation model scope is T009-T013. The command activation
 manifest contract implements only T009-T012. The command handler entrypoint shell
@@ -290,8 +294,8 @@ Marketplace work, and source copying remain blocked.
 `runtime-settings-cli-validation-command-contract-v1` admits
 `IAU-runtime-settings-cli-validation-command-contract-v1` for Issue #93 and
 T009-T018 only. Issue #93 is an admission issue and must not be reused for
-implementation. The admitted implementation must use a separate handoff issue
-after the admission PR merges. It may implement only the pure
+implementation. Issue #95 implements and closes it through PR #96 for
+T009-T018 only. It implements only the pure
 `createRuntimeSettingsValidationCommandResult(input = {})` contract for
 `vihs --validate` and optional `--proof-out <dir>` composition through the
 already admitted proof-out file-emission contract.

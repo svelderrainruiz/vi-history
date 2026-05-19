@@ -49,29 +49,30 @@ pure validation command result adapter for `vihs --validate`.
 
 **Public admission issue**: Issue #93
 
-**Implementation handoff issue**: created separately after this admission PR
-merges
+**Implementation handoff issue**: Issue #95
 
-- [ ] T009 Add tests proving ready `vihs --validate` command composition.
-- [ ] T010 Add tests proving missing or invalid persisted settings fail
+**Implementation PR**: PR #96
+
+- [x] T009 Add tests proving ready `vihs --validate` command composition.
+- [x] T010 Add tests proving missing or invalid persisted settings fail
   closed.
-- [ ] T011 Add tests proving missing runtime selection facts fail before ready
+- [x] T011 Add tests proving missing runtime selection facts fail before ready
   validation status.
-- [ ] T012 Add tests proving unknown runtime blocked-reason fallback remains
+- [x] T012 Add tests proving unknown runtime blocked-reason fallback remains
   stable through the command result.
-- [ ] T013 Add tests proving `--proof-out <dir>` composes through exactly
+- [x] T013 Add tests proving `--proof-out <dir>` composes through exactly
   `vihs-validation-proof.json` and `vihs-validation-issue.md` using the already
   admitted proof-out file-emission contract.
-- [ ] T014 Add tests proving no proof-out target means no file writes.
-- [ ] T015 Add tests proving unsupported proof-out targets and I/O failures do
+- [x] T014 Add tests proving no proof-out target means no file writes.
+- [x] T015 Add tests proving unsupported proof-out targets and I/O failures do
   not produce hidden partial success.
-- [ ] T016 Add tests proving non-interactive guidance is copyable and
+- [x] T016 Add tests proving non-interactive guidance is copyable and
   deterministic.
-- [ ] T017 Add tests proving OS probing, locators, runtime execution, compare,
+- [x] T017 Add tests proving OS probing, locators, runtime execution, compare,
   LabVIEWCLI, Docker, live proof, package/bin publication, launcher/profile
   mutation, Marketplace, release, `validate-plan-only`, and source-copying side
   effects remain blocked.
-- [ ] T018 Implement the minimum public MIT validation command-result
+- [x] T018 Implement the minimum public MIT validation command-result
   contract.
 
 ---
@@ -109,15 +110,15 @@ and source sharing visibly outside this IAU.
 
 ## Dependencies & Execution Order
 
-- `runtime-settings-cli-validation-runtime-outcome-v1` must be implemented and
+- `runtime-settings-cli-validation-runtime-outcome-v1` was implemented and
   closed before
   `IAU-runtime-settings-cli-validation-command-contract-v1` implementation
-  starts.
-- Phase 1 must merge before
+  started.
+- Phase 1 merged before
   `IAU-runtime-settings-cli-validation-command-contract-v1` implementation
-  starts.
-- Phase 2 must use a separate implementation handoff issue after the admission
-  PR merges.
+  started.
+- Phase 2 used separate implementation handoff Issue #95 after the admission
+  PR merged.
 - Phase 3 remains blocked until separate public requirements and preflight
   records admit OS inspection, runtime validation execution, compare
   execution, LabVIEWCLI execution, Docker execution, terminal process wiring,
@@ -127,9 +128,9 @@ and source sharing visibly outside this IAU.
 ## Implementation Strategy
 
 1. Merge import/spec/admission artifacts to `develop`.
-2. Create a separate implementation handoff issue for
+2. Create separate implementation handoff Issue #95 for
    `IAU-runtime-settings-cli-validation-command-contract-v1`.
-3. Implement only T009-T018 through that handoff issue.
+3. Implement only T009-T018 through that handoff issue and PR #96.
 4. Keep runtime validation execution, compare execution, LabVIEWCLI execution,
    Docker execution, terminal process wiring, live proof, package/bin
    publication, launcher/profile mutation, release automation, Marketplace

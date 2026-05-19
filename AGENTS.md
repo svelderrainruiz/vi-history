@@ -156,8 +156,8 @@ publication, and source copying remain blocked.
 `runtime-settings-cli-validation-command-contract-v1` admits
 `IAU-runtime-settings-cli-validation-command-contract-v1` for Issue #93 and
 T009-T018 only. Issue #93 is an admission issue and must not be reused for
-implementation. Implementation must use a separate handoff issue after the
-admission PR merges. The admitted IAU is a pure
+implementation. Issue #95 implements and closes it through PR #96 for
+T009-T018 only. The implemented IAU is a pure
 `createRuntimeSettingsValidationCommandResult(input = {})` command-result
 contract for `vihs --validate` and optional `--proof-out <dir>` composition
 through the already admitted file-emission contract. OS inspection, runtime
@@ -168,7 +168,7 @@ launcher/profile mutation, release automation, Marketplace publication,
 `validate-plan-only`, and source copying remain blocked.
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-command-contract-v1`.
+`none`.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that

@@ -5,7 +5,7 @@
 
 **Created**: 2026-05-19
 
-**Status**: Admitted for
+**Status**: Implemented for
 `IAU-runtime-settings-cli-validation-command-contract-v1`
 
 **Input**: Imported requirements slice
@@ -158,9 +158,9 @@ occurred.
   `IAU-runtime-settings-cli-validation-command-contract-v1` and keep runtime
   execution, terminal process wiring, publication, mutation, release,
   Marketplace, `validate-plan-only`, and source copying blocked.
-- **SC-003**: The admission record states that T009-T018 are admitted for the
-  command contract and the Current Implementation Admission Unit is
-  `IAU-runtime-settings-cli-validation-command-contract-v1`.
+- **SC-003**: The admission record states that T009-T018 are implemented for
+  the command contract and the Current Implementation Admission Unit is
+  `none`.
 - **SC-004**: Public validation rejects private paths, credentials, private
   evidence, private control-plane terms, and copied implementation-source
   instructions.
