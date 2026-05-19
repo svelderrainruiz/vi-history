@@ -1,0 +1,43 @@
+{
+  "schema": "vi-history/requirements-import@v1",
+  "sliceId": "runtime-settings-cli-validation-host-runtime-discovery-v1",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "e411ef2bfa74cedf6f9b53d764810f9f4c93a8b0",
+  "governedAdmissionCommit": "4f4211edc824c92f3d9aa4c39cafa928d59c5ce3",
+  "targetProduct": "vi-history",
+  "targetFeature": "runtime-settings-cli-validation-host-runtime-discovery-v1",
+  "specKitPath": ".specify/specs/runtime-settings-cli-validation-host-runtime-discovery-v1",
+  "redactionStatus": "pass",
+  "implementationSharing": "none",
+  "marketplacePublication": "disabled-until-later-adr",
+  "importedRequirementIds": [
+    "VHS-REQ-095",
+    "VHS-REQ-096",
+    "VHS-REQ-532",
+    "VHS-REQ-546",
+    "VHS-REQ-550"
+  ],
+  "prerequisiteRequirementIds": [
+    "VHS-REQ-537",
+    "VHS-REQ-543",
+    "VHS-REQ-544",
+    "VHS-REQ-545"
+  ],
+  "supportingTestIds": [
+    "TEST-UNIT-063",
+    "TEST-UNIT-064",
+    "TEST-UNIT-342",
+    "TEST-UNIT-354",
+    "TEST-UNIT-355",
+    "TEST-UNIT-392"
+  ],
+  "contractName": "createRuntimeSettingsValidationHostRuntimeDiscovery",
+  "composedContractName": "createRuntimeSettingsValidationHostRuntimePreflight",
+  "discoveryBoundary": "bounded-public-safe-discovery-facts-only",
+  "files": [
+    "syrs.md",
+    "srs.md",
+    "rtm.csv",
+    "test-plan.md"
+  ]
+}

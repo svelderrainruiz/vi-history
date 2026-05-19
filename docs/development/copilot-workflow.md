@@ -220,6 +220,17 @@ Read these before changing code:
 - `docs/requirements/admissions/runtime-settings-cli-validation-host-preflight-command-composition-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-host-preflight-command-composition-v1/IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-host-preflight-command-composition-v1/IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-discovery-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-discovery-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-discovery-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-discovery-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-discovery-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-validation-host-runtime-discovery-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-validation-host-runtime-discovery-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-validation-host-runtime-discovery-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-discovery-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-discovery-v1/IAU-runtime-settings-cli-validation-host-runtime-discovery-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-discovery-v1/IAU-runtime-settings-cli-validation-host-runtime-discovery-v1-preflight-v1.json`
 
 ## Current Status
 
@@ -456,6 +467,31 @@ Docker, wire raw terminal processes, write files from the host preflight
 adapter, publish packages, mutate launcher/profile state, or copy source
 without a separate public admission.
 
+Issue #118 imports
+`runtime-settings-cli-validation-host-runtime-discovery-v1` and admits
+`IAU-runtime-settings-cli-validation-host-runtime-discovery-v1` for T009-T016
+only. Issue #118 is an admission issue and must not be reused for
+implementation. The admitted IAU adds only a bounded
+`createRuntimeSettingsValidationHostRuntimeDiscovery(input = {})` facts
+contract over public-safe selected host facts and bounded discovery
+observations. It may derive public-safe host candidate facts for
+`createRuntimeSettingsValidationHostRuntimePreflight(input = {})` and the
+existing validation command chain without changing output shapes. Future work
+must not retain raw private paths, walk arbitrary filesystems, probe PATH or
+environment state, reuse the existing compare runtime locator, execute
+validation, call LabVIEWCLI, call Docker, wire raw terminal processes, write
+files, publish packages, mutate launcher/profile state, release, work on the
+Marketplace, or copy source without a separate public admission.
+
+Issue #118 admission temporarily sets the current IAU to
+`IAU-runtime-settings-cli-validation-host-runtime-discovery-v1`. A separate
+implementation handoff issue must be created after this admission PR merges.
+Before Issue #118 admission, the host preflight command-composition closeout
+recorded:
+
+Current Implementation Admission Unit:
+`none`.
+
 Issue #112 admission temporarily sets the current IAU to
 `IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1`.
 Issue #114 and PR #115 completed it. Before Issue #112 admission, the host
@@ -473,7 +509,7 @@ Current Implementation Admission Unit:
 `none`.
 
 Current Implementation Admission Unit:
-`none`.
+`IAU-runtime-settings-cli-validation-host-runtime-discovery-v1`.
 
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.
@@ -503,6 +539,8 @@ Do not implement these without a separate bridge admission:
   no-write proof-out planning facts branch
 - runtime settings CLI validation host runtime preflight behavior beyond the
   admitted supplied-facts-only host preflight adapter
+- runtime settings CLI validation host runtime discovery behavior beyond
+  bounded public-safe discovery facts
 - OS scanning, filesystem walking, registry probing, PATH probing, environment
   probing, private path discovery, or runtime locator invocation
 - file writes from the host preflight adapter

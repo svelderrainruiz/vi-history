@@ -120,6 +120,12 @@ const runtimeSettingsHostPreflightCommandCompositionImportDir = `docs/requiremen
 const runtimeSettingsHostPreflightCommandCompositionAdmissionPath = `docs/requirements/admissions/${runtimeSettingsHostPreflightCommandCompositionSliceId}.json`;
 const runtimeSettingsHostPreflightCommandCompositionIauPath = `docs/requirements/admissions/${runtimeSettingsHostPreflightCommandCompositionSliceId}/IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1.json`;
 const runtimeSettingsHostPreflightCommandCompositionPreflightPath = `docs/requirements/admissions/${runtimeSettingsHostPreflightCommandCompositionSliceId}/IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1-preflight-v1.json`;
+const runtimeSettingsHostRuntimeDiscoverySliceId = "runtime-settings-cli-validation-host-runtime-discovery-v1";
+const runtimeSettingsHostRuntimeDiscoveryFeatureDir = `.specify/specs/${runtimeSettingsHostRuntimeDiscoverySliceId}`;
+const runtimeSettingsHostRuntimeDiscoveryImportDir = `docs/requirements/imports/${runtimeSettingsHostRuntimeDiscoverySliceId}`;
+const runtimeSettingsHostRuntimeDiscoveryAdmissionPath = `docs/requirements/admissions/${runtimeSettingsHostRuntimeDiscoverySliceId}.json`;
+const runtimeSettingsHostRuntimeDiscoveryIauPath = `docs/requirements/admissions/${runtimeSettingsHostRuntimeDiscoverySliceId}/IAU-runtime-settings-cli-validation-host-runtime-discovery-v1.json`;
+const runtimeSettingsHostRuntimeDiscoveryPreflightPath = `docs/requirements/admissions/${runtimeSettingsHostRuntimeDiscoverySliceId}/IAU-runtime-settings-cli-validation-host-runtime-discovery-v1-preflight-v1.json`;
 const marketplaceAdrPath = "docs/decisions/ADR-001-marketplace-publication-disabled.md";
 const explicitCompareIauPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1.json`;
 const explicitComparePreflightPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1-preflight-v1.json`;
@@ -221,6 +227,13 @@ const runtimeSettingsHostRuntimePreflightExpectedIds = [
 const runtimeSettingsHostPreflightCommandCompositionExpectedIds = [
   "VHS-REQ-546"
 ];
+const runtimeSettingsHostRuntimeDiscoveryExpectedIds = [
+  "VHS-REQ-095",
+  "VHS-REQ-096",
+  "VHS-REQ-532",
+  "VHS-REQ-546",
+  "VHS-REQ-550"
+];
 
 const failures = [];
 
@@ -306,11 +319,12 @@ requireTextIncludes(".specify/memory/constitution.md", [
   "runtime-settings-cli-validation-plan-only-v1",
   "runtime-settings-cli-validation-host-runtime-preflight-v1",
   "runtime-settings-cli-validation-host-preflight-command-composition-v1",
-  "**Version**: 0.1.16"
+  "runtime-settings-cli-validation-host-runtime-discovery-v1",
+  "**Version**: 0.1.17"
 ]);
 
 const featureJson = readJson(".specify/feature.json");
-requireEqual(featureJson.feature_directory, runtimeSettingsHostPreflightCommandCompositionFeatureDir, "pinned Spec Kit feature directory");
+requireEqual(featureJson.feature_directory, runtimeSettingsHostRuntimeDiscoveryFeatureDir, "pinned Spec Kit feature directory");
 
 const admission = readJson(admissionPath);
 requireEqual(admission.schema, "vi-history/requirements-admission@v1", "admission schema");
@@ -3376,6 +3390,177 @@ requireTextIncludes("docs/development/copilot-workflow.md", [
   "createRuntimeSettingsValidationCommandResult(input = {})",
   "supplied public-safe host",
   "Current Implementation Admission Unit:\n`none`."
+]);
+
+const runtimeSettingsHostRuntimeDiscoveryAdmission = readJson(runtimeSettingsHostRuntimeDiscoveryAdmissionPath);
+requireEqual(runtimeSettingsHostRuntimeDiscoveryAdmission.schema, "vi-history/requirements-admission@v1", "runtime settings host runtime discovery admission schema");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryAdmission.sliceId, runtimeSettingsHostRuntimeDiscoverySliceId, "runtime settings host runtime discovery admission sliceId");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryAdmission.state, "admitted", "runtime settings host runtime discovery admission state");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryAdmission.targetProduct, "vi-history", "runtime settings host runtime discovery admission targetProduct");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryAdmission.targetFeature, runtimeSettingsHostRuntimeDiscoverySliceId, "runtime settings host runtime discovery admission targetFeature");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryAdmission.sourceBaselineTag, "v1.3.16", "runtime settings host runtime discovery admission sourceBaselineTag");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryAdmission.sourceCommit, "e411ef2bfa74cedf6f9b53d764810f9f4c93a8b0", "runtime settings host runtime discovery admission sourceCommit");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryAdmission.governedAdmissionCommit, "4f4211edc824c92f3d9aa4c39cafa928d59c5ce3", "runtime settings host runtime discovery admission governedAdmissionCommit");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryAdmission.implementationSharing, "none", "runtime settings host runtime discovery admission implementationSharing");
+requireMarketplacePosture(runtimeSettingsHostRuntimeDiscoveryAdmission, "runtime settings host runtime discovery admission");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryAdmission.currentImplementationAdmissionUnit, "IAU-runtime-settings-cli-validation-host-runtime-discovery-v1", "runtime settings host runtime discovery currentImplementationAdmissionUnit");
+requireArrayEqual(runtimeSettingsHostRuntimeDiscoveryAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "runtime settings host runtime discovery completedSpecScope");
+requireArrayEqual(runtimeSettingsHostRuntimeDiscoveryAdmission.completedImplementationScope, [], "runtime settings host runtime discovery completedImplementationScope");
+requireArrayEqual(runtimeSettingsHostRuntimeDiscoveryAdmission.admittedImplementationScope, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings host runtime discovery admittedImplementationScope");
+requireArrayEqual(runtimeSettingsHostRuntimeDiscoveryAdmission.blockedImplementationScope, ["T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025", "T026", "T027", "T028"], "runtime settings host runtime discovery blockedImplementationScope");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryAdmission.preImplementationPreflight?.iauId, "IAU-runtime-settings-cli-validation-host-runtime-discovery-v1", "runtime settings host runtime discovery preImplementationPreflight iauId");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryAdmission.preImplementationPreflight?.status, "pass", "runtime settings host runtime discovery preImplementationPreflight status");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryAdmission.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings host runtime discovery preImplementationPreflight implementationStartAllowed");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryAdmission.preImplementationPreflight?.record, runtimeSettingsHostRuntimeDiscoveryPreflightPath, "runtime settings host runtime discovery preImplementationPreflight record");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryAdmission.issue?.number, 118, "runtime settings host runtime discovery issue number");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryAdmission.implementationHandoffIssue, undefined, "runtime settings host runtime discovery implementationHandoffIssue");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryAdmission.implementationPullRequest, undefined, "runtime settings host runtime discovery implementationPullRequest");
+requireFile(`docs/requirements/admissions/${runtimeSettingsHostRuntimeDiscoverySliceId}.md`);
+
+const runtimeSettingsHostRuntimeDiscoveryAdmissionUnit = (runtimeSettingsHostRuntimeDiscoveryAdmission.implementationAdmissionUnits ?? [])
+  .find((unit) => unit?.iauId === "IAU-runtime-settings-cli-validation-host-runtime-discovery-v1");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryAdmissionUnit?.state, "admitted", "runtime settings host runtime discovery admission unit state");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryAdmissionUnit?.preflightRecord, runtimeSettingsHostRuntimeDiscoveryPreflightPath, "runtime settings host runtime discovery admission unit preflightRecord");
+
+const runtimeSettingsHostRuntimeDiscoveryIau = readJson(runtimeSettingsHostRuntimeDiscoveryIauPath);
+requireEqual(runtimeSettingsHostRuntimeDiscoveryIau.schema, "vi-history/implementation-admission-unit@v1", "runtime settings host runtime discovery IAU schema");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryIau.iauId, "IAU-runtime-settings-cli-validation-host-runtime-discovery-v1", "runtime settings host runtime discovery IAU id");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryIau.state, "admitted", "runtime settings host runtime discovery IAU state");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryIau.parentSliceId, runtimeSettingsHostRuntimeDiscoverySliceId, "runtime settings host runtime discovery IAU parentSliceId");
+requireArrayEqual(runtimeSettingsHostRuntimeDiscoveryIau.admittedTasks, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings host runtime discovery IAU admittedTasks");
+requireArrayEqual(runtimeSettingsHostRuntimeDiscoveryIau.blockedTasks, ["T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025", "T026", "T027", "T028"], "runtime settings host runtime discovery IAU blockedTasks");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryIau.implementationSharing, "none", "runtime settings host runtime discovery IAU implementationSharing");
+requireMarketplacePosture(runtimeSettingsHostRuntimeDiscoveryIau, "runtime settings host runtime discovery IAU");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryIau.preImplementationPreflight?.status, "pass", "runtime settings host runtime discovery IAU preImplementationPreflight status");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryIau.preImplementationPreflight?.record, "IAU-runtime-settings-cli-validation-host-runtime-discovery-v1-preflight-v1.json", "runtime settings host runtime discovery IAU preImplementationPreflight record");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryIau.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings host runtime discovery IAU preImplementationPreflight implementationStartAllowed");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryIau.implementationHandoffIssue, undefined, "runtime settings host runtime discovery IAU implementationHandoffIssue");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryIau.implementationPullRequest, undefined, "runtime settings host runtime discovery IAU implementationPullRequest");
+requireFile(`docs/requirements/admissions/${runtimeSettingsHostRuntimeDiscoverySliceId}/IAU-runtime-settings-cli-validation-host-runtime-discovery-v1.md`);
+
+const runtimeSettingsHostRuntimeDiscoveryPreflight = readJson(runtimeSettingsHostRuntimeDiscoveryPreflightPath);
+requireEqual(runtimeSettingsHostRuntimeDiscoveryPreflight.schema, "vi-history/implementation-admission-unit-preflight@v1", "runtime settings host runtime discovery preflight schema");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryPreflight.iauId, "IAU-runtime-settings-cli-validation-host-runtime-discovery-v1", "runtime settings host runtime discovery preflight iauId");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryPreflight.status, "pass", "runtime settings host runtime discovery preflight status");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryPreflight.implementationStartAllowed, true, "runtime settings host runtime discovery preflight implementationStartAllowed");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryPreflight.parentSliceId, runtimeSettingsHostRuntimeDiscoverySliceId, "runtime settings host runtime discovery preflight parentSliceId");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryPreflight.implementationSharing, "none", "runtime settings host runtime discovery preflight implementationSharing");
+requireMarketplacePosture(runtimeSettingsHostRuntimeDiscoveryPreflight, "runtime settings host runtime discovery preflight");
+requireArrayEqual(runtimeSettingsHostRuntimeDiscoveryPreflight.implementationStartScope, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings host runtime discovery preflight implementationStartScope");
+if (!Array.isArray(runtimeSettingsHostRuntimeDiscoveryPreflight.checkResults) || runtimeSettingsHostRuntimeDiscoveryPreflight.checkResults.length !== runtimeSettingsHostRuntimeDiscoveryPreflight.requiredChecks.length) {
+  failures.push("runtime settings host runtime discovery preflight checkResults: must match requiredChecks length");
+} else {
+  for (const result of runtimeSettingsHostRuntimeDiscoveryPreflight.checkResults) {
+    requireEqual(result.status, "pass", `runtime settings host runtime discovery preflight check result ${result.check}`);
+  }
+}
+requireFile(`docs/requirements/admissions/${runtimeSettingsHostRuntimeDiscoverySliceId}/IAU-runtime-settings-cli-validation-host-runtime-discovery-v1-preflight-v1.md`);
+
+const runtimeSettingsHostRuntimeDiscoveryManifest = readJson(`${runtimeSettingsHostRuntimeDiscoveryImportDir}/manifest.json`);
+requireEqual(runtimeSettingsHostRuntimeDiscoveryManifest.schema, "vi-history/requirements-import@v1", "runtime settings host runtime discovery manifest schema");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryManifest.sliceId, runtimeSettingsHostRuntimeDiscoverySliceId, "runtime settings host runtime discovery sliceId");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryManifest.sourceBaselineTag, "v1.3.16", "runtime settings host runtime discovery sourceBaselineTag");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryManifest.sourceCommit, "e411ef2bfa74cedf6f9b53d764810f9f4c93a8b0", "runtime settings host runtime discovery sourceCommit");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryManifest.governedAdmissionCommit, "4f4211edc824c92f3d9aa4c39cafa928d59c5ce3", "runtime settings host runtime discovery governedAdmissionCommit");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryManifest.targetProduct, "vi-history", "runtime settings host runtime discovery targetProduct");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryManifest.targetFeature, runtimeSettingsHostRuntimeDiscoverySliceId, "runtime settings host runtime discovery targetFeature");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryManifest.redactionStatus, "pass", "runtime settings host runtime discovery redactionStatus");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryManifest.implementationSharing, "none", "runtime settings host runtime discovery implementationSharing");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryManifest.marketplacePublication, "disabled-until-later-adr", "runtime settings host runtime discovery marketplacePublication");
+requireArrayEqual(runtimeSettingsHostRuntimeDiscoveryManifest.importedRequirementIds, runtimeSettingsHostRuntimeDiscoveryExpectedIds, "runtime settings host runtime discovery importedRequirementIds");
+requireArrayEqual(runtimeSettingsHostRuntimeDiscoveryManifest.prerequisiteRequirementIds, ["VHS-REQ-537", "VHS-REQ-543", "VHS-REQ-544", "VHS-REQ-545"], "runtime settings host runtime discovery prerequisiteRequirementIds");
+requireArrayEqual(runtimeSettingsHostRuntimeDiscoveryManifest.supportingTestIds, ["TEST-UNIT-063", "TEST-UNIT-064", "TEST-UNIT-342", "TEST-UNIT-354", "TEST-UNIT-355", "TEST-UNIT-392"], "runtime settings host runtime discovery supportingTestIds");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryManifest.contractName, "createRuntimeSettingsValidationHostRuntimeDiscovery", "runtime settings host runtime discovery contractName");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryManifest.composedContractName, "createRuntimeSettingsValidationHostRuntimePreflight", "runtime settings host runtime discovery composedContractName");
+requireEqual(runtimeSettingsHostRuntimeDiscoveryManifest.discoveryBoundary, "bounded-public-safe-discovery-facts-only", "runtime settings host runtime discovery discoveryBoundary");
+requireArrayEqual(runtimeSettingsHostRuntimeDiscoveryManifest.files, ["syrs.md", "srs.md", "rtm.csv", "test-plan.md"], "runtime settings host runtime discovery manifest files");
+
+for (const file of runtimeSettingsHostRuntimeDiscoveryManifest.files ?? []) {
+  requireFile(`${runtimeSettingsHostRuntimeDiscoveryImportDir}/${file}`);
+}
+
+for (const file of ["spec.md", "plan.md", "tasks.md"]) {
+  requireFile(`${runtimeSettingsHostRuntimeDiscoveryFeatureDir}/${file}`);
+}
+
+requireTextIncludes(`${runtimeSettingsHostRuntimeDiscoveryFeatureDir}/spec.md`, [
+  "Runtime Settings CLI Validation Host Runtime Discovery",
+  "VHS-REQ-095",
+  "VHS-REQ-096",
+  "VHS-REQ-550",
+  "TEST-UNIT-392",
+  "IAU-runtime-settings-cli-validation-host-runtime-discovery-v1",
+  "createRuntimeSettingsValidationHostRuntimeDiscovery",
+  "createRuntimeSettingsValidationHostRuntimePreflight",
+  "Current Implementation Admission Unit is",
+  "clean-room"
+]);
+requireTextIncludes(`${runtimeSettingsHostRuntimeDiscoveryFeatureDir}/plan.md`, [
+  "IAU-runtime-settings-cli-validation-host-runtime-discovery-v1",
+  "Issue #118",
+  "Marketplace publication: disabled",
+  "Implementation sharing: none",
+  "4f4211edc824c92f3d9aa4c39cafa928d59c5ce3"
+]);
+requireTextIncludes(`${runtimeSettingsHostRuntimeDiscoveryFeatureDir}/tasks.md`, [
+  "Issue #118",
+  "Implementation handoff issue**: To be created after this admission PR merges.",
+  "- [x] T001",
+  "- [x] T008",
+  "- [ ] T009",
+  "- [ ] T016",
+  "- [ ] T029",
+  "- [ ] T034",
+  "IAU-runtime-settings-cli-validation-host-runtime-discovery-v1",
+  "[BLOCKED]",
+  "T028"
+]);
+requireTextIncludes(`${runtimeSettingsHostRuntimeDiscoveryImportDir}/rtm.csv`, runtimeSettingsHostRuntimeDiscoveryExpectedIds);
+requireTextIncludes(`${runtimeSettingsHostRuntimeDiscoveryImportDir}/syrs.md`, [
+  "VHS-REQ-095",
+  "VHS-REQ-096",
+  "VHS-REQ-550",
+  "public-safe",
+  "there is no user-facing Docker"
+]);
+requireTextIncludes(`${runtimeSettingsHostRuntimeDiscoveryImportDir}/srs.md`, [
+  "VHS-REQ-095",
+  "VHS-REQ-096",
+  "TEST-UNIT-392",
+  "createRuntimeSettingsValidationHostRuntimeDiscovery",
+  "MUST NOT invoke the existing compare runtime"
+]);
+requireTextIncludes(`${runtimeSettingsHostRuntimeDiscoveryImportDir}/test-plan.md`, [
+  "TEST-UNIT-RSHOSTDISCOVERY-001",
+  "TEST-UNIT-RSHOSTDISCOVERY-008",
+  "Windows registry-view observations",
+  "runtime validation execution"
+]);
+requireTextIncludes("README.md", [
+  "runtime-settings-cli-validation-host-runtime-discovery-v1",
+  "docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-discovery-v1.json",
+  "Issue #118",
+  "IAU-runtime-settings-cli-validation-host-runtime-discovery-v1",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-host-runtime-discovery-v1`.",
+  "createRuntimeSettingsValidationHostRuntimeDiscovery(input = {})",
+  "bounded discovery",
+  "Raw private path disclosure"
+]);
+requireTextIncludes("AGENTS.md", [
+  "runtime-settings-cli-validation-host-runtime-discovery-v1",
+  "Issue #118",
+  "IAU-runtime-settings-cli-validation-host-runtime-discovery-v1",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-host-runtime-discovery-v1`.",
+  "createRuntimeSettingsValidationHostRuntimeDiscovery(input = {})",
+  "021-runtime-settings-cli-validation-host-runtime-discovery-v1"
+]);
+requireTextIncludes("docs/development/copilot-workflow.md", [
+  "runtime-settings-cli-validation-host-runtime-discovery-v1",
+  "Issue #118",
+  "IAU-runtime-settings-cli-validation-host-runtime-discovery-v1",
+  "createRuntimeSettingsValidationHostRuntimeDiscovery(input = {})",
+  "bounded public-safe discovery facts",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-host-runtime-discovery-v1`."
 ]);
 
 if (failures.length > 0) {
