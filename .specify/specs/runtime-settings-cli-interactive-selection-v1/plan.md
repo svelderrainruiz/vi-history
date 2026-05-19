@@ -107,7 +107,9 @@ Contracts to preserve for the admitted IAU:
 - Guided host selection accepts supported LabVIEW 2025, LabVIEW 2026, and
   newer local supported host choices when the selected installation and bitness
   are present.
-- Docker selection is bounded to LabVIEW 2026 x64.
+- Docker selection resolves to the latest supported NI LabVIEW Docker image
+  family; the current governed Linux default maps to LabVIEW 2026 and Docker
+  exposes no separate bitness choice.
 - Unsupported selections fail closed with stable reasons.
 - No terminal prompt loop, runtime execution, proof-out writing, package, or
   Marketplace behavior is started.

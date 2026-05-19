@@ -109,7 +109,9 @@ Contracts to preserve for the admitted IAU:
 - Enter-through confirmation preserves the current governed bundle
 - guided host selection accepts supported local host choices and fails closed
   for unsupported or missing host facts
-- Docker selection remains bounded to `2026` / `x64`
+- Docker selection resolves to the latest supported NI LabVIEW Docker image
+  family; the current governed Linux default maps to LabVIEW 2026 and Docker
+  exposes no separate bitness choice
 - validation handoff reuses the public `vihs --validate` readback contract
 - non-interactive surfaces receive exact copyable next-command guidance
 - no OS-specific terminal driver, runtime execution, compare execution, proof

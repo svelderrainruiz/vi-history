@@ -1940,21 +1940,27 @@ requireTextIncludes("README.md", [
   "Issue #71",
   "Issue #73",
   "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
+  "latest supported NI LabVIEW Docker image selection",
+  "no user-facing Docker bitness choice",
   "Current Implementation Admission Unit:\n`none`."
 ]);
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-terminal-prompt-loop-v1",
   "Issue #71",
   "Issue #73",
+  "Issue #75",
   "Current Implementation Admission Unit:\n`none`.",
   "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
+  "no separate Docker bitness\nchoice",
   "012-runtime-settings-cli-terminal-prompt-loop-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-terminal-prompt-loop-v1",
   "Issue #71",
   "Issue #73",
+  "Issue #75",
   "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
+  "latest supported NI LabVIEW Docker image family",
   "OS-specific raw stdin/TTY process drivers"
 ]);
 

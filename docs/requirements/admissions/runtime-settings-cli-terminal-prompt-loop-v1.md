@@ -31,8 +31,8 @@ materialized-entrypoint prerequisites, but it does not re-admit that work.
 - `T010`: Enter-through confirmation preserving the current governed bundle
   and requesting validation handoff.
 - `T011`: guided host selection with fail-closed unsupported host paths.
-- `T012`: bounded Docker `2026` / `x64` selection and fail-closed unsupported
-  Docker paths.
+- `T012`: latest supported NI LabVIEW Docker image selection with no Docker
+  bitness choice exposed and fail-closed unsupported Docker paths.
 - `T013`: the minimum public MIT terminal prompt-loop contract as pure prompt
   state and output facts.
 

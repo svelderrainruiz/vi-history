@@ -53,8 +53,9 @@ runtime settings without widening validation into a general path picker or
 runtime execution surface.
 
 **Independent Test**: Contract tests can model host and Docker choices and
-verify accepted selections, bounded Docker rules, and fail-closed reasons
-without invoking LabVIEWCLI, Docker, or any spawned process.
+verify accepted selections, latest supported NI LabVIEW Docker image selection,
+and fail-closed reasons without invoking LabVIEWCLI, Docker, or any spawned
+process.
 
 **Acceptance Scenarios**:
 
@@ -65,8 +66,9 @@ without invoking LabVIEWCLI, Docker, or any spawned process.
    mismatch, or missing selected bitness is selected, **Then** the contract
    fails closed with a stable reason.
 3. **Given** Docker selection, **When** a Docker bundle is selected, **Then**
-   only `2026` / `x64` is accepted and other Docker years or bitness values
-   fail closed.
+   the prompt-loop contract resolves to the latest supported NI LabVIEW Docker
+   image family, records Docker as 64-bit-only by image/platform, and fails
+   closed if Docker bitness is treated as user-selectable.
 
 ### Edge Cases
 
@@ -76,9 +78,10 @@ without invoking LabVIEWCLI, Docker, or any spawned process.
   `host/windows/2026/x86`.
 - The terminal surface is non-interactive and needs exact copyable
   next-command guidance instead of prompts.
-- The user selects an unsupported LabVIEW year, unsupported Docker bitness,
-  host/container platform mismatch, missing selected Windows host bitness, or
-  unsupported Linux host path.
+- The user selects an unsupported LabVIEW year, an unsupported Docker image
+  family, a user-facing Docker bitness choice, host/container platform
+  mismatch, missing selected Windows host bitness, or unsupported Linux host
+  path.
 - An implementation attempts to add raw OS-specific stdin/TTY handling,
   runtime execution, compare execution, proof-out expansion, packaging,
   Marketplace behavior, or copied source.
@@ -101,9 +104,10 @@ without invoking LabVIEWCLI, Docker, or any spawned process.
   bitness are present, and MUST fail closed for unsupported years,
   host/platform mismatches, or missing selected bitness. Imported ID:
   `VHS-REQ-545`.
-- **FR-005**: Docker selection MUST remain bounded to `2026` / `x64` and MUST
-  fail closed for unsupported Docker years or bitness values. Imported ID:
-  `VHS-REQ-545`.
+- **FR-005**: Docker selection MUST resolve to the latest supported NI LabVIEW
+  Docker image family, currently the LabVIEW 2026 Linux image family for the
+  governed Linux default, and MUST NOT expose a separate Docker bitness choice
+  because Docker is 64-bit-only by image/platform. Imported ID: `VHS-REQ-545`.
 - **FR-006**: Validation handoff MAY request the existing `vihs --validate`
   readback contract, but MUST NOT add runtime execution or proof-out expansion
   in this IAU. Imported ID: `VHS-REQ-546`.

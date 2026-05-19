@@ -92,8 +92,10 @@ remain blocked.
 T009-T013 only. Issue #60 is an admission issue and must not be reused for
 implementation. Issue #62 implements and closes the pure selection-state
 contract: default seeding, current bundle reporting, Enter-through
-confirmation, guided host selection, Docker 2026 x64 bounds, and validation
-readback handoff facts.
+confirmation, guided host selection, latest supported NI LabVIEW Docker image
+selection with no user-facing Docker bitness choice, and validation readback
+handoff facts. Docker remains 64-bit-only by image/platform; host LabVIEW
+bitness remains a host-provider concern.
 
 `runtime-settings-cli-terminal-entrypoint-v1` admits
 `IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1` for Issue #65
@@ -105,7 +107,10 @@ contract for T009-T013 only.
 `IAU-runtime-settings-cli-terminal-prompt-loop-v1` for Issue #71 and T009-T013
 only. Issue #71 is an admission issue and must not be reused for
 implementation. Issue #73 implements and closes the pure prompt
-transcript/state contract for T009-T013 only.
+transcript/state contract for T009-T013 only. Issue #75 clarifies that Docker
+provider selection means the latest supported NI LabVIEW Docker image family,
+currently the LabVIEW 2026 Linux image family, with no separate Docker bitness
+choice exposed to users.
 
 OS-specific raw terminal I/O drivers, compare execution, LabVIEWCLI execution,
 Docker execution or orchestration, proof-out expansion, live-session proof,
