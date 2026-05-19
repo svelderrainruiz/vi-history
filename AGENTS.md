@@ -129,13 +129,22 @@ target, artifact, non-interactive guidance, and blocked-side-effect facts over
 the already admitted validation readback and validation proof-artifact
 contracts for T009-T014 only.
 
+`runtime-settings-cli-validation-proof-out-file-emission-v1` admits
+`IAU-runtime-settings-cli-validation-proof-out-file-emission-v1` for Issue #85
+and T009-T016 only. Issue #85 is an admission issue and must not be reused for
+implementation. Implementation must use a separate handoff issue after the
+admission PR merges. The admitted unit is limited to writing exactly
+`vihs-validation-proof.json` and `vihs-validation-issue.md` from ready
+proof-out adapter facts, creating the supported target directory when safe, and
+returning deterministic write-result facts.
+
 Compare execution, LabVIEWCLI execution, Docker execution or orchestration,
-runtime validation execution, live-session proof, package/bin publication,
-launcher/profile mutation, packaging, and Marketplace publication remain
-blocked.
+runtime validation execution, new validation fact generation, live-session
+proof, package/bin publication, launcher/profile mutation, packaging, and
+Marketplace publication remain blocked.
 
 Current Implementation Admission Unit:
-`none`.
+`IAU-runtime-settings-cli-validation-proof-out-file-emission-v1`.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that
@@ -145,7 +154,7 @@ When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:
 
 ```bash
-SPECIFY_FEATURE=014-runtime-settings-cli-validation-proof-out-v1 \
-SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-validation-proof-out-v1 \
+SPECIFY_FEATURE=015-runtime-settings-cli-validation-proof-out-file-emission-v1 \
+SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-validation-proof-out-file-emission-v1 \
 .specify/scripts/bash/check-prerequisites.sh --json --paths-only
 ```
