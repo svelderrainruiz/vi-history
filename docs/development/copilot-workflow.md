@@ -371,14 +371,15 @@ runtime locators or execute validation.
 Issue #93 imports `runtime-settings-cli-validation-command-contract-v1` and
 admits `IAU-runtime-settings-cli-validation-command-contract-v1` for T009-T018
 only. Issue #93 is an admission issue and must not be reused for
-implementation. Copilot implementation must wait for the separate handoff issue
-created after the admission PR merges. The admitted IAU may implement only the
-pure `createRuntimeSettingsValidationCommandResult(input = {})` contract for
+implementation. Issue #95 implements and closes it through PR #96 for
+T009-T018 only. The implemented IAU adds only the pure
+`createRuntimeSettingsValidationCommandResult(input = {})` contract for
 `vihs --validate` and optional `--proof-out <dir>` composition through the
-already admitted proof-out file-emission contract. It must not execute
+already admitted proof-out file-emission contract. Future work must not execute
 validation, inspect the OS, invoke runtime locators, call LabVIEWCLI, call
 Docker, wire raw terminal processes, publish packages, mutate launcher/profile
-state, implement `validate-plan-only`, or copy source.
+state, implement `validate-plan-only`, or copy source without a separate
+public admission.
 
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.

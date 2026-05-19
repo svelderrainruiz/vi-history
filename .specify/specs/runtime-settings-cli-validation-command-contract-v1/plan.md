@@ -8,16 +8,16 @@
 
 **Admission Issue**: Issue #93
 
-**Implementation Handoff Issue**: created separately after this admission PR
-merges
+**Implementation Handoff Issue**: Issue #95
+
+**Implementation PR**: PR #96
 
 ## Summary
 
-Admit `IAU-runtime-settings-cli-validation-command-contract-v1` after the
-governed `runtime-settings-cli-validation-command-contract-v1` bridge packet.
-This admission creates the public import, Spec Kit feature, task list,
-admission ledger, and preflight records for a later Copilot implementation
-handoff. It does not implement the command contract.
+Close `IAU-runtime-settings-cli-validation-command-contract-v1` after the
+governed `runtime-settings-cli-validation-command-contract-v1` bridge packet,
+public admission, and separate Copilot implementation handoff. The command
+contract is implemented; no new IAU is active.
 
 ## Technical Context
 
@@ -35,15 +35,15 @@ handoff. It does not implement the command contract.
 
 - Clean-room requirements authority: pass; public artifacts import requirement
   IDs and behavior only.
-- Spec Kit before implementation: pass; Issue #93 admits the IAU and a
-  separate handoff issue is required before implementation work starts.
+- Spec Kit before implementation: pass; Issue #93 admitted the IAU and
+  separate handoff Issue #95 implemented it through PR #96.
 - Public evidence without private leakage: pass; public redaction and bridge
   artifact validation are required.
 - Marketplace disabled until governed: pass.
 
 ## Implementation Boundary
 
-The admitted IAU may add tests and a minimum pure adapter named
+The implemented IAU adds tests and a minimum pure adapter named
 `createRuntimeSettingsValidationCommandResult(input = {})` that composes
 already admitted validation settings, runtime outcome, proof artifact,
 proof-out adapter, and proof-out file-emission facts.

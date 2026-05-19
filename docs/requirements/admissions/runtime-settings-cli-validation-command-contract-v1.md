@@ -1,7 +1,7 @@
 # Requirements Admission: Runtime Settings CLI Validation Command Contract
 
-`runtime-settings-cli-validation-command-contract-v1` is admitted for public
-MIT Spec Kit planning and clean-room implementation handoff Issue #93.
+`runtime-settings-cli-validation-command-contract-v1` is implemented for public
+MIT Spec Kit planning and clean-room implementation handoff Issue #95.
 
 ## Source
 
@@ -15,19 +15,18 @@ MIT Spec Kit planning and clean-room implementation handoff Issue #93.
 ## Admission
 
 - Public issue: Issue #93
-- Implementation handoff issue: created separately after this admission PR
-  merges
-- Current Implementation Admission Unit:
-  `IAU-runtime-settings-cli-validation-command-contract-v1`
+- Implementation handoff issue: Issue #95
+- Implementation PR: PR #96
+- Current Implementation Admission Unit: `none`
 - Completed import/spec scope: T001-T008 in
   `.specify/specs/runtime-settings-cli-validation-command-contract-v1/tasks.md`
-- Admitted implementation scope: T009-T018 in
+- Completed implementation scope: T009-T018 in
   `.specify/specs/runtime-settings-cli-validation-command-contract-v1/tasks.md`
 
 ## Boundary
 
-The admitted IAU may implement a pure validation command-result contract named
-`createRuntimeSettingsValidationCommandResult(input = {})`. It may compose
+The implemented IAU adds a pure validation command-result contract named
+`createRuntimeSettingsValidationCommandResult(input = {})`. It composes
 already admitted settings readback, validation runtime outcome, validation
 proof-artifact, proof-out adapter, and proof-out file-emission facts. When a
 proof-out target is supplied, file writing is allowed only through the already

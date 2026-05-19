@@ -1,6 +1,6 @@
 # Implementation Admission Unit: Runtime Settings CLI Validation Command Contract
 
-`IAU-runtime-settings-cli-validation-command-contract-v1` is admitted for
+`IAU-runtime-settings-cli-validation-command-contract-v1` is implemented for
 `runtime-settings-cli-validation-command-contract-v1`.
 
 Parent slice: `runtime-settings-cli-validation-command-contract-v1`
@@ -35,5 +35,5 @@ Preflight:
 - T026: source copying from another VI History product line.
 - T027: `validate-plan-only` without a separate public IAU.
 
-Issue #93 is the admission issue and must not be reused for implementation.
-Create a separate implementation handoff issue after the admission PR merges.
+Issue #95 implements and closes T009-T018. Issue #93 is the admission issue and
+must not be reused for implementation.
