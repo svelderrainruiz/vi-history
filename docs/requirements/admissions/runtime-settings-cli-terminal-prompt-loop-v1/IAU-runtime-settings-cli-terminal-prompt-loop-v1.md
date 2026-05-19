@@ -1,0 +1,36 @@
+# IAU: Runtime Settings CLI Terminal Prompt Loop
+
+`IAU-runtime-settings-cli-terminal-prompt-loop-v1` is
+`implementation-admitted` for `runtime-settings-cli-terminal-prompt-loop-v1`.
+
+Parent slice: `runtime-settings-cli-terminal-prompt-loop-v1`
+
+Preflight:
+`IAU-runtime-settings-cli-terminal-prompt-loop-v1-preflight-v1.json`
+
+## Admitted Tasks
+
+- T009: tests for deterministic no-argument `vihs` prompt transcript/state
+  behavior.
+- T010: tests for Enter-through confirmation and validation handoff.
+- T011: tests for guided host selection and fail-closed unsupported host
+  paths.
+- T012: tests for bounded Docker `2026` / `x64` selection.
+- T013: minimum public MIT terminal prompt-loop contract as pure prompt state
+  and output facts.
+
+## Blocked Tasks
+
+- T014: OS-specific raw stdin/TTY process drivers or spawned terminal I/O
+  handling.
+- T015: compare execution.
+- T016: LabVIEWCLI execution, Docker execution, or Docker orchestration.
+- T017: proof-out file writing beyond already admitted proof artifact
+  contracts.
+- T018: live already-running VS Code session uptake proof or Windows
+  PowerShell Marketplace install/bootstrap behavior.
+- T019: packaging, Marketplace publication, or source copying from another VI
+  History product line.
+
+Implementation must wait until the admission PR merges and a separate handoff
+issue is created.

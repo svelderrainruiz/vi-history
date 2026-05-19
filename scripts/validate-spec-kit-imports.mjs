@@ -66,6 +66,12 @@ const runtimeSettingsTerminalImportDir = `docs/requirements/imports/${runtimeSet
 const runtimeSettingsTerminalAdmissionPath = `docs/requirements/admissions/${runtimeSettingsTerminalSliceId}.json`;
 const runtimeSettingsTerminalIauPath = `docs/requirements/admissions/${runtimeSettingsTerminalSliceId}/IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1.json`;
 const runtimeSettingsTerminalPreflightPath = `docs/requirements/admissions/${runtimeSettingsTerminalSliceId}/IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1-preflight-v1.json`;
+const runtimeSettingsPromptLoopSliceId = "runtime-settings-cli-terminal-prompt-loop-v1";
+const runtimeSettingsPromptLoopFeatureDir = `.specify/specs/${runtimeSettingsPromptLoopSliceId}`;
+const runtimeSettingsPromptLoopImportDir = `docs/requirements/imports/${runtimeSettingsPromptLoopSliceId}`;
+const runtimeSettingsPromptLoopAdmissionPath = `docs/requirements/admissions/${runtimeSettingsPromptLoopSliceId}.json`;
+const runtimeSettingsPromptLoopIauPath = `docs/requirements/admissions/${runtimeSettingsPromptLoopSliceId}/IAU-runtime-settings-cli-terminal-prompt-loop-v1.json`;
+const runtimeSettingsPromptLoopPreflightPath = `docs/requirements/admissions/${runtimeSettingsPromptLoopSliceId}/IAU-runtime-settings-cli-terminal-prompt-loop-v1-preflight-v1.json`;
 const marketplaceAdrPath = "docs/decisions/ADR-001-marketplace-publication-disabled.md";
 const explicitCompareIauPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1.json`;
 const explicitComparePreflightPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1-preflight-v1.json`;
@@ -133,6 +139,10 @@ const runtimeSettingsInteractiveExpectedIds = [
 const runtimeSettingsTerminalExpectedIds = [
   "VHS-REQ-537",
   "VHS-REQ-544",
+  "VHS-REQ-545",
+  "VHS-REQ-546"
+];
+const runtimeSettingsPromptLoopExpectedIds = [
   "VHS-REQ-545",
   "VHS-REQ-546"
 ];
@@ -212,11 +222,12 @@ requireTextIncludes(".specify/memory/constitution.md", [
   "runtime-settings-cli-validation-proof-v1",
   "runtime-settings-cli-interactive-selection-v1",
   "runtime-settings-cli-terminal-entrypoint-v1",
-  "**Version**: 0.1.9"
+  "runtime-settings-cli-terminal-prompt-loop-v1",
+  "**Version**: 0.1.10"
 ]);
 
 const featureJson = readJson(".specify/feature.json");
-requireEqual(featureJson.feature_directory, runtimeSettingsTerminalFeatureDir, "pinned Spec Kit feature directory");
+requireEqual(featureJson.feature_directory, runtimeSettingsPromptLoopFeatureDir, "pinned Spec Kit feature directory");
 
 const admission = readJson(admissionPath);
 requireEqual(admission.schema, "vi-history/requirements-admission@v1", "admission schema");
@@ -593,7 +604,7 @@ requireTextIncludes("README.md", [
 requireTextIncludes("AGENTS.md", [
   "installed-user-observation-public-surface-v1",
   "IAU-installed-user-observation-model-v1",
-  "011-runtime-settings-cli-terminal-entrypoint-v1"
+  "012-runtime-settings-cli-terminal-prompt-loop-v1"
 ]);
 
 const commandAdmission = readJson(commandAdmissionPath);
@@ -1080,7 +1091,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-bootstrap-v1",
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-prepare-command-shell-v1",
-  "011-runtime-settings-cli-terminal-entrypoint-v1"
+  "012-runtime-settings-cli-terminal-prompt-loop-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-bootstrap-v1",
@@ -1216,7 +1227,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-settings-write-v1",
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-settings-write-contract-v1",
-  "011-runtime-settings-cli-terminal-entrypoint-v1"
+  "012-runtime-settings-cli-terminal-prompt-loop-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-settings-write-v1",
@@ -1351,7 +1362,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-validation-readback-v1",
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-validation-readback-contract-v1",
-  "011-runtime-settings-cli-terminal-entrypoint-v1"
+  "012-runtime-settings-cli-terminal-prompt-loop-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-readback-v1",
@@ -1495,7 +1506,7 @@ requireTextIncludes("AGENTS.md", [
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-validation-proof-artifact-v1",
   "IAU-runtime-settings-cli-interactive-selection-contract-v1",
-  "011-runtime-settings-cli-terminal-entrypoint-v1"
+  "012-runtime-settings-cli-terminal-prompt-loop-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-proof-v1",
@@ -1637,10 +1648,10 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-interactive-selection-v1",
   "Issue #60",
   "Issue #62",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-terminal-prompt-loop-v1`.",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
   "IAU-runtime-settings-cli-interactive-selection-contract-v1",
-  "011-runtime-settings-cli-terminal-entrypoint-v1"
+  "012-runtime-settings-cli-terminal-prompt-loop-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-interactive-selection-v1",
@@ -1782,15 +1793,15 @@ requireTextIncludes("README.md", [
   "Issue #65",
   "Issue #67",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
-  "Current Implementation Admission Unit:\n`none`."
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-terminal-prompt-loop-v1`."
 ]);
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-terminal-entrypoint-v1",
   "Issue #65",
   "Issue #67",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-terminal-prompt-loop-v1`.",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
-  "011-runtime-settings-cli-terminal-entrypoint-v1"
+  "012-runtime-settings-cli-terminal-prompt-loop-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-terminal-entrypoint-v1",
@@ -1798,6 +1809,143 @@ requireTextIncludes("docs/development/copilot-workflow.md", [
   "Issue #67",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
   "terminal entrypoint implementation beyond"
+]);
+
+const runtimeSettingsPromptLoopAdmission = readJson(runtimeSettingsPromptLoopAdmissionPath);
+requireEqual(runtimeSettingsPromptLoopAdmission.schema, "vi-history/requirements-admission@v1", "runtime settings prompt-loop admission schema");
+requireEqual(runtimeSettingsPromptLoopAdmission.sliceId, runtimeSettingsPromptLoopSliceId, "runtime settings prompt-loop admission sliceId");
+requireEqual(runtimeSettingsPromptLoopAdmission.state, "admitted", "runtime settings prompt-loop admission state");
+requireEqual(runtimeSettingsPromptLoopAdmission.targetProduct, "vi-history", "runtime settings prompt-loop admission targetProduct");
+requireEqual(runtimeSettingsPromptLoopAdmission.targetFeature, runtimeSettingsPromptLoopSliceId, "runtime settings prompt-loop admission targetFeature");
+requireEqual(runtimeSettingsPromptLoopAdmission.sourceBaselineTag, "v1.3.16", "runtime settings prompt-loop admission sourceBaselineTag");
+requireEqual(runtimeSettingsPromptLoopAdmission.sourceCommit, "913f840a9dd23319d91d5fcf5862be9615d5b8d0", "runtime settings prompt-loop admission sourceCommit");
+requireEqual(runtimeSettingsPromptLoopAdmission.governedAdmissionCommit, "bb795ace470bcb17d9436fd34c59344077c37777", "runtime settings prompt-loop admission governedAdmissionCommit");
+requireEqual(runtimeSettingsPromptLoopAdmission.implementationSharing, "none", "runtime settings prompt-loop admission implementationSharing");
+requireMarketplacePosture(runtimeSettingsPromptLoopAdmission, "runtime settings prompt-loop admission");
+requireEqual(runtimeSettingsPromptLoopAdmission.currentImplementationAdmissionUnit, "IAU-runtime-settings-cli-terminal-prompt-loop-v1", "runtime settings prompt-loop currentImplementationAdmissionUnit");
+requireArrayEqual(runtimeSettingsPromptLoopAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "runtime settings prompt-loop completedSpecScope");
+requireArrayEqual(runtimeSettingsPromptLoopAdmission.completedImplementationScope, [], "runtime settings prompt-loop completedImplementationScope");
+requireArrayEqual(runtimeSettingsPromptLoopAdmission.admittedImplementationScope, ["T009", "T010", "T011", "T012", "T013"], "runtime settings prompt-loop admittedImplementationScope");
+requireArrayEqual(runtimeSettingsPromptLoopAdmission.blockedImplementationScope, ["T014", "T015", "T016", "T017", "T018", "T019"], "runtime settings prompt-loop blockedImplementationScope");
+requireEqual(runtimeSettingsPromptLoopAdmission.preImplementationPreflight?.iauId, "IAU-runtime-settings-cli-terminal-prompt-loop-v1", "runtime settings prompt-loop preImplementationPreflight iauId");
+requireEqual(runtimeSettingsPromptLoopAdmission.preImplementationPreflight?.status, "pass", "runtime settings prompt-loop preImplementationPreflight status");
+requireEqual(runtimeSettingsPromptLoopAdmission.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings prompt-loop preImplementationPreflight implementationStartAllowed");
+requireEqual(runtimeSettingsPromptLoopAdmission.preImplementationPreflight?.record, runtimeSettingsPromptLoopPreflightPath, "runtime settings prompt-loop preImplementationPreflight record");
+requireEqual(runtimeSettingsPromptLoopAdmission.issue?.number, 71, "runtime settings prompt-loop issue number");
+requireFile(`docs/requirements/admissions/${runtimeSettingsPromptLoopSliceId}.md`);
+
+const runtimeSettingsPromptLoopAdmissionUnit = (runtimeSettingsPromptLoopAdmission.implementationAdmissionUnits ?? [])
+  .find((unit) => unit?.iauId === "IAU-runtime-settings-cli-terminal-prompt-loop-v1");
+requireEqual(runtimeSettingsPromptLoopAdmissionUnit?.state, "admitted", "runtime settings prompt-loop admission unit state");
+requireEqual(runtimeSettingsPromptLoopAdmissionUnit?.preflightRecord, runtimeSettingsPromptLoopPreflightPath, "runtime settings prompt-loop admission unit preflightRecord");
+
+const runtimeSettingsPromptLoopIau = readJson(runtimeSettingsPromptLoopIauPath);
+requireEqual(runtimeSettingsPromptLoopIau.schema, "vi-history/implementation-admission-unit@v1", "runtime settings prompt-loop IAU schema");
+requireEqual(runtimeSettingsPromptLoopIau.iauId, "IAU-runtime-settings-cli-terminal-prompt-loop-v1", "runtime settings prompt-loop IAU id");
+requireEqual(runtimeSettingsPromptLoopIau.state, "admitted", "runtime settings prompt-loop IAU state");
+requireEqual(runtimeSettingsPromptLoopIau.parentSliceId, runtimeSettingsPromptLoopSliceId, "runtime settings prompt-loop IAU parentSliceId");
+requireArrayEqual(runtimeSettingsPromptLoopIau.admittedTasks, ["T009", "T010", "T011", "T012", "T013"], "runtime settings prompt-loop IAU admittedTasks");
+requireArrayEqual(runtimeSettingsPromptLoopIau.blockedTasks, ["T014", "T015", "T016", "T017", "T018", "T019"], "runtime settings prompt-loop IAU blockedTasks");
+requireEqual(runtimeSettingsPromptLoopIau.implementationSharing, "none", "runtime settings prompt-loop IAU implementationSharing");
+requireMarketplacePosture(runtimeSettingsPromptLoopIau, "runtime settings prompt-loop IAU");
+requireEqual(runtimeSettingsPromptLoopIau.preImplementationPreflight?.status, "pass", "runtime settings prompt-loop IAU preImplementationPreflight status");
+requireEqual(runtimeSettingsPromptLoopIau.preImplementationPreflight?.record, "IAU-runtime-settings-cli-terminal-prompt-loop-v1-preflight-v1.json", "runtime settings prompt-loop IAU preImplementationPreflight record");
+requireEqual(runtimeSettingsPromptLoopIau.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings prompt-loop IAU preImplementationPreflight implementationStartAllowed");
+requireFile(`docs/requirements/admissions/${runtimeSettingsPromptLoopSliceId}/IAU-runtime-settings-cli-terminal-prompt-loop-v1.md`);
+
+const runtimeSettingsPromptLoopPreflight = readJson(runtimeSettingsPromptLoopPreflightPath);
+requireEqual(runtimeSettingsPromptLoopPreflight.schema, "vi-history/implementation-admission-unit-preflight@v1", "runtime settings prompt-loop preflight schema");
+requireEqual(runtimeSettingsPromptLoopPreflight.iauId, "IAU-runtime-settings-cli-terminal-prompt-loop-v1", "runtime settings prompt-loop preflight iauId");
+requireEqual(runtimeSettingsPromptLoopPreflight.status, "pass", "runtime settings prompt-loop preflight status");
+requireEqual(runtimeSettingsPromptLoopPreflight.implementationStartAllowed, true, "runtime settings prompt-loop preflight implementationStartAllowed");
+requireEqual(runtimeSettingsPromptLoopPreflight.parentSliceId, runtimeSettingsPromptLoopSliceId, "runtime settings prompt-loop preflight parentSliceId");
+requireEqual(runtimeSettingsPromptLoopPreflight.implementationSharing, "none", "runtime settings prompt-loop preflight implementationSharing");
+requireMarketplacePosture(runtimeSettingsPromptLoopPreflight, "runtime settings prompt-loop preflight");
+requireArrayEqual(runtimeSettingsPromptLoopPreflight.implementationStartScope, ["T009", "T010", "T011", "T012", "T013"], "runtime settings prompt-loop preflight implementationStartScope");
+if (!Array.isArray(runtimeSettingsPromptLoopPreflight.checkResults) || runtimeSettingsPromptLoopPreflight.checkResults.length !== runtimeSettingsPromptLoopPreflight.requiredChecks.length) {
+  failures.push("runtime settings prompt-loop preflight checkResults: must match requiredChecks length");
+} else {
+  for (const result of runtimeSettingsPromptLoopPreflight.checkResults) {
+    requireEqual(result.status, "pass", `runtime settings prompt-loop preflight check result ${result.check}`);
+  }
+}
+requireFile(`docs/requirements/admissions/${runtimeSettingsPromptLoopSliceId}/IAU-runtime-settings-cli-terminal-prompt-loop-v1-preflight-v1.md`);
+
+const runtimeSettingsPromptLoopManifest = readJson(`${runtimeSettingsPromptLoopImportDir}/manifest.json`);
+requireEqual(runtimeSettingsPromptLoopManifest.schema, "vi-history/requirements-import@v1", "runtime settings prompt-loop manifest schema");
+requireEqual(runtimeSettingsPromptLoopManifest.sliceId, runtimeSettingsPromptLoopSliceId, "runtime settings prompt-loop sliceId");
+requireEqual(runtimeSettingsPromptLoopManifest.sourceBaselineTag, "v1.3.16", "runtime settings prompt-loop sourceBaselineTag");
+requireEqual(runtimeSettingsPromptLoopManifest.sourceCommit, "913f840a9dd23319d91d5fcf5862be9615d5b8d0", "runtime settings prompt-loop sourceCommit");
+requireEqual(runtimeSettingsPromptLoopManifest.governedAdmissionCommit, "bb795ace470bcb17d9436fd34c59344077c37777", "runtime settings prompt-loop governedAdmissionCommit");
+requireEqual(runtimeSettingsPromptLoopManifest.targetProduct, "vi-history", "runtime settings prompt-loop targetProduct");
+requireEqual(runtimeSettingsPromptLoopManifest.targetFeature, runtimeSettingsPromptLoopSliceId, "runtime settings prompt-loop targetFeature");
+requireEqual(runtimeSettingsPromptLoopManifest.redactionStatus, "pass", "runtime settings prompt-loop redactionStatus");
+requireEqual(runtimeSettingsPromptLoopManifest.implementationSharing, "none", "runtime settings prompt-loop implementationSharing");
+requireEqual(runtimeSettingsPromptLoopManifest.marketplacePublication, "disabled-until-later-adr", "runtime settings prompt-loop marketplacePublication");
+requireArrayEqual(runtimeSettingsPromptLoopManifest.importedRequirementIds, runtimeSettingsPromptLoopExpectedIds, "runtime settings prompt-loop importedRequirementIds");
+requireArrayEqual(runtimeSettingsPromptLoopManifest.prerequisiteRequirementIds, ["VHS-REQ-537", "VHS-REQ-544"], "runtime settings prompt-loop prerequisiteRequirementIds");
+requireArrayEqual(runtimeSettingsPromptLoopManifest.supportingTestIds, ["TEST-UNIT-353", "TEST-UNIT-354"], "runtime settings prompt-loop supportingTestIds");
+requireArrayEqual(runtimeSettingsPromptLoopManifest.files, ["syrs.md", "srs.md", "rtm.csv", "test-plan.md"], "runtime settings prompt-loop manifest files");
+
+for (const file of runtimeSettingsPromptLoopManifest.files ?? []) {
+  requireFile(`${runtimeSettingsPromptLoopImportDir}/${file}`);
+}
+
+for (const file of ["spec.md", "plan.md", "tasks.md"]) {
+  requireFile(`${runtimeSettingsPromptLoopFeatureDir}/${file}`);
+}
+
+requireTextIncludes(`${runtimeSettingsPromptLoopFeatureDir}/spec.md`, [
+  "Runtime Settings CLI Terminal Prompt Loop",
+  "VHS-REQ-545",
+  "VHS-REQ-546",
+  "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
+  "clean-room"
+]);
+requireTextIncludes(`${runtimeSettingsPromptLoopFeatureDir}/plan.md`, [
+  "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
+  "Issue #71",
+  "Marketplace publication remains disabled"
+]);
+requireTextIncludes(`${runtimeSettingsPromptLoopFeatureDir}/tasks.md`, [
+  "Issue #71",
+  "- [x] T001",
+  "- [x] T008",
+  "- [ ] T009",
+  "- [ ] T013",
+  "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
+  "[BLOCKED]",
+  "T019"
+]);
+requireTextIncludes(`${runtimeSettingsPromptLoopImportDir}/rtm.csv`, runtimeSettingsPromptLoopExpectedIds);
+requireTextIncludes(`${runtimeSettingsPromptLoopImportDir}/srs.md`, [
+  "VHS-REQ-545",
+  "VHS-REQ-546",
+  "TEST-UNIT-353",
+  "TEST-UNIT-354",
+  "VHS-REQ-537",
+  "VHS-REQ-544",
+  "validation handoff"
+]);
+requireTextIncludes("README.md", [
+  "runtime-settings-cli-terminal-prompt-loop-v1",
+  "docs/requirements/admissions/runtime-settings-cli-terminal-prompt-loop-v1.json",
+  "Issue #71",
+  "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-terminal-prompt-loop-v1`."
+]);
+requireTextIncludes("AGENTS.md", [
+  "runtime-settings-cli-terminal-prompt-loop-v1",
+  "Issue #71",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-terminal-prompt-loop-v1`.",
+  "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
+  "012-runtime-settings-cli-terminal-prompt-loop-v1"
+]);
+requireTextIncludes("docs/development/copilot-workflow.md", [
+  "runtime-settings-cli-terminal-prompt-loop-v1",
+  "Issue #71",
+  "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
+  "OS-specific raw stdin/TTY process drivers"
 ]);
 
 if (failures.length > 0) {
