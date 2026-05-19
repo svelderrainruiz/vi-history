@@ -1689,7 +1689,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-interactive-selection-v1",
   "Issue #60",
   "Issue #62",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-runtime-outcome-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
   "IAU-runtime-settings-cli-interactive-selection-contract-v1",
   "016-runtime-settings-cli-validation-runtime-outcome-v1"
@@ -1834,13 +1834,13 @@ requireTextIncludes("README.md", [
   "Issue #65",
   "Issue #67",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-runtime-outcome-v1`."
+  "Current Implementation Admission Unit:\n`none`."
 ]);
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-terminal-entrypoint-v1",
   "Issue #65",
   "Issue #67",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-runtime-outcome-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
   "016-runtime-settings-cli-validation-runtime-outcome-v1"
 ]);
@@ -1983,14 +1983,14 @@ requireTextIncludes("README.md", [
   "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
   "latest supported NI LabVIEW Docker image selection",
   "no user-facing Docker bitness choice",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-runtime-outcome-v1`."
+  "Current Implementation Admission Unit:\n`none`."
 ]);
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-terminal-prompt-loop-v1",
   "Issue #71",
   "Issue #73",
   "Issue #75",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-runtime-outcome-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
   "no separate Docker bitness\nchoice",
   "016-runtime-settings-cli-validation-runtime-outcome-v1"
@@ -2148,7 +2148,7 @@ requireTextIncludes("README.md", [
   "Issue #77",
   "Issue #79",
   "IAU-runtime-settings-cli-terminal-io-adapter-v1",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-runtime-outcome-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "latest supported NI LabVIEW image-family selection with no Docker bitness\nprompt",
   "source copying remain blocked"
 ]);
@@ -2156,7 +2156,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-terminal-io-adapter-v1",
   "Issue #77",
   "Issue #79",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-runtime-outcome-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "IAU-runtime-settings-cli-terminal-io-adapter-v1",
   "no Docker bitness prompt",
   "016-runtime-settings-cli-validation-runtime-outcome-v1"
@@ -2310,7 +2310,7 @@ requireTextIncludes("README.md", [
   "Issue #81",
   "Issue #83",
   "IAU-runtime-settings-cli-validation-proof-out-v1",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-runtime-outcome-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "Runtime validation execution",
   "source copying remain blocked"
 ]);
@@ -2318,7 +2318,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-validation-proof-out-v1",
   "Issue #81",
   "Issue #83",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-runtime-outcome-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "IAU-runtime-settings-cli-validation-proof-out-v1",
   "016-runtime-settings-cli-validation-runtime-outcome-v1"
 ]);
@@ -2494,7 +2494,7 @@ requireTextIncludes("docs/development/copilot-workflow.md", [
 const runtimeSettingsRuntimeOutcomeAdmission = readJson(runtimeSettingsRuntimeOutcomeAdmissionPath);
 requireEqual(runtimeSettingsRuntimeOutcomeAdmission.schema, "vi-history/requirements-admission@v1", "runtime settings runtime outcome admission schema");
 requireEqual(runtimeSettingsRuntimeOutcomeAdmission.sliceId, runtimeSettingsRuntimeOutcomeSliceId, "runtime settings runtime outcome admission sliceId");
-requireEqual(runtimeSettingsRuntimeOutcomeAdmission.state, "admitted", "runtime settings runtime outcome admission state");
+requireEqual(runtimeSettingsRuntimeOutcomeAdmission.state, "implemented", "runtime settings runtime outcome admission state");
 requireEqual(runtimeSettingsRuntimeOutcomeAdmission.targetProduct, "vi-history", "runtime settings runtime outcome admission targetProduct");
 requireEqual(runtimeSettingsRuntimeOutcomeAdmission.targetFeature, runtimeSettingsRuntimeOutcomeSliceId, "runtime settings runtime outcome admission targetFeature");
 requireEqual(runtimeSettingsRuntimeOutcomeAdmission.sourceBaselineTag, "v1.3.16", "runtime settings runtime outcome admission sourceBaselineTag");
@@ -2502,28 +2502,34 @@ requireEqual(runtimeSettingsRuntimeOutcomeAdmission.sourceCommit, "567157f4a7753
 requireEqual(runtimeSettingsRuntimeOutcomeAdmission.governedAdmissionCommit, "263e378a3781e2122d7f850998c4c07e2786078a", "runtime settings runtime outcome admission governedAdmissionCommit");
 requireEqual(runtimeSettingsRuntimeOutcomeAdmission.implementationSharing, "none", "runtime settings runtime outcome admission implementationSharing");
 requireMarketplacePosture(runtimeSettingsRuntimeOutcomeAdmission, "runtime settings runtime outcome admission");
-requireEqual(runtimeSettingsRuntimeOutcomeAdmission.currentImplementationAdmissionUnit, "IAU-runtime-settings-cli-validation-runtime-outcome-v1", "runtime settings runtime outcome currentImplementationAdmissionUnit");
+requireEqual(runtimeSettingsRuntimeOutcomeAdmission.currentImplementationAdmissionUnit, null, "runtime settings runtime outcome currentImplementationAdmissionUnit");
 requireArrayEqual(runtimeSettingsRuntimeOutcomeAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "runtime settings runtime outcome completedSpecScope");
-requireArrayEqual(runtimeSettingsRuntimeOutcomeAdmission.completedImplementationScope, [], "runtime settings runtime outcome completedImplementationScope");
-requireArrayEqual(runtimeSettingsRuntimeOutcomeAdmission.admittedImplementationScope, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings runtime outcome admittedImplementationScope");
+requireArrayEqual(runtimeSettingsRuntimeOutcomeAdmission.completedImplementationScope, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings runtime outcome completedImplementationScope");
+requireArrayEqual(runtimeSettingsRuntimeOutcomeAdmission.admittedImplementationScope, [], "runtime settings runtime outcome admittedImplementationScope");
 requireArrayEqual(runtimeSettingsRuntimeOutcomeAdmission.blockedImplementationScope, ["T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025"], "runtime settings runtime outcome blockedImplementationScope");
 requireEqual(runtimeSettingsRuntimeOutcomeAdmission.preImplementationPreflight?.iauId, "IAU-runtime-settings-cli-validation-runtime-outcome-v1", "runtime settings runtime outcome preImplementationPreflight iauId");
 requireEqual(runtimeSettingsRuntimeOutcomeAdmission.preImplementationPreflight?.status, "pass", "runtime settings runtime outcome preImplementationPreflight status");
 requireEqual(runtimeSettingsRuntimeOutcomeAdmission.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings runtime outcome preImplementationPreflight implementationStartAllowed");
 requireEqual(runtimeSettingsRuntimeOutcomeAdmission.preImplementationPreflight?.record, runtimeSettingsRuntimeOutcomePreflightPath, "runtime settings runtime outcome preImplementationPreflight record");
 requireEqual(runtimeSettingsRuntimeOutcomeAdmission.issue?.number, 89, "runtime settings runtime outcome issue number");
+requireEqual(runtimeSettingsRuntimeOutcomeAdmission.implementationHandoffIssue?.number, 91, "runtime settings runtime outcome implementation handoff issue number");
+requireEqual(runtimeSettingsRuntimeOutcomeAdmission.implementationCloseout?.status, "pass", "runtime settings runtime outcome implementation closeout status");
+requireEqual(runtimeSettingsRuntimeOutcomeAdmission.implementationCloseout?.issue, 91, "runtime settings runtime outcome implementation closeout issue");
+requireArrayEqual(runtimeSettingsRuntimeOutcomeAdmission.implementationCloseout?.completedTasks, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings runtime outcome implementation closeout completedTasks");
+requireArrayEqual(runtimeSettingsRuntimeOutcomeAdmission.implementationCloseout?.blockedScopeRetained, ["T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025"], "runtime settings runtime outcome implementation closeout blockedScopeRetained");
 requireFile(`docs/requirements/admissions/${runtimeSettingsRuntimeOutcomeSliceId}.md`);
 
 const runtimeSettingsRuntimeOutcomeAdmissionUnit = (runtimeSettingsRuntimeOutcomeAdmission.implementationAdmissionUnits ?? [])
   .find((unit) => unit?.iauId === "IAU-runtime-settings-cli-validation-runtime-outcome-v1");
-requireEqual(runtimeSettingsRuntimeOutcomeAdmissionUnit?.state, "admitted", "runtime settings runtime outcome admission unit state");
+requireEqual(runtimeSettingsRuntimeOutcomeAdmissionUnit?.state, "implemented", "runtime settings runtime outcome admission unit state");
 requireEqual(runtimeSettingsRuntimeOutcomeAdmissionUnit?.preflightRecord, runtimeSettingsRuntimeOutcomePreflightPath, "runtime settings runtime outcome admission unit preflightRecord");
 
 const runtimeSettingsRuntimeOutcomeIau = readJson(runtimeSettingsRuntimeOutcomeIauPath);
 requireEqual(runtimeSettingsRuntimeOutcomeIau.schema, "vi-history/implementation-admission-unit@v1", "runtime settings runtime outcome IAU schema");
 requireEqual(runtimeSettingsRuntimeOutcomeIau.iauId, "IAU-runtime-settings-cli-validation-runtime-outcome-v1", "runtime settings runtime outcome IAU id");
-requireEqual(runtimeSettingsRuntimeOutcomeIau.state, "admitted", "runtime settings runtime outcome IAU state");
+requireEqual(runtimeSettingsRuntimeOutcomeIau.state, "implemented", "runtime settings runtime outcome IAU state");
 requireEqual(runtimeSettingsRuntimeOutcomeIau.parentSliceId, runtimeSettingsRuntimeOutcomeSliceId, "runtime settings runtime outcome IAU parentSliceId");
+requireEqual(runtimeSettingsRuntimeOutcomeIau.implementationHandoffIssue?.number, 91, "runtime settings runtime outcome IAU implementation handoff issue number");
 requireArrayEqual(runtimeSettingsRuntimeOutcomeIau.admittedTasks, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings runtime outcome IAU admittedTasks");
 requireArrayEqual(runtimeSettingsRuntimeOutcomeIau.blockedTasks, ["T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025"], "runtime settings runtime outcome IAU blockedTasks");
 requireEqual(runtimeSettingsRuntimeOutcomeIau.implementationSharing, "none", "runtime settings runtime outcome IAU implementationSharing");
@@ -2531,6 +2537,9 @@ requireMarketplacePosture(runtimeSettingsRuntimeOutcomeIau, "runtime settings ru
 requireEqual(runtimeSettingsRuntimeOutcomeIau.preImplementationPreflight?.status, "pass", "runtime settings runtime outcome IAU preImplementationPreflight status");
 requireEqual(runtimeSettingsRuntimeOutcomeIau.preImplementationPreflight?.record, "IAU-runtime-settings-cli-validation-runtime-outcome-v1-preflight-v1.json", "runtime settings runtime outcome IAU preImplementationPreflight record");
 requireEqual(runtimeSettingsRuntimeOutcomeIau.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings runtime outcome IAU preImplementationPreflight implementationStartAllowed");
+requireEqual(runtimeSettingsRuntimeOutcomeIau.implementationCloseout?.status, "pass", "runtime settings runtime outcome IAU implementationCloseout status");
+requireEqual(runtimeSettingsRuntimeOutcomeIau.implementationCloseout?.issue, 91, "runtime settings runtime outcome IAU implementationCloseout issue");
+requireArrayEqual(runtimeSettingsRuntimeOutcomeIau.implementationCloseout?.completedTasks, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings runtime outcome IAU implementationCloseout completedTasks");
 requireFile(`docs/requirements/admissions/${runtimeSettingsRuntimeOutcomeSliceId}/IAU-runtime-settings-cli-validation-runtime-outcome-v1.md`);
 
 const runtimeSettingsRuntimeOutcomePreflight = readJson(runtimeSettingsRuntimeOutcomePreflightPath);
@@ -2584,20 +2593,22 @@ requireTextIncludes(`${runtimeSettingsRuntimeOutcomeFeatureDir}/spec.md`, [
   "createRuntimeSettingsValidationRuntimeOutcome",
   "runtime-settings-cli-validation-runtime-outcome-contract",
   "runtimeOutcome",
+  "Current Implementation Admission Unit\n  is `none`",
   "clean-room"
 ]);
 requireTextIncludes(`${runtimeSettingsRuntimeOutcomeFeatureDir}/plan.md`, [
   "IAU-runtime-settings-cli-validation-runtime-outcome-v1",
   "Issue #89",
+  "Issue #91",
   "Marketplace publication remains disabled"
 ]);
 requireTextIncludes(`${runtimeSettingsRuntimeOutcomeFeatureDir}/tasks.md`, [
   "Issue #89",
-  "Implementation handoff issue",
+  "Issue #91",
   "- [x] T001",
   "- [x] T008",
-  "- [ ] T009",
-  "- [ ] T016",
+  "- [x] T009",
+  "- [x] T016",
   "IAU-runtime-settings-cli-validation-runtime-outcome-v1",
   "[BLOCKED]",
   "T025"
@@ -2620,21 +2631,24 @@ requireTextIncludes("README.md", [
   "runtime-settings-cli-validation-runtime-outcome-v1",
   "docs/requirements/admissions/runtime-settings-cli-validation-runtime-outcome-v1.json",
   "Issue #89",
+  "Issue #91",
   "IAU-runtime-settings-cli-validation-runtime-outcome-v1",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-runtime-outcome-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "createRuntimeSettingsValidationRuntimeOutcome(input = {})",
   "validation fact generation beyond supplied\nruntime outcome fact shaping"
 ]);
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-validation-runtime-outcome-v1",
   "Issue #89",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-runtime-outcome-v1`.",
+  "Issue #91",
+  "Current Implementation Admission Unit:\n`none`.",
   "IAU-runtime-settings-cli-validation-runtime-outcome-v1",
   "016-runtime-settings-cli-validation-runtime-outcome-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-runtime-outcome-v1",
   "Issue #89",
+  "Issue #91",
   "IAU-runtime-settings-cli-validation-runtime-outcome-v1",
   "pure runtime outcome fact\nshaping",
   "runtime locator invocation or OS inspection"

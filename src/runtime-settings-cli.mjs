@@ -15,6 +15,14 @@ export const RUNTIME_SETTINGS_CLI_VALIDATION_READBACK_REQUIREMENTS = Object.free
   failClosed: Object.freeze(["VHS-REQ-546"])
 });
 
+export const RUNTIME_SETTINGS_CLI_VALIDATION_RUNTIME_OUTCOME_REQUIREMENTS = Object.freeze({
+  suppliedSelectionFacts: Object.freeze(["VHS-REQ-546"]),
+  readyMapping: Object.freeze(["VHS-REQ-546"]),
+  blockedMapping: Object.freeze(["VHS-REQ-546"]),
+  composition: Object.freeze(["VHS-REQ-546"]),
+  failClosed: Object.freeze(["VHS-REQ-546"])
+});
+
 export const RUNTIME_SETTINGS_CLI_VALIDATION_PROOF_REQUIREMENTS = Object.freeze({
   proofArtifact: Object.freeze(["VHS-REQ-546"]),
   redaction: Object.freeze(["VHS-REQ-546"]),
@@ -83,6 +91,27 @@ export const RUNTIME_SETTINGS_VALIDATION_BLOCKED_SIDE_EFFECTS = Object.freeze({
   liveSessionProof: false,
   packaging: false,
   marketplace: false
+});
+
+export const RUNTIME_SETTINGS_VALIDATION_RUNTIME_OUTCOME_BLOCKED_SIDE_EFFECTS = Object.freeze({
+  settingsMutation: false,
+  interactiveSelection: false,
+  proofOut: false,
+  fileSystemWrites: false,
+  osInspection: false,
+  runtimeLocator: false,
+  runtimeValidation: false,
+  runtimeExecution: false,
+  compareExecution: false,
+  labviewCli: false,
+  dockerExecution: false,
+  dockerOrchestration: false,
+  liveTerminalProof: false,
+  packageBinPublication: false,
+  launcherProfileMutation: false,
+  releaseAutomation: false,
+  marketplace: false,
+  sourceCopying: false
 });
 
 export const RUNTIME_SETTINGS_VALIDATION_PROOF_BLOCKED_SIDE_EFFECTS = Object.freeze({
@@ -252,6 +281,15 @@ export function allRuntimeSettingsCliSettingsWriteRequirementIds() {
 export function allRuntimeSettingsCliValidationReadbackRequirementIds() {
   return Object.freeze(
     Object.values(RUNTIME_SETTINGS_CLI_VALIDATION_READBACK_REQUIREMENTS)
+      .flat()
+      .filter((value, index, values) => values.indexOf(value) === index)
+      .sort()
+  );
+}
+
+export function allRuntimeSettingsCliValidationRuntimeOutcomeRequirementIds() {
+  return Object.freeze(
+    Object.values(RUNTIME_SETTINGS_CLI_VALIDATION_RUNTIME_OUTCOME_REQUIREMENTS)
       .flat()
       .filter((value, index, values) => values.indexOf(value) === index)
       .sort()
@@ -582,6 +620,46 @@ export function readRuntimeSettingsValidation(input = {}) {
     runtime: runtimeOutcome.value,
     blockedSideEffects: RUNTIME_SETTINGS_VALIDATION_BLOCKED_SIDE_EFFECTS,
     requirementIds: allRuntimeSettingsCliValidationReadbackRequirementIds()
+  });
+}
+
+export function createRuntimeSettingsValidationRuntimeOutcome(input = {}) {
+  const selection = normalizeRuntimeSelectionFacts(
+    input.runtimeSelection
+      ?? input.selection
+      ?? input.runtimeFacts
+      ?? input.runtime
+      ?? input
+  );
+
+  if (!selection.ok) {
+    return runtimeOutcomeContractResult({
+      status: "blocked",
+      blockedReason: selection.blockedReason,
+      runtimeOutcome: createBlockedRuntimeOutcome({
+        blockedReason: selection.blockedReason,
+        runtimeErrorCode: runtimeErrorCodeForRuntimeBlockedReason(selection.blockedReason)
+      })
+    });
+  }
+
+  const runtimeBlockedReason = selection.value.runtimeBlockedReason;
+  const ready = selection.value.runtimeProvider !== "unavailable" && !runtimeBlockedReason;
+  const runtimeOutcome = freezeRecord({
+    runtimeValidationOutcome: ready ? "ready" : "blocked",
+    runtimeProvider: ready ? selection.value.runtimeProvider : "unavailable",
+    runtimeEngine: ready ? selection.value.runtimeEngine : null,
+    runtimeBlockedReason: ready ? null : (runtimeBlockedReason ?? "runtime-validation-blocked"),
+    runtimeErrorCode: ready ? "VIHS_OK" : runtimeErrorCodeForRuntimeBlockedReason(runtimeBlockedReason),
+    runtimeProofStatus: ready ? "ready" : "blocked-with-actionable-error",
+    runtimeImplementationStatus: ready ? "implemented" : runtimeImplementationStatusForBlockedReason(runtimeBlockedReason)
+  });
+
+  return runtimeOutcomeContractResult({
+    status: runtimeOutcome.runtimeValidationOutcome,
+    blockedReason: runtimeOutcome.runtimeBlockedReason,
+    runtimeSelection: selection.value,
+    runtimeOutcome
   });
 }
 
@@ -1973,6 +2051,95 @@ function readPersistedRuntimeSettingsFacts(settings) {
   };
 }
 
+function normalizeRuntimeSelectionFacts(selection = {}) {
+  if (!isPlainObject(selection)) {
+    return {
+      ok: false,
+      blockedReason: "missing-runtime-selection-facts"
+    };
+  }
+
+  const provider = normalizeFact(
+    selection.runtimeProvider
+      ?? selection.provider
+      ?? selection.selectedProvider
+      ?? selection.requestedProvider
+  );
+  if (!provider) {
+    return {
+      ok: false,
+      blockedReason: "missing-runtime-selection-facts"
+    };
+  }
+
+  const runtimeProvider = normalizeRuntimeOutcomeProvider(provider);
+  if (!runtimeProvider) {
+    return {
+      ok: false,
+      blockedReason: "installed-provider-invalid"
+    };
+  }
+
+  const runtimeBlockedReason = normalizeFact(
+    selection.runtimeBlockedReason
+      ?? selection.blockedReason
+      ?? selection.reason
+  );
+  const runtimeEngine = normalizeFact(selection.runtimeEngine ?? selection.engine);
+
+  if (runtimeProvider === "unavailable" && !runtimeBlockedReason) {
+    return {
+      ok: false,
+      blockedReason: "labview-runtime-selection-required"
+    };
+  }
+
+  return {
+    ok: true,
+    value: freezeRecord({
+      runtimeProvider,
+      runtimeEngine,
+      runtimeBlockedReason
+    })
+  };
+}
+
+function normalizeRuntimeOutcomeProvider(provider) {
+  if (["host", "host-native", "docker", "linux-container", "windows-container", "unavailable"].includes(provider)) {
+    return provider;
+  }
+  return null;
+}
+
+function runtimeOutcomeContractResult({
+  status,
+  runtimeOutcome,
+  blockedReason = null,
+  runtimeSelection = null
+}) {
+  return freezeRecord({
+    status,
+    type: "runtime-settings-cli-validation-runtime-outcome-contract",
+    blockedReason,
+    runtimeSelection,
+    runtimeOutcome,
+    blockedSideEffects: RUNTIME_SETTINGS_VALIDATION_RUNTIME_OUTCOME_BLOCKED_SIDE_EFFECTS,
+    requirementIds: allRuntimeSettingsCliValidationRuntimeOutcomeRequirementIds()
+  });
+}
+
+function createBlockedRuntimeOutcome({ blockedReason, runtimeErrorCode }) {
+  return freezeRecord({
+    runtimeValidationOutcome: "blocked",
+    runtimeProvider: "unavailable",
+    runtimeEngine: null,
+    runtimeBlockedReason: blockedReason,
+    runtimeErrorCode,
+    runtimeProofStatus: "blocked-with-actionable-error",
+    runtimeImplementationStatus: runtimeImplementationStatusForBlockedReason(blockedReason)
+  });
+}
+
 function normalizeRuntimeOutcome(outcome = {}) {
   const runtimeValidationOutcome = normalizeFact(outcome.runtimeValidationOutcome);
   const runtimeProvider = normalizeFact(outcome.runtimeProvider);
@@ -2009,6 +2176,70 @@ function runtimeErrorCodeForSettingsFailure(blockedReason) {
     return "VIHS_E_INVALID_SETTINGS_CONTENT";
   }
   return "VIHS_E_RUNTIME_SETTINGS_READBACK_FAILED";
+}
+
+function runtimeErrorCodeForRuntimeBlockedReason(blockedReason) {
+  if (blockedReason === "installed-provider-invalid") {
+    return "VIHS_E_PROVIDER_INVALID";
+  }
+  if (blockedReason === "missing-runtime-selection-facts" || blockedReason === "labview-runtime-selection-required") {
+    return "VIHS_E_RUNTIME_SELECTION_REQUIRED";
+  }
+  if (blockedReason === "labview-version-required") {
+    return "VIHS_E_LABVIEW_VERSION_REQUIRED";
+  }
+  if (blockedReason === "labview-version-unsupported-for-comparison-report") {
+    return "VIHS_E_LABVIEW_VERSION_UNSUPPORTED";
+  }
+  if (blockedReason === "labview-bitness-required") {
+    return "VIHS_E_LABVIEW_BITNESS_REQUIRED";
+  }
+  if (
+    blockedReason === "labview-2026q1-unsupported-on-macos"
+    || blockedReason?.endsWith("provider-not-supported-on-platform")
+  ) {
+    return "VIHS_E_PLATFORM_UNSUPPORTED";
+  }
+  if (blockedReason?.startsWith("configured-") && blockedReason.endsWith("-path-missing")) {
+    return "VIHS_E_CONFIGURED_PATH_MISSING";
+  }
+  if (blockedReason === "docker-provider-labview-version-not-implemented") {
+    return "VIHS_E_DOCKER_PROVIDER_VERSION_NOT_IMPLEMENTED";
+  }
+  if (
+    blockedReason === "docker-provider-unavailable"
+    || blockedReason === "docker-only-provider-unavailable"
+    || blockedReason === "auto-docker-installed-provider-unavailable"
+  ) {
+    return "VIHS_E_DOCKER_UNAVAILABLE";
+  }
+  if (blockedReason === "labview-exe-not-found") {
+    return "VIHS_E_LABVIEW_NOT_FOUND";
+  }
+  if (blockedReason === "labview-exe-ambiguous") {
+    return "VIHS_E_LABVIEW_AMBIGUOUS";
+  }
+  if (blockedReason === "labview-cli-not-found-for-bitness") {
+    return "VIHS_E_LABVIEW_CLI_BITNESS_NOT_FOUND";
+  }
+  if (blockedReason === "canonical-labview-cli-not-found" || blockedReason === "comparison-tool-not-found") {
+    return "VIHS_E_COMPARISON_TOOL_NOT_FOUND";
+  }
+  if (blockedReason === "windows-host-runtime-surface-contaminated") {
+    return "VIHS_E_RUNTIME_SURFACE_CONTAMINATED";
+  }
+  return "VIHS_E_RUNTIME_VALIDATION_BLOCKED";
+}
+
+function runtimeImplementationStatusForBlockedReason(blockedReason) {
+  if (
+    blockedReason === "docker-provider-labview-version-not-implemented"
+    || blockedReason === "labview-2026q1-unsupported-on-macos"
+    || blockedReason?.endsWith("provider-not-supported-on-platform")
+  ) {
+    return "not-implemented";
+  }
+  return "blocked-or-missing-prerequisite";
 }
 
 function normalizeRuntimeSettingsFacts(facts) {
