@@ -1,0 +1,12 @@
+requirement_id,source_type,public_artifact,verification
+VHS-REQ-546,imported,docs/requirements/imports/runtime-settings-cli-validation-host-preflight-command-composition-v1/srs.md,Command result composes host preflight facts into the existing validation chain without changing output shapes.
+VHS-REQ-532,prerequisite,docs/requirements/imports/runtime-settings-cli-validation-host-preflight-command-composition-v1/srs.md,Host preflight remains supplied-facts-only and does not discover private host state.
+VHS-REQ-537,prerequisite,docs/requirements/imports/runtime-settings-cli-validation-host-preflight-command-composition-v1/syrs.md,Settings-write behavior remains a prerequisite and is not reopened.
+VHS-REQ-543,prerequisite,docs/requirements/imports/runtime-settings-cli-validation-host-preflight-command-composition-v1/syrs.md,Runtime outcome fact shaping remains a prerequisite and is not redesigned.
+VHS-REQ-544,prerequisite,docs/requirements/imports/runtime-settings-cli-validation-host-preflight-command-composition-v1/syrs.md,Interactive selection and terminal contracts remain prerequisites and are not reopened.
+VHS-REQ-545,prerequisite,docs/requirements/imports/runtime-settings-cli-validation-host-preflight-command-composition-v1/syrs.md,Terminal I/O and prompt-loop contracts remain prerequisites and are not reopened.
+VHS-REQ-550,prerequisite,docs/requirements/imports/runtime-settings-cli-validation-host-preflight-command-composition-v1/srs.md,Windows mixed-bitness host rule remains a supplied-facts prerequisite not host discovery.
+TEST-UNIT-342,supporting,docs/requirements/imports/runtime-settings-cli-validation-host-preflight-command-composition-v1/test-plan.md,Command composition preserves existing validation command behavior.
+TEST-UNIT-354,supporting,docs/requirements/imports/runtime-settings-cli-validation-host-preflight-command-composition-v1/test-plan.md,Host provider facts remain public-safe and supplied by caller.
+TEST-UNIT-355,supporting,docs/requirements/imports/runtime-settings-cli-validation-host-preflight-command-composition-v1/test-plan.md,Host runtime preflight facts feed runtime outcome deterministically.
+TEST-UNIT-392,supporting,docs/requirements/imports/runtime-settings-cli-validation-host-preflight-command-composition-v1/test-plan.md,Proof-out and validate-plan-only outputs remain deterministic and side-effect bounded.

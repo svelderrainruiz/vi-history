@@ -1,0 +1,39 @@
+{
+  "schema": "vi-history/requirements-import@v1",
+  "sliceId": "runtime-settings-cli-validation-host-preflight-command-composition-v1",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "b5ed9e5a77a096c342fc74c42e3e901d6bad041f",
+  "governedAdmissionCommit": "e411ef2bfa74cedf6f9b53d764810f9f4c93a8b0",
+  "targetProduct": "vi-history",
+  "targetFeature": "runtime-settings-cli-validation-host-preflight-command-composition-v1",
+  "specKitPath": ".specify/specs/runtime-settings-cli-validation-host-preflight-command-composition-v1",
+  "redactionStatus": "pass",
+  "implementationSharing": "none",
+  "marketplacePublication": "disabled-until-later-adr",
+  "importedRequirementIds": [
+    "VHS-REQ-546"
+  ],
+  "prerequisiteRequirementIds": [
+    "VHS-REQ-532",
+    "VHS-REQ-537",
+    "VHS-REQ-543",
+    "VHS-REQ-544",
+    "VHS-REQ-545",
+    "VHS-REQ-550"
+  ],
+  "supportingTestIds": [
+    "TEST-UNIT-342",
+    "TEST-UNIT-354",
+    "TEST-UNIT-355",
+    "TEST-UNIT-392"
+  ],
+  "contractName": "createRuntimeSettingsValidationCommandResult",
+  "composedContractName": "createRuntimeSettingsValidationHostRuntimePreflight",
+  "compositionBoundary": "supplied-public-safe-host-preflight-facts-or-host-candidate-facts-only",
+  "files": [
+    "syrs.md",
+    "srs.md",
+    "rtm.csv",
+    "test-plan.md"
+  ]
+}
