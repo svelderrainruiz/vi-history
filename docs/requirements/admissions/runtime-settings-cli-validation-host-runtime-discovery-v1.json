@@ -2,7 +2,7 @@
   "schema": "vi-history/requirements-admission@v1",
   "sliceId": "runtime-settings-cli-validation-host-runtime-discovery-v1",
   "createdDate": "2026-05-19",
-  "state": "admitted",
+  "state": "implemented",
   "targetProduct": "vi-history",
   "targetFeature": "runtime-settings-cli-validation-host-runtime-discovery-v1",
   "sourceBaselineTag": "v1.3.16",
@@ -13,6 +13,14 @@
   "issue": {
     "number": 118,
     "url": "https://github.com/svelderrainruiz/vi-history/issues/118"
+  },
+  "implementationHandoffIssue": {
+    "number": 120,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/120"
+  },
+  "implementationPullRequest": {
+    "number": 121,
+    "url": "https://github.com/svelderrainruiz/vi-history/pull/121"
   },
   "bridgeChecks": {
     "specKitCliVersion": "0.8.12.dev0",
@@ -26,7 +34,7 @@
   "implementationAdmissionUnits": [
     {
       "iauId": "IAU-runtime-settings-cli-validation-host-runtime-discovery-v1",
-      "state": "admitted",
+      "state": "implemented",
       "record": "docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-discovery-v1/IAU-runtime-settings-cli-validation-host-runtime-discovery-v1.json",
       "preflightRecord": "docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-discovery-v1/IAU-runtime-settings-cli-validation-host-runtime-discovery-v1-preflight-v1.json",
       "admittedTasks": [
@@ -41,7 +49,7 @@
       ]
     }
   ],
-  "currentImplementationAdmissionUnit": "IAU-runtime-settings-cli-validation-host-runtime-discovery-v1",
+  "currentImplementationAdmissionUnit": null,
   "completedSpecScope": [
     "T001",
     "T002",
@@ -52,8 +60,7 @@
     "T007",
     "T008"
   ],
-  "completedImplementationScope": [],
-  "admittedImplementationScope": [
+  "completedImplementationScope": [
     "T009",
     "T010",
     "T011",
@@ -63,6 +70,7 @@
     "T015",
     "T016"
   ],
+  "admittedImplementationScope": [],
   "blockedImplementationScope": [
     "T017",
     "T018",
@@ -83,7 +91,36 @@
     "record": "docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-discovery-v1/IAU-runtime-settings-cli-validation-host-runtime-discovery-v1-preflight-v1.json",
     "implementationStartAllowed": true
   },
-  "implementationHandoffPolicy": "Create a separate implementation handoff issue after this admission PR merges; do not reuse Issue #118 for implementation.",
+  "implementationHandoffPolicy": "Issue #120 is the separate implementation handoff issue; do not reuse Issue #118 for implementation.",
+  "implementationCloseout": {
+    "status": "pass",
+    "issue": 120,
+    "pullRequest": 121,
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011",
+      "T012",
+      "T013",
+      "T014",
+      "T015",
+      "T016"
+    ],
+    "blockedScopeRetained": [
+      "T017",
+      "T018",
+      "T019",
+      "T020",
+      "T021",
+      "T022",
+      "T023",
+      "T024",
+      "T025",
+      "T026",
+      "T027",
+      "T028"
+    ]
+  },
   "requirementMaturityBasis": "governed bridge-readiness packet supports public import, Spec Kit planning, and narrow host runtime discovery admission, not source reuse",
   "implementationSharing": "none",
   "marketplacePublication": "disabled",
