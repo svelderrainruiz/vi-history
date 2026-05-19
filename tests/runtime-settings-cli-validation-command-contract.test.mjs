@@ -153,6 +153,7 @@ test("T013 composes --proof-out through admitted two-file emission contract", as
   assert.deepEqual(entries, ["vihs-validation-issue.md", "vihs-validation-proof.json"]);
   assert.equal(result.proofOut.files.proofJson.fileName, "vihs-validation-proof.json");
   assert.equal(result.proofOut.files.issueMarkdown.fileName, "vihs-validation-issue.md");
+  assert.deepEqual(result.copyableGuidance, ["vihs --validate --proof-out proof/command"]);
 });
 
 test("T014 omitting --proof-out avoids file writes", async () => {
@@ -198,6 +199,8 @@ test("T015 unsupported proof-out targets and I/O failures fail closed without hi
   assert.equal(unsupported.blockedReason, "unsupported-proof-out-target");
   assert.equal(unsupported.partialWrite, false);
   assert.equal(unsupported.artifactWrites, false);
+  assert.deepEqual(unsupported.copyableGuidance, ["vihs --validate --proof-out <dir>"]);
+  assert.equal(unsupported.copyableGuidance.join(" ").includes("/absolute/proof"), false);
   assert.equal(calls.length, 0);
   assert.equal(ioFailure.status, "blocked");
   assert.equal(ioFailure.blockedReason, "proof-out-file-emission-failed");

@@ -2129,8 +2129,8 @@ function createValidationProofOutGuidance(target = null) {
 }
 
 function createValidationCommandGuidance({ requestMode, proofOut } = {}) {
-  const copyableCommand = requestMode === "validate-with-proof-out" && proofOut
-    ? `${RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_COMMAND} ${proofOut}`
+  const copyableCommand = requestMode === "validate-with-proof-out"
+    ? `${RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_COMMAND} ${proofOut ?? "<dir>"}`
     : RUNTIME_SETTINGS_VALIDATION_COMMAND;
   return freezeRecord({
     nonInteractive: true,
@@ -2146,9 +2146,12 @@ function validationCommandContractResult({
   validation = null,
   proofOut = null
 }) {
+  const publicSafeProofOut = proofOut?.proofOutTarget?.publicSafe === true
+    ? proofOut.proofOutTarget.identifier
+    : null;
   const guidance = createValidationCommandGuidance({
     requestMode: requestMode?.startsWith("validate-with-proof-out") ? "validate-with-proof-out" : "validate-only",
-    proofOut: proofOut?.proofOutTarget?.identifier ?? null
+    proofOut: publicSafeProofOut
   });
   return freezeRecord({
     status,
