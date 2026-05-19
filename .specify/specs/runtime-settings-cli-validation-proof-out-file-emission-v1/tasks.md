@@ -50,24 +50,24 @@ exactly two public proof files without running validation.
 
 **Public admission issue**: Issue #85
 
-**Implementation handoff issue**: To be created after the admission PR merges
+**Implementation handoff issue**: Issue #87
 
-- [ ] T009 Add tests proving a ready proof-out adapter writes exactly
+- [x] T009 Add tests proving a ready proof-out adapter writes exactly
   `vihs-validation-proof.json` and `vihs-validation-issue.md`.
-- [ ] T010 Add tests proving deterministic proof JSON and issue Markdown file
+- [x] T010 Add tests proving deterministic proof JSON and issue Markdown file
   content matches the already admitted proof-out adapter payload facts.
-- [ ] T011 Add tests proving a supported output target directory is created
+- [x] T011 Add tests proving a supported output target directory is created
   when safe.
-- [ ] T012 Add tests proving missing or unready proof-out adapter facts fail
+- [x] T012 Add tests proving missing or unready proof-out adapter facts fail
   closed before file writes.
-- [ ] T013 Add tests proving unsupported output targets fail closed before file
+- [x] T013 Add tests proving unsupported output targets fail closed before file
   writes.
-- [ ] T014 Add tests proving I/O failures report deterministic failure facts
+- [x] T014 Add tests proving I/O failures report deterministic failure facts
   without hidden partial success.
-- [ ] T015 Add tests proving runtime validation, new validation fact
+- [x] T015 Add tests proving runtime validation, new validation fact
   generation, compare, LabVIEWCLI, Docker, live proof, publication, mutation,
   Marketplace, and source-copying side effects remain blocked.
-- [ ] T016 Implement the minimum public MIT validation proof-out file-emission
+- [x] T016 Implement the minimum public MIT validation proof-out file-emission
   adapter around ready proof-out adapter facts.
 
 ---
@@ -113,8 +113,8 @@ sharing visibly outside this IAU.
 - Phase 1 must merge before
   `IAU-runtime-settings-cli-validation-proof-out-file-emission-v1`
   implementation starts.
-- Phase 2 must use a separate implementation handoff issue after the admission
-  PR merges.
+- Phase 2 used separate implementation handoff Issue #87 after the admission
+  PR merged.
 - Phase 3 remains blocked until separate public requirements and preflight
   records admit runtime validation execution, new validation fact generation,
   compare execution, LabVIEWCLI execution, Docker execution, live terminal
@@ -127,8 +127,9 @@ sharing visibly outside this IAU.
 ## Implementation Strategy
 
 1. Merge import/spec/admission artifacts to `develop`.
-2. Create a separate implementation handoff issue for
-   `IAU-runtime-settings-cli-validation-proof-out-file-emission-v1`.
+2. Implement and close
+   `IAU-runtime-settings-cli-validation-proof-out-file-emission-v1` through
+   Issue #87.
 3. Keep runtime validation execution, new validation fact generation, compare
    execution, LabVIEWCLI execution, Docker execution, live terminal proof,
    package/bin publication, launcher/profile mutation, Marketplace

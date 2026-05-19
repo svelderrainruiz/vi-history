@@ -1,13 +1,12 @@
 # Feature Specification: Runtime Settings CLI Validation Proof-Out File Emission
 
 **Feature Branch**:
-`codex/runtime-settings-cli-validation-proof-out-file-emission-admission`
+`codex/runtime-settings-cli-validation-proof-out-file-emission`
 
 **Created**: 2026-05-19
 
-**Status**: Admitted for
-`IAU-runtime-settings-cli-validation-proof-out-file-emission-v1`; implementation
-must use a separate handoff issue after this admission PR merges.
+**Status**: Implemented for
+`IAU-runtime-settings-cli-validation-proof-out-file-emission-v1`
 
 **Input**: Imported requirements slice
 `runtime-settings-cli-validation-proof-out-file-emission-v1`
@@ -129,9 +128,8 @@ facts and no hidden ready status.
   runtime validation, new validation fact generation, compare, LabVIEWCLI,
   Docker, live proof, publication, mutation, Marketplace, and source copying
   blocked.
-- **SC-003**: The admission record states that implementation is admitted only
-  for T009-T016 after the admission PR merges and a separate handoff issue is
-  created.
+- **SC-003**: The admission record states that implementation is complete only
+  for T009-T016 and that the current Implementation Admission Unit is `none`.
 - **SC-004**: Public validation rejects private paths, credentials, private
   evidence, private control-plane terms, and copied implementation-source
   instructions.

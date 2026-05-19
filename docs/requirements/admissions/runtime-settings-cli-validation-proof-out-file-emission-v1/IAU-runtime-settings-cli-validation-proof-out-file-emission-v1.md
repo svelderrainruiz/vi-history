@@ -1,6 +1,6 @@
 # Implementation Admission Unit: Runtime Settings CLI Validation Proof-Out File Emission
 
-`IAU-runtime-settings-cli-validation-proof-out-file-emission-v1` is admitted
+`IAU-runtime-settings-cli-validation-proof-out-file-emission-v1` is implemented
 for `runtime-settings-cli-validation-proof-out-file-emission-v1`.
 
 Parent slice: `runtime-settings-cli-validation-proof-out-file-emission-v1`
@@ -36,5 +36,5 @@ Preflight:
 - T026: implementation beyond proof-out file emission from ready adapter facts
   without a separate public IAU.
 
-Implementation must not start until this admission PR merges and a separate
-implementation handoff issue is created.
+Issue #87 implements and closes T009-T016. Issue #85 is the admission issue and
+must not be reused for implementation.

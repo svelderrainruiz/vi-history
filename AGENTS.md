@@ -132,8 +132,8 @@ contracts for T009-T014 only.
 `runtime-settings-cli-validation-proof-out-file-emission-v1` admits
 `IAU-runtime-settings-cli-validation-proof-out-file-emission-v1` for Issue #85
 and T009-T016 only. Issue #85 is an admission issue and must not be reused for
-implementation. Implementation must use a separate handoff issue after the
-admission PR merges. The admitted unit is limited to writing exactly
+implementation. Issue #87 implements and closes the file-emission contract for
+T009-T016 only: writing exactly
 `vihs-validation-proof.json` and `vihs-validation-issue.md` from ready
 proof-out adapter facts, creating the supported target directory when safe, and
 returning deterministic write-result facts.
@@ -144,7 +144,7 @@ proof, package/bin publication, launcher/profile mutation, packaging, and
 Marketplace publication remain blocked.
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-proof-out-file-emission-v1`.
+`none`.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that
