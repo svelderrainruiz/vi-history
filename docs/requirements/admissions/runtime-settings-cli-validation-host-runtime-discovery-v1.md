@@ -5,18 +5,18 @@ Slice:
 
 Admission issue: Issue #118
 
-State: admitted
+State: implemented
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-host-runtime-discovery-v1`
+`none`
 
 ## Scope
 
 This admission imports the governed bridge for bounded host runtime discovery
 facts into the public MIT authority.
 
-The admitted IAU covers only T009-T016: tests and the minimum public MIT
-discovery-facts contract that can derive public-safe host candidate facts for
+The implemented IAU covers only T009-T016: tests and the minimum public MIT
+discovery-facts contract that derives public-safe host candidate facts for
 `createRuntimeSettingsValidationHostRuntimePreflight(input = {})` and the
 existing validation command chain.
 
@@ -47,7 +47,9 @@ existing validation command chain.
 - Implementation sharing: none
 - Marketplace publication: disabled
 - Pre-implementation preflight: pass
-- Implementation handoff issue: to be created after this admission PR merges
+- Implementation handoff issue: Issue #120
+- Implementation PR: PR #121
+- Implementation closeout: pass
 
 ## Blocked Scope
 
@@ -60,3 +62,5 @@ launcher/profile mutation, VSIX packaging, Marketplace publication, release
 automation, and source copying remain blocked.
 
 Issue #118 is an admission issue and must not be reused for implementation.
+Issue #120 and PR #121 completed T009-T016 and returned the current
+Implementation Admission Unit to `none`.

@@ -219,7 +219,8 @@ publication, and source copying remain blocked.
 `runtime-settings-cli-validation-host-runtime-discovery-v1` admits
 `IAU-runtime-settings-cli-validation-host-runtime-discovery-v1` for Issue #118
 and T009-T016 only. Issue #118 is an admission issue and must not be reused for
-implementation. The admitted IAU is a bounded
+implementation. Issue #120 implements and closes it through PR #121 for
+T009-T016 only. The implemented IAU is a bounded
 `createRuntimeSettingsValidationHostRuntimeDiscovery(input = {})` facts
 contract over public-safe selected host facts and bounded discovery
 observations. It may derive public-safe host candidate facts for
@@ -233,13 +234,12 @@ publication, launcher/profile mutation, release automation, Marketplace
 publication, and source copying remain blocked.
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-host-runtime-discovery-v1`.
+`none`.
 
-Issue #118 admission temporarily sets the current IAU to
-`IAU-runtime-settings-cli-validation-host-runtime-discovery-v1`. A separate
-implementation handoff issue must be created after this admission PR merges.
-Before Issue #118 admission, the host preflight command-composition closeout
-recorded:
+Issue #118 admission temporarily set the current IAU to
+`IAU-runtime-settings-cli-validation-host-runtime-discovery-v1`; Issue #120 and
+PR #121 completed it. Before Issue #118 admission, the host preflight
+command-composition closeout recorded:
 
 Current Implementation Admission Unit:
 `none`.

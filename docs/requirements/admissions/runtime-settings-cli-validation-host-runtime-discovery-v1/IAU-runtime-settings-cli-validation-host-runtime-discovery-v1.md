@@ -6,16 +6,19 @@ IAU ID:
 Parent slice:
 `runtime-settings-cli-validation-host-runtime-discovery-v1`
 
-State: admitted
+State: implemented
 
 Admission issue: Issue #118
 
+Implementation handoff issue: Issue #120
+
+Implementation PR: PR #121
+
 ## Admitted Tasks
 
-T009-T016 are admitted after this admission PR merges and a separate
-implementation handoff issue is created.
+T009-T016 are implemented through Issue #120 and PR #121.
 
-The admitted implementation is limited to tests and the minimum
+The implemented behavior is limited to tests and the minimum
 `createRuntimeSettingsValidationHostRuntimeDiscovery(input = {})` contract for
 bounded public-safe host runtime discovery facts.
 

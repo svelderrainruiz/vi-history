@@ -471,7 +471,8 @@ Issue #118 imports
 `runtime-settings-cli-validation-host-runtime-discovery-v1` and admits
 `IAU-runtime-settings-cli-validation-host-runtime-discovery-v1` for T009-T016
 only. Issue #118 is an admission issue and must not be reused for
-implementation. The admitted IAU adds only a bounded
+implementation. Issue #120 implements and closes it through PR #121 for
+T009-T016 only. The implemented IAU adds only a bounded
 `createRuntimeSettingsValidationHostRuntimeDiscovery(input = {})` facts
 contract over public-safe selected host facts and bounded discovery
 observations. It may derive public-safe host candidate facts for
@@ -483,11 +484,10 @@ validation, call LabVIEWCLI, call Docker, wire raw terminal processes, write
 files, publish packages, mutate launcher/profile state, release, work on the
 Marketplace, or copy source without a separate public admission.
 
-Issue #118 admission temporarily sets the current IAU to
-`IAU-runtime-settings-cli-validation-host-runtime-discovery-v1`. A separate
-implementation handoff issue must be created after this admission PR merges.
-Before Issue #118 admission, the host preflight command-composition closeout
-recorded:
+Issue #118 admission temporarily set the current IAU to
+`IAU-runtime-settings-cli-validation-host-runtime-discovery-v1`; Issue #120 and
+PR #121 completed it. Before Issue #118 admission, the host preflight
+command-composition closeout recorded:
 
 Current Implementation Admission Unit:
 `none`.
@@ -509,7 +509,7 @@ Current Implementation Admission Unit:
 `none`.
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-host-runtime-discovery-v1`.
+`none`.
 
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.
