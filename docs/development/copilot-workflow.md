@@ -246,6 +246,12 @@ Issue #67 implements and closes
 `IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1` for T009-T013
 only. No new Copilot implementation should start from Issue #67.
 
+Issue #71 admits
+`IAU-runtime-settings-cli-terminal-prompt-loop-v1` for
+`runtime-settings-cli-terminal-prompt-loop-v1` and T009-T013 only. Issue #71
+is an admission issue. Copilot implementation must wait for the separate
+handoff issue created after the admission PR merges.
+
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.
 
@@ -258,6 +264,8 @@ Do not implement these without a separate bridge admission:
 - documentation navigation or rendering beyond the admitted minimum command shell
 - runtime settings CLI terminal entrypoint implementation beyond
   `IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1`
+- runtime settings CLI terminal prompt-loop implementation beyond
+  `IAU-runtime-settings-cli-terminal-prompt-loop-v1`
 - runtime settings mutation beyond the admitted provider/version/bitness
   settings-write contract
 - validation behavior beyond the admitted pure `vihs --validate` readback
@@ -267,7 +275,8 @@ Do not implement these without a separate bridge admission:
 - compare execution
 - no-argument interactive selection beyond the admitted pure selection-state
   contract
-- terminal process prompt loops or raw stdin handling
+- OS-specific raw stdin/TTY process drivers beyond the admitted pure terminal
+  prompt transcript/state contract
 - proof-out file generation
 - live already-running VS Code session uptake proof
 - observation report rendering for T014-T016

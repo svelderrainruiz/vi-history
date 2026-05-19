@@ -1,0 +1,31 @@
+{
+  "schema": "vi-history/requirements-import@v1",
+  "sliceId": "runtime-settings-cli-terminal-prompt-loop-v1",
+  "createdDate": "2026-05-19",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "913f840a9dd23319d91d5fcf5862be9615d5b8d0",
+  "governedAdmissionCommit": "bb795ace470bcb17d9436fd34c59344077c37777",
+  "targetProduct": "vi-history",
+  "targetFeature": "runtime-settings-cli-terminal-prompt-loop-v1",
+  "importedRequirementIds": [
+    "VHS-REQ-545",
+    "VHS-REQ-546"
+  ],
+  "prerequisiteRequirementIds": [
+    "VHS-REQ-537",
+    "VHS-REQ-544"
+  ],
+  "supportingTestIds": [
+    "TEST-UNIT-353",
+    "TEST-UNIT-354"
+  ],
+  "redactionStatus": "pass",
+  "implementationSharing": "none",
+  "marketplacePublication": "disabled-until-later-adr",
+  "files": [
+    "syrs.md",
+    "srs.md",
+    "rtm.csv",
+    "test-plan.md"
+  ]
+}
