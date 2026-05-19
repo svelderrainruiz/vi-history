@@ -201,6 +201,27 @@ live-session proof, file writes from the host preflight adapter, package/bin
 publication, launcher/profile mutation, release automation, Marketplace
 publication, and source copying remain blocked.
 
+`runtime-settings-cli-validation-host-preflight-command-composition-v1` admits
+`IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1` for
+Issue #112 and T009-T016 only. Issue #112 is an admission issue and must not be
+reused for implementation. The admitted IAU is a pure
+`createRuntimeSettingsValidationCommandResult(input = {})` composition branch
+over ready host preflight facts or supplied public-safe host
+selection/candidate facts. OS scanning, filesystem walking, registry probing,
+PATH probing, environment probing, private path discovery, runtime locator
+invocation, runtime validation execution, compare execution, LabVIEWCLI
+execution, Docker execution or orchestration, raw terminal process wiring,
+live-session proof, file writes from the host preflight adapter, package/bin
+publication, launcher/profile mutation, release automation, Marketplace
+publication, and source copying remain blocked.
+
+Current Implementation Admission Unit:
+`IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1`.
+
+Issue #112 admission temporarily sets the current IAU to
+`IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1`.
+Before Issue #112 admission, the host runtime preflight closeout recorded:
+
 Current Implementation Admission Unit:
 `none`.
 
@@ -220,10 +241,12 @@ When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:
 
 ```bash
-SPECIFY_FEATURE=019-runtime-settings-cli-validation-host-runtime-preflight-v1 \
-SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-validation-host-runtime-preflight-v1 \
+SPECIFY_FEATURE=020-runtime-settings-cli-validation-host-preflight-command-composition-v1 \
+SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-validation-host-preflight-command-composition-v1 \
 .specify/scripts/bash/check-prerequisites.sh --json --paths-only
 ```
 
+The previous host runtime preflight feature used
+`019-runtime-settings-cli-validation-host-runtime-preflight-v1`.
 The previous plan-only feature used
 `018-runtime-settings-cli-validation-plan-only-v1`.

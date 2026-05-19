@@ -209,6 +209,17 @@ Read these before changing code:
 - `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-preflight-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-preflight-v1/IAU-runtime-settings-cli-validation-host-runtime-preflight-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-preflight-v1/IAU-runtime-settings-cli-validation-host-runtime-preflight-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-preflight-command-composition-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-preflight-command-composition-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-preflight-command-composition-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-preflight-command-composition-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-validation-host-preflight-command-composition-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-validation-host-preflight-command-composition-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-validation-host-preflight-command-composition-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-validation-host-preflight-command-composition-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-validation-host-preflight-command-composition-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-host-preflight-command-composition-v1/IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-host-preflight-command-composition-v1/IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1-preflight-v1.json`
 
 ## Current Status
 
@@ -430,6 +441,28 @@ LabVIEWCLI, call Docker, wire raw terminal processes, write files from the host
 preflight adapter, publish packages, mutate launcher/profile state, or copy
 source without a separate public admission.
 
+Issue #112 imports
+`runtime-settings-cli-validation-host-preflight-command-composition-v1` and
+admits
+`IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1` for
+T009-T016 only. Issue #112 is an admission issue and must not be reused for
+implementation. Implementation must wait for a separate handoff issue after
+the admission PR merges. The admitted IAU adds only a pure
+`createRuntimeSettingsValidationCommandResult(input = {})` composition branch
+over ready host preflight facts or supplied public-safe host
+selection/candidate facts. Future work must not inspect the OS, invoke runtime
+locators, discover private paths, execute validation, call LabVIEWCLI, call
+Docker, wire raw terminal processes, write files from the host preflight
+adapter, publish packages, mutate launcher/profile state, or copy source
+without a separate public admission.
+
+Issue #112 admission temporarily sets the current IAU to
+`IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1`.
+Before Issue #112 admission, the host runtime preflight closeout recorded:
+
+Current Implementation Admission Unit:
+`none`.
+
 Issue #106 admission temporarily set the current IAU to
 `IAU-runtime-settings-cli-validation-host-runtime-preflight-v1`; Issue #108 and
 PR #109 completed it. Before Issue #106 admission, the previous plan-only
@@ -439,7 +472,7 @@ Current Implementation Admission Unit:
 `none`.
 
 Current Implementation Admission Unit:
-`none`.
+`IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1`.
 
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.
