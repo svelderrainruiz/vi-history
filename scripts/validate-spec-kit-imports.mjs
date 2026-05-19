@@ -3209,7 +3209,7 @@ requireTextIncludes("docs/development/copilot-workflow.md", [
 const runtimeSettingsHostPreflightCommandCompositionAdmission = readJson(runtimeSettingsHostPreflightCommandCompositionAdmissionPath);
 requireEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.schema, "vi-history/requirements-admission@v1", "runtime settings host preflight command composition admission schema");
 requireEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.sliceId, runtimeSettingsHostPreflightCommandCompositionSliceId, "runtime settings host preflight command composition admission sliceId");
-requireEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.state, "admitted", "runtime settings host preflight command composition admission state");
+requireEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.state, "implemented", "runtime settings host preflight command composition admission state");
 requireEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.targetProduct, "vi-history", "runtime settings host preflight command composition admission targetProduct");
 requireEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.targetFeature, runtimeSettingsHostPreflightCommandCompositionSliceId, "runtime settings host preflight command composition admission targetFeature");
 requireEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.sourceBaselineTag, "v1.3.16", "runtime settings host preflight command composition admission sourceBaselineTag");
@@ -3217,27 +3217,31 @@ requireEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.sourceCommi
 requireEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.governedAdmissionCommit, "e411ef2bfa74cedf6f9b53d764810f9f4c93a8b0", "runtime settings host preflight command composition admission governedAdmissionCommit");
 requireEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.implementationSharing, "none", "runtime settings host preflight command composition admission implementationSharing");
 requireMarketplacePosture(runtimeSettingsHostPreflightCommandCompositionAdmission, "runtime settings host preflight command composition admission");
-requireEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.currentImplementationAdmissionUnit, "IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1", "runtime settings host preflight command composition currentImplementationAdmissionUnit");
+requireEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.currentImplementationAdmissionUnit, null, "runtime settings host preflight command composition currentImplementationAdmissionUnit");
 requireArrayEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "runtime settings host preflight command composition completedSpecScope");
-requireArrayEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.completedImplementationScope, [], "runtime settings host preflight command composition completedImplementationScope");
-requireArrayEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.admittedImplementationScope, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings host preflight command composition admittedImplementationScope");
+requireArrayEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.completedImplementationScope, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings host preflight command composition completedImplementationScope");
+requireArrayEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.admittedImplementationScope, [], "runtime settings host preflight command composition admittedImplementationScope");
 requireArrayEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.blockedImplementationScope, ["T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025", "T026"], "runtime settings host preflight command composition blockedImplementationScope");
 requireEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.preImplementationPreflight?.iauId, "IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1", "runtime settings host preflight command composition preImplementationPreflight iauId");
 requireEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.preImplementationPreflight?.status, "pass", "runtime settings host preflight command composition preImplementationPreflight status");
 requireEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings host preflight command composition preImplementationPreflight implementationStartAllowed");
 requireEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.preImplementationPreflight?.record, runtimeSettingsHostPreflightCommandCompositionPreflightPath, "runtime settings host preflight command composition preImplementationPreflight record");
 requireEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.issue?.number, 112, "runtime settings host preflight command composition issue number");
+requireEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.implementationHandoffIssue?.number, 114, "runtime settings host preflight command composition implementationHandoffIssue number");
+requireEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.implementationPullRequest?.number, 115, "runtime settings host preflight command composition implementationPullRequest number");
+requireEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.implementationCloseout?.status, "pass", "runtime settings host preflight command composition implementationCloseout status");
+requireArrayEqual(runtimeSettingsHostPreflightCommandCompositionAdmission.implementationCloseout?.completedTasks, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings host preflight command composition implementationCloseout completedTasks");
 requireFile(`docs/requirements/admissions/${runtimeSettingsHostPreflightCommandCompositionSliceId}.md`);
 
 const runtimeSettingsHostPreflightCommandCompositionAdmissionUnit = (runtimeSettingsHostPreflightCommandCompositionAdmission.implementationAdmissionUnits ?? [])
   .find((unit) => unit?.iauId === "IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1");
-requireEqual(runtimeSettingsHostPreflightCommandCompositionAdmissionUnit?.state, "admitted", "runtime settings host preflight command composition admission unit state");
+requireEqual(runtimeSettingsHostPreflightCommandCompositionAdmissionUnit?.state, "implemented", "runtime settings host preflight command composition admission unit state");
 requireEqual(runtimeSettingsHostPreflightCommandCompositionAdmissionUnit?.preflightRecord, runtimeSettingsHostPreflightCommandCompositionPreflightPath, "runtime settings host preflight command composition admission unit preflightRecord");
 
 const runtimeSettingsHostPreflightCommandCompositionIau = readJson(runtimeSettingsHostPreflightCommandCompositionIauPath);
 requireEqual(runtimeSettingsHostPreflightCommandCompositionIau.schema, "vi-history/implementation-admission-unit@v1", "runtime settings host preflight command composition IAU schema");
 requireEqual(runtimeSettingsHostPreflightCommandCompositionIau.iauId, "IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1", "runtime settings host preflight command composition IAU id");
-requireEqual(runtimeSettingsHostPreflightCommandCompositionIau.state, "admitted", "runtime settings host preflight command composition IAU state");
+requireEqual(runtimeSettingsHostPreflightCommandCompositionIau.state, "implemented", "runtime settings host preflight command composition IAU state");
 requireEqual(runtimeSettingsHostPreflightCommandCompositionIau.parentSliceId, runtimeSettingsHostPreflightCommandCompositionSliceId, "runtime settings host preflight command composition IAU parentSliceId");
 requireArrayEqual(runtimeSettingsHostPreflightCommandCompositionIau.admittedTasks, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings host preflight command composition IAU admittedTasks");
 requireArrayEqual(runtimeSettingsHostPreflightCommandCompositionIau.blockedTasks, ["T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025", "T026"], "runtime settings host preflight command composition IAU blockedTasks");
@@ -3246,6 +3250,10 @@ requireMarketplacePosture(runtimeSettingsHostPreflightCommandCompositionIau, "ru
 requireEqual(runtimeSettingsHostPreflightCommandCompositionIau.preImplementationPreflight?.status, "pass", "runtime settings host preflight command composition IAU preImplementationPreflight status");
 requireEqual(runtimeSettingsHostPreflightCommandCompositionIau.preImplementationPreflight?.record, "IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1-preflight-v1.json", "runtime settings host preflight command composition IAU preImplementationPreflight record");
 requireEqual(runtimeSettingsHostPreflightCommandCompositionIau.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings host preflight command composition IAU preImplementationPreflight implementationStartAllowed");
+requireEqual(runtimeSettingsHostPreflightCommandCompositionIau.implementationHandoffIssue?.number, 114, "runtime settings host preflight command composition IAU implementationHandoffIssue number");
+requireEqual(runtimeSettingsHostPreflightCommandCompositionIau.implementationPullRequest?.number, 115, "runtime settings host preflight command composition IAU implementationPullRequest number");
+requireEqual(runtimeSettingsHostPreflightCommandCompositionIau.implementationCloseout?.status, "pass", "runtime settings host preflight command composition IAU implementationCloseout status");
+requireArrayEqual(runtimeSettingsHostPreflightCommandCompositionIau.implementationCloseout?.completedTasks, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings host preflight command composition IAU implementationCloseout completedTasks");
 requireFile(`docs/requirements/admissions/${runtimeSettingsHostPreflightCommandCompositionSliceId}/IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1.md`);
 
 const runtimeSettingsHostPreflightCommandCompositionPreflight = readJson(runtimeSettingsHostPreflightCommandCompositionPreflightPath);
@@ -3312,12 +3320,14 @@ requireTextIncludes(`${runtimeSettingsHostPreflightCommandCompositionFeatureDir}
 ]);
 requireTextIncludes(`${runtimeSettingsHostPreflightCommandCompositionFeatureDir}/tasks.md`, [
   "Issue #112",
+  "Issue #114",
+  "PR #115",
   "- [x] T001",
   "- [x] T008",
-  "- [ ] T009",
-  "- [ ] T016",
-  "- [ ] T027",
-  "- [ ] T032",
+  "- [x] T009",
+  "- [x] T016",
+  "- [x] T027",
+  "- [x] T032",
   "IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1",
   "[BLOCKED]",
   "T026"
@@ -3340,8 +3350,10 @@ requireTextIncludes("README.md", [
   "runtime-settings-cli-validation-host-preflight-command-composition-v1",
   "docs/requirements/admissions/runtime-settings-cli-validation-host-preflight-command-composition-v1.json",
   "Issue #112",
+  "Issue #114",
+  "PR #115",
   "IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "createRuntimeSettingsValidationCommandResult(input = {})",
   "supplied public-safe host selection/candidate facts",
   "runtime locator invocation"
@@ -3349,17 +3361,21 @@ requireTextIncludes("README.md", [
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-validation-host-preflight-command-composition-v1",
   "Issue #112",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1`.",
+  "Issue #114",
+  "PR #115",
+  "Current Implementation Admission Unit:\n`none`.",
   "IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1",
   "020-runtime-settings-cli-validation-host-preflight-command-composition-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-host-preflight-command-composition-v1",
   "Issue #112",
+  "Issue #114",
+  "PR #115",
   "IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1",
   "createRuntimeSettingsValidationCommandResult(input = {})",
   "supplied public-safe host",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1`."
+  "Current Implementation Admission Unit:\n`none`."
 ]);
 
 if (failures.length > 0) {

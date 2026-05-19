@@ -5,10 +5,10 @@ Slice:
 
 Admission issue: Issue #112
 
-State: admitted
+State: implemented
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1`
+`none`
 
 ## Scope
 
@@ -16,7 +16,7 @@ This admission imports the governed bridge for command-level composition of
 host runtime preflight facts into
 `createRuntimeSettingsValidationCommandResult(input = {})`.
 
-The admitted IAU covers only T009-T016: tests and the minimum public MIT
+The implemented IAU covers only T009-T016: tests and the minimum public MIT
 composition branch that consumes ready host preflight facts or supplied
 public-safe host selection/candidate facts through
 `createRuntimeSettingsValidationHostRuntimePreflight(input = {})`.
@@ -47,6 +47,9 @@ public-safe host selection/candidate facts through
 - Implementation sharing: none
 - Marketplace publication: disabled
 - Pre-implementation preflight: pass
+- Implementation handoff issue: Issue #114
+- Implementation PR: PR #115
+- Implementation closeout: pass
 
 ## Blocked Scope
 
@@ -59,5 +62,5 @@ mutation, VSIX packaging, Marketplace publication, release automation, and
 source copying remain blocked.
 
 Issue #112 is an admission issue and must not be reused for implementation.
-Implementation starts only after this admission PR merges and a separate
-implementation handoff issue is created.
+Issue #114 is the implementation handoff issue. PR #115 implements and closes
+T009-T016.

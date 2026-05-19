@@ -2,12 +2,20 @@
   "schema": "vi-history/implementation-admission-unit@v1",
   "iauId": "IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1",
   "createdDate": "2026-05-19",
-  "state": "admitted",
+  "state": "implemented",
   "parentSliceId": "runtime-settings-cli-validation-host-preflight-command-composition-v1",
   "specFeature": ".specify/specs/runtime-settings-cli-validation-host-preflight-command-composition-v1",
   "issue": {
     "number": 112,
     "url": "https://github.com/svelderrainruiz/vi-history/issues/112"
+  },
+  "implementationHandoffIssue": {
+    "number": 114,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/114"
+  },
+  "implementationPullRequest": {
+    "number": 115,
+    "url": "https://github.com/svelderrainruiz/vi-history/pull/115"
   },
   "admittedTasks": [
     "T009",
@@ -51,6 +59,33 @@
     "status": "pass",
     "record": "IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1-preflight-v1.json",
     "implementationStartAllowed": true
+  },
+  "implementationCloseout": {
+    "status": "pass",
+    "issue": 114,
+    "pullRequest": 115,
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011",
+      "T012",
+      "T013",
+      "T014",
+      "T015",
+      "T016"
+    ],
+    "blockedScopeRetained": [
+      "T017",
+      "T018",
+      "T019",
+      "T020",
+      "T021",
+      "T022",
+      "T023",
+      "T024",
+      "T025",
+      "T026"
+    ]
   },
   "implementationSharing": "none",
   "requirementMaturityBasis": "governed bridge-readiness packet supports public import, Spec Kit planning, and narrow host preflight command-composition admission, not source reuse",

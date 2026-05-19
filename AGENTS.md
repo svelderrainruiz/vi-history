@@ -204,7 +204,8 @@ publication, and source copying remain blocked.
 `runtime-settings-cli-validation-host-preflight-command-composition-v1` admits
 `IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1` for
 Issue #112 and T009-T016 only. Issue #112 is an admission issue and must not be
-reused for implementation. The admitted IAU is a pure
+reused for implementation. Issue #114 implements and closes it through PR #115
+for T009-T016 only. The implemented IAU is a pure
 `createRuntimeSettingsValidationCommandResult(input = {})` composition branch
 over ready host preflight facts or supplied public-safe host
 selection/candidate facts. OS scanning, filesystem walking, registry probing,
@@ -216,11 +217,12 @@ publication, launcher/profile mutation, release automation, Marketplace
 publication, and source copying remain blocked.
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1`.
+`none`.
 
 Issue #112 admission temporarily sets the current IAU to
 `IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1`.
-Before Issue #112 admission, the host runtime preflight closeout recorded:
+Issue #114 and PR #115 completed it. Before Issue #112 admission, the host
+runtime preflight closeout recorded:
 
 Current Implementation Admission Unit:
 `none`.
