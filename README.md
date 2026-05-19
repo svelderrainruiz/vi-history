@@ -72,7 +72,8 @@ Issue #112 imports
 admits
 `IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1` for
 T009-T016 only. Issue #112 is an admission issue and must not be reused for
-implementation.
+implementation. Issue #114 implements and closes it through PR #115 for
+T009-T016 only.
 
 ## Authority
 
@@ -205,6 +206,9 @@ implementation.
   `IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1`
   for T009-T016 only. Issue #112 is an admission issue and must not be reused
   for implementation.
+- Issue #114 implements and closes
+  `IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1`
+  through PR #115 for T009-T016 only.
 
 The current admission ledgers are:
 
@@ -230,11 +234,12 @@ The current admission ledgers are:
 - `docs/requirements/admissions/runtime-settings-cli-validation-host-preflight-command-composition-v1.json`
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1`.
+`none`.
 
 Issue #112 admission temporarily sets the current IAU to
 `IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1`.
-Before Issue #112 admission, the host runtime preflight closeout recorded:
+Issue #114 and PR #115 completed it. Before Issue #112 admission, the host
+runtime preflight closeout recorded:
 
 Current Implementation Admission Unit:
 `none`.
@@ -397,8 +402,9 @@ Marketplace work, and source copying remain blocked.
 `runtime-settings-cli-validation-host-preflight-command-composition-v1` admits
 `IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1` for
 Issue #112 and T009-T016 only. Issue #112 is an admission issue and must not be
-reused for implementation. The admitted IAU is a pure command-composition unit
-so `createRuntimeSettingsValidationCommandResult(input = {})` can consume ready
+reused for implementation. Issue #114 implements and closes it through PR #115
+for T009-T016 only. The implemented IAU is a pure command-composition unit so
+`createRuntimeSettingsValidationCommandResult(input = {})` can consume ready
 host preflight facts or supplied public-safe host selection/candidate facts
 through `createRuntimeSettingsValidationHostRuntimePreflight(input = {})`
 without redesigning runtime outcome, readback, proof artifact, proof-out,

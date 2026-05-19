@@ -446,8 +446,8 @@ Issue #112 imports
 admits
 `IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1` for
 T009-T016 only. Issue #112 is an admission issue and must not be reused for
-implementation. Implementation must wait for a separate handoff issue after
-the admission PR merges. The admitted IAU adds only a pure
+implementation. Issue #114 implements and closes it through PR #115 for
+T009-T016 only. The implemented IAU adds only a pure
 `createRuntimeSettingsValidationCommandResult(input = {})` composition branch
 over ready host preflight facts or supplied public-safe host
 selection/candidate facts. Future work must not inspect the OS, invoke runtime
@@ -458,7 +458,8 @@ without a separate public admission.
 
 Issue #112 admission temporarily sets the current IAU to
 `IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1`.
-Before Issue #112 admission, the host runtime preflight closeout recorded:
+Issue #114 and PR #115 completed it. Before Issue #112 admission, the host
+runtime preflight closeout recorded:
 
 Current Implementation Admission Unit:
 `none`.
@@ -472,7 +473,7 @@ Current Implementation Admission Unit:
 `none`.
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1`.
+`none`.
 
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.

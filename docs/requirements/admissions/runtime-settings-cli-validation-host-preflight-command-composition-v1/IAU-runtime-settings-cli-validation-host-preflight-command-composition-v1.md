@@ -6,13 +6,17 @@ IAU:
 Parent slice:
 `runtime-settings-cli-validation-host-preflight-command-composition-v1`
 
-State: admitted
+State: implemented
 
 Admission issue: Issue #112
 
+Implementation handoff issue: Issue #114
+
+Implementation PR: PR #115
+
 ## Admitted Tasks
 
-- T009 through T016 only.
+- T009 through T016 only. PR #115 implements and closes this scope.
 
 ## Implementation Boundary
 
@@ -21,8 +25,8 @@ The IAU admits tests and the minimum public MIT command-composition branch so
 host preflight facts or supplied public-safe host selection/candidate facts
 through `createRuntimeSettingsValidationHostRuntimePreflight(input = {})`.
 
-Implementation must not start from Issue #112. A separate implementation
-handoff issue is required after the admission PR merges.
+Issue #112 is an admission issue and must not be reused for implementation.
+Issue #114 is the implementation handoff issue.
 
 ## Blocked Tasks
 
