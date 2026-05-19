@@ -60,8 +60,9 @@ terminal I/O drivers or runtime execution.
 - [x] T011 Add tests proving guided host selection accepts supported local host
   choices and fails closed for unsupported years, host/platform mismatches, or
   missing selected bitness.
-- [x] T012 Add tests proving Docker selection remains bounded to `2026` /
-  `x64` and fails closed for unsupported Docker years or bitness values.
+- [x] T012 Add tests proving Docker selection uses the latest supported NI
+  LabVIEW Docker image family, exposes no Docker bitness choice, and fails
+  closed for unsupported Docker image-family or bitness-choice requests.
 - [x] T013 Implement the minimum public MIT terminal prompt-loop contract as
   pure prompt state and output facts.
 

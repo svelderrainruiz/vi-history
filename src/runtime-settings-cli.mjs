@@ -486,7 +486,7 @@ function resolveInteractiveSelection(input) {
   const requestedSelection = input.requestedSelection ?? input.selection;
   if (isPlainObject(requestedSelection)) {
     return validateRequestedInteractiveSelection(
-      normalizeInteractiveSelection(requestedSelection),
+      normalizeRequestedInteractiveSelection(requestedSelection),
       input.availableHostInstallations ?? input.hostInstallations ?? []
     );
   }
@@ -538,7 +538,7 @@ function validateRequestedInteractiveSelection(selection, availableHostInstallat
       return blockedSelection("unsupported-docker-year", selection);
     }
     if (selection.labviewBitness !== "x64") {
-      return blockedSelection("unsupported-docker-bitness", selection);
+      return blockedSelection("docker-bitness-not-selectable", selection);
     }
     return {
       ok: true,
@@ -597,6 +597,27 @@ function normalizeInteractiveSelection(selection) {
   const platform = normalizePlatform(selection.platform);
   const labviewVersion = normalizeFact(selection.labviewVersion ?? selection.version);
   const labviewBitness = normalizeLabviewBitness(selection.labviewBitness ?? selection.bitness);
+
+  if (!runtimeProvider || !platform || !labviewVersion || !labviewBitness) {
+    return null;
+  }
+
+  return freezeRecord({
+    runtimeProvider,
+    platform,
+    labviewVersion,
+    labviewBitness
+  });
+}
+
+function normalizeRequestedInteractiveSelection(selection) {
+  const runtimeProvider = normalizeRuntimeProvider(selection.runtimeProvider ?? selection.provider);
+  const platform = normalizePlatform(selection.platform ?? defaultPlatformForProvider(runtimeProvider));
+  const labviewVersion = normalizeFact(selection.labviewVersion ?? selection.version);
+  const requestedBitness = selection.labviewBitness ?? selection.bitness;
+  const labviewBitness = runtimeProvider === "docker" && requestedBitness == null
+    ? "x64"
+    : normalizeLabviewBitness(requestedBitness);
 
   if (!runtimeProvider || !platform || !labviewVersion || !labviewBitness) {
     return null;
@@ -734,17 +755,19 @@ function createBlockedInteractiveSelectionGuidance(blockedReason) {
 }
 
 function createSetRuntimeCommand(selection) {
-  return [
+  const command = [
     "vihs",
     "--set-provider",
     selection.runtimeProvider,
     "--set-platform",
     selection.platform,
     "--set-labview-version",
-    selection.labviewVersion,
-    "--set-labview-bitness",
-    selection.labviewBitness
-  ].join(" ");
+    selection.labviewVersion
+  ];
+  if (selection.runtimeProvider !== "docker") {
+    command.push("--set-labview-bitness", selection.labviewBitness);
+  }
+  return command.join(" ");
 }
 
 function createValidationHandoff(selection, requested) {

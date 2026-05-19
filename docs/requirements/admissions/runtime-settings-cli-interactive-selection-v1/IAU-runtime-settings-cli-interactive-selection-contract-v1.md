@@ -13,7 +13,8 @@ Preflight record:
 - T009: tests for default seeding and current bundle reporting
 - T010: tests for Enter-through confirmation and validation readback handoff
 - T011: tests for guided host selection and fail-closed unsupported host paths
-- T012: tests for Docker 2026 x64 selection bounds
+- T012: tests for latest supported NI LabVIEW Docker image selection with no
+  Docker bitness choice exposed
 - T013: minimum pure interactive-selection contract
 
 ## Closeout

@@ -4,7 +4,7 @@
 
 | ID | Requirement | Fit Criterion |
 | --- | --- | --- |
-| VHS-REQ-545 | Bare `vihs` must remain discoverable when invoked without arguments, including governed default settings, current runtime bundle reporting, exact copyable next-command guidance, Enter-through confirmation, and guided supported provider/platform/version/bitness selection. | The public MIT feature defines deterministic prompt transcript and state facts for no-argument `vihs` without adding OS-specific terminal I/O drivers or runtime execution. |
+| VHS-REQ-545 | Bare `vihs` must remain discoverable when invoked without arguments, including governed default settings, current host runtime bundle reporting, exact copyable next-command guidance, Enter-through confirmation, guided supported host provider/platform/version/bitness selection, and Docker provider selection through the latest supported NI LabVIEW Docker image family without exposing a Docker bitness choice. | The public MIT feature defines deterministic prompt transcript and state facts for no-argument `vihs` without adding OS-specific terminal I/O drivers or runtime execution. |
 | VHS-REQ-546 | The no-argument confirmation flow may hand off to the existing bounded `vihs --validate` contract after settings are confirmed. | The public MIT feature defines validation handoff as a prompt-loop output fact while keeping runtime validation execution and proof-out expansion outside this IAU. |
 
 ## Prerequisite Requirements
@@ -18,7 +18,8 @@ not re-import or reimplement that materialization work.
 
 `TEST-UNIT-353` verifies no-argument discoverability, default settings, current
 bundle reporting, copyable next commands, Enter-through confirmation, guided
-selection, bounded Docker choices, and fail-closed unsupported-path guidance.
+selection, latest supported NI LabVIEW Docker image selection without a Docker
+bitness choice, and fail-closed unsupported-path guidance.
 
 `TEST-UNIT-354` verifies that validation handoff uses the bounded
 `vihs --validate` contract after confirmation without reopening path-picking or

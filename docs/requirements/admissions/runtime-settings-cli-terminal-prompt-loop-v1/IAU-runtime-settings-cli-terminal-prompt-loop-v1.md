@@ -15,7 +15,8 @@ Preflight:
 - T010: tests for Enter-through confirmation and validation handoff.
 - T011: tests for guided host selection and fail-closed unsupported host
   paths.
-- T012: tests for bounded Docker `2026` / `x64` selection.
+- T012: tests for latest supported NI LabVIEW Docker image selection with no
+  Docker bitness choice exposed.
 - T013: minimum public MIT terminal prompt-loop contract as pure prompt state
   and output facts.
 

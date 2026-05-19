@@ -169,10 +169,12 @@ live-session proof, packaging, and Marketplace work remain blocked.
 The runtime settings CLI interactive selection IAU implements only T009-T013 in
 `.specify/specs/runtime-settings-cli-interactive-selection-v1/tasks.md`: tests
 for default settings seeding, confirmation validation handoff, guided host
-selection, bounded Docker 2026 x64 selection, and the minimum pure selection
-state contract. Terminal prompt loops, compare execution, LabVIEWCLI
-execution, Docker execution, proof-out expansion, live-session proof,
-packaging, and Marketplace work remain blocked.
+selection, latest supported NI LabVIEW Docker image selection with no
+user-facing Docker bitness choice, and the minimum pure selection state
+contract. The current governed Docker Linux default maps to the LabVIEW 2026
+image family and is 64-bit-only by image/platform. Terminal prompt loops,
+compare execution, LabVIEWCLI execution, Docker execution, proof-out
+expansion, live-session proof, packaging, and Marketplace work remain blocked.
 The runtime settings CLI terminal entrypoint IAU implements only T009-T013 in
 `.specify/specs/runtime-settings-cli-terminal-entrypoint-v1/tasks.md`: tests
 for materialized bare `vihs` entrypoint facts, user-scoped terminal admission,
@@ -184,11 +186,13 @@ Marketplace work remain blocked.
 The runtime settings CLI terminal prompt-loop IAU implements only T009-T013 in
 `.specify/specs/runtime-settings-cli-terminal-prompt-loop-v1/tasks.md`: tests
 for deterministic no-argument `vihs` prompt transcript/state behavior,
-Enter-through confirmation, guided host selection, bounded Docker 2026 x64
-selection, and the minimum pure prompt-loop contract. OS-specific raw terminal
-I/O drivers, compare execution, LabVIEWCLI execution, Docker execution,
-proof-out expansion, live-session proof, Windows PowerShell Marketplace
-bootstrap, packaging, and Marketplace work remain blocked.
+Enter-through confirmation, guided host selection, latest supported NI LabVIEW
+Docker image selection with no user-facing Docker bitness choice, and the
+minimum pure prompt-loop contract. The current governed Docker Linux default
+maps to the LabVIEW 2026 image family and is 64-bit-only by image/platform.
+OS-specific raw terminal I/O drivers, compare execution, LabVIEWCLI execution,
+Docker execution, proof-out expansion, live-session proof, Windows PowerShell
+Marketplace bootstrap, packaging, and Marketplace work remain blocked.
 
 The Marketplace posture is recorded in
 `docs/decisions/ADR-001-marketplace-publication-disabled.md` and summarized in

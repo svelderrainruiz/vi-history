@@ -24,7 +24,8 @@ Machine-readable record:
 - tests for bare `vihs` default seeding and current bundle reporting
 - tests for Enter-through confirmation and validation readback handoff facts
 - tests for guided host selection and fail-closed unsupported host paths
-- tests for Docker 2026 x64 selection bounds
+- tests for latest supported NI LabVIEW Docker image selection with no Docker
+  bitness choice exposed
 - the minimum pure interactive-selection contract as selection state and output
   facts
 

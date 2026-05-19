@@ -255,6 +255,12 @@ Issue #73 implements and closes
 `IAU-runtime-settings-cli-terminal-prompt-loop-v1` for T009-T013 only. No new
 Copilot implementation should start from Issue #73.
 
+Issue #75 clarifies the prompt/selection Docker wording: Docker provider
+selection is the latest supported NI LabVIEW Docker image family, currently the
+LabVIEW 2026 Linux image family for the governed Linux default, and must not be
+presented as a user-facing Docker bitness choice. Docker remains 64-bit-only by
+image/platform; host LabVIEW bitness remains host-provider scope.
+
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.
 

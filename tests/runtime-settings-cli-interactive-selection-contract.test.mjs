@@ -175,13 +175,11 @@ test("T011 guided host selection accepts supported local hosts and fails closed 
   assert.equal(missingBitness.blockedReason, "missing-selected-bitness");
 });
 
-test("T012 Docker selection remains bounded to LabVIEW 2026 x64", () => {
+test("T012 Docker selection uses the latest NI LabVIEW image family without a bitness choice", () => {
   const acceptedDocker = createRuntimeSettingsInteractiveSelection({
     requestedSelection: {
       runtimeProvider: "docker",
-      platform: "docker",
-      labviewVersion: "2026",
-      labviewBitness: "64-bit"
+      labviewVersion: "2026"
     }
   });
 
@@ -192,11 +190,14 @@ test("T012 Docker selection remains bounded to LabVIEW 2026 x64", () => {
     labviewVersion: "2026",
     labviewBitness: "x64"
   });
+  assert.deepEqual(acceptedDocker.guidance.copyableNextCommands, [
+    "vihs --set-provider docker --set-platform docker --set-labview-version 2026",
+    "vihs --validate"
+  ]);
 
   const unsupportedYear = createRuntimeSettingsInteractiveSelection({
     requestedSelection: {
       runtimeProvider: "docker",
-      platform: "docker",
       labviewVersion: "2025",
       labviewBitness: "x64"
     }
@@ -215,7 +216,7 @@ test("T012 Docker selection remains bounded to LabVIEW 2026 x64", () => {
   });
 
   assert.equal(unsupportedBitness.status, "blocked");
-  assert.equal(unsupportedBitness.blockedReason, "unsupported-docker-bitness");
+  assert.equal(unsupportedBitness.blockedReason, "docker-bitness-not-selectable");
 });
 
 test("T013 traces interactive selection IDs to the imported manifest and RTM", () => {

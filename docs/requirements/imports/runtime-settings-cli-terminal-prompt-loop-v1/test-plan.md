@@ -12,7 +12,7 @@ This test plan covers the public MIT import for
 | TEST-UNIT-RSTPROMPT-001 | VHS-REQ-545 | Prove no-argument `vihs` produces a deterministic prompt transcript from already materialized entrypoint facts. |
 | TEST-UNIT-RSTPROMPT-002 | VHS-REQ-545 | Prove Enter-through confirmation preserves the current governed provider/platform/version/bitness bundle and requests validation handoff. |
 | TEST-UNIT-RSTPROMPT-003 | VHS-REQ-545 | Prove guided host selection accepts supported local host choices and fails closed for unsupported years, host/platform mismatches, or missing selected bitness. |
-| TEST-UNIT-RSTPROMPT-004 | VHS-REQ-545 | Prove Docker selection remains bounded to `2026` / `x64` and fails closed for unsupported Docker years or bitness values. |
+| TEST-UNIT-RSTPROMPT-004 | VHS-REQ-545 | Prove Docker selection uses the latest supported NI LabVIEW Docker image family, exposes no Docker bitness choice, and fails closed for unsupported Docker image-family or bitness-choice requests. |
 | TEST-UNIT-RSTPROMPT-005 | VHS-REQ-546 | Prove validation handoff remains a prompt-loop output fact through the public `vihs --validate` contract without runtime execution or proof-out expansion. |
 
 ## Blocked Scope
