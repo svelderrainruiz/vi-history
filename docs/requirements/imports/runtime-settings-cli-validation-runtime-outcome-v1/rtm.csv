@@ -1,0 +1,7 @@
+Requirement ID,Test ID,Public Test Summary,Status
+VHS-REQ-546,TEST-UNIT-RSRUNTIMEOUTCOME-001,Prove ready supplied runtime selection facts map to VIHS_OK ready proof and implemented status,Imported
+VHS-REQ-546,TEST-UNIT-RSRUNTIMEOUTCOME-002,Prove invalid or missing provider facts fail closed before readback proof or file emission,Imported
+VHS-REQ-546,TEST-UNIT-RSRUNTIMEOUTCOME-003,Prove Docker not-implemented and provider or platform unsupported facts map to not-implemented status,Imported
+VHS-REQ-546,TEST-UNIT-RSRUNTIMEOUTCOME-004,Prove LabVIEW not-found and unknown blocked reasons map to stable public error and status facts,Imported
+VHS-REQ-546,TEST-UNIT-RSRUNTIMEOUTCOME-005,Prove generated runtimeOutcome facts compose into validation readback proof artifact proof-out adapter and file emission,Imported
+VHS-REQ-546,TEST-UNIT-RSRUNTIMEOUTCOME-006,Prove OS probing locators runtime execution compare LabVIEWCLI Docker live proof publication mutation release Marketplace and source-copying side effects remain blocked,Imported

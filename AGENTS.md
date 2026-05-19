@@ -143,8 +143,18 @@ runtime validation execution, new validation fact generation, live-session
 proof, package/bin publication, launcher/profile mutation, packaging, and
 Marketplace publication remain blocked.
 
+`runtime-settings-cli-validation-runtime-outcome-v1` admits
+`IAU-runtime-settings-cli-validation-runtime-outcome-v1` for Issue #89 and
+T009-T016 only. Issue #89 is an admission issue and must not be reused for
+implementation. The later handoff may implement only pure runtime outcome fact
+shaping from supplied public-safe selection facts. Runtime validation
+execution, runtime locator invocation, compare execution, LabVIEWCLI execution,
+Docker execution or orchestration, live-session proof, package/bin
+publication, launcher/profile mutation, release automation, Marketplace
+publication, and source copying remain blocked.
+
 Current Implementation Admission Unit:
-`none`.
+`IAU-runtime-settings-cli-validation-runtime-outcome-v1`.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that
@@ -154,7 +164,7 @@ When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:
 
 ```bash
-SPECIFY_FEATURE=015-runtime-settings-cli-validation-proof-out-file-emission-v1 \
-SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-validation-proof-out-file-emission-v1 \
+SPECIFY_FEATURE=016-runtime-settings-cli-validation-runtime-outcome-v1 \
+SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-validation-runtime-outcome-v1 \
 .specify/scripts/bash/check-prerequisites.sh --json --paths-only
 ```

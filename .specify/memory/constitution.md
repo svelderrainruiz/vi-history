@@ -1,7 +1,7 @@
 <!--
 Sync Impact Report
-Version change: 0.1.12 -> 0.1.13
-Modified principles: imported slice registry adds runtime settings CLI validation proof-out file-emission contract
+Version change: 0.1.13 -> 0.1.14
+Modified principles: imported slice registry adds runtime settings CLI validation runtime outcome facts contract
 Added sections: Authority Boundaries, Development Workflow, Governance
 Removed sections: unresolved template placeholders
 Templates requiring updates: pending after first implementation planning pass
@@ -111,6 +111,11 @@ The imported slices are:
   `docs/requirements/imports/runtime-settings-cli-validation-proof-out-file-emission-v1/`
   and Spec Kit feature under
   `.specify/specs/runtime-settings-cli-validation-proof-out-file-emission-v1/`.
+- `runtime-settings-cli-validation-runtime-outcome-v1`, with its import packet
+  under
+  `docs/requirements/imports/runtime-settings-cli-validation-runtime-outcome-v1/`
+  and Spec Kit feature under
+  `.specify/specs/runtime-settings-cli-validation-runtime-outcome-v1/`.
 
 The active pinned Spec Kit feature is recorded in `.specify/feature.json`.
 
@@ -127,4 +132,4 @@ This constitution governs repository-local work. Amendments require a versioned
 change, a short rationale, and validation that affected Spec Kit templates and
 repository guidance remain consistent.
 
-**Version**: 0.1.13 | **Ratified**: 2026-05-17 | **Last Amended**: 2026-05-19
+**Version**: 0.1.14 | **Ratified**: 2026-05-17 | **Last Amended**: 2026-05-19
