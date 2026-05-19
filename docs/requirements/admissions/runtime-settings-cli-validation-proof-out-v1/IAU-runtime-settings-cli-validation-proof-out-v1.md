@@ -1,14 +1,15 @@
 # Implementation Admission Unit: Runtime Settings CLI Validation Proof-Out Adapter
 
-`IAU-runtime-settings-cli-validation-proof-out-v1` is admitted for
-`runtime-settings-cli-validation-proof-out-v1`.
+`IAU-runtime-settings-cli-validation-proof-out-v1` is implemented for
+`runtime-settings-cli-validation-proof-out-v1`. Issue #83 implements and
+closes the IAU for T009-T014 only.
 
 Parent slice: `runtime-settings-cli-validation-proof-out-v1`
 
 Preflight:
 `IAU-runtime-settings-cli-validation-proof-out-v1-preflight-v1.json`
 
-## Admitted Tasks
+## Implemented Tasks
 
 - T009: proof-out request and artifact filename tests.
 - T010: deterministic proof JSON and issue Markdown tests.
@@ -17,8 +18,8 @@ Preflight:
 - T013: non-interactive guidance and blocked side-effect tests.
 - T014: the minimum pure validation proof-out adapter implementation.
 
-Implementation may start only after this admission PR merges and a separate
-implementation handoff issue is created.
+Issue #83 is the completed implementation handoff issue. Issue #81 is an
+admission issue and must not be reused for implementation.
 
 ## Still Blocked
 

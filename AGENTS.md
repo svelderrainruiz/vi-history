@@ -124,11 +124,10 @@ input/EOF/cancel fail-closed behavior, and validation handoff facts.
 `runtime-settings-cli-validation-proof-out-v1` admits
 `IAU-runtime-settings-cli-validation-proof-out-v1` for Issue #81 and
 T009-T014 only. Issue #81 is an admission issue and must not be reused for
-implementation. Implementation must use a separate handoff issue after the
-admission PR merges. The admitted unit is limited to pure proof-out request,
+implementation. Issue #83 implements and closes the pure proof-out request,
 target, artifact, non-interactive guidance, and blocked-side-effect facts over
 the already admitted validation readback and validation proof-artifact
-contracts.
+contracts for T009-T014 only.
 
 Compare execution, LabVIEWCLI execution, Docker execution or orchestration,
 runtime validation execution, live-session proof, package/bin publication,
@@ -136,7 +135,7 @@ launcher/profile mutation, packaging, and Marketplace publication remain
 blocked.
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-proof-out-v1`.
+`none`.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that

@@ -1,18 +1,20 @@
 # Implementation Plan: Runtime Settings CLI Validation Proof-Out Adapter
 
-**Branch**: `codex/runtime-settings-cli-validation-proof-out-admission`
+**Branch**: `codex/runtime-settings-cli-validation-proof-out`
 
 **Spec**:
 `.specify/specs/runtime-settings-cli-validation-proof-out-v1/spec.md`
 
 **Admission Issue**: Issue #81
 
+**Implementation Handoff Issue**: Issue #83
+
 ## Summary
 
-Import the governed `runtime-settings-cli-validation-proof-out-v1` slice and
-admit `IAU-runtime-settings-cli-validation-proof-out-v1` for a later
-implementation handoff. This admission PR creates public requirements, Spec Kit
-artifacts, admission records, and validation coverage only.
+Implement `IAU-runtime-settings-cli-validation-proof-out-v1` after the governed
+`runtime-settings-cli-validation-proof-out-v1` admission merged. This
+implementation adds only the pure proof-out adapter contract, focused tests,
+and closeout records.
 
 ## Technical Context
 
@@ -27,15 +29,15 @@ artifacts, admission records, and validation coverage only.
 
 - Clean-room requirements authority: pass; public artifacts import requirement
   IDs and behavior only.
-- Spec Kit before implementation: pass; implementation remains blocked until
-  this admission merges and a separate handoff issue is created.
+- Spec Kit before implementation: pass; Issue #81 admitted the IAU and Issue
+  #83 is the separate implementation handoff.
 - Public evidence without private leakage: pass; public redaction and bridge
   artifact validation are required.
 - Marketplace disabled until governed: pass.
 
 ## Implementation Boundary
 
-The later IAU may add tests and the minimum pure proof-out adapter for supplied
+This IAU adds tests and the minimum pure proof-out adapter for supplied
 validation/proof facts. It must not add runtime validation execution, compare
 execution, LabVIEWCLI execution, Docker command execution/orchestration, live
 terminal proof, package/bin publication, launcher/profile mutation,

@@ -41,6 +41,7 @@ Issue #73 implements and closes it for T009-T013 only. Issue #77 imports
 Issue #79 implements and closes it for T009-T014 only.
 Issue #81 imports `runtime-settings-cli-validation-proof-out-v1` and admits
 `IAU-runtime-settings-cli-validation-proof-out-v1` for T009-T014 only.
+Issue #83 implements and closes it for T009-T014 only.
 
 ## Authority
 
@@ -129,6 +130,8 @@ Issue #81 imports `runtime-settings-cli-validation-proof-out-v1` and admits
 - Issue #81 imports `runtime-settings-cli-validation-proof-out-v1` and admits
   `IAU-runtime-settings-cli-validation-proof-out-v1` for T009-T014 only.
   Issue #81 is an admission issue and must not be reused for implementation.
+- Issue #83 implements and closes
+  `IAU-runtime-settings-cli-validation-proof-out-v1` for T009-T014 only.
 
 The current admission ledgers are:
 
@@ -148,7 +151,7 @@ The current admission ledgers are:
 - `docs/requirements/admissions/runtime-settings-cli-validation-proof-out-v1.json`
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-proof-out-v1`.
+`none`.
 
 The completed observation model scope is T009-T013. The command activation
 manifest contract implements only T009-T012. The command handler entrypoint shell
@@ -217,18 +220,17 @@ behavior, and the minimum pure terminal session/input adapter contract.
 Compare execution, LabVIEWCLI execution, Docker execution or orchestration,
 proof-out expansion, live-session proof, package/bin publication,
 launcher/profile mutation, Marketplace work, and source copying remain blocked.
-The runtime settings CLI validation proof-out adapter IAU is admitted for
+The runtime settings CLI validation proof-out adapter IAU implements only
 T009-T014 in
 `.specify/specs/runtime-settings-cli-validation-proof-out-v1/tasks.md`: tests
 for `--proof-out <dir>` request facts, deterministic proof JSON and issue
 Markdown from the already admitted proof-artifact contract, missing
 validation/proof facts fail-closed behavior, unsupported proof-out target
 fail-closed behavior, non-interactive guidance, and the minimum pure proof-out
-adapter contract. Implementation has not started; it must use a separate
-handoff issue after this admission merges. Runtime validation execution,
-compare execution, LabVIEWCLI execution, Docker execution, live terminal proof,
-package/bin publication, launcher/profile mutation, Marketplace work, and
-source copying remain blocked.
+adapter contract. Issue #83 implements and closes the handoff. Runtime
+validation execution, compare execution, LabVIEWCLI execution, Docker
+execution, live terminal proof, package/bin publication, launcher/profile
+mutation, Marketplace work, and source copying remain blocked.
 Runtime validation execution, compare execution, LabVIEWCLI execution, Docker execution, and source copying remain blocked until separate public bridge admission.
 
 The Marketplace posture is recorded in

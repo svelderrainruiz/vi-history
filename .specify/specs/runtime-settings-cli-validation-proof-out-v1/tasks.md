@@ -48,20 +48,20 @@ and issue Markdown artifact facts without runtime execution.
 
 **Public admission issue**: Issue #81
 
-**Implementation handoff issue**: not created until this admission merges.
+**Implementation handoff issue**: Issue #83
 
-- [ ] T009 Add tests proving `--proof-out <dir>` request facts resolve to
+- [x] T009 Add tests proving `--proof-out <dir>` request facts resolve to
   `vihs-validation-proof.json` and `vihs-validation-issue.md`.
-- [ ] T010 Add tests proving deterministic proof JSON and issue Markdown come
+- [x] T010 Add tests proving deterministic proof JSON and issue Markdown come
   from the already admitted validation proof-artifact contract.
-- [ ] T011 Add tests proving missing validation/proof facts fail closed without
+- [x] T011 Add tests proving missing validation/proof facts fail closed without
   artifact writes.
-- [ ] T012 Add tests proving unsupported proof-out target facts fail closed
+- [x] T012 Add tests proving unsupported proof-out target facts fail closed
   without artifact writes.
-- [ ] T013 Add tests proving non-interactive guidance is copyable and runtime
+- [x] T013 Add tests proving non-interactive guidance is copyable and runtime
   validation, compare, LabVIEWCLI, Docker, live proof, publication, mutation,
   Marketplace, and source-copying side effects remain blocked.
-- [ ] T014 Implement the minimum public MIT validation proof-out adapter as
+- [x] T014 Implement the minimum public MIT validation proof-out adapter as
   pure request/target/artifact facts around supplied validation proof facts.
 
 ---
@@ -114,7 +114,8 @@ sharing visibly outside this IAU.
   launcher/profile mutation, Marketplace publication, or source copying.
 - Future Copilot implementation work must start from a new public bridge
   admission and implementation handoff issue. Issue #81 is an admission issue
-  and must not be reused for implementation.
+  and Issue #83 is the completed implementation handoff issue; neither must be
+  reused for new implementation.
 
 ## Implementation Strategy
 
