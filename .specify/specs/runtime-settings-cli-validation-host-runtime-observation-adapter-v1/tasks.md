@@ -52,30 +52,29 @@ public-safe discovery observation facts without execution.
 
 **Public admission issue**: Issue #130
 
-**Implementation handoff issue**: To be created only after the admission PR
-merges.
+**Implementation handoff issue**: Issue #132.
 
-- [ ] T009 Add tests proving selected host facts drive public-safe observation
+- [x] T009 Add tests proving selected host facts drive public-safe observation
   shaping without arbitrary filesystem walking.
-- [ ] T010 Add tests proving registry observations reduce to source-class and
+- [x] T010 Add tests proving registry observations reduce to source-class and
   candidate facts without retaining raw registry output or private paths.
-- [ ] T011 Add tests proving documented-root observations reduce to
+- [x] T011 Add tests proving documented-root observations reduce to
   public-safe availability, executable-role, version, and bitness facts.
-- [ ] T012 Add tests proving Windows `host` / `2026` / `x64` can observe
+- [x] T012 Add tests proving Windows `host` / `2026` / `x64` can observe
   LabVIEW 2026 x64 plus the canonical installed x86 LabVIEWCLI surface as
   sanitized facts.
-- [ ] T013 Add tests proving missing selection, unsupported provider/platform
+- [x] T013 Add tests proving missing selection, unsupported provider/platform
   or version, missing observation dependencies, malformed observations,
   missing candidates, ambiguous candidates, incompatible candidates,
   contaminated host surface, and private-path disclosure attempts fail closed.
-- [ ] T014 Add tests proving generated observation facts compose into
+- [x] T014 Add tests proving generated observation facts compose into
   `createRuntimeSettingsValidationHostRuntimeDiscovery(input = {})` and the
   existing validation command chain without output-shape redesign.
-- [ ] T015 Add tests proving deterministic blocked side-effect facts and no
+- [x] T015 Add tests proving deterministic blocked side-effect facts and no
   runtime validation execution, compare, LabVIEWCLI, Docker, terminal process
   wiring, proof-out expansion, file writes, publication, Marketplace, release
   automation, launcher/profile mutation, or source copying.
-- [ ] T016 Implement the minimum public MIT host runtime observation facts
+- [x] T016 Implement the minimum public MIT host runtime observation facts
   contract.
 
 ---

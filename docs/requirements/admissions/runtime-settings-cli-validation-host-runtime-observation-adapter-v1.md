@@ -5,23 +5,20 @@ Slice:
 
 Admission issue: Issue #130
 
-State: admitted
+State: implemented
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1`
+`none`
 
 ## Scope
 
 This admission imports the governed bridge for bounded host runtime observation
 facts into the public MIT authority.
 
-The admitted IAU covers only future T009-T016 work: tests and the minimum
-public MIT observation-facts contract that derives public-safe observation
-facts for `createRuntimeSettingsValidationHostRuntimeDiscovery(input = {})`
-and the existing validation command chain.
-
-Implementation is not performed in this admission PR. A separate handoff issue
-is required after this PR merges.
+The implemented IAU covers only T009-T016: tests and the minimum public MIT
+observation-facts contract that derives public-safe observation facts for
+`createRuntimeSettingsValidationHostRuntimeDiscovery(input = {})` and the
+existing validation command chain.
 
 ## Source
 
@@ -50,7 +47,9 @@ is required after this PR merges.
 - Implementation sharing: none
 - Marketplace publication: disabled
 - Pre-implementation preflight: pass
-- Implementation handoff issue: required after admission PR merge
+- Implementation handoff issue: Issue #132
+- Implementation PR: PR #133
+- Implementation closeout: pass
 
 ## Blocked Scope
 
@@ -65,3 +64,5 @@ Marketplace publication, release automation, and source copying remain
 blocked.
 
 Issue #130 is an admission issue and must not be reused for implementation.
+Issue #132 and PR #133 completed T009-T016 and returned the current
+Implementation Admission Unit to `none`.

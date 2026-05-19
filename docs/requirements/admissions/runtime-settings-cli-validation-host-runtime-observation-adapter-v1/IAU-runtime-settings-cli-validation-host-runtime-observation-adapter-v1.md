@@ -6,18 +6,19 @@ IAU ID:
 Parent slice:
 `runtime-settings-cli-validation-host-runtime-observation-adapter-v1`
 
-State: admitted
+State: implemented
 
 Admission issue: Issue #130
 
-Implementation handoff issue: required after admission PR merge
+Implementation handoff issue: Issue #132
+
+Implementation PR: PR #133
 
 ## Admitted Tasks
 
-T009-T016 are admitted for a future implementation handoff issue after this
-admission PR merges.
+T009-T016 are implemented through Issue #132 and PR #133.
 
-The admitted behavior is limited to tests and the minimum
+The implemented behavior is limited to tests and the minimum
 `createRuntimeSettingsValidationHostRuntimeObservation(input = {})` contract
 for bounded public-safe host runtime observation facts.
 
@@ -41,4 +42,3 @@ automation, or source copying.
 - Preflight: pass
 - Implementation sharing: none
 - Marketplace publication: disabled
-- Separate implementation handoff issue: required after admission PR merge

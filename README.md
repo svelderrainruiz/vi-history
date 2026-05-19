@@ -85,7 +85,8 @@ Issue #130 imports
 admits
 `IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1` for
 T009-T016 only. Issue #130 is an admission issue and must not be reused for
-implementation.
+implementation. Issue #132 implements and closes it through PR #133 for
+T009-T016 only.
 
 ## Authority
 
@@ -235,6 +236,9 @@ implementation.
   `IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1` for
   T009-T016 only. Issue #130 is an admission issue and must not be reused for
   implementation.
+- Issue #132 implements and closes
+  `IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1`
+  through PR #133 for T009-T016 only.
 
 The current admission ledgers are:
 
@@ -262,12 +266,11 @@ The current admission ledgers are:
 - `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-adapter-v1.json`
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1`.
+`none`.
 
-Issue #130 admission temporarily sets the current IAU to
+Issue #130 admission temporarily set the current IAU to
 `IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1`.
-Implementation may start only after the admission PR merges and a separate
-implementation handoff issue is created. Before Issue #130 admission, the host
+Issue #132 and PR #133 completed it. Before Issue #130 admission, the host
 runtime discovery closeout recorded:
 
 Current Implementation Admission Unit:
@@ -481,10 +484,11 @@ wiring, live terminal proof, file writes, package/bin publication,
 launcher/profile mutation, release automation, Marketplace work, and source
 copying remain blocked.
 
-`runtime-settings-cli-validation-host-runtime-observation-adapter-v1` admits
+`runtime-settings-cli-validation-host-runtime-observation-adapter-v1`
+implements
 `IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1` for
-Issue #130 and T009-T016 only. Issue #130 is an admission issue and must not be
-reused for implementation. The admitted IAU is a pure
+Issue #132 and T009-T016 only. Issue #130 is an admission issue and must not
+be reused for implementation. The implemented IAU is a pure
 `createRuntimeSettingsValidationHostRuntimeObservation(input = {})` facts
 contract over public-safe selected host facts and supplied bounded observation
 dependencies. It may derive public-safe observation facts for
