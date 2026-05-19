@@ -1,11 +1,11 @@
 # Feature Specification: Runtime Settings CLI Validation Proof-Out Adapter
 
 **Feature Branch**:
-`codex/runtime-settings-cli-validation-proof-out-admission`
+`codex/runtime-settings-cli-validation-proof-out`
 
 **Created**: 2026-05-19
 
-**Status**: Admission locked for
+**Status**: Implemented for
 `IAU-runtime-settings-cli-validation-proof-out-v1`
 
 **Input**: Imported requirements slice

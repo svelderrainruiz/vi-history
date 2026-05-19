@@ -19,6 +19,14 @@ export const RUNTIME_SETTINGS_CLI_VALIDATION_PROOF_REQUIREMENTS = Object.freeze(
   failClosed: Object.freeze(["VHS-REQ-546"])
 });
 
+export const RUNTIME_SETTINGS_CLI_VALIDATION_PROOF_OUT_REQUIREMENTS = Object.freeze({
+  request: Object.freeze(["VHS-REQ-546"]),
+  target: Object.freeze(["VHS-REQ-546"]),
+  artifactFiles: Object.freeze(["VHS-REQ-546"]),
+  nonInteractiveGuidance: Object.freeze(["VHS-REQ-546"]),
+  failClosed: Object.freeze(["VHS-REQ-546"])
+});
+
 export const RUNTIME_SETTINGS_CLI_INTERACTIVE_SELECTION_REQUIREMENTS = Object.freeze({
   defaultSelection: Object.freeze(["VHS-REQ-545"]),
   currentBundle: Object.freeze(["VHS-REQ-545"]),
@@ -75,6 +83,23 @@ export const RUNTIME_SETTINGS_VALIDATION_PROOF_BLOCKED_SIDE_EFFECTS = Object.fre
   liveSessionProof: false,
   packaging: false,
   marketplace: false
+});
+
+export const RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_BLOCKED_SIDE_EFFECTS = Object.freeze({
+  settingsMutation: false,
+  interactiveSelection: false,
+  runtimeValidation: false,
+  runtimeExecution: false,
+  compareExecution: false,
+  labviewCli: false,
+  dockerExecution: false,
+  dockerOrchestration: false,
+  liveTerminalProof: false,
+  packageBinPublication: false,
+  launcherProfileMutation: false,
+  marketplace: false,
+  sourceCopying: false,
+  fileSystemWrites: false
 });
 
 export const RUNTIME_SETTINGS_INTERACTIVE_SELECTION_BLOCKED_SIDE_EFFECTS = Object.freeze({
@@ -171,6 +196,9 @@ export const RUNTIME_SETTINGS_TERMINAL_IO_ADAPTER_BLOCKED_SIDE_EFFECTS = Object.
 
 const RUNTIME_SETTINGS_VALIDATION_PROOF_SCHEMA = "vi-history/runtime-settings-validation-proof@v1";
 const RUNTIME_SETTINGS_VALIDATION_PROOF_COMMAND = "vihs --validate --proof-out";
+const RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_COMMAND = "vihs --validate --proof-out";
+const RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_PROOF_FILE = "vihs-validation-proof.json";
+const RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_ISSUE_FILE = "vihs-validation-issue.md";
 const RUNTIME_SETTINGS_INTERACTIVE_SELECTION_COMMAND = "vihs";
 const RUNTIME_SETTINGS_VALIDATION_COMMAND = "vihs --validate";
 const MIT_PUBLIC_AUTHORITY = "svelderrainruiz/vi-history";
@@ -203,6 +231,15 @@ export function allRuntimeSettingsCliValidationReadbackRequirementIds() {
 export function allRuntimeSettingsCliValidationProofRequirementIds() {
   return Object.freeze(
     Object.values(RUNTIME_SETTINGS_CLI_VALIDATION_PROOF_REQUIREMENTS)
+      .flat()
+      .filter((value, index, values) => values.indexOf(value) === index)
+      .sort()
+  );
+}
+
+export function allRuntimeSettingsCliValidationProofOutRequirementIds() {
+  return Object.freeze(
+    Object.values(RUNTIME_SETTINGS_CLI_VALIDATION_PROOF_OUT_REQUIREMENTS)
       .flat()
       .filter((value, index, values) => values.indexOf(value) === index)
       .sort()
@@ -564,6 +601,52 @@ export function createRuntimeSettingsValidationProofIssueBody(proofJson = {}) {
     `- Persisted LabVIEW bitness: ${persistedSettings.labviewBitness ?? "unknown"}`,
     ...environmentLines
   ].join("\n");
+}
+
+export function createRuntimeSettingsValidationProofOutAdapter(input = {}) {
+  const request = normalizeValidationProofOutRequest(input.request ?? input.proofOutRequest ?? input, input);
+  if (!request.ok) {
+    return validationProofOutBlockedResult({
+      blockedReason: request.blockedReason,
+      request: request.value ?? null,
+      proofOutTarget: request.proofOutTarget ?? null
+    });
+  }
+
+  const proofArtifact = resolveValidationProofOutArtifact(input);
+  if (!proofArtifact.ok) {
+    return validationProofOutBlockedResult({
+      blockedReason: proofArtifact.blockedReason,
+      request: request.value,
+      proofOutTarget: request.value.proofOutTarget,
+      proofArtifact: proofArtifact.artifact ?? null
+    });
+  }
+
+  const artifactFiles = createValidationProofOutArtifactFiles(
+    request.value.proofOutTarget,
+    proofArtifact.value
+  );
+  const guidance = createValidationProofOutGuidance(request.value.proofOutTarget);
+
+  return freezeRecord({
+    status: "ready",
+    type: "runtime-settings-cli-validation-proof-out-adapter-contract",
+    command: request.value.command,
+    request: request.value,
+    proofOutTarget: request.value.proofOutTarget,
+    proofArtifactStatus: proofArtifact.value.status,
+    artifactFiles,
+    proofJson: proofArtifact.value.proofJson,
+    issueMarkdown: proofArtifact.value.issueBody,
+    guidance,
+    copyableGuidance: guidance.copyableCommands,
+    promptWait: false,
+    writeBound: false,
+    artifactWrites: false,
+    blockedSideEffects: RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_BLOCKED_SIDE_EFFECTS,
+    requirementIds: allRuntimeSettingsCliValidationProofOutRequirementIds()
+  });
 }
 
 export function createRuntimeSettingsInteractiveSelection(input = {}) {
@@ -1347,6 +1430,219 @@ function validationProofBlockedResult(blockedReason) {
     issueBody: createRuntimeSettingsValidationProofIssueBody(proofJson),
     blockedSideEffects: RUNTIME_SETTINGS_VALIDATION_PROOF_BLOCKED_SIDE_EFFECTS,
     requirementIds: allRuntimeSettingsCliValidationProofRequirementIds()
+  });
+}
+
+function validationProofOutBlockedResult({
+  blockedReason,
+  request = null,
+  proofOutTarget = null,
+  proofArtifact = null
+}) {
+  const guidance = createValidationProofOutGuidance(proofOutTarget);
+  return freezeRecord({
+    status: "blocked",
+    type: "runtime-settings-cli-validation-proof-out-adapter-contract",
+    command: request?.command ?? RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_COMMAND,
+    blockedReason,
+    request,
+    proofOutTarget,
+    proofArtifactStatus: proofArtifact?.status ?? null,
+    artifactFiles: {},
+    proofJson: null,
+    issueMarkdown: null,
+    guidance,
+    copyableGuidance: guidance.copyableCommands,
+    promptWait: false,
+    writeBound: false,
+    artifactWrites: false,
+    partialWrite: false,
+    blockedSideEffects: RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_BLOCKED_SIDE_EFFECTS,
+    requirementIds: allRuntimeSettingsCliValidationProofOutRequirementIds()
+  });
+}
+
+function normalizeValidationProofOutRequest(request = {}, fallbackInput = {}) {
+  const target = normalizeValidationProofOutTarget(
+    request.proofOutTarget
+      ?? request.proofOut
+      ?? request.outputTarget
+      ?? request.outputDirectory
+      ?? request.directory
+      ?? request.dir
+      ?? request.target
+      ?? fallbackInput.proofOutTarget
+      ?? fallbackInput.proofOut
+      ?? fallbackInput.outputTarget
+      ?? fallbackInput.outputDirectory
+      ?? fallbackInput.directory
+      ?? fallbackInput.dir
+      ?? fallbackInput.target
+  );
+
+  if (!target.ok) {
+    return {
+      ok: false,
+      blockedReason: target.blockedReason,
+      proofOutTarget: target.value ?? null
+    };
+  }
+
+  return {
+    ok: true,
+    value: freezeRecord({
+      command: `${RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_COMMAND} ${target.value.identifier}`,
+      option: "--proof-out",
+      proofOut: true,
+      proofOutTarget: target.value
+    })
+  };
+}
+
+function normalizeValidationProofOutTarget(target) {
+  const identifier = typeof target === "string"
+    ? normalizeFact(target)
+    : isPlainObject(target)
+      ? normalizeFact(target.identifier ?? target.path ?? target.directory ?? target.dir ?? target.value)
+      : null;
+
+  if (!identifier) {
+    return {
+      ok: false,
+      blockedReason: "missing-proof-out-target"
+    };
+  }
+
+  const normalized = identifier.replaceAll("\\", "/").replace(/\/+$/u, "");
+  if (!isPublicSafeProofOutTarget(normalized)) {
+    return {
+      ok: false,
+      blockedReason: "unsupported-proof-out-target",
+      value: freezeRecord({
+        kind: "proof-out-directory",
+        identifier: normalized || identifier,
+        publicSafe: false
+      })
+    };
+  }
+
+  return {
+    ok: true,
+    value: freezeRecord({
+      kind: "proof-out-directory",
+      identifier: normalized,
+      publicSafe: true,
+      artifactPaths: {
+        proofJson: `${normalized}/${RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_PROOF_FILE}`,
+        issueMarkdown: `${normalized}/${RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_ISSUE_FILE}`
+      }
+    })
+  };
+}
+
+function isPublicSafeProofOutTarget(identifier) {
+  if (!identifier || identifier === ".." || identifier.includes("\0")) {
+    return false;
+  }
+  if (identifier.startsWith("/") || identifier.startsWith("~") || identifier.startsWith("\\")) {
+    return false;
+  }
+  if (/^[a-z]:[\\/]/iu.test(identifier) || identifier.includes("://")) {
+    return false;
+  }
+  if (/(^|\/)\.\.(\/|$)/u.test(identifier)) {
+    return false;
+  }
+  return !/(?:\/home\/|\/users\/|\\users\\|secret|password|token|credential|authorization|bearer|private)/iu.test(identifier);
+}
+
+function resolveValidationProofOutArtifact(input = {}) {
+  const provided = input.validationProofArtifact ?? input.proofArtifact ?? input.artifact;
+  if (isPlainObject(provided)) {
+    return normalizeProvidedValidationProofOutArtifact(provided);
+  }
+
+  const validation = input.validation
+    ?? input.validationFacts
+    ?? input.validationReadback
+    ?? (input.persistedSettings || input.runtime ? input : undefined);
+  const artifact = createRuntimeSettingsValidationProofArtifact({
+    validation,
+    environment: input.environment ?? input.environmentFacts ?? {}
+  });
+
+  if (isMissingValidationProofArtifact(artifact)) {
+    return {
+      ok: false,
+      blockedReason: artifact.blockedReason ?? "missing-validation-proof-facts",
+      artifact
+    };
+  }
+
+  return normalizeProvidedValidationProofOutArtifact(artifact);
+}
+
+function normalizeProvidedValidationProofOutArtifact(artifact) {
+  const issueBody = typeof artifact.issueBody === "string"
+    ? artifact.issueBody
+    : typeof artifact.issueMarkdown === "string"
+      ? artifact.issueMarkdown
+      : null;
+
+  if (!isPlainObject(artifact.proofJson) || !issueBody || isMissingValidationProofArtifact(artifact)) {
+    return {
+      ok: false,
+      blockedReason: artifact.blockedReason ?? "missing-validation-proof-facts",
+      artifact
+    };
+  }
+
+  return {
+    ok: true,
+    value: freezeRecord({
+      status: normalizeFact(artifact.status) ?? artifact.proofJson.validation?.status ?? "ready",
+      proofJson: artifact.proofJson,
+      issueBody,
+      requirementIds: artifact.requirementIds ?? allRuntimeSettingsCliValidationProofRequirementIds()
+    })
+  };
+}
+
+function isMissingValidationProofArtifact(artifact) {
+  const runtime = artifact?.proofJson?.validation?.runtime ?? {};
+  return artifact?.blockedReason === "missing-validation-proof-facts"
+    || runtime.runtimeErrorCode === "VIHS_E_MISSING_VALIDATION_PROOF_FACTS";
+}
+
+function createValidationProofOutArtifactFiles(target, artifact) {
+  return freezeRecord({
+    proofJson: {
+      fileName: RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_PROOF_FILE,
+      relativePath: target.artifactPaths.proofJson,
+      contentType: "application/json",
+      content: artifact.proofJson,
+      text: `${JSON.stringify(artifact.proofJson, null, 2)}\n`,
+      writeBound: false
+    },
+    issueMarkdown: {
+      fileName: RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_ISSUE_FILE,
+      relativePath: target.artifactPaths.issueMarkdown,
+      contentType: "text/markdown",
+      content: artifact.issueBody,
+      text: artifact.issueBody.endsWith("\n") ? artifact.issueBody : `${artifact.issueBody}\n`,
+      writeBound: false
+    }
+  });
+}
+
+function createValidationProofOutGuidance(target = null) {
+  const targetIdentifier = target?.publicSafe === true ? target.identifier : "<dir>";
+  return freezeRecord({
+    nonInteractive: true,
+    promptWait: false,
+    copyableCommands: [
+      `${RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_COMMAND} ${targetIdentifier}`
+    ]
   });
 }
 

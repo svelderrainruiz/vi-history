@@ -308,14 +308,14 @@ Issue #79.
 Issue #81 admits
 `IAU-runtime-settings-cli-validation-proof-out-v1` for
 `runtime-settings-cli-validation-proof-out-v1` and T009-T014 only. Issue #81
-is an admission issue and must not be reused for implementation. A separate
-implementation handoff issue must implement only the pure proof-out adapter:
-`--proof-out <dir>` request facts, deterministic proof JSON and issue Markdown
-from the admitted proof-artifact contract, missing validation/proof facts and
-unsupported target fail-closed behavior, non-interactive copyable guidance, and
-blocked side-effect facts. The proof-out adapter must consume supplied
-validation/proof facts; it must not run validation.
-The runtime settings CLI validation proof-out adapter behavior beyond pure proof-out facts remains blocked. The proof-out adapter must consume supplied validation/proof facts.
+is an admission issue and must not be reused for implementation. Issue #83
+implements and closes only the pure proof-out adapter: `--proof-out <dir>`
+request facts, deterministic proof JSON and issue Markdown from the admitted
+proof-artifact contract, missing validation/proof facts and unsupported target
+fail-closed behavior, non-interactive copyable guidance, and blocked
+side-effect facts. The proof-out adapter consumes supplied validation/proof
+facts; it does not run validation. Runtime settings CLI validation proof-out
+adapter behavior beyond pure proof-out facts remains blocked.
 
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.
