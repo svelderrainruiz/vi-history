@@ -1,0 +1,6 @@
+ReqID,TestID,Verification,Status
+VHS-REQ-546,TEST-UNIT-RSPROOFOUT-001,Prove a proof-out request for vihs --validate --proof-out resolves deterministic artifact names and target facts without exposing private host paths,Imported
+VHS-REQ-546,TEST-UNIT-RSPROOFOUT-002,Prove proof JSON and issue Markdown are emitted from the already admitted validation proof-artifact contract without runtime execution,Imported
+VHS-REQ-546,TEST-UNIT-RSPROOFOUT-003,Prove missing validation/proof facts and unsupported proof-out targets fail closed without writes or execution side effects,Imported
+VHS-REQ-546,TEST-UNIT-RSPROOFOUT-004,Prove non-interactive guidance remains copyable and does not wait for terminal input,Imported
+VHS-REQ-546,TEST-UNIT-RSPROOFOUT-005,Prove runtime validation execution compare LabVIEWCLI Docker live proof package launcher Marketplace and source-copying side effects remain blocked,Imported
