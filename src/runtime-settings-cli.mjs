@@ -1001,11 +1001,9 @@ export async function createRuntimeSettingsValidationCommandResult(input = {}) {
     });
   }
 
+  const runtimeSelection = resolveValidationCommandRuntimeSelection(input);
   const runtimeOutcomeResult = createRuntimeSettingsValidationRuntimeOutcome({
-    runtimeSelection: input.runtimeSelection
-      ?? input.selection
-      ?? input.runtimeFacts
-      ?? input.runtime
+    runtimeSelection
   });
   const validation = readRuntimeSettingsValidation({
     settingsContent: input.settingsContent,
@@ -1081,6 +1079,58 @@ export async function createRuntimeSettingsValidationCommandResult(input = {}) {
     validation,
     proofOut: proofOutResult
   });
+}
+
+function resolveValidationCommandRuntimeSelection(input = {}) {
+  const explicitRuntimeSelection = input.runtimeSelection
+    ?? input.runtimeFacts
+    ?? input.runtime;
+  if (explicitRuntimeSelection !== undefined) {
+    return explicitRuntimeSelection;
+  }
+
+  const providedPreflight = input.hostRuntimePreflight
+    ?? input.hostPreflight
+    ?? input.runtimePreflight
+    ?? input.preflight;
+  if (isPlainObject(providedPreflight) && providedPreflight.runtimeSelection) {
+    return providedPreflight.runtimeSelection;
+  }
+
+  const hostPreflightRequest = input.hostRuntimePreflightRequest
+    ?? input.hostPreflightRequest;
+  if (isPlainObject(hostPreflightRequest)) {
+    return createRuntimeSettingsValidationHostRuntimePreflight(hostPreflightRequest).runtimeSelection;
+  }
+
+  if (hasValidationCommandHostPreflightFacts(input)) {
+    return createRuntimeSettingsValidationHostRuntimePreflight({
+      selection: input.hostSelection
+        ?? input.hostRuntimeSelection
+        ?? input.hostRuntimeFacts
+        ?? input.selection
+        ?? input.persistedSettings
+        ?? input.settings,
+      hostCandidates: input.hostCandidates
+        ?? input.hostRuntimeCandidates
+        ?? input.availableHostInstallations
+        ?? input.hostInstallations
+        ?? input.candidates
+    }).runtimeSelection;
+  }
+
+  return input.selection;
+}
+
+function hasValidationCommandHostPreflightFacts(input = {}) {
+  return input.hostSelection !== undefined
+    || input.hostRuntimeSelection !== undefined
+    || input.hostRuntimeFacts !== undefined
+    || input.hostCandidates !== undefined
+    || input.hostRuntimeCandidates !== undefined
+    || input.availableHostInstallations !== undefined
+    || input.hostInstallations !== undefined
+    || input.candidates !== undefined;
 }
 
 export function createRuntimeSettingsInteractiveSelection(input = {}) {
