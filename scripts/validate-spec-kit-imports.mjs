@@ -90,6 +90,12 @@ const runtimeSettingsProofOutFileEmissionImportDir = `docs/requirements/imports/
 const runtimeSettingsProofOutFileEmissionAdmissionPath = `docs/requirements/admissions/${runtimeSettingsProofOutFileEmissionSliceId}.json`;
 const runtimeSettingsProofOutFileEmissionIauPath = `docs/requirements/admissions/${runtimeSettingsProofOutFileEmissionSliceId}/IAU-runtime-settings-cli-validation-proof-out-file-emission-v1.json`;
 const runtimeSettingsProofOutFileEmissionPreflightPath = `docs/requirements/admissions/${runtimeSettingsProofOutFileEmissionSliceId}/IAU-runtime-settings-cli-validation-proof-out-file-emission-v1-preflight-v1.json`;
+const runtimeSettingsRuntimeOutcomeSliceId = "runtime-settings-cli-validation-runtime-outcome-v1";
+const runtimeSettingsRuntimeOutcomeFeatureDir = `.specify/specs/${runtimeSettingsRuntimeOutcomeSliceId}`;
+const runtimeSettingsRuntimeOutcomeImportDir = `docs/requirements/imports/${runtimeSettingsRuntimeOutcomeSliceId}`;
+const runtimeSettingsRuntimeOutcomeAdmissionPath = `docs/requirements/admissions/${runtimeSettingsRuntimeOutcomeSliceId}.json`;
+const runtimeSettingsRuntimeOutcomeIauPath = `docs/requirements/admissions/${runtimeSettingsRuntimeOutcomeSliceId}/IAU-runtime-settings-cli-validation-runtime-outcome-v1.json`;
+const runtimeSettingsRuntimeOutcomePreflightPath = `docs/requirements/admissions/${runtimeSettingsRuntimeOutcomeSliceId}/IAU-runtime-settings-cli-validation-runtime-outcome-v1-preflight-v1.json`;
 const marketplaceAdrPath = "docs/decisions/ADR-001-marketplace-publication-disabled.md";
 const explicitCompareIauPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1.json`;
 const explicitComparePreflightPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1-preflight-v1.json`;
@@ -174,6 +180,9 @@ const runtimeSettingsProofOutExpectedIds = [
 const runtimeSettingsProofOutFileEmissionExpectedIds = [
   "VHS-REQ-546"
 ];
+const runtimeSettingsRuntimeOutcomeExpectedIds = [
+  "VHS-REQ-546"
+];
 
 const failures = [];
 
@@ -254,11 +263,12 @@ requireTextIncludes(".specify/memory/constitution.md", [
   "runtime-settings-cli-terminal-io-adapter-v1",
   "runtime-settings-cli-validation-proof-out-v1",
   "runtime-settings-cli-validation-proof-out-file-emission-v1",
-  "**Version**: 0.1.13"
+  "runtime-settings-cli-validation-runtime-outcome-v1",
+  "**Version**: 0.1.14"
 ]);
 
 const featureJson = readJson(".specify/feature.json");
-requireEqual(featureJson.feature_directory, runtimeSettingsProofOutFileEmissionFeatureDir, "pinned Spec Kit feature directory");
+requireEqual(featureJson.feature_directory, runtimeSettingsRuntimeOutcomeFeatureDir, "pinned Spec Kit feature directory");
 
 const admission = readJson(admissionPath);
 requireEqual(admission.schema, "vi-history/requirements-admission@v1", "admission schema");
@@ -635,7 +645,7 @@ requireTextIncludes("README.md", [
 requireTextIncludes("AGENTS.md", [
   "installed-user-observation-public-surface-v1",
   "IAU-installed-user-observation-model-v1",
-  "015-runtime-settings-cli-validation-proof-out-file-emission-v1"
+  "016-runtime-settings-cli-validation-runtime-outcome-v1"
 ]);
 
 const commandAdmission = readJson(commandAdmissionPath);
@@ -1122,7 +1132,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-bootstrap-v1",
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-prepare-command-shell-v1",
-  "015-runtime-settings-cli-validation-proof-out-file-emission-v1"
+  "016-runtime-settings-cli-validation-runtime-outcome-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-bootstrap-v1",
@@ -1258,7 +1268,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-settings-write-v1",
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-settings-write-contract-v1",
-  "015-runtime-settings-cli-validation-proof-out-file-emission-v1"
+  "016-runtime-settings-cli-validation-runtime-outcome-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-settings-write-v1",
@@ -1393,7 +1403,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-validation-readback-v1",
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-validation-readback-contract-v1",
-  "015-runtime-settings-cli-validation-proof-out-file-emission-v1"
+  "016-runtime-settings-cli-validation-runtime-outcome-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-readback-v1",
@@ -1537,7 +1547,7 @@ requireTextIncludes("AGENTS.md", [
   "Current Implementation Admission Unit",
   "IAU-runtime-settings-cli-validation-proof-artifact-v1",
   "IAU-runtime-settings-cli-interactive-selection-contract-v1",
-  "015-runtime-settings-cli-validation-proof-out-file-emission-v1"
+  "016-runtime-settings-cli-validation-runtime-outcome-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-proof-v1",
@@ -1679,10 +1689,10 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-interactive-selection-v1",
   "Issue #60",
   "Issue #62",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-runtime-outcome-v1`.",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
   "IAU-runtime-settings-cli-interactive-selection-contract-v1",
-  "015-runtime-settings-cli-validation-proof-out-file-emission-v1"
+  "016-runtime-settings-cli-validation-runtime-outcome-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-interactive-selection-v1",
@@ -1824,15 +1834,15 @@ requireTextIncludes("README.md", [
   "Issue #65",
   "Issue #67",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
-  "Current Implementation Admission Unit:\n`none`."
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-runtime-outcome-v1`."
 ]);
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-terminal-entrypoint-v1",
   "Issue #65",
   "Issue #67",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-runtime-outcome-v1`.",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
-  "015-runtime-settings-cli-validation-proof-out-file-emission-v1"
+  "016-runtime-settings-cli-validation-runtime-outcome-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-terminal-entrypoint-v1",
@@ -1973,17 +1983,17 @@ requireTextIncludes("README.md", [
   "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
   "latest supported NI LabVIEW Docker image selection",
   "no user-facing Docker bitness choice",
-  "Current Implementation Admission Unit:\n`none`."
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-runtime-outcome-v1`."
 ]);
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-terminal-prompt-loop-v1",
   "Issue #71",
   "Issue #73",
   "Issue #75",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-runtime-outcome-v1`.",
   "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
   "no separate Docker bitness\nchoice",
-  "015-runtime-settings-cli-validation-proof-out-file-emission-v1"
+  "016-runtime-settings-cli-validation-runtime-outcome-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-terminal-prompt-loop-v1",
@@ -2138,7 +2148,7 @@ requireTextIncludes("README.md", [
   "Issue #77",
   "Issue #79",
   "IAU-runtime-settings-cli-terminal-io-adapter-v1",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-runtime-outcome-v1`.",
   "latest supported NI LabVIEW image-family selection with no Docker bitness\nprompt",
   "source copying remain blocked"
 ]);
@@ -2146,10 +2156,10 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-terminal-io-adapter-v1",
   "Issue #77",
   "Issue #79",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-runtime-outcome-v1`.",
   "IAU-runtime-settings-cli-terminal-io-adapter-v1",
   "no Docker bitness prompt",
-  "015-runtime-settings-cli-validation-proof-out-file-emission-v1"
+  "016-runtime-settings-cli-validation-runtime-outcome-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-terminal-io-adapter-v1",
@@ -2300,7 +2310,7 @@ requireTextIncludes("README.md", [
   "Issue #81",
   "Issue #83",
   "IAU-runtime-settings-cli-validation-proof-out-v1",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-runtime-outcome-v1`.",
   "Runtime validation execution",
   "source copying remain blocked"
 ]);
@@ -2308,9 +2318,9 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-validation-proof-out-v1",
   "Issue #81",
   "Issue #83",
-  "Current Implementation Admission Unit:\n`none`.",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-runtime-outcome-v1`.",
   "IAU-runtime-settings-cli-validation-proof-out-v1",
-  "015-runtime-settings-cli-validation-proof-out-file-emission-v1"
+  "016-runtime-settings-cli-validation-runtime-outcome-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-proof-out-v1",
@@ -2462,7 +2472,6 @@ requireTextIncludes("README.md", [
   "Issue #85",
   "Issue #87",
   "IAU-runtime-settings-cli-validation-proof-out-file-emission-v1",
-  "Current Implementation Admission Unit:\n`none`.",
   "new validation fact generation",
   "source copying remain\nblocked"
 ]);
@@ -2470,9 +2479,8 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-validation-proof-out-file-emission-v1",
   "Issue #85",
   "Issue #87",
-  "Current Implementation Admission Unit:\n`none`.",
   "IAU-runtime-settings-cli-validation-proof-out-file-emission-v1",
-  "015-runtime-settings-cli-validation-proof-out-file-emission-v1"
+  "IAU-runtime-settings-cli-validation-runtime-outcome-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-proof-out-file-emission-v1",
@@ -2481,6 +2489,155 @@ requireTextIncludes("docs/development/copilot-workflow.md", [
   "IAU-runtime-settings-cli-validation-proof-out-file-emission-v1",
   "file emission from ready proof-out adapter facts",
   "new\nvalidation facts"
+]);
+
+const runtimeSettingsRuntimeOutcomeAdmission = readJson(runtimeSettingsRuntimeOutcomeAdmissionPath);
+requireEqual(runtimeSettingsRuntimeOutcomeAdmission.schema, "vi-history/requirements-admission@v1", "runtime settings runtime outcome admission schema");
+requireEqual(runtimeSettingsRuntimeOutcomeAdmission.sliceId, runtimeSettingsRuntimeOutcomeSliceId, "runtime settings runtime outcome admission sliceId");
+requireEqual(runtimeSettingsRuntimeOutcomeAdmission.state, "admitted", "runtime settings runtime outcome admission state");
+requireEqual(runtimeSettingsRuntimeOutcomeAdmission.targetProduct, "vi-history", "runtime settings runtime outcome admission targetProduct");
+requireEqual(runtimeSettingsRuntimeOutcomeAdmission.targetFeature, runtimeSettingsRuntimeOutcomeSliceId, "runtime settings runtime outcome admission targetFeature");
+requireEqual(runtimeSettingsRuntimeOutcomeAdmission.sourceBaselineTag, "v1.3.16", "runtime settings runtime outcome admission sourceBaselineTag");
+requireEqual(runtimeSettingsRuntimeOutcomeAdmission.sourceCommit, "567157f4a77536c4efa07ba72eea3314083ccde2", "runtime settings runtime outcome admission sourceCommit");
+requireEqual(runtimeSettingsRuntimeOutcomeAdmission.governedAdmissionCommit, "263e378a3781e2122d7f850998c4c07e2786078a", "runtime settings runtime outcome admission governedAdmissionCommit");
+requireEqual(runtimeSettingsRuntimeOutcomeAdmission.implementationSharing, "none", "runtime settings runtime outcome admission implementationSharing");
+requireMarketplacePosture(runtimeSettingsRuntimeOutcomeAdmission, "runtime settings runtime outcome admission");
+requireEqual(runtimeSettingsRuntimeOutcomeAdmission.currentImplementationAdmissionUnit, "IAU-runtime-settings-cli-validation-runtime-outcome-v1", "runtime settings runtime outcome currentImplementationAdmissionUnit");
+requireArrayEqual(runtimeSettingsRuntimeOutcomeAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "runtime settings runtime outcome completedSpecScope");
+requireArrayEqual(runtimeSettingsRuntimeOutcomeAdmission.completedImplementationScope, [], "runtime settings runtime outcome completedImplementationScope");
+requireArrayEqual(runtimeSettingsRuntimeOutcomeAdmission.admittedImplementationScope, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings runtime outcome admittedImplementationScope");
+requireArrayEqual(runtimeSettingsRuntimeOutcomeAdmission.blockedImplementationScope, ["T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025"], "runtime settings runtime outcome blockedImplementationScope");
+requireEqual(runtimeSettingsRuntimeOutcomeAdmission.preImplementationPreflight?.iauId, "IAU-runtime-settings-cli-validation-runtime-outcome-v1", "runtime settings runtime outcome preImplementationPreflight iauId");
+requireEqual(runtimeSettingsRuntimeOutcomeAdmission.preImplementationPreflight?.status, "pass", "runtime settings runtime outcome preImplementationPreflight status");
+requireEqual(runtimeSettingsRuntimeOutcomeAdmission.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings runtime outcome preImplementationPreflight implementationStartAllowed");
+requireEqual(runtimeSettingsRuntimeOutcomeAdmission.preImplementationPreflight?.record, runtimeSettingsRuntimeOutcomePreflightPath, "runtime settings runtime outcome preImplementationPreflight record");
+requireEqual(runtimeSettingsRuntimeOutcomeAdmission.issue?.number, 89, "runtime settings runtime outcome issue number");
+requireFile(`docs/requirements/admissions/${runtimeSettingsRuntimeOutcomeSliceId}.md`);
+
+const runtimeSettingsRuntimeOutcomeAdmissionUnit = (runtimeSettingsRuntimeOutcomeAdmission.implementationAdmissionUnits ?? [])
+  .find((unit) => unit?.iauId === "IAU-runtime-settings-cli-validation-runtime-outcome-v1");
+requireEqual(runtimeSettingsRuntimeOutcomeAdmissionUnit?.state, "admitted", "runtime settings runtime outcome admission unit state");
+requireEqual(runtimeSettingsRuntimeOutcomeAdmissionUnit?.preflightRecord, runtimeSettingsRuntimeOutcomePreflightPath, "runtime settings runtime outcome admission unit preflightRecord");
+
+const runtimeSettingsRuntimeOutcomeIau = readJson(runtimeSettingsRuntimeOutcomeIauPath);
+requireEqual(runtimeSettingsRuntimeOutcomeIau.schema, "vi-history/implementation-admission-unit@v1", "runtime settings runtime outcome IAU schema");
+requireEqual(runtimeSettingsRuntimeOutcomeIau.iauId, "IAU-runtime-settings-cli-validation-runtime-outcome-v1", "runtime settings runtime outcome IAU id");
+requireEqual(runtimeSettingsRuntimeOutcomeIau.state, "admitted", "runtime settings runtime outcome IAU state");
+requireEqual(runtimeSettingsRuntimeOutcomeIau.parentSliceId, runtimeSettingsRuntimeOutcomeSliceId, "runtime settings runtime outcome IAU parentSliceId");
+requireArrayEqual(runtimeSettingsRuntimeOutcomeIau.admittedTasks, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings runtime outcome IAU admittedTasks");
+requireArrayEqual(runtimeSettingsRuntimeOutcomeIau.blockedTasks, ["T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025"], "runtime settings runtime outcome IAU blockedTasks");
+requireEqual(runtimeSettingsRuntimeOutcomeIau.implementationSharing, "none", "runtime settings runtime outcome IAU implementationSharing");
+requireMarketplacePosture(runtimeSettingsRuntimeOutcomeIau, "runtime settings runtime outcome IAU");
+requireEqual(runtimeSettingsRuntimeOutcomeIau.preImplementationPreflight?.status, "pass", "runtime settings runtime outcome IAU preImplementationPreflight status");
+requireEqual(runtimeSettingsRuntimeOutcomeIau.preImplementationPreflight?.record, "IAU-runtime-settings-cli-validation-runtime-outcome-v1-preflight-v1.json", "runtime settings runtime outcome IAU preImplementationPreflight record");
+requireEqual(runtimeSettingsRuntimeOutcomeIau.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings runtime outcome IAU preImplementationPreflight implementationStartAllowed");
+requireFile(`docs/requirements/admissions/${runtimeSettingsRuntimeOutcomeSliceId}/IAU-runtime-settings-cli-validation-runtime-outcome-v1.md`);
+
+const runtimeSettingsRuntimeOutcomePreflight = readJson(runtimeSettingsRuntimeOutcomePreflightPath);
+requireEqual(runtimeSettingsRuntimeOutcomePreflight.schema, "vi-history/implementation-admission-unit-preflight@v1", "runtime settings runtime outcome preflight schema");
+requireEqual(runtimeSettingsRuntimeOutcomePreflight.iauId, "IAU-runtime-settings-cli-validation-runtime-outcome-v1", "runtime settings runtime outcome preflight iauId");
+requireEqual(runtimeSettingsRuntimeOutcomePreflight.status, "pass", "runtime settings runtime outcome preflight status");
+requireEqual(runtimeSettingsRuntimeOutcomePreflight.implementationStartAllowed, true, "runtime settings runtime outcome preflight implementationStartAllowed");
+requireEqual(runtimeSettingsRuntimeOutcomePreflight.parentSliceId, runtimeSettingsRuntimeOutcomeSliceId, "runtime settings runtime outcome preflight parentSliceId");
+requireEqual(runtimeSettingsRuntimeOutcomePreflight.implementationSharing, "none", "runtime settings runtime outcome preflight implementationSharing");
+requireMarketplacePosture(runtimeSettingsRuntimeOutcomePreflight, "runtime settings runtime outcome preflight");
+requireArrayEqual(runtimeSettingsRuntimeOutcomePreflight.implementationStartScope, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "runtime settings runtime outcome preflight implementationStartScope");
+if (!Array.isArray(runtimeSettingsRuntimeOutcomePreflight.checkResults) || runtimeSettingsRuntimeOutcomePreflight.checkResults.length !== runtimeSettingsRuntimeOutcomePreflight.requiredChecks.length) {
+  failures.push("runtime settings runtime outcome preflight checkResults: must match requiredChecks length");
+} else {
+  for (const result of runtimeSettingsRuntimeOutcomePreflight.checkResults) {
+    requireEqual(result.status, "pass", `runtime settings runtime outcome preflight check result ${result.check}`);
+  }
+}
+requireFile(`docs/requirements/admissions/${runtimeSettingsRuntimeOutcomeSliceId}/IAU-runtime-settings-cli-validation-runtime-outcome-v1-preflight-v1.md`);
+
+const runtimeSettingsRuntimeOutcomeManifest = readJson(`${runtimeSettingsRuntimeOutcomeImportDir}/manifest.json`);
+requireEqual(runtimeSettingsRuntimeOutcomeManifest.schema, "vi-history/requirements-import@v1", "runtime settings runtime outcome manifest schema");
+requireEqual(runtimeSettingsRuntimeOutcomeManifest.sliceId, runtimeSettingsRuntimeOutcomeSliceId, "runtime settings runtime outcome sliceId");
+requireEqual(runtimeSettingsRuntimeOutcomeManifest.sourceBaselineTag, "v1.3.16", "runtime settings runtime outcome sourceBaselineTag");
+requireEqual(runtimeSettingsRuntimeOutcomeManifest.sourceCommit, "567157f4a77536c4efa07ba72eea3314083ccde2", "runtime settings runtime outcome sourceCommit");
+requireEqual(runtimeSettingsRuntimeOutcomeManifest.governedAdmissionCommit, "263e378a3781e2122d7f850998c4c07e2786078a", "runtime settings runtime outcome governedAdmissionCommit");
+requireEqual(runtimeSettingsRuntimeOutcomeManifest.targetProduct, "vi-history", "runtime settings runtime outcome targetProduct");
+requireEqual(runtimeSettingsRuntimeOutcomeManifest.targetFeature, runtimeSettingsRuntimeOutcomeSliceId, "runtime settings runtime outcome targetFeature");
+requireEqual(runtimeSettingsRuntimeOutcomeManifest.redactionStatus, "pass", "runtime settings runtime outcome redactionStatus");
+requireEqual(runtimeSettingsRuntimeOutcomeManifest.implementationSharing, "none", "runtime settings runtime outcome implementationSharing");
+requireEqual(runtimeSettingsRuntimeOutcomeManifest.marketplacePublication, "disabled-until-later-adr", "runtime settings runtime outcome marketplacePublication");
+requireArrayEqual(runtimeSettingsRuntimeOutcomeManifest.importedRequirementIds, runtimeSettingsRuntimeOutcomeExpectedIds, "runtime settings runtime outcome importedRequirementIds");
+requireArrayEqual(runtimeSettingsRuntimeOutcomeManifest.prerequisiteRequirementIds, ["VHS-REQ-537", "VHS-REQ-543", "VHS-REQ-544", "VHS-REQ-545"], "runtime settings runtime outcome prerequisiteRequirementIds");
+requireArrayEqual(runtimeSettingsRuntimeOutcomeManifest.supportingTestIds, ["TEST-UNIT-392"], "runtime settings runtime outcome supportingTestIds");
+requireEqual(runtimeSettingsRuntimeOutcomeManifest.contractName, "createRuntimeSettingsValidationRuntimeOutcome", "runtime settings runtime outcome contractName");
+requireArrayEqual(runtimeSettingsRuntimeOutcomeManifest.files, ["syrs.md", "srs.md", "rtm.csv", "test-plan.md"], "runtime settings runtime outcome manifest files");
+
+for (const file of runtimeSettingsRuntimeOutcomeManifest.files ?? []) {
+  requireFile(`${runtimeSettingsRuntimeOutcomeImportDir}/${file}`);
+}
+
+for (const file of ["spec.md", "plan.md", "tasks.md"]) {
+  requireFile(`${runtimeSettingsRuntimeOutcomeFeatureDir}/${file}`);
+}
+
+requireTextIncludes(`${runtimeSettingsRuntimeOutcomeFeatureDir}/spec.md`, [
+  "Runtime Settings CLI Validation Runtime Outcome Facts",
+  "VHS-REQ-546",
+  "TEST-UNIT-392",
+  "IAU-runtime-settings-cli-validation-runtime-outcome-v1",
+  "createRuntimeSettingsValidationRuntimeOutcome",
+  "runtime-settings-cli-validation-runtime-outcome-contract",
+  "runtimeOutcome",
+  "clean-room"
+]);
+requireTextIncludes(`${runtimeSettingsRuntimeOutcomeFeatureDir}/plan.md`, [
+  "IAU-runtime-settings-cli-validation-runtime-outcome-v1",
+  "Issue #89",
+  "Marketplace publication remains disabled"
+]);
+requireTextIncludes(`${runtimeSettingsRuntimeOutcomeFeatureDir}/tasks.md`, [
+  "Issue #89",
+  "Implementation handoff issue",
+  "- [x] T001",
+  "- [x] T008",
+  "- [ ] T009",
+  "- [ ] T016",
+  "IAU-runtime-settings-cli-validation-runtime-outcome-v1",
+  "[BLOCKED]",
+  "T025"
+]);
+requireTextIncludes(`${runtimeSettingsRuntimeOutcomeImportDir}/rtm.csv`, runtimeSettingsRuntimeOutcomeExpectedIds);
+requireTextIncludes(`${runtimeSettingsRuntimeOutcomeImportDir}/srs.md`, [
+  "VHS-REQ-546",
+  "TEST-UNIT-392",
+  "runtimeValidationOutcome",
+  "runtimeImplementationStatus",
+  "VIHS_E_RUNTIME_VALIDATION_BLOCKED"
+]);
+requireTextIncludes(`${runtimeSettingsRuntimeOutcomeImportDir}/test-plan.md`, [
+  "TEST-UNIT-RSRUNTIMEOUTCOME-001",
+  "TEST-UNIT-RSRUNTIMEOUTCOME-006",
+  "runtimeOutcome",
+  "source-copying side effects remain blocked"
+]);
+requireTextIncludes("README.md", [
+  "runtime-settings-cli-validation-runtime-outcome-v1",
+  "docs/requirements/admissions/runtime-settings-cli-validation-runtime-outcome-v1.json",
+  "Issue #89",
+  "IAU-runtime-settings-cli-validation-runtime-outcome-v1",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-runtime-outcome-v1`.",
+  "createRuntimeSettingsValidationRuntimeOutcome(input = {})",
+  "validation fact generation beyond supplied\nruntime outcome fact shaping"
+]);
+requireTextIncludes("AGENTS.md", [
+  "runtime-settings-cli-validation-runtime-outcome-v1",
+  "Issue #89",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-runtime-outcome-v1`.",
+  "IAU-runtime-settings-cli-validation-runtime-outcome-v1",
+  "016-runtime-settings-cli-validation-runtime-outcome-v1"
+]);
+requireTextIncludes("docs/development/copilot-workflow.md", [
+  "runtime-settings-cli-validation-runtime-outcome-v1",
+  "Issue #89",
+  "IAU-runtime-settings-cli-validation-runtime-outcome-v1",
+  "pure runtime outcome fact\nshaping",
+  "runtime locator invocation or OS inspection"
 ]);
 
 if (failures.length > 0) {

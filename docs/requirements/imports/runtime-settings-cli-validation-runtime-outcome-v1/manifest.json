@@ -1,0 +1,32 @@
+{
+  "schema": "vi-history/requirements-import@v1",
+  "sliceId": "runtime-settings-cli-validation-runtime-outcome-v1",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "567157f4a77536c4efa07ba72eea3314083ccde2",
+  "governedAdmissionCommit": "263e378a3781e2122d7f850998c4c07e2786078a",
+  "targetProduct": "vi-history",
+  "targetFeature": "runtime-settings-cli-validation-runtime-outcome-v1",
+  "specKitPath": ".specify/specs/runtime-settings-cli-validation-runtime-outcome-v1",
+  "redactionStatus": "pass",
+  "implementationSharing": "none",
+  "marketplacePublication": "disabled-until-later-adr",
+  "importedRequirementIds": [
+    "VHS-REQ-546"
+  ],
+  "prerequisiteRequirementIds": [
+    "VHS-REQ-537",
+    "VHS-REQ-543",
+    "VHS-REQ-544",
+    "VHS-REQ-545"
+  ],
+  "supportingTestIds": [
+    "TEST-UNIT-392"
+  ],
+  "contractName": "createRuntimeSettingsValidationRuntimeOutcome",
+  "files": [
+    "syrs.md",
+    "srs.md",
+    "rtm.csv",
+    "test-plan.md"
+  ]
+}
