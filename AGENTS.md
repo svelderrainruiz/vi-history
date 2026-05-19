@@ -233,6 +233,31 @@ raw terminal process wiring, live-session proof, file writes, package/bin
 publication, launcher/profile mutation, release automation, Marketplace
 publication, and source copying remain blocked.
 
+`runtime-settings-cli-validation-host-runtime-observation-adapter-v1` admits
+`IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1` for
+Issue #130 and T009-T016 only. Issue #130 is an admission issue and must not be
+reused for implementation. Implementation must use a separate handoff issue
+after the admission PR merges. The admitted IAU is a pure
+`createRuntimeSettingsValidationHostRuntimeObservation(input = {})` facts
+contract over public-safe selected host facts and supplied bounded observation
+dependencies. It may derive public-safe observation facts for
+`createRuntimeSettingsValidationHostRuntimeDiscovery(input = {})` and the
+existing validation command chain without changing output shapes. Raw private
+path disclosure, raw registry output retention, arbitrary filesystem walking
+beyond the admitted bounded observation policy, PATH probing, environment
+probing, existing compare runtime locator reuse, runtime validation execution,
+compare execution, LabVIEWCLI execution, Docker execution or orchestration,
+raw terminal process wiring, live-session proof, proof-out expansion, file
+writes, package/bin publication, launcher/profile mutation, release
+automation, Marketplace publication, and source copying remain blocked.
+
+Current Implementation Admission Unit:
+`IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1`.
+
+Issue #130 admission temporarily sets the current IAU to
+`IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1`.
+Before Issue #130 admission, the host runtime discovery closeout recorded:
+
 Current Implementation Admission Unit:
 `none`.
 
@@ -273,6 +298,8 @@ SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-validation-host-ru
 .specify/scripts/bash/check-prerequisites.sh --json --paths-only
 ```
 
+The current host runtime observation adapter feature uses
+`022-runtime-settings-cli-validation-host-runtime-observation-adapter-v1`.
 The previous host preflight command-composition feature used
 `020-runtime-settings-cli-validation-host-preflight-command-composition-v1`.
 The previous host runtime preflight feature used
