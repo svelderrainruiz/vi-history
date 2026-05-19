@@ -53,17 +53,17 @@ runtime execution.
 
 **Implementation handoff issue**: not created yet.
 
-- [ ] T009 Add tests proving a materialized `vihs` terminal entrypoint is
+- [x] T009 Add tests proving a materialized `vihs` terminal entrypoint is
   represented without hidden path reconstruction, profile editing, admin
   elevation, machine-wide install doctrine, or a prebuilt external CLI payload.
-- [ ] T010 Add tests proving supported terminal-session admission records stay
+- [x] T010 Add tests proving supported terminal-session admission records stay
   user-scoped and expose the intended entrypoint state.
-- [ ] T011 Add tests proving runtime lookup and recovery facts prefer the
+- [x] T011 Add tests proving runtime lookup and recovery facts prefer the
   standard VS Code runtime on Windows before global Node fallback or explicit
   override.
-- [ ] T012 Add tests proving stale or missing launchers fail closed with one
+- [x] T012 Add tests proving stale or missing launchers fail closed with one
   stable actionable recovery instruction.
-- [ ] T013 Implement the minimum public MIT materialized-entrypoint contract as
+- [x] T013 Implement the minimum public MIT materialized-entrypoint contract as
   pure command-surface facts and command plans.
 
 ---

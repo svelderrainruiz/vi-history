@@ -2,9 +2,17 @@
   "schema": "vi-history/implementation-admission-unit@v1",
   "iauId": "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
   "createdDate": "2026-05-18",
-  "state": "implementation-admitted",
+  "state": "implemented",
   "parentSliceId": "runtime-settings-cli-terminal-entrypoint-v1",
   "specFeature": ".specify/specs/runtime-settings-cli-terminal-entrypoint-v1",
+  "issue": {
+    "number": 65,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/65"
+  },
+  "implementationHandoffIssue": {
+    "number": 67,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/67"
+  },
   "admittedTasks": [
     "T009",
     "T010",
@@ -51,6 +59,23 @@
     "record": "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1-preflight-v1.json",
     "implementationStartAllowed": true
   },
-  "implementationHandoffIssue": null,
-  "implementationCloseout": null
+  "implementationCloseout": {
+    "status": "pass",
+    "issue": 67,
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011",
+      "T012",
+      "T013"
+    ],
+    "blockedScopeRetained": [
+      "T014",
+      "T015",
+      "T016",
+      "T017",
+      "T018",
+      "T019"
+    ]
+  }
 }

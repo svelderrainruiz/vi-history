@@ -91,11 +91,42 @@ export const RUNTIME_SETTINGS_INTERACTIVE_SELECTION_BLOCKED_SIDE_EFFECTS = Objec
   marketplace: false
 });
 
+export const RUNTIME_SETTINGS_CLI_TERMINAL_ENTRYPOINT_REQUIREMENTS = Object.freeze({
+  materializationFacts: Object.freeze(["VHS-REQ-537"]),
+  admissionScope: Object.freeze(["VHS-REQ-537"]),
+  runtimeLookup: Object.freeze(["VHS-REQ-544"]),
+  failClosed: Object.freeze(["VHS-REQ-544"]),
+  discoverability: Object.freeze(["VHS-REQ-545"]),
+  validationHandoff: Object.freeze(["VHS-REQ-546"])
+});
+
+export const RUNTIME_SETTINGS_TERMINAL_ENTRYPOINT_BLOCKED_SIDE_EFFECTS = Object.freeze({
+  terminalPromptLoop: false,
+  stdinHandling: false,
+  runtimeExecution: false,
+  profileEditing: false,
+  adminElevation: false,
+  machineWideInstall: false,
+  settingsMutation: false,
+  compareExecution: false,
+  labviewCli: false,
+  dockerExecution: false,
+  liveSessionProof: false,
+  packaging: false,
+  marketplace: false
+});
+
 const RUNTIME_SETTINGS_VALIDATION_PROOF_SCHEMA = "vi-history/runtime-settings-validation-proof@v1";
 const RUNTIME_SETTINGS_VALIDATION_PROOF_COMMAND = "vihs --validate --proof-out";
 const RUNTIME_SETTINGS_INTERACTIVE_SELECTION_COMMAND = "vihs";
 const RUNTIME_SETTINGS_VALIDATION_COMMAND = "vihs --validate";
 const MIT_PUBLIC_AUTHORITY = "svelderrainruiz/vi-history";
+const TERMINAL_ENTRYPOINT_COMMAND = "vihs";
+const TERMINAL_ENTRYPOINT_ADMISSION_SCOPE = "user";
+const TERMINAL_ENTRYPOINT_RECOVERY_INSTRUCTION = "Run `vihs prepare` to restore the local runtime settings CLI launcher.";
+const TERMINAL_ENTRYPOINT_RECOVERY_COMMAND = "vihs prepare";
+const TERMINAL_ENTRYPOINT_RUNTIME_LOOKUP_ORDER_WINDOWS = Object.freeze(["vscode-runtime", "global-node", "explicit-override"]);
+const TERMINAL_ENTRYPOINT_RUNTIME_LOOKUP_ORDER_OTHER = Object.freeze(["global-node", "explicit-override"]);
 
 export function allRuntimeSettingsCliSettingsWriteRequirementIds() {
   return Object.freeze(
@@ -131,6 +162,45 @@ export function allRuntimeSettingsCliInteractiveSelectionRequirementIds() {
       .filter((value, index, values) => values.indexOf(value) === index)
       .sort()
   );
+}
+
+export function allRuntimeSettingsCliTerminalEntrypointRequirementIds() {
+  return Object.freeze(
+    Object.values(RUNTIME_SETTINGS_CLI_TERMINAL_ENTRYPOINT_REQUIREMENTS)
+      .flat()
+      .filter((value, index, values) => values.indexOf(value) === index)
+      .sort()
+  );
+}
+
+export function createRuntimeSettingsTerminalEntrypoint(input = {}) {
+  const launcherState = normalizeLauncherState(input.launcher?.launcherState ?? input.launcherState);
+
+  if (launcherState === "missing" || launcherState === "stale") {
+    return terminalEntrypointBlockedResult({
+      blockedReason: launcherState === "missing" ? "launcher-missing" : "launcher-stale"
+    });
+  }
+
+  const platform = normalizePlatform(input.platform ?? "windows");
+  const runtimeLookupFacts = resolveRuntimeLookupFacts(input.runtimeLookup ?? {}, platform);
+  const terminalSession = normalizeTerminalSession(input.terminalSession);
+  const discoverability = createDiscoverabilityFacts(input.currentBundle ?? input.bundle ?? null, platform);
+
+  return freezeRecord({
+    status: "ready",
+    type: "runtime-settings-cli-terminal-entrypoint-contract",
+    command: TERMINAL_ENTRYPOINT_COMMAND,
+    admissionScope: TERMINAL_ENTRYPOINT_ADMISSION_SCOPE,
+    materializationState: "materialized",
+    terminalSession,
+    runtimeLookup: runtimeLookupFacts,
+    recoveryInstruction: null,
+    discoverability,
+    validationHandoff: createTerminalValidationHandoff(),
+    blockedSideEffects: RUNTIME_SETTINGS_TERMINAL_ENTRYPOINT_BLOCKED_SIDE_EFFECTS,
+    requirementIds: allRuntimeSettingsCliTerminalEntrypointRequirementIds()
+  });
 }
 
 export function writeRuntimeSettingsFacts(input = {}) {
@@ -592,6 +662,125 @@ function isConfirmationAccepted(value) {
     return false;
   }
   return ["accept", "accepted", "confirm", "confirmed", "enter"].includes(value.trim().toLowerCase());
+}
+
+function terminalEntrypointBlockedResult({ blockedReason }) {
+  return freezeRecord({
+    status: "blocked",
+    type: "runtime-settings-cli-terminal-entrypoint-contract",
+    command: TERMINAL_ENTRYPOINT_COMMAND,
+    admissionScope: TERMINAL_ENTRYPOINT_ADMISSION_SCOPE,
+    materializationState: "blocked",
+    blockedReason,
+    recoveryInstruction: TERMINAL_ENTRYPOINT_RECOVERY_INSTRUCTION,
+    recoveryCommand: TERMINAL_ENTRYPOINT_RECOVERY_COMMAND,
+    discoverability: null,
+    validationHandoff: createTerminalValidationHandoff(),
+    blockedSideEffects: RUNTIME_SETTINGS_TERMINAL_ENTRYPOINT_BLOCKED_SIDE_EFFECTS,
+    requirementIds: allRuntimeSettingsCliTerminalEntrypointRequirementIds()
+  });
+}
+
+function normalizeLauncherState(value) {
+  const normalized = normalizeFact(value);
+  if (!normalized) {
+    return "present";
+  }
+  const lower = normalized.toLowerCase();
+  if (lower === "missing") {
+    return "missing";
+  }
+  if (lower === "stale") {
+    return "stale";
+  }
+  return "present";
+}
+
+function resolveRuntimeLookupFacts(lookup, platform) {
+  const isWindows = platform === "windows";
+  const order = isWindows ? TERMINAL_ENTRYPOINT_RUNTIME_LOOKUP_ORDER_WINDOWS : TERMINAL_ENTRYPOINT_RUNTIME_LOOKUP_ORDER_OTHER;
+  const vscodeAvailable = lookup.vscodeRuntimeAvailable === true;
+  const globalNodeAvailable = lookup.globalNodeAvailable === true;
+  const explicitOverride = normalizeFact(lookup.explicitOverride ?? lookup.override);
+
+  let activeRuntime = null;
+  if (isWindows && vscodeAvailable) {
+    activeRuntime = "vscode-runtime";
+  } else if (globalNodeAvailable) {
+    activeRuntime = "global-node";
+  } else if (explicitOverride) {
+    activeRuntime = "explicit-override";
+  }
+
+  return freezeRecord({
+    platform,
+    order,
+    activeRuntime,
+    vscodeRuntimeAvailable: vscodeAvailable,
+    globalNodeAvailable,
+    overrideActive: Boolean(explicitOverride),
+    explicitOverride: explicitOverride ?? null
+  });
+}
+
+function normalizeTerminalSession(session) {
+  if (!session) {
+    return Object.freeze({
+      admitted: true,
+      scope: "user"
+    });
+  }
+  return Object.freeze({
+    admitted: session.admitted !== false,
+    scope: normalizeFact(session.scope) ?? "user"
+  });
+}
+
+function createDiscoverabilityFacts(bundle, platform) {
+  if (!bundle) {
+    return freezeRecord({
+      currentBundle: null,
+      copyableNextCommands: [
+        RUNTIME_SETTINGS_VALIDATION_COMMAND
+      ],
+      promptLoopBound: false
+    });
+  }
+
+  const normalizedBundle = normalizeInteractiveSelection({
+    runtimeProvider: bundle.runtimeProvider ?? bundle.provider,
+    platform: bundle.platform ?? platform,
+    labviewVersion: bundle.labviewVersion ?? bundle.version,
+    labviewBitness: bundle.labviewBitness ?? bundle.bitness
+  });
+
+  if (!normalizedBundle) {
+    return freezeRecord({
+      currentBundle: null,
+      copyableNextCommands: [
+        RUNTIME_SETTINGS_VALIDATION_COMMAND
+      ],
+      promptLoopBound: false
+    });
+  }
+
+  return freezeRecord({
+    currentBundle: normalizedBundle,
+    copyableNextCommands: [
+      createSetRuntimeCommand(normalizedBundle),
+      RUNTIME_SETTINGS_VALIDATION_COMMAND
+    ],
+    promptLoopBound: false
+  });
+}
+
+function createTerminalValidationHandoff() {
+  return Object.freeze({
+    command: RUNTIME_SETTINGS_VALIDATION_COMMAND,
+    contract: "runtime-settings-cli-validation-readback-contract",
+    executionBound: false,
+    proofOutBound: false
+  });
 }
 
 function blockedResult({ blockedReason, effectiveSettingsTarget }) {
