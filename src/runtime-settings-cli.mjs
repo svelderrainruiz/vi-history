@@ -47,6 +47,14 @@ export const RUNTIME_SETTINGS_CLI_VALIDATION_PROOF_OUT_FILE_EMISSION_REQUIREMENT
   blockedSideEffects: Object.freeze(["VHS-REQ-546"])
 });
 
+export const RUNTIME_SETTINGS_CLI_VALIDATION_COMMAND_REQUIREMENTS = Object.freeze({
+  commandContract: Object.freeze(["VHS-REQ-546"]),
+  validateOnlyComposition: Object.freeze(["VHS-REQ-546"]),
+  proofOutComposition: Object.freeze(["VHS-REQ-546"]),
+  failClosed: Object.freeze(["VHS-REQ-546"]),
+  blockedSideEffects: Object.freeze(["VHS-REQ-546"])
+});
+
 export const RUNTIME_SETTINGS_CLI_INTERACTIVE_SELECTION_REQUIREMENTS = Object.freeze({
   defaultSelection: Object.freeze(["VHS-REQ-545"]),
   currentBundle: Object.freeze(["VHS-REQ-545"]),
@@ -159,6 +167,26 @@ export const RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_FILE_EMISSION_BLOCKED_SIDE_EF
   marketplace: false,
   sourceCopying: false,
   extraFileSystemWrites: false
+});
+
+export const RUNTIME_SETTINGS_VALIDATION_COMMAND_BLOCKED_SIDE_EFFECTS = Object.freeze({
+  osInspection: false,
+  runtimeLocator: false,
+  privatePathDiscovery: false,
+  runtimeValidation: false,
+  runtimeExecution: false,
+  compareExecution: false,
+  labviewCli: false,
+  dockerExecution: false,
+  dockerOrchestration: false,
+  rawTerminalProcessWiring: false,
+  liveTerminalProof: false,
+  packageBinPublication: false,
+  launcherProfileMutation: false,
+  releaseAutomation: false,
+  marketplace: false,
+  sourceCopying: false,
+  validatePlanOnly: false
 });
 
 export const RUNTIME_SETTINGS_INTERACTIVE_SELECTION_BLOCKED_SIDE_EFFECTS = Object.freeze({
@@ -317,6 +345,15 @@ export function allRuntimeSettingsCliValidationProofOutRequirementIds() {
 export function allRuntimeSettingsCliValidationProofOutFileEmissionRequirementIds() {
   return Object.freeze(
     Object.values(RUNTIME_SETTINGS_CLI_VALIDATION_PROOF_OUT_FILE_EMISSION_REQUIREMENTS)
+      .flat()
+      .filter((value, index, values) => values.indexOf(value) === index)
+      .sort()
+  );
+}
+
+export function allRuntimeSettingsCliValidationCommandRequirementIds() {
+  return Object.freeze(
+    Object.values(RUNTIME_SETTINGS_CLI_VALIDATION_COMMAND_REQUIREMENTS)
       .flat()
       .filter((value, index, values) => values.indexOf(value) === index)
       .sort()
@@ -839,6 +876,87 @@ export async function writeRuntimeSettingsValidationProofOutFiles(input = {}) {
     partialWrite: false,
     blockedSideEffects: RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_FILE_EMISSION_BLOCKED_SIDE_EFFECTS,
     requirementIds: allRuntimeSettingsCliValidationProofOutFileEmissionRequirementIds()
+  });
+}
+
+export async function createRuntimeSettingsValidationCommandResult(input = {}) {
+  const request = normalizeValidationCommandRequest(input);
+  if (!request.ok) {
+    return validationCommandContractResult({
+      status: "blocked",
+      requestMode: request.requestMode ?? "validate-only",
+      blockedReason: request.blockedReason
+    });
+  }
+
+  const runtimeOutcomeResult = createRuntimeSettingsValidationRuntimeOutcome({
+    runtimeSelection: input.runtimeSelection
+      ?? input.selection
+      ?? input.runtimeFacts
+      ?? input.runtime
+  });
+  const validation = readRuntimeSettingsValidation({
+    settingsContent: input.settingsContent,
+    settings: input.settings,
+    target: input.target,
+    effectiveSettingsTarget: input.effectiveSettingsTarget,
+    runtimeOutcome: runtimeOutcomeResult.runtimeOutcome
+  });
+
+  if (validation.status !== "ready") {
+    return validationCommandContractResult({
+      status: "blocked",
+      requestMode: request.value.requestMode,
+      blockedReason: validation.blockedReason ?? validation.runtime?.runtimeBlockedReason,
+      validation
+    });
+  }
+
+  if (!request.value.proofOut) {
+    return validationCommandContractResult({
+      status: "ready",
+      requestMode: "validate-only",
+      validation
+    });
+  }
+
+  const proofOutAdapter = createRuntimeSettingsValidationProofOutAdapter({
+    proofOut: request.value.proofOut,
+    validation,
+    environment: input.environment ?? input.environmentFacts ?? {}
+  });
+
+  if (proofOutAdapter.status !== "ready") {
+    return validationCommandContractResult({
+      status: "blocked",
+      requestMode: "validate-with-proof-out-blocked",
+      blockedReason: proofOutAdapter.blockedReason,
+      validation,
+      proofOut: proofOutAdapter
+    });
+  }
+
+  const proofOutResult = await writeRuntimeSettingsValidationProofOutFiles({
+    proofOutAdapter,
+    baseDirectory: input.baseDirectory,
+    fileSystem: input.fileSystem ?? input.fs
+  });
+
+  if (proofOutResult.status !== "ready") {
+    return validationCommandContractResult({
+      status: "blocked",
+      requestMode: "validate-with-proof-out-blocked",
+      blockedReason: proofOutResult.blockedReason,
+      validation,
+      proofOut: proofOutResult
+    });
+  }
+
+  return validationCommandContractResult({
+    status: "ready",
+    requestMode: "validate-with-proof-out-ready",
+    validation,
+    proofOut: proofOutResult
   });
 }
 
@@ -1903,6 +2021,49 @@ function resolveValidationProofOutArtifact(input = {}) {
   return normalizeProvidedValidationProofOutArtifact(artifact);
 }
 
+function normalizeValidationCommandRequest(input = {}) {
+  const requestedMode = normalizeFact(input.requestMode ?? input.mode);
+  if (requestedMode === "validate-plan-only") {
+    return {
+      ok: false,
+      blockedReason: "validate-plan-only-not-admitted",
+      requestMode: "validate-plan-only"
+    };
+  }
+
+  if (requestedMode && requestedMode !== "validate-only" && requestedMode !== "validate-with-proof-out") {
+    return {
+      ok: false,
+      blockedReason: "unsupported-validation-command-request-mode",
+      requestMode: requestedMode
+    };
+  }
+
+  const proofOut = normalizeFact(
+    input.proofOut
+      ?? input.proofOutTarget
+      ?? input.request?.proofOut
+      ?? input.request?.proofOutTarget
+  );
+
+  if (requestedMode === "validate-with-proof-out" && !proofOut) {
+    return {
+      ok: false,
+      blockedReason: "missing-proof-out-target",
+      requestMode: requestedMode
+    };
+  }
+
+  return {
+    ok: true,
+    value: freezeRecord({
+      command: RUNTIME_SETTINGS_VALIDATION_COMMAND,
+      requestMode: proofOut ? "validate-with-proof-out" : "validate-only",
+      proofOut
+    })
+  };
+}
+
 function normalizeProvidedValidationProofOutArtifact(artifact) {
   const issueBody = typeof artifact.issueBody === "string"
     ? artifact.issueBody
@@ -1964,6 +2125,53 @@ function createValidationProofOutGuidance(target = null) {
     copyableCommands: [
       `${RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_COMMAND} ${targetIdentifier}`
     ]
+  });
+}
+
+function createValidationCommandGuidance({ requestMode, proofOut } = {}) {
+  const copyableCommand = requestMode === "validate-with-proof-out"
+    ? `${RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_COMMAND} ${proofOut ?? "<dir>"}`
+    : RUNTIME_SETTINGS_VALIDATION_COMMAND;
+  return freezeRecord({
+    nonInteractive: true,
+    promptWait: false,
+    copyableCommands: [copyableCommand]
+  });
+}
+
+function validationCommandContractResult({
+  status,
+  requestMode,
+  blockedReason = null,
+  validation = null,
+  proofOut = null
+}) {
+  const publicSafeProofOut = proofOut?.proofOutTarget?.publicSafe === true
+    ? proofOut.proofOutTarget.identifier
+    : null;
+  const guidance = createValidationCommandGuidance({
+    requestMode: requestMode?.startsWith("validate-with-proof-out") ? "validate-with-proof-out" : "validate-only",
+    proofOut: publicSafeProofOut
+  });
+  return freezeRecord({
+    status,
+    type: "runtime-settings-cli-validation-command-contract",
+    command: RUNTIME_SETTINGS_VALIDATION_COMMAND,
+    requestMode,
+    blockedReason,
+    validationStatus: validation?.status ?? (status === "ready" ? "ready" : "blocked"),
+    validation,
+    effectiveSettingsTarget: validation?.effectiveSettingsTarget ?? null,
+    persistedSettings: validation?.persistedSettings ?? null,
+    runtimeOutcome: validation?.runtime ?? null,
+    proofOut,
+    guidance,
+    copyableGuidance: guidance.copyableCommands,
+    promptWait: false,
+    artifactWrites: proofOut?.artifactWrites ?? false,
+    partialWrite: proofOut?.partialWrite ?? false,
+    blockedSideEffects: RUNTIME_SETTINGS_VALIDATION_COMMAND_BLOCKED_SIDE_EFFECTS,
+    requirementIds: allRuntimeSettingsCliValidationCommandRequirementIds()
   });
 }
 
