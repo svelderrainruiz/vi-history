@@ -187,6 +187,17 @@ Read these before changing code:
 - `docs/requirements/admissions/runtime-settings-cli-validation-command-contract-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-command-contract-v1/IAU-runtime-settings-cli-validation-command-contract-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-command-contract-v1/IAU-runtime-settings-cli-validation-command-contract-v1-preflight-v1.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-plan-only-v1/manifest.json`
+- `docs/requirements/imports/runtime-settings-cli-validation-plan-only-v1/syrs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-plan-only-v1/srs.md`
+- `docs/requirements/imports/runtime-settings-cli-validation-plan-only-v1/rtm.csv`
+- `docs/requirements/imports/runtime-settings-cli-validation-plan-only-v1/test-plan.md`
+- `.specify/specs/runtime-settings-cli-validation-plan-only-v1/spec.md`
+- `.specify/specs/runtime-settings-cli-validation-plan-only-v1/plan.md`
+- `.specify/specs/runtime-settings-cli-validation-plan-only-v1/tasks.md`
+- `docs/requirements/admissions/runtime-settings-cli-validation-plan-only-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-plan-only-v1/IAU-runtime-settings-cli-validation-plan-only-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-plan-only-v1/IAU-runtime-settings-cli-validation-plan-only-v1-preflight-v1.json`
 
 ## Current Status
 
@@ -378,8 +389,20 @@ T009-T018 only. The implemented IAU adds only the pure
 already admitted proof-out file-emission contract. Future work must not execute
 validation, inspect the OS, invoke runtime locators, call LabVIEWCLI, call
 Docker, wire raw terminal processes, publish packages, mutate launcher/profile
-state, implement `validate-plan-only`, or copy source without a separate
-public admission.
+state, or copy source. `validate-plan-only` remained blocked for that IAU and
+is admitted separately by Issue #99.
+
+Issue #99 imports `runtime-settings-cli-validation-plan-only-v1` and admits
+`IAU-runtime-settings-cli-validation-plan-only-v1` for T009-T016 only. Issue
+#99 is an admission issue and must not be reused for implementation. The
+admitted IAU adds only a pure `validate-plan-only` branch over
+`createRuntimeSettingsValidationCommandResult(input = {})` that returns
+deterministic proof-out target and artifact planning facts without calling the
+proof-out file-emission writer or writing files. Future work must not execute
+validation, inspect the OS, invoke runtime locators, call LabVIEWCLI, call
+Docker, wire raw terminal processes, publish packages, mutate launcher/profile
+state, write files for plan-only, or copy source without a separate public
+admission.
 
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.
@@ -405,6 +428,8 @@ Do not implement these without a separate bridge admission:
   from supplied public-safe runtime selection facts
 - runtime settings CLI validation command-result behavior beyond the admitted
   pure `vihs --validate` command contract
+- runtime settings CLI validation plan-only behavior beyond the admitted
+  no-write proof-out planning facts branch
 - runtime settings mutation beyond the admitted provider/version/bitness
   settings-write contract
 - validation behavior beyond the admitted pure `vihs --validate` readback
@@ -419,8 +444,8 @@ Do not implement these without a separate bridge admission:
   session/input adapter contract
 - runtime locator invocation or OS inspection beyond the admitted pure runtime
   outcome fact adapter
-- runtime execution, terminal process wiring, or `validate-plan-only` beyond
-  the admitted validation command-result contract
+- runtime execution or terminal process wiring beyond the admitted validation
+  command-result contract
 - proof-out file generation beyond the admitted validation proof-out adapter
   and file-emission IAU
 - live already-running VS Code session uptake proof
