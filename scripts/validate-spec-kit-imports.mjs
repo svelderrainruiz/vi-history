@@ -132,7 +132,14 @@ const runtimeSettingsHostRuntimeObservationImportDir = `docs/requirements/import
 const runtimeSettingsHostRuntimeObservationAdmissionPath = `docs/requirements/admissions/${runtimeSettingsHostRuntimeObservationSliceId}.json`;
 const runtimeSettingsHostRuntimeObservationIauPath = `docs/requirements/admissions/${runtimeSettingsHostRuntimeObservationSliceId}/IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1.json`;
 const runtimeSettingsHostRuntimeObservationPreflightPath = `docs/requirements/admissions/${runtimeSettingsHostRuntimeObservationSliceId}/IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1-preflight-v1.json`;
+const extensionVsixPackagingSliceId = "extension-vsix-packaging-artifact-v1";
+const extensionVsixPackagingFeatureDir = `.specify/specs/${extensionVsixPackagingSliceId}`;
+const extensionVsixPackagingImportDir = `docs/requirements/imports/${extensionVsixPackagingSliceId}`;
+const extensionVsixPackagingAdmissionPath = `docs/requirements/admissions/${extensionVsixPackagingSliceId}.json`;
+const extensionVsixPackagingIauPath = `docs/requirements/admissions/${extensionVsixPackagingSliceId}/IAU-extension-vsix-packaging-artifact-v1.json`;
+const extensionVsixPackagingPreflightPath = `docs/requirements/admissions/${extensionVsixPackagingSliceId}/IAU-extension-vsix-packaging-artifact-v1-preflight-v1.json`;
 const marketplaceAdrPath = "docs/decisions/ADR-001-marketplace-publication-disabled.md";
+const vsixPackagingAdrPath = "docs/decisions/ADR-002-vsix-packaging-artifact-only.md";
 const explicitCompareIauPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1.json`;
 const explicitComparePreflightPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-explicit-compare-v1-preflight-v1.json`;
 const runtimeFactsIauPath = `docs/requirements/admissions/${sliceId}/IAU-runtime-contract-runtime-facts-v1.json`;
@@ -247,6 +254,13 @@ const runtimeSettingsHostRuntimeObservationExpectedIds = [
   "VHS-REQ-546",
   "VHS-REQ-550"
 ];
+const extensionVsixPackagingExpectedIds = [
+  "VHS-REQ-596",
+  "VHS-REQ-597",
+  "VHS-REQ-598",
+  "VHS-REQ-599",
+  "VHS-REQ-600"
+];
 
 const failures = [];
 
@@ -293,6 +307,21 @@ function requireTextIncludes(relativePath, snippets) {
   }
 }
 
+function requireTextExcludes(relativePath, snippets) {
+  const fullPath = path.join(repoRoot, relativePath);
+  if (!fs.existsSync(fullPath)) {
+    failures.push(`${relativePath}: missing`);
+    return;
+  }
+
+  const text = fs.readFileSync(fullPath, "utf8");
+  for (const snippet of snippets) {
+    if (text.includes(snippet)) {
+      failures.push(`${relativePath}: unexpectedly contains ${JSON.stringify(snippet)}`);
+    }
+  }
+}
+
 function requireMarketplacePosture(record, label) {
   requireEqual(record.marketplacePublication, "disabled", `${label} marketplacePublication`);
   requireEqual(record.marketplacePublicationAdr, marketplaceAdrPath, `${label} marketplacePublicationAdr`);
@@ -305,8 +334,15 @@ requireEqual(packageJson.publisher, "svelderrainruiz", "publisher");
 requireEqual(packageJson.version, "0.1.0", "version");
 requireEqual(packageJson.license, "MIT", "license");
 requireEqual(packageJson.private, false, "private");
+requireEqual(packageJson.type, "module", "package type");
+requireEqual(packageJson.main, "./src/extension.mjs", "package main");
+requireEqual(packageJson.engines?.vscode, "^1.95.0", "VS Code engine");
+requireEqual(packageJson.scripts?.["package:vsix"], "node scripts/package-vsix.mjs", "package:vsix script");
+requireEqual(packageJson.scripts?.["inspect:vsix"], "node scripts/inspect-vsix-package.mjs", "inspect:vsix script");
+requireEqual(typeof packageJson.devDependencies?.["@vscode/vsce"], "string", "@vscode/vsce dev dependency");
 requireFile("docs/governance/marketplace-posture.md");
 requireFile(marketplaceAdrPath);
+requireFile(vsixPackagingAdrPath);
 
 const integration = readJson(".specify/integration.json");
 requireEqual(integration.integration, "codex", "Spec Kit integration");
@@ -334,11 +370,12 @@ requireTextIncludes(".specify/memory/constitution.md", [
   "runtime-settings-cli-validation-host-preflight-command-composition-v1",
   "runtime-settings-cli-validation-host-runtime-discovery-v1",
   "runtime-settings-cli-validation-host-runtime-observation-adapter-v1",
-  "**Version**: 0.1.18"
+  "extension-vsix-packaging-artifact-v1",
+  "**Version**: 0.1.19"
 ]);
 
 const featureJson = readJson(".specify/feature.json");
-requireEqual(featureJson.feature_directory, runtimeSettingsHostRuntimeObservationFeatureDir, "pinned Spec Kit feature directory");
+requireEqual(featureJson.feature_directory, extensionVsixPackagingFeatureDir, "pinned Spec Kit feature directory");
 
 const admission = readJson(admissionPath);
 requireEqual(admission.schema, "vi-history/requirements-admission@v1", "admission schema");
@@ -538,25 +575,30 @@ requireTextIncludes(`${featureDir}/plan.md`, [
 requireTextIncludes("README.md", [
   "IAU-installed-user-observation-model-v1",
   "command-activation-surface-v1",
-  "docs/decisions/ADR-001-marketplace-publication-disabled.md",
+  "ADR-002 admits local",
   "docs/governance/marketplace-posture.md"
 ]);
 requireTextIncludes("AGENTS.md", [
-  "Marketplace publication is disabled",
-  "docs/decisions/ADR-001-marketplace-publication-disabled.md",
+  "VSIX packaging is authorized only as a local/CI artifact",
+  "docs/decisions/ADR-002-vsix-packaging-artifact-only.md",
   "IAU-installed-user-observation-model-v1",
   "command-activation-surface-v1"
 ]);
 requireTextIncludes(marketplaceAdrPath, [
   "ADR-001: Marketplace Publication Disabled",
-  "Marketplace publication remains disabled",
-  "Future Marketplace work must"
+  "Marketplace publication is out of scope",
+  "ADR-002 separately admits local/CI VSIX artifact packaging"
+]);
+requireTextIncludes(vsixPackagingAdrPath, [
+  "ADR-002: VSIX Packaging Artifact Only",
+  "local VSIX artifact creation only",
+  "Marketplace publication is out of scope"
 ]);
 requireTextIncludes("docs/governance/marketplace-posture.md", [
-  "remains Marketplace-disabled",
+  "admits local VSIX artifact packaging only",
   "docs/decisions/ADR-001-marketplace-publication-disabled.md",
-  "future ADR",
-  "No publication workflow is admitted"
+  "docs/decisions/ADR-002-vsix-packaging-artifact-only.md",
+  "No Marketplace publication workflow is admitted"
 ]);
 requireTextIncludes(`${featureDir}/tasks.md`, [
   "Issue #4",
@@ -3758,7 +3800,8 @@ requireTextIncludes("AGENTS.md", [
   "IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1",
   "Current Implementation Admission Unit:\n`none`.",
   "createRuntimeSettingsValidationHostRuntimeObservation(input = {})",
-  "022-runtime-settings-cli-validation-host-runtime-observation-adapter-v1"
+  "extension-vsix-packaging-artifact-v1",
+  "022-extension-vsix-packaging-artifact-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-host-runtime-observation-adapter-v1",
@@ -3769,6 +3812,181 @@ requireTextIncludes("docs/development/copilot-workflow.md", [
   "createRuntimeSettingsValidationHostRuntimeObservation(input = {})",
   "bounded public-safe observation facts",
   "Current Implementation Admission Unit:\n`none`."
+]);
+
+const extensionVsixPackagingAdmission = readJson(extensionVsixPackagingAdmissionPath);
+requireEqual(extensionVsixPackagingAdmission.schema, "vi-history/requirements-admission@v1", "extension VSIX packaging admission schema");
+requireEqual(extensionVsixPackagingAdmission.sliceId, extensionVsixPackagingSliceId, "extension VSIX packaging admission sliceId");
+requireEqual(extensionVsixPackagingAdmission.state, "implemented", "extension VSIX packaging admission state");
+requireEqual(extensionVsixPackagingAdmission.targetProduct, "vi-history", "extension VSIX packaging admission targetProduct");
+requireEqual(extensionVsixPackagingAdmission.targetFeature, extensionVsixPackagingSliceId, "extension VSIX packaging admission targetFeature");
+requireEqual(extensionVsixPackagingAdmission.sourceBaselineTag, "v1.3.16", "extension VSIX packaging sourceBaselineTag");
+requireEqual(extensionVsixPackagingAdmission.sourceCommit, "478d80eac94722411e44ef10a1fc00e39d579fdb", "extension VSIX packaging sourceCommit");
+requireEqual(extensionVsixPackagingAdmission.implementationSharing, "none", "extension VSIX packaging implementationSharing");
+requireEqual(extensionVsixPackagingAdmission.vsixPackaging, "local-artifact-only", "extension VSIX packaging mode");
+requireEqual(extensionVsixPackagingAdmission.marketplacePublication, "out-of-scope", "extension VSIX packaging marketplacePublication");
+requireEqual(extensionVsixPackagingAdmission.issue?.number, 137, "extension VSIX packaging issue number");
+requireEqual(extensionVsixPackagingAdmission.implementationHandoffIssue?.number, 136, "extension VSIX packaging implementation handoff issue number");
+requireEqual(extensionVsixPackagingAdmission.implementationPullRequest?.number, 138, "extension VSIX packaging implementation pull request number");
+requireEqual(extensionVsixPackagingAdmission.currentImplementationAdmissionUnit, null, "extension VSIX packaging currentImplementationAdmissionUnit");
+requireArrayEqual(extensionVsixPackagingAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "extension VSIX packaging completedSpecScope");
+requireArrayEqual(extensionVsixPackagingAdmission.completedImplementationScope, ["T009", "T010", "T011", "T012", "T013", "T014"], "extension VSIX packaging completedImplementationScope");
+requireArrayEqual(extensionVsixPackagingAdmission.admittedImplementationScope, [], "extension VSIX packaging admittedImplementationScope");
+requireArrayEqual(extensionVsixPackagingAdmission.blockedImplementationScope, ["T015", "T016"], "extension VSIX packaging blockedImplementationScope");
+requireEqual(extensionVsixPackagingAdmission.preImplementationPreflight?.iauId, "IAU-extension-vsix-packaging-artifact-v1", "extension VSIX packaging preImplementationPreflight iauId");
+requireEqual(extensionVsixPackagingAdmission.preImplementationPreflight?.status, "pass", "extension VSIX packaging preImplementationPreflight status");
+requireEqual(extensionVsixPackagingAdmission.preImplementationPreflight?.implementationStartAllowed, true, "extension VSIX packaging preImplementationPreflight implementationStartAllowed");
+requireEqual(extensionVsixPackagingAdmission.preImplementationPreflight?.record, extensionVsixPackagingPreflightPath, "extension VSIX packaging preImplementationPreflight record");
+requireFile(`docs/requirements/admissions/${extensionVsixPackagingSliceId}.md`);
+
+const extensionVsixPackagingAdmissionUnit = (extensionVsixPackagingAdmission.implementationAdmissionUnits ?? [])
+  .find((unit) => unit?.iauId === "IAU-extension-vsix-packaging-artifact-v1");
+requireEqual(extensionVsixPackagingAdmissionUnit?.state, "implemented", "extension VSIX packaging admission unit state");
+requireEqual(extensionVsixPackagingAdmissionUnit?.preflightRecord, extensionVsixPackagingPreflightPath, "extension VSIX packaging admission unit preflightRecord");
+
+const extensionVsixPackagingIau = readJson(extensionVsixPackagingIauPath);
+requireEqual(extensionVsixPackagingIau.schema, "vi-history/implementation-admission-unit@v1", "extension VSIX packaging IAU schema");
+requireEqual(extensionVsixPackagingIau.iauId, "IAU-extension-vsix-packaging-artifact-v1", "extension VSIX packaging IAU id");
+requireEqual(extensionVsixPackagingIau.state, "implemented", "extension VSIX packaging IAU state");
+requireEqual(extensionVsixPackagingIau.parentSliceId, extensionVsixPackagingSliceId, "extension VSIX packaging IAU parentSliceId");
+requireArrayEqual(extensionVsixPackagingIau.admittedTasks, ["T009", "T010", "T011", "T012", "T013", "T014"], "extension VSIX packaging IAU admittedTasks");
+requireArrayEqual(extensionVsixPackagingIau.blockedTasks, ["T015", "T016"], "extension VSIX packaging IAU blockedTasks");
+requireEqual(extensionVsixPackagingIau.implementationSharing, "none", "extension VSIX packaging IAU implementationSharing");
+requireEqual(extensionVsixPackagingIau.vsixPackaging, "local-artifact-only", "extension VSIX packaging IAU mode");
+requireEqual(extensionVsixPackagingIau.marketplacePublication, "out-of-scope", "extension VSIX packaging IAU marketplacePublication");
+requireEqual(extensionVsixPackagingIau.implementationHandoffIssue?.number, 136, "extension VSIX packaging IAU implementation handoff issue number");
+requireEqual(extensionVsixPackagingIau.implementationPullRequest?.number, 138, "extension VSIX packaging IAU implementation pull request number");
+requireEqual(extensionVsixPackagingIau.preImplementationPreflight?.status, "pass", "extension VSIX packaging IAU preImplementationPreflight status");
+requireEqual(extensionVsixPackagingIau.preImplementationPreflight?.record, "IAU-extension-vsix-packaging-artifact-v1-preflight-v1.json", "extension VSIX packaging IAU preImplementationPreflight record");
+requireEqual(extensionVsixPackagingIau.preImplementationPreflight?.implementationStartAllowed, true, "extension VSIX packaging IAU preImplementationPreflight implementationStartAllowed");
+requireFile(`docs/requirements/admissions/${extensionVsixPackagingSliceId}/IAU-extension-vsix-packaging-artifact-v1.md`);
+
+const extensionVsixPackagingPreflight = readJson(extensionVsixPackagingPreflightPath);
+requireEqual(extensionVsixPackagingPreflight.schema, "vi-history/implementation-admission-unit-preflight@v1", "extension VSIX packaging preflight schema");
+requireEqual(extensionVsixPackagingPreflight.iauId, "IAU-extension-vsix-packaging-artifact-v1", "extension VSIX packaging preflight iauId");
+requireEqual(extensionVsixPackagingPreflight.status, "pass", "extension VSIX packaging preflight status");
+requireEqual(extensionVsixPackagingPreflight.implementationStartAllowed, true, "extension VSIX packaging preflight implementationStartAllowed");
+requireEqual(extensionVsixPackagingPreflight.parentSliceId, extensionVsixPackagingSliceId, "extension VSIX packaging preflight parentSliceId");
+requireEqual(extensionVsixPackagingPreflight.implementationSharing, "none", "extension VSIX packaging preflight implementationSharing");
+requireEqual(extensionVsixPackagingPreflight.vsixPackaging, "local-artifact-only", "extension VSIX packaging preflight mode");
+requireEqual(extensionVsixPackagingPreflight.marketplacePublication, "out-of-scope", "extension VSIX packaging preflight marketplacePublication");
+requireArrayEqual(extensionVsixPackagingPreflight.implementationStartScope, ["T009", "T010", "T011", "T012", "T013", "T014"], "extension VSIX packaging preflight implementationStartScope");
+if (!Array.isArray(extensionVsixPackagingPreflight.checkResults) || extensionVsixPackagingPreflight.checkResults.length !== extensionVsixPackagingPreflight.requiredChecks.length) {
+  failures.push("extension VSIX packaging preflight checkResults: must match requiredChecks length");
+} else {
+  for (const result of extensionVsixPackagingPreflight.checkResults) {
+    requireEqual(result.status, "pass", `extension VSIX packaging preflight check result ${result.check}`);
+  }
+}
+requireFile(`docs/requirements/admissions/${extensionVsixPackagingSliceId}/IAU-extension-vsix-packaging-artifact-v1-preflight-v1.md`);
+
+const extensionVsixPackagingManifest = readJson(`${extensionVsixPackagingImportDir}/manifest.json`);
+requireEqual(extensionVsixPackagingManifest.schema, "vi-history/requirements-import@v1", "extension VSIX packaging manifest schema");
+requireEqual(extensionVsixPackagingManifest.sliceId, extensionVsixPackagingSliceId, "extension VSIX packaging sliceId");
+requireEqual(extensionVsixPackagingManifest.sourceBaselineTag, "v1.3.16", "extension VSIX packaging sourceBaselineTag");
+requireEqual(extensionVsixPackagingManifest.sourceCommit, "478d80eac94722411e44ef10a1fc00e39d579fdb", "extension VSIX packaging sourceCommit");
+requireEqual(extensionVsixPackagingManifest.targetProduct, "vi-history", "extension VSIX packaging targetProduct");
+requireEqual(extensionVsixPackagingManifest.targetFeature, extensionVsixPackagingSliceId, "extension VSIX packaging targetFeature");
+requireEqual(extensionVsixPackagingManifest.specKitPath, extensionVsixPackagingFeatureDir, "extension VSIX packaging specKitPath");
+requireEqual(extensionVsixPackagingManifest.redactionStatus, "pass", "extension VSIX packaging redactionStatus");
+requireEqual(extensionVsixPackagingManifest.implementationSharing, "none", "extension VSIX packaging implementationSharing");
+requireEqual(extensionVsixPackagingManifest.vsixPackaging, "local-artifact-only", "extension VSIX packaging manifest mode");
+requireEqual(extensionVsixPackagingManifest.marketplacePublication, "out-of-scope", "extension VSIX packaging manifest marketplacePublication");
+requireArrayEqual(extensionVsixPackagingManifest.importedRequirementIds, extensionVsixPackagingExpectedIds, "extension VSIX packaging importedRequirementIds");
+requireArrayEqual(extensionVsixPackagingManifest.supportingTestIds, ["TEST-UNIT-VSIX-001", "TEST-UNIT-VSIX-002", "TEST-UNIT-VSIX-003", "TEST-UNIT-VSIX-004"], "extension VSIX packaging supportingTestIds");
+requireEqual(extensionVsixPackagingManifest.contractName, "createExtensionVsixPackagingArtifact", "extension VSIX packaging contractName");
+requireEqual(extensionVsixPackagingManifest.packageArtifact, "dist/vi-history-0.1.0.vsix", "extension VSIX packaging packageArtifact");
+requireArrayEqual(extensionVsixPackagingManifest.files, ["syrs.md", "srs.md", "rtm.csv", "test-plan.md"], "extension VSIX packaging manifest files");
+
+for (const file of extensionVsixPackagingManifest.files ?? []) {
+  requireFile(`${extensionVsixPackagingImportDir}/${file}`);
+}
+
+for (const file of ["spec.md", "plan.md", "tasks.md"]) {
+  requireFile(`${extensionVsixPackagingFeatureDir}/${file}`);
+}
+
+requireTextIncludes(`${extensionVsixPackagingFeatureDir}/spec.md`, [
+  "Extension VSIX Packaging Artifact",
+  "IAU-extension-vsix-packaging-artifact-v1",
+  "dist/vi-history-0.1.0.vsix",
+  "Marketplace publication"
+]);
+requireTextIncludes(`${extensionVsixPackagingFeatureDir}/plan.md`, [
+  "@vscode/vsce",
+  "local artifact only",
+  "package-vsix.mjs",
+  "inspect-vsix-package.mjs"
+]);
+requireTextIncludes(`${extensionVsixPackagingFeatureDir}/tasks.md`, [
+  "T009",
+  "T014",
+  "T015 [BLOCKED]",
+  "npm run inspect:vsix"
+]);
+requireTextIncludes(`${extensionVsixPackagingImportDir}/rtm.csv`, extensionVsixPackagingExpectedIds);
+requireTextIncludes(`${extensionVsixPackagingImportDir}/syrs.md`, [
+  "VHS-REQ-596",
+  "VHS-REQ-600",
+  "local/CI `.vsix` artifact only"
+]);
+requireTextIncludes(`${extensionVsixPackagingImportDir}/srs.md`, [
+  "npm run package:vsix",
+  "npm run inspect:vsix",
+  "vsce publish"
+]);
+requireTextIncludes(`${extensionVsixPackagingImportDir}/test-plan.md`, [
+  "TEST-UNIT-VSIX-001",
+  "TEST-UNIT-VSIX-004",
+  "git diff --check"
+]);
+requireTextIncludes("README.md", [
+  "extension-vsix-packaging-artifact-v1",
+  "IAU-extension-vsix-packaging-artifact-v1",
+  "Issue #137",
+  "Issue #136",
+  "PR #138",
+  "npm run package:vsix",
+  "Marketplace publication: out of scope"
+]);
+requireTextIncludes("AGENTS.md", [
+  "extension-vsix-packaging-artifact-v1",
+  "IAU-extension-vsix-packaging-artifact-v1",
+  "Issue #137",
+  "Issue #136",
+  "PR #138",
+  "dist/vi-history-0.1.0.vsix",
+  "Marketplace publication, release tokens"
+]);
+requireTextIncludes("docs/development/copilot-workflow.md", [
+  "extension-vsix-packaging-artifact-v1",
+  "IAU-extension-vsix-packaging-artifact-v1",
+  "VSIX packaging outside"
+]);
+requireTextIncludes(".vscodeignore", [
+  ".specify/**",
+  "docs/requirements/**",
+  "docs/decisions/**",
+  "docs/governance/**",
+  "tests/**",
+  "scripts/**",
+  "src/runtime-settings-cli.mjs",
+  ".gitignore",
+  "package-lock.json"
+]);
+requireTextIncludes("scripts/package-vsix.mjs", [
+  "dist",
+  "--no-dependencies"
+]);
+requireTextIncludes("scripts/inspect-vsix-package.mjs", [
+  "extension/package.json",
+  "extension/docs/requirements/",
+  "extension/src/runtime-settings-cli.mjs",
+  "Marketplace"
+]);
+requireTextExcludes("package.json", [
+  "vsce publish",
+  "ovsx publish"
 ]);
 
 if (failures.length > 0) {

@@ -46,8 +46,8 @@ export function activate(context) {
 function openHandler() {
   // Entrypoint shell: blocked scope not started here.
   // Runtime settings CLI materialization, compare execution, Docker
-  // orchestration, packaging, and Marketplace publication remain blocked
-  // until separately admitted.
+  // orchestration, and Marketplace publication remain blocked here. Local VSIX
+  // artifact packaging is governed separately from runtime command handlers.
 }
 
 function openDocumentationHandler() {

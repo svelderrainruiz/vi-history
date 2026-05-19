@@ -1,0 +1,35 @@
+{
+  "schema": "vi-history/requirements-import@v1",
+  "sliceId": "extension-vsix-packaging-artifact-v1",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "478d80eac94722411e44ef10a1fc00e39d579fdb",
+  "governedAdmissionCommit": "478d80eac94722411e44ef10a1fc00e39d579fdb",
+  "targetProduct": "vi-history",
+  "targetFeature": "extension-vsix-packaging-artifact-v1",
+  "specKitPath": ".specify/specs/extension-vsix-packaging-artifact-v1",
+  "redactionStatus": "pass",
+  "implementationSharing": "none",
+  "vsixPackaging": "local-artifact-only",
+  "marketplacePublication": "out-of-scope",
+  "importedRequirementIds": [
+    "VHS-REQ-596",
+    "VHS-REQ-597",
+    "VHS-REQ-598",
+    "VHS-REQ-599",
+    "VHS-REQ-600"
+  ],
+  "supportingTestIds": [
+    "TEST-UNIT-VSIX-001",
+    "TEST-UNIT-VSIX-002",
+    "TEST-UNIT-VSIX-003",
+    "TEST-UNIT-VSIX-004"
+  ],
+  "contractName": "createExtensionVsixPackagingArtifact",
+  "packageArtifact": "dist/vi-history-0.1.0.vsix",
+  "files": [
+    "syrs.md",
+    "srs.md",
+    "rtm.csv",
+    "test-plan.md"
+  ]
+}
