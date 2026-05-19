@@ -1,7 +1,7 @@
 # IAU: Runtime Settings CLI Terminal Prompt Loop
 
-`IAU-runtime-settings-cli-terminal-prompt-loop-v1` is
-`implementation-admitted` for `runtime-settings-cli-terminal-prompt-loop-v1`.
+`IAU-runtime-settings-cli-terminal-prompt-loop-v1` is implemented for
+`runtime-settings-cli-terminal-prompt-loop-v1`.
 
 Parent slice: `runtime-settings-cli-terminal-prompt-loop-v1`
 
@@ -32,5 +32,5 @@ Preflight:
 - T019: packaging, Marketplace publication, or source copying from another VI
   History product line.
 
-Implementation must wait until the admission PR merges and a separate handoff
-issue is created.
+Implementation uses separate handoff Issue #73 and is closed for T009-T013
+only.

@@ -100,6 +100,15 @@ export const RUNTIME_SETTINGS_CLI_TERMINAL_ENTRYPOINT_REQUIREMENTS = Object.free
   validationHandoff: Object.freeze(["VHS-REQ-546"])
 });
 
+export const RUNTIME_SETTINGS_CLI_TERMINAL_PROMPT_LOOP_REQUIREMENTS = Object.freeze({
+  promptTranscript: Object.freeze(["VHS-REQ-545"]),
+  confirmation: Object.freeze(["VHS-REQ-545", "VHS-REQ-546"]),
+  guidedHostSelection: Object.freeze(["VHS-REQ-545"]),
+  dockerBounds: Object.freeze(["VHS-REQ-545"]),
+  validationHandoff: Object.freeze(["VHS-REQ-546"]),
+  failClosed: Object.freeze(["VHS-REQ-545", "VHS-REQ-546"])
+});
+
 export const RUNTIME_SETTINGS_TERMINAL_ENTRYPOINT_BLOCKED_SIDE_EFFECTS = Object.freeze({
   terminalPromptLoop: false,
   stdinHandling: false,
@@ -111,6 +120,23 @@ export const RUNTIME_SETTINGS_TERMINAL_ENTRYPOINT_BLOCKED_SIDE_EFFECTS = Object.
   compareExecution: false,
   labviewCli: false,
   dockerExecution: false,
+  liveSessionProof: false,
+  packaging: false,
+  marketplace: false
+});
+
+export const RUNTIME_SETTINGS_TERMINAL_PROMPT_LOOP_BLOCKED_SIDE_EFFECTS = Object.freeze({
+  stdinHandling: false,
+  rawTerminalIo: false,
+  spawnedTerminalIo: false,
+  settingsMutation: false,
+  runtimeValidation: false,
+  runtimeExecution: false,
+  compareExecution: false,
+  labviewCli: false,
+  dockerExecution: false,
+  dockerOrchestration: false,
+  proofOut: false,
   liveSessionProof: false,
   packaging: false,
   marketplace: false
@@ -174,6 +200,15 @@ export function allRuntimeSettingsCliTerminalEntrypointRequirementIds() {
   );
 }
 
+export function allRuntimeSettingsCliTerminalPromptLoopRequirementIds() {
+  return Object.freeze(
+    Object.values(RUNTIME_SETTINGS_CLI_TERMINAL_PROMPT_LOOP_REQUIREMENTS)
+      .flat()
+      .filter((value, index, values) => values.indexOf(value) === index)
+      .sort()
+  );
+}
+
 export function createRuntimeSettingsTerminalEntrypoint(input = {}) {
   const terminalSession = normalizeTerminalSession(input.terminalSession);
   if (!terminalSession.admitted) {
@@ -209,6 +244,64 @@ export function createRuntimeSettingsTerminalEntrypoint(input = {}) {
     validationHandoff: createTerminalValidationHandoff(),
     blockedSideEffects: RUNTIME_SETTINGS_TERMINAL_ENTRYPOINT_BLOCKED_SIDE_EFFECTS,
     requirementIds: allRuntimeSettingsCliTerminalEntrypointRequirementIds()
+  });
+}
+
+export function createRuntimeSettingsTerminalPromptLoop(input = {}) {
+  const entrypoint = input.entrypoint ?? input.terminalEntrypoint ?? createRuntimeSettingsTerminalEntrypoint(input);
+  if (!entrypoint || entrypoint.status !== "ready") {
+    return terminalPromptLoopBlockedResult({
+      blockedReason: entrypoint?.blockedReason ?? "terminal-entrypoint-not-ready",
+      entrypoint: entrypoint ?? null
+    });
+  }
+
+  const currentSelection = normalizePromptLoopCurrentSelection(
+    input.currentSelection ?? input.currentBundle ?? entrypoint.discoverability?.currentBundle,
+    entrypoint.runtimeLookup?.platform ?? input.platform ?? "windows"
+  );
+  const selectionContract = createRuntimeSettingsInteractiveSelection({
+    settings: input.settings ?? settingsFromSelection(currentSelection) ?? {},
+    platform: input.platform ?? currentSelection?.platform ?? entrypoint.runtimeLookup?.platform,
+    requestedSelection: input.requestedSelection ?? input.selection,
+    availableHostInstallations: input.availableHostInstallations ?? input.hostInstallations ?? [],
+    confirmation: input.confirmation ?? input.confirm
+  });
+
+  if (selectionContract.status !== "ready") {
+    return terminalPromptLoopBlockedResult({
+      blockedReason: selectionContract.blockedReason,
+      entrypoint,
+      currentSelection,
+      selectionContract
+    });
+  }
+
+  const selectedBundle = selectionContract.selection;
+  const promptMode = input.interactive === false ? "non-interactive" : "interactive";
+  const validationHandoff = createPromptLoopValidationHandoff(selectionContract.validationHandoff);
+
+  return freezeRecord({
+    status: "ready",
+    type: "runtime-settings-cli-terminal-prompt-loop-contract",
+    command: RUNTIME_SETTINGS_INTERACTIVE_SELECTION_COMMAND,
+    promptMode,
+    entrypoint,
+    currentSelection: currentSelection ?? selectedBundle,
+    selectedBundle,
+    confirmation: {
+      accepted: validationHandoff.requested,
+      mode: validationHandoff.requested ? "enter-through" : "pending"
+    },
+    options: selectionContract.options,
+    guidance: selectionContract.guidance,
+    transcript: createPromptLoopTranscript({
+      currentSelection: currentSelection ?? selectedBundle,
+      promptMode
+    }),
+    validationHandoff,
+    blockedSideEffects: RUNTIME_SETTINGS_TERMINAL_PROMPT_LOOP_BLOCKED_SIDE_EFFECTS,
+    requirementIds: allRuntimeSettingsCliTerminalPromptLoopRequirementIds()
   });
 }
 
@@ -663,6 +756,17 @@ function createValidationHandoff(selection, requested) {
   });
 }
 
+function createPromptLoopValidationHandoff(handoff) {
+  return freezeRecord({
+    requested: handoff?.requested === true,
+    command: handoff?.command ?? RUNTIME_SETTINGS_VALIDATION_COMMAND,
+    contract: handoff?.contract ?? "runtime-settings-cli-validation-readback-contract",
+    selection: handoff?.selection ?? null,
+    executionBound: false,
+    proofOutBound: false
+  });
+}
+
 function isConfirmationAccepted(value) {
   if (value === true) {
     return true;
@@ -671,6 +775,117 @@ function isConfirmationAccepted(value) {
     return false;
   }
   return ["accept", "accepted", "confirm", "confirmed", "enter"].includes(value.trim().toLowerCase());
+}
+
+function terminalPromptLoopBlockedResult({
+  blockedReason,
+  entrypoint = null,
+  currentSelection = null,
+  selectionContract = null
+}) {
+  const attemptedSelection = selectionContract?.selection ?? null;
+  return freezeRecord({
+    status: "blocked",
+    type: "runtime-settings-cli-terminal-prompt-loop-contract",
+    command: RUNTIME_SETTINGS_INTERACTIVE_SELECTION_COMMAND,
+    blockedReason,
+    entrypoint,
+    currentSelection,
+    attemptedSelection,
+    selectedBundle: null,
+    confirmation: {
+      accepted: false,
+      mode: "blocked"
+    },
+    transcript: createBlockedPromptLoopTranscript(blockedReason),
+    validationHandoff: createPromptLoopValidationHandoff(createValidationHandoff(null, false)),
+    blockedSideEffects: RUNTIME_SETTINGS_TERMINAL_PROMPT_LOOP_BLOCKED_SIDE_EFFECTS,
+    requirementIds: allRuntimeSettingsCliTerminalPromptLoopRequirementIds()
+  });
+}
+
+function createPromptLoopTranscript({ currentSelection, promptMode }) {
+  const currentSelectionText = formatRuntimeSelection(currentSelection);
+  const transcript = [
+    {
+      kind: "heading",
+      text: "VI History runtime settings"
+    },
+    {
+      kind: "current-selection",
+      text: `Current runtime: ${currentSelectionText}`
+    },
+    {
+      kind: "next-command",
+      text: `Next command: ${RUNTIME_SETTINGS_VALIDATION_COMMAND}`
+    }
+  ];
+
+  if (promptMode === "interactive") {
+    transcript.push({
+      kind: "confirmation",
+      text: "Press Enter to confirm this runtime or choose a supported runtime."
+    });
+  } else {
+    transcript.push({
+      kind: "non-interactive-guidance",
+      text: "Use the copyable command guidance to update or validate runtime settings."
+    });
+  }
+
+  return freezeRecord(transcript);
+}
+
+function createBlockedPromptLoopTranscript(blockedReason) {
+  return freezeRecord([
+    {
+      kind: "heading",
+      text: "VI History runtime settings"
+    },
+    {
+      kind: "blocked",
+      text: `Prompt loop blocked: ${blockedReason}`
+    },
+    {
+      kind: "next-command",
+      text: `Next command: ${RUNTIME_SETTINGS_VALIDATION_COMMAND}`
+    }
+  ]);
+}
+
+function normalizePromptLoopCurrentSelection(selection, platform) {
+  if (!selection) {
+    return null;
+  }
+  return normalizeInteractiveSelection({
+    runtimeProvider: selection.runtimeProvider ?? selection.provider,
+    platform: selection.platform ?? platform,
+    labviewVersion: selection.labviewVersion ?? selection.version,
+    labviewBitness: selection.labviewBitness ?? selection.bitness
+  });
+}
+
+function settingsFromSelection(selection) {
+  if (!selection) {
+    return null;
+  }
+  return {
+    [RUNTIME_SETTINGS_KEYS.runtimeProvider]: selection.runtimeProvider,
+    [RUNTIME_SETTINGS_KEYS.labviewVersion]: selection.labviewVersion,
+    [RUNTIME_SETTINGS_KEYS.labviewBitness]: selection.labviewBitness
+  };
+}
+
+function formatRuntimeSelection(selection) {
+  if (!selection) {
+    return "not configured";
+  }
+  return [
+    selection.runtimeProvider,
+    selection.platform,
+    selection.labviewVersion,
+    selection.labviewBitness
+  ].join("/");
 }
 
 function terminalEntrypointBlockedResult({ blockedReason, terminalSession = normalizeTerminalSession() }) {

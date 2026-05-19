@@ -104,15 +104,15 @@ contract for T009-T013 only.
 `runtime-settings-cli-terminal-prompt-loop-v1` admits
 `IAU-runtime-settings-cli-terminal-prompt-loop-v1` for Issue #71 and T009-T013
 only. Issue #71 is an admission issue and must not be reused for
-implementation. A separate handoff issue is required before Copilot or any
-agent implements the pure prompt transcript/state contract.
+implementation. Issue #73 implements and closes the pure prompt
+transcript/state contract for T009-T013 only.
 
 OS-specific raw terminal I/O drivers, compare execution, LabVIEWCLI execution,
 Docker execution or orchestration, proof-out expansion, live-session proof,
 packaging, and Marketplace publication remain blocked.
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-terminal-prompt-loop-v1`.
+`none`.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that
