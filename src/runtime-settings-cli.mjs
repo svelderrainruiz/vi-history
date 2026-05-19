@@ -1,3 +1,6 @@
+import fs from "node:fs/promises";
+import path from "node:path";
+
 export const RUNTIME_SETTINGS_CLI_SETTINGS_WRITE_REQUIREMENTS = Object.freeze({
   settingsWrite: Object.freeze(["VHS-REQ-537"]),
   effectiveTarget: Object.freeze(["VHS-REQ-543"]),
@@ -25,6 +28,15 @@ export const RUNTIME_SETTINGS_CLI_VALIDATION_PROOF_OUT_REQUIREMENTS = Object.fre
   artifactFiles: Object.freeze(["VHS-REQ-546"]),
   nonInteractiveGuidance: Object.freeze(["VHS-REQ-546"]),
   failClosed: Object.freeze(["VHS-REQ-546"])
+});
+
+export const RUNTIME_SETTINGS_CLI_VALIDATION_PROOF_OUT_FILE_EMISSION_REQUIREMENTS = Object.freeze({
+  readyAdapter: Object.freeze(["VHS-REQ-546"]),
+  directoryCreation: Object.freeze(["VHS-REQ-546"]),
+  fileWrites: Object.freeze(["VHS-REQ-546"]),
+  writeResults: Object.freeze(["VHS-REQ-546"]),
+  failClosed: Object.freeze(["VHS-REQ-546"]),
+  blockedSideEffects: Object.freeze(["VHS-REQ-546"])
 });
 
 export const RUNTIME_SETTINGS_CLI_INTERACTIVE_SELECTION_REQUIREMENTS = Object.freeze({
@@ -100,6 +112,24 @@ export const RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_BLOCKED_SIDE_EFFECTS = Object
   marketplace: false,
   sourceCopying: false,
   fileSystemWrites: false
+});
+
+export const RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_FILE_EMISSION_BLOCKED_SIDE_EFFECTS = Object.freeze({
+  settingsMutation: false,
+  interactiveSelection: false,
+  runtimeValidation: false,
+  validationFactGeneration: false,
+  runtimeExecution: false,
+  compareExecution: false,
+  labviewCli: false,
+  dockerExecution: false,
+  dockerOrchestration: false,
+  liveTerminalProof: false,
+  packageBinPublication: false,
+  launcherProfileMutation: false,
+  marketplace: false,
+  sourceCopying: false,
+  extraFileSystemWrites: false
 });
 
 export const RUNTIME_SETTINGS_INTERACTIVE_SELECTION_BLOCKED_SIDE_EFFECTS = Object.freeze({
@@ -240,6 +270,15 @@ export function allRuntimeSettingsCliValidationProofRequirementIds() {
 export function allRuntimeSettingsCliValidationProofOutRequirementIds() {
   return Object.freeze(
     Object.values(RUNTIME_SETTINGS_CLI_VALIDATION_PROOF_OUT_REQUIREMENTS)
+      .flat()
+      .filter((value, index, values) => values.indexOf(value) === index)
+      .sort()
+  );
+}
+
+export function allRuntimeSettingsCliValidationProofOutFileEmissionRequirementIds() {
+  return Object.freeze(
+    Object.values(RUNTIME_SETTINGS_CLI_VALIDATION_PROOF_OUT_FILE_EMISSION_REQUIREMENTS)
       .flat()
       .filter((value, index, values) => values.indexOf(value) === index)
       .sort()
@@ -646,6 +685,82 @@ export function createRuntimeSettingsValidationProofOutAdapter(input = {}) {
     artifactWrites: false,
     blockedSideEffects: RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_BLOCKED_SIDE_EFFECTS,
     requirementIds: allRuntimeSettingsCliValidationProofOutRequirementIds()
+  });
+}
+
+export async function writeRuntimeSettingsValidationProofOutFiles(input = {}) {
+  const adapter = input.proofOutAdapter
+    ?? input.validationProofOutAdapter
+    ?? input.adapter
+    ?? (input.type === "runtime-settings-cli-validation-proof-out-adapter-contract" ? input : null);
+  const readyAdapter = normalizeReadyValidationProofOutAdapter(adapter);
+  if (!readyAdapter.ok) {
+    return validationProofOutFileEmissionBlockedResult({
+      blockedReason: readyAdapter.blockedReason,
+      proofOutAdapter: adapter ?? null,
+      proofOutTarget: readyAdapter.proofOutTarget ?? null
+    });
+  }
+
+  const payloads = resolveValidationProofOutFilePayloads(readyAdapter.value);
+  if (!payloads.ok) {
+    return validationProofOutFileEmissionBlockedResult({
+      blockedReason: payloads.blockedReason,
+      proofOutAdapter: readyAdapter.value,
+      proofOutTarget: readyAdapter.value.proofOutTarget
+    });
+  }
+
+  const fileSystem = input.fileSystem ?? input.fs ?? fs;
+  const baseDirectory = typeof input.baseDirectory === "string" && input.baseDirectory
+    ? input.baseDirectory
+    : ".";
+  const targetDirectory = path.resolve(baseDirectory, readyAdapter.value.proofOutTarget.identifier);
+  const writePlan = createValidationProofOutFileEmissionPlan(readyAdapter.value, targetDirectory, payloads.value);
+  const completedFiles = [];
+
+  try {
+    await fileSystem.mkdir(targetDirectory, { recursive: true });
+    for (const file of writePlan.files) {
+      await fileSystem.writeFile(file.absolutePath, file.text, "utf8");
+      completedFiles.push(file.result);
+    }
+  } catch (error) {
+    const failedFile = writePlan.files
+      .find((file) => !completedFiles.some((completed) => completed.relativePath === file.result.relativePath));
+
+    return validationProofOutFileEmissionBlockedResult({
+      blockedReason: "proof-out-file-emission-failed",
+      proofOutAdapter: readyAdapter.value,
+      proofOutTarget: readyAdapter.value.proofOutTarget,
+      attemptedFiles: writePlan.files.map((file) => file.result),
+      completedFiles,
+      failedFile: failedFile?.result ?? null,
+      errorCode: normalizeFact(error?.code) ?? "VIHS_E_PROOF_OUT_FILE_EMISSION_FAILED"
+    });
+  }
+
+  return freezeRecord({
+    status: "ready",
+    type: "runtime-settings-cli-validation-proof-out-file-emission-contract",
+    command: readyAdapter.value.command,
+    proofOutAdapterStatus: readyAdapter.value.status,
+    proofOutTarget: readyAdapter.value.proofOutTarget,
+    directory: freezeRecord({
+      kind: "proof-out-directory",
+      identifier: readyAdapter.value.proofOutTarget.identifier,
+      publicSafe: true,
+      createdWhenMissing: true
+    }),
+    files: freezeRecord({
+      proofJson: completedFiles[0],
+      issueMarkdown: completedFiles[1]
+    }),
+    writeResults: completedFiles,
+    artifactWrites: true,
+    partialWrite: false,
+    blockedSideEffects: RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_FILE_EMISSION_BLOCKED_SIDE_EFFECTS,
+    requirementIds: allRuntimeSettingsCliValidationProofOutFileEmissionRequirementIds()
   });
 }
 
@@ -1459,6 +1574,134 @@ function validationProofOutBlockedResult({
     partialWrite: false,
     blockedSideEffects: RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_BLOCKED_SIDE_EFFECTS,
     requirementIds: allRuntimeSettingsCliValidationProofOutRequirementIds()
+  });
+}
+
+function validationProofOutFileEmissionBlockedResult({
+  blockedReason,
+  proofOutAdapter = null,
+  proofOutTarget = null,
+  attemptedFiles = [],
+  completedFiles = [],
+  failedFile = null,
+  errorCode = null
+}) {
+  return freezeRecord({
+    status: "blocked",
+    type: "runtime-settings-cli-validation-proof-out-file-emission-contract",
+    command: proofOutAdapter?.command ?? RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_COMMAND,
+    blockedReason,
+    proofOutAdapterStatus: proofOutAdapter?.status ?? null,
+    proofOutTarget,
+    attemptedFiles,
+    completedFiles,
+    failedFile,
+    errorCode,
+    artifactWrites: completedFiles.length > 0,
+    partialWrite: completedFiles.length > 0,
+    blockedSideEffects: RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_FILE_EMISSION_BLOCKED_SIDE_EFFECTS,
+    requirementIds: allRuntimeSettingsCliValidationProofOutFileEmissionRequirementIds()
+  });
+}
+
+function normalizeReadyValidationProofOutAdapter(adapter) {
+  if (!isPlainObject(adapter)) {
+    return {
+      ok: false,
+      blockedReason: "missing-ready-proof-out-adapter"
+    };
+  }
+
+  if (adapter.type !== "runtime-settings-cli-validation-proof-out-adapter-contract") {
+    return {
+      ok: false,
+      blockedReason: "unsupported-proof-out-adapter",
+      proofOutTarget: adapter.proofOutTarget ?? null
+    };
+  }
+
+  if (adapter.status !== "ready") {
+    return {
+      ok: false,
+      blockedReason: adapter.blockedReason ?? "proof-out-adapter-not-ready",
+      proofOutTarget: adapter.proofOutTarget ?? null
+    };
+  }
+
+  const target = adapter.proofOutTarget;
+  if (!isPlainObject(target) || target.publicSafe !== true || !isPublicSafeProofOutTarget(target.identifier)) {
+    return {
+      ok: false,
+      blockedReason: "unsupported-proof-out-target",
+      proofOutTarget: target ?? null
+    };
+  }
+
+  return {
+    ok: true,
+    value: adapter
+  };
+}
+
+function resolveValidationProofOutFilePayloads(adapter) {
+  const proofJson = adapter.artifactFiles?.proofJson;
+  const issueMarkdown = adapter.artifactFiles?.issueMarkdown;
+  if (typeof proofJson?.text !== "string" || typeof issueMarkdown?.text !== "string") {
+    return {
+      ok: false,
+      blockedReason: "missing-proof-out-artifact-payload"
+    };
+  }
+
+  if (
+    proofJson.fileName !== RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_PROOF_FILE
+    || issueMarkdown.fileName !== RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_ISSUE_FILE
+    || proofJson.relativePath !== `${adapter.proofOutTarget.identifier}/${RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_PROOF_FILE}`
+    || issueMarkdown.relativePath !== `${adapter.proofOutTarget.identifier}/${RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_ISSUE_FILE}`
+  ) {
+    return {
+      ok: false,
+      blockedReason: "unsupported-proof-out-artifact-files"
+    };
+  }
+
+  return {
+    ok: true,
+    value: freezeRecord({
+      proofJson,
+      issueMarkdown
+    })
+  };
+}
+
+function createValidationProofOutFileEmissionPlan(adapter, targetDirectory, payloads) {
+  const proofJsonResult = createValidationProofOutFileWriteResult(payloads.proofJson, payloads.proofJson.text);
+  const issueMarkdownResult = createValidationProofOutFileWriteResult(payloads.issueMarkdown, payloads.issueMarkdown.text);
+
+  return {
+    files: [
+      {
+        absolutePath: path.join(targetDirectory, RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_PROOF_FILE),
+        text: payloads.proofJson.text,
+        result: proofJsonResult
+      },
+      {
+        absolutePath: path.join(targetDirectory, RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_ISSUE_FILE),
+        text: payloads.issueMarkdown.text,
+        result: issueMarkdownResult
+      }
+    ],
+    target: adapter.proofOutTarget
+  };
+}
+
+function createValidationProofOutFileWriteResult(file, text) {
+  return freezeRecord({
+    status: "written",
+    fileName: file.fileName,
+    relativePath: file.relativePath,
+    contentType: file.contentType,
+    bytes: Buffer.byteLength(text, "utf8")
   });
 }
 

@@ -4,8 +4,7 @@ Issue #85 imports
 `runtime-settings-cli-validation-proof-out-file-emission-v1`, locks the public
 Spec Kit feature, and admits
 `IAU-runtime-settings-cli-validation-proof-out-file-emission-v1` for T009-T016
-only. Implementation must use a separate handoff issue after the admission PR
-merges.
+only. Issue #87 implements and closes that IAU for T009-T016 only.
 
 Machine-readable ledger:
 [runtime-settings-cli-validation-proof-out-file-emission-v1.json](./runtime-settings-cli-validation-proof-out-file-emission-v1.json)
@@ -23,7 +22,7 @@ Machine-readable ledger:
 
 ## Admitted IAU
 
-`IAU-runtime-settings-cli-validation-proof-out-file-emission-v1` is admitted
+`IAU-runtime-settings-cli-validation-proof-out-file-emission-v1` is implemented
 for:
 
 - T009: successful two-file emission tests.
@@ -36,7 +35,8 @@ for:
 - T016: the minimum pure validation proof-out file-emission adapter
   implementation.
 
-Issue #85 is an admission issue and must not be reused for implementation.
+Issue #87 is the completed implementation handoff issue. Issue #85 is an
+admission issue and must not be reused for implementation.
 
 ## Blocked Scope
 

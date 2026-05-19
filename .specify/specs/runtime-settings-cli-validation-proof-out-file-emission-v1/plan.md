@@ -1,23 +1,22 @@
 # Implementation Plan: Runtime Settings CLI Validation Proof-Out File Emission
 
 **Branch**:
-`codex/runtime-settings-cli-validation-proof-out-file-emission-admission`
+`codex/runtime-settings-cli-validation-proof-out-file-emission`
 
 **Spec**:
 `.specify/specs/runtime-settings-cli-validation-proof-out-file-emission-v1/spec.md`
 
 **Admission Issue**: Issue #85
 
-**Implementation Handoff Issue**: To be created after the admission PR merges
+**Implementation Handoff Issue**: Issue #87
 
 ## Summary
 
-Admit `IAU-runtime-settings-cli-validation-proof-out-file-emission-v1` after
-the governed
-`runtime-settings-cli-validation-proof-out-file-emission-v1` bridge-readiness
-record merged. This admission PR adds only the public import packet, Spec Kit
-feature, admission ledger, IAU record, and preflight record. Implementation
-will occur in a separate handoff issue/PR.
+Implement `IAU-runtime-settings-cli-validation-proof-out-file-emission-v1`
+after the governed
+`runtime-settings-cli-validation-proof-out-file-emission-v1` admission merged.
+This implementation adds focused tests, the minimum bounded file-emission
+adapter, and closeout records.
 
 ## Technical Context
 
@@ -34,18 +33,18 @@ will occur in a separate handoff issue/PR.
 
 - Clean-room requirements authority: pass; public artifacts import requirement
   IDs and behavior only.
-- Spec Kit before implementation: pass; Issue #85 admits the IAU and a separate
-  implementation handoff issue is required after this PR merges.
+- Spec Kit before implementation: pass; Issue #85 admitted the IAU and Issue
+  #87 is the separate implementation handoff.
 - Public evidence without private leakage: pass; public redaction and bridge
   artifact validation are required.
 - Marketplace disabled until governed: pass.
 
 ## Implementation Boundary
 
-The later IAU may add tests and the minimum public MIT file-emission adapter
-around ready proof-out adapter facts. It may create a supported target
-directory, write exactly `vihs-validation-proof.json` and
-`vihs-validation-issue.md`, and return deterministic write-result facts.
+This IAU adds tests and the minimum public MIT file-emission adapter around
+ready proof-out adapter facts. It may create a supported target directory,
+write exactly `vihs-validation-proof.json` and `vihs-validation-issue.md`, and
+return deterministic write-result facts.
 
 It must not add runtime validation execution, new validation fact generation,
 compare execution, LabVIEWCLI execution, Docker command execution or

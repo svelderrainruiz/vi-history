@@ -332,13 +332,13 @@ Issue #85 admits
 `IAU-runtime-settings-cli-validation-proof-out-file-emission-v1` for
 `runtime-settings-cli-validation-proof-out-file-emission-v1` and T009-T016
 only. Issue #85 is an admission issue and must not be reused for
-implementation. Implementation must use a separate handoff issue after the
-admission PR merges. The admitted unit is limited to file emission from ready
-proof-out adapter facts: create the supported target directory when safe,
-write exactly `vihs-validation-proof.json` and
-`vihs-validation-issue.md`, report deterministic write-result facts, and fail
+implementation. Issue #87 implements and closes the file-emission contract for
+T009-T016 only: file emission from ready proof-out adapter facts, creating the
+supported target directory when safe, writing exactly
+`vihs-validation-proof.json` and
+`vihs-validation-issue.md`, reporting deterministic write-result facts, and fail
 closed without hidden partial success. It does not run validation or create new
-validation facts.
+validation facts. No new Copilot implementation should start from Issue #87.
 
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.
