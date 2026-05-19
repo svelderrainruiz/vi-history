@@ -87,6 +87,10 @@ admits
 T009-T016 only. Issue #130 is an admission issue and must not be reused for
 implementation. Issue #132 implements and closes it through PR #133 for
 T009-T016 only.
+Issue #137 imports `extension-vsix-packaging-artifact-v1` and admits
+`IAU-extension-vsix-packaging-artifact-v1` for local VSIX package artifact
+creation and inspection only. Issue #137 is an admission issue and must not be
+reused for implementation. Issue #136 implements it through PR #138.
 
 ## Authority
 
@@ -96,7 +100,8 @@ T009-T016 only.
 - Extension ID: `svelderrainruiz.vi-history`
 - License: MIT
 - Version: `0.1.0`
-- Marketplace publication: disabled; future enablement requires a later ADR
+- VSIX packaging: local artifact only via `npm run package:vsix`
+- Marketplace publication: out of scope for this repository
 
 ## Branch Flow
 
@@ -111,7 +116,8 @@ T009-T016 only.
 - #2 imported `runtime-contract-host-provider-v1`.
 - #3 locked the Spec Kit feature spec, plan, and tasks.
 - #4 completed admitted runtime-contract IAUs through proof intake.
-- #5 keeps Marketplace publication disabled until a later ADR admits it.
+- #5 records the historical Marketplace-disabled posture; ADR-002 admits local
+  VSIX packaging and records Marketplace publication as out of scope.
 - #25 imported `installed-user-observation-public-surface-v1` as a public
   requirements/spec baseline.
 - #27 implements and closes
@@ -239,6 +245,12 @@ T009-T016 only.
 - Issue #132 implements and closes
   `IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1`
   through PR #133 for T009-T016 only.
+- Issue #137 imports `extension-vsix-packaging-artifact-v1` and admits
+  `IAU-extension-vsix-packaging-artifact-v1` for local VSIX package artifact
+  creation and inspection only. Issue #137 is an admission issue and must not
+  be reused for implementation.
+- Issue #136 implements `IAU-extension-vsix-packaging-artifact-v1` through PR
+  #138.
 
 The current admission ledgers are:
 
@@ -264,6 +276,7 @@ The current admission ledgers are:
 - `docs/requirements/admissions/runtime-settings-cli-validation-host-preflight-command-composition-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-discovery-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-adapter-v1.json`
+- `docs/requirements/admissions/extension-vsix-packaging-artifact-v1.json`
 
 Current Implementation Admission Unit:
 `none`.
@@ -505,9 +518,20 @@ terminal process wiring, live terminal proof, proof-out expansion, file writes,
 package/bin publication, launcher/profile mutation, release automation,
 Marketplace work, and source copying remain blocked.
 
+`extension-vsix-packaging-artifact-v1` implements
+`IAU-extension-vsix-packaging-artifact-v1` for local VSIX package artifact
+creation and inspection only. It adds `npm run package:vsix`,
+`npm run inspect:vsix`, and `.vscodeignore` package boundaries for
+`dist/vi-history-0.1.0.vsix`. Marketplace publication, release tokens,
+`vsce publish`, Open VSX publication, release uploads, package registry
+publication, runtime validation execution, compare execution, LabVIEWCLI
+execution, Docker execution, launcher/profile mutation, release automation,
+and source copying remain out of scope.
+
 The Marketplace posture is recorded in
-`docs/decisions/ADR-001-marketplace-publication-disabled.md` and summarized in
-`docs/governance/marketplace-posture.md`.
+`docs/decisions/ADR-001-marketplace-publication-disabled.md`, superseded in
+part by `docs/decisions/ADR-002-vsix-packaging-artifact-only.md`, and
+summarized in `docs/governance/marketplace-posture.md`.
 
 ## Validation
 

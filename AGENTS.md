@@ -16,11 +16,12 @@ other VI History product line.
 The integration branch is `develop`; feature work targets `develop` before
 promotion to `main`.
 
-Marketplace publication is disabled. The decision is recorded in
-`docs/decisions/ADR-001-marketplace-publication-disabled.md` and summarized in
-`docs/governance/marketplace-posture.md`. Future enablement requires a later
-ADR and must not add release tokens, publishing automation, or Marketplace
-workflows before that decision lands.
+VSIX packaging is authorized only as a local/CI artifact. The decision is
+recorded in `docs/decisions/ADR-002-vsix-packaging-artifact-only.md` and
+summarized in `docs/governance/marketplace-posture.md`. Marketplace
+publication, release tokens, `vsce publish`, Open VSX publication, Marketplace
+workflows, release uploads, and package registry publication are out of scope
+for this repository.
 
 Implementation for `runtime-contract-host-provider-v1` is complete through
 proof intake. `installed-user-observation-public-surface-v1` is a
@@ -252,6 +253,16 @@ raw terminal process wiring, live-session proof, proof-out expansion, file
 writes, package/bin publication, launcher/profile mutation, release
 automation, Marketplace publication, and source copying remain blocked.
 
+`extension-vsix-packaging-artifact-v1` implements
+`IAU-extension-vsix-packaging-artifact-v1` for local VSIX package artifact
+creation and inspection only. Issue #137 is the admission issue and must not be
+reused for implementation. Issue #136 is the implementation handoff issue. It
+is implemented through PR #138 and may create `dist/vi-history-0.1.0.vsix`.
+Marketplace publication, release tokens, `vsce publish`, Open VSX publication,
+release uploads, package registry publication, runtime validation execution,
+compare execution, LabVIEWCLI execution, Docker execution, launcher/profile
+mutation, release automation, and source copying remain out of scope.
+
 Current Implementation Admission Unit:
 `none`.
 
@@ -295,13 +306,17 @@ When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:
 
 ```bash
-SPECIFY_FEATURE=021-runtime-settings-cli-validation-host-runtime-discovery-v1 \
-SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-validation-host-runtime-discovery-v1 \
+SPECIFY_FEATURE=022-extension-vsix-packaging-artifact-v1 \
+SPECIFY_FEATURE_DIRECTORY=.specify/specs/extension-vsix-packaging-artifact-v1 \
 .specify/scripts/bash/check-prerequisites.sh --json --paths-only
 ```
 
-The current host runtime observation adapter feature uses
-`022-runtime-settings-cli-validation-host-runtime-observation-adapter-v1`.
+The current VSIX packaging feature uses
+`022-extension-vsix-packaging-artifact-v1`.
+The previous host runtime observation adapter feature used
+`021-runtime-settings-cli-validation-host-runtime-observation-adapter-v1`.
+The previous host runtime discovery feature used
+`021-runtime-settings-cli-validation-host-runtime-discovery-v1`.
 The previous host preflight command-composition feature used
 `020-runtime-settings-cli-validation-host-preflight-command-composition-v1`.
 The previous host runtime preflight feature used

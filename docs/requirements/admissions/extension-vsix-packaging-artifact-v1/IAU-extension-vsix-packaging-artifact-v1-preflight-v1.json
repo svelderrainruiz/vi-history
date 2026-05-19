@@ -1,0 +1,49 @@
+{
+  "schema": "vi-history/implementation-admission-unit-preflight@v1",
+  "iauId": "IAU-extension-vsix-packaging-artifact-v1",
+  "parentSliceId": "extension-vsix-packaging-artifact-v1",
+  "status": "pass",
+  "implementationStartAllowed": true,
+  "implementationSharing": "none",
+  "vsixPackaging": "local-artifact-only",
+  "packageArtifact": "dist/vi-history-0.1.0.vsix",
+  "marketplacePublication": "out-of-scope",
+  "implementationStartScope": [
+    "T009",
+    "T010",
+    "T011",
+    "T012",
+    "T013",
+    "T014"
+  ],
+  "requiredChecks": [
+    "public import packet is present",
+    "Spec Kit artifacts are present",
+    "Marketplace publication is out of scope",
+    "local VSIX packaging is the only admitted distribution behavior",
+    "implementation sharing is none"
+  ],
+  "checkResults": [
+    {
+      "check": "public import packet is present",
+      "status": "pass"
+    },
+    {
+      "check": "Spec Kit artifacts are present",
+      "status": "pass"
+    },
+    {
+      "check": "Marketplace publication is out of scope",
+      "status": "pass"
+    },
+    {
+      "check": "local VSIX packaging is the only admitted distribution behavior",
+      "status": "pass"
+    },
+    {
+      "check": "implementation sharing is none",
+      "status": "pass"
+    }
+  ],
+  "resultSummary": "Implementation may start for IAU-extension-vsix-packaging-artifact-v1. T015-T016 and all Marketplace publication, release tokens, vsce publish, Open VSX publication, Marketplace workflows, package registry publication, release automation, runtime validation execution, compare execution, LabVIEWCLI execution, Docker execution, launcher/profile mutation, and source-copying behavior remain blocked."
+}

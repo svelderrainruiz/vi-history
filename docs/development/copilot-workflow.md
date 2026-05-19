@@ -242,13 +242,27 @@ Read these before changing code:
 - `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-adapter-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-adapter-v1/IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-adapter-v1/IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1-preflight-v1.json`
+- `docs/requirements/imports/extension-vsix-packaging-artifact-v1/manifest.json`
+- `docs/requirements/imports/extension-vsix-packaging-artifact-v1/syrs.md`
+- `docs/requirements/imports/extension-vsix-packaging-artifact-v1/srs.md`
+- `docs/requirements/imports/extension-vsix-packaging-artifact-v1/rtm.csv`
+- `docs/requirements/imports/extension-vsix-packaging-artifact-v1/test-plan.md`
+- `.specify/specs/extension-vsix-packaging-artifact-v1/spec.md`
+- `.specify/specs/extension-vsix-packaging-artifact-v1/plan.md`
+- `.specify/specs/extension-vsix-packaging-artifact-v1/tasks.md`
+- `docs/requirements/admissions/extension-vsix-packaging-artifact-v1.json`
+- `docs/requirements/admissions/extension-vsix-packaging-artifact-v1/IAU-extension-vsix-packaging-artifact-v1.json`
+- `docs/requirements/admissions/extension-vsix-packaging-artifact-v1/IAU-extension-vsix-packaging-artifact-v1-preflight-v1.json`
 
 ## Current Status
 
 GitHub Issue #5 closed the Marketplace publication governance decision. The
 decision is recorded in
-`docs/decisions/ADR-001-marketplace-publication-disabled.md`. Marketplace
-publication remains disabled and no packaging or release work is admitted.
+`docs/decisions/ADR-001-marketplace-publication-disabled.md`. ADR-002 records
+that local VSIX artifact packaging is now admitted through
+`extension-vsix-packaging-artifact-v1`, while Marketplace publication, release
+tokens, publish commands, release uploads, and package registry publication are
+out of scope for this repository.
 
 GitHub Issue #4 completed the runtime-contract implementation loop through
 `IAU-runtime-contract-proof-intake-v1`. No new Copilot implementation should
@@ -600,7 +614,8 @@ Do not implement these without a separate bridge admission:
   and file-emission IAU
 - live already-running VS Code session uptake proof
 - observation report rendering for T014-T016
-- Marketplace publication or packaging
+- Marketplace publication, release, or package registry publication
+- VSIX packaging outside `IAU-extension-vsix-packaging-artifact-v1`
 - source copying from another VI History product line
 
 If a blocked task appears necessary, stop and open a new public issue with the
@@ -640,7 +655,8 @@ The PR summary should include:
 - the implementation plan used before code changes
 - the exact admitted IAU and completed tasks
 - tests added or updated
-- confirmation that execution and Marketplace work remain blocked
+- confirmation that execution remains blocked and Marketplace work remains out
+  of scope
 - validation command results
 
 ## Clarification Rule
