@@ -123,8 +123,9 @@ const RUNTIME_SETTINGS_VALIDATION_COMMAND = "vihs --validate";
 const MIT_PUBLIC_AUTHORITY = "svelderrainruiz/vi-history";
 const TERMINAL_ENTRYPOINT_COMMAND = "vihs";
 const TERMINAL_ENTRYPOINT_ADMISSION_SCOPE = "user";
-const TERMINAL_ENTRYPOINT_RECOVERY_INSTRUCTION = "Run `vihs prepare` to restore the local runtime settings CLI launcher.";
-const TERMINAL_ENTRYPOINT_RECOVERY_COMMAND = "vihs prepare";
+const TERMINAL_ENTRYPOINT_RECOVERY_COMMAND = "labviewViHistory.prepareLocalRuntimeSettingsCli";
+const TERMINAL_ENTRYPOINT_RECOVERY_INSTRUCTION =
+  `Run the VS Code command ${TERMINAL_ENTRYPOINT_RECOVERY_COMMAND} to restore the local runtime settings CLI launcher.`;
 const TERMINAL_ENTRYPOINT_RUNTIME_LOOKUP_ORDER_WINDOWS = Object.freeze(["vscode-runtime", "global-node", "explicit-override"]);
 const TERMINAL_ENTRYPOINT_RUNTIME_LOOKUP_ORDER_OTHER = Object.freeze(["global-node", "explicit-override"]);
 
@@ -174,17 +175,25 @@ export function allRuntimeSettingsCliTerminalEntrypointRequirementIds() {
 }
 
 export function createRuntimeSettingsTerminalEntrypoint(input = {}) {
+  const terminalSession = normalizeTerminalSession(input.terminalSession);
+  if (!terminalSession.admitted) {
+    return terminalEntrypointBlockedResult({
+      blockedReason: "unsupported-terminal-session",
+      terminalSession
+    });
+  }
+
   const launcherState = normalizeLauncherState(input.launcher?.launcherState ?? input.launcherState);
 
   if (launcherState === "missing" || launcherState === "stale") {
     return terminalEntrypointBlockedResult({
-      blockedReason: launcherState === "missing" ? "launcher-missing" : "launcher-stale"
+      blockedReason: launcherState === "missing" ? "launcher-missing" : "launcher-stale",
+      terminalSession
     });
   }
 
   const platform = normalizePlatform(input.platform ?? "windows");
   const runtimeLookupFacts = resolveRuntimeLookupFacts(input.runtimeLookup ?? {}, platform);
-  const terminalSession = normalizeTerminalSession(input.terminalSession);
   const discoverability = createDiscoverabilityFacts(input.currentBundle ?? input.bundle ?? null, platform);
 
   return freezeRecord({
@@ -664,7 +673,7 @@ function isConfirmationAccepted(value) {
   return ["accept", "accepted", "confirm", "confirmed", "enter"].includes(value.trim().toLowerCase());
 }
 
-function terminalEntrypointBlockedResult({ blockedReason }) {
+function terminalEntrypointBlockedResult({ blockedReason, terminalSession = normalizeTerminalSession() }) {
   return freezeRecord({
     status: "blocked",
     type: "runtime-settings-cli-terminal-entrypoint-contract",
@@ -672,6 +681,7 @@ function terminalEntrypointBlockedResult({ blockedReason }) {
     admissionScope: TERMINAL_ENTRYPOINT_ADMISSION_SCOPE,
     materializationState: "blocked",
     blockedReason,
+    terminalSession,
     recoveryInstruction: TERMINAL_ENTRYPOINT_RECOVERY_INSTRUCTION,
     recoveryCommand: TERMINAL_ENTRYPOINT_RECOVERY_COMMAND,
     discoverability: null,
@@ -725,14 +735,21 @@ function resolveRuntimeLookupFacts(lookup, platform) {
 
 function normalizeTerminalSession(session) {
   if (!session) {
-    return Object.freeze({
+    return freezeRecord({
       admitted: true,
-      scope: "user"
+      scope: "user",
+      requestedScope: "user",
+      blockedReason: null
     });
   }
-  return Object.freeze({
-    admitted: session.admitted !== false,
-    scope: normalizeFact(session.scope) ?? "user"
+  const requestedScope = (normalizeFact(session.scope) ?? "user").toLowerCase();
+  const userScoped = requestedScope === "user";
+  const admitted = session.admitted !== false && userScoped;
+  return freezeRecord({
+    admitted,
+    scope: "user",
+    requestedScope,
+    blockedReason: admitted ? null : "unsupported-terminal-session"
   });
 }
 

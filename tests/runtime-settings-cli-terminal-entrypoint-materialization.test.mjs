@@ -60,6 +60,8 @@ test("T010 terminal-session admission records stay user-scoped and expose the in
   assert.equal(admitted.admissionScope, "user");
   assert.equal(admitted.terminalSession.admitted, true);
   assert.equal(admitted.terminalSession.scope, "user");
+  assert.equal(admitted.terminalSession.requestedScope, "user");
+  assert.equal(admitted.terminalSession.blockedReason, null);
   assert.equal(admitted.materializationState, "materialized");
   assert.equal(admitted.validationHandoff.command, "vihs --validate");
   assert.equal(admitted.validationHandoff.contract, "runtime-settings-cli-validation-readback-contract");
@@ -72,8 +74,11 @@ test("T010 terminal-session admission records stay user-scoped and expose the in
     terminalSession: { admitted: false, scope: "machine" }
   });
 
+  assert.equal(machineSession.status, "blocked");
+  assert.equal(machineSession.blockedReason, "unsupported-terminal-session");
   assert.equal(machineSession.admissionScope, "user");
-  assert.equal(machineSession.terminalSession.scope, "machine");
+  assert.equal(machineSession.terminalSession.scope, "user");
+  assert.equal(machineSession.terminalSession.requestedScope, "machine");
   assert.equal(machineSession.terminalSession.admitted, false);
   assert.equal(machineSession.validationHandoff.executionBound, false);
   assert.equal(machineSession.validationHandoff.proofOutBound, false);
@@ -127,8 +132,12 @@ test("T012 stale or missing launchers fail closed with one stable actionable rec
   assert.equal(missing.status, "blocked");
   assert.equal(missing.blockedReason, "launcher-missing");
   assert.equal(missing.materializationState, "blocked");
-  assert.ok(typeof missing.recoveryInstruction === "string" && missing.recoveryInstruction.length > 0);
-  assert.ok(typeof missing.recoveryCommand === "string" && missing.recoveryCommand.length > 0);
+  assert.equal(
+    missing.recoveryInstruction,
+    "Run the VS Code command labviewViHistory.prepareLocalRuntimeSettingsCli to restore the local runtime settings CLI launcher."
+  );
+  assert.equal(missing.recoveryCommand, "labviewViHistory.prepareLocalRuntimeSettingsCli");
+  assert.equal(missing.terminalSession.scope, "user");
   assert.equal(missing.blockedSideEffects.terminalPromptLoop, false);
   assert.equal(missing.blockedSideEffects.runtimeExecution, false);
 
