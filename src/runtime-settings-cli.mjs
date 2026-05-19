@@ -170,6 +170,8 @@ export const RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_FILE_EMISSION_BLOCKED_SIDE_EF
 });
 
 export const RUNTIME_SETTINGS_VALIDATION_COMMAND_BLOCKED_SIDE_EFFECTS = Object.freeze({
+  fileSystemWrites: false,
+  proofOutFileEmission: false,
   osInspection: false,
   runtimeLocator: false,
   privatePathDiscovery: false,
@@ -880,32 +882,6 @@ export async function writeRuntimeSettingsValidationProofOutFiles(input = {}) {
 }
 
 export async function createRuntimeSettingsValidationCommandResult(input = {}) {
-  const { requestMode } = input;
-
-  if (requestMode === "validate-plan-only") {
-    // Fail closed for missing inputs
-    if (!input.settings || !input.runtimeSelection) {
-      return {
-        status: "blocked",
-        blockedReason: "missing-validation-facts",
-        validationStatus: "blocked"
-      };
-    }
-
-    // Compose through createRuntimeSettingsValidationProofOutAdapter
-    const proofOutAdapter = createRuntimeSettingsValidationProofOutAdapter(input);
-
-    return {
-      status: "ready",
-      requestMode,
-      proofOut: proofOutAdapter,
-      artifactWrites: false,
-      partialWrite: false,
-      guidance: { nonInteractive: true, promptWait: false },
-      copyableGuidance: ["vihs --validate"]
-    };
-  }
-
   const request = normalizeValidationCommandRequest(input);
   if (!request.ok) {
     return validationCommandContractResult({
@@ -955,8 +931,19 @@ export async function createRuntimeSettingsValidationCommandResult(input = {}) {
   if (proofOutAdapter.status !== "ready") {
     return validationCommandContractResult({
       status: "blocked",
-      requestMode: "validate-with-proof-out-blocked",
+      requestMode: request.value.requestMode === "validate-plan-only"
+        ? "validate-plan-only-blocked"
+        : "validate-with-proof-out-blocked",
       blockedReason: proofOutAdapter.blockedReason,
+      validation,
+      proofOut: proofOutAdapter
+    });
+  }
+
+  if (request.value.requestMode === "validate-plan-only") {
+    return validationCommandContractResult({
+      status: "ready",
+      requestMode: "validate-plan-only",
       validation,
       proofOut: proofOutAdapter
     });
@@ -2049,15 +2036,12 @@ function resolveValidationProofOutArtifact(input = {}) {
 
 function normalizeValidationCommandRequest(input = {}) {
   const requestedMode = normalizeFact(input.requestMode ?? input.mode);
-  if (requestedMode === "validate-plan-only") {
-    return {
-      ok: false,
-      blockedReason: "validate-plan-only-not-admitted",
-      requestMode: "validate-plan-only"
-    };
-  }
-
-  if (requestedMode && requestedMode !== "validate-only" && requestedMode !== "validate-with-proof-out") {
+  if (
+    requestedMode
+    && requestedMode !== "validate-only"
+    && requestedMode !== "validate-with-proof-out"
+    && requestedMode !== "validate-plan-only"
+  ) {
     return {
       ok: false,
       blockedReason: "unsupported-validation-command-request-mode",
@@ -2072,7 +2056,7 @@ function normalizeValidationCommandRequest(input = {}) {
       ?? input.request?.proofOutTarget
   );
 
-  if (requestedMode === "validate-with-proof-out" && !proofOut) {
+  if ((requestedMode === "validate-with-proof-out" || requestedMode === "validate-plan-only") && !proofOut) {
     return {
       ok: false,
       blockedReason: "missing-proof-out-target",
@@ -2084,7 +2068,9 @@ function normalizeValidationCommandRequest(input = {}) {
     ok: true,
     value: freezeRecord({
       command: RUNTIME_SETTINGS_VALIDATION_COMMAND,
-      requestMode: proofOut ? "validate-with-proof-out" : "validate-only",
+      requestMode: requestedMode === "validate-plan-only"
+        ? "validate-plan-only"
+        : proofOut ? "validate-with-proof-out" : "validate-only",
       proofOut
     })
   };
@@ -2155,7 +2141,7 @@ function createValidationProofOutGuidance(target = null) {
 }
 
 function createValidationCommandGuidance({ requestMode, proofOut } = {}) {
-  const copyableCommand = requestMode === "validate-with-proof-out"
+  const copyableCommand = requestMode === "validate-with-proof-out" || requestMode === "validate-plan-only"
     ? `${RUNTIME_SETTINGS_VALIDATION_PROOF_OUT_COMMAND} ${proofOut ?? "<dir>"}`
     : RUNTIME_SETTINGS_VALIDATION_COMMAND;
   return freezeRecord({
@@ -2176,7 +2162,9 @@ function validationCommandContractResult({
     ? proofOut.proofOutTarget.identifier
     : null;
   const guidance = createValidationCommandGuidance({
-    requestMode: requestMode?.startsWith("validate-with-proof-out") ? "validate-with-proof-out" : "validate-only",
+    requestMode: requestMode?.startsWith("validate-with-proof-out")
+      ? "validate-with-proof-out"
+      : requestMode?.startsWith("validate-plan-only") ? "validate-plan-only" : "validate-only",
     proofOut: publicSafeProofOut
   });
   return freezeRecord({

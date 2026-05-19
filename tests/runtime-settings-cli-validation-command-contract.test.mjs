@@ -231,13 +231,17 @@ test("T017 keeps blocked execution side effects stable and traces requirement ID
   const result = await createRuntimeSettingsValidationCommandResult({
     settings: readySettings(),
     runtimeSelection: readyRuntimeSelection(),
-    requestMode: "validate-plan-only"
+    requestMode: "validate-and-run-private-runtime"
   });
 
   assert.deepEqual(implementationIds, [...manifest.importedRequirementIds].sort());
   for (const id of implementationIds) {
     assert.ok(rtmIds.has(id), `${id} must appear in imported RTM`);
   }
-  assert.equal(result.status, "ready");
-  assert.equal(result.requestMode, "validate-plan-only");
+  assert.equal(result.status, "blocked");
+  assert.equal(result.blockedReason, "unsupported-validation-command-request-mode");
+  assert.equal(result.blockedSideEffects.runtimeLocator, false);
+  assert.equal(result.blockedSideEffects.labviewCli, false);
+  assert.equal(result.blockedSideEffects.dockerExecution, false);
+  assert.equal(result.blockedSideEffects.sourceCopying, false);
 });
