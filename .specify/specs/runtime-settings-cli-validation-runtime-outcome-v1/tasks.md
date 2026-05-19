@@ -50,24 +50,24 @@ to the existing validation readback `runtimeOutcome` shape.
 
 **Public admission issue**: Issue #89
 
-**Implementation handoff issue**: To be created after the admission PR merges
+**Implementation handoff issue**: Issue #91
 
-- [ ] T009 Add tests proving ready supplied runtime selection facts map to
+- [x] T009 Add tests proving ready supplied runtime selection facts map to
   `VIHS_OK`, `ready`, `ready`, and `implemented`.
-- [ ] T010 Add tests proving invalid or missing provider facts fail closed.
-- [ ] T011 Add tests proving Docker not-implemented and provider/platform
+- [x] T010 Add tests proving invalid or missing provider facts fail closed.
+- [x] T011 Add tests proving Docker not-implemented and provider/platform
   unsupported facts map to `runtimeImplementationStatus: not-implemented`.
-- [ ] T012 Add tests proving LabVIEW not-found and unknown blocked reasons
+- [x] T012 Add tests proving LabVIEW not-found and unknown blocked reasons
   produce stable public error/status facts.
-- [ ] T013 Add tests proving generated `runtimeOutcome` facts compose into the
+- [x] T013 Add tests proving generated `runtimeOutcome` facts compose into the
   existing validation readback and proof-artifact contracts.
-- [ ] T014 Add tests proving generated facts compose into the existing
+- [x] T014 Add tests proving generated facts compose into the existing
   proof-out adapter and file-emission contracts without changing their output
   shapes.
-- [ ] T015 Add tests proving OS probing, locators, runtime execution, compare,
+- [x] T015 Add tests proving OS probing, locators, runtime execution, compare,
   LabVIEWCLI, Docker, live proof, publication, mutation, release, Marketplace,
   and source-copying side effects remain blocked.
-- [ ] T016 Implement the minimum public MIT validation runtime outcome facts
+- [x] T016 Implement the minimum public MIT validation runtime outcome facts
   adapter.
 
 ---
@@ -115,8 +115,8 @@ visibly outside this IAU.
 - Phase 1 must merge before
   `IAU-runtime-settings-cli-validation-runtime-outcome-v1` implementation
   starts.
-- Phase 2 must use a separate implementation handoff issue after the admission
-  PR merges.
+- Phase 2 used separate implementation handoff Issue #91 after the admission
+  PR merged.
 - Phase 3 remains blocked until separate public requirements and preflight
   records admit runtime validation execution, compare execution, LabVIEWCLI
   execution, Docker execution, live terminal proof, package/bin publication,
@@ -129,8 +129,8 @@ visibly outside this IAU.
 ## Implementation Strategy
 
 1. Merge import/spec/admission artifacts to `develop`.
-2. Create a separate implementation handoff issue for
-   `IAU-runtime-settings-cli-validation-runtime-outcome-v1`.
+2. Implement and close
+   `IAU-runtime-settings-cli-validation-runtime-outcome-v1` through Issue #91.
 3. Keep runtime validation execution, compare execution, LabVIEWCLI execution,
    Docker execution, live terminal proof, package/bin publication,
    launcher/profile mutation, release automation, Marketplace publication, and

@@ -1,22 +1,21 @@
 # Implementation Plan: Runtime Settings CLI Validation Runtime Outcome Facts
 
 **Branch**:
-`codex/runtime-settings-cli-validation-runtime-outcome-admission`
+`codex/runtime-settings-cli-validation-runtime-outcome`
 
 **Spec**:
 `.specify/specs/runtime-settings-cli-validation-runtime-outcome-v1/spec.md`
 
 **Admission Issue**: Issue #89
 
-**Implementation Handoff Issue**: To be created after this admission PR merges
+**Implementation Handoff Issue**: Issue #91
 
 ## Summary
 
-Admit `IAU-runtime-settings-cli-validation-runtime-outcome-v1` after the
-governed `runtime-settings-cli-validation-runtime-outcome-v1` bridge merges.
-This admission PR imports the public-safe requirements slice, adds Spec Kit
-artifacts, and records preflight. It does not implement the runtime outcome
-adapter.
+Implement `IAU-runtime-settings-cli-validation-runtime-outcome-v1` after the
+governed `runtime-settings-cli-validation-runtime-outcome-v1` admission merged.
+This implementation adds focused tests, the minimum pure runtime outcome facts
+adapter, and closeout records.
 
 ## Technical Context
 
@@ -33,15 +32,15 @@ adapter.
 
 - Clean-room requirements authority: pass; public artifacts import requirement
   IDs and behavior only.
-- Spec Kit before implementation: pass; implementation waits for a separate
-  handoff issue after admission merges.
+- Spec Kit before implementation: pass; Issue #89 admitted the IAU and Issue
+  #91 is the separate implementation handoff.
 - Public evidence without private leakage: pass; public redaction and bridge
   artifact validation are required.
 - Marketplace disabled until governed: pass.
 
 ## Implementation Boundary
 
-The admitted IAU may add tests and a minimum pure adapter named
+The implemented IAU adds tests and a minimum pure adapter named
 `createRuntimeSettingsValidationRuntimeOutcome(input = {})` that derives a
 normalized `runtimeOutcome` object from supplied public-safe runtime selection
 facts.

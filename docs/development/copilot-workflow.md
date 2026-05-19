@@ -353,7 +353,7 @@ validation facts. No new Copilot implementation should start from Issue #87.
 Issue #89 imports `runtime-settings-cli-validation-runtime-outcome-v1` and
 admits `IAU-runtime-settings-cli-validation-runtime-outcome-v1` for T009-T016
 only. Issue #89 is an admission issue and must not be reused for
-implementation. The later handoff may implement only pure runtime outcome fact
+implementation. Issue #91 implements and closes only pure runtime outcome fact
 shaping from supplied public-safe runtime selection facts; it must not invoke
 runtime locators or execute validation.
 

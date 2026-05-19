@@ -50,6 +50,7 @@ Issue #87 implements and closes it for T009-T016 only.
 Issue #89 imports `runtime-settings-cli-validation-runtime-outcome-v1` and
 admits `IAU-runtime-settings-cli-validation-runtime-outcome-v1` for
 T009-T016 only.
+Issue #91 implements and closes it for T009-T016 only.
 
 ## Authority
 
@@ -152,6 +153,8 @@ T009-T016 only.
   admits `IAU-runtime-settings-cli-validation-runtime-outcome-v1` for
   T009-T016 only. Issue #89 is an admission issue and must not be reused for
   implementation.
+- Issue #91 implements and closes
+  `IAU-runtime-settings-cli-validation-runtime-outcome-v1` for T009-T016 only.
 
 The current admission ledgers are:
 
@@ -173,7 +176,7 @@ The current admission ledgers are:
 - `docs/requirements/admissions/runtime-settings-cli-validation-runtime-outcome-v1.json`
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-runtime-outcome-v1`.
+`none`.
 
 The completed observation model scope is T009-T013. The command activation
 manifest contract implements only T009-T012. The command handler entrypoint shell
@@ -268,10 +271,10 @@ blocked.
 `runtime-settings-cli-validation-runtime-outcome-v1` admits
 `IAU-runtime-settings-cli-validation-runtime-outcome-v1` for Issue #89 and
 T009-T016 only. Issue #89 is an admission issue and must not be reused for
-implementation. The later handoff may implement pure runtime outcome fact
+implementation. Issue #91 implements and closes pure runtime outcome fact
 shaping from supplied public-safe runtime selection facts through
-`createRuntimeSettingsValidationRuntimeOutcome(input = {})`. Runtime
-validation execution, runtime locator invocation, compare execution,
+`createRuntimeSettingsValidationRuntimeOutcome(input = {})` for T009-T016 only.
+Runtime validation execution, runtime locator invocation, compare execution,
 LabVIEWCLI execution, Docker execution or orchestration, live terminal proof,
 package/bin publication, launcher/profile mutation, release automation,
 Marketplace work, and source copying remain blocked.

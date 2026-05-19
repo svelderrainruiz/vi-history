@@ -1,6 +1,6 @@
 # Implementation Admission Unit: Runtime Settings CLI Validation Runtime Outcome Facts
 
-`IAU-runtime-settings-cli-validation-runtime-outcome-v1` is admitted for
+`IAU-runtime-settings-cli-validation-runtime-outcome-v1` is implemented for
 `runtime-settings-cli-validation-runtime-outcome-v1`.
 
 Parent slice: `runtime-settings-cli-validation-runtime-outcome-v1`
@@ -35,6 +35,5 @@ Preflight:
 - T025: implementation beyond runtime outcome facts without a separate public
   IAU.
 
-Issue #89 is the admission issue and must not be reused for implementation.
-A separate implementation handoff issue must be created after the admission PR
-merges.
+Issue #91 implements and closes T009-T016. Issue #89 is the admission issue and
+must not be reused for implementation.

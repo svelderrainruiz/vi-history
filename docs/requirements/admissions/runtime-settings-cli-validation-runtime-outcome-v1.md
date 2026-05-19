@@ -1,7 +1,7 @@
 # Requirements Admission: Runtime Settings CLI Validation Runtime Outcome Facts
 
-`runtime-settings-cli-validation-runtime-outcome-v1` is admitted for public
-MIT Spec Kit planning and a later clean-room implementation handoff.
+`runtime-settings-cli-validation-runtime-outcome-v1` is implemented for public
+MIT Spec Kit planning and clean-room implementation handoff Issue #91.
 
 ## Source
 
@@ -15,11 +15,10 @@ MIT Spec Kit planning and a later clean-room implementation handoff.
 ## Admission
 
 - Public issue: Issue #89
-- Current Implementation Admission Unit:
-  `IAU-runtime-settings-cli-validation-runtime-outcome-v1`
-- Admitted implementation scope: T009-T016 in
+- Implementation handoff issue: Issue #91
+- Current Implementation Admission Unit: `none`
+- Completed implementation scope: T009-T016 in
   `.specify/specs/runtime-settings-cli-validation-runtime-outcome-v1/tasks.md`
-- Implementation handoff issue: to be created after this admission PR merges
 
 ## Boundary
 

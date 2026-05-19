@@ -2,7 +2,7 @@
   "schema": "vi-history/requirements-admission@v1",
   "sliceId": "runtime-settings-cli-validation-runtime-outcome-v1",
   "createdDate": "2026-05-19",
-  "state": "admitted",
+  "state": "implemented",
   "targetProduct": "vi-history",
   "targetFeature": "runtime-settings-cli-validation-runtime-outcome-v1",
   "sourceBaselineTag": "v1.3.16",
@@ -13,6 +13,10 @@
   "issue": {
     "number": 89,
     "url": "https://github.com/svelderrainruiz/vi-history/issues/89"
+  },
+  "implementationHandoffIssue": {
+    "number": 91,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/91"
   },
   "bridgeChecks": {
     "specKitCliVersion": "0.8.12.dev0",
@@ -26,7 +30,7 @@
   "implementationAdmissionUnits": [
     {
       "iauId": "IAU-runtime-settings-cli-validation-runtime-outcome-v1",
-      "state": "admitted",
+      "state": "implemented",
       "record": "docs/requirements/admissions/runtime-settings-cli-validation-runtime-outcome-v1/IAU-runtime-settings-cli-validation-runtime-outcome-v1.json",
       "preflightRecord": "docs/requirements/admissions/runtime-settings-cli-validation-runtime-outcome-v1/IAU-runtime-settings-cli-validation-runtime-outcome-v1-preflight-v1.json",
       "admittedTasks": [
@@ -41,7 +45,7 @@
       ]
     }
   ],
-  "currentImplementationAdmissionUnit": "IAU-runtime-settings-cli-validation-runtime-outcome-v1",
+  "currentImplementationAdmissionUnit": null,
   "completedSpecScope": [
     "T001",
     "T002",
@@ -52,8 +56,7 @@
     "T007",
     "T008"
   ],
-  "completedImplementationScope": [],
-  "admittedImplementationScope": [
+  "completedImplementationScope": [
     "T009",
     "T010",
     "T011",
@@ -63,6 +66,7 @@
     "T015",
     "T016"
   ],
+  "admittedImplementationScope": [],
   "blockedImplementationScope": [
     "T017",
     "T018",
@@ -79,6 +83,31 @@
     "status": "pass",
     "record": "docs/requirements/admissions/runtime-settings-cli-validation-runtime-outcome-v1/IAU-runtime-settings-cli-validation-runtime-outcome-v1-preflight-v1.json",
     "implementationStartAllowed": true
+  },
+  "implementationCloseout": {
+    "status": "pass",
+    "issue": 91,
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011",
+      "T012",
+      "T013",
+      "T014",
+      "T015",
+      "T016"
+    ],
+    "blockedScopeRetained": [
+      "T017",
+      "T018",
+      "T019",
+      "T020",
+      "T021",
+      "T022",
+      "T023",
+      "T024",
+      "T025"
+    ]
   },
   "requirementMaturityBasis": "governed bridge-readiness packet supports public import, Spec Kit planning, and narrow validation runtime outcome fact admission, not source reuse",
   "implementationSharing": "none",

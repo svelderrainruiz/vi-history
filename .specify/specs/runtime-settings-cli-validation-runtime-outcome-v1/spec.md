@@ -1,11 +1,11 @@
 # Feature Specification: Runtime Settings CLI Validation Runtime Outcome Facts
 
 **Feature Branch**:
-`codex/runtime-settings-cli-validation-runtime-outcome-admission`
+`codex/runtime-settings-cli-validation-runtime-outcome`
 
 **Created**: 2026-05-19
 
-**Status**: Admitted for
+**Status**: Implemented for
 `IAU-runtime-settings-cli-validation-runtime-outcome-v1`
 
 **Input**: Imported requirements slice
@@ -133,9 +133,9 @@ retains the generated fields.
 - **SC-002**: `spec.md`, `plan.md`, and `tasks.md` define
   `IAU-runtime-settings-cli-validation-runtime-outcome-v1` and keep execution,
   publication, mutation, release, Marketplace, and source copying blocked.
-- **SC-003**: The admission record states that implementation is admitted only
-  for T009-T016 and that the current Implementation Admission Unit is
-  `IAU-runtime-settings-cli-validation-runtime-outcome-v1`.
+- **SC-003**: The admission record states that T009-T016 are implemented and
+  Issue #91 is the implementation handoff. Current Implementation Admission Unit
+  is `none`.
 - **SC-004**: Public validation rejects private paths, credentials, private
   evidence, private control-plane terms, and copied implementation-source
   instructions.
