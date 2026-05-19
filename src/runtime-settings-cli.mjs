@@ -23,6 +23,14 @@ export const RUNTIME_SETTINGS_CLI_VALIDATION_RUNTIME_OUTCOME_REQUIREMENTS = Obje
   failClosed: Object.freeze(["VHS-REQ-546"])
 });
 
+export const RUNTIME_SETTINGS_CLI_VALIDATION_HOST_RUNTIME_PREFLIGHT_REQUIREMENTS = Object.freeze({
+  selectionFacts: Object.freeze(["VHS-REQ-532", "VHS-REQ-546"]),
+  suppliedCandidates: Object.freeze(["VHS-REQ-532"]),
+  mixedBitnessHostBundle: Object.freeze(["VHS-REQ-550"]),
+  runtimeOutcomeComposition: Object.freeze(["VHS-REQ-546"]),
+  failClosed: Object.freeze(["VHS-REQ-532", "VHS-REQ-546", "VHS-REQ-550"])
+});
+
 export const RUNTIME_SETTINGS_CLI_VALIDATION_PROOF_REQUIREMENTS = Object.freeze({
   proofArtifact: Object.freeze(["VHS-REQ-546"]),
   redaction: Object.freeze(["VHS-REQ-546"]),
@@ -114,6 +122,34 @@ export const RUNTIME_SETTINGS_VALIDATION_RUNTIME_OUTCOME_BLOCKED_SIDE_EFFECTS = 
   labviewCli: false,
   dockerExecution: false,
   dockerOrchestration: false,
+  liveTerminalProof: false,
+  packageBinPublication: false,
+  launcherProfileMutation: false,
+  releaseAutomation: false,
+  marketplace: false,
+  sourceCopying: false
+});
+
+export const RUNTIME_SETTINGS_VALIDATION_HOST_RUNTIME_PREFLIGHT_BLOCKED_SIDE_EFFECTS = Object.freeze({
+  settingsMutation: false,
+  interactiveSelection: false,
+  proofOut: false,
+  fileSystemReads: false,
+  fileSystemWrites: false,
+  osInspection: false,
+  filesystemWalking: false,
+  registryProbe: false,
+  pathProbe: false,
+  environmentProbe: false,
+  privatePathDiscovery: false,
+  runtimeLocator: false,
+  runtimeValidation: false,
+  runtimeExecution: false,
+  compareExecution: false,
+  labviewCli: false,
+  dockerExecution: false,
+  dockerOrchestration: false,
+  rawTerminalProcessWiring: false,
   liveTerminalProof: false,
   packageBinPublication: false,
   launcherProfileMutation: false,
@@ -320,6 +356,15 @@ export function allRuntimeSettingsCliValidationReadbackRequirementIds() {
 export function allRuntimeSettingsCliValidationRuntimeOutcomeRequirementIds() {
   return Object.freeze(
     Object.values(RUNTIME_SETTINGS_CLI_VALIDATION_RUNTIME_OUTCOME_REQUIREMENTS)
+      .flat()
+      .filter((value, index, values) => values.indexOf(value) === index)
+      .sort()
+  );
+}
+
+export function allRuntimeSettingsCliValidationHostRuntimePreflightRequirementIds() {
+  return Object.freeze(
+    Object.values(RUNTIME_SETTINGS_CLI_VALIDATION_HOST_RUNTIME_PREFLIGHT_REQUIREMENTS)
       .flat()
       .filter((value, index, values) => values.indexOf(value) === index)
       .sort()
@@ -699,6 +744,71 @@ export function createRuntimeSettingsValidationRuntimeOutcome(input = {}) {
     blockedReason: runtimeOutcome.runtimeBlockedReason,
     runtimeSelection: selection.value,
     runtimeOutcome
+  });
+}
+
+export function createRuntimeSettingsValidationHostRuntimePreflight(input = {}) {
+  const selection = normalizeHostRuntimePreflightSelection(input);
+  if (!selection.ok) {
+    return hostRuntimePreflightBlockedResult({
+      blockedReason: selection.blockedReason,
+      selection: selection.value ?? null
+    });
+  }
+
+  if (selection.value.runtimeProvider !== "host-native") {
+    return hostRuntimePreflightBlockedResult({
+      blockedReason: "unsupported-runtime-provider",
+      selection: selection.value
+    });
+  }
+
+  const candidateSet = normalizeHostRuntimePreflightCandidates(input);
+  if (!candidateSet.ok) {
+    return hostRuntimePreflightBlockedResult({
+      blockedReason: candidateSet.blockedReason,
+      selection: selection.value,
+      hostCandidateCount: candidateSet.count ?? 0
+    });
+  }
+
+  const analyses = candidateSet.value.map((candidate) => analyzeHostRuntimePreflightCandidate(candidate, selection.value));
+  const compatible = analyses.filter((analysis) => analysis.compatible);
+
+  if (compatible.length === 0) {
+    return hostRuntimePreflightBlockedResult({
+      blockedReason: selectHostRuntimePreflightBlockedReason(analyses),
+      selection: selection.value,
+      hostCandidateCount: candidateSet.value.length,
+      compatibleHostCandidateCount: 0
+    });
+  }
+
+  if (compatible.length > 1) {
+    return hostRuntimePreflightBlockedResult({
+      blockedReason: "ambiguous-host-runtime-candidate",
+      selection: selection.value,
+      hostCandidateCount: candidateSet.value.length,
+      compatibleHostCandidateCount: compatible.length
+    });
+  }
+
+  const selectedHostCandidate = compatible[0].candidate;
+  const runtimeSelection = createHostRuntimePreflightRuntimeSelection(selection.value);
+
+  return freezeRecord({
+    status: "ready",
+    type: "runtime-settings-cli-validation-host-runtime-preflight-contract",
+    preflightBoundary: "supplied-public-safe-host-candidate-facts-only",
+    selection: selection.value,
+    hostCandidateCount: candidateSet.value.length,
+    compatibleHostCandidateCount: compatible.length,
+    selectedHostCandidate,
+    mixedBitnessAccepted: selectedHostCandidate.labviewExecutable.bitness !== selectedHostCandidate.labviewCli.bitness,
+    runtimeSelection,
+    blockedReason: null,
+    blockedSideEffects: RUNTIME_SETTINGS_VALIDATION_HOST_RUNTIME_PREFLIGHT_BLOCKED_SIDE_EFFECTS,
+    requirementIds: allRuntimeSettingsCliValidationHostRuntimePreflightRequirementIds()
   });
 }
 
@@ -2273,6 +2383,297 @@ function readPersistedRuntimeSettingsFacts(settings) {
   };
 }
 
+function normalizeHostRuntimePreflightSelection(input = {}) {
+  const selection = input.selection
+    ?? input.runtimeSelection
+    ?? input.runtimeFacts
+    ?? input.persistedSettings
+    ?? input.settings
+    ?? input;
+  const parsedSettings = isPlainObject(selection) && Object.values(RUNTIME_SETTINGS_KEYS).some((key) => key in selection)
+    ? readPersistedRuntimeSettingsFacts(selection)
+    : null;
+  const source = parsedSettings?.ok === true ? parsedSettings.value : selection;
+
+  if (!isPlainObject(source)) {
+    return {
+      ok: false,
+      blockedReason: "missing-selection-facts"
+    };
+  }
+
+  const runtimeProvider = normalizeRuntimeProvider(
+    source.runtimeProvider
+      ?? source.provider
+      ?? source.selectedProvider
+      ?? source.requestedProvider
+  );
+  const labviewVersion = normalizeFact(source.labviewVersion ?? source.version);
+  const labviewBitness = normalizeLabviewBitness(source.labviewBitness ?? source.bitness);
+  const platform = normalizePlatform(source.platform ?? input.platform ?? defaultPlatformForProvider(runtimeProvider));
+
+  if (!runtimeProvider || !labviewVersion || !labviewBitness || !platform) {
+    return {
+      ok: false,
+      blockedReason: "missing-selection-facts",
+      value: null
+    };
+  }
+
+  return {
+    ok: true,
+    value: freezeRecord({
+      runtimeProvider,
+      platform,
+      labviewVersion,
+      labviewBitness
+    })
+  };
+}
+
+function normalizeHostRuntimePreflightCandidates(input = {}) {
+  const candidates = input.hostCandidates
+    ?? input.hostRuntimeCandidates
+    ?? input.availableHostInstallations
+    ?? input.hostInstallations
+    ?? input.candidates;
+
+  if (candidates == null) {
+    return {
+      ok: false,
+      blockedReason: "missing-host-runtime-candidate",
+      count: 0
+    };
+  }
+
+  if (!Array.isArray(candidates)) {
+    return {
+      ok: false,
+      blockedReason: "malformed-host-runtime-preflight-input",
+      count: 0
+    };
+  }
+
+  const normalized = [];
+  for (const candidate of candidates) {
+    const normalizedCandidate = normalizeHostRuntimePreflightCandidate(candidate);
+    if (!normalizedCandidate.ok) {
+      return {
+        ok: false,
+        blockedReason: normalizedCandidate.blockedReason,
+        count: candidates.length
+      };
+    }
+    normalized.push(normalizedCandidate.value);
+  }
+
+  if (normalized.length === 0) {
+    return {
+      ok: false,
+      blockedReason: "missing-host-runtime-candidate",
+      count: 0
+    };
+  }
+
+  return {
+    ok: true,
+    value: freezeRecord(normalized)
+  };
+}
+
+function normalizeHostRuntimePreflightCandidate(candidate) {
+  if (!isPlainObject(candidate)) {
+    return {
+      ok: false,
+      blockedReason: "malformed-host-runtime-preflight-input"
+    };
+  }
+
+  const labviewExecutable = normalizeLabviewExecutableFacts(candidate);
+  const labviewCli = normalizeLabviewCliFacts(candidate);
+
+  return {
+    ok: true,
+    value: freezeRecord({
+      kind: "host-runtime-candidate",
+      publicSafe: true,
+      available: candidate.available !== false && candidate.installed !== false,
+      contaminated: candidate.contaminated === true || candidate.surfaceContaminated === true,
+      platform: normalizePlatform(candidate.platform ?? candidate.osFamily ?? "windows"),
+      labviewVersion: normalizeFact(candidate.labviewVersion ?? candidate.version ?? labviewExecutable.version),
+      labviewBitness: normalizeLabviewBitness(candidate.labviewBitness ?? candidate.bitness ?? labviewExecutable.bitness),
+      labviewExecutable,
+      labviewCli
+    })
+  };
+}
+
+function normalizeLabviewExecutableFacts(candidate) {
+  const executable = isPlainObject(candidate.labviewExecutable)
+    ? candidate.labviewExecutable
+    : isPlainObject(candidate.labview)
+      ? candidate.labview
+      : {};
+  const available = candidate.labviewExecutable === false
+    ? false
+    : executable.available ?? executable.present ?? candidate.labviewExecutableAvailable ?? candidate.labviewExecutablePresent;
+
+  return freezeRecord({
+    role: "labview-executable",
+    available: available === true,
+    version: normalizeFact(executable.labviewVersion ?? executable.version ?? candidate.labviewExecutableVersion ?? candidate.labviewVersion ?? candidate.version),
+    bitness: normalizeLabviewBitness(executable.labviewBitness ?? executable.bitness ?? candidate.labviewExecutableBitness ?? candidate.labviewBitness ?? candidate.bitness)
+  });
+}
+
+function normalizeLabviewCliFacts(candidate) {
+  const cli = isPlainObject(candidate.labviewCli)
+    ? candidate.labviewCli
+    : isPlainObject(candidate.labviewCliExecutable)
+      ? candidate.labviewCliExecutable
+      : {};
+  const available = candidate.labviewCli === false || candidate.labviewCliExecutable === false
+    ? false
+    : cli.available ?? cli.present ?? candidate.labviewCliAvailable ?? candidate.labviewCliPresent;
+  const role = normalizeFact(cli.role ?? candidate.labviewCliRole ?? candidate.cliRole);
+  const canonical = cli.canonical === true
+    || candidate.canonicalLabviewCli === true
+    || candidate.labviewCliCanonical === true
+    || role === "canonical-labview-cli";
+
+  return freezeRecord({
+    role: canonical ? "canonical-labview-cli" : (role ?? "labview-cli"),
+    available: available === true,
+    canonical,
+    bitness: normalizeLabviewBitness(cli.labviewBitness ?? cli.bitness ?? candidate.labviewCliBitness ?? candidate.cliBitness)
+  });
+}
+
+function analyzeHostRuntimePreflightCandidate(candidate, selection) {
+  if (candidate.contaminated) {
+    return hostCandidateAnalysis(candidate, "windows-host-runtime-surface-contaminated");
+  }
+  if (!candidate.available) {
+    return hostCandidateAnalysis(candidate, "missing-host-runtime-candidate");
+  }
+  if (candidate.platform !== selection.platform) {
+    return hostCandidateAnalysis(candidate, "host-platform-mismatch");
+  }
+  if (!candidate.labviewExecutable.available) {
+    return hostCandidateAnalysis(candidate, "labview-exe-not-found");
+  }
+  if (candidate.labviewExecutable.version !== selection.labviewVersion || candidate.labviewVersion !== selection.labviewVersion) {
+    return hostCandidateAnalysis(candidate, "labview-version-mismatch");
+  }
+  if (candidate.labviewExecutable.bitness !== selection.labviewBitness || candidate.labviewBitness !== selection.labviewBitness) {
+    return hostCandidateAnalysis(candidate, "labview-bitness-mismatch");
+  }
+  if (!candidate.labviewCli.available || !candidate.labviewCli.canonical) {
+    return hostCandidateAnalysis(candidate, "canonical-labview-cli-not-found");
+  }
+  if (!isHostRuntimePreflightCliBitnessCompatible(candidate, selection)) {
+    return hostCandidateAnalysis(candidate, "labview-cli-not-found-for-bitness");
+  }
+
+  return freezeRecord({
+    compatible: true,
+    candidate,
+    blockedReason: null
+  });
+}
+
+function hostCandidateAnalysis(candidate, blockedReason) {
+  return freezeRecord({
+    compatible: false,
+    candidate,
+    blockedReason
+  });
+}
+
+function isHostRuntimePreflightCliBitnessCompatible(candidate, selection) {
+  if (!candidate.labviewCli.bitness) {
+    return false;
+  }
+  if (candidate.labviewCli.bitness === selection.labviewBitness) {
+    return true;
+  }
+  return selection.platform === "windows"
+    && selection.labviewVersion === "2026"
+    && selection.labviewBitness === "x64"
+    && candidate.labviewExecutable.bitness === "x64"
+    && candidate.labviewCli.bitness === "x86"
+    && candidate.labviewCli.canonical;
+}
+
+function selectHostRuntimePreflightBlockedReason(analyses) {
+  const reasons = analyses.map((analysis) => analysis.blockedReason).filter(Boolean);
+  for (const reason of [
+    "windows-host-runtime-surface-contaminated",
+    "labview-exe-not-found",
+    "canonical-labview-cli-not-found",
+    "labview-version-mismatch",
+    "labview-bitness-mismatch",
+    "labview-cli-not-found-for-bitness",
+    "host-platform-mismatch",
+    "missing-host-runtime-candidate"
+  ]) {
+    if (reasons.includes(reason)) {
+      return reason;
+    }
+  }
+  return "missing-host-runtime-candidate";
+}
+
+function createHostRuntimePreflightRuntimeSelection(selection, blockedReason = null) {
+  if (blockedReason) {
+    return freezeRecord({
+      provider: "unavailable",
+      runtimeProvider: "unavailable",
+      engine: null,
+      runtimeEngine: null,
+      platform: selection?.platform ?? null,
+      labviewVersion: selection?.labviewVersion ?? null,
+      labviewBitness: selection?.labviewBitness ?? null,
+      blockedReason,
+      runtimeBlockedReason: blockedReason
+    });
+  }
+
+  return freezeRecord({
+    provider: "host-native",
+    runtimeProvider: "host-native",
+    engine: "labview-cli",
+    runtimeEngine: "labview-cli",
+    platform: selection.platform,
+    labviewVersion: selection.labviewVersion,
+    labviewBitness: selection.labviewBitness,
+    blockedReason: null,
+    runtimeBlockedReason: null
+  });
+}
+
+function hostRuntimePreflightBlockedResult({
+  blockedReason,
+  selection = null,
+  hostCandidateCount = 0,
+  compatibleHostCandidateCount = 0
+}) {
+  return freezeRecord({
+    status: "blocked",
+    type: "runtime-settings-cli-validation-host-runtime-preflight-contract",
+    preflightBoundary: "supplied-public-safe-host-candidate-facts-only",
+    selection,
+    hostCandidateCount,
+    compatibleHostCandidateCount,
+    selectedHostCandidate: null,
+    mixedBitnessAccepted: false,
+    runtimeSelection: createHostRuntimePreflightRuntimeSelection(selection, blockedReason),
+    blockedReason,
+    blockedSideEffects: RUNTIME_SETTINGS_VALIDATION_HOST_RUNTIME_PREFLIGHT_BLOCKED_SIDE_EFFECTS,
+    requirementIds: allRuntimeSettingsCliValidationHostRuntimePreflightRequirementIds()
+  });
+}
+
 function normalizeRuntimeSelectionFacts(selection = {}) {
   if (!isPlainObject(selection)) {
     return {
@@ -2401,10 +2802,14 @@ function runtimeErrorCodeForSettingsFailure(blockedReason) {
 }
 
 function runtimeErrorCodeForRuntimeBlockedReason(blockedReason) {
-  if (blockedReason === "installed-provider-invalid") {
+  if (blockedReason === "installed-provider-invalid" || blockedReason === "unsupported-runtime-provider") {
     return "VIHS_E_PROVIDER_INVALID";
   }
-  if (blockedReason === "missing-runtime-selection-facts" || blockedReason === "labview-runtime-selection-required") {
+  if (
+    blockedReason === "missing-runtime-selection-facts"
+    || blockedReason === "missing-selection-facts"
+    || blockedReason === "labview-runtime-selection-required"
+  ) {
     return "VIHS_E_RUNTIME_SELECTION_REQUIRED";
   }
   if (blockedReason === "labview-version-required") {
@@ -2435,11 +2840,17 @@ function runtimeErrorCodeForRuntimeBlockedReason(blockedReason) {
   ) {
     return "VIHS_E_DOCKER_UNAVAILABLE";
   }
-  if (blockedReason === "labview-exe-not-found") {
+  if (blockedReason === "labview-exe-not-found" || blockedReason === "missing-host-runtime-candidate") {
     return "VIHS_E_LABVIEW_NOT_FOUND";
   }
-  if (blockedReason === "labview-exe-ambiguous") {
+  if (blockedReason === "labview-exe-ambiguous" || blockedReason === "ambiguous-host-runtime-candidate") {
     return "VIHS_E_LABVIEW_AMBIGUOUS";
+  }
+  if (blockedReason === "labview-version-mismatch") {
+    return "VIHS_E_LABVIEW_VERSION_UNSUPPORTED";
+  }
+  if (blockedReason === "labview-bitness-mismatch") {
+    return "VIHS_E_LABVIEW_BITNESS_MISMATCH";
   }
   if (blockedReason === "labview-cli-not-found-for-bitness") {
     return "VIHS_E_LABVIEW_CLI_BITNESS_NOT_FOUND";
