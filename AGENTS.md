@@ -115,13 +115,11 @@ choice exposed to users.
 `runtime-settings-cli-terminal-io-adapter-v1` admits
 `IAU-runtime-settings-cli-terminal-io-adapter-v1` for Issue #77 and T009-T014
 only. Issue #77 is an admission issue and must not be reused for
-implementation. The future implementation must use a separate handoff issue
-after the admission PR merges. This IAU is limited to pure terminal
-session/input facts around the existing prompt-loop contract: Enter
-confirmation adaptation, guided host selection adaptation, Docker latest
-supported NI LabVIEW image-family selection with no Docker bitness prompt,
-non-TTY copyable guidance, unsupported input/EOF/cancel fail-closed behavior,
-and validation handoff facts.
+implementation. Issue #79 implements and closes the pure terminal session/input
+adapter for T009-T014 only: Enter confirmation adaptation, guided host
+selection adaptation, Docker latest supported NI LabVIEW image-family selection
+with no Docker bitness prompt, non-TTY copyable guidance, unsupported
+input/EOF/cancel fail-closed behavior, and validation handoff facts.
 
 Compare execution, LabVIEWCLI execution, Docker execution or orchestration,
 proof-out expansion, live-session proof, package/bin publication,
@@ -129,7 +127,7 @@ launcher/profile mutation, packaging, and Marketplace publication remain
 blocked.
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-terminal-io-adapter-v1`.
+`none`.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that

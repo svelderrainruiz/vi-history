@@ -109,6 +109,15 @@ export const RUNTIME_SETTINGS_CLI_TERMINAL_PROMPT_LOOP_REQUIREMENTS = Object.fre
   failClosed: Object.freeze(["VHS-REQ-545", "VHS-REQ-546"])
 });
 
+export const RUNTIME_SETTINGS_CLI_TERMINAL_IO_ADAPTER_REQUIREMENTS = Object.freeze({
+  enterConfirmation: Object.freeze(["VHS-REQ-545", "VHS-REQ-546"]),
+  guidedHostSelection: Object.freeze(["VHS-REQ-545"]),
+  dockerImageFamily: Object.freeze(["VHS-REQ-545"]),
+  nonInteractiveGuidance: Object.freeze(["VHS-REQ-545"]),
+  failClosed: Object.freeze(["VHS-REQ-545"]),
+  validationHandoff: Object.freeze(["VHS-REQ-546"])
+});
+
 export const RUNTIME_SETTINGS_TERMINAL_ENTRYPOINT_BLOCKED_SIDE_EFFECTS = Object.freeze({
   terminalPromptLoop: false,
   stdinHandling: false,
@@ -140,6 +149,24 @@ export const RUNTIME_SETTINGS_TERMINAL_PROMPT_LOOP_BLOCKED_SIDE_EFFECTS = Object
   liveSessionProof: false,
   packaging: false,
   marketplace: false
+});
+
+export const RUNTIME_SETTINGS_TERMINAL_IO_ADAPTER_BLOCKED_SIDE_EFFECTS = Object.freeze({
+  rawTerminalIo: false,
+  spawnedTerminalIo: false,
+  settingsMutation: false,
+  runtimeValidation: false,
+  runtimeExecution: false,
+  compareExecution: false,
+  labviewCli: false,
+  dockerExecution: false,
+  dockerOrchestration: false,
+  proofOut: false,
+  liveSessionProof: false,
+  packageBinPublication: false,
+  launcherProfileMutation: false,
+  marketplace: false,
+  sourceCopying: false
 });
 
 const RUNTIME_SETTINGS_VALIDATION_PROOF_SCHEMA = "vi-history/runtime-settings-validation-proof@v1";
@@ -203,6 +230,15 @@ export function allRuntimeSettingsCliTerminalEntrypointRequirementIds() {
 export function allRuntimeSettingsCliTerminalPromptLoopRequirementIds() {
   return Object.freeze(
     Object.values(RUNTIME_SETTINGS_CLI_TERMINAL_PROMPT_LOOP_REQUIREMENTS)
+      .flat()
+      .filter((value, index, values) => values.indexOf(value) === index)
+      .sort()
+  );
+}
+
+export function allRuntimeSettingsCliTerminalIoAdapterRequirementIds() {
+  return Object.freeze(
+    Object.values(RUNTIME_SETTINGS_CLI_TERMINAL_IO_ADAPTER_REQUIREMENTS)
       .flat()
       .filter((value, index, values) => values.indexOf(value) === index)
       .sort()
@@ -302,6 +338,77 @@ export function createRuntimeSettingsTerminalPromptLoop(input = {}) {
     validationHandoff,
     blockedSideEffects: RUNTIME_SETTINGS_TERMINAL_PROMPT_LOOP_BLOCKED_SIDE_EFFECTS,
     requirementIds: allRuntimeSettingsCliTerminalPromptLoopRequirementIds()
+  });
+}
+
+export function createRuntimeSettingsTerminalIoAdapter(input = {}) {
+  const terminalSession = normalizeTerminalIoSession(input.terminalSession ?? input.session ?? {});
+  if (!terminalSession.admitted) {
+    return terminalIoAdapterBlockedResult({
+      blockedReason: terminalSession.blockedReason,
+      terminalSession
+    });
+  }
+
+  const terminalInput = terminalSession.interactive === false
+    ? {
+      ok: true,
+      value: freezeRecord({
+        kind: "non-interactive-guidance",
+        confirmation: false,
+        requestedSelection: null
+      })
+    }
+    : normalizeTerminalInput(input.terminalInput ?? input.input ?? input.promptInput);
+  if (!terminalInput.ok) {
+    return terminalIoAdapterBlockedResult({
+      blockedReason: terminalInput.blockedReason,
+      terminalSession,
+      terminalInput: terminalInput.value
+    });
+  }
+
+  if (terminalInput.value.kind === "cancel" || terminalInput.value.kind === "eof") {
+    return terminalIoAdapterBlockedResult({
+      blockedReason: terminalInput.value.kind === "cancel" ? "terminal-input-cancelled" : "terminal-input-eof",
+      terminalSession,
+      terminalInput: terminalInput.value
+    });
+  }
+
+  const promptLoop = createRuntimeSettingsTerminalPromptLoop({
+    ...input,
+    interactive: terminalSession.interactive,
+    confirmation: terminalInput.value.confirmation,
+    requestedSelection: terminalInput.value.requestedSelection ?? input.requestedSelection ?? input.selection
+  });
+
+  if (promptLoop.status !== "ready") {
+    return terminalIoAdapterBlockedResult({
+      blockedReason: promptLoop.blockedReason,
+      terminalSession,
+      terminalInput: terminalInput.value,
+      promptLoop
+    });
+  }
+
+  const nonInteractive = terminalSession.interactive === false;
+  return freezeRecord({
+    status: "ready",
+    type: "runtime-settings-cli-terminal-io-adapter-contract",
+    command: RUNTIME_SETTINGS_INTERACTIVE_SELECTION_COMMAND,
+    mode: nonInteractive ? "non-interactive-guidance" : "interactive",
+    terminalSession,
+    terminalInput: terminalInput.value,
+    promptLoop,
+    transcript: promptLoop.transcript,
+    transcriptLines: promptLoop.transcript.map((step) => step.text),
+    copyableGuidance: promptLoop.guidance?.copyableNextCommands ?? promptLoop.entrypoint?.discoverability?.copyableNextCommands ?? [],
+    promptWait: !nonInteractive,
+    selectedBundle: promptLoop.selectedBundle,
+    validationHandoff: promptLoop.validationHandoff,
+    blockedSideEffects: RUNTIME_SETTINGS_TERMINAL_IO_ADAPTER_BLOCKED_SIDE_EFFECTS,
+    requirementIds: allRuntimeSettingsCliTerminalIoAdapterRequirementIds()
   });
 }
 
@@ -827,6 +934,34 @@ function terminalPromptLoopBlockedResult({
   });
 }
 
+function terminalIoAdapterBlockedResult({
+  blockedReason,
+  terminalSession = normalizeTerminalIoSession(),
+  terminalInput = null,
+  promptLoop = null
+}) {
+  return freezeRecord({
+    status: "blocked",
+    type: "runtime-settings-cli-terminal-io-adapter-contract",
+    command: RUNTIME_SETTINGS_INTERACTIVE_SELECTION_COMMAND,
+    blockedReason,
+    terminalSession,
+    terminalInput,
+    promptLoop,
+    transcript: promptLoop?.transcript ?? createBlockedPromptLoopTranscript(blockedReason),
+    transcriptLines: (promptLoop?.transcript ?? createBlockedPromptLoopTranscript(blockedReason)).map((step) => step.text),
+    copyableGuidance: promptLoop?.guidance?.copyableNextCommands ?? [
+      "vihs --help",
+      RUNTIME_SETTINGS_VALIDATION_COMMAND
+    ],
+    promptWait: false,
+    selectedBundle: null,
+    validationHandoff: createPromptLoopValidationHandoff(createValidationHandoff(null, false)),
+    blockedSideEffects: RUNTIME_SETTINGS_TERMINAL_IO_ADAPTER_BLOCKED_SIDE_EFFECTS,
+    requirementIds: allRuntimeSettingsCliTerminalIoAdapterRequirementIds()
+  });
+}
+
 function createPromptLoopTranscript({ currentSelection, promptMode }) {
   const currentSelectionText = formatRuntimeSelection(currentSelection);
   const transcript = [
@@ -989,6 +1124,134 @@ function normalizeTerminalSession(session) {
     requestedScope,
     blockedReason: admitted ? null : "unsupported-terminal-session"
   });
+}
+
+function normalizeTerminalIoSession(session = {}) {
+  const base = normalizeTerminalSession(session);
+  const interactive = session.interactive === false || session.isTTY === false || session.tty === false
+    ? false
+    : true;
+  return freezeRecord({
+    ...base,
+    interactive,
+    isTTY: interactive,
+    rawDriverBound: false,
+    spawnedProcessBound: false
+  });
+}
+
+function normalizeTerminalInput(input) {
+  if (input == null || input === "") {
+    return {
+      ok: true,
+      value: freezeRecord({
+        kind: "enter",
+        confirmation: "enter",
+        requestedSelection: null
+      })
+    };
+  }
+
+  if (typeof input === "string") {
+    const normalized = input.trim().toLowerCase();
+    if (["enter", "return", "confirm", "confirmed", "accept", "accepted"].includes(normalized)) {
+      return {
+        ok: true,
+        value: freezeRecord({
+          kind: "enter",
+          confirmation: "enter",
+          requestedSelection: null
+        })
+      };
+    }
+    if (["cancel", "escape", "esc"].includes(normalized)) {
+      return {
+        ok: true,
+        value: freezeRecord({
+          kind: "cancel",
+          confirmation: false,
+          requestedSelection: null
+        })
+      };
+    }
+    if (normalized === "eof") {
+      return {
+        ok: true,
+        value: freezeRecord({
+          kind: "eof",
+          confirmation: false,
+          requestedSelection: null
+        })
+      };
+    }
+    return {
+      ok: false,
+      blockedReason: "unsupported-terminal-input",
+      value: freezeRecord({
+        kind: "unsupported",
+        raw: input
+      })
+    };
+  }
+
+  if (!isPlainObject(input)) {
+    return {
+      ok: false,
+      blockedReason: "unsupported-terminal-input",
+      value: null
+    };
+  }
+
+  const kind = normalizeFact(input.kind ?? input.action ?? input.type)?.toLowerCase();
+  if (["cancel", "escape", "esc"].includes(kind)) {
+    return {
+      ok: true,
+      value: freezeRecord({
+        kind: "cancel",
+        confirmation: false,
+        requestedSelection: null
+      })
+    };
+  }
+  if (kind === "eof") {
+    return {
+      ok: true,
+      value: freezeRecord({
+        kind: "eof",
+        confirmation: false,
+        requestedSelection: null
+      })
+    };
+  }
+  if (kind === "selection" || input.selection || input.requestedSelection) {
+    return {
+      ok: true,
+      value: freezeRecord({
+        kind: "selection",
+        confirmation: input.confirmation ?? input.confirm ?? "enter",
+        requestedSelection: input.selection ?? input.requestedSelection
+      })
+    };
+  }
+  if (!kind || ["enter", "return", "confirm", "accepted", "accept"].includes(kind)) {
+    return {
+      ok: true,
+      value: freezeRecord({
+        kind: "enter",
+        confirmation: input.confirmation ?? input.confirm ?? "enter",
+        requestedSelection: null
+      })
+    };
+  }
+
+  return {
+    ok: false,
+    blockedReason: "unsupported-terminal-input",
+    value: freezeRecord({
+      kind: "unsupported",
+      raw: input
+    })
+  };
 }
 
 function createDiscoverabilityFacts(bundle, platform) {

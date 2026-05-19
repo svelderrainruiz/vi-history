@@ -2,7 +2,8 @@
 
 Issue #77 imports `runtime-settings-cli-terminal-io-adapter-v1`, locks the
 public Spec Kit feature, and admits
-`IAU-runtime-settings-cli-terminal-io-adapter-v1` for T009-T014 only.
+`IAU-runtime-settings-cli-terminal-io-adapter-v1` for T009-T014 only. Issue #79
+implements and closes the admitted IAU for T009-T014 only.
 
 Machine-readable admission record:
 [runtime-settings-cli-terminal-io-adapter-v1.json](./runtime-settings-cli-terminal-io-adapter-v1.json)
@@ -29,8 +30,7 @@ Machine-readable admission record:
 - T013 unsupported input, EOF, cancel, and blocked side-effect tests
 - T014 minimum pure terminal I/O adapter contract
 
-Implementation must wait for this admission PR to merge and then use a
-separate implementation handoff issue.
+Implementation used separate handoff Issue #79 after the admission PR merged.
 
 ## Blocked Scope
 

@@ -38,7 +38,7 @@ Issue #71 imports `runtime-settings-cli-terminal-prompt-loop-v1` and admits
 Issue #73 implements and closes it for T009-T013 only. Issue #77 imports
 `runtime-settings-cli-terminal-io-adapter-v1` and admits
 `IAU-runtime-settings-cli-terminal-io-adapter-v1` for T009-T014 only.
-Implementation waits for a separate handoff issue.
+Issue #79 implements and closes it for T009-T014 only.
 
 ## Authority
 
@@ -122,6 +122,8 @@ Implementation waits for a separate handoff issue.
 - Issue #77 imports `runtime-settings-cli-terminal-io-adapter-v1` and admits
   `IAU-runtime-settings-cli-terminal-io-adapter-v1` for T009-T014 only.
   Issue #77 is an admission issue and must not be reused for implementation.
+- Issue #79 implements and closes
+  `IAU-runtime-settings-cli-terminal-io-adapter-v1` for T009-T014 only.
 
 The current admission ledgers are:
 
@@ -140,7 +142,7 @@ The current admission ledgers are:
 - `docs/requirements/admissions/runtime-settings-cli-terminal-io-adapter-v1.json`
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-terminal-io-adapter-v1`.
+`none`.
 
 The completed observation model scope is T009-T013. The command activation
 manifest contract implements only T009-T012. The command handler entrypoint shell
@@ -200,17 +202,15 @@ maps to the LabVIEW 2026 image family and is 64-bit-only by image/platform.
 OS-specific raw terminal I/O drivers, compare execution, LabVIEWCLI execution,
 Docker execution, proof-out expansion, live-session proof, Windows PowerShell
 Marketplace bootstrap, packaging, and Marketplace work remain blocked.
-The runtime settings CLI terminal I/O adapter IAU is admitted for T009-T014 in
-`.specify/specs/runtime-settings-cli-terminal-io-adapter-v1/tasks.md`: future
-tests for Enter confirmation adaptation, guided host terminal selection, Docker
+The runtime settings CLI terminal I/O adapter IAU implements only T009-T014 in
+`.specify/specs/runtime-settings-cli-terminal-io-adapter-v1/tasks.md`: tests
+for Enter confirmation adaptation, guided host terminal selection, Docker
 latest supported NI LabVIEW image-family selection with no Docker bitness
 prompt, non-TTY copyable guidance, unsupported input/EOF/cancel fail-closed
-behavior, and the minimum pure terminal session/input adapter contract. Issue
-#77 is an admission issue; implementation must wait for a separate handoff
-issue after this admission PR merges. Compare execution, LabVIEWCLI execution,
-Docker execution or orchestration, proof-out expansion, live-session proof,
-package/bin publication, launcher/profile mutation, Marketplace work, and
-source copying remain blocked.
+behavior, and the minimum pure terminal session/input adapter contract.
+Compare execution, LabVIEWCLI execution, Docker execution or orchestration,
+proof-out expansion, live-session proof, package/bin publication,
+launcher/profile mutation, Marketplace work, and source copying remain blocked.
 
 The Marketplace posture is recorded in
 `docs/decisions/ADR-001-marketplace-publication-disabled.md` and summarized in
