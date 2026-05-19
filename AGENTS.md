@@ -171,7 +171,9 @@ that IAU and is admitted separately below.
 `runtime-settings-cli-validation-plan-only-v1` admits
 `IAU-runtime-settings-cli-validation-plan-only-v1` for Issue #99 and
 T009-T016 only. Issue #99 is an admission issue and must not be reused for
-implementation. The admitted IAU is a pure `validate-plan-only` branch over
+implementation. Issue #101 implements and closes it for T009-T016 only. Issue
+#102 and PR #103 repair and close the final plan-only command-contract
+behavior. The implemented IAU is a pure `validate-plan-only` branch over
 `createRuntimeSettingsValidationCommandResult(input = {})` that returns
 deterministic proof-out target and artifact planning facts without calling the
 proof-out file-emission writer or writing files. The proof-out file-emission
@@ -183,7 +185,7 @@ launcher/profile mutation, release automation, Marketplace publication, and
 source copying remain blocked.
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-plan-only-v1`.
+`none`.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that

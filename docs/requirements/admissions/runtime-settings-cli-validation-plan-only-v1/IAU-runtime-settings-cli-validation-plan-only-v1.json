@@ -2,12 +2,24 @@
   "schema": "vi-history/implementation-admission-unit@v1",
   "iauId": "IAU-runtime-settings-cli-validation-plan-only-v1",
   "createdDate": "2026-05-19",
-  "state": "admitted",
+  "state": "implemented",
   "parentSliceId": "runtime-settings-cli-validation-plan-only-v1",
   "specFeature": ".specify/specs/runtime-settings-cli-validation-plan-only-v1",
   "issue": {
     "number": 99,
     "url": "https://github.com/svelderrainruiz/vi-history/issues/99"
+  },
+  "implementationHandoffIssue": {
+    "number": 101,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/101"
+  },
+  "implementationRepairIssue": {
+    "number": 102,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/102"
+  },
+  "implementationPullRequest": {
+    "number": 103,
+    "url": "https://github.com/svelderrainruiz/vi-history/pull/103"
   },
   "admittedTasks": [
     "T009",
@@ -51,6 +63,34 @@
     "status": "pass",
     "record": "IAU-runtime-settings-cli-validation-plan-only-v1-preflight-v1.json",
     "implementationStartAllowed": true
+  },
+  "implementationCloseout": {
+    "status": "pass",
+    "issue": 101,
+    "repairIssue": 102,
+    "pullRequest": 103,
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011",
+      "T012",
+      "T013",
+      "T014",
+      "T015",
+      "T016"
+    ],
+    "blockedScopeRetained": [
+      "T017",
+      "T018",
+      "T019",
+      "T020",
+      "T021",
+      "T022",
+      "T023",
+      "T024",
+      "T025",
+      "T026"
+    ]
   },
   "implementationSharing": "none",
   "requirementMaturityBasis": "governed bridge-readiness packet supports public import, Spec Kit planning, and narrow validation plan-only command-result admission, not source reuse",

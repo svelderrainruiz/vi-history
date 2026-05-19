@@ -140,9 +140,8 @@ or source copying occurred.
   `IAU-runtime-settings-cli-validation-plan-only-v1` and keep runtime
   execution, terminal process wiring, file emission for plan-only,
   publication, mutation, release, Marketplace, and source copying blocked.
-- **SC-003**: The admission record states that T009-T016 are admitted for the
-  plan-only IAU and the Current Implementation Admission Unit is
-  `IAU-runtime-settings-cli-validation-plan-only-v1`.
+- **SC-003**: The admission record states that T009-T016 are implemented for
+  the plan-only IAU and the Current Implementation Admission Unit is `none`.
 - **SC-004**: Public validation rejects private paths, credentials, private
   evidence, private control-plane terms, and copied implementation-source
   instructions.

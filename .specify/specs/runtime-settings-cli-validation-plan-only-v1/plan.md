@@ -54,12 +54,11 @@ over the already implemented validation command contract.
 
 ## Implementation Admission Unit
 
-Admitted after this PR merges and a separate implementation handoff issue is
-created:
+Implemented through implementation handoff Issue #101 and repair PR #103:
 
 `IAU-runtime-settings-cli-validation-plan-only-v1`
 
-Admitted tasks: T009-T016.
+Implemented tasks: T009-T016.
 
 The IAU may add tests and the minimum pure command-result branch needed for
 `validate-plan-only`.

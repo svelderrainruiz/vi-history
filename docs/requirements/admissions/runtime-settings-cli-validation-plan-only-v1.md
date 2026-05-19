@@ -1,7 +1,7 @@
 # Requirements Admission: Runtime Settings CLI Validation Plan-Only
 
-`runtime-settings-cli-validation-plan-only-v1` is admitted for public MIT Spec
-Kit planning and a later clean-room implementation handoff issue.
+`runtime-settings-cli-validation-plan-only-v1` is implemented for public MIT
+Spec Kit planning and clean-room implementation handoff Issue #101.
 
 ## Source
 
@@ -15,13 +15,14 @@ Kit planning and a later clean-room implementation handoff issue.
 ## Admission
 
 - Public issue: Issue #99
-- Current Implementation Admission Unit:
-  `IAU-runtime-settings-cli-validation-plan-only-v1`
+- Implementation handoff issue: Issue #101
+- Implementation repair issue: Issue #102
+- Implementation PR: PR #103
+- Current Implementation Admission Unit: `none`
 - Completed import/spec scope: T001-T008 in
   `.specify/specs/runtime-settings-cli-validation-plan-only-v1/tasks.md`
-- Admitted implementation scope: T009-T016 in
+- Completed implementation scope: T009-T016 in
   `.specify/specs/runtime-settings-cli-validation-plan-only-v1/tasks.md`
-- Implementation handoff issue: to be created after this admission PR merges
 
 ## Boundary
 
@@ -31,7 +32,7 @@ returns deterministic proof-out target and artifact planning facts through the
 already admitted validation readback, runtime outcome, validation
 proof-artifact, and proof-out adapter contracts.
 
-Plan-only must not call the proof-out file-emission writer and must not write
+Plan-only does not call the proof-out file-emission writer and does not write
 proof files.
 
 Runtime locator invocation, OS inspection, private path discovery, runtime
