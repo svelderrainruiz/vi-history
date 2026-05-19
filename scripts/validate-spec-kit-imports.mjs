@@ -1653,7 +1653,7 @@ requireTextIncludes("docs/development/copilot-workflow.md", [
 const runtimeSettingsTerminalAdmission = readJson(runtimeSettingsTerminalAdmissionPath);
 requireEqual(runtimeSettingsTerminalAdmission.schema, "vi-history/requirements-admission@v1", "runtime settings terminal admission schema");
 requireEqual(runtimeSettingsTerminalAdmission.sliceId, runtimeSettingsTerminalSliceId, "runtime settings terminal admission sliceId");
-requireEqual(runtimeSettingsTerminalAdmission.state, "implementation-admitted", "runtime settings terminal admission state");
+requireEqual(runtimeSettingsTerminalAdmission.state, "implemented", "runtime settings terminal admission state");
 requireEqual(runtimeSettingsTerminalAdmission.targetProduct, "vi-history", "runtime settings terminal admission targetProduct");
 requireEqual(runtimeSettingsTerminalAdmission.targetFeature, runtimeSettingsTerminalSliceId, "runtime settings terminal admission targetFeature");
 requireEqual(runtimeSettingsTerminalAdmission.sourceBaselineTag, "v1.3.16", "runtime settings terminal admission sourceBaselineTag");
@@ -1661,29 +1661,30 @@ requireEqual(runtimeSettingsTerminalAdmission.sourceCommit, "3716d35a7ba57031464
 requireEqual(runtimeSettingsTerminalAdmission.governedAdmissionCommit, "913f840a9dd23319d91d5fcf5862be9615d5b8d0", "runtime settings terminal admission governedAdmissionCommit");
 requireEqual(runtimeSettingsTerminalAdmission.implementationSharing, "none", "runtime settings terminal admission implementationSharing");
 requireMarketplacePosture(runtimeSettingsTerminalAdmission, "runtime settings terminal admission");
-requireEqual(runtimeSettingsTerminalAdmission.currentImplementationAdmissionUnit, "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1", "runtime settings terminal currentImplementationAdmissionUnit");
+requireEqual(runtimeSettingsTerminalAdmission.currentImplementationAdmissionUnit, null, "runtime settings terminal currentImplementationAdmissionUnit");
 requireArrayEqual(runtimeSettingsTerminalAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "runtime settings terminal completedSpecScope");
-requireArrayEqual(runtimeSettingsTerminalAdmission.completedImplementationScope, [], "runtime settings terminal completedImplementationScope");
-requireArrayEqual(runtimeSettingsTerminalAdmission.admittedImplementationScope, ["T009", "T010", "T011", "T012", "T013"], "runtime settings terminal admittedImplementationScope");
+requireArrayEqual(runtimeSettingsTerminalAdmission.completedImplementationScope, ["T009", "T010", "T011", "T012", "T013"], "runtime settings terminal completedImplementationScope");
+requireArrayEqual(runtimeSettingsTerminalAdmission.admittedImplementationScope, [], "runtime settings terminal admittedImplementationScope");
 requireArrayEqual(runtimeSettingsTerminalAdmission.blockedImplementationScope, ["T014", "T015", "T016", "T017", "T018", "T019"], "runtime settings terminal blockedImplementationScope");
 requireEqual(runtimeSettingsTerminalAdmission.preImplementationPreflight?.iauId, "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1", "runtime settings terminal preImplementationPreflight iauId");
 requireEqual(runtimeSettingsTerminalAdmission.preImplementationPreflight?.status, "pass", "runtime settings terminal preImplementationPreflight status");
 requireEqual(runtimeSettingsTerminalAdmission.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings terminal preImplementationPreflight implementationStartAllowed");
 requireEqual(runtimeSettingsTerminalAdmission.preImplementationPreflight?.record, runtimeSettingsTerminalPreflightPath, "runtime settings terminal preImplementationPreflight record");
 requireEqual(runtimeSettingsTerminalAdmission.issue?.number, 65, "runtime settings terminal issue number");
-requireEqual(runtimeSettingsTerminalAdmission.implementationHandoffIssue, null, "runtime settings terminal implementationHandoffIssue");
-requireEqual(runtimeSettingsTerminalAdmission.implementationCloseout, null, "runtime settings terminal implementationCloseout");
+requireEqual(runtimeSettingsTerminalAdmission.implementationHandoffIssue?.number, 67, "runtime settings terminal implementationHandoffIssue number");
+requireEqual(runtimeSettingsTerminalAdmission.implementationCloseout?.status, "pass", "runtime settings terminal implementationCloseout status");
+requireArrayEqual(runtimeSettingsTerminalAdmission.implementationCloseout?.completedTasks, ["T009", "T010", "T011", "T012", "T013"], "runtime settings terminal implementationCloseout completedTasks");
 requireFile(`docs/requirements/admissions/${runtimeSettingsTerminalSliceId}.md`);
 
 const runtimeSettingsTerminalAdmissionUnit = (runtimeSettingsTerminalAdmission.implementationAdmissionUnits ?? [])
   .find((unit) => unit?.iauId === "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1");
-requireEqual(runtimeSettingsTerminalAdmissionUnit?.state, "implementation-admitted", "runtime settings terminal admission unit state");
+requireEqual(runtimeSettingsTerminalAdmissionUnit?.state, "implemented", "runtime settings terminal admission unit state");
 requireEqual(runtimeSettingsTerminalAdmissionUnit?.preflightRecord, runtimeSettingsTerminalPreflightPath, "runtime settings terminal admission unit preflightRecord");
 
 const runtimeSettingsTerminalIau = readJson(runtimeSettingsTerminalIauPath);
 requireEqual(runtimeSettingsTerminalIau.schema, "vi-history/implementation-admission-unit@v1", "runtime settings terminal IAU schema");
 requireEqual(runtimeSettingsTerminalIau.iauId, "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1", "runtime settings terminal IAU id");
-requireEqual(runtimeSettingsTerminalIau.state, "implementation-admitted", "runtime settings terminal IAU state");
+requireEqual(runtimeSettingsTerminalIau.state, "implemented", "runtime settings terminal IAU state");
 requireEqual(runtimeSettingsTerminalIau.parentSliceId, runtimeSettingsTerminalSliceId, "runtime settings terminal IAU parentSliceId");
 requireArrayEqual(runtimeSettingsTerminalIau.admittedTasks, ["T009", "T010", "T011", "T012", "T013"], "runtime settings terminal IAU admittedTasks");
 requireArrayEqual(runtimeSettingsTerminalIau.blockedTasks, ["T014", "T015", "T016", "T017", "T018", "T019"], "runtime settings terminal IAU blockedTasks");
@@ -1692,8 +1693,9 @@ requireMarketplacePosture(runtimeSettingsTerminalIau, "runtime settings terminal
 requireEqual(runtimeSettingsTerminalIau.preImplementationPreflight?.status, "pass", "runtime settings terminal IAU preImplementationPreflight status");
 requireEqual(runtimeSettingsTerminalIau.preImplementationPreflight?.record, "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1-preflight-v1.json", "runtime settings terminal IAU preImplementationPreflight record");
 requireEqual(runtimeSettingsTerminalIau.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings terminal IAU preImplementationPreflight implementationStartAllowed");
-requireEqual(runtimeSettingsTerminalIau.implementationHandoffIssue, null, "runtime settings terminal IAU implementationHandoffIssue");
-requireEqual(runtimeSettingsTerminalIau.implementationCloseout, null, "runtime settings terminal IAU implementationCloseout");
+requireEqual(runtimeSettingsTerminalIau.implementationHandoffIssue?.number, 67, "runtime settings terminal IAU implementationHandoffIssue number");
+requireEqual(runtimeSettingsTerminalIau.implementationCloseout?.status, "pass", "runtime settings terminal IAU implementationCloseout status");
+requireArrayEqual(runtimeSettingsTerminalIau.implementationCloseout?.completedTasks, ["T009", "T010", "T011", "T012", "T013"], "runtime settings terminal IAU implementationCloseout completedTasks");
 requireFile(`docs/requirements/admissions/${runtimeSettingsTerminalSliceId}/IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1.md`);
 
 const runtimeSettingsTerminalPreflight = readJson(runtimeSettingsTerminalPreflightPath);
@@ -1755,8 +1757,8 @@ requireTextIncludes(`${runtimeSettingsTerminalFeatureDir}/tasks.md`, [
   "Issue #65",
   "- [x] T001",
   "- [x] T008",
-  "- [ ] T009",
-  "- [ ] T013",
+  "- [x] T009",
+  "- [x] T013",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
   "[BLOCKED]",
   "T019"
