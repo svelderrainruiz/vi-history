@@ -1,0 +1,116 @@
+{
+  "schema": "vi-history/requirements-admission@v1",
+  "sliceId": "extension-vsix-packaging-artifact-v1",
+  "createdDate": "2026-05-19",
+  "state": "implemented",
+  "targetProduct": "vi-history",
+  "targetFeature": "extension-vsix-packaging-artifact-v1",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "478d80eac94722411e44ef10a1fc00e39d579fdb",
+  "governedAdmissionCommit": "478d80eac94722411e44ef10a1fc00e39d579fdb",
+  "publicImportPath": "docs/requirements/imports/extension-vsix-packaging-artifact-v1/",
+  "specKitPath": ".specify/specs/extension-vsix-packaging-artifact-v1/",
+  "issue": {
+    "number": 137,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/137"
+  },
+  "implementationHandoffIssue": {
+    "number": 136,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/136"
+  },
+  "implementationPullRequest": {
+    "number": 138,
+    "url": "https://github.com/svelderrainruiz/vi-history/pull/138"
+  },
+  "bridgeChecks": {
+    "publicImportPacketPresent": "pass",
+    "specKitArtifactsPresent": "pass",
+    "redactionScan": "pass",
+    "artifactConsistency": "pass",
+    "implementationPreflight": "pass"
+  },
+  "implementationAdmissionUnits": [
+    {
+      "iauId": "IAU-extension-vsix-packaging-artifact-v1",
+      "state": "implemented",
+      "record": "docs/requirements/admissions/extension-vsix-packaging-artifact-v1/IAU-extension-vsix-packaging-artifact-v1.json",
+      "preflightRecord": "docs/requirements/admissions/extension-vsix-packaging-artifact-v1/IAU-extension-vsix-packaging-artifact-v1-preflight-v1.json",
+      "admittedTasks": [
+        "T009",
+        "T010",
+        "T011",
+        "T012",
+        "T013",
+        "T014"
+      ]
+    }
+  ],
+  "currentImplementationAdmissionUnit": null,
+  "completedSpecScope": [
+    "T001",
+    "T002",
+    "T003",
+    "T004",
+    "T005",
+    "T006",
+    "T007",
+    "T008"
+  ],
+  "completedImplementationScope": [
+    "T009",
+    "T010",
+    "T011",
+    "T012",
+    "T013",
+    "T014"
+  ],
+  "admittedImplementationScope": [],
+  "blockedImplementationScope": [
+    "T015",
+    "T016"
+  ],
+  "preImplementationPreflight": {
+    "iauId": "IAU-extension-vsix-packaging-artifact-v1",
+    "status": "pass",
+    "record": "docs/requirements/admissions/extension-vsix-packaging-artifact-v1/IAU-extension-vsix-packaging-artifact-v1-preflight-v1.json",
+    "implementationStartAllowed": true
+  },
+  "implementationCloseout": {
+    "status": "pass",
+    "issue": 136,
+    "pullRequest": 138,
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011",
+      "T012",
+      "T013",
+      "T014"
+    ],
+    "blockedScopeRetained": [
+      "T015",
+      "T016"
+    ]
+  },
+  "requirementMaturityBasis": "MIT-authored VSIX packaging artifact authorization, not source reuse",
+  "implementationSharing": "none",
+  "implementationHandoffPolicy": "Issue #136 is the separate implementation handoff issue; do not reuse Issue #137 for implementation.",
+  "vsixPackaging": "local-artifact-only",
+  "packageArtifact": "dist/vi-history-0.1.0.vsix",
+  "marketplacePublication": "out-of-scope",
+  "blockedScope": [
+    "Marketplace publication",
+    "release tokens",
+    "vsce publish",
+    "Open VSX publication",
+    "Marketplace workflows",
+    "package registry publication",
+    "release automation",
+    "runtime validation execution",
+    "compare execution",
+    "LabVIEWCLI execution",
+    "Docker execution",
+    "launcher/profile mutation",
+    "source copying"
+  ]
+}

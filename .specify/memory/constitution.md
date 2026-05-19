@@ -1,7 +1,7 @@
 <!--
 Sync Impact Report
-Version change: 0.1.17 -> 0.1.18
-Modified principles: imported slice registry adds runtime settings CLI validation host runtime observation adapter
+Version change: 0.1.18 -> 0.1.19
+Modified principles: VSIX packaging artifact separated from Marketplace publication; imported slice registry adds extension VSIX packaging artifact
 Added sections: Authority Boundaries, Development Workflow, Governance
 Removed sections: unresolved template placeholders
 Templates requiring updates: pending after first implementation planning pass
@@ -38,12 +38,14 @@ issues, and validation scripts MUST exclude private filesystem paths, local
 skill names, credential locations, private evidence, and release-control
 instructions.
 
-### V. Marketplace Disabled Until Governed
+### V. VSIX Package Artifact Only
 
-The extension identity MAY be modeled for future compatibility, but package
-publishing and Marketplace release work MUST remain disabled. Issue #5 records
-the current posture: this repository stays MIT, public, and
-Marketplace-disabled. A later ADR is required before enabling that channel.
+The extension identity MAY be modeled for compatibility, and local/CI VSIX
+artifact packaging MAY be admitted by a named IAU. Marketplace publication,
+release tokens, `vsce publish`, Open VSX publication, Marketplace workflows,
+release uploads, and package registry publication are out of scope for this
+repository unless a future authority explicitly moves that work outside this
+repo's current scope.
 
 ## Authority Boundaries
 
@@ -145,6 +147,9 @@ The imported slices are:
   `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-observation-adapter-v1/`
   and Spec Kit feature under
   `.specify/specs/runtime-settings-cli-validation-host-runtime-observation-adapter-v1/`.
+- `extension-vsix-packaging-artifact-v1`, with its import packet under
+  `docs/requirements/imports/extension-vsix-packaging-artifact-v1/` and Spec
+  Kit feature under `.specify/specs/extension-vsix-packaging-artifact-v1/`.
 
 The active pinned Spec Kit feature is recorded in `.specify/feature.json`.
 
@@ -161,4 +166,4 @@ This constitution governs repository-local work. Amendments require a versioned
 change, a short rationale, and validation that affected Spec Kit templates and
 repository guidance remain consistent.
 
-**Version**: 0.1.18 | **Ratified**: 2026-05-17 | **Last Amended**: 2026-05-19
+**Version**: 0.1.19 | **Ratified**: 2026-05-17 | **Last Amended**: 2026-05-19

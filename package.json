@@ -5,6 +5,11 @@
   "version": "0.1.0",
   "license": "MIT",
   "description": "MIT clean-room Spec Kit implementation authority for VI History.",
+  "type": "module",
+  "main": "./src/extension.mjs",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/svelderrainruiz/vi-history.git"
@@ -38,7 +43,12 @@
   "scripts": {
     "check": "npm run validate",
     "test": "npm run validate",
+    "package:vsix": "node scripts/package-vsix.mjs",
+    "inspect:vsix": "node scripts/inspect-vsix-package.mjs",
     "unit": "node --test tests/*.test.mjs",
     "validate": "npm run unit && node scripts/validate-spec-kit-imports.mjs && node scripts/check-clean-room-boundary.mjs"
+  },
+  "devDependencies": {
+    "@vscode/vsce": "^3.9.1"
   }
 }
