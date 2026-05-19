@@ -286,13 +286,13 @@ image/platform; host LabVIEW bitness remains host-provider scope.
 Issue #77 admits
 `IAU-runtime-settings-cli-terminal-io-adapter-v1` for
 `runtime-settings-cli-terminal-io-adapter-v1` and T009-T014 only. Issue #77 is
-an admission issue and must not be reused for implementation. Copilot
-implementation must wait for the separate handoff issue created after the
-admission PR merges. The admitted IAU is limited to pure terminal session/input
-facts around the existing prompt-loop contract: Enter confirmation, guided host
-selection, Docker latest supported NI LabVIEW image-family selection without a
-Docker bitness prompt, non-TTY copyable guidance, unsupported input/EOF/cancel
-fail-closed behavior, and validation handoff facts.
+an admission issue and must not be reused for implementation. Issue #79
+implements and closes the pure terminal session/input adapter for T009-T014
+only: Enter confirmation, guided host selection, Docker latest supported NI
+LabVIEW image-family selection without a Docker bitness prompt, non-TTY
+copyable guidance, unsupported input/EOF/cancel fail-closed behavior, and
+validation handoff facts. No new Copilot implementation should start from
+Issue #79.
 
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.
@@ -308,8 +308,6 @@ Do not implement these without a separate bridge admission:
   `IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1`
 - runtime settings CLI terminal prompt-loop implementation beyond
   `IAU-runtime-settings-cli-terminal-prompt-loop-v1`
-- runtime settings CLI terminal I/O adapter implementation before the separate
-  handoff issue for `IAU-runtime-settings-cli-terminal-io-adapter-v1`
 - runtime settings CLI terminal I/O adapter behavior beyond pure terminal
   session/input facts
 - runtime settings mutation beyond the admitted provider/version/bitness

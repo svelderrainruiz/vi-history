@@ -50,20 +50,20 @@ handling, and validation handoff without runtime execution.
 
 **Public admission issue**: Issue #77
 
-**Implementation handoff issue**: not created yet.
+**Implementation handoff issue**: Issue #79
 
-- [ ] T009 Add tests proving Enter confirmation adapts terminal input facts
+- [x] T009 Add tests proving Enter confirmation adapts terminal input facts
   into the existing prompt-loop validation handoff.
-- [ ] T010 Add tests proving guided host terminal selection feeds the already
+- [x] T010 Add tests proving guided host terminal selection feeds the already
   admitted supported host selection contract.
-- [ ] T011 Add tests proving Docker terminal selection uses the latest
+- [x] T011 Add tests proving Docker terminal selection uses the latest
   supported NI LabVIEW Docker image family without exposing a Docker bitness
   prompt.
-- [ ] T012 Add tests proving non-TTY sessions return copyable guidance instead
+- [x] T012 Add tests proving non-TTY sessions return copyable guidance instead
   of prompting.
-- [ ] T013 Add tests proving unsupported input, EOF, cancel, and blocked side
+- [x] T013 Add tests proving unsupported input, EOF, cancel, and blocked side
   effects fail closed without runtime execution.
-- [ ] T014 Implement the minimum public MIT terminal I/O adapter contract as
+- [x] T014 Implement the minimum public MIT terminal I/O adapter contract as
   pure terminal session/input and output facts.
 
 ---
@@ -109,8 +109,8 @@ sharing visibly outside this IAU.
   starts.
 - Phase 1 must merge before
   `IAU-runtime-settings-cli-terminal-io-adapter-v1` implementation starts.
-- Phase 2 must use a separate implementation handoff issue after this
-  admission PR merges.
+- Phase 2 used separate implementation handoff Issue #79 after the admission
+  PR merged.
 - Phase 3 remains blocked until separate public requirements and preflight
   records admit compare execution, LabVIEWCLI execution, Docker execution,
   proof-out expansion, live-session proof, package/bin publication,
@@ -122,8 +122,8 @@ sharing visibly outside this IAU.
 ## Implementation Strategy
 
 1. Merge import/spec/admission artifacts to `develop`.
-2. Create a separate handoff issue for
-   `IAU-runtime-settings-cli-terminal-io-adapter-v1`.
+2. Implement and close
+   `IAU-runtime-settings-cli-terminal-io-adapter-v1` through Issue #79.
 3. Keep compare execution, LabVIEWCLI execution, Docker execution, proof
    expansion, live-session proof, package/bin publication, launcher/profile
    mutation, Marketplace publication, and source copying blocked.

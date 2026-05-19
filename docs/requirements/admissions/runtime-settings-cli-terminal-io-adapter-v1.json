@@ -2,7 +2,7 @@
   "schema": "vi-history/requirements-admission@v1",
   "sliceId": "runtime-settings-cli-terminal-io-adapter-v1",
   "createdDate": "2026-05-19",
-  "state": "admitted",
+  "state": "implemented",
   "targetProduct": "vi-history",
   "targetFeature": "runtime-settings-cli-terminal-io-adapter-v1",
   "sourceBaselineTag": "v1.3.16",
@@ -13,6 +13,10 @@
   "issue": {
     "number": 77,
     "url": "https://github.com/svelderrainruiz/vi-history/issues/77"
+  },
+  "implementationHandoffIssue": {
+    "number": 79,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/79"
   },
   "bridgeChecks": {
     "specKitCliVersion": "0.8.12.dev0",
@@ -26,7 +30,7 @@
   "implementationAdmissionUnits": [
     {
       "iauId": "IAU-runtime-settings-cli-terminal-io-adapter-v1",
-      "state": "admitted",
+      "state": "implemented",
       "record": "docs/requirements/admissions/runtime-settings-cli-terminal-io-adapter-v1/IAU-runtime-settings-cli-terminal-io-adapter-v1.json",
       "preflightRecord": "docs/requirements/admissions/runtime-settings-cli-terminal-io-adapter-v1/IAU-runtime-settings-cli-terminal-io-adapter-v1-preflight-v1.json",
       "admittedTasks": [
@@ -39,7 +43,7 @@
       ]
     }
   ],
-  "currentImplementationAdmissionUnit": "IAU-runtime-settings-cli-terminal-io-adapter-v1",
+  "currentImplementationAdmissionUnit": null,
   "completedSpecScope": [
     "T001",
     "T002",
@@ -50,8 +54,7 @@
     "T007",
     "T008"
   ],
-  "completedImplementationScope": [],
-  "admittedImplementationScope": [
+  "completedImplementationScope": [
     "T009",
     "T010",
     "T011",
@@ -59,6 +62,7 @@
     "T013",
     "T014"
   ],
+  "admittedImplementationScope": [],
   "blockedImplementationScope": [
     "T015",
     "T016",
@@ -75,6 +79,29 @@
     "status": "pass",
     "record": "docs/requirements/admissions/runtime-settings-cli-terminal-io-adapter-v1/IAU-runtime-settings-cli-terminal-io-adapter-v1-preflight-v1.json",
     "implementationStartAllowed": true
+  },
+  "implementationCloseout": {
+    "status": "pass",
+    "issue": 79,
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011",
+      "T012",
+      "T013",
+      "T014"
+    ],
+    "blockedScopeRetained": [
+      "T015",
+      "T016",
+      "T017",
+      "T018",
+      "T019",
+      "T020",
+      "T021",
+      "T022",
+      "T023"
+    ]
   },
   "requirementMaturityBasis": "governed bridge-readiness packet supports public import, Spec Kit planning, and narrow terminal I/O adapter admission, not source reuse",
   "implementationSharing": "none",

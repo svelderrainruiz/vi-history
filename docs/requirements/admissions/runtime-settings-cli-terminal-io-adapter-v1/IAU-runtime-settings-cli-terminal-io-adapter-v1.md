@@ -1,6 +1,6 @@
 # Implementation Admission Unit: Runtime Settings CLI Terminal I/O Adapter
 
-`IAU-runtime-settings-cli-terminal-io-adapter-v1` is admitted for
+`IAU-runtime-settings-cli-terminal-io-adapter-v1` is implemented for
 `runtime-settings-cli-terminal-io-adapter-v1`.
 
 Parent slice: `runtime-settings-cli-terminal-io-adapter-v1`

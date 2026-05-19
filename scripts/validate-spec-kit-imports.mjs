@@ -1659,7 +1659,7 @@ requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-interactive-selection-v1",
   "Issue #60",
   "Issue #62",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-terminal-io-adapter-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
   "IAU-runtime-settings-cli-interactive-selection-contract-v1",
   "013-runtime-settings-cli-terminal-io-adapter-v1"
@@ -1804,13 +1804,13 @@ requireTextIncludes("README.md", [
   "Issue #65",
   "Issue #67",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-terminal-io-adapter-v1`."
+  "Current Implementation Admission Unit:\n`none`."
 ]);
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-terminal-entrypoint-v1",
   "Issue #65",
   "Issue #67",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-terminal-io-adapter-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "IAU-runtime-settings-cli-terminal-entrypoint-materialization-v1",
   "013-runtime-settings-cli-terminal-io-adapter-v1"
 ]);
@@ -1953,14 +1953,14 @@ requireTextIncludes("README.md", [
   "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
   "latest supported NI LabVIEW Docker image selection",
   "no user-facing Docker bitness choice",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-terminal-io-adapter-v1`."
+  "Current Implementation Admission Unit:\n`none`."
 ]);
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-terminal-prompt-loop-v1",
   "Issue #71",
   "Issue #73",
   "Issue #75",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-terminal-io-adapter-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "IAU-runtime-settings-cli-terminal-prompt-loop-v1",
   "no separate Docker bitness\nchoice",
   "013-runtime-settings-cli-terminal-io-adapter-v1"
@@ -1978,7 +1978,7 @@ requireTextIncludes("docs/development/copilot-workflow.md", [
 const runtimeSettingsTerminalIoAdmission = readJson(runtimeSettingsTerminalIoAdmissionPath);
 requireEqual(runtimeSettingsTerminalIoAdmission.schema, "vi-history/requirements-admission@v1", "runtime settings terminal I/O admission schema");
 requireEqual(runtimeSettingsTerminalIoAdmission.sliceId, runtimeSettingsTerminalIoSliceId, "runtime settings terminal I/O admission sliceId");
-requireEqual(runtimeSettingsTerminalIoAdmission.state, "admitted", "runtime settings terminal I/O admission state");
+requireEqual(runtimeSettingsTerminalIoAdmission.state, "implemented", "runtime settings terminal I/O admission state");
 requireEqual(runtimeSettingsTerminalIoAdmission.targetProduct, "vi-history", "runtime settings terminal I/O admission targetProduct");
 requireEqual(runtimeSettingsTerminalIoAdmission.targetFeature, runtimeSettingsTerminalIoSliceId, "runtime settings terminal I/O admission targetFeature");
 requireEqual(runtimeSettingsTerminalIoAdmission.sourceBaselineTag, "v1.3.16", "runtime settings terminal I/O admission sourceBaselineTag");
@@ -1986,27 +1986,30 @@ requireEqual(runtimeSettingsTerminalIoAdmission.sourceCommit, "bb795ace470bcb17d
 requireEqual(runtimeSettingsTerminalIoAdmission.governedAdmissionCommit, "087b08493c4f0f4fea55aca379a585a2110c5b63", "runtime settings terminal I/O admission governedAdmissionCommit");
 requireEqual(runtimeSettingsTerminalIoAdmission.implementationSharing, "none", "runtime settings terminal I/O admission implementationSharing");
 requireMarketplacePosture(runtimeSettingsTerminalIoAdmission, "runtime settings terminal I/O admission");
-requireEqual(runtimeSettingsTerminalIoAdmission.currentImplementationAdmissionUnit, "IAU-runtime-settings-cli-terminal-io-adapter-v1", "runtime settings terminal I/O currentImplementationAdmissionUnit");
+requireEqual(runtimeSettingsTerminalIoAdmission.currentImplementationAdmissionUnit, null, "runtime settings terminal I/O currentImplementationAdmissionUnit");
 requireArrayEqual(runtimeSettingsTerminalIoAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "runtime settings terminal I/O completedSpecScope");
-requireArrayEqual(runtimeSettingsTerminalIoAdmission.completedImplementationScope, [], "runtime settings terminal I/O completedImplementationScope");
-requireArrayEqual(runtimeSettingsTerminalIoAdmission.admittedImplementationScope, ["T009", "T010", "T011", "T012", "T013", "T014"], "runtime settings terminal I/O admittedImplementationScope");
+requireArrayEqual(runtimeSettingsTerminalIoAdmission.completedImplementationScope, ["T009", "T010", "T011", "T012", "T013", "T014"], "runtime settings terminal I/O completedImplementationScope");
+requireArrayEqual(runtimeSettingsTerminalIoAdmission.admittedImplementationScope, [], "runtime settings terminal I/O admittedImplementationScope");
 requireArrayEqual(runtimeSettingsTerminalIoAdmission.blockedImplementationScope, ["T015", "T016", "T017", "T018", "T019", "T020", "T021", "T022", "T023"], "runtime settings terminal I/O blockedImplementationScope");
 requireEqual(runtimeSettingsTerminalIoAdmission.preImplementationPreflight?.iauId, "IAU-runtime-settings-cli-terminal-io-adapter-v1", "runtime settings terminal I/O preImplementationPreflight iauId");
 requireEqual(runtimeSettingsTerminalIoAdmission.preImplementationPreflight?.status, "pass", "runtime settings terminal I/O preImplementationPreflight status");
 requireEqual(runtimeSettingsTerminalIoAdmission.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings terminal I/O preImplementationPreflight implementationStartAllowed");
 requireEqual(runtimeSettingsTerminalIoAdmission.preImplementationPreflight?.record, runtimeSettingsTerminalIoPreflightPath, "runtime settings terminal I/O preImplementationPreflight record");
 requireEqual(runtimeSettingsTerminalIoAdmission.issue?.number, 77, "runtime settings terminal I/O issue number");
+requireEqual(runtimeSettingsTerminalIoAdmission.implementationHandoffIssue?.number, 79, "runtime settings terminal I/O implementationHandoffIssue number");
+requireEqual(runtimeSettingsTerminalIoAdmission.implementationCloseout?.status, "pass", "runtime settings terminal I/O implementationCloseout status");
+requireArrayEqual(runtimeSettingsTerminalIoAdmission.implementationCloseout?.completedTasks, ["T009", "T010", "T011", "T012", "T013", "T014"], "runtime settings terminal I/O implementationCloseout completedTasks");
 requireFile(`docs/requirements/admissions/${runtimeSettingsTerminalIoSliceId}.md`);
 
 const runtimeSettingsTerminalIoAdmissionUnit = (runtimeSettingsTerminalIoAdmission.implementationAdmissionUnits ?? [])
   .find((unit) => unit?.iauId === "IAU-runtime-settings-cli-terminal-io-adapter-v1");
-requireEqual(runtimeSettingsTerminalIoAdmissionUnit?.state, "admitted", "runtime settings terminal I/O admission unit state");
+requireEqual(runtimeSettingsTerminalIoAdmissionUnit?.state, "implemented", "runtime settings terminal I/O admission unit state");
 requireEqual(runtimeSettingsTerminalIoAdmissionUnit?.preflightRecord, runtimeSettingsTerminalIoPreflightPath, "runtime settings terminal I/O admission unit preflightRecord");
 
 const runtimeSettingsTerminalIoIau = readJson(runtimeSettingsTerminalIoIauPath);
 requireEqual(runtimeSettingsTerminalIoIau.schema, "vi-history/implementation-admission-unit@v1", "runtime settings terminal I/O IAU schema");
 requireEqual(runtimeSettingsTerminalIoIau.iauId, "IAU-runtime-settings-cli-terminal-io-adapter-v1", "runtime settings terminal I/O IAU id");
-requireEqual(runtimeSettingsTerminalIoIau.state, "admitted", "runtime settings terminal I/O IAU state");
+requireEqual(runtimeSettingsTerminalIoIau.state, "implemented", "runtime settings terminal I/O IAU state");
 requireEqual(runtimeSettingsTerminalIoIau.parentSliceId, runtimeSettingsTerminalIoSliceId, "runtime settings terminal I/O IAU parentSliceId");
 requireArrayEqual(runtimeSettingsTerminalIoIau.admittedTasks, ["T009", "T010", "T011", "T012", "T013", "T014"], "runtime settings terminal I/O IAU admittedTasks");
 requireArrayEqual(runtimeSettingsTerminalIoIau.blockedTasks, ["T015", "T016", "T017", "T018", "T019", "T020", "T021", "T022", "T023"], "runtime settings terminal I/O IAU blockedTasks");
@@ -2015,6 +2018,9 @@ requireMarketplacePosture(runtimeSettingsTerminalIoIau, "runtime settings termin
 requireEqual(runtimeSettingsTerminalIoIau.preImplementationPreflight?.status, "pass", "runtime settings terminal I/O IAU preImplementationPreflight status");
 requireEqual(runtimeSettingsTerminalIoIau.preImplementationPreflight?.record, "IAU-runtime-settings-cli-terminal-io-adapter-v1-preflight-v1.json", "runtime settings terminal I/O IAU preImplementationPreflight record");
 requireEqual(runtimeSettingsTerminalIoIau.preImplementationPreflight?.implementationStartAllowed, true, "runtime settings terminal I/O IAU preImplementationPreflight implementationStartAllowed");
+requireEqual(runtimeSettingsTerminalIoIau.implementationHandoffIssue?.number, 79, "runtime settings terminal I/O IAU implementationHandoffIssue number");
+requireEqual(runtimeSettingsTerminalIoIau.implementationCloseout?.status, "pass", "runtime settings terminal I/O IAU implementationCloseout status");
+requireArrayEqual(runtimeSettingsTerminalIoIau.implementationCloseout?.completedTasks, ["T009", "T010", "T011", "T012", "T013", "T014"], "runtime settings terminal I/O IAU implementationCloseout completedTasks");
 requireFile(`docs/requirements/admissions/${runtimeSettingsTerminalIoSliceId}/IAU-runtime-settings-cli-terminal-io-adapter-v1.md`);
 
 const runtimeSettingsTerminalIoPreflight = readJson(runtimeSettingsTerminalIoPreflightPath);
@@ -2081,11 +2087,11 @@ requireTextIncludes(`${runtimeSettingsTerminalIoFeatureDir}/plan.md`, [
 ]);
 requireTextIncludes(`${runtimeSettingsTerminalIoFeatureDir}/tasks.md`, [
   "Issue #77",
-  "**Implementation handoff issue**: not created yet.",
+  "Issue #79",
   "- [x] T001",
   "- [x] T008",
-  "- [ ] T009",
-  "- [ ] T014",
+  "- [x] T009",
+  "- [x] T014",
   "IAU-runtime-settings-cli-terminal-io-adapter-v1",
   "[BLOCKED]",
   "T023"
@@ -2110,15 +2116,17 @@ requireTextIncludes("README.md", [
   "runtime-settings-cli-terminal-io-adapter-v1",
   "docs/requirements/admissions/runtime-settings-cli-terminal-io-adapter-v1.json",
   "Issue #77",
+  "Issue #79",
   "IAU-runtime-settings-cli-terminal-io-adapter-v1",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-terminal-io-adapter-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "latest supported NI LabVIEW image-family selection with no Docker bitness\nprompt",
   "source copying remain blocked"
 ]);
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-terminal-io-adapter-v1",
   "Issue #77",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-terminal-io-adapter-v1`.",
+  "Issue #79",
+  "Current Implementation Admission Unit:\n`none`.",
   "IAU-runtime-settings-cli-terminal-io-adapter-v1",
   "no Docker bitness prompt",
   "013-runtime-settings-cli-terminal-io-adapter-v1"
@@ -2126,9 +2134,10 @@ requireTextIncludes("AGENTS.md", [
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-terminal-io-adapter-v1",
   "Issue #77",
+  "Issue #79",
   "IAU-runtime-settings-cli-terminal-io-adapter-v1",
-  "Docker latest supported NI LabVIEW image-family selection without a\nDocker bitness prompt",
-  "runtime settings CLI terminal I/O adapter implementation before the separate"
+  "Docker latest supported NI\nLabVIEW image-family selection without a Docker bitness prompt",
+  "runtime settings CLI terminal I/O adapter behavior beyond pure terminal"
 ]);
 
 if (failures.length > 0) {
