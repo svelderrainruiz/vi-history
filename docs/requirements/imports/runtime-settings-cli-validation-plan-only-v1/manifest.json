@@ -1,0 +1,33 @@
+{
+  "schema": "vi-history/requirements-import@v1",
+  "sliceId": "runtime-settings-cli-validation-plan-only-v1",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "93177a013b5294c0e05745f5af67b866e9b15568",
+  "governedAdmissionCommit": "331b6eab04068299b85405d36bf0ba033dbd9b26",
+  "targetProduct": "vi-history",
+  "targetFeature": "runtime-settings-cli-validation-plan-only-v1",
+  "specKitPath": ".specify/specs/runtime-settings-cli-validation-plan-only-v1",
+  "redactionStatus": "pass",
+  "implementationSharing": "none",
+  "marketplacePublication": "disabled-until-later-adr",
+  "importedRequirementIds": [
+    "VHS-REQ-546"
+  ],
+  "prerequisiteRequirementIds": [
+    "VHS-REQ-537",
+    "VHS-REQ-543",
+    "VHS-REQ-544",
+    "VHS-REQ-545"
+  ],
+  "supportingTestIds": [
+    "TEST-UNIT-392"
+  ],
+  "contractName": "createRuntimeSettingsValidationCommandResult",
+  "requestMode": "validate-plan-only",
+  "files": [
+    "syrs.md",
+    "srs.md",
+    "rtm.csv",
+    "test-plan.md"
+  ]
+}

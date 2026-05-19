@@ -165,10 +165,25 @@ locator invocation, private path discovery, runtime validation execution,
 compare execution, LabVIEWCLI execution, Docker execution or orchestration,
 raw terminal process wiring, live-session proof, package/bin publication,
 launcher/profile mutation, release automation, Marketplace publication,
-`validate-plan-only`, and source copying remain blocked.
+and source copying remain blocked. `validate-plan-only` remained blocked for
+that IAU and is admitted separately below.
+
+`runtime-settings-cli-validation-plan-only-v1` admits
+`IAU-runtime-settings-cli-validation-plan-only-v1` for Issue #99 and
+T009-T016 only. Issue #99 is an admission issue and must not be reused for
+implementation. The admitted IAU is a pure `validate-plan-only` branch over
+`createRuntimeSettingsValidationCommandResult(input = {})` that returns
+deterministic proof-out target and artifact planning facts without calling the
+proof-out file-emission writer or writing files. The proof-out file-emission
+writer and file writes for plan-only, runtime locator invocation, OS
+inspection, private path discovery, runtime validation execution, compare
+execution, LabVIEWCLI execution, Docker execution or orchestration, raw
+terminal process wiring, live-session proof, package/bin publication,
+launcher/profile mutation, release automation, Marketplace publication, and
+source copying remain blocked.
 
 Current Implementation Admission Unit:
-`none`.
+`IAU-runtime-settings-cli-validation-plan-only-v1`.
 
 For Copilot local or web implementation work, read
 `docs/development/copilot-workflow.md` before changing code. It explains that
@@ -178,7 +193,7 @@ When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:
 
 ```bash
-SPECIFY_FEATURE=017-runtime-settings-cli-validation-command-contract-v1 \
-SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-validation-command-contract-v1 \
+SPECIFY_FEATURE=018-runtime-settings-cli-validation-plan-only-v1 \
+SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-validation-plan-only-v1 \
 .specify/scripts/bash/check-prerequisites.sh --json --paths-only
 ```
