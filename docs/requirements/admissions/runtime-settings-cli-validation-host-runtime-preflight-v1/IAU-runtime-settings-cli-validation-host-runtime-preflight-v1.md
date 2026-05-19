@@ -1,6 +1,6 @@
 # Implementation Admission Unit: Runtime Settings CLI Validation Host Runtime Preflight
 
-`IAU-runtime-settings-cli-validation-host-runtime-preflight-v1` is admitted for
+`IAU-runtime-settings-cli-validation-host-runtime-preflight-v1` is implemented for
 `runtime-settings-cli-validation-host-runtime-preflight-v1`.
 
 Parent slice: `runtime-settings-cli-validation-host-runtime-preflight-v1`
@@ -40,5 +40,6 @@ Preflight:
 - T026: source copying from another VI History product line or implementation
   beyond host runtime preflight without a separate public IAU.
 
-Issue #106 is the admission issue and must not be reused for implementation.
+Issue #108 implements and closes T009-T016 through PR #109. Issue #106 is the
+admission issue and must not be reused for implementation.
 Implementation requires a separate handoff issue after this admission merges.

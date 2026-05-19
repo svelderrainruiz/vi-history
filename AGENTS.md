@@ -184,10 +184,11 @@ terminal process wiring, live-session proof, package/bin publication,
 launcher/profile mutation, release automation, Marketplace publication, and
 source copying remain blocked.
 
-`runtime-settings-cli-validation-host-runtime-preflight-v1` admits
+`runtime-settings-cli-validation-host-runtime-preflight-v1` implements
 `IAU-runtime-settings-cli-validation-host-runtime-preflight-v1` for Issue #106
 and T009-T016 only. Issue #106 is an admission issue and must not be reused
-for implementation. The admitted IAU is a pure
+for implementation. Issue #108 implements and closes it through PR #109 for
+T009-T016 only. The implemented IAU is a pure
 `createRuntimeSettingsValidationHostRuntimePreflight(input = {})` adapter over
 supplied public-safe host candidate facts. It may compose with the existing
 runtime outcome, readback, proof artifact, proof-out adapter, file-emission,
@@ -201,9 +202,12 @@ publication, launcher/profile mutation, release automation, Marketplace
 publication, and source copying remain blocked.
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-host-runtime-preflight-v1`.
+`none`.
 
-Before Issue #106 admission, the plan-only closeout recorded:
+Issue #106 admission temporarily set the current IAU to
+`IAU-runtime-settings-cli-validation-host-runtime-preflight-v1`; Issue #108 and
+PR #109 completed it. Before Issue #106 admission, the plan-only closeout also
+recorded:
 
 Current Implementation Admission Unit:
 `none`.

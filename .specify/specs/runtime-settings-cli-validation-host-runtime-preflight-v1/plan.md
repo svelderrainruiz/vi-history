@@ -10,14 +10,14 @@
 
 ## Summary
 
-Import governed slice
-`runtime-settings-cli-validation-host-runtime-preflight-v1` and admit
-`IAU-runtime-settings-cli-validation-host-runtime-preflight-v1` for a later
-clean-room implementation handoff.
+Close out governed slice
+`runtime-settings-cli-validation-host-runtime-preflight-v1` and mark
+`IAU-runtime-settings-cli-validation-host-runtime-preflight-v1` implemented
+after clean-room implementation handoff Issue #108 and PR #109.
 
-This admission PR does not implement code. It locks the public MIT import,
-Spec Kit feature, admission ledger, IAU record, preflight record, validation
-coverage, and guidance for the next bounded unit:
+The admission PR locked the public MIT import, Spec Kit feature, admission
+ledger, IAU record, preflight record, validation coverage, and guidance for
+the bounded unit:
 `createRuntimeSettingsValidationHostRuntimePreflight(input = {})`.
 
 ## Technical Context
@@ -32,6 +32,8 @@ coverage, and guidance for the next bounded unit:
 - Governed bridge admission commit:
   `b5ed9e5a77a096c342fc74c42e3e901d6bad041f`
 - Public admission issue: Issue #106
+- Implementation handoff issue: Issue #108
+- Implementation PR: PR #109
 - Candidate IAU:
   `IAU-runtime-settings-cli-validation-host-runtime-preflight-v1`
 - Public contract:
@@ -44,8 +46,8 @@ coverage, and guidance for the next bounded unit:
 
 - Clean-room authority: pass. The slice imports public-safe requirements and
   does not copy implementation source.
-- Spec Kit before implementation: pass. This PR creates import, spec, plan,
-  tasks, admission, and preflight records before implementation starts.
+- Spec Kit before implementation: pass. The admission PR created import, spec,
+  plan, tasks, admission, and preflight records before implementation started.
 - Immutable imported IDs: pass. The import preserves `VHS-REQ-532`,
   `VHS-REQ-546`, and `VHS-REQ-550`, and treats `VHS-REQ-537`,
   `VHS-REQ-543`, `VHS-REQ-544`, and `VHS-REQ-545` as prerequisites.
@@ -56,12 +58,11 @@ coverage, and guidance for the next bounded unit:
 
 ## Implementation Admission Unit
 
-Admitted after this admission PR merges and a separate implementation handoff
-issue is created:
+Implemented through implementation handoff Issue #108 and PR #109:
 
 `IAU-runtime-settings-cli-validation-host-runtime-preflight-v1`
 
-Admitted tasks: T009-T016.
+Implemented tasks: T009-T016.
 
 The IAU may add tests and the minimum pure host runtime preflight facts adapter
 needed to normalize supplied public-safe host candidate facts and compose them

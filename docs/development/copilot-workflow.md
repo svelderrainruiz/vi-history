@@ -421,8 +421,8 @@ Issue #106 imports
 `runtime-settings-cli-validation-host-runtime-preflight-v1` and admits
 `IAU-runtime-settings-cli-validation-host-runtime-preflight-v1` for T009-T016
 only. Issue #106 is an admission issue and must not be reused for
-implementation. The implementation handoff issue must be created separately
-after admission merges. The admitted IAU adds only a pure
+implementation. Issue #108 implements and closes it through PR #109 for
+T009-T016 only. The implemented IAU adds only a pure
 `createRuntimeSettingsValidationHostRuntimePreflight(input = {})` adapter over
 supplied public-safe host candidate facts. Future work must not inspect the
 OS, invoke runtime locators, discover private paths, execute validation, call
@@ -430,13 +430,16 @@ LabVIEWCLI, call Docker, wire raw terminal processes, write files from the host
 preflight adapter, publish packages, mutate launcher/profile state, or copy
 source without a separate public admission.
 
-Before Issue #106 admission, the previous plan-only closeout recorded:
+Issue #106 admission temporarily set the current IAU to
+`IAU-runtime-settings-cli-validation-host-runtime-preflight-v1`; Issue #108 and
+PR #109 completed it. Before Issue #106 admission, the previous plan-only
+closeout recorded:
 
 Current Implementation Admission Unit:
 `none`.
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-host-runtime-preflight-v1`.
+`none`.
 
 The Copilot plan must target `develop`, read this workflow first, and name how
 blocked work remains blocked.

@@ -65,7 +65,8 @@ Issue #106 imports
 `runtime-settings-cli-validation-host-runtime-preflight-v1` and admits
 `IAU-runtime-settings-cli-validation-host-runtime-preflight-v1` for
 T009-T016 only. Issue #106 is an admission issue and must not be reused for
-implementation.
+implementation. Issue #108 implements and closes it through PR #109 for
+T009-T016 only.
 
 ## Authority
 
@@ -189,6 +190,9 @@ implementation.
   `IAU-runtime-settings-cli-validation-host-runtime-preflight-v1` for
   T009-T016 only. Issue #106 is an admission issue and must not be reused for
   implementation.
+- Issue #108 implements and closes
+  `IAU-runtime-settings-cli-validation-host-runtime-preflight-v1` through PR
+  #109 for T009-T016 only.
 
 The current admission ledgers are:
 
@@ -213,9 +217,12 @@ The current admission ledgers are:
 - `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-preflight-v1.json`
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-host-runtime-preflight-v1`.
+`none`.
 
-Before Issue #106 admission, the plan-only closeout recorded:
+Issue #106 admission temporarily set the current IAU to
+`IAU-runtime-settings-cli-validation-host-runtime-preflight-v1`; Issue #108 and
+PR #109 completed it. Before Issue #106 admission, the plan-only closeout also
+recorded:
 
 Current Implementation Admission Unit:
 `none`.
@@ -350,10 +357,11 @@ terminal process wiring, live terminal proof, package/bin publication,
 launcher/profile mutation, release automation, Marketplace work, and source
 copying remain blocked.
 
-`runtime-settings-cli-validation-host-runtime-preflight-v1` admits
+`runtime-settings-cli-validation-host-runtime-preflight-v1` implements
 `IAU-runtime-settings-cli-validation-host-runtime-preflight-v1` for Issue #106
-and T009-T016 only. Issue #106 is an admission issue and must not be reused
-for implementation. The admitted IAU is a pure
+and implementation handoff Issue #108 through PR #109 for T009-T016 only.
+Issue #106 is an admission issue and must not be reused for implementation.
+The implemented IAU is a pure
 `createRuntimeSettingsValidationHostRuntimePreflight(input = {})` adapter over
 supplied public-safe host candidate facts. It may produce deterministic
 runtime selection facts for the existing validation runtime outcome, readback,

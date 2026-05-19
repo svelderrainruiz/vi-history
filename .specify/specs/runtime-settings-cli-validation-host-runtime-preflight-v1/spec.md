@@ -5,7 +5,7 @@
 
 **Created**: 2026-05-19
 
-**Status**: Admitted for
+**Status**: Implemented for
 `IAU-runtime-settings-cli-validation-host-runtime-preflight-v1`
 
 **Input**: Imported requirements slice
@@ -158,9 +158,8 @@ copying occurred.
   scanning, locators, runtime execution, compare, LabVIEWCLI, Docker,
   terminal process wiring, file writes, publication, mutation, release,
   Marketplace, and source copying blocked.
-- **SC-003**: The admission record states that T009-T016 are admitted and that
-  the Current Implementation Admission Unit is
-  `IAU-runtime-settings-cli-validation-host-runtime-preflight-v1`.
+- **SC-003**: The admission record states that T009-T016 are implemented and
+  that the Current Implementation Admission Unit is `none`.
 - **SC-004**: Public validation rejects private paths, credentials, private
   evidence, private control-plane terms, and copied implementation-source
   instructions.
