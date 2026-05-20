@@ -1,0 +1,50 @@
+{
+  "schema": "vi-history/requirements-import@v1",
+  "sliceId": "runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "2e0d7bfd6bf1154aa1b3693c49d32974a59c6686",
+  "governedAdmissionCommit": "2e0d7bfd6bf1154aa1b3693c49d32974a59c6686",
+  "promotedBaselineCommit": "ef311a0daa57fb619a2ea33694a413a79982c585",
+  "targetProduct": "vi-history",
+  "targetFeature": "runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1",
+  "specKitPath": ".specify/specs/runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1",
+  "redactionStatus": "pass",
+  "implementationSharing": "none",
+  "marketplacePublication": "out-of-scope",
+  "importedRequirementIds": [
+    "VHS-REQ-095",
+    "VHS-REQ-096",
+    "VHS-REQ-532",
+    "VHS-REQ-546",
+    "VHS-REQ-550"
+  ],
+  "prerequisiteRequirementIds": [
+    "VHS-REQ-537",
+    "VHS-REQ-543",
+    "VHS-REQ-544",
+    "VHS-REQ-545"
+  ],
+  "supportingTestIds": [
+    "TEST-UNIT-RSHOSTACQ-001",
+    "TEST-UNIT-RSHOSTACQ-002",
+    "TEST-UNIT-RSHOSTACQ-003",
+    "TEST-UNIT-RSHOSTACQ-004",
+    "TEST-UNIT-RSHOSTACQ-005",
+    "TEST-UNIT-RSHOSTACQ-006",
+    "TEST-UNIT-RSHOSTNATIVEACQ-001",
+    "TEST-UNIT-RSHOSTNATIVEACQ-002",
+    "TEST-UNIT-RSHOSTNATIVEACQ-003",
+    "TEST-UNIT-RSHOSTNATIVEACQ-004",
+    "TEST-UNIT-RSHOSTNATIVEACQ-005",
+    "TEST-UNIT-RSHOSTNATIVEACQ-006"
+  ],
+  "contractName": "createRuntimeSettingsValidationHostRuntimeObservationNativeSourceAcquisition",
+  "composedContractName": "createRuntimeSettingsValidationHostRuntimeObservationSourceAcquisition",
+  "nativeSourceAcquisitionBoundary": "bounded-native-host-source-acquisition-dependency-adapter-only",
+  "files": [
+    "syrs.md",
+    "srs.md",
+    "rtm.csv",
+    "test-plan.md"
+  ]
+}

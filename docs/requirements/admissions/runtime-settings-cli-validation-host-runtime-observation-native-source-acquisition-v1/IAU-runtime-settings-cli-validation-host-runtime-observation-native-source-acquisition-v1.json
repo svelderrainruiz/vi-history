@@ -1,0 +1,66 @@
+{
+  "schema": "vi-history/implementation-admission-unit@v1",
+  "iauId": "IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1",
+  "createdDate": "2026-05-20",
+  "state": "admitted",
+  "parentSliceId": "runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1",
+  "specFeature": ".specify/specs/runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1",
+  "issue": {
+    "number": 154,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/154"
+  },
+  "admittedTasks": [
+    "T009",
+    "T010",
+    "T011",
+    "T012",
+    "T013",
+    "T014",
+    "T015",
+    "T016"
+  ],
+  "blockedTasks": [
+    "T017",
+    "T018",
+    "T019",
+    "T020",
+    "T021",
+    "T022",
+    "T023",
+    "T024",
+    "T025",
+    "T026",
+    "T027",
+    "T028",
+    "T029",
+    "T030"
+  ],
+  "entryGate": {
+    "admissionIssue": 154,
+    "admissionPrMerged": true,
+    "separateImplementationHandoffRequired": true,
+    "preflightStatus": "pass"
+  },
+  "exitGate": {
+    "allAdmittedTasksImplemented": true,
+    "blockedTasksRemainBlocked": true,
+    "currentImplementationAdmissionUnitCleared": true,
+    "validationRequired": [
+      "npm test",
+      "npm run check",
+      "git diff --check",
+      "public redaction scan",
+      "bridge artifact validation",
+      "clean-room boundary scan"
+    ]
+  },
+  "preImplementationPreflight": {
+    "status": "pass",
+    "record": "IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1-preflight-v1.json",
+    "implementationStartAllowed": true
+  },
+  "implementationHandoffPolicy": "Create a separate implementation handoff issue after the admission PR merges; do not reuse Issue #154 for implementation.",
+  "implementationSharing": "none",
+  "requirementMaturityBasis": "public sequencing marker and promoted source-acquisition baseline support narrow native source acquisition dependency-adapter admission, not runtime execution",
+  "marketplacePublication": "out-of-scope"
+}

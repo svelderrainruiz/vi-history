@@ -103,6 +103,13 @@ and admits
 `IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`
 for T009-T016 only. Issue #148 is an admission issue and must not be reused for
 implementation. Issue #150 implements and closes it through PR #151.
+Issue #154 imports
+`runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1`
+and admits
+`IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1`
+for T009-T016 only. Issue #154 is an admission issue and must not be reused for
+implementation; a separate implementation handoff issue is required after the
+admission PR merges.
 
 ## Authority
 
@@ -281,6 +288,12 @@ implementation. Issue #150 implements and closes it through PR #151.
 - Issue #150 implements and closes
   `IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`
   through PR #151 for T009-T016 only.
+- Issue #154 imports
+  `runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1`
+  and admits
+  `IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1`
+  for T009-T016 only. Issue #154 is an admission issue and must not be reused
+  for implementation.
 
 The current admission ledgers are:
 
@@ -308,7 +321,16 @@ The current admission ledgers are:
 - `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-adapter-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1.json`
 - `docs/requirements/admissions/extension-vsix-packaging-artifact-v1.json`
+
+Current Implementation Admission Unit:
+`IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1`.
+
+Issue #154 admission temporarily sets the current IAU to
+`IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1`.
+Implementation requires a separate handoff issue after the admission PR merges.
+Before Issue #154 admission, the source acquisition closeout recorded:
 
 Current Implementation Admission Unit:
 `none`.
@@ -614,6 +636,30 @@ publication, launcher/profile mutation, VSIX packaging changes, release
 automation, Marketplace work, Docker source discovery, and source copying
 remain blocked.
 
+`runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1`
+admits
+`IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1`
+for Issue #154 and T009-T016 only. Issue #154 is an admission issue and must
+not be reused for implementation. The admitted IAU is a bounded
+`createRuntimeSettingsValidationHostRuntimeObservationNativeSourceAcquisition(input =
+{})` facts contract over public-safe selected host facts and supplied governed
+native acquisition dependency observations. It may derive acquisition
+dependency facts for
+`createRuntimeSettingsValidationHostRuntimeObservationSourceAcquisition(input =
+{})` and the existing validation command chain without changing runtime
+outcome, readback, proof artifact, proof-out, file-emission, validation
+command, `validate-plan-only`, host runtime preflight, host preflight command
+composition, host runtime discovery, host runtime observation, source adapter,
+or source-acquisition output shapes. Raw private path disclosure, raw registry
+output retention, arbitrary filesystem walking, broad PATH probing,
+environment probing, existing compare runtime locator reuse, runtime validation
+execution, compare execution, LabVIEWCLI execution, Docker execution or
+orchestration, Docker image inspection, container source discovery, raw
+terminal process wiring, live terminal proof, proof-out expansion, file writes,
+package/bin publication, launcher/profile mutation, VSIX packaging changes,
+release automation, Marketplace work, Docker source discovery, and source
+copying remain blocked.
+
 `extension-vsix-packaging-artifact-v1` implements
 `IAU-extension-vsix-packaging-artifact-v1` for local VSIX package artifact
 creation and inspection only. It adds `npm run package:vsix`,
@@ -630,7 +676,7 @@ part by `docs/decisions/ADR-002-vsix-packaging-artifact-only.md`, and
 summarized in `docs/governance/marketplace-posture.md`.
 
 Current Implementation Admission Unit:
-`none`.
+`IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1`.
 
 ## Validation
 
