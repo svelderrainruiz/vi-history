@@ -24,4 +24,7 @@ Slice:
   Docker execution, file writes, VSIX packaging changes, Marketplace
   publication, release automation, launcher/profile mutation, Docker source
   discovery, and source copying blocked.
+- `TEST-UNIT-RSHOSTNATIVEPROBE-007`: Windows LabVIEW 2026 x64 plus canonical
+  installed x86 LabVIEWCLI mixed-bitness public fact shape is preserved as
+  admitted by the native source acquisition lane.
 

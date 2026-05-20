@@ -19,7 +19,7 @@ Slice:
 - `VHS-REQ-550`: The probe MUST preserve the Windows LabVIEW 2026 x64 plus
   canonical installed x86 LabVIEWCLI public fact shape already admitted by the
   native source acquisition lane. Verification signal:
-  `TEST-UNIT-RSHOSTNATIVEPROBE-006`.
+  `TEST-UNIT-RSHOSTNATIVEPROBE-007`.
 - `VHS-REQ-551`: The probe MUST produce only public-safe native acquisition
   observations without raw registry output, raw private paths, or arbitrary
   environment data.
