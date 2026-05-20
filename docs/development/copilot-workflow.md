@@ -537,6 +537,34 @@ proof-out, write files, publish packages, mutate launcher/profile state,
 release, work on the Marketplace, or copy source without a separate public
 admission.
 
+Issue #142 imports
+`runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`
+and admits
+`IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`
+for T009-T016 only. Issue #142 is an admission issue and must not be reused for
+implementation. Issue #144 and PR #145 completed it. The implemented IAU is a
+bounded
+`createRuntimeSettingsValidationHostRuntimeObservationSourceAdapter(input =
+{})` facts contract over public-safe selected host facts and supplied bounded
+source facts. It may derive public-safe observation dependency facts for
+`createRuntimeSettingsValidationHostRuntimeObservation(input = {})` and the
+existing validation command chain without changing output shapes. Future work
+must not retain raw private paths or raw registry output, walk arbitrary
+filesystems, probe PATH or environment state, reuse the existing compare
+runtime locator, execute validation, call LabVIEWCLI, call Docker, wire raw
+terminal processes, expand proof-out, write files from a source or observation
+adapter, change VSIX packaging behavior, publish packages, mutate
+launcher/profile state, release, work on the Marketplace, or copy source
+without a separate public admission.
+
+Current Implementation Admission Unit:
+`none`.
+
+Issue #142 admission temporarily set the current IAU to
+`IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`.
+Issue #144 and PR #145 completed it. Before Issue #142 admission, the previous
+VSIX packaging closeout recorded:
+
 Current Implementation Admission Unit:
 `none`.
 
@@ -552,9 +580,6 @@ Issue #106 admission temporarily set the current IAU to
 `IAU-runtime-settings-cli-validation-host-runtime-preflight-v1`; Issue #108 and
 PR #109 completed it. Before Issue #106 admission, the previous plan-only
 closeout recorded:
-
-Current Implementation Admission Unit:
-`none`.
 
 Current Implementation Admission Unit:
 `none`.
@@ -591,6 +616,8 @@ Do not implement these without a separate bridge admission:
   bounded public-safe discovery facts
 - runtime settings CLI validation host runtime observation behavior beyond
   bounded public-safe observation facts
+- runtime settings CLI validation host runtime observation source adapter
+  behavior beyond bounded public-safe source facts
 - OS scanning, filesystem walking, registry probing, PATH probing, environment
   probing, private path discovery, or runtime locator invocation
 - file writes from the host preflight adapter

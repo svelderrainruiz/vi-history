@@ -48,6 +48,15 @@ export const RUNTIME_SETTINGS_CLI_VALIDATION_HOST_RUNTIME_OBSERVATION_REQUIREMEN
   failClosed: Object.freeze(["VHS-REQ-095", "VHS-REQ-096", "VHS-REQ-532", "VHS-REQ-546", "VHS-REQ-550"])
 });
 
+export const RUNTIME_SETTINGS_CLI_VALIDATION_HOST_RUNTIME_OBSERVATION_SOURCE_REQUIREMENTS = Object.freeze({
+  selectedHostFacts: Object.freeze(["VHS-REQ-095", "VHS-REQ-096", "VHS-REQ-532"]),
+  windowsRegistryViewSourceFacts: Object.freeze(["VHS-REQ-095"]),
+  linuxDocumentedRootSourceFacts: Object.freeze(["VHS-REQ-096"]),
+  hostObservationComposition: Object.freeze(["VHS-REQ-532", "VHS-REQ-546", "VHS-REQ-550"]),
+  mixedBitnessHostBundle: Object.freeze(["VHS-REQ-550"]),
+  failClosed: Object.freeze(["VHS-REQ-095", "VHS-REQ-096", "VHS-REQ-532", "VHS-REQ-546", "VHS-REQ-550"])
+});
+
 export const RUNTIME_SETTINGS_CLI_VALIDATION_PROOF_REQUIREMENTS = Object.freeze({
   proofArtifact: Object.freeze(["VHS-REQ-546"]),
   redaction: Object.freeze(["VHS-REQ-546"]),
@@ -232,6 +241,40 @@ export const RUNTIME_SETTINGS_VALIDATION_HOST_RUNTIME_OBSERVATION_BLOCKED_SIDE_E
   rawTerminalProcessWiring: false,
   liveTerminalProof: false,
   packageBinPublication: false,
+  launcherProfileMutation: false,
+  releaseAutomation: false,
+  marketplace: false,
+  sourceCopying: false
+});
+
+export const RUNTIME_SETTINGS_VALIDATION_HOST_RUNTIME_OBSERVATION_SOURCE_BLOCKED_SIDE_EFFECTS = Object.freeze({
+  settingsMutation: false,
+  interactiveSelection: false,
+  proofOut: false,
+  proofOutExpansion: false,
+  fileSystemReads: false,
+  fileSystemWrites: false,
+  rawPrivatePathDisclosure: false,
+  privatePathDisclosure: false,
+  rawRegistryOutputRetention: false,
+  arbitraryFilesystemWalking: false,
+  filesystemWalking: false,
+  registryProbe: false,
+  pathProbe: false,
+  environmentProbe: false,
+  privatePathDiscovery: false,
+  runtimeLocator: false,
+  compareRuntimeLocator: false,
+  runtimeValidation: false,
+  runtimeExecution: false,
+  compareExecution: false,
+  labviewCli: false,
+  dockerExecution: false,
+  dockerOrchestration: false,
+  rawTerminalProcessWiring: false,
+  liveTerminalProof: false,
+  packageBinPublication: false,
+  vsixPackagingChanges: false,
   launcherProfileMutation: false,
   releaseAutomation: false,
   marketplace: false,
@@ -463,6 +506,15 @@ export function allRuntimeSettingsCliValidationHostRuntimeDiscoveryRequirementId
 export function allRuntimeSettingsCliValidationHostRuntimeObservationRequirementIds() {
   return Object.freeze(
     Object.values(RUNTIME_SETTINGS_CLI_VALIDATION_HOST_RUNTIME_OBSERVATION_REQUIREMENTS)
+      .flat()
+      .filter((value, index, values) => values.indexOf(value) === index)
+      .sort()
+  );
+}
+
+export function allRuntimeSettingsCliValidationHostRuntimeObservationSourceRequirementIds() {
+  return Object.freeze(
+    Object.values(RUNTIME_SETTINGS_CLI_VALIDATION_HOST_RUNTIME_OBSERVATION_SOURCE_REQUIREMENTS)
       .flat()
       .filter((value, index, values) => values.indexOf(value) === index)
       .sort()
@@ -1069,6 +1121,92 @@ export function createRuntimeSettingsValidationHostRuntimeObservation(input = {}
   });
 }
 
+export function createRuntimeSettingsValidationHostRuntimeObservationSourceAdapter(input = {}) {
+  const selection = normalizeHostRuntimePreflightSelection(input);
+  if (!selection.ok) {
+    return hostRuntimeObservationSourceBlockedResult({
+      blockedReason: selection.blockedReason,
+      selection: selection.value ?? null
+    });
+  }
+
+  if (selection.value.runtimeProvider !== "host-native") {
+    return hostRuntimeObservationSourceBlockedResult({
+      blockedReason: "unsupported-runtime-provider",
+      selection: selection.value
+    });
+  }
+
+  if (selection.value.platform === "macos") {
+    return hostRuntimeObservationSourceBlockedResult({
+      blockedReason: "macos-host-runtime-observation-source-unavailable",
+      selection: selection.value
+    });
+  }
+
+  if (!["windows", "linux"].includes(selection.value.platform)) {
+    return hostRuntimeObservationSourceBlockedResult({
+      blockedReason: "unsupported-host-platform",
+      selection: selection.value
+    });
+  }
+
+  if (!isSupportedHostYear(selection.value.labviewVersion)) {
+    return hostRuntimeObservationSourceBlockedResult({
+      blockedReason: "unsupported-host-year",
+      selection: selection.value
+    });
+  }
+
+  const sourceFacts = normalizeHostRuntimeObservationSourceFacts(input, selection.value);
+  if (!sourceFacts.ok) {
+    return hostRuntimeObservationSourceBlockedResult({
+      blockedReason: sourceFacts.blockedReason,
+      selection: selection.value,
+      sourceFacts: sourceFacts.value ?? [],
+      observationDependencyFacts: sourceFacts.observationDependencyFacts ?? []
+    });
+  }
+
+  const observationDependencies = createObservationDependenciesFromSourceFacts(sourceFacts.value);
+  const observation = createRuntimeSettingsValidationHostRuntimeObservation({
+    selection: selection.value,
+    observationDependencies
+  });
+
+  if (observation.status !== "ready") {
+    return hostRuntimeObservationSourceBlockedResult({
+      blockedReason: observation.blockedReason,
+      selection: selection.value,
+      sourceFacts: sourceFacts.value,
+      observationDependencyFacts: sourceFacts.value,
+      observation
+    });
+  }
+
+  return freezeRecord({
+    status: "ready",
+    type: "runtime-settings-cli-validation-host-runtime-observation-source-adapter-contract",
+    sourceAdapterBoundary: "bounded-public-safe-observation-source-facts-only",
+    selection: selection.value,
+    sourceCount: sourceFacts.value.length,
+    sourceFacts: sourceFacts.value,
+    observationDependencyFacts: sourceFacts.value,
+    observationDependencies,
+    observation,
+    discovery: observation.discovery,
+    preflight: observation.preflight,
+    hostCandidates: observation.hostCandidates,
+    hostCandidateCount: observation.hostCandidateCount,
+    compatibleHostCandidateCount: observation.compatibleHostCandidateCount,
+    runtimeSelection: observation.runtimeSelection,
+    blockedReason: null,
+    partialWrite: false,
+    blockedSideEffects: RUNTIME_SETTINGS_VALIDATION_HOST_RUNTIME_OBSERVATION_SOURCE_BLOCKED_SIDE_EFFECTS,
+    requirementIds: allRuntimeSettingsCliValidationHostRuntimeObservationSourceRequirementIds()
+  });
+}
+
 export function createRuntimeSettingsValidationProofArtifact(input = {}) {
   const validation = normalizeValidationProofFacts(input.validation ?? input.validationFacts ?? input);
   if (!validation.ok) {
@@ -1354,6 +1492,27 @@ function resolveValidationCommandRuntimeSelection(input = {}) {
     return providedPreflight.runtimeSelection;
   }
 
+  const providedSourceAdapter = input.hostRuntimeObservationSourceAdapter
+    ?? input.runtimeObservationSourceAdapter
+    ?? input.observationSourceAdapter
+    ?? input.sourceAdapter;
+  if (isPlainObject(providedSourceAdapter) && providedSourceAdapter.runtimeSelection) {
+    return providedSourceAdapter.runtimeSelection;
+  }
+  if (isPlainObject(providedSourceAdapter)) {
+    return createRuntimeSettingsValidationHostRuntimeObservationSourceAdapter(providedSourceAdapter).runtimeSelection;
+  }
+
+  const hostObservationSourceRequest = input.hostRuntimeObservationSourceAdapterRequest
+    ?? input.runtimeObservationSourceAdapterRequest
+    ?? input.observationSourceAdapterRequest
+    ?? input.sourceAdapterRequest
+    ?? input.hostRuntimeObservationSourceRequest
+    ?? input.runtimeObservationSourceRequest;
+  if (isPlainObject(hostObservationSourceRequest)) {
+    return createRuntimeSettingsValidationHostRuntimeObservationSourceAdapter(hostObservationSourceRequest).runtimeSelection;
+  }
+
   const providedObservation = input.hostRuntimeObservation
     ?? input.runtimeObservation
     ?? input.observationAdapter
@@ -1394,6 +1553,28 @@ function resolveValidationCommandRuntimeSelection(input = {}) {
     ?? input.hostPreflightRequest;
   if (isPlainObject(hostPreflightRequest)) {
     return createRuntimeSettingsValidationHostRuntimePreflight(hostPreflightRequest).runtimeSelection;
+  }
+
+  if (hasValidationCommandHostRuntimeObservationSourceFacts(input)) {
+    return createRuntimeSettingsValidationHostRuntimeObservationSourceAdapter({
+      selection: input.hostSelection
+        ?? input.hostRuntimeSelection
+        ?? input.hostRuntimeFacts
+        ?? input.selection
+        ?? input.persistedSettings
+        ?? input.settings,
+      sourceFacts: input.hostRuntimeObservationSourceFacts
+        ?? input.runtimeObservationSourceFacts
+        ?? input.observationSourceFacts
+        ?? input.sourceFacts,
+      sources: input.hostRuntimeObservationSources
+        ?? input.runtimeObservationSources
+        ?? input.observationSources
+        ?? input.sources,
+      sourceDependencies: input.hostRuntimeObservationSourceDependencies
+        ?? input.runtimeObservationSourceDependencies
+        ?? input.observationSourceDependencies
+    }).runtimeSelection;
   }
 
   if (hasValidationCommandHostRuntimeObservationFacts(input)) {
@@ -1466,6 +1647,30 @@ function hasValidationCommandHostPreflightFacts(input = {}) {
     || input.availableHostInstallations !== undefined
     || input.hostInstallations !== undefined
     || input.candidates !== undefined;
+}
+
+function hasValidationCommandHostRuntimeObservationSourceFacts(input = {}) {
+  return input.hostRuntimeObservationSourceAdapter !== undefined
+    || input.runtimeObservationSourceAdapter !== undefined
+    || input.observationSourceAdapter !== undefined
+    || input.sourceAdapter !== undefined
+    || input.hostRuntimeObservationSourceAdapterRequest !== undefined
+    || input.runtimeObservationSourceAdapterRequest !== undefined
+    || input.observationSourceAdapterRequest !== undefined
+    || input.sourceAdapterRequest !== undefined
+    || input.hostRuntimeObservationSourceRequest !== undefined
+    || input.runtimeObservationSourceRequest !== undefined
+    || input.hostRuntimeObservationSourceFacts !== undefined
+    || input.runtimeObservationSourceFacts !== undefined
+    || input.observationSourceFacts !== undefined
+    || input.sourceFacts !== undefined
+    || input.hostRuntimeObservationSources !== undefined
+    || input.runtimeObservationSources !== undefined
+    || input.observationSources !== undefined
+    || input.sources !== undefined
+    || input.hostRuntimeObservationSourceDependencies !== undefined
+    || input.runtimeObservationSourceDependencies !== undefined
+    || input.observationSourceDependencies !== undefined;
 }
 
 function hasValidationCommandHostRuntimeObservationFacts(input = {}) {
@@ -3160,6 +3365,263 @@ function hostRuntimeObservationBlockedResult({
   });
 }
 
+function hostRuntimeObservationSourceBlockedResult({
+  blockedReason,
+  selection = null,
+  sourceFacts = [],
+  observationDependencyFacts = [],
+  observation = null
+}) {
+  const frozenSources = Array.isArray(sourceFacts) ? freezeRecord(sourceFacts) : freezeRecord([]);
+  const frozenDependencies = Array.isArray(observationDependencyFacts)
+    ? freezeRecord(observationDependencyFacts)
+    : freezeRecord([]);
+  const observationDependencies = createObservationDependenciesFromSourceFacts(frozenDependencies);
+  const hostCandidates = observation?.hostCandidates ?? freezeRecord([]);
+
+  return freezeRecord({
+    status: "blocked",
+    type: "runtime-settings-cli-validation-host-runtime-observation-source-adapter-contract",
+    sourceAdapterBoundary: "bounded-public-safe-observation-source-facts-only",
+    selection,
+    sourceCount: frozenSources.length,
+    sourceFacts: frozenSources,
+    observationDependencyFacts: frozenDependencies,
+    observationDependencies,
+    observation,
+    discovery: observation?.discovery ?? null,
+    preflight: observation?.preflight ?? null,
+    hostCandidates,
+    hostCandidateCount: observation?.hostCandidateCount ?? hostCandidates.length,
+    compatibleHostCandidateCount: observation?.compatibleHostCandidateCount ?? 0,
+    runtimeSelection: observation?.runtimeSelection ?? createHostRuntimePreflightRuntimeSelection(selection, blockedReason),
+    blockedReason,
+    partialWrite: false,
+    blockedSideEffects: RUNTIME_SETTINGS_VALIDATION_HOST_RUNTIME_OBSERVATION_SOURCE_BLOCKED_SIDE_EFFECTS,
+    requirementIds: allRuntimeSettingsCliValidationHostRuntimeObservationSourceRequirementIds()
+  });
+}
+
+function normalizeHostRuntimeObservationSourceFacts(input = {}, selection) {
+  const collected = collectHostRuntimeObservationSourceFacts(input);
+  if (!collected.ok) {
+    return collected;
+  }
+
+  if (collected.value.length === 0) {
+    return {
+      ok: false,
+      blockedReason: "missing-observation-source"
+    };
+  }
+
+  const sourceFacts = [];
+  for (const sourceFact of collected.value) {
+    const normalized = normalizeHostRuntimeObservationSourceFact(sourceFact, selection);
+    if (!normalized.ok) {
+      return {
+        ok: false,
+        blockedReason: normalized.blockedReason,
+        value: sourceFacts,
+        observationDependencyFacts: sourceFacts
+      };
+    }
+    sourceFacts.push(normalized.value);
+  }
+
+  return {
+    ok: true,
+    value: freezeRecord(sourceFacts)
+  };
+}
+
+function collectHostRuntimeObservationSourceFacts(input = {}) {
+  const sourceContainers = [];
+  for (const sourceContainer of [
+    input.sourceDependencies,
+    input.hostRuntimeObservationSourceDependencies,
+    input.runtimeObservationSourceDependencies,
+    input.observationSourceDependencies,
+    input.dependencies
+  ]) {
+    if (sourceContainer === undefined || sourceContainer === null) {
+      continue;
+    }
+    if (!isPlainObject(sourceContainer)) {
+      return {
+        ok: false,
+        blockedReason: "malformed-host-runtime-observation-source-input"
+      };
+    }
+    sourceContainers.push(sourceContainer);
+  }
+
+  const sourceGroups = [
+    input.sourceFacts ?? input.sources ?? input.observationSources,
+    input.hostRuntimeObservationSources ?? input.runtimeObservationSources,
+    input.hostRuntimeObservationSourceFacts ?? input.runtimeObservationSourceFacts,
+    input.documentedRootSources ?? input.documentedRootSourceFacts,
+    input.windowsRegistryViewSources ?? input.registryViewSources,
+    input.observationFacts
+  ];
+  for (const sourceContainer of sourceContainers) {
+    sourceGroups.push(
+      sourceContainer.sourceFacts ?? sourceContainer.sources ?? sourceContainer.observationSources,
+      sourceContainer.hostRuntimeObservationSources ?? sourceContainer.runtimeObservationSources,
+      sourceContainer.hostRuntimeObservationSourceFacts ?? sourceContainer.runtimeObservationSourceFacts,
+      sourceContainer.documentedRootSources ?? sourceContainer.documentedRootSourceFacts,
+      sourceContainer.windowsRegistryViewSources ?? sourceContainer.registryViewSources,
+      sourceContainer.observationFacts
+    );
+  }
+
+  const sourceFacts = [];
+  for (const group of sourceGroups) {
+    if (group === undefined || group === null) {
+      continue;
+    }
+    if (!Array.isArray(group)) {
+      return {
+        ok: false,
+        blockedReason: "malformed-host-runtime-observation-source-input"
+      };
+    }
+    sourceFacts.push(...group);
+  }
+
+  return {
+    ok: true,
+    value: sourceFacts
+  };
+}
+
+function normalizeHostRuntimeObservationSourceFact(sourceFact, selection) {
+  if (!isPlainObject(sourceFact)) {
+    return {
+      ok: false,
+      blockedReason: "malformed-host-runtime-observation-source-input"
+    };
+  }
+
+  const explicitSourceClass = normalizeFact(sourceFact.sourceClass ?? sourceFact.kind ?? sourceFact.type ?? sourceFact.source);
+  const sourceClass = explicitSourceClass
+    ? normalizeHostRuntimeDiscoverySourceClass({ sourceClass: explicitSourceClass })
+    : normalizeHostRuntimeDiscoverySourceClass(sourceFact);
+  if (!sourceClass) {
+    return {
+      ok: false,
+      blockedReason: explicitSourceClass ? "unsupported-observation-source-class" : "malformed-host-runtime-observation-source-input"
+    };
+  }
+
+  if (sourceClass === "windows-registry-view" && hasRawRegistryOutput(sourceFact)) {
+    return {
+      ok: false,
+      blockedReason: "malformed-registry-source"
+    };
+  }
+
+  if (hasPrivatePathDisclosure(sourceFact)) {
+    return {
+      ok: false,
+      blockedReason: "private-path-disclosure-attempt"
+    };
+  }
+
+  const labviewExecutable = normalizeHostRuntimeDiscoveryLabviewExecutable(sourceFact);
+  const labviewCli = normalizeHostRuntimeDiscoveryLabviewCli(sourceFact);
+  const platform = normalizePlatform(sourceFact.platform ?? sourceFact.osFamily ?? selection?.platform);
+  const labviewVersion = normalizeFact(
+    sourceFact.labviewVersion
+      ?? sourceFact.version
+      ?? labviewExecutable.version
+      ?? selection?.labviewVersion
+  );
+  const labviewBitness = normalizeLabviewBitness(
+    sourceFact.labviewBitness
+      ?? sourceFact.bitness
+      ?? labviewExecutable.bitness
+      ?? selection?.labviewBitness
+  );
+
+  if (!platform || !labviewVersion || !labviewBitness) {
+    return {
+      ok: false,
+      blockedReason: sourceClass === "windows-registry-view"
+        ? "malformed-registry-source"
+        : "malformed-documented-root-source"
+    };
+  }
+
+  const sourceId = normalizePublicDiscoveryIdentifier(
+    sourceFact.sourceId
+      ?? sourceFact.identifier
+      ?? sourceFact.id
+      ?? sourceFact.documentedRoot
+      ?? sourceFact.root
+      ?? sourceFact.registryView
+      ?? `${sourceClass}-${platform}-${labviewVersion}-${labviewBitness}`
+  );
+  if (!sourceId) {
+    return {
+      ok: false,
+      blockedReason: "private-path-disclosure-attempt"
+    };
+  }
+
+  const documentedRoot = sourceClass === "documented-root"
+    ? normalizePublicDiscoveryIdentifier(sourceFact.documentedRoot ?? sourceFact.root)
+    : null;
+  const registryView = sourceClass === "windows-registry-view"
+    ? normalizeRegistryView(sourceFact.registryView ?? sourceFact.view)
+    : null;
+
+  if (sourceClass === "documented-root" && !documentedRoot) {
+    return {
+      ok: false,
+      blockedReason: "malformed-documented-root-source"
+    };
+  }
+
+  if (sourceClass === "windows-registry-view" && !registryView) {
+    return {
+      ok: false,
+      blockedReason: "malformed-registry-source"
+    };
+  }
+
+  return {
+    ok: true,
+    value: freezeRecord({
+      kind: "host-runtime-observation-source",
+      publicSafe: true,
+      sourceAdapterBoundary: "bounded-public-safe-observation-source-facts-only",
+      sourceClass,
+      sourceId,
+      documentedRoot,
+      registryView,
+      available: sourceFact.available !== false && sourceFact.installed !== false && sourceFact.present !== false,
+      contaminated: sourceFact.contaminated === true || sourceFact.surfaceContaminated === true,
+      platform,
+      labviewVersion,
+      labviewBitness,
+      labviewExecutable,
+      labviewCli
+    })
+  };
+}
+
+function createObservationDependenciesFromSourceFacts(sourceFacts = []) {
+  const facts = Array.isArray(sourceFacts) ? sourceFacts : [];
+  const windowsRegistryViewObservations = facts.filter((fact) => fact?.sourceClass === "windows-registry-view");
+  const documentedRootObservations = facts.filter((fact) => fact?.sourceClass === "documented-root");
+
+  return freezeRecord({
+    windowsRegistryViewObservations: freezeRecord(windowsRegistryViewObservations),
+    documentedRootObservations: freezeRecord(documentedRootObservations)
+  });
+}
+
 function normalizeHostRuntimeObservationDependencies(input = {}, selection) {
   const collected = collectHostRuntimeObservationDependencies(input);
   if (!collected.ok) {
@@ -3523,10 +3985,10 @@ function normalizeHostRuntimeDiscoveryObservation(observation, selection) {
 
 function normalizeHostRuntimeDiscoverySourceClass(observation) {
   const sourceClass = normalizeFact(observation.sourceClass ?? observation.kind ?? observation.type ?? observation.source)?.toLowerCase();
-  if (["documented-root", "documented-root-observation", "documented-root-facts", "root"].includes(sourceClass)) {
+  if (["documented-root", "documented-root-observation", "documented-root-facts", "documented-root-source", "root"].includes(sourceClass)) {
     return "documented-root";
   }
-  if (["windows-registry-view", "registry-view", "registry-view-observation", "windows-registry"].includes(sourceClass)) {
+  if (["windows-registry-view", "registry-view", "registry-view-observation", "windows-registry-view-source", "registry-view-source", "windows-registry"].includes(sourceClass)) {
     return "windows-registry-view";
   }
   if (observation.documentedRoot || observation.root) {
@@ -3785,6 +4247,7 @@ function runtimeErrorCodeForRuntimeBlockedReason(blockedReason) {
   if (
     blockedReason === "labview-2026q1-unsupported-on-macos"
     || blockedReason === "macos-host-runtime-discovery-unavailable"
+    || blockedReason === "macos-host-runtime-observation-source-unavailable"
     || blockedReason === "unsupported-host-platform"
     || blockedReason?.endsWith("provider-not-supported-on-platform")
   ) {
@@ -3803,7 +4266,7 @@ function runtimeErrorCodeForRuntimeBlockedReason(blockedReason) {
   ) {
     return "VIHS_E_DOCKER_UNAVAILABLE";
   }
-  if (blockedReason === "labview-exe-not-found" || blockedReason === "missing-host-runtime-candidate" || blockedReason === "missing-discovery-observation") {
+  if (blockedReason === "labview-exe-not-found" || blockedReason === "missing-host-runtime-candidate" || blockedReason === "missing-discovery-observation" || blockedReason === "missing-observation-source") {
     return "VIHS_E_LABVIEW_NOT_FOUND";
   }
   if (blockedReason === "labview-exe-ambiguous" || blockedReason === "ambiguous-host-runtime-candidate") {
@@ -3824,6 +4287,10 @@ function runtimeErrorCodeForRuntimeBlockedReason(blockedReason) {
   if (
     blockedReason === "windows-host-runtime-surface-contaminated"
     || blockedReason === "malformed-registry-observation"
+    || blockedReason === "malformed-registry-source"
+    || blockedReason === "malformed-documented-root-source"
+    || blockedReason === "malformed-host-runtime-observation-source-input"
+    || blockedReason === "unsupported-observation-source-class"
     || blockedReason === "private-path-disclosure-attempt"
   ) {
     return "VIHS_E_RUNTIME_SURFACE_CONTAMINATED";

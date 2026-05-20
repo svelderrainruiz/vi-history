@@ -518,6 +518,29 @@ terminal process wiring, live terminal proof, proof-out expansion, file writes,
 package/bin publication, launcher/profile mutation, release automation,
 Marketplace work, and source copying remain blocked.
 
+`runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`
+implements
+`IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`
+for Issue #144 and T009-T016 only. Issue #142 is an admission issue and must
+not be reused for implementation. Issue #144 implements and closes it through
+PR #145 for T009-T016 only. The implemented IAU is a bounded
+`createRuntimeSettingsValidationHostRuntimeObservationSourceAdapter(input =
+{})` facts contract over public-safe selected host facts and supplied bounded
+source facts. It may derive public-safe observation dependency facts for
+`createRuntimeSettingsValidationHostRuntimeObservation(input = {})` and the
+existing validation command chain without changing runtime outcome, readback,
+proof artifact, proof-out, file-emission, validation command,
+`validate-plan-only`, host runtime preflight, host preflight command
+composition, host runtime discovery, or host runtime observation output shapes.
+Raw private path disclosure, raw registry output retention, arbitrary
+filesystem walking, PATH probing, environment probing, existing compare runtime
+locator reuse, runtime validation execution, compare execution, LabVIEWCLI
+execution, Docker execution or orchestration, raw terminal process wiring, live
+terminal proof, proof-out expansion, file writes from a source or observation
+adapter, package/bin publication, launcher/profile mutation, VSIX packaging
+changes, release automation, Marketplace work, and source copying remain
+blocked.
+
 `extension-vsix-packaging-artifact-v1` implements
 `IAU-extension-vsix-packaging-artifact-v1` for local VSIX package artifact
 creation and inspection only. It adds `npm run package:vsix`,
@@ -532,6 +555,9 @@ The Marketplace posture is recorded in
 `docs/decisions/ADR-001-marketplace-publication-disabled.md`, superseded in
 part by `docs/decisions/ADR-002-vsix-packaging-artifact-only.md`, and
 summarized in `docs/governance/marketplace-posture.md`.
+
+Current Implementation Admission Unit:
+`none`.
 
 ## Validation
 

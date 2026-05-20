@@ -1,0 +1,100 @@
+{
+  "schema": "vi-history/implementation-admission-unit@v1",
+  "iauId": "IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1",
+  "createdDate": "2026-05-19",
+  "state": "implemented",
+  "parentSliceId": "runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1",
+  "specFeature": ".specify/specs/runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1",
+  "issue": {
+    "number": 142,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/142"
+  },
+  "implementationHandoffIssue": {
+    "number": 144,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/144"
+  },
+  "implementationPullRequest": {
+    "number": 145,
+    "url": "https://github.com/svelderrainruiz/vi-history/pull/145"
+  },
+  "admittedTasks": [
+    "T009",
+    "T010",
+    "T011",
+    "T012",
+    "T013",
+    "T014",
+    "T015",
+    "T016"
+  ],
+  "blockedTasks": [
+    "T017",
+    "T018",
+    "T019",
+    "T020",
+    "T021",
+    "T022",
+    "T023",
+    "T024",
+    "T025",
+    "T026",
+    "T027",
+    "T028"
+  ],
+  "entryGate": [
+    "public import packet committed",
+    "Spec Kit spec/plan/tasks committed",
+    "public redaction scan passes",
+    "bridge artifact validation passes",
+    "preflight status is pass",
+    "admission PR merged",
+    "separate implementation handoff issue created"
+  ],
+  "exitGate": [
+    "T009-T016 tests and implementation complete",
+    "npm test passes",
+    "npm run check passes",
+    "git diff --check passes",
+    "public redaction scan passes",
+    "bridge artifact validation passes",
+    "implementation handoff issue names completed IAU and next blocked scope"
+  ],
+  "preImplementationPreflight": {
+    "status": "pass",
+    "record": "IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1-preflight-v1.json",
+    "implementationStartAllowed": true
+  },
+  "implementationCloseout": {
+    "status": "pass",
+    "issue": 144,
+    "pullRequest": 145,
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011",
+      "T012",
+      "T013",
+      "T014",
+      "T015",
+      "T016"
+    ],
+    "blockedScopeRetained": [
+      "T017",
+      "T018",
+      "T019",
+      "T020",
+      "T021",
+      "T022",
+      "T023",
+      "T024",
+      "T025",
+      "T026",
+      "T027",
+      "T028"
+    ]
+  },
+  "implementationHandoffPolicy": "Create a separate implementation handoff issue after the admission PR merges; do not reuse Issue #142 for implementation.",
+  "implementationSharing": "none",
+  "requirementMaturityBasis": "public sequencing marker and admitted bridge-readiness packet support narrow source-adapter admission, not source reuse",
+  "marketplacePublication": "out-of-scope"
+}

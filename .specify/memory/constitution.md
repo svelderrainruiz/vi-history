@@ -1,7 +1,7 @@
 <!--
 Sync Impact Report
-Version change: 0.1.18 -> 0.1.19
-Modified principles: VSIX packaging artifact separated from Marketplace publication; imported slice registry adds extension VSIX packaging artifact
+Version change: 0.1.19 -> 0.1.20
+Modified principles: imported slice registry adds host runtime observation source adapter
 Added sections: Authority Boundaries, Development Workflow, Governance
 Removed sections: unresolved template placeholders
 Templates requiring updates: pending after first implementation planning pass
@@ -147,6 +147,11 @@ The imported slices are:
   `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-observation-adapter-v1/`
   and Spec Kit feature under
   `.specify/specs/runtime-settings-cli-validation-host-runtime-observation-adapter-v1/`.
+- `runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`,
+  with its import packet under
+  `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1/`
+  and Spec Kit feature under
+  `.specify/specs/runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1/`.
 - `extension-vsix-packaging-artifact-v1`, with its import packet under
   `docs/requirements/imports/extension-vsix-packaging-artifact-v1/` and Spec
   Kit feature under `.specify/specs/extension-vsix-packaging-artifact-v1/`.
@@ -166,4 +171,4 @@ This constitution governs repository-local work. Amendments require a versioned
 change, a short rationale, and validation that affected Spec Kit templates and
 repository guidance remain consistent.
 
-**Version**: 0.1.19 | **Ratified**: 2026-05-17 | **Last Amended**: 2026-05-19
+**Version**: 0.1.20 | **Ratified**: 2026-05-17 | **Last Amended**: 2026-05-19
