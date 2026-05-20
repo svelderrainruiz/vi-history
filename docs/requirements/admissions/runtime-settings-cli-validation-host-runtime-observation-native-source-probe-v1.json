@@ -1,0 +1,104 @@
+{
+  "schema": "vi-history/requirements-admission@v1",
+  "sliceId": "runtime-settings-cli-validation-host-runtime-observation-native-source-probe-v1",
+  "createdDate": "2026-05-20",
+  "state": "admitted",
+  "targetProduct": "vi-history",
+  "targetFeature": "runtime-settings-cli-validation-host-runtime-observation-native-source-probe-v1",
+  "sourceBaselineTag": "v1.3.17",
+  "sourceCommit": "abaa48b0f863e59e73dde4be65a58cf1905c6146",
+  "governedAdmissionCommit": "abaa48b0f863e59e73dde4be65a58cf1905c6146",
+  "promotedBaselineCommit": "abaa48b0f863e59e73dde4be65a58cf1905c6146",
+  "publicImportPath": "docs/requirements/imports/runtime-settings-cli-validation-host-runtime-observation-native-source-probe-v1/",
+  "specKitPath": ".specify/specs/runtime-settings-cli-validation-host-runtime-observation-native-source-probe-v1/",
+  "issue": {
+    "number": null,
+    "url": null
+  },
+  "publicSequencingMarker": {
+    "number": 159,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/159"
+  },
+  "implementationHandoffIssue": {
+    "number": null,
+    "url": null
+  },
+  "implementationPullRequest": {
+    "number": null,
+    "url": null
+  },
+  "bridgeChecks": {
+    "publicImportPacketPresent": "pass",
+    "specKitArtifactsPresent": "pass",
+    "redactionScan": "pass",
+    "artifactConsistency": "pass",
+    "implementationPreflight": "pending"
+  },
+  "implementationAdmissionUnits": [
+    {
+      "iauId": "IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-probe-v1",
+      "state": "admitted",
+      "record": "docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-native-source-probe-v1/IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-probe-v1.json",
+      "preflightRecord": "docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-native-source-probe-v1/IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-probe-v1-preflight-v1.json",
+      "admittedTasks": [
+        "T009",
+        "T010",
+        "T011",
+        "T012",
+        "T013",
+        "T014",
+        "T015",
+        "T016"
+      ]
+    }
+  ],
+  "currentImplementationAdmissionUnit": "IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-probe-v1",
+  "completedSpecScope": [
+    "T001",
+    "T002",
+    "T003",
+    "T004",
+    "T005",
+    "T006",
+    "T007",
+    "T008"
+  ],
+  "completedImplementationScope": [],
+  "admittedImplementationScope": [
+    "T009",
+    "T010",
+    "T011",
+    "T012",
+    "T013",
+    "T014",
+    "T015",
+    "T016"
+  ],
+  "blockedImplementationScope": [
+    "T017",
+    "T018",
+    "T019",
+    "T020",
+    "T021",
+    "T022",
+    "T023",
+    "T024",
+    "T025",
+    "T026",
+    "T027",
+    "T028",
+    "T029",
+    "T030"
+  ],
+  "preImplementationPreflight": {
+    "iauId": "IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-probe-v1",
+    "status": "pending",
+    "record": "docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-native-source-probe-v1/IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-probe-v1-preflight-v1.json",
+    "implementationStartAllowed": false
+  },
+  "implementationCloseout": null,
+  "implementationHandoffPolicy": "Create a separate implementation handoff issue after the admission PR merges; do not reuse the admission issue for implementation.",
+  "requirementMaturityBasis": "public sequencing marker and promoted native-source-acquisition baseline support narrow native source probe admission, not runtime execution",
+  "implementationSharing": "none",
+  "marketplacePublication": "out-of-scope"
+}
