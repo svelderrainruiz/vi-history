@@ -519,11 +519,11 @@ package/bin publication, launcher/profile mutation, release automation,
 Marketplace work, and source copying remain blocked.
 
 `runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`
-admits
+implements
 `IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`
-for Issue #142 and T009-T016 only. Issue #142 is an admission issue and must
-not be reused for implementation. The implementation handoff issue must be
-created after the admission PR merges. The admitted IAU is a bounded
+for Issue #144 and T009-T016 only. Issue #142 is an admission issue and must
+not be reused for implementation. Issue #144 implements and closes it through
+PR #145 for T009-T016 only. The implemented IAU is a bounded
 `createRuntimeSettingsValidationHostRuntimeObservationSourceAdapter(input =
 {})` facts contract over public-safe selected host facts and supplied bounded
 source facts. It may derive public-safe observation dependency facts for
@@ -557,7 +557,7 @@ part by `docs/decisions/ADR-002-vsix-packaging-artifact-only.md`, and
 summarized in `docs/governance/marketplace-posture.md`.
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`.
+`none`.
 
 ## Validation
 

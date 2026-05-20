@@ -2,7 +2,7 @@
   "schema": "vi-history/requirements-admission@v1",
   "sliceId": "runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1",
   "createdDate": "2026-05-19",
-  "state": "admitted",
+  "state": "implemented",
   "targetProduct": "vi-history",
   "targetFeature": "runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1",
   "sourceBaselineTag": "v1.3.16",
@@ -14,8 +14,14 @@
     "number": 142,
     "url": "https://github.com/svelderrainruiz/vi-history/issues/142"
   },
-  "implementationHandoffIssue": null,
-  "implementationPullRequest": null,
+  "implementationHandoffIssue": {
+    "number": 144,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/144"
+  },
+  "implementationPullRequest": {
+    "number": 145,
+    "url": "https://github.com/svelderrainruiz/vi-history/pull/145"
+  },
   "publicSequencingMarker": {
     "number": 135,
     "url": "https://github.com/svelderrainruiz/vi-history/issues/135"
@@ -30,7 +36,7 @@
   "implementationAdmissionUnits": [
     {
       "iauId": "IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1",
-      "state": "admitted",
+      "state": "implemented",
       "record": "docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1/IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1.json",
       "preflightRecord": "docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1/IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1-preflight-v1.json",
       "admittedTasks": [
@@ -45,7 +51,7 @@
       ]
     }
   ],
-  "currentImplementationAdmissionUnit": "IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1",
+  "currentImplementationAdmissionUnit": null,
   "completedSpecScope": [
     "T001",
     "T002",
@@ -56,8 +62,7 @@
     "T007",
     "T008"
   ],
-  "completedImplementationScope": [],
-  "admittedImplementationScope": [
+  "completedImplementationScope": [
     "T009",
     "T010",
     "T011",
@@ -67,6 +72,7 @@
     "T015",
     "T016"
   ],
+  "admittedImplementationScope": [],
   "blockedImplementationScope": [
     "T017",
     "T018",
@@ -86,6 +92,35 @@
     "status": "pass",
     "record": "docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1/IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1-preflight-v1.json",
     "implementationStartAllowed": true
+  },
+  "implementationCloseout": {
+    "status": "pass",
+    "issue": 144,
+    "pullRequest": 145,
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011",
+      "T012",
+      "T013",
+      "T014",
+      "T015",
+      "T016"
+    ],
+    "blockedScopeRetained": [
+      "T017",
+      "T018",
+      "T019",
+      "T020",
+      "T021",
+      "T022",
+      "T023",
+      "T024",
+      "T025",
+      "T026",
+      "T027",
+      "T028"
+    ]
   },
   "implementationHandoffPolicy": "Create a separate implementation handoff issue after the admission PR merges; do not reuse Issue #142 for implementation.",
   "requirementMaturityBasis": "public sequencing marker and admitted bridge-readiness packet support narrow source-adapter admission, not source reuse",

@@ -3,24 +3,26 @@
 Slice:
 `runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`
 
-State: admitted
+State: implemented
 
 Admission issue: Issue #142
 
 Sequencing marker: Issue #135
 
-Implementation handoff issue: create after admission PR merges
+Implementation handoff issue: Issue #144
+
+Implementation PR: PR #145
 
 ## Scope
 
-This admission allows a narrow source adapter that turns bounded public-safe
-source facts into observation dependency facts for
+This admission implements a narrow source adapter that turns bounded
+public-safe source facts into observation dependency facts for
 `createRuntimeSettingsValidationHostRuntimeObservation(input = {})`.
 
 ## Admitted IAU
 
 `IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`
-admits T009-T016:
+implements T009-T016:
 
 - source-adapter tests for selected host facts
 - Windows registry-view source fact sanitization
@@ -34,8 +36,8 @@ admits T009-T016:
 - blocked side-effect facts
 - the minimum public MIT source adapter contract
 
-Issue #142 must not be reused for implementation. A separate implementation
-handoff issue must be created after the admission PR merges.
+Issue #142 must not be reused for implementation. Issue #144 is the
+implementation handoff issue. PR #145 implements the IAU.
 
 ## Blocked Scope
 

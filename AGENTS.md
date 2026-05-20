@@ -264,11 +264,11 @@ compare execution, LabVIEWCLI execution, Docker execution, launcher/profile
 mutation, release automation, and source copying remain out of scope.
 
 `runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`
-admits
+implements
 `IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`
-for Issue #142 and T009-T016 only. Issue #142 is an admission issue and must not
-be reused for implementation. The implementation handoff issue must be created
-after the admission PR merges. The admitted IAU is a bounded
+for Issue #144 and T009-T016 only. Issue #142 is an admission issue and must not
+be reused for implementation. Issue #144 implements and closes it through PR
+#145 for T009-T016 only. The implemented IAU is a bounded
 `createRuntimeSettingsValidationHostRuntimeObservationSourceAdapter(input =
 {})` facts contract over public-safe selected host facts and supplied bounded
 source facts. It may derive public-safe observation dependency facts for
@@ -283,7 +283,15 @@ publication, launcher/profile mutation, VSIX packaging changes, release
 automation, Marketplace publication, and source copying remain blocked.
 
 Current Implementation Admission Unit:
+`none`.
+
+Issue #142 admission temporarily set the current IAU to
 `IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`.
+Issue #144 and PR #145 completed it. Before Issue #142 admission, the VSIX
+packaging closeout recorded:
+
+Current Implementation Admission Unit:
+`none`.
 
 Issue #130 admission temporarily set the current IAU to
 `IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1`.

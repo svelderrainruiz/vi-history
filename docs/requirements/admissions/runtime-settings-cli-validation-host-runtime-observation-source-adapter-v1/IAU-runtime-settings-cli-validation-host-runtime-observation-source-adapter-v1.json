@@ -2,15 +2,21 @@
   "schema": "vi-history/implementation-admission-unit@v1",
   "iauId": "IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1",
   "createdDate": "2026-05-19",
-  "state": "admitted",
+  "state": "implemented",
   "parentSliceId": "runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1",
   "specFeature": ".specify/specs/runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1",
   "issue": {
     "number": 142,
     "url": "https://github.com/svelderrainruiz/vi-history/issues/142"
   },
-  "implementationHandoffIssue": null,
-  "implementationPullRequest": null,
+  "implementationHandoffIssue": {
+    "number": 144,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/144"
+  },
+  "implementationPullRequest": {
+    "number": 145,
+    "url": "https://github.com/svelderrainruiz/vi-history/pull/145"
+  },
   "admittedTasks": [
     "T009",
     "T010",
@@ -57,6 +63,35 @@
     "status": "pass",
     "record": "IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1-preflight-v1.json",
     "implementationStartAllowed": true
+  },
+  "implementationCloseout": {
+    "status": "pass",
+    "issue": 144,
+    "pullRequest": 145,
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011",
+      "T012",
+      "T013",
+      "T014",
+      "T015",
+      "T016"
+    ],
+    "blockedScopeRetained": [
+      "T017",
+      "T018",
+      "T019",
+      "T020",
+      "T021",
+      "T022",
+      "T023",
+      "T024",
+      "T025",
+      "T026",
+      "T027",
+      "T028"
+    ]
   },
   "implementationHandoffPolicy": "Create a separate implementation handoff issue after the admission PR merges; do not reuse Issue #142 for implementation.",
   "implementationSharing": "none",
