@@ -557,6 +557,36 @@ adapter, change VSIX packaging behavior, publish packages, mutate
 launcher/profile state, release, work on the Marketplace, or copy source
 without a separate public admission.
 
+Issue #148 imports
+`runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`
+and admits
+`IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`
+for T009-T016 only. Issue #148 is an admission issue and must not be reused for
+implementation. Issue #150 and PR #151 completed it. The implemented IAU is a
+bounded
+`createRuntimeSettingsValidationHostRuntimeObservationSourceAcquisition(input =
+{})` facts contract over public-safe selected host facts and supplied bounded
+native host acquisition dependency facts. It may derive public-safe source
+facts for
+`createRuntimeSettingsValidationHostRuntimeObservationSourceAdapter(input = {})`
+and the existing validation command chain without changing output shapes.
+Future work must not retain raw private paths or raw registry output, walk
+arbitrary filesystems, broadly probe PATH or environment state, reuse the
+existing compare runtime locator, execute validation, call LabVIEWCLI, call
+Docker, wire raw terminal processes, expand proof-out, write files from source,
+observation, discovery, or preflight adapters, change VSIX packaging behavior,
+publish packages, mutate launcher/profile state, release, work on the
+Marketplace, perform Docker source discovery, or copy source without a separate
+public admission.
+
+Current Implementation Admission Unit:
+`none`.
+
+Issue #148 admission temporarily sets the current IAU to
+`IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`.
+Issue #150 and PR #151 completed it. Before Issue #148 admission, the source
+adapter closeout recorded:
+
 Current Implementation Admission Unit:
 `none`.
 
@@ -618,6 +648,8 @@ Do not implement these without a separate bridge admission:
   bounded public-safe observation facts
 - runtime settings CLI validation host runtime observation source adapter
   behavior beyond bounded public-safe source facts
+- runtime settings CLI validation host runtime observation source acquisition
+  behavior beyond bounded public-safe acquisition dependency facts
 - OS scanning, filesystem walking, registry probing, PATH probing, environment
   probing, private path discovery, or runtime locator invocation
 - file writes from the host preflight adapter

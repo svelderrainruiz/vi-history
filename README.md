@@ -91,6 +91,18 @@ Issue #137 imports `extension-vsix-packaging-artifact-v1` and admits
 `IAU-extension-vsix-packaging-artifact-v1` for local VSIX package artifact
 creation and inspection only. Issue #137 is an admission issue and must not be
 reused for implementation. Issue #136 implements it through PR #138.
+Issue #142 imports
+`runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`
+and admits
+`IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`
+for T009-T016 only. Issue #142 is an admission issue and must not be reused for
+implementation. Issue #144 implements and closes it through PR #145.
+Issue #148 imports
+`runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`
+and admits
+`IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`
+for T009-T016 only. Issue #148 is an admission issue and must not be reused for
+implementation. Issue #150 implements and closes it through PR #151.
 
 ## Authority
 
@@ -251,6 +263,24 @@ reused for implementation. Issue #136 implements it through PR #138.
   be reused for implementation.
 - Issue #136 implements `IAU-extension-vsix-packaging-artifact-v1` through PR
   #138.
+- Issue #142 imports
+  `runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`
+  and admits
+  `IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`
+  for T009-T016 only. Issue #142 is an admission issue and must not be reused
+  for implementation.
+- Issue #144 implements and closes
+  `IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`
+  through PR #145 for T009-T016 only.
+- Issue #148 imports
+  `runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`
+  and admits
+  `IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`
+  for T009-T016 only. Issue #148 is an admission issue and must not be reused
+  for implementation.
+- Issue #150 implements and closes
+  `IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`
+  through PR #151 for T009-T016 only.
 
 The current admission ledgers are:
 
@@ -276,7 +306,25 @@ The current admission ledgers are:
 - `docs/requirements/admissions/runtime-settings-cli-validation-host-preflight-command-composition-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-discovery-v1.json`
 - `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-adapter-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1.json`
+- `docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1.json`
 - `docs/requirements/admissions/extension-vsix-packaging-artifact-v1.json`
+
+Current Implementation Admission Unit:
+`none`.
+
+Issue #148 admission temporarily sets the current IAU to
+`IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`.
+Issue #150 and PR #151 completed it. Before Issue #148 admission, the source
+adapter closeout recorded:
+
+Current Implementation Admission Unit:
+`none`.
+
+Issue #142 admission temporarily set the current IAU to
+`IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`.
+Issue #144 and PR #145 completed it. Before Issue #142 admission, the VSIX
+packaging closeout recorded:
 
 Current Implementation Admission Unit:
 `none`.
@@ -540,6 +588,31 @@ terminal proof, proof-out expansion, file writes from a source or observation
 adapter, package/bin publication, launcher/profile mutation, VSIX packaging
 changes, release automation, Marketplace work, and source copying remain
 blocked.
+
+`runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`
+implements
+`IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`
+for Issue #150 and T009-T016 only. Issue #148 is an admission issue and must
+not be reused for implementation. Issue #150 implements and closes it through
+PR #151. The implemented IAU is a bounded
+`createRuntimeSettingsValidationHostRuntimeObservationSourceAcquisition(input =
+{})` facts contract over public-safe selected host facts and supplied bounded
+native host acquisition dependency facts. It may derive public-safe source
+facts for
+`createRuntimeSettingsValidationHostRuntimeObservationSourceAdapter(input = {})`
+and the existing validation command chain without changing runtime outcome,
+readback, proof artifact, proof-out, file-emission, validation command,
+`validate-plan-only`, host runtime preflight, host preflight command
+composition, host runtime discovery, host runtime observation, or source
+adapter output shapes. Raw private path disclosure, raw registry output
+retention, arbitrary filesystem walking, broad PATH probing, environment
+probing, existing compare runtime locator reuse, runtime validation execution,
+compare execution, LabVIEWCLI execution, Docker execution or orchestration, raw
+terminal process wiring, live terminal proof, proof-out expansion, file writes
+from source, observation, discovery, or preflight adapters, package/bin
+publication, launcher/profile mutation, VSIX packaging changes, release
+automation, Marketplace work, Docker source discovery, and source copying
+remain blocked.
 
 `extension-vsix-packaging-artifact-v1` implements
 `IAU-extension-vsix-packaging-artifact-v1` for local VSIX package artifact
