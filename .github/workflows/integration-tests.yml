@@ -11,10 +11,15 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   # Standard tests run on GitHub-hosted runner
   unit-tests:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout
@@ -37,6 +42,8 @@ jobs:
     needs: unit-tests
     # Only run on main branch or when explicitly requested
     if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout
