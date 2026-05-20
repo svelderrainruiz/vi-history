@@ -3,13 +3,15 @@
 Slice:
 `runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`
 
-State: admitted
+State: implemented
 
 Admission issue: Issue #148
 
 Sequencing marker: Issue #147
 
-Implementation handoff issue: Created after admission PR merge
+Implementation handoff issue: Issue #150
+
+Implementation PR: PR #151
 
 ## Scope
 
@@ -20,7 +22,7 @@ native host acquisition dependency facts into source facts for
 ## Admitted IAU
 
 `IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`
-admits T009-T016:
+implements T009-T016:
 
 - source-acquisition tests for selected host facts
 - Windows registry-view acquisition dependency sanitization
@@ -34,8 +36,8 @@ admits T009-T016:
 - blocked side-effect facts
 - the minimum public MIT source acquisition contract
 
-Issue #148 must not be reused for implementation. A separate implementation
-handoff issue must be created after the admission PR merges.
+Issue #148 must not be reused for implementation. Issue #150 is the
+implementation handoff issue. PR #151 implements the IAU.
 
 ## Blocked Scope
 

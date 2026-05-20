@@ -5,7 +5,7 @@
 
 **Created**: 2026-05-20
 
-**Status**: Admission planning
+**Status**: Implemented
 
 **Input**: Public sequencing marker #147 and admission issue #148 for
 `runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`
@@ -114,10 +114,11 @@ exposing private host details.
 ## Current Implementation Admission Unit
 
 Current Implementation Admission Unit is
-`IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`.
+`none`.
 
-Implementation requires the admission PR to merge and a separate implementation
-handoff issue to be created. Issue #148 must not be reused for implementation.
+`IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`
+completed through Issue #150 and PR #151 for T009-T016 only. Issue #148 must
+not be reused for implementation.
 
 ## Out Of Scope
 

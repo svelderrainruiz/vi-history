@@ -102,8 +102,7 @@ Issue #148 imports
 and admits
 `IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`
 for T009-T016 only. Issue #148 is an admission issue and must not be reused for
-implementation; a separate implementation handoff issue is required after the
-admission PR merges.
+implementation. Issue #150 implements and closes it through PR #151.
 
 ## Authority
 
@@ -279,6 +278,9 @@ admission PR merges.
   `IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`
   for T009-T016 only. Issue #148 is an admission issue and must not be reused
   for implementation.
+- Issue #150 implements and closes
+  `IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`
+  through PR #151 for T009-T016 only.
 
 The current admission ledgers are:
 
@@ -309,12 +311,12 @@ The current admission ledgers are:
 - `docs/requirements/admissions/extension-vsix-packaging-artifact-v1.json`
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`.
+`none`.
 
 Issue #148 admission temporarily sets the current IAU to
 `IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`.
-Implementation requires a separate handoff issue after the admission PR merges.
-Before Issue #148 admission, the source adapter closeout recorded:
+Issue #150 and PR #151 completed it. Before Issue #148 admission, the source
+adapter closeout recorded:
 
 Current Implementation Admission Unit:
 `none`.
@@ -588,10 +590,11 @@ changes, release automation, Marketplace work, and source copying remain
 blocked.
 
 `runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`
-admits
+implements
 `IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`
-for Issue #148 and T009-T016 only. Issue #148 is an admission issue and must
-not be reused for implementation. The admitted IAU is a bounded
+for Issue #150 and T009-T016 only. Issue #148 is an admission issue and must
+not be reused for implementation. Issue #150 implements and closes it through
+PR #151. The implemented IAU is a bounded
 `createRuntimeSettingsValidationHostRuntimeObservationSourceAcquisition(input =
 {})` facts contract over public-safe selected host facts and supplied bounded
 native host acquisition dependency facts. It may derive public-safe source
@@ -627,7 +630,7 @@ part by `docs/decisions/ADR-002-vsix-packaging-artifact-only.md`, and
 summarized in `docs/governance/marketplace-posture.md`.
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`.
+`none`.
 
 ## Validation
 
