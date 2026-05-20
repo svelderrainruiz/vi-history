@@ -6,15 +6,17 @@ IAU:
 Parent slice:
 `runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`
 
-State: admitted
+State: implemented
 
 Admission issue: Issue #148
 
-Implementation handoff issue: Created after admission PR merge
+Implementation handoff issue: Issue #150
+
+Implementation PR: PR #151
 
 ## Admitted Tasks
 
-T009-T016 are admitted:
+T009-T016 are implemented:
 
 - tests for selected host facts and bounded source acquisition
 - tests for Windows registry-view acquisition dependency sanitization
@@ -41,6 +43,5 @@ discovery, and source copying.
 
 ## Entry Gate
 
-Implementation may start only after the admission PR merges and a separate
-implementation handoff issue is created. Issue #148 must not be reused for
-implementation.
+Implementation completed through Issue #150 and PR #151. T017-T030 remain
+blocked until a separate public admission.

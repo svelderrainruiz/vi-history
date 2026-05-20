@@ -4025,7 +4025,7 @@ requireTextIncludes("tests/runtime-settings-cli-validation-host-runtime-observat
 const runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmission = readJson(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmissionPath);
 requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmission.schema, "vi-history/requirements-admission@v1", "host runtime observation source acquisition admission schema");
 requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmission.sliceId, runtimeSettingsHostRuntimeObservationSourceAcquisitionSliceId, "host runtime observation source acquisition admission sliceId");
-requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmission.state, "admitted", "host runtime observation source acquisition admission state");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmission.state, "implemented", "host runtime observation source acquisition admission state");
 requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmission.targetProduct, "vi-history", "host runtime observation source acquisition admission targetProduct");
 requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmission.targetFeature, runtimeSettingsHostRuntimeObservationSourceAcquisitionSliceId, "host runtime observation source acquisition admission targetFeature");
 requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmission.sourceBaselineTag, "v1.3.16", "host runtime observation source acquisition admission sourceBaselineTag");
@@ -4033,11 +4033,13 @@ requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmission.sou
 requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmission.implementationSharing, "none", "host runtime observation source acquisition implementationSharing");
 requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmission.marketplacePublication, "out-of-scope", "host runtime observation source acquisition marketplacePublication");
 requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmission.issue?.number, 148, "host runtime observation source acquisition issue number");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmission.implementationHandoffIssue?.number, 150, "host runtime observation source acquisition implementation handoff issue");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmission.implementationPullRequest?.number, 151, "host runtime observation source acquisition implementation pull request");
 requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmission.publicSequencingMarker?.number, 147, "host runtime observation source acquisition sequencing marker");
-requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmission.currentImplementationAdmissionUnit, "IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1", "host runtime observation source acquisition currentImplementationAdmissionUnit");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmission.currentImplementationAdmissionUnit, null, "host runtime observation source acquisition currentImplementationAdmissionUnit");
 requireArrayEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "host runtime observation source acquisition completedSpecScope");
-requireArrayEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmission.completedImplementationScope, [], "host runtime observation source acquisition completedImplementationScope");
-requireArrayEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmission.admittedImplementationScope, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "host runtime observation source acquisition admittedImplementationScope");
+requireArrayEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmission.completedImplementationScope, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "host runtime observation source acquisition completedImplementationScope");
+requireArrayEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmission.admittedImplementationScope, [], "host runtime observation source acquisition admittedImplementationScope");
 requireArrayEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmission.blockedImplementationScope, ["T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025", "T026", "T027", "T028", "T029", "T030"], "host runtime observation source acquisition blockedImplementationScope");
 requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmission.preImplementationPreflight?.iauId, "IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1", "host runtime observation source acquisition preImplementationPreflight iauId");
 requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmission.preImplementationPreflight?.status, "pass", "host runtime observation source acquisition preImplementationPreflight status");
@@ -4047,15 +4049,17 @@ requireFile(`docs/requirements/admissions/${runtimeSettingsHostRuntimeObservatio
 
 const runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmissionUnit = (runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmission.implementationAdmissionUnits ?? [])
   .find((unit) => unit?.iauId === "IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1");
-requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmissionUnit?.state, "admitted", "host runtime observation source acquisition admission unit state");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmissionUnit?.state, "implemented", "host runtime observation source acquisition admission unit state");
 requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionAdmissionUnit?.preflightRecord, runtimeSettingsHostRuntimeObservationSourceAcquisitionPreflightPath, "host runtime observation source acquisition admission unit preflightRecord");
 
 const runtimeSettingsHostRuntimeObservationSourceAcquisitionIau = readJson(runtimeSettingsHostRuntimeObservationSourceAcquisitionIauPath);
 requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionIau.schema, "vi-history/implementation-admission-unit@v1", "host runtime observation source acquisition IAU schema");
 requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionIau.iauId, "IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1", "host runtime observation source acquisition IAU id");
-requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionIau.state, "admitted", "host runtime observation source acquisition IAU state");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionIau.state, "implemented", "host runtime observation source acquisition IAU state");
 requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionIau.parentSliceId, runtimeSettingsHostRuntimeObservationSourceAcquisitionSliceId, "host runtime observation source acquisition IAU parentSliceId");
 requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionIau.issue?.number, 148, "host runtime observation source acquisition IAU issue number");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionIau.implementationHandoffIssue?.number, 150, "host runtime observation source acquisition IAU implementation handoff issue");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionIau.implementationPullRequest?.number, 151, "host runtime observation source acquisition IAU implementation pull request");
 requireArrayEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionIau.admittedTasks, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "host runtime observation source acquisition IAU admittedTasks");
 requireArrayEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionIau.blockedTasks, ["T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025", "T026", "T027", "T028", "T029", "T030"], "host runtime observation source acquisition IAU blockedTasks");
 requireEqual(runtimeSettingsHostRuntimeObservationSourceAcquisitionIau.implementationSharing, "none", "host runtime observation source acquisition IAU implementationSharing");
@@ -4114,6 +4118,7 @@ requireTextIncludes(`${runtimeSettingsHostRuntimeObservationSourceAcquisitionFea
   "createRuntimeSettingsValidationHostRuntimeObservationSourceAcquisition",
   "Current Implementation Admission Unit is",
   "Issue #148",
+  "Issue #150",
   "clean-room"
 ]);
 requireTextIncludes(`${runtimeSettingsHostRuntimeObservationSourceAcquisitionFeatureDir}/plan.md`, [
@@ -4124,11 +4129,12 @@ requireTextIncludes(`${runtimeSettingsHostRuntimeObservationSourceAcquisitionFea
 ]);
 requireTextIncludes(`${runtimeSettingsHostRuntimeObservationSourceAcquisitionFeatureDir}/tasks.md`, [
   "Issue #148",
-  "Implementation handoff issue**: Created after admission PR merge.",
+  "Implementation handoff issue**: Issue #150.",
   "- [x] T001",
   "- [x] T008",
-  "- [ ] T009",
-  "- [ ] T016",
+  "- [x] T009",
+  "- [x] T016",
+  "- [x] T036",
   "IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1",
   "[BLOCKED]",
   "T030"
@@ -4157,24 +4163,44 @@ requireTextIncludes(`${runtimeSettingsHostRuntimeObservationSourceAcquisitionImp
 requireTextIncludes("README.md", [
   "runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1",
   "Issue #148",
+  "Issue #150",
+  "PR #151",
   "IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1",
   "createRuntimeSettingsValidationHostRuntimeObservationSourceAcquisition(input =",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`."
+  "Current Implementation Admission Unit:\n`none`."
 ]);
 requireTextIncludes("AGENTS.md", [
   "runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1",
   "Issue #148",
+  "Issue #150",
+  "PR #151",
   "IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1",
   "createRuntimeSettingsValidationHostRuntimeObservationSourceAcquisition(input =",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`.",
+  "Current Implementation Admission Unit:\n`none`.",
   "024-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1"
 ]);
 requireTextIncludes("docs/development/copilot-workflow.md", [
   "runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1",
   "Issue #148",
+  "Issue #150",
+  "PR #151",
   "IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1",
   "createRuntimeSettingsValidationHostRuntimeObservationSourceAcquisition(input =",
-  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`."
+  "Current Implementation Admission Unit:\n`none`."
+]);
+requireTextIncludes("src/runtime-settings-cli.mjs", [
+  "RUNTIME_SETTINGS_CLI_VALIDATION_HOST_RUNTIME_OBSERVATION_SOURCE_ACQUISITION_REQUIREMENTS",
+  "RUNTIME_SETTINGS_VALIDATION_HOST_RUNTIME_OBSERVATION_SOURCE_ACQUISITION_BLOCKED_SIDE_EFFECTS",
+  "createRuntimeSettingsValidationHostRuntimeObservationSourceAcquisition",
+  "bounded-native-host-source-acquisition-dependencies-only",
+  "hasValidationCommandHostRuntimeObservationSourceAcquisitionFacts"
+]);
+requireTextIncludes("tests/runtime-settings-cli-validation-host-runtime-observation-source-acquisition.test.mjs", [
+  "T009 selected host facts drive bounded public-safe source acquisition",
+  "T012 Windows host 2026 x64 acquisition facts preserve canonical installed x86 LabVIEWCLI",
+  "T015 traces host observation source acquisition IDs",
+  "createRuntimeSettingsValidationHostRuntimeObservationSourceAcquisition",
+  "runtimeValidation"
 ]);
 
 const extensionVsixPackagingAdmission = readJson(extensionVsixPackagingAdmissionPath);

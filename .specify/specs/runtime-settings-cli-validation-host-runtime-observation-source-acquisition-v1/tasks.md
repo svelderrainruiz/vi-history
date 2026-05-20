@@ -55,33 +55,33 @@ that emits public-safe source facts without execution.
 
 **Public admission issue**: Issue #148
 
-**Implementation handoff issue**: Created after admission PR merge.
+**Implementation handoff issue**: Issue #150.
 
-- [ ] T009 Add tests proving selected host facts drive bounded public-safe
+- [x] T009 Add tests proving selected host facts drive bounded public-safe
   source acquisition without arbitrary filesystem walking.
-- [ ] T010 Add tests proving Windows registry-view acquisition dependency facts
+- [x] T010 Add tests proving Windows registry-view acquisition dependency facts
   reduce to source facts without retaining raw registry output or private paths.
-- [ ] T011 Add tests proving documented-root acquisition dependency facts reduce
+- [x] T011 Add tests proving documented-root acquisition dependency facts reduce
   to public-safe availability, executable-role, version, and bitness facts.
-- [ ] T012 Add tests proving Windows `host` / `2026` / `x64` acquisition facts
+- [x] T012 Add tests proving Windows `host` / `2026` / `x64` acquisition facts
   can produce LabVIEW 2026 x64 plus canonical installed x86 LabVIEWCLI source
   facts.
-- [ ] T013 Add tests proving missing selection, unsupported provider/platform
+- [x] T013 Add tests proving missing selection, unsupported provider/platform
   or version, missing dependency facts, malformed dependency facts, unsupported
   source class, unavailable dependency, ambiguous dependency facts,
   incompatible dependency facts, contaminated host surface, dependency errors,
   raw registry output, and private-path disclosure attempts fail closed.
-- [ ] T014 Add tests proving source acquisition output composes into
+- [x] T014 Add tests proving source acquisition output composes into
   `createRuntimeSettingsValidationHostRuntimeObservationSourceAdapter(input =
   {})`, `createRuntimeSettingsValidationHostRuntimeObservation(input = {})`,
   `createRuntimeSettingsValidationHostRuntimeDiscovery(input = {})`, and the
   existing validation command chain without output-shape redesign.
-- [ ] T015 Add tests proving deterministic blocked side-effect facts and no
+- [x] T015 Add tests proving deterministic blocked side-effect facts and no
   runtime validation execution, compare, LabVIEWCLI, Docker, terminal process
   wiring, proof-out expansion, file writes, VSIX packaging changes,
   publication, Marketplace, release automation, launcher/profile mutation, or
   source copying.
-- [ ] T016 Implement the minimum public MIT host runtime observation source
+- [x] T016 Implement the minimum public MIT host runtime observation source
   acquisition contract.
 
 ---
@@ -120,13 +120,13 @@ writes, and source sharing visibly outside this IAU.
 
 **Purpose**: Validate traceability, clean-room boundaries, and public safety.
 
-- [ ] T031 Run `npm test`.
-- [ ] T032 Run `npm run check`.
-- [ ] T033 Run `git diff --check`.
-- [ ] T034 Run public redaction scan over this feature's public artifacts.
-- [ ] T035 Run bridge artifact validation for
+- [x] T031 Run `npm test`.
+- [x] T032 Run `npm run check`.
+- [x] T033 Run `git diff --check`.
+- [x] T034 Run public redaction scan over this feature's public artifacts.
+- [x] T035 Run bridge artifact validation for
   `runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`.
-- [ ] T036 Run Spec Kit CLI version/features check.
+- [x] T036 Run Spec Kit CLI version/features check.
 
 ## Dependencies & Execution Order
 
@@ -153,7 +153,7 @@ writes, and source sharing visibly outside this IAU.
 1. Merge import/spec/admission artifacts to `develop`.
 2. Create a separate implementation handoff issue for
    `IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`.
-3. Implement only T009-T016 through the handoff issue.
+3. Implement only T009-T016 through Issue #150.
 4. Keep runtime validation execution, compare execution, LabVIEWCLI execution,
    Docker execution, terminal process wiring, live proof, proof-out expansion,
    file writes, package/bin publication, launcher/profile mutation, release
