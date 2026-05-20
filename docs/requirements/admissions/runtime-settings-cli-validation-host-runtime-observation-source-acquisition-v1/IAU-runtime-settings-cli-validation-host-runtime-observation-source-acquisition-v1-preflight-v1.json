@@ -1,0 +1,94 @@
+{
+  "schema": "vi-history/implementation-admission-unit-preflight@v1",
+  "iauId": "IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1",
+  "parentSliceId": "runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1",
+  "status": "pass",
+  "implementationStartAllowed": true,
+  "implementationStartScope": [
+    "T009",
+    "T010",
+    "T011",
+    "T012",
+    "T013",
+    "T014",
+    "T015",
+    "T016"
+  ],
+  "requiredChecks": [
+    "constitution includes imported slice",
+    "requirements import packet exists",
+    "Spec Kit spec exists",
+    "Spec Kit plan exists",
+    "Spec Kit tasks exist",
+    "admission ledger exists",
+    "IAU record exists",
+    "redaction scan passes",
+    "bridge artifact validation passes",
+    "implementation sharing is none",
+    "Marketplace publication is out of scope",
+    "VSIX packaging changes remain out of scope for this feature",
+    "blocked scope remains explicit",
+    "host runtime observation source acquisition remains bounded public-safe dependency facts only"
+  ],
+  "checkResults": [
+    {
+      "check": "constitution includes imported slice",
+      "status": "pass"
+    },
+    {
+      "check": "requirements import packet exists",
+      "status": "pass"
+    },
+    {
+      "check": "Spec Kit spec exists",
+      "status": "pass"
+    },
+    {
+      "check": "Spec Kit plan exists",
+      "status": "pass"
+    },
+    {
+      "check": "Spec Kit tasks exists",
+      "status": "pass"
+    },
+    {
+      "check": "admission ledger exists",
+      "status": "pass"
+    },
+    {
+      "check": "IAU record exists",
+      "status": "pass"
+    },
+    {
+      "check": "redaction scan passes",
+      "status": "pass"
+    },
+    {
+      "check": "bridge artifact validation passes",
+      "status": "pass"
+    },
+    {
+      "check": "implementation sharing is none",
+      "status": "pass"
+    },
+    {
+      "check": "Marketplace publication is out of scope",
+      "status": "pass"
+    },
+    {
+      "check": "VSIX packaging changes remain out of scope for this feature",
+      "status": "pass"
+    },
+    {
+      "check": "blocked scope remains explicit",
+      "status": "pass"
+    },
+    {
+      "check": "host runtime observation source acquisition remains bounded public-safe dependency facts only",
+      "status": "pass"
+    }
+  ],
+  "resultSummary": "Implementation may start for IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1 only after this admission PR merges and a separate implementation handoff issue is created. T017-T030 and all raw private path disclosure, raw registry output retention, arbitrary filesystem walking, broad PATH or environment probing, existing compare runtime locator reuse, runtime validation execution, compare execution, LabVIEWCLI execution, Docker execution, terminal process wiring, live proof, proof-out expansion, file writes from source, observation, discovery, or preflight adapters, package/bin publication, launcher/profile mutation, VSIX packaging changes, release automation, Marketplace, Docker source discovery, and source-copying behavior remain blocked.",
+  "implementationSharing": "none",
+  "marketplacePublication": "out-of-scope"
+}

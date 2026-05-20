@@ -282,6 +282,35 @@ expansion, file writes from a source or observation adapter, package/bin
 publication, launcher/profile mutation, VSIX packaging changes, release
 automation, Marketplace publication, and source copying remain blocked.
 
+`runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`
+admits
+`IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`
+for Issue #148 and T009-T016 only. Issue #148 is an admission issue and must
+not be reused for implementation. Implementation requires a separate handoff
+issue after the admission PR merges. The admitted IAU is a bounded
+`createRuntimeSettingsValidationHostRuntimeObservationSourceAcquisition(input =
+{})` facts contract over public-safe selected host facts and supplied bounded
+native host acquisition dependency facts. It may derive public-safe source
+facts for
+`createRuntimeSettingsValidationHostRuntimeObservationSourceAdapter(input = {})`
+and the existing validation command chain without changing output shapes. Raw
+private path disclosure, raw registry output retention, arbitrary filesystem
+walking, broad PATH probing, environment probing, existing compare runtime
+locator reuse, runtime validation execution, compare execution, LabVIEWCLI
+execution, Docker execution or orchestration, raw terminal process wiring,
+live proof, proof-out expansion, file writes from source, observation,
+discovery, or preflight adapters, package/bin publication, launcher/profile
+mutation, VSIX packaging changes, release automation, Marketplace publication,
+Docker source discovery, and source copying remain blocked.
+
+Current Implementation Admission Unit:
+`IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`.
+
+Issue #148 admission temporarily sets the current IAU to
+`IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`.
+Implementation requires a separate handoff issue after the admission PR merges.
+Before Issue #148 admission, the source adapter closeout recorded:
+
 Current Implementation Admission Unit:
 `none`.
 
@@ -333,12 +362,14 @@ When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:
 
 ```bash
-SPECIFY_FEATURE=023-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1 \
-SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1 \
+SPECIFY_FEATURE=024-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1 \
+SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1 \
 .specify/scripts/bash/check-prerequisites.sh --json --paths-only
 ```
 
-The current host runtime observation source adapter feature uses
+The current host runtime observation source acquisition feature uses
+`024-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1`.
+The previous host runtime observation source adapter feature used
 `023-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`.
 The previous VSIX packaging feature used
 `022-extension-vsix-packaging-artifact-v1`.
