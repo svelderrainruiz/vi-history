@@ -53,32 +53,32 @@ observation dependency facts without execution.
 
 **Public admission issue**: Issue #142
 
-**Implementation handoff issue**: created after the admission PR merges.
+**Implementation handoff issue**: Issue #144.
 
-- [ ] T009 Add tests proving selected host facts drive public-safe source
+- [x] T009 Add tests proving selected host facts drive public-safe source
   adaptation without arbitrary filesystem walking.
-- [ ] T010 Add tests proving registry-view source facts reduce to source-class
+- [x] T010 Add tests proving registry-view source facts reduce to source-class
   and candidate facts without retaining raw registry output or private paths.
-- [ ] T011 Add tests proving documented-root source facts reduce to public-safe
+- [x] T011 Add tests proving documented-root source facts reduce to public-safe
   availability, executable-role, version, and bitness facts.
-- [ ] T012 Add tests proving Windows `host` / `2026` / `x64` source facts can
+- [x] T012 Add tests proving Windows `host` / `2026` / `x64` source facts can
   produce LabVIEW 2026 x64 plus canonical installed x86 LabVIEWCLI observation
   dependencies.
-- [ ] T013 Add tests proving missing selection, unsupported provider/platform
+- [x] T013 Add tests proving missing selection, unsupported provider/platform
   or version, missing source facts, malformed source facts, unsupported source
   class, unavailable source, ambiguous source facts, incompatible source facts,
   contaminated host surface, raw registry output, and private-path disclosure
   attempts fail closed.
-- [ ] T014 Add tests proving source adapter output composes into
+- [x] T014 Add tests proving source adapter output composes into
   `createRuntimeSettingsValidationHostRuntimeObservation(input = {})`,
   `createRuntimeSettingsValidationHostRuntimeDiscovery(input = {})`, and the
   existing validation command chain without output-shape redesign.
-- [ ] T015 Add tests proving deterministic blocked side-effect facts and no
+- [x] T015 Add tests proving deterministic blocked side-effect facts and no
   runtime validation execution, compare, LabVIEWCLI, Docker, terminal process
   wiring, proof-out expansion, file writes, VSIX packaging changes,
   publication, Marketplace, release automation, launcher/profile mutation, or
   source copying.
-- [ ] T016 Implement the minimum public MIT host runtime observation source
+- [x] T016 Implement the minimum public MIT host runtime observation source
   adapter contract.
 
 ---
@@ -113,13 +113,13 @@ writes, and source sharing visibly outside this IAU.
 
 **Purpose**: Validate traceability, clean-room boundaries, and public safety.
 
-- [ ] T029 Run `npm test`.
-- [ ] T030 Run `npm run check`.
-- [ ] T031 Run `git diff --check`.
-- [ ] T032 Run public redaction scan over this feature's public artifacts.
-- [ ] T033 Run bridge artifact validation for
+- [x] T029 Run `npm test`.
+- [x] T030 Run `npm run check`.
+- [x] T031 Run `git diff --check`.
+- [x] T032 Run public redaction scan over this feature's public artifacts.
+- [x] T033 Run bridge artifact validation for
   `runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`.
-- [ ] T034 Run Spec Kit CLI version/features check.
+- [x] T034 Run Spec Kit CLI version/features check.
 
 ## Dependencies & Execution Order
 
@@ -147,7 +147,7 @@ writes, and source sharing visibly outside this IAU.
 1. Merge import/spec/admission artifacts to `develop`.
 2. Create a separate implementation handoff issue for
    `IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`.
-3. Implement only T009-T016 through that handoff issue.
+3. Implement only T009-T016 through Issue #144.
 4. Keep runtime validation execution, compare execution, LabVIEWCLI execution,
    Docker execution, terminal process wiring, live proof, proof-out expansion,
    file writes, package/bin publication, launcher/profile mutation, release

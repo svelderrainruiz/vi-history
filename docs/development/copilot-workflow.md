@@ -542,8 +542,8 @@ Issue #142 imports
 and admits
 `IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`
 for T009-T016 only. Issue #142 is an admission issue and must not be reused for
-implementation. A separate implementation handoff issue must be created after
-the admission PR merges. The admitted IAU is a bounded
+implementation. Issue #144 and PR #145 completed it. The implemented IAU is a
+bounded
 `createRuntimeSettingsValidationHostRuntimeObservationSourceAdapter(input =
 {})` facts contract over public-safe selected host facts and supplied bounded
 source facts. It may derive public-safe observation dependency facts for
@@ -558,7 +558,15 @@ launcher/profile state, release, work on the Marketplace, or copy source
 without a separate public admission.
 
 Current Implementation Admission Unit:
+`none`.
+
+Issue #142 admission temporarily set the current IAU to
 `IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`.
+Issue #144 and PR #145 completed it. Before Issue #142 admission, the previous
+VSIX packaging closeout recorded:
+
+Current Implementation Admission Unit:
+`none`.
 
 Issue #112 admission temporarily set the current IAU to
 `IAU-runtime-settings-cli-validation-host-preflight-command-composition-v1`.

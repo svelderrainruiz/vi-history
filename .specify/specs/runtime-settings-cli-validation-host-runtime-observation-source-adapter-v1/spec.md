@@ -109,11 +109,10 @@ chain can consume sanitized source facts without exposing private host details.
 
 ## Current Implementation Admission Unit
 
-Current Implementation Admission Unit is
-`IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`.
+Current Implementation Admission Unit is `none`.
 
-Implementation may begin only after this admission PR merges and a separate
-implementation handoff issue is created.
+`IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`
+completed through Issue #144 and PR #145 for T009-T016 only.
 
 ## Out Of Scope
 
