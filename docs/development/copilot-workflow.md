@@ -579,6 +579,37 @@ publish packages, mutate launcher/profile state, release, work on the
 Marketplace, perform Docker source discovery, or copy source without a separate
 public admission.
 
+Issue #154 imports
+`runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1`
+and admits
+`IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1`
+for T009-T016 only. Issue #154 is an admission issue and must not be reused for
+implementation. Issue #156 and PR #157 completed it. The implemented IAU is a
+bounded
+`createRuntimeSettingsValidationHostRuntimeObservationNativeSourceAcquisition(input =
+{})` facts contract over public-safe selected host facts and supplied governed
+native acquisition dependency observations. It may derive acquisition
+dependency facts for
+`createRuntimeSettingsValidationHostRuntimeObservationSourceAcquisition(input =
+{})` and the existing validation command chain without changing output shapes.
+Future work must not retain raw private paths or raw registry output, walk
+arbitrary filesystems, broadly probe PATH or environment state, reuse the
+existing compare runtime locator, execute validation, call LabVIEWCLI, call
+Docker, inspect Docker images, discover container sources, wire raw terminal
+processes, expand proof-out, write files from source, observation, discovery,
+preflight, source-acquisition, or native-source adapters, change VSIX packaging
+behavior, publish packages, mutate launcher/profile state, release, work on the
+Marketplace, perform Docker source discovery, or copy source without a separate
+public admission.
+
+Current Implementation Admission Unit:
+`none`.
+
+Issue #154 admission temporarily sets the current IAU to
+`IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1`.
+Issue #156 and PR #157 completed it. Before Issue #154 admission, the source
+acquisition closeout recorded:
+
 Current Implementation Admission Unit:
 `none`.
 
@@ -650,6 +681,8 @@ Do not implement these without a separate bridge admission:
   behavior beyond bounded public-safe source facts
 - runtime settings CLI validation host runtime observation source acquisition
   behavior beyond bounded public-safe acquisition dependency facts
+- runtime settings CLI validation host runtime observation native source
+  acquisition behavior beyond bounded public-safe native dependency facts
 - OS scanning, filesystem walking, registry probing, PATH probing, environment
   probing, private path discovery, or runtime locator invocation
 - file writes from the host preflight adapter

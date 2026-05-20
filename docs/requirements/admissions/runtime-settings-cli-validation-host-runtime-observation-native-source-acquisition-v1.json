@@ -1,0 +1,134 @@
+{
+  "schema": "vi-history/requirements-admission@v1",
+  "sliceId": "runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1",
+  "createdDate": "2026-05-20",
+  "state": "implemented",
+  "targetProduct": "vi-history",
+  "targetFeature": "runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "2e0d7bfd6bf1154aa1b3693c49d32974a59c6686",
+  "governedAdmissionCommit": "2e0d7bfd6bf1154aa1b3693c49d32974a59c6686",
+  "promotedBaselineCommit": "ef311a0daa57fb619a2ea33694a413a79982c585",
+  "publicImportPath": "docs/requirements/imports/runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1/",
+  "specKitPath": ".specify/specs/runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1/",
+  "issue": {
+    "number": 154,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/154"
+  },
+  "publicSequencingMarker": {
+    "number": 153,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/153"
+  },
+  "implementationHandoffIssue": {
+    "number": 156,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/156"
+  },
+  "implementationPullRequest": {
+    "number": 157,
+    "url": "https://github.com/svelderrainruiz/vi-history/pull/157"
+  },
+  "bridgeChecks": {
+    "publicImportPacketPresent": "pass",
+    "specKitArtifactsPresent": "pass",
+    "redactionScan": "pass",
+    "artifactConsistency": "pass",
+    "implementationPreflight": "pass"
+  },
+  "implementationAdmissionUnits": [
+    {
+      "iauId": "IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1",
+      "state": "implemented",
+      "record": "docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1/IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1.json",
+      "preflightRecord": "docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1/IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1-preflight-v1.json",
+      "admittedTasks": [
+        "T009",
+        "T010",
+        "T011",
+        "T012",
+        "T013",
+        "T014",
+        "T015",
+        "T016"
+      ]
+    }
+  ],
+  "currentImplementationAdmissionUnit": null,
+  "completedSpecScope": [
+    "T001",
+    "T002",
+    "T003",
+    "T004",
+    "T005",
+    "T006",
+    "T007",
+    "T008"
+  ],
+  "completedImplementationScope": [
+    "T009",
+    "T010",
+    "T011",
+    "T012",
+    "T013",
+    "T014",
+    "T015",
+    "T016"
+  ],
+  "admittedImplementationScope": [],
+  "blockedImplementationScope": [
+    "T017",
+    "T018",
+    "T019",
+    "T020",
+    "T021",
+    "T022",
+    "T023",
+    "T024",
+    "T025",
+    "T026",
+    "T027",
+    "T028",
+    "T029",
+    "T030"
+  ],
+  "preImplementationPreflight": {
+    "iauId": "IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1",
+    "status": "pass",
+    "record": "docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1/IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1-preflight-v1.json",
+    "implementationStartAllowed": true
+  },
+  "implementationCloseout": {
+    "status": "pass",
+    "issue": 156,
+    "pullRequest": 157,
+    "completedTasks": [
+      "T009",
+      "T010",
+      "T011",
+      "T012",
+      "T013",
+      "T014",
+      "T015",
+      "T016"
+    ],
+    "blockedScopeRetained": [
+      "T017",
+      "T018",
+      "T019",
+      "T020",
+      "T021",
+      "T022",
+      "T023",
+      "T024",
+      "T025",
+      "T026",
+      "T027",
+      "T028",
+      "T029",
+      "T030"
+    ]
+  },
+  "implementationHandoffPolicy": "Create a separate implementation handoff issue after the admission PR merges; do not reuse Issue #154 for implementation.",
+  "requirementMaturityBasis": "public sequencing marker and promoted source-acquisition baseline support narrow native source acquisition dependency-adapter admission, not runtime execution",
+  "implementationSharing": "none",
+  "marketplacePublication": "out-of-scope"
+}

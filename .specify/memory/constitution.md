@@ -157,6 +157,11 @@ The imported slices are:
   `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1/`
   and Spec Kit feature under
   `.specify/specs/runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1/`.
+- `runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1`,
+  with its import packet under
+  `docs/requirements/imports/runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1/`
+  and Spec Kit feature under
+  `.specify/specs/runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1/`.
 - `extension-vsix-packaging-artifact-v1`, with its import packet under
   `docs/requirements/imports/extension-vsix-packaging-artifact-v1/` and Spec
   Kit feature under `.specify/specs/extension-vsix-packaging-artifact-v1/`.
@@ -176,4 +181,4 @@ This constitution governs repository-local work. Amendments require a versioned
 change, a short rationale, and validation that affected Spec Kit templates and
 repository guidance remain consistent.
 
-**Version**: 0.1.21 | **Ratified**: 2026-05-17 | **Last Amended**: 2026-05-20
+**Version**: 0.1.22 | **Ratified**: 2026-05-17 | **Last Amended**: 2026-05-20
