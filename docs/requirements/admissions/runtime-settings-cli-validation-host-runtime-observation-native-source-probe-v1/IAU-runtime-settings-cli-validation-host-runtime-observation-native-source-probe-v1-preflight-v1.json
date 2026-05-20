@@ -1,0 +1,65 @@
+{
+  "schema": "vi-history/implementation-admission-unit-preflight@v1",
+  "iauId": "IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-probe-v1",
+  "parentSliceId": "runtime-settings-cli-validation-host-runtime-observation-native-source-probe-v1",
+  "createdDate": "2026-05-20",
+  "status": "pending",
+  "implementationStartAllowed": false,
+  "implementationStartScope": [
+    "T009",
+    "T010",
+    "T011",
+    "T012",
+    "T013",
+    "T014",
+    "T015",
+    "T016"
+  ],
+  "requiredChecks": [
+    "public import packet present",
+    "Spec Kit artifacts present",
+    "admission record present",
+    "redaction scan pass",
+    "blocked scope explicit",
+    "separate handoff issue required",
+    "implementation sharing none",
+    "Marketplace publication out of scope"
+  ],
+  "checkResults": [
+    {
+      "check": "public import packet present",
+      "status": "pass"
+    },
+    {
+      "check": "Spec Kit artifacts present",
+      "status": "pass"
+    },
+    {
+      "check": "admission record present",
+      "status": "pass"
+    },
+    {
+      "check": "redaction scan pass",
+      "status": "pass"
+    },
+    {
+      "check": "blocked scope explicit",
+      "status": "pass"
+    },
+    {
+      "check": "separate handoff issue required",
+      "status": "pass"
+    },
+    {
+      "check": "implementation sharing none",
+      "status": "pass"
+    },
+    {
+      "check": "Marketplace publication out of scope",
+      "status": "pass"
+    }
+  ],
+  "implementationSharing": "none",
+  "marketplacePublication": "out-of-scope",
+  "resultSummary": "Implementation may start for IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-probe-v1 only after this admission PR merges and a separate implementation handoff issue is created. T017-T030 and all raw private path disclosure, raw registry output retention, arbitrary filesystem walking, broad PATH or environment probing, existing compare runtime locator reuse, runtime validation execution, compare execution, LabVIEWCLI execution, Docker execution, terminal process wiring, live proof, proof-out expansion, file writes from source, observation, discovery, preflight, source-acquisition, native-source, or probe adapters, package/bin publication, launcher/profile mutation, VSIX packaging changes, release automation, Marketplace, Docker source discovery, and source-copying behavior remain blocked."
+}
