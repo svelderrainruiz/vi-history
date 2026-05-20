@@ -132,6 +132,12 @@ const runtimeSettingsHostRuntimeObservationImportDir = `docs/requirements/import
 const runtimeSettingsHostRuntimeObservationAdmissionPath = `docs/requirements/admissions/${runtimeSettingsHostRuntimeObservationSliceId}.json`;
 const runtimeSettingsHostRuntimeObservationIauPath = `docs/requirements/admissions/${runtimeSettingsHostRuntimeObservationSliceId}/IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1.json`;
 const runtimeSettingsHostRuntimeObservationPreflightPath = `docs/requirements/admissions/${runtimeSettingsHostRuntimeObservationSliceId}/IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1-preflight-v1.json`;
+const runtimeSettingsHostRuntimeObservationSourceSliceId = "runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1";
+const runtimeSettingsHostRuntimeObservationSourceFeatureDir = `.specify/specs/${runtimeSettingsHostRuntimeObservationSourceSliceId}`;
+const runtimeSettingsHostRuntimeObservationSourceImportDir = `docs/requirements/imports/${runtimeSettingsHostRuntimeObservationSourceSliceId}`;
+const runtimeSettingsHostRuntimeObservationSourceAdmissionPath = `docs/requirements/admissions/${runtimeSettingsHostRuntimeObservationSourceSliceId}.json`;
+const runtimeSettingsHostRuntimeObservationSourceIauPath = `docs/requirements/admissions/${runtimeSettingsHostRuntimeObservationSourceSliceId}/IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1.json`;
+const runtimeSettingsHostRuntimeObservationSourcePreflightPath = `docs/requirements/admissions/${runtimeSettingsHostRuntimeObservationSourceSliceId}/IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1-preflight-v1.json`;
 const extensionVsixPackagingSliceId = "extension-vsix-packaging-artifact-v1";
 const extensionVsixPackagingFeatureDir = `.specify/specs/${extensionVsixPackagingSliceId}`;
 const extensionVsixPackagingImportDir = `docs/requirements/imports/${extensionVsixPackagingSliceId}`;
@@ -254,6 +260,13 @@ const runtimeSettingsHostRuntimeObservationExpectedIds = [
   "VHS-REQ-546",
   "VHS-REQ-550"
 ];
+const runtimeSettingsHostRuntimeObservationSourceExpectedIds = [
+  "VHS-REQ-095",
+  "VHS-REQ-096",
+  "VHS-REQ-532",
+  "VHS-REQ-546",
+  "VHS-REQ-550"
+];
 const extensionVsixPackagingExpectedIds = [
   "VHS-REQ-596",
   "VHS-REQ-597",
@@ -370,12 +383,13 @@ requireTextIncludes(".specify/memory/constitution.md", [
   "runtime-settings-cli-validation-host-preflight-command-composition-v1",
   "runtime-settings-cli-validation-host-runtime-discovery-v1",
   "runtime-settings-cli-validation-host-runtime-observation-adapter-v1",
+  "runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1",
   "extension-vsix-packaging-artifact-v1",
-  "**Version**: 0.1.19"
+  "**Version**: 0.1.20"
 ]);
 
 const featureJson = readJson(".specify/feature.json");
-requireEqual(featureJson.feature_directory, extensionVsixPackagingFeatureDir, "pinned Spec Kit feature directory");
+requireEqual(featureJson.feature_directory, runtimeSettingsHostRuntimeObservationSourceFeatureDir, "pinned Spec Kit feature directory");
 
 const admission = readJson(admissionPath);
 requireEqual(admission.schema, "vi-history/requirements-admission@v1", "admission schema");
@@ -3812,6 +3826,166 @@ requireTextIncludes("docs/development/copilot-workflow.md", [
   "createRuntimeSettingsValidationHostRuntimeObservation(input = {})",
   "bounded public-safe observation facts",
   "Current Implementation Admission Unit:\n`none`."
+]);
+
+const runtimeSettingsHostRuntimeObservationSourceAdmission = readJson(runtimeSettingsHostRuntimeObservationSourceAdmissionPath);
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAdmission.schema, "vi-history/requirements-admission@v1", "host runtime observation source admission schema");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAdmission.sliceId, runtimeSettingsHostRuntimeObservationSourceSliceId, "host runtime observation source admission sliceId");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAdmission.state, "admitted", "host runtime observation source admission state");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAdmission.targetProduct, "vi-history", "host runtime observation source admission targetProduct");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAdmission.targetFeature, runtimeSettingsHostRuntimeObservationSourceSliceId, "host runtime observation source admission targetFeature");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAdmission.sourceBaselineTag, "v1.3.16", "host runtime observation source admission sourceBaselineTag");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAdmission.sourceCommit, "c87c8096c239d439c3c04865c67e02d87433e93f", "host runtime observation source admission sourceCommit");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAdmission.implementationSharing, "none", "host runtime observation source implementationSharing");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAdmission.marketplacePublication, "out-of-scope", "host runtime observation source marketplacePublication");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAdmission.issue?.number, 142, "host runtime observation source issue number");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAdmission.implementationHandoffIssue, null, "host runtime observation source implementation handoff issue");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAdmission.implementationPullRequest, null, "host runtime observation source implementation pull request");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAdmission.publicSequencingMarker?.number, 135, "host runtime observation source sequencing marker");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAdmission.currentImplementationAdmissionUnit, "IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1", "host runtime observation source currentImplementationAdmissionUnit");
+requireArrayEqual(runtimeSettingsHostRuntimeObservationSourceAdmission.completedSpecScope, ["T001", "T002", "T003", "T004", "T005", "T006", "T007", "T008"], "host runtime observation source completedSpecScope");
+requireArrayEqual(runtimeSettingsHostRuntimeObservationSourceAdmission.completedImplementationScope, [], "host runtime observation source completedImplementationScope");
+requireArrayEqual(runtimeSettingsHostRuntimeObservationSourceAdmission.admittedImplementationScope, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "host runtime observation source admittedImplementationScope");
+requireArrayEqual(runtimeSettingsHostRuntimeObservationSourceAdmission.blockedImplementationScope, ["T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025", "T026", "T027", "T028"], "host runtime observation source blockedImplementationScope");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAdmission.preImplementationPreflight?.iauId, "IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1", "host runtime observation source preImplementationPreflight iauId");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAdmission.preImplementationPreflight?.status, "pass", "host runtime observation source preImplementationPreflight status");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAdmission.preImplementationPreflight?.implementationStartAllowed, true, "host runtime observation source preImplementationPreflight implementationStartAllowed");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAdmission.preImplementationPreflight?.record, runtimeSettingsHostRuntimeObservationSourcePreflightPath, "host runtime observation source preImplementationPreflight record");
+requireFile(`docs/requirements/admissions/${runtimeSettingsHostRuntimeObservationSourceSliceId}.md`);
+
+const runtimeSettingsHostRuntimeObservationSourceAdmissionUnit = (runtimeSettingsHostRuntimeObservationSourceAdmission.implementationAdmissionUnits ?? [])
+  .find((unit) => unit?.iauId === "IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAdmissionUnit?.state, "admitted", "host runtime observation source admission unit state");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceAdmissionUnit?.preflightRecord, runtimeSettingsHostRuntimeObservationSourcePreflightPath, "host runtime observation source admission unit preflightRecord");
+
+const runtimeSettingsHostRuntimeObservationSourceIau = readJson(runtimeSettingsHostRuntimeObservationSourceIauPath);
+requireEqual(runtimeSettingsHostRuntimeObservationSourceIau.schema, "vi-history/implementation-admission-unit@v1", "host runtime observation source IAU schema");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceIau.iauId, "IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1", "host runtime observation source IAU id");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceIau.state, "admitted", "host runtime observation source IAU state");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceIau.parentSliceId, runtimeSettingsHostRuntimeObservationSourceSliceId, "host runtime observation source IAU parentSliceId");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceIau.issue?.number, 142, "host runtime observation source IAU issue number");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceIau.implementationHandoffIssue, null, "host runtime observation source IAU implementation handoff issue");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceIau.implementationPullRequest, null, "host runtime observation source IAU implementation pull request");
+requireArrayEqual(runtimeSettingsHostRuntimeObservationSourceIau.admittedTasks, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "host runtime observation source IAU admittedTasks");
+requireArrayEqual(runtimeSettingsHostRuntimeObservationSourceIau.blockedTasks, ["T017", "T018", "T019", "T020", "T021", "T022", "T023", "T024", "T025", "T026", "T027", "T028"], "host runtime observation source IAU blockedTasks");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceIau.implementationSharing, "none", "host runtime observation source IAU implementationSharing");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceIau.marketplacePublication, "out-of-scope", "host runtime observation source IAU marketplacePublication");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceIau.preImplementationPreflight?.status, "pass", "host runtime observation source IAU preImplementationPreflight status");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceIau.preImplementationPreflight?.record, "IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1-preflight-v1.json", "host runtime observation source IAU preImplementationPreflight record");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceIau.preImplementationPreflight?.implementationStartAllowed, true, "host runtime observation source IAU preImplementationPreflight implementationStartAllowed");
+requireFile(`docs/requirements/admissions/${runtimeSettingsHostRuntimeObservationSourceSliceId}/IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1.md`);
+
+const runtimeSettingsHostRuntimeObservationSourcePreflight = readJson(runtimeSettingsHostRuntimeObservationSourcePreflightPath);
+requireEqual(runtimeSettingsHostRuntimeObservationSourcePreflight.schema, "vi-history/implementation-admission-unit-preflight@v1", "host runtime observation source preflight schema");
+requireEqual(runtimeSettingsHostRuntimeObservationSourcePreflight.iauId, "IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1", "host runtime observation source preflight iauId");
+requireEqual(runtimeSettingsHostRuntimeObservationSourcePreflight.status, "pass", "host runtime observation source preflight status");
+requireEqual(runtimeSettingsHostRuntimeObservationSourcePreflight.implementationStartAllowed, true, "host runtime observation source preflight implementationStartAllowed");
+requireEqual(runtimeSettingsHostRuntimeObservationSourcePreflight.parentSliceId, runtimeSettingsHostRuntimeObservationSourceSliceId, "host runtime observation source preflight parentSliceId");
+requireEqual(runtimeSettingsHostRuntimeObservationSourcePreflight.implementationSharing, "none", "host runtime observation source preflight implementationSharing");
+requireEqual(runtimeSettingsHostRuntimeObservationSourcePreflight.marketplacePublication, "out-of-scope", "host runtime observation source preflight marketplacePublication");
+requireArrayEqual(runtimeSettingsHostRuntimeObservationSourcePreflight.implementationStartScope, ["T009", "T010", "T011", "T012", "T013", "T014", "T015", "T016"], "host runtime observation source preflight implementationStartScope");
+if (!Array.isArray(runtimeSettingsHostRuntimeObservationSourcePreflight.checkResults) || runtimeSettingsHostRuntimeObservationSourcePreflight.checkResults.length !== runtimeSettingsHostRuntimeObservationSourcePreflight.requiredChecks.length) {
+  failures.push("host runtime observation source preflight checkResults: must match requiredChecks length");
+} else {
+  for (const result of runtimeSettingsHostRuntimeObservationSourcePreflight.checkResults) {
+    requireEqual(result.status, "pass", `host runtime observation source preflight check result ${result.check}`);
+  }
+}
+requireFile(`docs/requirements/admissions/${runtimeSettingsHostRuntimeObservationSourceSliceId}/IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1-preflight-v1.md`);
+
+const runtimeSettingsHostRuntimeObservationSourceManifest = readJson(`${runtimeSettingsHostRuntimeObservationSourceImportDir}/manifest.json`);
+requireEqual(runtimeSettingsHostRuntimeObservationSourceManifest.schema, "vi-history/requirements-import@v1", "host runtime observation source manifest schema");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceManifest.sliceId, runtimeSettingsHostRuntimeObservationSourceSliceId, "host runtime observation source manifest sliceId");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceManifest.sourceBaselineTag, "v1.3.16", "host runtime observation source manifest sourceBaselineTag");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceManifest.sourceCommit, "c87c8096c239d439c3c04865c67e02d87433e93f", "host runtime observation source manifest sourceCommit");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceManifest.targetProduct, "vi-history", "host runtime observation source manifest targetProduct");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceManifest.targetFeature, runtimeSettingsHostRuntimeObservationSourceSliceId, "host runtime observation source manifest targetFeature");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceManifest.specKitPath, runtimeSettingsHostRuntimeObservationSourceFeatureDir, "host runtime observation source manifest specKitPath");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceManifest.redactionStatus, "pass", "host runtime observation source manifest redactionStatus");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceManifest.implementationSharing, "none", "host runtime observation source manifest implementationSharing");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceManifest.marketplacePublication, "out-of-scope", "host runtime observation source manifest marketplacePublication");
+requireArrayEqual(runtimeSettingsHostRuntimeObservationSourceManifest.importedRequirementIds, runtimeSettingsHostRuntimeObservationSourceExpectedIds, "host runtime observation source importedRequirementIds");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceManifest.contractName, "createRuntimeSettingsValidationHostRuntimeObservationSourceAdapter", "host runtime observation source contractName");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceManifest.composedContractName, "createRuntimeSettingsValidationHostRuntimeObservation", "host runtime observation source composedContractName");
+requireEqual(runtimeSettingsHostRuntimeObservationSourceManifest.sourceAdapterBoundary, "bounded-public-safe-observation-source-facts-only", "host runtime observation source boundary");
+requireArrayEqual(runtimeSettingsHostRuntimeObservationSourceManifest.files, ["syrs.md", "srs.md", "rtm.csv", "test-plan.md"], "host runtime observation source manifest files");
+
+for (const file of runtimeSettingsHostRuntimeObservationSourceManifest.files ?? []) {
+  requireFile(`${runtimeSettingsHostRuntimeObservationSourceImportDir}/${file}`);
+}
+
+for (const file of ["spec.md", "plan.md", "tasks.md"]) {
+  requireFile(`${runtimeSettingsHostRuntimeObservationSourceFeatureDir}/${file}`);
+}
+
+requireTextIncludes(`${runtimeSettingsHostRuntimeObservationSourceFeatureDir}/spec.md`, [
+  "Runtime Settings CLI Validation Host Runtime Observation Source Adapter",
+  "IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1",
+  "createRuntimeSettingsValidationHostRuntimeObservationSourceAdapter",
+  "Current Implementation Admission Unit is",
+  "clean-room"
+]);
+requireTextIncludes(`${runtimeSettingsHostRuntimeObservationSourceFeatureDir}/plan.md`, [
+  "bounded-public-safe-observation-source-facts-only",
+  "Implementation sharing: none",
+  "Marketplace publication: out of scope",
+  "SPECIFY_FEATURE=023-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1"
+]);
+requireTextIncludes(`${runtimeSettingsHostRuntimeObservationSourceFeatureDir}/tasks.md`, [
+  "Issue #142",
+  "Implementation handoff issue**: created after the admission PR merges.",
+  "- [x] T001",
+  "- [x] T008",
+  "- [ ] T009",
+  "- [ ] T016",
+  "- [ ] T029",
+  "- [ ] T034",
+  "IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1",
+  "[BLOCKED]",
+  "T028"
+]);
+requireTextIncludes(`${runtimeSettingsHostRuntimeObservationSourceImportDir}/rtm.csv`, runtimeSettingsHostRuntimeObservationSourceExpectedIds);
+requireTextIncludes(`${runtimeSettingsHostRuntimeObservationSourceImportDir}/syrs.md`, [
+  "VHS-REQ-095",
+  "VHS-REQ-096",
+  "VHS-REQ-550",
+  "public-safe observation dependency",
+  "no user-facing Docker"
+]);
+requireTextIncludes(`${runtimeSettingsHostRuntimeObservationSourceImportDir}/srs.md`, [
+  "VHS-REQ-095",
+  "VHS-REQ-096",
+  "TEST-UNIT-RSHOSTSOURCE-005",
+  "createRuntimeSettingsValidationHostRuntimeObservationSourceAdapter",
+  "MUST NOT perform arbitrary filesystem walking"
+]);
+requireTextIncludes(`${runtimeSettingsHostRuntimeObservationSourceImportDir}/test-plan.md`, [
+  "TEST-UNIT-RSHOSTSOURCE-001",
+  "TEST-UNIT-RSHOSTSOURCE-005",
+  "registry-view source facts",
+  "runtime validation execution"
+]);
+requireTextIncludes("README.md", [
+  "runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1",
+  "Issue #142",
+  "IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1",
+  "createRuntimeSettingsValidationHostRuntimeObservationSourceAdapter(input =",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`."
+]);
+requireTextIncludes("AGENTS.md", [
+  "runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1",
+  "Issue #142",
+  "IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1",
+  "createRuntimeSettingsValidationHostRuntimeObservationSourceAdapter(input =",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`.",
+  "023-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1"
+]);
+requireTextIncludes("docs/development/copilot-workflow.md", [
+  "runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1",
+  "Issue #142",
+  "IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1",
+  "createRuntimeSettingsValidationHostRuntimeObservationSourceAdapter(input =",
+  "Current Implementation Admission Unit:\n`IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`."
 ]);
 
 const extensionVsixPackagingAdmission = readJson(extensionVsixPackagingAdmissionPath);

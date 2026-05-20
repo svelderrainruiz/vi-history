@@ -263,8 +263,27 @@ release uploads, package registry publication, runtime validation execution,
 compare execution, LabVIEWCLI execution, Docker execution, launcher/profile
 mutation, release automation, and source copying remain out of scope.
 
+`runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`
+admits
+`IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`
+for Issue #142 and T009-T016 only. Issue #142 is an admission issue and must not
+be reused for implementation. The implementation handoff issue must be created
+after the admission PR merges. The admitted IAU is a bounded
+`createRuntimeSettingsValidationHostRuntimeObservationSourceAdapter(input =
+{})` facts contract over public-safe selected host facts and supplied bounded
+source facts. It may derive public-safe observation dependency facts for
+`createRuntimeSettingsValidationHostRuntimeObservation(input = {})` and the
+existing validation command chain without changing output shapes. Raw private
+path disclosure, raw registry output retention, arbitrary filesystem walking,
+PATH probing, environment probing, existing compare runtime locator reuse,
+runtime validation execution, compare execution, LabVIEWCLI execution, Docker
+execution or orchestration, raw terminal process wiring, live proof, proof-out
+expansion, file writes from a source or observation adapter, package/bin
+publication, launcher/profile mutation, VSIX packaging changes, release
+automation, Marketplace publication, and source copying remain blocked.
+
 Current Implementation Admission Unit:
-`none`.
+`IAU-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`.
 
 Issue #130 admission temporarily set the current IAU to
 `IAU-runtime-settings-cli-validation-host-runtime-observation-adapter-v1`.
@@ -306,12 +325,14 @@ When running generated Spec Kit helpers from a governed `codex/...` branch, set
 both environment variables so branch validation resolves the pinned feature:
 
 ```bash
-SPECIFY_FEATURE=022-extension-vsix-packaging-artifact-v1 \
-SPECIFY_FEATURE_DIRECTORY=.specify/specs/extension-vsix-packaging-artifact-v1 \
+SPECIFY_FEATURE=023-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1 \
+SPECIFY_FEATURE_DIRECTORY=.specify/specs/runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1 \
 .specify/scripts/bash/check-prerequisites.sh --json --paths-only
 ```
 
-The current VSIX packaging feature uses
+The current host runtime observation source adapter feature uses
+`023-runtime-settings-cli-validation-host-runtime-observation-source-adapter-v1`.
+The previous VSIX packaging feature used
 `022-extension-vsix-packaging-artifact-v1`.
 The previous host runtime observation adapter feature used
 `021-runtime-settings-cli-validation-host-runtime-observation-adapter-v1`.
