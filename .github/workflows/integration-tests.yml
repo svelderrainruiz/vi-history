@@ -1,0 +1,85 @@
+name: integration-tests
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+  push:
+    branches:
+      - develop
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  # Standard tests run on GitHub-hosted runner
+  unit-tests:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run unit tests
+        run: npm test
+
+  # LabVIEW-dependent integration tests run on self-hosted runner
+  labview-integration-tests:
+    runs-on: self-hosted-windows-labview
+    needs: unit-tests
+    # Only run on main branch or when explicitly requested
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify LabVIEWCLI availability
+        shell: powershell
+        run: |
+          $labviewCliPath = "C:\Program Files\National Instruments\LabVIEW 2026\LabVIEWCLI.exe"
+          if (Test-Path $labviewCliPath) {
+            Write-Host "LabVIEWCLI found at: $labviewCliPath"
+            & $labviewCliPath -Help
+          } else {
+            Write-Error "LabVIEWCLI not found at expected path"
+            exit 1
+          }
+
+      - name: Run integration tests
+        run: npm run test:integration
+        env:
+          LABVIEW_CLI_PATH: "C:\\Program Files\\National Instruments\\LabVIEW 2026\\LabVIEWCLI.exe"
+
+      - name: Upload test artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: integration-test-results
+          path: |
+            test-results/
+            coverage/
+          retention-days: 7

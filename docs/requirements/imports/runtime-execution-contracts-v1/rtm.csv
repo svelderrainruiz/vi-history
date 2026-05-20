@@ -1,0 +1,18 @@
+Requirement ID,Test ID,Test Description,Status
+VHS-REQ-600,TEST-UNIT-EXEC-001,CreateComparisonReport command assembly produces valid LabVIEWCLI invocation,pending
+VHS-REQ-600,TEST-UNIT-EXEC-002,CreateComparisonReport includes required -VIPath1 -VIPath2 -OutputPath arguments,pending
+VHS-REQ-601,TEST-UNIT-EXEC-003,Host-native execution derives LabVIEWCLI path from runtime discovery facts,pending
+VHS-REQ-602,TEST-UNIT-EXEC-004,Docker execution uses hardcoded nationalinstruments/labview:latest-linux image,pending
+VHS-REQ-603,TEST-UNIT-EXEC-005,CreateComparisonReport arguments are properly formatted and escaped,pending
+VHS-REQ-604,TEST-UNIT-EXEC-006,CreateComparisonReport includes -ReportType html flag,pending
+VHS-REQ-605,TEST-UNIT-EXEC-007,Docker execution includes -Headless flag,pending
+VHS-REQ-606,TEST-UNIT-EXEC-008,Execution plan facts include executable path and arguments,pending
+VHS-REQ-607,TEST-UNIT-EXEC-009,Docker volume mounts map workspace to /workspace,pending
+VHS-REQ-608,TEST-UNIT-EXEC-010,Docker image is hardcoded to latest-linux family,pending
+VHS-REQ-609,TEST-UNIT-EXEC-011,Host LabVIEWCLI path derived from native source acquisition facts,pending
+VHS-REQ-610,TEST-UNIT-EXEC-012,Execution captures stdout and stderr as diagnostic facts,pending
+VHS-REQ-611,TEST-UNIT-EXEC-013,Execution returns exit code as outcome fact,pending
+VHS-REQ-600,TEST-INT-EXEC-001,End-to-end CreateComparisonReport produces HTML output on host,pending
+VHS-REQ-602,TEST-INT-EXEC-002,End-to-end Docker CreateComparisonReport produces HTML output,pending
+VHS-REQ-610,TEST-INT-EXEC-003,Integration test captures actual LabVIEWCLI stdout,pending
+VHS-REQ-611,TEST-INT-EXEC-004,Integration test verifies exit code 0 on success,pending

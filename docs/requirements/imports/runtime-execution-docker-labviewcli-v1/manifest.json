@@ -1,0 +1,51 @@
+{
+  "schema": "vi-history/requirements-import@v1",
+  "sliceId": "runtime-execution-docker-labviewcli-v1",
+  "sourceBaselineTag": "v1.4.0",
+  "sourceCommit": "pending",
+  "governedAdmissionCommit": "pending",
+  "promotedBaselineCommit": "pending",
+  "targetProduct": "vi-history",
+  "targetFeature": "runtime-execution-docker-labviewcli-v1",
+  "specKitPath": ".specify/specs/runtime-execution-docker-labviewcli-v1",
+  "redactionStatus": "pass",
+  "implementationSharing": "none",
+  "marketplacePublication": "out-of-scope",
+  "importedRequirementIds": [
+    "VHS-REQ-630",
+    "VHS-REQ-631",
+    "VHS-REQ-632",
+    "VHS-REQ-633",
+    "VHS-REQ-634",
+    "VHS-REQ-635"
+  ],
+  "prerequisiteRequirementIds": [
+    "VHS-REQ-600",
+    "VHS-REQ-602",
+    "VHS-REQ-605",
+    "VHS-REQ-606",
+    "VHS-REQ-607",
+    "VHS-REQ-608",
+    "VHS-REQ-610",
+    "VHS-REQ-611"
+  ],
+  "supportingTestIds": [
+    "TEST-UNIT-DOCKEREXEC-001",
+    "TEST-UNIT-DOCKEREXEC-002",
+    "TEST-UNIT-DOCKEREXEC-003",
+    "TEST-UNIT-DOCKEREXEC-004",
+    "TEST-UNIT-DOCKEREXEC-005",
+    "TEST-UNIT-DOCKEREXEC-006",
+    "TEST-INT-DOCKEREXEC-001",
+    "TEST-INT-DOCKEREXEC-002"
+  ],
+  "contractName": "executeDockerComparisonReport",
+  "executionBoundary": "docker-labviewcli-container-execution",
+  "dockerImage": "nationalinstruments/labview:latest-linux",
+  "files": [
+    "syrs.md",
+    "srs.md",
+    "rtm.csv",
+    "test-plan.md"
+  ]
+}

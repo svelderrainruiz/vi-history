@@ -1,0 +1,24 @@
+{
+  "schema": "vi-history/admission@v1",
+  "sliceId": "runtime-execution-contracts-v1",
+  "admissionState": "admitted",
+  "admissionIssue": "pending",
+  "sequencingMarker": "pending",
+  "admittedIAUs": [
+    "IAU-runtime-execution-labviewcli-create-comparison-report-v1"
+  ],
+  "prerequisiteSlices": [
+    "runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1"
+  ],
+  "targetTestScope": "T009-T016",
+  "contractName": "createComparisonReportCommand",
+  "executionBoundary": "pure-command-facts-only",
+  "blockedScope": [
+    "multi-family-docker-image-selection",
+    "labview-license-management",
+    "docker-image-building",
+    "marketplace-publication",
+    "package-registry-publication",
+    "release-automation"
+  ]
+}

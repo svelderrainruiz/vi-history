@@ -1,0 +1,55 @@
+{
+  "schema": "vi-history/requirements-import@v1",
+  "sliceId": "runtime-execution-contracts-v1",
+  "sourceBaselineTag": "v1.4.0",
+  "sourceCommit": "pending",
+  "governedAdmissionCommit": "pending",
+  "promotedBaselineCommit": "pending",
+  "targetProduct": "vi-history",
+  "targetFeature": "runtime-execution-contracts-v1",
+  "specKitPath": ".specify/specs/runtime-execution-contracts-v1",
+  "redactionStatus": "pass",
+  "implementationSharing": "none",
+  "marketplacePublication": "out-of-scope",
+  "importedRequirementIds": [
+    "VHS-REQ-600",
+    "VHS-REQ-601",
+    "VHS-REQ-602",
+    "VHS-REQ-603",
+    "VHS-REQ-604",
+    "VHS-REQ-605",
+    "VHS-REQ-606",
+    "VHS-REQ-607",
+    "VHS-REQ-608",
+    "VHS-REQ-609",
+    "VHS-REQ-610",
+    "VHS-REQ-611"
+  ],
+  "prerequisiteRequirementIds": [
+    "VHS-REQ-095",
+    "VHS-REQ-096",
+    "VHS-REQ-532",
+    "VHS-REQ-546",
+    "VHS-REQ-550"
+  ],
+  "supportingTestIds": [
+    "TEST-UNIT-EXEC-001",
+    "TEST-UNIT-EXEC-002",
+    "TEST-UNIT-EXEC-003",
+    "TEST-UNIT-EXEC-004",
+    "TEST-UNIT-EXEC-005",
+    "TEST-UNIT-EXEC-006",
+    "TEST-INT-EXEC-001",
+    "TEST-INT-EXEC-002",
+    "TEST-INT-EXEC-003",
+    "TEST-INT-EXEC-004"
+  ],
+  "contractName": "createComparisonReportExecution",
+  "executionBoundary": "labviewcli-create-comparison-report-execution",
+  "files": [
+    "syrs.md",
+    "srs.md",
+    "rtm.csv",
+    "test-plan.md"
+  ]
+}

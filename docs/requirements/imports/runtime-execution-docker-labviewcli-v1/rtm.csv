@@ -1,0 +1,16 @@
+Requirement ID,Test ID,Test Description,Status
+VHS-REQ-630,TEST-UNIT-DOCKEREXEC-001,Docker spawn uses hardcoded nationalinstruments/labview:latest-linux image,pending
+VHS-REQ-630,TEST-UNIT-DOCKEREXEC-002,Docker spawn includes docker run --rm command,pending
+VHS-REQ-631,TEST-UNIT-DOCKEREXEC-003,Volume mounts map workspace to /workspace,pending
+VHS-REQ-631,TEST-UNIT-DOCKEREXEC-004,VI paths are mapped to container /workspace paths,pending
+VHS-REQ-632,TEST-UNIT-DOCKEREXEC-005,LabVIEWCLI command includes -Headless flag,pending
+VHS-REQ-633,TEST-UNIT-DOCKEREXEC-006,Execution captures stdout in outcome facts,pending
+VHS-REQ-633,TEST-UNIT-DOCKEREXEC-007,Execution captures stderr in outcome facts,pending
+VHS-REQ-634,TEST-UNIT-DOCKEREXEC-008,Execution captures exit code in outcome facts,pending
+VHS-REQ-634,TEST-UNIT-DOCKEREXEC-009,Exit code 0 maps to success status,pending
+VHS-REQ-634,TEST-UNIT-DOCKEREXEC-010,Non-zero exit code maps to failure status,pending
+VHS-REQ-635,TEST-UNIT-DOCKEREXEC-011,Default timeout is 600000ms,pending
+VHS-REQ-635,TEST-UNIT-DOCKEREXEC-012,Custom timeout is respected,pending
+VHS-REQ-635,TEST-UNIT-DOCKEREXEC-013,Timeout triggers container termination,pending
+VHS-REQ-630,TEST-INT-DOCKEREXEC-001,End-to-end Docker execution produces HTML report,pending
+VHS-REQ-634,TEST-INT-DOCKEREXEC-002,Integration test verifies exit code 0 on success,pending
