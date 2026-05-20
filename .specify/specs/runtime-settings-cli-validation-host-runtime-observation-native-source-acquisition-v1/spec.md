@@ -5,7 +5,7 @@
 
 **Created**: 2026-05-20
 
-**Status**: Admission planning
+**Status**: Implemented
 
 **Input**: Public sequencing marker #153 and admission issue #154 for
 `runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1`
@@ -66,10 +66,11 @@ control-plane scripts, or credential handling.
 ## Current Implementation Admission Unit
 
 Current Implementation Admission Unit is
-`IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1`.
+`none`.
 
-Implementation requires the admission PR to merge and a separate implementation
-handoff issue to be created. Issue #154 must not be reused for implementation.
+`IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1`
+completed through Issue #156 and PR #157 for T009-T016 only. Issue #154 must
+not be reused for implementation.
 
 ## Out Of Scope
 
