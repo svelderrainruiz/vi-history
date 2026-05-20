@@ -37,7 +37,8 @@
     "TEST-UNIT-RSHOSTNATIVEPROBE-003",
     "TEST-UNIT-RSHOSTNATIVEPROBE-004",
     "TEST-UNIT-RSHOSTNATIVEPROBE-005",
-    "TEST-UNIT-RSHOSTNATIVEPROBE-006"
+    "TEST-UNIT-RSHOSTNATIVEPROBE-006",
+    "TEST-UNIT-RSHOSTNATIVEPROBE-007"
   ],
   "contractName": "createRuntimeSettingsValidationHostRuntimeObservationNativeSourceProbe",
   "composedContractName": "createRuntimeSettingsValidationHostRuntimeObservationNativeSourceAcquisition",
