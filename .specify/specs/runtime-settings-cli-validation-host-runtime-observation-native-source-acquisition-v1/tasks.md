@@ -49,32 +49,32 @@ contract that emits public-safe acquisition dependency facts without execution.
 
 **Public admission issue**: Issue #154
 
-**Implementation handoff issue**: Created after admission PR merge.
+**Implementation handoff issue**: Issue #156.
 
-- [ ] T009 Add tests proving selected host facts drive bounded native
+- [x] T009 Add tests proving selected host facts drive bounded native
   source-acquisition dependency adaptation without arbitrary filesystem walking.
-- [ ] T010 Add tests proving Windows registry-view acquisition observations
+- [x] T010 Add tests proving Windows registry-view acquisition observations
   reduce to acquisition dependency facts without retaining raw registry output
   or private paths.
-- [ ] T011 Add tests proving documented-root acquisition observations reduce to
+- [x] T011 Add tests proving documented-root acquisition observations reduce to
   public-safe availability, executable-role, version, and bitness facts.
-- [ ] T012 Add tests proving Windows `host` / `2026` / `x64` native acquisition
+- [x] T012 Add tests proving Windows `host` / `2026` / `x64` native acquisition
   facts can produce LabVIEW 2026 x64 plus canonical installed x86 LabVIEWCLI
   acquisition dependency facts.
-- [ ] T013 Add tests proving missing selection, unsupported provider/platform
+- [x] T013 Add tests proving missing selection, unsupported provider/platform
   or version, missing dependency surface, malformed dependency surface,
   unavailable dependency, ambiguous dependency facts, incompatible dependency
   facts, contaminated source surface, dependency errors, raw registry output,
   and private-path disclosure attempts fail closed.
-- [ ] T014 Add tests proving native source acquisition output composes into
+- [x] T014 Add tests proving native source acquisition output composes into
   `createRuntimeSettingsValidationHostRuntimeObservationSourceAcquisition(input =
   {})` and the existing validation command chain without output-shape redesign.
-- [ ] T015 Add tests proving deterministic blocked side-effect facts and no
+- [x] T015 Add tests proving deterministic blocked side-effect facts and no
   runtime validation execution, compare, LabVIEWCLI, Docker, terminal process
   wiring, proof-out expansion, file writes, VSIX packaging changes,
   publication, Marketplace, release automation, launcher/profile mutation,
   Docker source discovery, or source copying.
-- [ ] T016 Implement the minimum public MIT native source acquisition
+- [x] T016 Implement the minimum public MIT native source acquisition
   dependency adapter contract.
 
 ---
@@ -147,10 +147,9 @@ writes, and source sharing visibly outside this IAU.
 1. Merge import/spec/admission artifacts to `develop`.
 2. Create a separate implementation handoff issue for
    `IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1`.
-3. Implement only T009-T016 through that handoff issue.
+3. Implement only T009-T016 through Issue #156.
 4. Keep runtime validation execution, compare execution, LabVIEWCLI execution,
    Docker execution, terminal process wiring, live proof, proof-out expansion,
    file writes, package/bin publication, launcher/profile mutation, release
    automation, Marketplace publication, VSIX packaging changes, Docker source
    discovery, and source copying blocked.
-

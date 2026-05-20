@@ -66,6 +66,15 @@ export const RUNTIME_SETTINGS_CLI_VALIDATION_HOST_RUNTIME_OBSERVATION_SOURCE_ACQ
   failClosed: Object.freeze(["VHS-REQ-095", "VHS-REQ-096", "VHS-REQ-532", "VHS-REQ-546", "VHS-REQ-550"])
 });
 
+export const RUNTIME_SETTINGS_CLI_VALIDATION_HOST_RUNTIME_OBSERVATION_NATIVE_SOURCE_ACQUISITION_REQUIREMENTS = Object.freeze({
+  selectedHostFacts: Object.freeze(["VHS-REQ-095", "VHS-REQ-096", "VHS-REQ-532"]),
+  windowsRegistryViewNativeAcquisitionDependencies: Object.freeze(["VHS-REQ-095"]),
+  linuxDocumentedRootNativeAcquisitionDependencies: Object.freeze(["VHS-REQ-096"]),
+  hostSourceAcquisitionComposition: Object.freeze(["VHS-REQ-532", "VHS-REQ-546", "VHS-REQ-550"]),
+  mixedBitnessHostBundle: Object.freeze(["VHS-REQ-550"]),
+  failClosed: Object.freeze(["VHS-REQ-095", "VHS-REQ-096", "VHS-REQ-532", "VHS-REQ-546", "VHS-REQ-550"])
+});
+
 export const RUNTIME_SETTINGS_CLI_VALIDATION_PROOF_REQUIREMENTS = Object.freeze({
   proofArtifact: Object.freeze(["VHS-REQ-546"]),
   redaction: Object.freeze(["VHS-REQ-546"]),
@@ -325,6 +334,42 @@ export const RUNTIME_SETTINGS_VALIDATION_HOST_RUNTIME_OBSERVATION_SOURCE_ACQUISI
   sourceCopying: false
 });
 
+export const RUNTIME_SETTINGS_VALIDATION_HOST_RUNTIME_OBSERVATION_NATIVE_SOURCE_ACQUISITION_BLOCKED_SIDE_EFFECTS = Object.freeze({
+  settingsMutation: false,
+  interactiveSelection: false,
+  proofOut: false,
+  proofOutExpansion: false,
+  fileSystemReads: false,
+  fileSystemWrites: false,
+  rawPrivatePathDisclosure: false,
+  privatePathDisclosure: false,
+  rawRegistryOutputRetention: false,
+  arbitraryFilesystemWalking: false,
+  filesystemWalking: false,
+  registryProbe: false,
+  pathProbe: false,
+  environmentProbe: false,
+  privatePathDiscovery: false,
+  runtimeLocator: false,
+  compareRuntimeLocator: false,
+  runtimeValidation: false,
+  runtimeExecution: false,
+  compareExecution: false,
+  labviewCli: false,
+  dockerExecution: false,
+  dockerOrchestration: false,
+  dockerImageInspection: false,
+  dockerSourceDiscovery: false,
+  rawTerminalProcessWiring: false,
+  liveTerminalProof: false,
+  packageBinPublication: false,
+  vsixPackagingChanges: false,
+  launcherProfileMutation: false,
+  releaseAutomation: false,
+  marketplace: false,
+  sourceCopying: false
+});
+
 export const RUNTIME_SETTINGS_VALIDATION_PROOF_BLOCKED_SIDE_EFFECTS = Object.freeze({
   settingsMutation: false,
   interactiveSelection: false,
@@ -568,6 +613,15 @@ export function allRuntimeSettingsCliValidationHostRuntimeObservationSourceRequi
 export function allRuntimeSettingsCliValidationHostRuntimeObservationSourceAcquisitionRequirementIds() {
   return Object.freeze(
     Object.values(RUNTIME_SETTINGS_CLI_VALIDATION_HOST_RUNTIME_OBSERVATION_SOURCE_ACQUISITION_REQUIREMENTS)
+      .flat()
+      .filter((value, index, values) => values.indexOf(value) === index)
+      .sort()
+  );
+}
+
+export function allRuntimeSettingsCliValidationHostRuntimeObservationNativeSourceAcquisitionRequirementIds() {
+  return Object.freeze(
+    Object.values(RUNTIME_SETTINGS_CLI_VALIDATION_HOST_RUNTIME_OBSERVATION_NATIVE_SOURCE_ACQUISITION_REQUIREMENTS)
       .flat()
       .filter((value, index, values) => values.indexOf(value) === index)
       .sort()
@@ -1346,6 +1400,97 @@ export function createRuntimeSettingsValidationHostRuntimeObservationSourceAcqui
   });
 }
 
+export function createRuntimeSettingsValidationHostRuntimeObservationNativeSourceAcquisition(input = {}) {
+  const selection = normalizeHostRuntimePreflightSelection(input);
+  if (!selection.ok) {
+    return hostRuntimeObservationNativeSourceAcquisitionBlockedResult({
+      blockedReason: selection.blockedReason,
+      selection: selection.value ?? null
+    });
+  }
+
+  if (selection.value.runtimeProvider !== "host-native") {
+    return hostRuntimeObservationNativeSourceAcquisitionBlockedResult({
+      blockedReason: "unsupported-runtime-provider",
+      selection: selection.value
+    });
+  }
+
+  if (selection.value.platform === "macos") {
+    return hostRuntimeObservationNativeSourceAcquisitionBlockedResult({
+      blockedReason: "macos-host-runtime-observation-native-source-acquisition-unavailable",
+      selection: selection.value
+    });
+  }
+
+  if (!["windows", "linux"].includes(selection.value.platform)) {
+    return hostRuntimeObservationNativeSourceAcquisitionBlockedResult({
+      blockedReason: "unsupported-host-platform",
+      selection: selection.value
+    });
+  }
+
+  if (!isSupportedHostYear(selection.value.labviewVersion)) {
+    return hostRuntimeObservationNativeSourceAcquisitionBlockedResult({
+      blockedReason: "unsupported-host-year",
+      selection: selection.value
+    });
+  }
+
+  const nativeDependencies = normalizeHostRuntimeObservationNativeSourceAcquisitionDependencies(input, selection.value);
+  if (!nativeDependencies.ok) {
+    return hostRuntimeObservationNativeSourceAcquisitionBlockedResult({
+      blockedReason: nativeDependencies.blockedReason,
+      selection: selection.value,
+      nativeAcquisitionDependencyFacts: nativeDependencies.value ?? [],
+      acquisitionDependencyFacts: nativeDependencies.acquisitionDependencyFacts ?? []
+    });
+  }
+
+  const sourceAcquisition = createRuntimeSettingsValidationHostRuntimeObservationSourceAcquisition({
+    selection: selection.value,
+    acquisitionDependencies: {
+      sourceAcquisitionFacts: nativeDependencies.acquisitionDependencyFacts
+    }
+  });
+
+  if (sourceAcquisition.status !== "ready") {
+    return hostRuntimeObservationNativeSourceAcquisitionBlockedResult({
+      blockedReason: nativeSourceAcquisitionBlockedReasonForSourceAcquisitionBlockedReason(sourceAcquisition.blockedReason),
+      selection: selection.value,
+      nativeAcquisitionDependencyFacts: nativeDependencies.value,
+      acquisitionDependencyFacts: nativeDependencies.acquisitionDependencyFacts,
+      sourceAcquisition
+    });
+  }
+
+  return freezeRecord({
+    status: "ready",
+    type: "runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-contract",
+    nativeSourceAcquisitionBoundary: "bounded-native-host-source-acquisition-dependency-adapter-only",
+    selection: selection.value,
+    nativeAcquisitionDependencyCount: nativeDependencies.value.length,
+    nativeAcquisitionDependencyFacts: nativeDependencies.value,
+    acquisitionDependencyCount: nativeDependencies.acquisitionDependencyFacts.length,
+    acquisitionDependencyFacts: nativeDependencies.acquisitionDependencyFacts,
+    sourceAcquisition,
+    sourceCount: sourceAcquisition.sourceCount,
+    sourceFacts: sourceAcquisition.sourceFacts,
+    sourceAdapter: sourceAcquisition.sourceAdapter,
+    observation: sourceAcquisition.observation,
+    discovery: sourceAcquisition.discovery,
+    preflight: sourceAcquisition.preflight,
+    hostCandidates: sourceAcquisition.hostCandidates,
+    hostCandidateCount: sourceAcquisition.hostCandidateCount,
+    compatibleHostCandidateCount: sourceAcquisition.compatibleHostCandidateCount,
+    runtimeSelection: sourceAcquisition.runtimeSelection,
+    blockedReason: null,
+    partialWrite: false,
+    blockedSideEffects: RUNTIME_SETTINGS_VALIDATION_HOST_RUNTIME_OBSERVATION_NATIVE_SOURCE_ACQUISITION_BLOCKED_SIDE_EFFECTS,
+    requirementIds: allRuntimeSettingsCliValidationHostRuntimeObservationNativeSourceAcquisitionRequirementIds()
+  });
+}
+
 export function createRuntimeSettingsValidationProofArtifact(input = {}) {
   const validation = normalizeValidationProofFacts(input.validation ?? input.validationFacts ?? input);
   if (!validation.ok) {
@@ -1631,6 +1776,25 @@ function resolveValidationCommandRuntimeSelection(input = {}) {
     return providedPreflight.runtimeSelection;
   }
 
+  const providedNativeSourceAcquisition = input.hostRuntimeObservationNativeSourceAcquisition
+    ?? input.runtimeObservationNativeSourceAcquisition
+    ?? input.nativeSourceAcquisition;
+  if (isPlainObject(providedNativeSourceAcquisition) && providedNativeSourceAcquisition.runtimeSelection) {
+    return providedNativeSourceAcquisition.runtimeSelection;
+  }
+  if (isPlainObject(providedNativeSourceAcquisition)) {
+    return createRuntimeSettingsValidationHostRuntimeObservationNativeSourceAcquisition(providedNativeSourceAcquisition).runtimeSelection;
+  }
+
+  const hostObservationNativeSourceAcquisitionRequest = input.hostRuntimeObservationNativeSourceAcquisitionRequest
+    ?? input.runtimeObservationNativeSourceAcquisitionRequest
+    ?? input.nativeSourceAcquisitionRequest
+    ?? input.hostRuntimeObservationNativeSourceAcquisitionFactsRequest
+    ?? input.runtimeObservationNativeSourceAcquisitionFactsRequest;
+  if (isPlainObject(hostObservationNativeSourceAcquisitionRequest)) {
+    return createRuntimeSettingsValidationHostRuntimeObservationNativeSourceAcquisition(hostObservationNativeSourceAcquisitionRequest).runtimeSelection;
+  }
+
   const providedSourceAcquisition = input.hostRuntimeObservationSourceAcquisition
     ?? input.runtimeObservationSourceAcquisition
     ?? input.observationSourceAcquisition
@@ -1713,6 +1877,29 @@ function resolveValidationCommandRuntimeSelection(input = {}) {
     ?? input.hostPreflightRequest;
   if (isPlainObject(hostPreflightRequest)) {
     return createRuntimeSettingsValidationHostRuntimePreflight(hostPreflightRequest).runtimeSelection;
+  }
+
+  if (hasValidationCommandHostRuntimeObservationNativeSourceAcquisitionFacts(input)) {
+    return createRuntimeSettingsValidationHostRuntimeObservationNativeSourceAcquisition({
+      selection: input.hostSelection
+        ?? input.hostRuntimeSelection
+        ?? input.hostRuntimeFacts
+        ?? input.selection
+        ?? input.persistedSettings
+        ?? input.settings,
+      nativeAcquisitionDependencies: input.hostRuntimeObservationNativeSourceAcquisitionDependencies
+        ?? input.runtimeObservationNativeSourceAcquisitionDependencies
+        ?? input.nativeSourceAcquisitionDependencies
+        ?? input.nativeAcquisitionDependencies,
+      nativeAcquisitionFacts: input.hostRuntimeObservationNativeSourceAcquisitionFacts
+        ?? input.runtimeObservationNativeSourceAcquisitionFacts
+        ?? input.nativeSourceAcquisitionFacts
+        ?? input.nativeAcquisitionFacts,
+      documentedRootNativeAcquisitions: input.documentedRootNativeAcquisitions
+        ?? input.nativeDocumentedRootAcquisitions,
+      windowsRegistryViewNativeAcquisitions: input.windowsRegistryViewNativeAcquisitions
+        ?? input.nativeRegistryViewAcquisitions
+    }).runtimeSelection;
   }
 
   if (hasValidationCommandHostRuntimeObservationSourceFacts(input)) {
@@ -1883,6 +2070,29 @@ function hasValidationCommandHostRuntimeObservationSourceAcquisitionFacts(input 
     || input.documentedRootAcquisitionFacts !== undefined
     || input.windowsRegistryViewAcquisitions !== undefined
     || input.registryViewAcquisitions !== undefined;
+}
+
+function hasValidationCommandHostRuntimeObservationNativeSourceAcquisitionFacts(input = {}) {
+  return input.hostRuntimeObservationNativeSourceAcquisition !== undefined
+    || input.runtimeObservationNativeSourceAcquisition !== undefined
+    || input.nativeSourceAcquisition !== undefined
+    || input.hostRuntimeObservationNativeSourceAcquisitionRequest !== undefined
+    || input.runtimeObservationNativeSourceAcquisitionRequest !== undefined
+    || input.nativeSourceAcquisitionRequest !== undefined
+    || input.hostRuntimeObservationNativeSourceAcquisitionFactsRequest !== undefined
+    || input.runtimeObservationNativeSourceAcquisitionFactsRequest !== undefined
+    || input.hostRuntimeObservationNativeSourceAcquisitionFacts !== undefined
+    || input.runtimeObservationNativeSourceAcquisitionFacts !== undefined
+    || input.nativeSourceAcquisitionFacts !== undefined
+    || input.nativeAcquisitionFacts !== undefined
+    || input.hostRuntimeObservationNativeSourceAcquisitionDependencies !== undefined
+    || input.runtimeObservationNativeSourceAcquisitionDependencies !== undefined
+    || input.nativeSourceAcquisitionDependencies !== undefined
+    || input.nativeAcquisitionDependencies !== undefined
+    || input.documentedRootNativeAcquisitions !== undefined
+    || input.nativeDocumentedRootAcquisitions !== undefined
+    || input.windowsRegistryViewNativeAcquisitions !== undefined
+    || input.nativeRegistryViewAcquisitions !== undefined;
 }
 
 function hasValidationCommandHostRuntimeObservationFacts(input = {}) {
@@ -3651,6 +3861,282 @@ function hostRuntimeObservationSourceAcquisitionBlockedResult({
   });
 }
 
+function hostRuntimeObservationNativeSourceAcquisitionBlockedResult({
+  blockedReason,
+  selection = null,
+  nativeAcquisitionDependencyFacts = [],
+  acquisitionDependencyFacts = [],
+  sourceAcquisition = null
+}) {
+  const frozenNativeDependencies = Array.isArray(nativeAcquisitionDependencyFacts)
+    ? freezeRecord(nativeAcquisitionDependencyFacts)
+    : freezeRecord([]);
+  const frozenAcquisitionDependencies = Array.isArray(acquisitionDependencyFacts)
+    ? freezeRecord(acquisitionDependencyFacts)
+    : freezeRecord([]);
+  const hostCandidates = sourceAcquisition?.hostCandidates ?? freezeRecord([]);
+
+  return freezeRecord({
+    status: "blocked",
+    type: "runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-contract",
+    nativeSourceAcquisitionBoundary: "bounded-native-host-source-acquisition-dependency-adapter-only",
+    selection,
+    nativeAcquisitionDependencyCount: frozenNativeDependencies.length,
+    nativeAcquisitionDependencyFacts: frozenNativeDependencies,
+    acquisitionDependencyCount: frozenAcquisitionDependencies.length,
+    acquisitionDependencyFacts: frozenAcquisitionDependencies,
+    sourceAcquisition,
+    sourceCount: sourceAcquisition?.sourceCount ?? 0,
+    sourceFacts: sourceAcquisition?.sourceFacts ?? freezeRecord([]),
+    sourceAdapter: sourceAcquisition?.sourceAdapter ?? null,
+    observation: sourceAcquisition?.observation ?? null,
+    discovery: sourceAcquisition?.discovery ?? null,
+    preflight: sourceAcquisition?.preflight ?? null,
+    hostCandidates,
+    hostCandidateCount: sourceAcquisition?.hostCandidateCount ?? hostCandidates.length,
+    compatibleHostCandidateCount: sourceAcquisition?.compatibleHostCandidateCount ?? 0,
+    runtimeSelection: sourceAcquisition?.runtimeSelection ?? createHostRuntimePreflightRuntimeSelection(selection, blockedReason),
+    blockedReason,
+    partialWrite: false,
+    blockedSideEffects: RUNTIME_SETTINGS_VALIDATION_HOST_RUNTIME_OBSERVATION_NATIVE_SOURCE_ACQUISITION_BLOCKED_SIDE_EFFECTS,
+    requirementIds: allRuntimeSettingsCliValidationHostRuntimeObservationNativeSourceAcquisitionRequirementIds()
+  });
+}
+
+function normalizeHostRuntimeObservationNativeSourceAcquisitionDependencies(input = {}, selection) {
+  const collected = collectHostRuntimeObservationNativeSourceAcquisitionDependencies(input);
+  if (!collected.ok) {
+    return collected;
+  }
+
+  if (collected.value.length === 0) {
+    return {
+      ok: false,
+      blockedReason: "missing-native-source-acquisition-dependency"
+    };
+  }
+
+  const nativeAcquisitionDependencyFacts = [];
+  const acquisitionDependencyFacts = [];
+  for (const dependency of collected.value) {
+    const normalized = normalizeHostRuntimeObservationNativeSourceAcquisitionDependency(dependency, selection);
+    if (!normalized.ok) {
+      return {
+        ok: false,
+        blockedReason: normalized.blockedReason,
+        value: nativeAcquisitionDependencyFacts,
+        acquisitionDependencyFacts
+      };
+    }
+    nativeAcquisitionDependencyFacts.push(normalized.nativeAcquisitionDependencyFact);
+    acquisitionDependencyFacts.push(normalized.acquisitionDependencyFact);
+  }
+
+  return {
+    ok: true,
+    value: freezeRecord(nativeAcquisitionDependencyFacts),
+    acquisitionDependencyFacts: freezeRecord(acquisitionDependencyFacts)
+  };
+}
+
+function collectHostRuntimeObservationNativeSourceAcquisitionDependencies(input = {}) {
+  const dependencyContainers = [];
+  for (const dependencyContainer of [
+    input.nativeAcquisitionDependencies,
+    input.nativeSourceAcquisitionDependencies,
+    input.hostRuntimeObservationNativeSourceAcquisitionDependencies,
+    input.runtimeObservationNativeSourceAcquisitionDependencies,
+    input.dependencies
+  ]) {
+    if (dependencyContainer === undefined || dependencyContainer === null) {
+      continue;
+    }
+    if (!isPlainObject(dependencyContainer)) {
+      return {
+        ok: false,
+        blockedReason: "malformed-native-source-acquisition-input"
+      };
+    }
+    dependencyContainers.push(dependencyContainer);
+  }
+
+  const dependencyGroups = [
+    input.nativeAcquisitionFacts ?? input.nativeSourceAcquisitionFacts,
+    input.hostRuntimeObservationNativeSourceAcquisitionFacts ?? input.runtimeObservationNativeSourceAcquisitionFacts,
+    input.documentedRootNativeAcquisitions ?? input.nativeDocumentedRootAcquisitions,
+    input.windowsRegistryViewNativeAcquisitions ?? input.nativeRegistryViewAcquisitions
+  ];
+  for (const dependencyContainer of dependencyContainers) {
+    dependencyGroups.push(
+      dependencyContainer.nativeAcquisitionFacts ?? dependencyContainer.nativeSourceAcquisitionFacts,
+      dependencyContainer.hostRuntimeObservationNativeSourceAcquisitionFacts ?? dependencyContainer.runtimeObservationNativeSourceAcquisitionFacts,
+      dependencyContainer.documentedRootNativeAcquisitions ?? dependencyContainer.nativeDocumentedRootAcquisitions,
+      dependencyContainer.windowsRegistryViewNativeAcquisitions ?? dependencyContainer.nativeRegistryViewAcquisitions
+    );
+  }
+
+  const dependencies = [];
+  for (const group of dependencyGroups) {
+    if (group === undefined || group === null) {
+      continue;
+    }
+    if (!Array.isArray(group)) {
+      return {
+        ok: false,
+        blockedReason: "malformed-native-source-acquisition-input"
+      };
+    }
+    dependencies.push(...group);
+  }
+
+  return {
+    ok: true,
+    value: dependencies
+  };
+}
+
+function normalizeHostRuntimeObservationNativeSourceAcquisitionDependency(dependency, selection) {
+  if (!isPlainObject(dependency)) {
+    return {
+      ok: false,
+      blockedReason: "malformed-native-source-acquisition-input"
+    };
+  }
+
+  if (
+    dependency.dependencyError !== undefined
+    || dependency.acquisitionError !== undefined
+    || dependency.error !== undefined
+    || dependency.threw === true
+  ) {
+    return {
+      ok: false,
+      blockedReason: "native-source-acquisition-dependency-error"
+    };
+  }
+
+  const sourceClass = normalizeHostRuntimeNativeSourceAcquisitionClass(dependency);
+  if (!sourceClass) {
+    return {
+      ok: false,
+      blockedReason: "unsupported-native-source-acquisition-class"
+    };
+  }
+
+  if (sourceClass === "windows-registry-view" && hasRawRegistryOutput(dependency)) {
+    return {
+      ok: false,
+      blockedReason: "malformed-native-registry-acquisition"
+    };
+  }
+
+  if (hasPrivatePathDisclosure(dependency)) {
+    return {
+      ok: false,
+      blockedReason: "private-path-disclosure-attempt"
+    };
+  }
+
+  const sourceAcquisitionDependency = normalizeHostRuntimeObservationSourceAcquisitionDependency({
+    ...dependency,
+    sourceAcquisitionClass: sourceClass,
+    sourceClass,
+    acquisitionId: dependency.acquisitionId
+      ?? dependency.nativeAcquisitionId
+      ?? dependency.sourceAcquisitionId
+      ?? dependency.identifier
+      ?? dependency.id
+      ?? dependency.documentedRoot
+      ?? dependency.root
+      ?? dependency.registryView
+      ?? dependency.view
+  }, selection);
+
+  if (!sourceAcquisitionDependency.ok) {
+    return {
+      ok: false,
+      blockedReason: nativeSourceAcquisitionBlockedReasonForSourceAcquisitionBlockedReason(sourceAcquisitionDependency.blockedReason)
+    };
+  }
+
+  const nativeAcquisitionDependencyFact = freezeRecord({
+    ...sourceAcquisitionDependency.acquisitionDependencyFact,
+    kind: "host-runtime-observation-native-source-acquisition-dependency",
+    nativeSourceAcquisitionBoundary: "bounded-native-host-source-acquisition-dependency-adapter-only",
+    sourceAcquisitionDependencyKind: sourceAcquisitionDependency.acquisitionDependencyFact.kind,
+    nativeAcquisitionId: sourceAcquisitionDependency.acquisitionDependencyFact.acquisitionId
+  });
+
+  return {
+    ok: true,
+    nativeAcquisitionDependencyFact,
+    acquisitionDependencyFact: sourceAcquisitionDependency.acquisitionDependencyFact
+  };
+}
+
+function normalizeHostRuntimeNativeSourceAcquisitionClass(dependency) {
+  const acquisitionClass = normalizeFact(
+    dependency.nativeAcquisitionClass
+      ?? dependency.nativeSourceAcquisitionClass
+      ?? dependency.acquisitionClass
+      ?? dependency.sourceAcquisitionClass
+      ?? dependency.sourceClass
+      ?? dependency.kind
+      ?? dependency.type
+      ?? dependency.source
+  )?.toLowerCase();
+  if ([
+    "documented-root",
+    "documented-root-native-acquisition",
+    "native-documented-root-acquisition",
+    "documented-root-acquisition",
+    "documented-root-dependency",
+    "root"
+  ].includes(acquisitionClass)) {
+    return "documented-root";
+  }
+  if ([
+    "windows-registry-view",
+    "windows-registry-view-native-acquisition",
+    "native-windows-registry-view-acquisition",
+    "registry-view-native-acquisition",
+    "windows-registry-view-acquisition",
+    "registry-view-acquisition",
+    "windows-registry"
+  ].includes(acquisitionClass)) {
+    return "windows-registry-view";
+  }
+  if (acquisitionClass) {
+    return null;
+  }
+  if (dependency.documentedRoot || dependency.root) {
+    return "documented-root";
+  }
+  if (dependency.registryView || dependency.view) {
+    return "windows-registry-view";
+  }
+  return null;
+}
+
+function nativeSourceAcquisitionBlockedReasonForSourceAcquisitionBlockedReason(blockedReason) {
+  if (blockedReason === "malformed-registry-acquisition") {
+    return "malformed-native-registry-acquisition";
+  }
+  if (blockedReason === "malformed-documented-root-acquisition") {
+    return "malformed-native-documented-root-acquisition";
+  }
+  if (blockedReason === "malformed-source-acquisition-input") {
+    return "malformed-native-source-acquisition-input";
+  }
+  if (blockedReason === "unsupported-source-acquisition-class") {
+    return "unsupported-native-source-acquisition-class";
+  }
+  if (blockedReason === "source-acquisition-dependency-error") {
+    return "native-source-acquisition-dependency-error";
+  }
+  return blockedReason;
+}
+
 function normalizeHostRuntimeObservationSourceAcquisitionDependencies(input = {}, selection) {
   const collected = collectHostRuntimeObservationSourceAcquisitionDependencies(input);
   if (!collected.ok) {
@@ -4729,6 +5215,7 @@ function runtimeErrorCodeForRuntimeBlockedReason(blockedReason) {
     blockedReason === "labview-2026q1-unsupported-on-macos"
     || blockedReason === "macos-host-runtime-discovery-unavailable"
     || blockedReason === "macos-host-runtime-observation-source-unavailable"
+    || blockedReason === "macos-host-runtime-observation-native-source-acquisition-unavailable"
     || blockedReason === "unsupported-host-platform"
     || blockedReason?.endsWith("provider-not-supported-on-platform")
   ) {
@@ -4747,7 +5234,7 @@ function runtimeErrorCodeForRuntimeBlockedReason(blockedReason) {
   ) {
     return "VIHS_E_DOCKER_UNAVAILABLE";
   }
-  if (blockedReason === "labview-exe-not-found" || blockedReason === "missing-host-runtime-candidate" || blockedReason === "missing-discovery-observation" || blockedReason === "missing-observation-source" || blockedReason === "missing-source-acquisition-dependency") {
+  if (blockedReason === "labview-exe-not-found" || blockedReason === "missing-host-runtime-candidate" || blockedReason === "missing-discovery-observation" || blockedReason === "missing-observation-source" || blockedReason === "missing-source-acquisition-dependency" || blockedReason === "missing-native-source-acquisition-dependency") {
     return "VIHS_E_LABVIEW_NOT_FOUND";
   }
   if (blockedReason === "labview-exe-ambiguous" || blockedReason === "ambiguous-host-runtime-candidate") {
@@ -4770,13 +5257,18 @@ function runtimeErrorCodeForRuntimeBlockedReason(blockedReason) {
     || blockedReason === "malformed-registry-observation"
     || blockedReason === "malformed-registry-source"
     || blockedReason === "malformed-registry-acquisition"
+    || blockedReason === "malformed-native-registry-acquisition"
     || blockedReason === "malformed-documented-root-source"
     || blockedReason === "malformed-documented-root-acquisition"
+    || blockedReason === "malformed-native-documented-root-acquisition"
     || blockedReason === "malformed-host-runtime-observation-source-input"
     || blockedReason === "malformed-source-acquisition-input"
+    || blockedReason === "malformed-native-source-acquisition-input"
     || blockedReason === "unsupported-observation-source-class"
     || blockedReason === "unsupported-source-acquisition-class"
+    || blockedReason === "unsupported-native-source-acquisition-class"
     || blockedReason === "source-acquisition-dependency-error"
+    || blockedReason === "native-source-acquisition-dependency-error"
     || blockedReason === "private-path-disclosure-attempt"
   ) {
     return "VIHS_E_RUNTIME_SURFACE_CONTAMINATED";

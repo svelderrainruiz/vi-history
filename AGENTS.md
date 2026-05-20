@@ -304,11 +304,11 @@ mutation, VSIX packaging changes, release automation, Marketplace publication,
 Docker source discovery, and source copying remain blocked.
 
 `runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1`
-admits
+implements
 `IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1`
 for Issue #154 and T009-T016 only. Issue #154 is an admission issue and must
-not be reused for implementation. Implementation requires a separate handoff
-issue after the admission PR merges. The admitted IAU is a bounded
+not be reused for implementation. Issue #156 implements and closes it through
+PR #157 for T009-T016 only. The implemented IAU is a bounded
 `createRuntimeSettingsValidationHostRuntimeObservationNativeSourceAcquisition(input =
 {})` facts contract over public-safe selected host facts and supplied governed
 native acquisition dependency observations. It may derive acquisition
@@ -327,12 +327,12 @@ automation, Marketplace publication, Docker source discovery, and source
 copying remain blocked.
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1`.
+`none`.
 
 Issue #154 admission temporarily sets the current IAU to
 `IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1`.
-Implementation requires a separate handoff issue after the admission PR merges.
-Before Issue #154 admission, the source acquisition closeout recorded:
+Issue #156 and PR #157 completed it. Before Issue #154 admission, the source
+acquisition closeout recorded:
 
 Current Implementation Admission Unit:
 `none`.

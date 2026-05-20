@@ -584,8 +584,8 @@ Issue #154 imports
 and admits
 `IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1`
 for T009-T016 only. Issue #154 is an admission issue and must not be reused for
-implementation. Implementation requires a separate handoff issue after the
-admission PR merges. The admitted IAU is a bounded
+implementation. Issue #156 and PR #157 completed it. The implemented IAU is a
+bounded
 `createRuntimeSettingsValidationHostRuntimeObservationNativeSourceAcquisition(input =
 {})` facts contract over public-safe selected host facts and supplied governed
 native acquisition dependency observations. It may derive acquisition
@@ -603,12 +603,12 @@ Marketplace, perform Docker source discovery, or copy source without a separate
 public admission.
 
 Current Implementation Admission Unit:
-`IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1`.
+`none`.
 
 Issue #154 admission temporarily sets the current IAU to
 `IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1`.
-Implementation requires a separate handoff issue after the admission PR merges.
-Before Issue #154 admission, the source acquisition closeout recorded:
+Issue #156 and PR #157 completed it. Before Issue #154 admission, the source
+acquisition closeout recorded:
 
 Current Implementation Admission Unit:
 `none`.
