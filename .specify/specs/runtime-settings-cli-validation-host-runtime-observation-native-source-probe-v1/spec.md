@@ -64,11 +64,15 @@ control-plane scripts, or credential handling.
 ## Current Implementation Admission Unit
 
 Current Implementation Admission Unit is
-`none`.
+`IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-probe-v1`.
 
-`IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-probe-v1`
-is admitted through this admission PR. Issue must not be reused for
-implementation. A separate implementation handoff issue is required.
+Implementation completed in PR #160 commit 261c990. T009-T016 implemented:
+- `createRuntimeSettingsValidationHostRuntimeObservationNativeSourceProbe` contract
+- Windows registry-view source surface probing
+- Linux documented-root source surface probing
+- Mixed-bitness LabVIEWCLI fact shape preservation
+- Fail-closed behavior for all error conditions
+- Composition into native source acquisition and validation command chain
 
 ## Out Of Scope
 

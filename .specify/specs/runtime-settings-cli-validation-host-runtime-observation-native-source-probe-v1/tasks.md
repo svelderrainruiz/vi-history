@@ -47,34 +47,34 @@ public-safe native acquisition observations without execution.
 **Admitted IAU**:
 `IAU-runtime-settings-cli-validation-host-runtime-observation-native-source-probe-v1`
 
-**Public admission issue**: (to be assigned)
+**Public admission issue**: #159
 
-**Implementation handoff issue**: (to be created after admission PR merges).
+**Implementation handoff issue**: PR #160 (implemented in commit 261c990).
 
-- [ ] T009 Add tests proving selected host facts drive bounded native
+- [x] T009 Add tests proving selected host facts drive bounded native
   source-surface probing without arbitrary filesystem walking.
-- [ ] T010 Add tests proving Windows registry-view source surface probing
+- [x] T010 Add tests proving Windows registry-view source surface probing
   produces native acquisition observations without retaining raw registry output
   or private paths.
-- [ ] T011 Add tests proving Linux documented-root source surface probing
+- [x] T011 Add tests proving Linux documented-root source surface probing
   produces public-safe availability, executable-role, version, and bitness
   observations.
-- [ ] T012 Add tests proving Windows `host` / `2026` / `x64` native source probe
+- [x] T012 Add tests proving Windows `host` / `2026` / `x64` native source probe
   observations can produce LabVIEW 2026 x64 plus canonical installed x86
   LabVIEWCLI native acquisition observations.
-- [ ] T013 Add tests proving missing selection, unsupported provider/platform
+- [x] T013 Add tests proving missing selection, unsupported provider/platform
   or version, missing source surface, malformed source surface, ambiguous
   source surface, probe unavailable, contaminated source surface, probe errors,
   raw registry output, and private-path disclosure attempts fail closed.
-- [ ] T014 Add tests proving native source probe output composes into
+- [x] T014 Add tests proving native source probe output composes into
   `createRuntimeSettingsValidationHostRuntimeObservationNativeSourceAcquisition(input =
   {})` and the existing validation command chain without output-shape redesign.
-- [ ] T015 Add tests proving deterministic blocked side-effect facts and no
+- [x] T015 Add tests proving deterministic blocked side-effect facts and no
   runtime validation execution, compare, LabVIEWCLI, Docker, terminal process
   wiring, proof-out expansion, file writes, VSIX packaging changes,
   publication, Marketplace, release automation, launcher/profile mutation,
   Docker source discovery, or source copying.
-- [ ] T016 Implement the minimum public MIT native source probe contract.
+- [x] T016 Implement the minimum public MIT native source probe contract.
 
 ---
 
