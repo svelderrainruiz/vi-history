@@ -1,0 +1,7 @@
+Requirement ID,Verification ID,Verification Summary,Status
+VHS-REQ-095,TEST-UNIT-RSHOSTACQ-001,Prove selected Windows host facts drive bounded native source acquisition without arbitrary filesystem walking raw registry output private path disclosure LabVIEWCLI execution or compare execution,Admitted
+VHS-REQ-095,TEST-UNIT-RSHOSTACQ-002,Prove bounded Windows registry-view acquisition dependency facts reduce to sanitized source facts for LabVIEW 2026 x64 plus canonical installed x86 LabVIEWCLI,Admitted
+VHS-REQ-096,TEST-UNIT-RSHOSTACQ-003,Prove bounded Linux documented-root acquisition dependency facts reduce to sanitized documented-root source facts and macOS unavailable facts remain deterministic,Admitted
+VHS-REQ-532,TEST-UNIT-RSHOSTACQ-004,Prove source acquisition output composes into source adapter observation discovery preflight runtime outcome readback proof proof-out validation command and validate-plan-only contracts without output-shape redesign,Admitted
+VHS-REQ-546,TEST-UNIT-RSHOSTACQ-005,Prove source acquisition remains pure and blocks runtime validation compare LabVIEWCLI Docker terminal wiring proof expansion file writes publication release mutation Marketplace and source copying,Admitted
+VHS-REQ-550,TEST-UNIT-RSHOSTACQ-006,Prove Windows host 2026 x64 acquisition facts preserve the governed mixed-bitness LabVIEW 2026 x64 plus canonical installed x86 LabVIEWCLI rule,Admitted

@@ -1,0 +1,115 @@
+{
+  "schema": "vi-history/requirements-admission@v1",
+  "sliceId": "runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1",
+  "createdDate": "2026-05-20",
+  "state": "admitted",
+  "targetProduct": "vi-history",
+  "targetFeature": "runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1",
+  "sourceBaselineTag": "v1.3.16",
+  "sourceCommit": "2e0d7bfd6bf1154aa1b3693c49d32974a59c6686",
+  "governedAdmissionCommit": "2e0d7bfd6bf1154aa1b3693c49d32974a59c6686",
+  "publicImportPath": "docs/requirements/imports/runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1/",
+  "specKitPath": ".specify/specs/runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1/",
+  "issue": {
+    "number": 148,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/148"
+  },
+  "publicSequencingMarker": {
+    "number": 147,
+    "url": "https://github.com/svelderrainruiz/vi-history/issues/147"
+  },
+  "bridgeChecks": {
+    "publicImportPacketPresent": "pass",
+    "specKitArtifactsPresent": "pass",
+    "redactionScan": "pass",
+    "artifactConsistency": "pass",
+    "implementationPreflight": "pass"
+  },
+  "implementationAdmissionUnits": [
+    {
+      "iauId": "IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1",
+      "state": "admitted",
+      "record": "docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1/IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1.json",
+      "preflightRecord": "docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1/IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1-preflight-v1.json",
+      "admittedTasks": [
+        "T009",
+        "T010",
+        "T011",
+        "T012",
+        "T013",
+        "T014",
+        "T015",
+        "T016"
+      ]
+    }
+  ],
+  "currentImplementationAdmissionUnit": "IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1",
+  "completedSpecScope": [
+    "T001",
+    "T002",
+    "T003",
+    "T004",
+    "T005",
+    "T006",
+    "T007",
+    "T008"
+  ],
+  "completedImplementationScope": [],
+  "admittedImplementationScope": [
+    "T009",
+    "T010",
+    "T011",
+    "T012",
+    "T013",
+    "T014",
+    "T015",
+    "T016"
+  ],
+  "blockedImplementationScope": [
+    "T017",
+    "T018",
+    "T019",
+    "T020",
+    "T021",
+    "T022",
+    "T023",
+    "T024",
+    "T025",
+    "T026",
+    "T027",
+    "T028",
+    "T029",
+    "T030"
+  ],
+  "preImplementationPreflight": {
+    "iauId": "IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1",
+    "status": "pass",
+    "record": "docs/requirements/admissions/runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1/IAU-runtime-settings-cli-validation-host-runtime-observation-source-acquisition-v1-preflight-v1.json",
+    "implementationStartAllowed": true
+  },
+  "implementationHandoffPolicy": "Create a separate implementation handoff issue after the admission PR merges; do not reuse Issue #148 for implementation.",
+  "requirementMaturityBasis": "public sequencing marker and promoted source-adapter baseline support narrow source-acquisition admission, not source reuse",
+  "implementationSharing": "none",
+  "marketplacePublication": "out-of-scope",
+  "blockedScope": [
+    "raw private path disclosure",
+    "raw registry output retention",
+    "arbitrary filesystem walking",
+    "broad PATH probing or environment probing",
+    "invocation of the existing compare runtime locator as an implementation shortcut",
+    "runtime validation execution",
+    "compare execution",
+    "LabVIEWCLI execution",
+    "Docker command execution or orchestration",
+    "raw terminal process wiring or live terminal proof",
+    "proof-out expansion",
+    "file writes from source, observation, discovery, or preflight adapters",
+    "package/bin publication",
+    "VSIX packaging changes",
+    "Marketplace publication",
+    "release automation",
+    "launcher/profile mutation",
+    "Docker image inspection or container source discovery",
+    "source copying from another VI History product line"
+  ]
+}
