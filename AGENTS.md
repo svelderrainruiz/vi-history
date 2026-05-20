@@ -416,3 +416,24 @@ The previous host runtime preflight feature used
 `019-runtime-settings-cli-validation-host-runtime-preflight-v1`.
 The previous plan-only feature used
 `018-runtime-settings-cli-validation-plan-only-v1`.
+
+## CI Workflows
+
+The repository uses GitHub Actions for CI/CD:
+
+- `.github/workflows/spec-gates.yml` — standard CI validation running on
+  `ubuntu-latest`. Runs `npm test` for unit tests and boundary checks.
+
+- `.github/workflows/integration-tests.yml` — integration tests including
+  LabVIEW-dependent tests. Unit tests run on `ubuntu-latest`; LabVIEW
+  integration tests run on `self-hosted-windows-labview` runner.
+
+### Self-Hosted Runner
+
+The `self-hosted-windows-labview` runner label designates a Windows runner with
+LabVIEW 2026 installed. This runner enables integration tests that require
+LabVIEWCLI execution. See `docs/development/self-hosted-runner-setup.md` for
+provisioning details.
+
+LabVIEW integration tests are gated to `main` branch or manual workflow dispatch
+to avoid running on every PR until the runner is provisioned.
