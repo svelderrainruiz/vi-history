@@ -1,0 +1,24 @@
+{
+  "schema": "vi-history/admission@v1",
+  "sliceId": "runtime-execution-host-native-labviewcli-v1",
+  "admissionState": "admitted",
+  "admissionIssue": "pending",
+  "sequencingMarker": "pending",
+  "admittedIAUs": [
+    "IAU-runtime-execution-host-native-create-comparison-report-v1"
+  ],
+  "prerequisiteSlices": [
+    "runtime-execution-contracts-v1",
+    "runtime-settings-cli-validation-host-runtime-observation-native-source-acquisition-v1"
+  ],
+  "targetTestScope": "T009-T016",
+  "contractName": "executeHostNativeComparisonReport",
+  "executionBoundary": "host-native-labviewcli-process-spawning",
+  "runnerRequirement": "self-hosted-windows-labview",
+  "blockedScope": [
+    "docker-execution",
+    "labview-license-validation",
+    "interactive-sessions",
+    "marketplace-publication"
+  ]
+}

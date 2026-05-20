@@ -1,0 +1,48 @@
+{
+  "schema": "vi-history/requirements-import@v1",
+  "sliceId": "runtime-execution-host-native-labviewcli-v1",
+  "sourceBaselineTag": "v1.4.0",
+  "sourceCommit": "pending",
+  "governedAdmissionCommit": "pending",
+  "promotedBaselineCommit": "pending",
+  "targetProduct": "vi-history",
+  "targetFeature": "runtime-execution-host-native-labviewcli-v1",
+  "specKitPath": ".specify/specs/runtime-execution-host-native-labviewcli-v1",
+  "redactionStatus": "pass",
+  "implementationSharing": "none",
+  "marketplacePublication": "out-of-scope",
+  "importedRequirementIds": [
+    "VHS-REQ-620",
+    "VHS-REQ-621",
+    "VHS-REQ-622",
+    "VHS-REQ-623",
+    "VHS-REQ-624",
+    "VHS-REQ-625"
+  ],
+  "prerequisiteRequirementIds": [
+    "VHS-REQ-600",
+    "VHS-REQ-601",
+    "VHS-REQ-606",
+    "VHS-REQ-609",
+    "VHS-REQ-610",
+    "VHS-REQ-611"
+  ],
+  "supportingTestIds": [
+    "TEST-UNIT-HOSTEXEC-001",
+    "TEST-UNIT-HOSTEXEC-002",
+    "TEST-UNIT-HOSTEXEC-003",
+    "TEST-UNIT-HOSTEXEC-004",
+    "TEST-UNIT-HOSTEXEC-005",
+    "TEST-UNIT-HOSTEXEC-006",
+    "TEST-INT-HOSTEXEC-001",
+    "TEST-INT-HOSTEXEC-002"
+  ],
+  "contractName": "executeHostNativeComparisonReport",
+  "executionBoundary": "host-native-labviewcli-process-execution",
+  "files": [
+    "syrs.md",
+    "srs.md",
+    "rtm.csv",
+    "test-plan.md"
+  ]
+}
